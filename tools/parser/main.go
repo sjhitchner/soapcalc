@@ -2,13 +2,15 @@ package main
 
 import (
 	"encoding/csv"
-	"encoding/json"
+	"flag"
 	"fmt"
 	"os"
 	"reflect"
 	"sort"
 	"strconv"
 	"strings"
+
+	"github.com/sjhitchner/soapcalc/domain"
 )
 
 type Records [][]string
@@ -25,82 +27,60 @@ func (t Records) Swap(i, j int) {
 	t[i], t[j] = t[j], t[i]
 }
 
-type Lipid struct {
-	Name           string  `json:"name"`
-	Description    string  `json:"description"`
-	ScientificName string  `json:"scientific_name"`
-	NaOH           float64 `json:"naoh"`
-	KOH            float64 `json:"koh"`
-	Iodine         int     `json:"iodine"`
-	INS            int     `json:"ins"`
-	Lauric         float64 `json:"lauric"`     // Sat 12:0
-	Myristic       float64 `json:"myristic"`   // Sat 14:0
-	Palmitic       float64 `json:"palmitic"`   // Sat 16:0
-	Stearic        float64 `json:"stearic"`    // Sat 18:0
-	Ricinoleic     float64 `json:"ricinoleic"` // MonoUnsat 18:1
-	Oleic          float64 `json:"oleic"`      // MonoUnsat 18:1
-	Linoleic       float64 `json:"linoleic"`   // PolyUnsat 18:2
-	Linolenic      float64 `json:"linolenic"`  // PolyUnsat 18:3
-	Hardness       int     `json:"hardness"`
-	Cleansing      int     `json:"cleansing"`
-	Condition      int     `json:"condition"`
-	Bubbly         int     `json:"bubbly"`
-	Creamy         int     `json:"creamy"`
-}
+var (
+	dataPath string
+)
 
-func (t Lipid) String() string {
-	b, err := json.MarshalIndent(t, "", "  ")
-	if err != nil {
-		return err.Error()
-	}
-	return string(b)
+func init() {
+	flag.StringVar(&dataPath, "d", "data", "Path to soap data")
 }
 
 func main() {
+	flag.Parse()
 
-	lipids := make(map[string]Lipid)
+	lipids := make(map[string]domain.Lipid)
 
-	ins, err := ParseRecords("data/ins.txt")
+	ins, err := ParseRecords(dataPath + "/ins.txt")
 	CheckError(err)
 	CheckError(AddValues(lipids, ins, "INS", 1))
 
-	iodine, err := ParseRecords("data/iodine.txt")
+	iodine, err := ParseRecords(dataPath + "/iodine.txt")
 	CheckError(err)
 	CheckError(AddValues(lipids, iodine, "Iodine", 1))
 
-	linoleic, err := ParseRecords("data/linoleic.txt")
+	linoleic, err := ParseRecords(dataPath + "/linoleic.txt")
 	CheckError(err)
 	CheckError(AddValues(lipids, linoleic, "Linoleic", 1))
 
-	myristic, err := ParseRecords("data/myristic.txt")
+	myristic, err := ParseRecords(dataPath + "/myristic.txt")
 	CheckError(err)
 	CheckError(AddValues(lipids, myristic, "Myristic", 1))
 
-	oleic, err := ParseRecords("data/oleic.txt")
+	oleic, err := ParseRecords(dataPath + "/oleic.txt")
 	CheckError(err)
 	CheckError(AddValues(lipids, oleic, "Oleic", 1))
 
-	ricinoleic, err := ParseRecords("data/ricinoleic.txt")
+	ricinoleic, err := ParseRecords(dataPath + "/ricinoleic.txt")
 	CheckError(err)
 	CheckError(AddValues(lipids, ricinoleic, "Ricinoleic", 1))
 
-	lauric, err := ParseRecords("data/lauric.txt")
+	lauric, err := ParseRecords(dataPath + "/lauric.txt")
 	CheckError(err)
 	CheckError(AddValues(lipids, lauric, "Lauric", 1))
 
-	linolenic, err := ParseRecords("data/linolenic.txt")
+	linolenic, err := ParseRecords(dataPath + "/linolenic.txt")
 	CheckError(err)
 	CheckError(AddValues(lipids, linolenic, "Linolenic", 1))
 
-	palmitic, err := ParseRecords("data/palmitic.txt")
+	palmitic, err := ParseRecords(dataPath + "/palmitic.txt")
 	CheckError(err)
 	CheckError(AddValues(lipids, palmitic, "PalmiticS", 1))
 
-	stearic, err := ParseRecords("data/stearic.txt")
+	stearic, err := ParseRecords(dataPath + "/stearic.txt")
 	CheckError(err)
 	CheckError(AddValues(lipids, stearic, "Stearic", 1))
 
-	qualities, err := ParseRecords("data/qualities.txt")
+	qualities, err := ParseRecords(dataPath + "/qualities.txt")
 	CheckError(err)
 	CheckError(AddValues(lipids, qualities, "Hardness", 1))
 	CheckError(AddValues(lipids, qualities, "Cleansing", 2))
@@ -108,7 +88,7 @@ func main() {
 	CheckError(AddValues(lipids, qualities, "Bubbly", 4))
 	CheckError(AddValues(lipids, qualities, "Creamy", 5))
 
-	sap, err := ParseRecords("data/sap.txt")
+	sap, err := ParseRecords(dataPath + "/sap.txt")
 	CheckError(err)
 	CheckError(AddValues(lipids, sap, "NaOH", 1))
 	CheckError(AddValues(lipids, sap, "KOH", 2))
@@ -119,14 +99,14 @@ func main() {
 	}
 }
 
-func AddValues(lipids map[string]Lipid, records Records, fieldName string, index int) error {
+func AddValues(lipids map[string]domain.Lipid, records Records, fieldName string, index int) error {
 	for _, record := range records {
 
 		name := record[0]
 
 		lipid, ok := lipids[name]
 		if !ok {
-			lipid = Lipid{
+			lipid = domain.Lipid{
 				Name: name,
 			}
 		}
@@ -141,7 +121,7 @@ func AddValues(lipids map[string]Lipid, records Records, fieldName string, index
 	return nil
 }
 
-func AddValue(lipid *Lipid, record []string, fieldName string, index int) error {
+func AddValue(lipid *domain.Lipid, record []string, fieldName string, index int) error {
 	ps := reflect.ValueOf(lipid)
 	s := ps.Elem()
 	if s.Kind() != reflect.Struct {
