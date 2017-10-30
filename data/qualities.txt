@@ -1,0 +1,107 @@
+"Coconut Oil, fractionated",93,93,0,93,0,1,324
+Coconut Oil 76 degree,79,67,10,67,12,10,258
+Murumuru Butter,82,73,18,73,9,25,250
+Aloe Butter,0,0,0,0,0,0,249
+Myrstic Acid,99,99,0,99,0,1,246
+Monoi de Tahiti Oil,73,60,2,60,13,9,246
+Babassu Oil,85,70,10,70,15,15,230
+Palmitic Acid,98,0,0,0,98,2,213
+Stearic Acid,99,0,0,0,99,2,196
+"Ghee, any bovine",55,15,22,15,40,30,191
+"Milk fat, any bovine",55,15,22,15,40,30,191
+Saw Palmetto Extract,50,40,40,40,10,45,185
+Palm kernel Oil Flakes,70,61,18,61,9,20,183
+Sal palmetto Oil,53,42,36,42,11,44,176
+Tucuma Seed Butter,77,71,13,71,6,13,175
+Cohune Oil,75,64,21,64,11,30,175
+Ucuuba Butter,31,0,49,0,31,38,167
+"Tallow, Deer",45,1,48,1,44,31,166
+Cocoa Butter,61,0,38,0,61,37,157
+"Tallow, Sheep",51,14,31,14,37,54,156
+Kokum Butter,60,0,37,0,60,35,155
+Capuaca Butter,42,0,44,0,42,38,155
+Palm Stearin,67,2,33,2,65,48,151
+Walmart GV shortening,54,5,44,5,49,49,151
+Kpangnan Butter,50,0,50,0,50,42,149
+Tallow beef,58,8,40,8,50,45,147
+Sal Butter,50,0,42,0,50,39,146
+Mango Seed Butter,49,0,48,0,49,45,146
+Palm Oil,50,1,49,1,49,53,145
+Red Palm Butter,50,1,49,1,49,53,145
+Mink Oil,0,0,0,0,0,55,141
+"Lard, pig tallow",42,1,52,1,41,57,139
+Mowrah Butter,46,0,51,0,46,62,132
+Mango Seed Oil,35,0,61,0,35,60,130
+Chicken fat,33,1,59,1,32,69,130
+Ostrich Oil,36,4,57,4,32,97,128
+Emu Oil,32,0,55,0,32,60,128
+Baobab Oil,29,1,67,1,28,75,125
+Neem Tree Oil,33,0,63,0,33,89,124
+Moringa Oil,14,0,73,0,14,68,124
+Avocado Butter,31,0,61,0,31,67,120
+Marula Oil,18,0,79,0,18,73,119
+Macadamina nut Oil,14,0,61,0,14,76,119
+Almond Butter,25,1,74,1,24,70,118
+Horse Oil,34,3,49,3,31,79,117
+Shea Butter,45,0,54,0,45,59,116
+"Crisco, old",26,0,70,0,26,93,115
+"Soybean, 27.5% hydro",24,0,49,0,24,78,113
+Oleic Acid,0,0,99,0,0,92,110
+"Sunflower Oil, high oleic",7,0,88,0,7,83,106
+Olive Oil,17,0,82,0,17,85,105
+Olive Oil Pomace,17,0,83,0,17,84,104
+"Shea Oil, fractionated",16,0,84,0,16,83,102
+"Coffee bean Oil, green",46,0,50,0,46,85,100
+Tallow bear,12,2,79,2,10,92,100
+Avocado Oil,22,0,70,0,22,86,99
+Peanut Oil,11,0,82,0,11,92,99
+Karanja Oil,12,0,73,0,12,85,98
+"Yangu, cape cheasnut",23,0,76,0,23,95,97
+"Almond Oil, Sweet",7,0,89,0,7,99,97
+"Safflower Oil, Organic, High Oleic, Refined",7,0,92,0,7,93,97
+Argan Oil,15,1,81,1,14,95,95
+Castor Oil,0,0,98,90,90,86,95
+Hazelnut Oil,8,0,85,0,8,97,94
+"Coffee bean Oil, roasted",40,0,48,0,40,87,93
+Pistachio Oil,12,0,88,0,12,95,92
+Jatropha Oil,16,0,78,0,16,102,91
+Apricot Kernel Oil,6,0,93,0,6,100,91
+"Canola Oil, high oleic",6,0,90,0,6,96,90
+CottonSeed Oil,26,0,71,0,26,108,89
+Peach kernel Oil,8,0,91,0,8,108,87
+Beeswax,0,0,0,0,0,10,84
+Lanolin liquid wax,0,0,0,0,0,27,83
+"Crisco, new with palm",25,0,74,0,25,111,82
+"Tamanu Oil, kamani",25,0,73,0,25,111,82
+Sesame Oil,15,0,83,0,15,110,81
+Meadowfarm Oil,0,5,95,0,0,92,77
+"Mustard Oil, kachi gha",4,0,41,0,4,101,72
+Rice bran Oil,26,1,69,1,25,110,70
+Corn Oil,14,0,84,0,14,117,69
+"Pumpkin Seed Oil, virgin",19,0,83,0,19,128,67
+GrapeSeed Oil,12,0,88,0,12,131,66
+Sunflower Oil,11,0,87,0,11,133,63
+Black cumin Seed Oil,16,0,83,0,16,133,62
+Cherry kernel Oil avium,11,0,87,0,11,128,62
+Soybean Oil,16,0,82,0,16,131,61
+Wheat germ Oil,19,0,75,0,19,128,58
+"Canola Oil, rapeSeed",6,0,91,0,6,110,56
+RapeSeed Oil,4,0,35,0,4,108,56
+Borage Oil,14,0,68,0,14,135,55
+Poppy Seed Oil,12,0,88,0,12,140,54
+Passion fruit Seed Oil,13,0,86,0,13,136,47
+Safflower Oil,7,0,90,0,7,145,47
+Walnut Oil,9,0,78,0,9,154,45
+Camellia Seed Oil,8,0,88,0,8,144,44
+Cranberry Seed Oil,8,0,92,0,8,150,40
+Hemp Oil,8,0,90,0,8,165,39
+Evening primrose Oil,0,0,89,0,0,160,30
+Kukui nut Oil,8,0,91,0,8,168,24
+Jojoba liquid wax ester,0,0,12,0,0,83,11
+Rose hip Oil,6,0,89,0,6,188,10
+Illipe Butter,62,0,35,0,62,33,152
+Plum kernel Oil,3,0,91,0,3,98,96
+Pine tar,0,0,0,0,0,0,0
+"Flax Oil, linSeed",9,0,90,0,9,180,-6
+"LinSeed Oil, flax",9,0,90,0,9,180,-6
+Perilla Seed Oil,8,0,87,0,8,196,-6
