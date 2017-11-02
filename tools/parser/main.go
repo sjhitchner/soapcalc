@@ -90,8 +90,8 @@ func main() {
 
 	sap, err := ParseRecords(dataPath + "/sap.txt")
 	CheckError(err)
-	CheckError(AddValues(lipids, sap, "NaOH", 1))
-	CheckError(AddValues(lipids, sap, "KOH", 2))
+	CheckError(AddValues(lipids, sap, "KOH", 1))
+	CheckError(AddValues(lipids, sap, "NaOH", 2))
 	CheckError(AddValues(lipids, sap, "Description", 3))
 
 	for _, lipid := range lipids {

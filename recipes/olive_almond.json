@@ -1,0 +1,18 @@
+{
+  "units": "oz",
+  "lye_type": "naoh",
+  "lipid_weight": 40,
+  "water_to_lipid_ratio": 0.35,
+  "super_fat_percentage": 0.05,
+  "fragrance_ratio": 0.5,
+  "lipids": [
+   {
+      "lipid": "Almond Oil, sweet",
+      "percentage": 0.25
+   },
+   {
+      "lipid": "Olive Oil",
+      "percentage": 0.75
+   }
+  ]
+}
