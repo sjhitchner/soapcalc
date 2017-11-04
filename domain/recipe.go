@@ -5,11 +5,22 @@ import (
 	"os"
 )
 
+const (
+	Ounces Unit = "Ounces"
+	Grams  Unit = "grams"
+
+	NaOH LyeType = "NaOH"
+	KOH  LyeType = "KOH"
+)
+
+type Unit string
+type LyeType string
+
 type Recipe struct {
 	Name               string           `json:"name"`
 	Description        string           `json:"description"`
-	Units              string           `json:"units"`
-	LyeType            string           `json:"lye_type"`
+	Units              Unit             `json:"units"`
+	LyeType            LyeType          `json:"lye_type"`
 	LipidWeight        float64          `json:"lipid_weight"`
 	WaterToLipidRatio  float64          `json:"water_to_lipid_ratio"`
 	SuperFatPercentage float64          `json:"super_fat_percentage"`
@@ -18,8 +29,8 @@ type Recipe struct {
 	WaterWeight        float64          `json:"water_weight"`
 	LyeWeight          float64          `json:"lye_weight"`
 	FragranceiWeight   float64          `json:"fragrance_weight"`
-	Iodine             int              `json:"iodine"`
-	INS                int              `json:"ins"`
+	Iodine             float64          `json:"iodine"`
+	INS                float64          `json:"ins"`
 	Lauric             float64          `json:"lauric"`     // Sat 12:0
 	Myristic           float64          `json:"myristic"`   // Sat 14:0
 	Palmitic           float64          `json:"palmitic"`   // Sat 16:0
@@ -28,11 +39,11 @@ type Recipe struct {
 	Oleic              float64          `json:"oleic"`      // MonoUnsat 18:1
 	Linoleic           float64          `json:"linoleic"`   // PolyUnsat 18:2
 	Linolenic          float64          `json:"linolenic"`  // PolyUnsat 18:3
-	Hardness           int              `json:"hardness"`
-	Cleansing          int              `json:"cleansing"`
-	Condition          int              `json:"condition"`
-	Bubbly             int              `json:"bubbly"`
-	Creamy             int              `json:"creamy"`
+	Hardness           float64          `json:"hardness"`
+	Cleansing          float64          `json:"cleansing"`
+	Condition          float64          `json:"condition"`
+	Bubbly             float64          `json:"bubbly"`
+	Creamy             float64          `json:"creamy"`
 }
 
 type LipidComponent struct {
@@ -50,8 +61,8 @@ func (t Recipe) String() string {
 }
 
 type RecipeInput struct {
-	Units              string       `json:"units"`
-	LyeType            string       `json:"lye_type"`
+	Units              Unit         `json:"units"`
+	LyeType            LyeType      `json:"lye_type"`
 	LipidWeight        float64      `json:"lipid_weight"`
 	WaterToLipidRatio  float64      `json:"water_to_lipid_ratio"`
 	SuperFatPercentage float64      `json:"super_fat_percentage"`

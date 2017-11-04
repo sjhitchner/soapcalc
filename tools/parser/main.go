@@ -74,7 +74,7 @@ func main() {
 
 	palmitic, err := ParseRecords(dataPath + "/palmitic.txt")
 	CheckError(err)
-	CheckError(AddValues(lipids, palmitic, "PalmiticS", 1))
+	CheckError(AddValues(lipids, palmitic, "Palmitic", 1))
 
 	stearic, err := ParseRecords(dataPath + "/stearic.txt")
 	CheckError(err)

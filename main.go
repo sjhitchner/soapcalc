@@ -9,15 +9,31 @@ import (
 )
 
 var (
-	dataPath string
+	dataPath  string
+	newRecipe bool
 )
 
 func init() {
 	flag.StringVar(&dataPath, "d", "data", "Path to soap data")
+	flag.BoolVar(&newRecipe, "n", false, "Create a new recipe")
 }
 
 func main() {
 	flag.Parse()
+
+	if newRecipe {
+		fmt.Println(domain.RecipeInput{
+			Units:   domain.Ounces,
+			LyeType: domain.NaOH,
+			Lipids: []domain.LipidInput{
+				domain.LipidInput{
+					Lipid:      "Olive Oil",
+					Percentage: 1,
+				},
+			},
+		}.String())
+		return
+	}
 
 	recipeFilename := flag.Arg(0)
 
@@ -59,21 +75,23 @@ func Calculate(lipids map[string]domain.Lipid, recipeIn *domain.RecipeInput) (*d
 		})
 
 		recipe.LyeWeight += lipid.NaOH * weight * (1 - recipeIn.SuperFatPercentage)
-		//recipe.Iodine += lipidInput.Percentage * lipid.Iodine
-		//recipe.INS += lipidInput.Percentage * lipid.INS
-		recipe.Lauric += lipidInput.Percentage * lipid.Lauric
-		recipe.Myristic += lipidInput.Percentage * lipid.Myristic
-		recipe.Palmitic += lipidInput.Percentage * lipid.Palmitic
-		recipe.Stearic += lipidInput.Percentage * lipid.Stearic
-		recipe.Ricinoleic += lipidInput.Percentage * lipid.Ricinoleic
-		recipe.Oleic += lipidInput.Percentage * lipid.Oleic
-		recipe.Linoleic += lipidInput.Percentage * lipid.Linoleic
-		recipe.Linolenic += lipidInput.Percentage * lipid.Linolenic
-		//recipe.Hardness += lipidInput.Percentage * lipid.Hardness
-		//recipe.Cleansing += lipidInput.Percentage * lipid.Cleansing
-		//recipe.Condition += lipidInput.Percentage * lipid.Condition
-		//recipe.Bubbly += lipidInput.Percentage * lipid.Bubbly
-		//recipe.Creamy += lipidInput.Percentage * lipid.Creamy
+		recipe.Iodine += lipidInput.Percentage * float64(lipid.Iodine)
+		recipe.INS += lipidInput.Percentage * float64(lipid.INS)
+
+		recipe.Lauric += lipidInput.Percentage * lipid.Lauric * 100
+		recipe.Myristic += lipidInput.Percentage * lipid.Myristic * 100
+		recipe.Palmitic += lipidInput.Percentage * lipid.Palmitic * 100
+		recipe.Stearic += lipidInput.Percentage * lipid.Stearic * 100
+		recipe.Ricinoleic += lipidInput.Percentage * lipid.Ricinoleic * 100
+		recipe.Oleic += lipidInput.Percentage * lipid.Oleic * 100
+		recipe.Linoleic += lipidInput.Percentage * lipid.Linoleic * 100
+		recipe.Linolenic += lipidInput.Percentage * lipid.Linolenic * 100
+
+		recipe.Hardness += lipidInput.Percentage * float64(lipid.Hardness)
+		recipe.Cleansing += lipidInput.Percentage * float64(lipid.Cleansing)
+		recipe.Condition += lipidInput.Percentage * float64(lipid.Condition)
+		recipe.Bubbly += lipidInput.Percentage * float64(lipid.Bubbly)
+		recipe.Creamy += lipidInput.Percentage * float64(lipid.Creamy)
 	}
 
 	recipe.WaterWeight = recipeIn.WaterToLipidRatio * recipeIn.LipidWeight
