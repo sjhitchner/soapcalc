@@ -1,0 +1,22 @@
+{
+  "units": "Ounces",
+  "lye_type": "NaOH",
+  "lipid_weight": 31,
+  "water_to_lipid_ratio":0.35,
+  "super_fat_percentage": 0.05,
+  "fragrance_ratio": 0.50,
+  "lipids": [
+    {
+      "lipid": "Olive Oil",
+      "percentage": 0.9
+    },
+    {
+      "lipid": "Shea Butter",
+      "percentage": 0.05
+    },
+    {
+      "lipid": "Castor Oil",
+      "percentage": 0.05
+    }
+  ]
+}
