@@ -21,14 +21,15 @@ type Recipe struct {
 	Description        string           `json:"description"`
 	Units              Unit             `json:"units"`
 	LyeType            LyeType          `json:"lye_type"`
-	LipidWeight        float64          `json:"lipid_weight"`
 	WaterToLipidRatio  float64          `json:"water_to_lipid_ratio"`
 	SuperFatPercentage float64          `json:"super_fat_percentage"`
-	FraganceRatio      float64          `json:"fragrance_ratio"`
+	FragranceRatio     float64          `json:"fragrance_ratio"`
 	Lipids             []LipidComponent `json:"lipids"`
+	LipidWeight        float64          `json:"lipid_weight"`
 	WaterWeight        float64          `json:"water_weight"`
 	LyeWeight          float64          `json:"lye_weight"`
-	FragranceiWeight   float64          `json:"fragrance_weight"`
+	FragranceWeight    float64          `json:"fragrance_weight"`
+	TotalWeight        float64          `json:"total_weight"`
 	Iodine             float64          `json:"iodine"`
 	INS                float64          `json:"ins"`
 	Lauric             float64          `json:"lauric"`     // Sat 12:0
@@ -61,12 +62,13 @@ func (t Recipe) String() string {
 }
 
 type RecipeInput struct {
+	Name               string       `json:"name"`
 	Units              Unit         `json:"units"`
 	LyeType            LyeType      `json:"lye_type"`
 	LipidWeight        float64      `json:"lipid_weight"`
 	WaterToLipidRatio  float64      `json:"water_to_lipid_ratio"`
 	SuperFatPercentage float64      `json:"super_fat_percentage"`
-	FraganceRatio      float64      `json:"fragrance_ratio"`
+	FragranceRatio     float64      `json:"fragrance_ratio"`
 	Lipids             []LipidInput `json:"lipids"`
 }
 

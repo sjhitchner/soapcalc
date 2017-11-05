@@ -54,10 +54,12 @@ func main() {
 func Calculate(lipids map[string]domain.Lipid, recipeIn *domain.RecipeInput) (*domain.Recipe, error) {
 
 	recipe := domain.Recipe{
+		Name:               recipeIn.Name,
 		Units:              recipeIn.Units,
 		LyeType:            recipeIn.LyeType,
 		WaterToLipidRatio:  recipeIn.WaterToLipidRatio,
 		SuperFatPercentage: recipeIn.SuperFatPercentage,
+		FragranceRatio:     recipeIn.FragranceRatio,
 	}
 
 	for _, lipidInput := range recipeIn.Lipids {
@@ -74,7 +76,9 @@ func Calculate(lipids map[string]domain.Lipid, recipeIn *domain.RecipeInput) (*d
 			Weight:     weight,
 		})
 
-		recipe.LyeWeight += lipid.NaOH * weight * (1 - recipeIn.SuperFatPercentage)
+		//recipe.LyeWeight += lipid.NaOH * weight * (1 - recipeIn.SuperFatPercentage)
+		recipe.LyeWeight += lipid.NaOH * weight
+		recipe.LipidWeight += weight
 		recipe.Iodine += lipidInput.Percentage * float64(lipid.Iodine)
 		recipe.INS += lipidInput.Percentage * float64(lipid.INS)
 
@@ -94,13 +98,14 @@ func Calculate(lipids map[string]domain.Lipid, recipeIn *domain.RecipeInput) (*d
 		recipe.Creamy += lipidInput.Percentage * float64(lipid.Creamy)
 	}
 
+	recipe.LyeWeight *= (1 - recipeIn.SuperFatPercentage)
+	recipe.FragranceWeight = recipeIn.FragranceRatio * recipe.LipidWeight / 16
 	recipe.WaterWeight = recipeIn.WaterToLipidRatio * recipeIn.LipidWeight
 
-	/*
-		for _, lipid := range lipids {
-			fmt.Println(lipid)
-		}
-	*/
+	recipe.TotalWeight = recipe.WaterWeight +
+		recipe.FragranceWeight +
+		recipe.LyeWeight +
+		recipe.LipidWeight
 
 	return &recipe, nil
 }
