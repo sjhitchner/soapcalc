@@ -1,0 +1,27 @@
+{
+  "name": "Blue Swirl",
+  "units": "Ounces",
+  "lye_type": "NaOH",
+  "lipid_weight": 30,
+  "water_to_lipid_ratio": 0.33,
+  "super_fat_percentage": 0.05,
+  "fragrance_ratio": 0.5,
+  "lipids": [
+    {
+      "lipid": "Olive Oil",
+      "percentage": 0.42
+    },
+    {
+      "lipid": "Castor Oil",
+      "percentage": 0.04
+    },
+    {
+      "lipid": "Palm Oil",
+      "percentage": 0.27
+    },
+    {
+      "lipid": "Coconut Oil, 76 deg",
+      "percentage": 0.27
+    }
+  ]
+}

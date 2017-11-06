@@ -3,7 +3,9 @@ package main
 import (
 	"flag"
 	"fmt"
+	"math"
 	"os"
+	"strings"
 
 	"github.com/sjhitchner/soapcalc/domain"
 )
@@ -11,20 +13,31 @@ import (
 var (
 	dataPath  string
 	newRecipe bool
+	findLipid string
+	showLipid string
 )
 
 func init() {
 	flag.StringVar(&dataPath, "d", "data", "Path to soap data")
 	flag.BoolVar(&newRecipe, "n", false, "Create a new recipe")
+	flag.StringVar(&findLipid, "f", "", "Find Lipid")
+	flag.StringVar(&showLipid, "l", "", "Show Lipid")
 }
 
 func main() {
 	flag.Parse()
 
+	lipids, err := LoadLipids(dataPath + "/sap.json")
+	CheckError(err)
+
 	if newRecipe {
 		fmt.Println(domain.RecipeInput{
-			Units:   domain.Ounces,
-			LyeType: domain.NaOH,
+			Units:              domain.Ounces,
+			LyeType:            domain.NaOH,
+			LipidWeight:        30,
+			WaterToLipidRatio:  .35,
+			SuperFatPercentage: 0.05,
+			FragranceRatio:     0.5,
 			Lipids: []domain.LipidInput{
 				domain.LipidInput{
 					Lipid:      "Olive Oil",
@@ -35,15 +48,27 @@ func main() {
 		return
 	}
 
+	if findLipid != "" {
+		findLipid = strings.ToLower(findLipid)
+		for lipid, _ := range lipids {
+			if strings.Contains(strings.ToLower(lipid), findLipid) {
+				fmt.Println(lipid)
+			}
+		}
+		return
+	}
+
+	if showLipid != "" {
+		CheckError(ShowLipid(lipids, showLipid))
+		return
+	}
+
 	recipeFilename := flag.Arg(0)
 
 	recipeIn, err := domain.LoadRecipeInput(recipeFilename)
 	CheckError(err)
 
 	fmt.Println(recipeIn)
-
-	lipids, err := LoadLipids(dataPath + "/sap.json")
-	CheckError(err)
 
 	recipe, err := Calculate(lipids, recipeIn)
 	CheckError(err)
@@ -62,11 +87,15 @@ func Calculate(lipids map[string]domain.Lipid, recipeIn *domain.RecipeInput) (*d
 		FragranceRatio:     recipeIn.FragranceRatio,
 	}
 
+	var totalPercentage float64
+
 	for _, lipidInput := range recipeIn.Lipids {
 		lipid, ok := lipids[lipidInput.Lipid]
 		if !ok {
 			return nil, fmt.Errorf("Invalid Value Lipid '%s'", lipidInput.Lipid)
 		}
+
+		totalPercentage += lipidInput.Percentage
 
 		weight := recipeIn.LipidWeight * lipidInput.Percentage
 
@@ -98,6 +127,10 @@ func Calculate(lipids map[string]domain.Lipid, recipeIn *domain.RecipeInput) (*d
 		recipe.Creamy += lipidInput.Percentage * float64(lipid.Creamy)
 	}
 
+	if math.Abs(totalPercentage-1) > 0.001 {
+		return nil, fmt.Errorf("Lipid percentages (%.3f) do not add up to 1", totalPercentage)
+	}
+
 	recipe.LyeWeight *= (1 - recipeIn.SuperFatPercentage)
 	recipe.FragranceWeight = recipeIn.FragranceRatio * recipe.LipidWeight / 16
 	recipe.WaterWeight = recipeIn.WaterToLipidRatio * recipeIn.LipidWeight
@@ -108,6 +141,18 @@ func Calculate(lipids map[string]domain.Lipid, recipeIn *domain.RecipeInput) (*d
 		recipe.LipidWeight
 
 	return &recipe, nil
+}
+
+func ShowLipid(lipids map[string]domain.Lipid, lipidName string) error {
+
+	lipid, ok := lipids[lipidName]
+	if !ok {
+		return fmt.Errorf("Invalid Value Lipid '%s'", lipidName)
+	}
+
+	fmt.Println(lipid)
+
+	return nil
 }
 
 func LoadLipids(filename string) (map[string]domain.Lipid, error) {
