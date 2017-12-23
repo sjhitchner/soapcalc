@@ -1,6 +1,12 @@
 # soapcalc
 Soap Saponification Calculator
 
+https://reactcheatsheet.com/
+https://getbootstrap.com/docs/4.0/layout/grid/
+https://reactjs.org/docs/thinking-in-react.html
+https://react-bootstrap.github.io/components.html#forms
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
