@@ -6,12 +6,12 @@ import registerServiceWorker from './registerServiceWorker';
 
 
 const RECIPE = {
-	units: 'oz',
+	units: 'g',
 	lye_type: 'naoh',
 	lipid_weight: 40,
-	water_to_lipid_ratio: 0.35,
-	super_fat_percentage: 0.05,
-	fragrance_ratio: 0.05,
+	water_lipid_ratio: 0.25,
+	super_fat_percentage: 0.04,
+	fragrance_ratio: 0.04,
 	lipids: [
 		{name: 'Olive Oil', sap: '.123', weight: '10', percentage: '50'},
  		{name: 'Coconut Oil', sap: '.145', weight: '5', percentage: '25'},

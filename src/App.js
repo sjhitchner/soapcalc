@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { 
-	Button, 
-	ButtonGroup, 
 	ButtonToolbar,
-	/*
-	FormGroup,
 	ControlLabel,
 	FormControl,
+	FormGroup,
+	Grid,
 	HelpBlock,
-	*/
+	InputGroup,
+	Row,
+	Col,
+	ToggleButton, 
+	ToggleButtonGroup, 
 } from 'react-bootstrap';
 //import logo from './logo.svg';
 import './App.css';
@@ -44,19 +46,21 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 class SoapCalc extends Component {
 	render() {
 		return (
-			<div className="container">
-				<div className="row">
+			<Grid>
+				<Row>
 					<SoapCalcParameters 
+						units={this.props.recipe.units}
 						lye_type={this.props.recipe.lye_type}
 						lipid_weight={this.props.recipe.lipid_weight}
-						water_to_lipid_ratio={this.props.recipe.water_to_lipid_ratio}
+						water_lipid_ratio={this.props.recipe.water_lipid_ratio}
 						super_fat_percentage={this.props.recipe.super_fat_percentage}
+						fragrance_ratio={this.props.recipe.fragrance_ratio}
 					/>
-				</div>
-				<div className="row">
+				</Row>
+				<Row>
 					<SoapCalcLipidSelection lipids={this.props.recipe.lipids}/>
-				</div>
-			</div>
+				</Row>
+			</Grid>
 		);
 	}
 }
@@ -64,22 +68,32 @@ class SoapCalc extends Component {
 class SoapCalcParameters extends Component {
 	render() {
 		return (
-			<table className="table">
-				<tbody>
-					<tr>
-						<td>Lye Type</td>
-						<td><LyeType type={this.props.lye_type}/></td>
-						<td>Superfat</td>
-						<td>{this.props.super_fat_percentage}</td>
-					</tr>
-					<tr>
-						<td>Lipid Weight</td>
-						<td>{this.props.lipid_weight}</td>
-						<td>Water:Lipid Ratio</td>
-						<td>{this.props.water_to_lipid_ratio}</td>
-					</tr>
-				</tbody>
-			</table>
+			<Grid>
+				<Row className="show-grid">
+					<Col xs={6} md={6}>
+						<LyeType value={this.props.lye_type} />
+					</Col>
+					<Col xs={6} md={6}>
+						<Units value={this.props.units} />
+					</Col>
+				</Row>
+				<Row>
+					<Col xs={6} md={6}>
+						<LipidWeight value={this.props.lipid_weight} units={this.props.units} />
+					</Col>
+					<Col xs={6} md={6}>
+						<SuperFatInput value={this.props.super_fat_percentage} />
+					</Col>
+				</Row>
+				<Row>
+					<Col xs={6} md={6}>
+						<WaterLipidRatioInput value={this.props.water_lipid_ratio} />
+					</Col>
+					<Col xs={6} md={6}>
+						<FragranceRatioInput value={this.props.fragrance_ratio} />
+					</Col>
+				</Row>
+			</Grid>
 		);
 	}	
 }
@@ -100,9 +114,25 @@ class SoapCalcLipidSelection extends Component {
 }
 
 class LipidLookup extends Component {
+
+	handleChange(e) {
+
+	}
+
 	render() {
 		return (
-			<input type="text" />
+			<FormGroup
+				controlId="lipidLookup">
+				<InputGroup>
+					<FormControl
+						type="text"
+						bsSize="sm"
+						placeholder="Find lipid..."
+			 			onChange={this.handleChange}
+						defaultValue={this.props.value} />
+				</InputGroup>
+				<FormControl.Feedback />
+			</FormGroup>
 		);
 	}
 }
@@ -155,6 +185,181 @@ class LipidTableRow extends Component {
 		);
 	}
 }
+
+class Units extends Component {
+	constructor(props) {
+		super();
+		this.state = {
+      		activeButton: props.value,
+    	};
+	}
+
+	onChange(e) {
+		this.setState({
+			activeButton: e,
+		});
+		//alert('Units ' + this.state.activeButton);
+	}
+
+	render() {
+		return (
+			<FormGroup controlId="units">
+				<ControlLabel>Units</ControlLabel>
+				<ButtonToolbar>
+					<ToggleButtonGroup
+						name="units"
+						type="radio"
+						onChange={this.onChange}
+						defaultValue={this.state.activeButton}>
+						<ToggleButton value={'oz'}>Ounces</ToggleButton>
+						<ToggleButton value={'g'}>Grams</ToggleButton>
+					</ToggleButtonGroup>
+				</ButtonToolbar>
+				<FormControl.Feedback />
+			</FormGroup>
+		)
+	}
+}
+
+class LyeType extends Component {
+	constructor(props) {
+		super();
+		this.state = {
+      		activeButton: props.value,
+    	};
+	}
+	
+	render() {
+		return (
+			<FormGroup controlId="lyeType">
+   				<ControlLabel>Lye Type</ControlLabel>
+				<ButtonToolbar>
+					<ToggleButtonGroup
+						name="lye_type"
+						type="radio"
+						defaultValue={this.state.activeButton}>
+						<ToggleButton value={'naoh'}>NaOH</ToggleButton>
+						<ToggleButton value={'koh'}>KOH</ToggleButton>
+					</ToggleButtonGroup>
+				</ButtonToolbar>
+				<FormControl.Feedback />
+			</FormGroup>
+		)
+	}
+}
+
+class LipidWeight extends Component {
+
+	getValidationState () {
+		/*
+    	const length = this.state.value.length;
+    	if (length > 10) return 'success';
+    	else if (length > 5) return 'warning';
+    	else if (length > 0) return 'error';
+		*/
+	}
+
+	handleChange (event) {
+		this.setState({ value: event.target.value });
+	}
+
+	render() {
+		return (
+			<FormGroup
+				controlId="lipidWeight"
+				validationState={this.getValidationState()}>
+      			<ControlLabel>Lipid Weight</ControlLabel>
+				<InputGroup>
+					<FormControl
+						type="text"
+						bsSize="sm"
+						placeholder={this.props.placeholder}
+			 			onChange={this.handleChange}
+						defaultValue={this.props.value} />
+					<InputGroup.Addon>{this.props.units}</InputGroup.Addon>
+				</InputGroup>
+				<FormControl.Feedback />
+            	<HelpBlock>Validation is based on string length.</HelpBlock>
+			</FormGroup>
+		)
+	}
+}
+
+class WaterLipidRatioInput extends Component {
+	render() {
+		return (
+			<FormGroup controlId="waterLipidRatio">
+   				<ControlLabel>Water to Lipid Ratio</ControlLabel>
+				<PercentageInput name="water_lipid_ratio" value={this.props.value} />
+				<FormControl.Feedback />
+            	<HelpBlock>Validation is based on string length.</HelpBlock>
+			</FormGroup>
+		)
+	}
+}
+
+class SuperFatInput extends Component {
+	render() {
+		return (
+			<FormGroup controlId="superFatPercentage">
+   				<ControlLabel>Super Fat Percentage</ControlLabel>
+				<PercentageInput name="super_fat_percentage" value={this.props.value} />
+				<FormControl.Feedback />
+            	<HelpBlock>Validation is based on string length.</HelpBlock>
+			</FormGroup>
+		)
+	}
+}
+
+class FragranceRatioInput extends Component {
+	render() {
+		return (
+			<FormGroup controlId="fragranceRatio">
+   				<ControlLabel>Fragrance Ratio</ControlLabel>
+				<PercentageInput name="fragrance_ratio" value={this.props.value} />
+				<FormControl.Feedback />
+            	<HelpBlock>Validation is based on string length.</HelpBlock>
+			</FormGroup>
+		)
+	}
+}
+
+class PercentageInput extends Component {
+
+	/*
+	getValidationState () {
+		const value = this.state.value;
+		if (value > 0 && value <= 1 {
+			return 'success';
+		}
+    	else if (value > 5) {
+			return 'warning';
+		}
+    	else {
+			return 'error';
+		}
+	}
+	*/
+
+	handleChange (event) {
+		this.setState({ value: event.target.value/100 });
+	}
+
+	render() {
+		return (
+			<InputGroup>
+      			<FormControl
+					type="text"
+					bsSize="sm"
+					placeholder={this.props.placeholder}
+			 		onChange={this.handleChange}
+					defaultValue={this.props.value * 100} />
+				<InputGroup.Addon>%</InputGroup.Addon>
+			</InputGroup>
+		)
+	}
+}
+
 
 /*
 class LipidList extends Component {
@@ -229,40 +434,5 @@ var BoardSwitcher = React.createClass({
 });
 */
 
-class UnitsSelector extends Component {
-	render() {
-		return (
-			<ButtonToolbar>
-				<ButtonGroup bsSize="large">
-					<Button>Ounces</Button>
-					<Button>Grams</Button>
-				</ButtonGroup>
-			</ButtonToolbar>
-		)
-	}
-}
-
-class LyeType extends Component {
-	render() {
-		return (
-			<ButtonToolbar>
-				<ButtonGroup>
-					<Button>NaOH</Button>
-					<Button>KOH</Button>
-				</ButtonGroup>
-			</ButtonToolbar>
-		)
-	}
-}
-
-class LipidWeight extends Component {
-	render() {
-		return (
-			<div>
-				Lipid Weight
-			</div>
-		)
-	}
-}
 
 export default SoapCalc;
