@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Autosuggest from 'react-autosuggest';
 import { 
 	ButtonToolbar,
 	ControlLabel,
@@ -63,6 +64,7 @@ class SoapCalc extends Component {
 		this.handleWaterLipidRatioChange = this.handleWaterLipidRatioChange.bind(this);
 		this.handleSuperFatPercentageChange = this.handleSuperFatPercentageChange.bind(this);
 		this.handleFragranceRatioChange = this.handleFragranceRatioChange.bind(this);
+		this.handleAddLipid = this.handleAddLipid.bind(this);
 	}
 
 	handleUnitsChange(newUnits) {
@@ -101,6 +103,18 @@ class SoapCalc extends Component {
 		});
 	}
 
+	handleAddLipid(lipidName) {
+		const lipid = this.props.lipids.find(lipide => lipid.name === lipidName);
+
+		var lipids = this.state.selectedLipids.slice()
+		lipids.push(lipid)
+		this.setState({
+			selectedLipids: {
+				name: lipid,
+				sap: 
+		})
+	};
+
 	render() {
 		return (
 			<Grid>
@@ -121,7 +135,11 @@ class SoapCalc extends Component {
 					/>
 				</Row>
 				<Row>
-					<SoapCalcLipidSelection lipids={this.state.selectedLipids}/>
+					<SoapCalcLipidSelection
+						allLipids={this.props.lipids}
+						selectedLipids={this.state.selectedLipids}
+						addLipid={this.handleAddLipid}
+					/>
 				</Row>
 			</Grid>
 		);
@@ -177,38 +195,98 @@ class SoapCalcParameters extends Component {
 class SoapCalcLipidSelection extends Component {
 	render() {
 		return (
-			<div className="container">
-				<div className="row">
-					<div className="col-md"><LipidLookup /></div>
-    			</div>
-  				<div className="row">
-					<div className="col-md"><LipidTable lipids={this.props.lipids} /></div>
-    			</div>
-			</div>
+			<Grid>
+				<Row>
+					<LipidLookup
+						allLipids={this.props.allLipids}
+						onSelected={this.props.addLipid}
+					/>
+				</Row>
+				<Row>
+					<LipidTable
+						selectedLipids={this.props.selectedLipids}
+					/>
+    			</Row>
+			</Grid>
 		);
 	}	
 }
 
+// Use your imagination to render suggestions.
+const renderSuggestion = suggestion => (
+	<div>
+		{suggestion.name}
+	</div>
+);
+
 class LipidLookup extends Component {
+	constructor(props) {
+		super(props);
 
-	handleChange(e) {
-
+		this.state = {
+			value: '',
+			suggestions: [],
+		};
 	}
 
+	onSuggestionSelected = (event, { suggestion }) => {
+		this.props.onSelected(this.state.value);
+	};
+
+	onChange = (event, { newValue }) => {
+		this.setState({
+			value: newValue
+		});
+	};
+
+	// Autosuggest will call this function every time you need to update suggestions.
+	// You already implemented this logic above, so just use it.
+	onSuggestionsFetchRequested = ({ value }) => {
+		this.setState({
+			suggestions: this.getSuggestions(value)
+		});
+	};
+
+	// Autosuggest will call this function every time you need to clear suggestions.
+	onSuggestionsClearRequested = () => {
+		this.setState({
+			suggestions: []
+		});
+	};
+
+	getSuggestionValue = suggestion => {
+		return suggestion.name;
+	}
+
+	getSuggestions = value => {
+		const inputValue = value.trim().toLowerCase();
+		const inputLength = inputValue.length;
+
+		return inputLength === 0 ? [] : this.props.allLipids.filter(lipid =>
+			lipid.name.toLowerCase().slice(0, inputLength) === inputValue
+		);
+	};
+
 	render() {
+		const { value, suggestions } = this.state;
+
+		// Autosuggest will pass through all these props to the input.
+		const inputProps = {
+			placeholder: 'Select a Lipid/Oil',
+			value,
+			onChange: this.onChange
+		};
+
 		return (
-			<FormGroup
-				controlId="lipidLookup">
-				<InputGroup>
-					<FormControl
-						type="text"
-						bsSize="sm"
-						placeholder="Find lipid..."
-			 			onChange={this.handleChange}
-						defaultValue={this.props.value} />
-				</InputGroup>
-				<FormControl.Feedback />
-			</FormGroup>
+			<Autosuggest
+				suggestions={suggestions}
+				onSuggestionSelected={this.onSuggestionSelected}
+				onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+				onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+				getSuggestionValue={this.getSuggestionValue}
+				renderSuggestion={renderSuggestion}
+				inputProps={inputProps}
+			/>
 		);
 	}
 }
@@ -217,7 +295,7 @@ class LipidTable extends Component {
 	render() {
 		const rows = [];
 
-		this.props.lipids.forEach((lipid, i) => {
+		this.props.selectedLipids.forEach((lipid, i) => {
 			rows.push(
 				<LipidTableRow
 				        key={i}
