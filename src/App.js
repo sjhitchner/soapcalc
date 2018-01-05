@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Autosuggest from 'react-autosuggest';
 import { 
+	Button,
 	ButtonToolbar,
 	ControlLabel,
 	FormControl,
@@ -65,6 +66,8 @@ class SoapCalc extends Component {
 		this.handleSuperFatPercentageChange = this.handleSuperFatPercentageChange.bind(this);
 		this.handleFragranceRatioChange = this.handleFragranceRatioChange.bind(this);
 		this.handleAddLipid = this.handleAddLipid.bind(this);
+		this.handleDeleteLipid = this.handleDeleteLipid.bind(this);
+		this.handleLipidPercentageUpdate = this.handleLipidPercentageUpdate.bind(this);  
 	}
 
 	handleUnitsChange(newUnits) {
@@ -103,17 +106,34 @@ class SoapCalc extends Component {
 		});
 	}
 
-	handleAddLipid(lipidName) {
-		const lipid = this.props.lipids.find(lipide => lipid.name === lipidName);
+	handleAddLipid(lipid) {
+		lipid.percentage = 0;
 
 		var lipids = this.state.selectedLipids.slice()
 		lipids.push(lipid)
+
 		this.setState({
-			selectedLipids: {
-				name: lipid,
-				sap: 
-		})
+			selectedLipids: lipids
+		});
 	};
+
+	handleDeleteLipid(index) {
+		var lipids = this.state.selectedLipids.slice()
+		lipids.splice(index, 1);
+
+		this.setState({
+			selectedLipids: lipids
+		});
+	}
+
+	handleLipidPercentageUpdate(index, percentage) {
+		var lipids = this.state.selectedLipids.slice()
+		lipids[index].percentage = percentage;
+
+		this.setState({
+			selectedLipids: lipids
+		});
+	}
 
 	render() {
 		return (
@@ -139,6 +159,9 @@ class SoapCalc extends Component {
 						allLipids={this.props.lipids}
 						selectedLipids={this.state.selectedLipids}
 						addLipid={this.handleAddLipid}
+						updatePercentage={this.handleLipidPercentageUpdate}
+						deleteLipid={this.handleDeleteLipid}
+						totalWeight={this.state.lipidWeight}
 					/>
 				</Row>
 			</Grid>
@@ -205,6 +228,9 @@ class SoapCalcLipidSelection extends Component {
 				<Row>
 					<LipidTable
 						selectedLipids={this.props.selectedLipids}
+						updatePercentage={this.props.updatePercentage}
+						deleteLipid={this.props.deleteLipid}
+						totalWeight={this.props.totalWeight}
 					/>
     			</Row>
 			</Grid>
@@ -230,7 +256,10 @@ class LipidLookup extends Component {
 	}
 
 	onSuggestionSelected = (event, { suggestion }) => {
-		this.props.onSelected(this.state.value);
+		this.props.onSelected(suggestion);
+		this.setState({
+			value: '',
+		});
 	};
 
 	onChange = (event, { newValue }) => {
@@ -294,16 +323,22 @@ class LipidLookup extends Component {
 class LipidTable extends Component {
 	render() {
 		const rows = [];
+		var sumWeight = 0;
 
 		this.props.selectedLipids.forEach((lipid, i) => {
+			const weight = this.props.totalWeight * lipid.percentage;
+			sumWeight += weight;
 			rows.push(
 				<LipidTableRow
 				        key={i}
-				        num={i+1}
+				        num={i}
 						name={lipid.name}
-						sap={lipid.sap}
+						sap={lipid.naoh}
 						percentage={lipid.percentage}
-						weight={lipid.weight} />
+						updatePercentage={this.props.updatePercentage}
+						weight={weight}
+						deleteLipid={this.props.deleteLipid}
+				/>
 			);
 		});
 
@@ -319,22 +354,55 @@ class LipidTable extends Component {
       					<th scope="col"></th>
 					</tr>
 				</thead>
-				<tbody>{rows}</tbody>
+				<tbody>
+						{rows}
+						<tr>
+							<th colSpan="4">Total Weight</th>
+							<th>{sumWeight}</th>
+						</tr>
+				</tbody>
 			</table>
 		);
 	}
 }
 
 class LipidTableRow extends Component {
+	constructor(props) {
+		super(props);
+		this.handleChange = this.handleChange.bind(this);
+		this.handleDelete = this.handleDelete.bind(this);
+	}
+
+	handleChange(value) {
+		this.props.updatePercentage(this.props.num, value);
+	}
+
+	handleDelete(e) {
+		this.props.deleteLipid(this.props.num);
+	}
+
 	render() {
 		return (
 			<tr>
-				<th scope="row">{this.props.num}</th>
+				<th scope="row">{this.props.num+1}</th>
       			<td>{this.props.name}</td>
       			<td>{this.props.sap}</td>
-      			<td>{this.props.percentage}</td>
+      			<td>
+					<PercentageInput
+						name="lipid_percentage"
+						value={this.props.percentage}
+						onChange={this.handleChange}
+					/>
+				</td>
       			<td>{this.props.weight}</td>
-				<td>delete</td>
+				<td>
+					<Button
+						bsSize="small"
+						bsStyle="primary"
+						onClick={this.handleDelete} >
+					delete
+					</Button>
+				</td>
     		</tr>
 		);
 	}
@@ -496,7 +564,7 @@ class PercentageInput extends Component {
 	}
   
 	handleChange(e) {
-		this.props.onChange(e.target.value);
+		this.props.onChange(e.target.value/100);
 	}
 
 	/*
