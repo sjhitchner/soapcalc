@@ -45,6 +45,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 */
  
 
+function updateLipids(lipids) {
+	var hash = {};
+	return lipids.sort((a, b) => a.percentage > b.percentage).filter(function(lipid) {
+		var name = lipid.name;
+		return !hash[name] && (hash[name] = true)
+	});// .sort((a, b) => a.percentage < b.percentage)
+}
+
 class SoapCalc extends Component {
 	constructor(props) {
 		super(props);
@@ -113,7 +121,7 @@ class SoapCalc extends Component {
 		lipids.push(lipid)
 
 		this.setState({
-			selectedLipids: lipids
+			selectedLipids: updateLipids(lipids)
 		});
 	};
 
@@ -122,7 +130,7 @@ class SoapCalc extends Component {
 		lipids.splice(index, 1);
 
 		this.setState({
-			selectedLipids: lipids
+			selectedLipids: updateLipids(lipids)
 		});
 	}
 
@@ -131,7 +139,7 @@ class SoapCalc extends Component {
 		lipids[index].percentage = percentage;
 
 		this.setState({
-			selectedLipids: lipids
+			selectedLipids: updateLipids(lipids)
 		});
 	}
 
