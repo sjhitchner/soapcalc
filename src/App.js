@@ -67,81 +67,91 @@ class SoapCalc extends Component {
 			fragranceRatio: 0.05,
 			selectedLipids:[],
 		};
-
-		this.handleUnitsChange = this.handleUnitsChange.bind(this);
-    	this.handleLyeTypeChange = this.handleLyeTypeChange.bind(this);
-		this.handleLipidWeightChange = this.handleLipidWeightChange.bind(this);
-		this.handleWaterLipidRatioChange = this.handleWaterLipidRatioChange.bind(this);
-		this.handleSuperFatPercentageChange = this.handleSuperFatPercentageChange.bind(this);
-		this.handleFragranceRatioChange = this.handleFragranceRatioChange.bind(this);
-		this.handleAddLipid = this.handleAddLipid.bind(this);
-		this.handleDeleteLipid = this.handleDeleteLipid.bind(this);
-		this.handleLipidPercentageUpdate = this.handleLipidPercentageUpdate.bind(this);  
 	}
 
-	handleUnitsChange(newUnits) {
+	handleUnitsChange = (newUnits) => {
 		this.setState({
 			units: newUnits,
 		});
 	}
   
-	handleLyeTypeChange(newLyeType) {
+	handleLyeTypeChange = (newLyeType) => {
 		this.setState({
 			lyeType: newLyeType,
 		});
 	}
 
-	handleLipidWeightChange(newLipidWeight) {
+	handleLipidWeightChange = (newLipidWeight) => {
 		this.setState({
 			lipidWeight: newLipidWeight,
 		});
 	}
 
-	handleWaterLipidRatioChange(newWaterLipidRatio) {
+	handleWaterLipidRatioChange = (newWaterLipidRatio) => {
 		this.setState({
 			waterLipidRatio: newWaterLipidRatio,
 		});
 	}
 
-	handleSuperFatPercentageChange(newSuperFat) {
+	handleSuperFatPercentageChange = (newSuperFat) => {
 		this.setState({
 			superFatPercentage: newSuperFat,
 		});
 	}
 
-	handleFragranceRatioChange(newFragranceRatio) {
+	handleFragranceRatioChange = (newFragranceRatio) => {
 		this.setState({
 			fragranceRatio: newFragranceRatio,
 		});
 	}
 
-	handleAddLipid(lipid) {
+	handleAddLipid = (lipid) => {
+		lipid.weight = 0;
 		lipid.percentage = 0;
 
-		var lipids = this.state.selectedLipids.slice()
-		lipids.push(lipid)
-
 		this.setState({
-			selectedLipids: sortLipids(lipids)
+			selectedLipids: sortLipids(this.state.selectedLipids.concat([lipid])),
 		});
 	};
 
-	handleDeleteLipid(index) {
+	handleDeleteLipid = (index) => {
+		this.setState({
+			selectedLipids: sortLipids(this.state.selectedLipids.filter((s, idx) => idx !== index)),
+		});
+	}
+
+	handleLipidUpdate = (index, type, value) => {
 		var lipids = this.state.selectedLipids.slice()
-		lipids.splice(index, 1);
+		//lipids[index].weight = weightpercentage;
+		//lipids[index].percentage = percentage;
+		switch (type) {
+			case 'weight':
+				
+				break;
+			case 'percentage':
+				break;
+
+			default:
+				break;
+		}
 
 		this.setState({
 			selectedLipids: sortLipids(lipids)
 		});
 	}
 
-	handleLipidPercentageUpdate(index, percentage) {
-		var lipids = this.state.selectedLipids.slice()
-		lipids[index].percentage = percentage;
-
-		this.setState({
-			selectedLipids: sortLipids(lipids)
-		});
+	handleSubmit = (e) => {
+		const recipe = {
+			units: this.state.units,
+			lye_type: this.state.lyeType,
+			lipid_weight: this.state.lipidWeight,
+			water_lipid_ratio: this.state.waterLipidRatio,
+			super_fat_percentage: this.state.superFatPercentage,
+			fragrance_ratio: this.state.fragranceRatio, 
+			lipids: this.state.selectedLipids,
+		}
+	
+		alert(`Recipe: ` + JSON.stringify(recipe));
 	}
 
 	render() {
@@ -168,10 +178,14 @@ class SoapCalc extends Component {
 						allLipids={this.props.lipids}
 						selectedLipids={this.state.selectedLipids}
 						addLipid={this.handleAddLipid}
-						updatePercentage={this.handleLipidPercentageUpdate}
+						updateLipid={this.handleLipidUpdate}
 						deleteLipid={this.handleDeleteLipid}
 						totalWeight={this.state.lipidWeight}
+						units={this.state.units}
 					/>
+				</Row>
+				<Row>
+					<Button bsStyle="primary" bsSize="large" disabled>Submit Recipe</Button>
 				</Row>
 			</Grid>
 		);
@@ -237,9 +251,10 @@ class SoapCalcLipidSelection extends Component {
 				<Row>
 					<LipidTable
 						selectedLipids={this.props.selectedLipids}
-						updatePercentage={this.props.updatePercentage}
+						updateLipid={this.props.updateLipid}
 						deleteLipid={this.props.deleteLipid}
 						totalWeight={this.props.totalWeight}
+						units={this.props.units}
 					/>
     			</Row>
 			</Grid>
@@ -333,20 +348,22 @@ class LipidTable extends Component {
 	render() {
 		const rows = [];
 		var sumWeight = 0;
+		var sumPercentage = 0;
 
 		this.props.selectedLipids.forEach((lipid, i) => {
-			const weight = this.props.totalWeight * lipid.percentage;
-			sumWeight += weight;
+			sumWeight += lipid.weight;
+			sumPercentage += lipid.percentage;
 			rows.push(
 				<LipidTableRow
-				        key={i}
+				        key={lipid.name}
 				        num={i}
 						name={lipid.name}
 						sap={lipid.naoh}
 						percentage={lipid.percentage}
-						updatePercentage={this.props.updatePercentage}
-						weight={weight}
-						deleteLipid={this.props.deleteLipid}
+						weight={lipid.weight}
+						units={this.props.units}
+						onUpdate={this.props.updateLipid}
+						onDelete={this.props.deleteLipid}
 				/>
 			);
 		});
@@ -366,8 +383,9 @@ class LipidTable extends Component {
 				<tbody>
 						{rows}
 						<tr>
-							<th colSpan="4">Total Weight</th>
-							<th>{sumWeight}</th>
+							<th colSpan="3">Total Weight</th>
+							<th>{sumPercentage}</th>
+							<th>{sumWeight}&nbsp;{this.props.units}</th>
 						</tr>
 				</tbody>
 			</table>
@@ -376,23 +394,22 @@ class LipidTable extends Component {
 }
 
 class LipidTableRow extends Component {
-	constructor(props) {
-		super(props);
-		this.handleChange = this.handleChange.bind(this);
-		this.handleDelete = this.handleDelete.bind(this);
+
+	handleWeightChange = (value) => {
+		this.props.onUpdate(this.props.num, 'weight', value);
 	}
 
-	handleChange(value) {
-		this.props.updatePercentage(this.props.num, value);
+	handlePercentageChange = (value) => {
+		this.props.onUpdate(this.props.num, 'percentage', value);
 	}
 
-	handleDelete(e) {
+	handleDelete = (e) => {
 		this.props.deleteLipid(this.props.num);
 	}
 
 	render() {
 		return (
-			<tr>
+			<tr key={this.props.key}>
 				<th scope="row">{this.props.num+1}</th>
       			<td>{this.props.name}</td>
       			<td>{this.props.sap}</td>
@@ -400,14 +417,21 @@ class LipidTableRow extends Component {
 					<PercentageInput
 						name="lipid_percentage"
 						value={this.props.percentage}
-						onChange={this.handleChange}
+						onChange={this.handleWeightChange}
 					/>
 				</td>
-      			<td>{this.props.weight}</td>
+      			<td>
+					<UnitsInput 
+						name="lipid_weight"
+						value={this.props.value}
+						units={this.props.units}
+						placeholder={this.props.placeholder}
+						onChange={this.handlePercentageChange}
+					/>
+				</td>
 				<td>
 					<Button
 						bsSize="small"
-						bsStyle="primary"
 						onClick={this.handleDelete} >
 					delete
 					</Button>
@@ -418,12 +442,8 @@ class LipidTableRow extends Component {
 }
 
 class Units extends Component {
-	constructor(props) {
-		super(props);
-		this.handleChange = this.handleChange.bind(this);
-	}
   
-	handleChange(e) {
+	handleChange = (e) => {
 		this.props.onChange(e);
 	}
 
@@ -448,12 +468,8 @@ class Units extends Component {
 }
 
 class LyeType extends Component {
-	constructor(props) {
-		super(props);
-		this.handleChange = this.handleChange.bind(this);
-	}
   
-	handleChange(e) {
+	handleChange = (e) => {
 		this.props.onChange(e);
 	}
 
@@ -468,7 +484,7 @@ class LyeType extends Component {
 						onChange={this.handleChange}
 						defaultValue={this.props.value}>
 						<ToggleButton value={'naoh'}>NaOH</ToggleButton>
-						<ToggleButton value={'koh'}>KOH</ToggleButton>
+						<ToggleButton value={'koh'} disabled>KOH</ToggleButton>
 					</ToggleButtonGroup>
 				</ButtonToolbar>
 				<FormControl.Feedback />
@@ -478,12 +494,8 @@ class LyeType extends Component {
 }
 
 class LipidWeight extends Component {
-	constructor(props) {
-		super(props);
-		this.handleChange = this.handleChange.bind(this);
-	}
   
-	handleChange(e) {
+	handleChange = (e) => {
 		this.props.onChange(e.target.value);
 	}
 
@@ -502,15 +514,11 @@ class LipidWeight extends Component {
 				controlId="lipidWeight"
 				validationState={this.getValidationState()}>
       			<ControlLabel>Lipid Weight</ControlLabel>
-				<InputGroup>
-					<FormControl
-						type="text"
-						bsSize="sm"
-						placeholder={this.props.placeholder}
-			 			onChange={this.handleChange}
-						defaultValue={this.props.value} />
-					<InputGroup.Addon>{this.props.units}</InputGroup.Addon>
-				</InputGroup>
+				<UnitsInput 
+					name="lipid_weight"
+					value={this.props.value}
+					units={this.props.units}
+					placeholder={this.props.placeholder} />
 				<FormControl.Feedback />
             	<HelpBlock>Validation is based on string length.</HelpBlock>
 			</FormGroup>
@@ -519,6 +527,7 @@ class LipidWeight extends Component {
 }
 
 class WaterLipidRatioInput extends Component {
+
 	render() {
 		return (
 			<FormGroup controlId="waterLipidRatio">
@@ -535,6 +544,7 @@ class WaterLipidRatioInput extends Component {
 }
 
 class SuperFatInput extends Component {
+
 	render() {
 		return (
 			<FormGroup controlId="superFatPercentage">
@@ -551,6 +561,7 @@ class SuperFatInput extends Component {
 }
 
 class FragranceRatioInput extends Component {
+
 	render() {
 		return (
 			<FormGroup controlId="fragranceRatio">
@@ -566,13 +577,30 @@ class FragranceRatioInput extends Component {
 	}
 }
 
-class PercentageInput extends Component {
-	constructor(props) {
-		super(props);
-		this.handleChange = this.handleChange.bind(this);
+class UnitsInput extends Component {
+
+	handleChange = (e) => {
+		this.props.onChange(e.target.value);
 	}
+
+	render() {
+		return (
+			<InputGroup>
+      			<FormControl
+					type="text"
+					bsSize="sm"
+					placeholder={this.props.placeholder}
+			 		onChange={this.handleChange}
+					defaultValue={this.props.value} />
+				<InputGroup.Addon>{this.props.units}</InputGroup.Addon>
+			</InputGroup>
+		)
+	}
+}
+
+class PercentageInput extends Component {
   
-	handleChange(e) {
+	handleChange = (e) => {
 		this.props.onChange(e.target.value/100);
 	}
 
