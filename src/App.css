@@ -1,28 +1,31 @@
-.App {
+.SoapCalc {
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
+.SoapCalc-logo {
+  animation: SoapCalc-logo-spin infinite 20s linear;
   height: 80px;
 }
 
-.App-header {
+.SoapCalc-header {
   background-color: #222;
   height: 150px;
   padding: 20px;
   color: white;
 }
 
-.App-title {
+.SoapCalc-title {
   font-size: 1.5em;
 }
 
-.App-intro {
+.SoapCalc-intro {
   font-size: large;
 }
 
-@keyframes App-logo-spin {
+@keyframes SoapCalc-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.selector { border: 5px solid #ccc; float: left; font: 700 20px HelveticaNeue, Helvetica, Arial; margin-right: 10px; padding: 10px; }
+.selector.selected { border-color: #3BA8AA; }

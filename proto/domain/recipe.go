@@ -6,8 +6,8 @@ import (
 )
 
 const (
-	Ounces Unit = "Ounces"
-	Grams  Unit = "grams"
+	Ounces Unit = "oz"
+	Grams  Unit = "g"
 
 	NaOH LyeType = "NaOH"
 	KOH  LyeType = "KOH"
@@ -21,7 +21,7 @@ type Recipe struct {
 	Description        string           `json:"description"`
 	Units              Unit             `json:"units"`
 	LyeType            LyeType          `json:"lye_type"`
-	WaterToLipidRatio  float64          `json:"water_to_lipid_ratio"`
+	WaterToLipidRatio  float64          `json:"water_lipid_ratio"`
 	SuperFatPercentage float64          `json:"super_fat_percentage"`
 	FragranceRatio     float64          `json:"fragrance_ratio"`
 	Lipids             []LipidComponent `json:"lipids"`
