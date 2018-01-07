@@ -45,13 +45,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 */
 
 function sortLipids(lipids) {
-   const hash = {};
-   return lipids
-     .sort((a,b) => a.percentage < b.percentage)
-     .filter(function(lipid) {
-         var name = lipid.name;
-         return !hash[name] && (hash[name] = true);
-   });
+   return lipids.sort((a,b) => a.percentage < b.percentage);
 }
 
 class SoapCalc extends Component {
@@ -106,6 +100,12 @@ class SoapCalc extends Component {
 	}
 
 	handleAddLipid = (lipid) => {
+        for (var l of this.state.selectedLipids) {
+                if (l.name === lipid.name) {
+                        return;
+                }
+        }
+
 		lipid.weight = 0;
 		lipid.percentage = 0;
 
@@ -399,9 +399,10 @@ class LipidTable extends Component {
 							)
 						})}
 						<tr>
-							<th colSpan="3">Total Weight</th>
-							<th>{sumPercentage*100}</th>
-							<th>{sumWeight}&nbsp;{this.props.units}</th>
+                <th colSpan="3">Total Weight</th>
+                <th>{sumPercentage*100}</th>
+                <th>{sumWeight*1}&nbsp;{this.props.units}</th>
+                <th>&nbsp;</th>
 						</tr>
 				</tbody>
 			</table>
@@ -595,7 +596,7 @@ class UnitsInput extends Component {
 					bsSize="sm"
 					placeholder={this.props.placeholder}
 			 		onChange={this.handleChange}
-					defaultValue={this.props.value} />
+					value={this.props.value} />
 				<InputGroup.Addon>{this.props.units}</InputGroup.Addon>
 			</InputGroup>
 		)
@@ -605,7 +606,10 @@ class UnitsInput extends Component {
 class PercentageInput extends Component {
   
 	handleChange = (e) => {
-		this.props.onChange(e.target.value/100);
+    const value = e.target.value;
+    if (value >= 0 && value <= 100) {
+		    this.props.onChange(value/100);
+    }
 	}
 
 	/*
@@ -631,7 +635,7 @@ class PercentageInput extends Component {
 					bsSize="sm"
 					placeholder={this.props.placeholder}
 			 		onChange={this.handleChange}
-					defaultValue={this.props.value * 100} />
+					value={this.props.value * 100} />
 				<InputGroup.Addon>%</InputGroup.Addon>
 			</InputGroup>
 		)
