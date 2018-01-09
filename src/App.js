@@ -464,6 +464,8 @@ class Units extends Component {
 						defaultValue={this.props.value}>
 						<ToggleButton value={'oz'}>Ounces</ToggleButton>
 						<ToggleButton value={'g'}>Grams</ToggleButton>
+						<ToggleButton value={'lbs'}>Pounds</ToggleButton>
+						<ToggleButton value={'kg'}>Kilograms</ToggleButton>
 					</ToggleButtonGroup>
 				</ButtonToolbar>
 				<FormControl.Feedback />
@@ -525,7 +527,7 @@ class LipidWeight extends Component {
 					units={this.props.units}
 					placeholder={this.props.placeholder} />
 				<FormControl.Feedback />
-            	<HelpBlock>Validation is based on string length.</HelpBlock>
+        <HelpBlock>Total weight of lipids/fat to be used in the recipe.</HelpBlock>
 			</FormGroup>
 		)
 	}
@@ -542,7 +544,7 @@ class WaterLipidRatioInput extends Component {
 					value={this.props.value} 
 					onChange={this.props.onChange} />
 				<FormControl.Feedback />
-            	<HelpBlock>Validation is based on string length.</HelpBlock>
+        <HelpBlock>Amount of water to be used as a percent of lipids/fats.</HelpBlock>
 			</FormGroup>
 		)
 	}
@@ -559,7 +561,7 @@ class SuperFatInput extends Component {
 					value={this.props.value}
 					onChange={this.props.onChange} />
 				<FormControl.Feedback />
-            	<HelpBlock>Validation is based on string length.</HelpBlock>
+        <HelpBlock>The superfat percentage to calculate lye discount.</HelpBlock>
 			</FormGroup>
 		)
 	}
@@ -576,7 +578,7 @@ class FragranceRatioInput extends Component {
 					value={this.props.value}
 					onChange={this.props.onChange} />
 				<FormControl.Feedback />
-            	<HelpBlock>Validation is based on string length.</HelpBlock>
+        <HelpBlock>Amount of fragrance with respect to lipids/fats.</HelpBlock>
 			</FormGroup>
 		)
 	}
@@ -630,7 +632,7 @@ class PercentageInput extends Component {
 	render() {
 		return (
 			<InputGroup>
-      			<FormControl
+        <FormControl
 					type="text"
 					bsSize="sm"
 					placeholder={this.props.placeholder}
