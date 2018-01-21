@@ -204,3 +204,10 @@ class PercentageInput extends Component {
 	}
 }
 
+export default Units;
+export default LyeType;
+export default LipidWeight;
+export default WaterLipidRatioInput;
+export default SuperFatInput;
+export default FragranceRatioInput;
+
