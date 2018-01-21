@@ -390,7 +390,7 @@ class LipidTableRow extends Component {
 
 	render() {
 		return (
-			<tr key={this.props.key}>
+			<tr> 
 				<th scope="row">{this.props.num+1}</th>
       			<td>{this.props.name}</td>
       			<td>{this.props.sap}</td>
