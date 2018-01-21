@@ -1,22 +1,28 @@
 import React, { Component } from 'react';
-import { 
-	Button,
-	ButtonToolbar,
-	ControlLabel,
-	FormControl,
-	FormGroup,
-	Grid,
-	HelpBlock,
-	InputGroup,
-	Row,
-	Col,
-	ToggleButton, 
-	ToggleButtonGroup, 
-} from 'react-bootstrap';
+import {
+  BrowserRouter as Router,
+  Route
+} from 'react-router-dom';
 //import logo from './logo.svg';
 import '../../public/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Calculator } from './calculator';
 
+class App extends Component {
+  render() {
+    return (
+      <Router>
+        <div>
+          <Route exact path='/' component={Calculator}/>
+          <Route path='/home'   component={Calculator}/>
+          <Route path='/calc'   component={Calculator}/>
+        </div>
+      </Router>
+    );
+  }
+}
+
+export default App;
 /*
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
@@ -118,4 +124,3 @@ var BoardSwitcher = React.createClass({
 */
 
 
-export default SoapCalc;
