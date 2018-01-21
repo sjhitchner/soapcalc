@@ -156,7 +156,7 @@ class Calculator extends Component {
 				</Row>
 				<Row>
 					<LipidSelection
-						allLipids={this.props.lipids}
+						allLipids={LIPIDS} //this.props.lipids}
 						selectedLipids={this.state.selectedLipids}
 						addLipid={this.handleAddLipid}
 						updateLipid={this.handleLipidUpdate}

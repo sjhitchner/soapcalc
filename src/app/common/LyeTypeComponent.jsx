@@ -4,8 +4,6 @@ import {
 	ControlLabel,
 	FormControl,
 	FormGroup,
-	HelpBlock,
-	InputGroup,
 	ToggleButton, 
 	ToggleButtonGroup, 
 } from 'react-bootstrap';

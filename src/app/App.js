@@ -4,7 +4,7 @@ import {
   Route
 } from 'react-router-dom';
 //import logo from './logo.svg';
-import '../../public/App.css';
+import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Calculator from './calculator/CalculatorComponent';
 

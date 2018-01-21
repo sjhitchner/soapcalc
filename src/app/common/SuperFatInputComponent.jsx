@@ -4,7 +4,6 @@ import {
 	FormControl,
 	FormGroup,
 	HelpBlock,
-	InputGroup,
 } from 'react-bootstrap';
 import PercentageInput from './PercentageInputComponent';
 
