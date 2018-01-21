@@ -6,16 +6,16 @@ import {
 //import logo from './logo.svg';
 import '../../public/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Calculator } from './calculator';
+import Calculator from './calculator/CalculatorComponent';
 
 class App extends Component {
   render() {
     return (
       <Router>
         <div>
-          <Route exact path='/' component={Calculator}/>
-          <Route path='/home'   component={Calculator}/>
-          <Route path='/calc'   component={Calculator}/>
+          <Route exact path='/' component={Calculator} />
+          <Route path='/home'   component={Calculator} />
+          <Route path='/calc'   component={Calculator} />
         </div>
       </Router>
     );
