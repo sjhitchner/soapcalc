@@ -38,13 +38,7 @@ const LIPIDS = [
 //lipids={LIPIDS} 
 
 function sortLipids(lipids) {
-   const hash = {};
-   return lipids
-     .sort((a,b) => a.percentage < b.percentage)
-     .filter(function(lipid) {
-         var name = lipid.name;
-         return !hash[name] && (hash[name] = true);
-   });
+  return lipids; //lipids.sort((a,b) => a.percentage < b.percentage);
 }
 
 class Calculator extends Component {
@@ -99,6 +93,12 @@ class Calculator extends Component {
 	}
 
 	handleAddLipid = (lipid) => {
+    for (let l of this.state.selectedLipids) {
+      if (l.name === lipid.name) {
+         return;
+      }
+    }
+
 		lipid.weight = 0;
 		lipid.percentage = 0;
 
@@ -113,15 +113,17 @@ class Calculator extends Component {
 		});
 	}
 
-	handleLipidUpdate = (index, type, value) => {
-		var lipids = this.state.selectedLipids.slice()
-		//lipids[index].weight = weightpercentage;
-		//lipids[index].percentage = percentage;
+	handleLipidUpdate = (idx, type, value) => {
+		let lipids = this.state.selectedLipids.slice()
+
 		switch (type) {
 			case 'weight':
-				
+        lipids[idx].weight = value;
+        lipids[idx].percentage = value / this.state.lipidWeight;	
 				break;
 			case 'percentage':
+        lipids[idx].weight = this.state.lipidWeight * value;
+        lipids[idx].percentage = value;
 				break;
 
 			default:
@@ -338,28 +340,22 @@ class LipidLookup extends Component {
 }
 
 class LipidTable extends Component {
-	render() {
-		const rows = [];
-		var sumWeight = 0;
-		var sumPercentage = 0;
 
-		this.props.selectedLipids.forEach((lipid, i) => {
-			sumWeight += lipid.weight;
-			sumPercentage += lipid.percentage;
-			rows.push(
-				<LipidTableRow
-				        key={lipid.name}
-				        num={i}
-						name={lipid.name}
-						sap={lipid.naoh}
-						percentage={lipid.percentage}
-						weight={lipid.weight}
-						units={this.props.units}
-						onUpdate={this.props.updateLipid}
-						onDelete={this.props.deleteLipid}
-				/>
-			);
-		});
+	handleWeightChange = (idx) => (value) => {
+		this.props.updateLipid(idx, 'weight', value);
+	}
+
+	handlePercentageChange = (idx) => (value) => {
+		this.props.updateLipid(idx, 'percentage', value);
+	}
+
+	handleDelete = (idx) => (e) => {
+		this.props.deleteLipid(idx);
+	}
+
+	render() {
+		let sumWeight = 0;
+		let sumPercentage = 0;
 
 		return (
 			<table className="table">
@@ -374,11 +370,30 @@ class LipidTable extends Component {
 					</tr>
 				</thead>
 				<tbody>
-						{rows}
+          {this.props.selectedLipids.map((lipid, idx) => {
+ 							sumWeight += lipid.weight;
+ 							sumPercentage += lipid.percentage;
+ 
+ 							return (
+ 								<LipidTableRow
+ 									key={idx}
+ 				        	num={idx+1}
+ 									name={lipid.name}
+ 									sap={lipid.naoh}
+ 									percentage={lipid.percentage}
+ 									weight={lipid.weight}
+ 									units={this.props.units}
+ 									onWeightUpdate={this.handleWeightChange(idx)}
+ 									onPercentageUpdate={this.handlePercentageChange(idx)}
+ 									onDelete={this.handleDelete(idx)}
+ 								/>
+ 							)
+ 						})}
 						<tr>
 							<th colSpan="3">Total Weight</th>
-							<th>{sumPercentage}</th>
-							<th>{sumWeight}&nbsp;{this.props.units}</th>
+							<th>{sumPercentage*100}</th>
+							<th>{sumWeight*1}&nbsp;{this.props.units}</th>
+              <th>&nbsp;</th>
 						</tr>
 				</tbody>
 			</table>
@@ -388,44 +403,32 @@ class LipidTable extends Component {
 
 class LipidTableRow extends Component {
 
-	handleWeightChange = (value) => {
-		this.props.onUpdate(this.props.num, 'weight', value);
-	}
-
-	handlePercentageChange = (value) => {
-		this.props.onUpdate(this.props.num, 'percentage', value);
-	}
-
-	handleDelete = (e) => {
-		this.props.deleteLipid(this.props.num);
-	}
-
 	render() {
 		return (
 			<tr> 
-				<th scope="row">{this.props.num+1}</th>
+				<th scope="row">{this.props.num}</th>
       			<td>{this.props.name}</td>
       			<td>{this.props.sap}</td>
       			<td>
 					<PercentageInput
 						name="lipid_percentage"
 						value={this.props.percentage}
-						onChange={this.handleWeightChange}
+						onChange={this.props.onPercentageUpdate}
 					/>
 				</td>
       			<td>
 					<UnitsInput 
 						name="lipid_weight"
-						value={this.props.value}
+						value={this.props.weight}
 						units={this.props.units}
 						placeholder={this.props.placeholder}
-						onChange={this.handlePercentageChange}
+						onChange={this.props.onWeightUpdate}
 					/>
 				</td>
 				<td>
 					<Button
 						bsSize="small"
-						onClick={this.handleDelete} >
+						onClick={this.props.onDelete} >
 					delete
 					</Button>
 				</td>

@@ -18,7 +18,7 @@ class UnitsInput extends Component {
 					bsSize="sm"
 					placeholder={this.props.placeholder}
 			 		onChange={this.handleChange}
-					defaultValue={this.props.value} />
+					value={this.props.value} />
 				<InputGroup.Addon>{this.props.units}</InputGroup.Addon>
 			</InputGroup>
 		)

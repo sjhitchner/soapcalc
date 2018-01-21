@@ -34,7 +34,7 @@ class LipidWeight extends Component {
 					units={this.props.units}
 					placeholder={this.props.placeholder} />
 				<FormControl.Feedback />
-            	<HelpBlock>Validation is based on string length.</HelpBlock>
+       	<HelpBlock>Total weight of lipids/fat to be used in the recipe.</HelpBlock>
 			</FormGroup>
 		)
 	}

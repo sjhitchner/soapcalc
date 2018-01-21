@@ -8,7 +8,10 @@ import {
 class PercentageInput extends Component {
   
 	handleChange = (e) => {
-		this.props.onChange(e.target.value/100);
+    const value = e.target.value;
+    if (value >= 0 && value <= 100) {
+      this.props.onChange(value/100);
+    }
 	}
 
 	/*
@@ -29,12 +32,12 @@ class PercentageInput extends Component {
 	render() {
 		return (
 			<InputGroup>
-   			<FormControl
+        <FormControl
 					type="text"
 					bsSize="sm"
 					placeholder={this.props.placeholder}
 			 		onChange={this.handleChange}
-					defaultValue={this.props.value * 100} />
+					value={this.props.value * 100} />
 				<InputGroup.Addon>%</InputGroup.Addon>
 			</InputGroup>
 		)

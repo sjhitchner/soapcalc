@@ -26,6 +26,8 @@ class Units extends Component {
 						defaultValue={this.props.value}>
 						<ToggleButton value={'oz'}>Ounces</ToggleButton>
 						<ToggleButton value={'g'}>Grams</ToggleButton>
+            <ToggleButton value={'lbs'}>Pounds</ToggleButton>
+  					<ToggleButton value={'kg'}>Kilograms</ToggleButton>
 					</ToggleButtonGroup>
 				</ButtonToolbar>
 				<FormControl.Feedback />

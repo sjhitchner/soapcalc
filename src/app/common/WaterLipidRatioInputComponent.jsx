@@ -18,7 +18,7 @@ class WaterLipidRatioInput extends Component {
 					value={this.props.value} 
 					onChange={this.props.onChange} />
 				<FormControl.Feedback />
-            	<HelpBlock>Validation is based on string length.</HelpBlock>
+        <HelpBlock>Amount of water to be used as a percent of lipids/fats.</HelpBlock>
 			</FormGroup>
 		)
 	}

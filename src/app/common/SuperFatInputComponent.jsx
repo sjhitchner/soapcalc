@@ -18,7 +18,7 @@ class SuperFatInput extends Component {
 					value={this.props.value}
 					onChange={this.props.onChange} />
 				<FormControl.Feedback />
-            	<HelpBlock>Validation is based on string length.</HelpBlock>
+        <HelpBlock>The superfat percentage to calculate lye discount.</HelpBlock>
 			</FormGroup>
 		)
 	}

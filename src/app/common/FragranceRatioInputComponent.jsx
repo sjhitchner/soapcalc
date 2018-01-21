@@ -18,7 +18,7 @@ class FragranceRatioInput extends Component {
 					value={this.props.value}
 					onChange={this.props.onChange} />
 				<FormControl.Feedback />
-            	<HelpBlock>Validation is based on string length.</HelpBlock>
+        <HelpBlock>Amount of fragrance with respect to lipids/fats.</HelpBlock>
 			</FormGroup>
 		)
 	}
