@@ -6,14 +6,26 @@ import {
 	Grid,
 	Row,
 } from 'react-bootstrap';
-import FragranceRatioInput from '../common/FragranceRatioInputComponent.jsx';
-import LyeType from '../common/LyeTypeComponent.jsx';
-import LipidWeight from '../common/LipidWeightComponent.jsx';
-import PercentageInput from '../common/PercentageInputComponent.jsx';
-import SuperFatInput from '../common/SuperFatInputComponent.jsx';
-import Units from '../common/UnitsComponent.jsx';
-import UnitsInput from '../common/UnitsInputComponent.jsx';
-import WaterLipidRatioInput from '../common/WaterLipidRatioInputComponent.jsx';
+/*
+import {
+  FragranceRatioInput,
+  LyeType,
+  LipidWeight,
+  PercentageInput,
+  SuperFatInput,
+  Units,
+  UnitsInput,
+  WaterLipidRatioInput,
+} from '../common/index';
+*/
+import FragranceRatioInput from '../common/FragranceRatioInputComponent';
+import LyeType from '../common/LyeTypeComponent';
+import LipidWeight from '../common/LipidWeightComponent';
+import PercentageInput from '../common/PercentageInputComponent';
+import SuperFatInput from '../common/SuperFatInputComponent';
+import Units from '../common/UnitsComponent';
+import UnitsInput from '../common/UnitsInputComponent';
+import WaterLipidRatioInput from '../common/WaterLipidRatioInputComponent';
 
 const LIPIDS = [
 	{name: "Olive Oil", "description": "Olive Oil", "scientific_name": "", naoh: 0.135, "koh": 0.19, "iodine": 85, "ins": 105, "lauric": 0, "myristic": 0, "palmitic": 0.14, "stearic": 0.03, "ricinoleic": 0, "oleic": 0.69, "linoleic": 0.12, "linolenic": 0.01, "hardness": 17, "cleansing": 0, "condition": 82, "bubbly": 0, "creamy": 17},
