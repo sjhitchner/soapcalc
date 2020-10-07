@@ -1,0 +1,42 @@
+
+
+type BalanceSheet {
+	year: Int!
+	assets: [BalanceSheetAsset!]! 
+	liabilities: [BalanceSheetLiability!]!
+	ownersEquity: [BalanceSheetOwnersEquity!]!
+}
+
+type BalanceSheetAsset {
+	current: [BalanceSheetValue!]! 
+	ppe: [BalanceSheetValue!]! 
+}
+
+type BalanceSheetLiability {
+	current: [BalanceSheetValue!]! 
+}
+
+type BalanceSheetOwnersEquity {
+	current: [BalanceSheetValue!]! 
+}
+
+type BalanceSheetValue {
+	name: String!
+	value: Int!
+}
+
+type JournalEntry {
+	date: Date!
+	description: String!
+	annotation: String!
+	tags: [String!]
+	debits: [JournalRow!]!
+	credits: [JournalRow!]!
+	notes: String!
+}
+
+type JournalRow {
+	account: String!
+	type: String!
+	amount: Int!
+}
