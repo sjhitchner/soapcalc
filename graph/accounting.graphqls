@@ -1,5 +1,3 @@
-
-
 type BalanceSheet {
 	year: Int!
 	assets: [BalanceSheetAsset!]! 
@@ -26,7 +24,7 @@ type BalanceSheetValue {
 }
 
 type JournalEntry {
-	date: Date!
+	date: String!
 	description: String!
 	annotation: String!
 	tags: [String!]

@@ -1,6 +1,6 @@
 type Recipe {
 	name: String!
-	lipids: [LipidiValue!]!
+	lipids: [LipidValue!]!
 	additives: [AdditiveValue!]
 	lipidWeight: Float!
 	water: Float!
@@ -41,7 +41,6 @@ type LipidValue {
 
 type FragranceValue {
 	fragrance: Fragrance!
-	weight: Float!
 	percentage: Float!
 	weight: Float!
 }
@@ -81,8 +80,8 @@ input CreateRecipe {
 	lipidWeight: Float!
 	lyeConcentration: Float!
 	lyeDiscount: Float!
-	fragrance: [FragranceValue!]
-	lipids: [LipidiValue!]!
+	# fragrances: [FragranceValue!]
+	# lipids: [LipidValue!]!
 }
 
 type Mutation {
