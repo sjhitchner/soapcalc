@@ -1,86 +1,58 @@
+import uuid
+import string
+import random
 from django.db import models
 
 
-class Additive(models.Model):
+class BaseModel(models.Model):
 
-    id = models.CharField(max_length=100)
+    class Meta:
+        abstract = True
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True)  
+
+
+class Additive(BaseModel):
+    id = models.CharField(primary_key=True, max_length=36, default=uuid.uuid1)
     name = models.CharField(max_length=100)
-    note = models.CharField(max_length=100)
-    inventory = models.ForeignKey()
+    inventory = models.ForeignKey('Inventory', on_delete=models.PROTECT)
+    note = models.TextField(blank=True)
 
 
-
-class Fragrance(models.Model):
-
-    id = models.CharField(max_length=100)
+class Fragrance(BaseModel):
+    id = models.CharField(primary_key=True, max_length=36, default=uuid.uuid1)
     name = models.CharField(max_length=100)
-    gramsperliter = models.FloatField()
-    inventory = models.ForeignKey()
-    note = models.CharField(max_length=100)
+    grams_per_liter = models.FloatField()
+    inventory = models.ForeignKey('Inventory', on_delete=models.PROTECT)
+    note = models.TextField(blank=True)
 
 
-
-class Inventory(models.Model):
-
-    id = models.CharField(max_length=100)
-    supplier = models.ForeignKey()
-    purchasedate = models.ForeignKey()
-    expirydate = models.ForeignKey()
+class Inventory(BaseModel):
+    id = models.CharField(primary_key=True, max_length=36, default=uuid.uuid1)
+    supplier = models.ForeignKey('Supplier', on_delete=models.PROTECT)
+    purchase_date = models.DateTimeField()
+    expiry_date = models.DateTimeField()
     cost = models.FloatField()
     weight = models.FloatField()
 
+# class InventoryCategory(BaseModel):
+#    id = models.CharField(primary_key=True, max_length=36, default=uuid.uuid1)
+#    category = models.CharField(max_length=30)
 
 
-class Lipid(models.Model):
-
-    id = models.CharField(max_length=100)
+class Supplier(BaseModel):
+    id = models.CharField(primary_key=True, max_length=36, default=uuid.uuid1)
     name = models.CharField(max_length=100)
-    type = models.CharField(max_length=100)
-    naoh = models.FloatField()
-    koh = models.FloatField()
-    inciname = models.CharField(max_length=100)
-    gramsperliter = models.FloatField()
-    inventory = models.ForeignKey()
+    website = models.CharField(max_length=255)
+    note = models.TextField(blank=True)
 
 
+class Lipid(BaseModel):
 
-class Lye(models.Model):
-
-    id = models.CharField(max_length=100)
+    id = models.CharField(primary_key=True, max_length=36, default=uuid.uuid1)
     name = models.CharField(max_length=100)
-    note = models.CharField(max_length=100)
-    inventory = models.ForeignKey()
-
-
-
-class Recipe(models.Model):
-
-    id = models.CharField(max_length=100)
-    name = models.CharField(max_length=100)
-    lye = models.ForeignKey()
-    additives = models.ForeignKey()
-    lipids = models.ForeignKey()
-    lipidweight = models.FloatField()
-    fragrances = models.ForeignKey()
-    quality = models.ForeignKey()
-    composition = models.ForeignKey()
-    cost = models.FloatField()
-
-
-
-class RecipeAdditive(models.Model):
-
-    id = models.CharField(max_length=100)
-    additive = models.ForeignKey()
-    percentage = models.FloatField()
-    weight = models.FloatField()
-    cost = models.FloatField()
-
-
-
-class RecipeComposition(models.Model):
-
-    id = models.CharField(max_length=100)
     lauric = models.IntegerField()
     myristic = models.IntegerField()
     palmitic = models.IntegerField()
@@ -89,42 +61,6 @@ class RecipeComposition(models.Model):
     oleic = models.IntegerField()
     linoleic = models.IntegerField()
     linolenic = models.IntegerField()
-
-
-
-class RecipeFragrance(models.Model):
-
-    id = models.CharField(max_length=100)
-    fragrance = models.ForeignKey()
-    percentage = models.FloatField()
-    weight = models.FloatField()
-
-
-
-class RecipeLipid(models.Model):
-
-    id = models.CharField(max_length=100)
-    lipid = models.ForeignKey()
-    percentage = models.FloatField()
-    weight = models.FloatField()
-    cost = models.FloatField()
-
-
-
-class RecipeLye(models.Model):
-
-    id = models.CharField(max_length=100)
-    type = models.ForeignKey()
-    weight = models.FloatField()
-    concentration = models.FloatField()
-    discount = models.FloatField()
-    cost = models.FloatField()
-
-
-
-class RecipeQuality(models.Model):
-
-    id = models.CharField(max_length=100)
     hardness = models.IntegerField()
     cleansing = models.IntegerField()
     conditioning = models.IntegerField()
@@ -132,13 +68,72 @@ class RecipeQuality(models.Model):
     creamy = models.IntegerField()
     iodine = models.IntegerField()
     ins = models.IntegerField()
+    inci_name = models.CharField(max_length=100)
 
 
+class LipidBatch(BaseModel):
+    id = models.CharField(primary_key=True, max_length=36, default=uuid.uuid1)
+    lipid = models.ForeignKey('Lipid', on_delete=models.PROTECT)    
+    naoh = models.FloatField()
+    koh = models.FloatField()
+    grams_per_liter = models.FloatField()
+    inventory = models.ForeignKey('Inventory', on_delete=models.PROTECT)
 
-class Supplier(models.Model):
 
-    id = models.CharField(max_length=100)
+class Lye(BaseModel):
+
+    id = models.CharField(primary_key=True, max_length=36, default=uuid.uuid1)
+    kind = models.CharField(max_length=4, choices=(('naoh', 'NaOH'), ('koh', 'KOH')), default='naoh')
     name = models.CharField(max_length=100)
-    note = models.CharField(max_length=100)
+    note = models.TextField(blank=True)
+    inventory = models.ForeignKey('Inventory', on_delete=models.PROTECT)
 
+
+class Recipe(BaseModel):
+
+    id = models.CharField(primary_key=True, max_length=36, default=uuid.uuid1)
+    name = models.CharField(max_length=100)
+    lye = models.ForeignKey('RecipeLye', on_delete=models.CASCADE)
+    additives = models.ForeignKey('RecipeAdditive', on_delete=models.CASCADE)
+    lipids = models.ForeignKey('RecipeLipid', on_delete=models.CASCADE)
+    lipidweight = models.FloatField()
+    fragrances = models.ForeignKey('RecipeFragrance', on_delete=models.CASCADE)
+    cost = models.FloatField()
+    note = models.TextField(blank=True)
+
+
+class RecipeAdditive(BaseModel):
+
+    id = models.CharField(primary_key=True, max_length=36, default=uuid.uuid1)
+    additive = models.ForeignKey('Additive', on_delete=models.PROTECT)
+    percentage = models.FloatField()
+    weight = models.FloatField()
+    cost = models.FloatField()
+
+
+class RecipeFragrance(BaseModel):
+
+    id = models.CharField(primary_key=True, max_length=36, default=uuid.uuid1)
+    fragrance = models.ForeignKey('Fragrance', on_delete=models.PROTECT)
+    percentage = models.FloatField()
+    weight = models.FloatField()
+
+
+class RecipeLipid(BaseModel):
+
+    id = models.CharField(primary_key=True, max_length=36, default=uuid.uuid1)
+    lipid = models.ForeignKey('LipidBatch', on_delete=models.PROTECT)
+    percentage = models.FloatField()
+    weight = models.FloatField()
+    cost = models.FloatField()
+
+
+class RecipeLye(BaseModel):
+
+    id = models.CharField(primary_key=True, max_length=36, default=uuid.uuid1)
+    lye = models.ForeignKey('Lye', on_delete=models.PROTECT)
+    weight = models.FloatField()
+    concentration = models.FloatField()
+    discount = models.FloatField()
+    cost = models.FloatField()
 
