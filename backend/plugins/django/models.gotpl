@@ -1,0 +1,21 @@
+from django.db import models
+
+{{ range .Models }}
+
+class {{ .Name }}(models.Model):
+	{{ range .Fields }}
+    {{ snake .Name }} = {{ djangoField . }}
+	{{- end }}
+
+{{ end }}
+
+
+
+String
+
+models.CharField(max_length=100)
+models.IntegerField()
+models.ForeignKey()
+    gender = models.CharField(max_length=100, choices=(('M', 'Male'), ('F', 'Female')), default='F')
+    movie = models.CharField(max_length=100)
+

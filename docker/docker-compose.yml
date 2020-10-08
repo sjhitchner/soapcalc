@@ -1,0 +1,105 @@
+version: '3'
+services:
+
+#  nginx:
+#    container_name: "soap-nginx"
+#    image: "soap-nginx:1.0"
+#    dns_search: localdomain
+#    ports:
+#      - 80:80
+#    dns:
+#      - 8.8.8.8
+#      - 8.8.4.4
+#    networks:
+#      - vpc
+#    volumes:
+#      - ./nginx/index.html:/etc/nginx/html/index.html
+#    depends_on:
+#      - react
+#      - admin
+#      - soap 
+
+  soap:
+    container_name: "soap"
+    restart: always
+    image: 030389209847.dkr.ecr.us-east-1.amazonaws.com/soap-backend:latest
+    dns_search: localdomain
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    depends_on:
+      - soap-db
+    environment:
+      - LOG_FIREHOSE=false
+      - DATABASE_HOST=soap-db
+      - DATABASE_NAME=soap
+      - DATABASE_USER=soap
+      - DATABASE_PASSWORD=soap
+      - DATABASE_PORT=5432
+      - SENTRY_ENVIRONMENT=local
+      - AUTH_REDIRECT_URL=http://localhost/auth/callback
+      - CORS_ORIGIN=http://localhost
+      - LOG_LEVEL=TRACE
+    ports:
+      - 8080:8001
+    networks:
+      - vpc
+
+  soap-db:
+    container_name: "soap-db"
+    image: "soap-db:10.6"
+    volumes:
+        - soap-db:/var/lib/postgresql/data:rw
+    dns_search: localdomain
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    ports:
+      - 15432:5432
+    networks:
+      - vpc
+
+  admin:
+    container_name: "admin"
+    restart: always
+    image: 030389209847.dkr.ecr.us-east-1.amazonaws.com/soap-admin:latest
+    dns_search: localdomain
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    ports:
+      - 18000:8000
+    depends_on:
+      - soap-db
+    environment:
+      - MOMENTSAVE_DB_HOST=soap-db
+      - MOMENTSAVE_DB_PORT=5432
+      - SURVEY_DB_HOST=soap-db
+      - SURVEY_DB_PORT=5432
+    networks:
+      - vpc
+
+#  frontend:
+#    container_name: "soap-frontend"
+#    image: "soap-rewardunit:4.0"
+#    volumes:
+#        - ~/.aws/config:/root/.aws/credentials:ro
+#        - ./frontend/:/frontend:cached
+#        - /frontend/node_modules
+#    ports:
+#        - 8888:8888
+#    dns_search: localdomain
+#    dns:
+#      - 8.8.8.8
+#      - 8.8.4.4
+#    networks:
+#      - vpc
+#    # command: tail -f /dev/null
+#    command: npx webpack-dev-server --config webpack.config.dev.js --host 0.0.0.0 --port 8888
+
+volumes:
+  soap-db:
+
+networks:
+  vpc:
+    driver: bridge
