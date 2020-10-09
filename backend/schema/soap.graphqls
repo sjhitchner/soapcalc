@@ -1,0 +1,88 @@
+directive @django(maxLength: Int!) on FIELD_DEFINITION
+
+enum LyeType {
+	NaOH
+	KOH
+}
+
+scalar Time
+
+type Additive {
+	id: ID!
+	name: String! @django(maxLength: 100)
+	note: String!
+	inventory: [Inventory!]!
+}
+
+type Lye {
+	id: ID!
+	name: String!
+	note: String!
+	inventory: [Inventory!]!
+}
+
+type Lipid {
+	id: ID!
+	name: String!
+	type: String!
+	naoh: Float!
+	koh: Float!
+	inciName: String!
+	gramsPerLiter: Float!
+	inventory: [Inventory!]!
+}
+
+type Fragrance {
+	id: ID!
+	name: String!
+	gramsPerLiter: Float!
+	inventory: [Inventory!]!
+	note: String!
+}
+
+type Inventory {
+	id: ID!
+	supplier: Supplier!
+	purchaseDate: Time!
+	expiryDate: Time
+	cost: Float!
+	weight: Float!
+}
+
+type Supplier {
+	id: ID!
+	name: String!
+	note: String!
+}
+
+input CreateRecipe {
+	lye: LyeType!
+	lipidWeight: Float!
+	lyeConcentration: Float!
+	lyeDiscount: Float!
+	# fragrances: [FragranceValue!]
+	# lipids: [LipidValue!]!
+}
+
+
+type Query {
+	additive(id: ID!): Additive
+	listAdditives(first: Int, after: ID): [Additive!]!
+
+	lye(id: ID!): Lye
+	listLye(first: Int, after: ID): [Lye!]!
+
+	lipid(id: ID!): Lipid
+	listLipids(first: Int, after: ID): [Lipid!]!
+
+	fragrance(id: ID!): Fragrance
+	listFragrances(first: Int, after: ID): [Fragrance!]!
+
+	recipe(id: ID!): Recipe
+	listRecipes(first: Int, after: ID): [Recipe!]!
+	searchRecipes(search: String!, first: Int, after: ID): [Recipe!]! 
+}
+
+type Mutation {
+	calculateRecipe(input: CreateRecipe!): Recipe!
+}
