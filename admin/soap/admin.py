@@ -3,10 +3,9 @@ from django.contrib.admin import DateFieldListFilter
 from .models import (
     Additive,
     Fragrance,
-    Inventory,
     Supplier,
     Lipid,
-    LipidBatch,
+    LipidInventory,
     Lye,
     Recipe,
     RecipeAdditive,
@@ -22,8 +21,8 @@ class AdditiveAdmin(admin.ModelAdmin):
 class FragranceAdmin(admin.ModelAdmin):
     pass
 
-class InventoryAdmin(admin.ModelAdmin):
-    pass
+# class InventoryAdmin(admin.ModelAdmin):
+#    pass
 
 class SupplierAdmin(admin.ModelAdmin):
     pass
@@ -31,7 +30,7 @@ class SupplierAdmin(admin.ModelAdmin):
 class LipidAdmin(admin.ModelAdmin):
     pass
 
-class LipidBatchAdmin(admin.ModelAdmin):
+class LipidInventoryAdmin(admin.ModelAdmin):
     pass
 
 class LyeAdmin(admin.ModelAdmin):
@@ -55,13 +54,13 @@ class RecipeLyeAdmin(admin.ModelAdmin):
 
 admin.site.register(Additive, AdditiveAdmin)
 admin.site.register(Fragrance, FragranceAdmin)
-admin.site.register(Inventory, InventoryAdmin)
+# admin.site.register(Inventory, InventoryAdmin)
 admin.site.register(Supplier, SupplierAdmin)
 admin.site.register(Lipid, LipidAdmin)
-admin.site.register(LipidBatch, LipidBatchAdmin)
+admin.site.register(LipidInventory, LipidInventoryAdmin)
 admin.site.register(Lye, LyeAdmin)
 admin.site.register(Recipe, RecipeAdmin)
 admin.site.register(RecipeAdditive, RecipeAdditiveAdmin)
-admin.site.register( RecipeFragrance, RecipeFragranceAdmin)
+admin.site.register(RecipeFragrance, RecipeFragranceAdmin)
 admin.site.register(RecipeLipid, RecipeLipidAdmin)
 admin.site.register(RecipeLye, RecipeLyeAdmin)
