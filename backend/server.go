@@ -1,4 +1,4 @@
-// go generate go run github.com/99designs/gqlgen generate
+//go:generate sqlboiler psql --no-back-referencing --wipe --add-soft-deletes
 package main
 
 import (

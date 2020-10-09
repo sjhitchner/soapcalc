@@ -34,7 +34,8 @@ DOCKER_REACT_TAG=1.0
 DOCKER_NGINX_NAME=soap-nginx
 DOCKER_NGINX_TAG=1.0
 
-SERVICE_MAIN="./cmd/service"
+BIN_DIR="./bin"
+SERVICE_MAIN="."
 SERVICE_BINARY_NAME="service"
 SERVICE_BINARY64_NAME="service.amd64"
 EXPORT_DIR="docker/postgres"
@@ -50,10 +51,6 @@ ifndef DEPLOY_SHA
 	override DEPLOY_SHA = $(SHA)
 endif
 
-CLIENT_MAIN="./cmd/client"
-CLIENT_BINARY_NAME="client"
-
-BIN_DIR="./bin"
 
 GOFILES := $(wildcard *.go)
 
@@ -199,7 +196,7 @@ docker_db_logs:
 
 # blow away local db volume useful for testing
 docker_db_rm:
-	docker volume rm soap_$(DOCKER_DB_NAME)
+	docker volume rm docker_$(DOCKER_DB_NAME)
 
 docker_react:
 # We run yarn install inside the container and on the host
