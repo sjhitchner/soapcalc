@@ -7,11 +7,29 @@ enum LyeType {
 
 scalar Time
 
+interface Inventory {
+	id: ID!
+	supplier: Supplier!
+	purchaseDate: Time!
+	expiryDate: Time
+	cost: Float!
+	weight: Float!
+}
+
 type Additive {
 	id: ID!
 	name: String! @django(maxLength: 100)
 	note: String!
-	inventory: [Inventory!]!
+	inventory: [AdditiveInventory!]!
+}
+
+type AdditiveInventory implements Inventory {
+	id: ID!
+	supplier: Supplier!
+	purchaseDate: Time!
+	expiryDate: Time
+	cost: Float!
+	weight: Float!
 }
 
 type Lye {
@@ -32,21 +50,21 @@ type Lipid {
 	inventory: [Inventory!]!
 }
 
-type Fragrance {
-	id: ID!
-	name: String!
-	gramsPerLiter: Float!
-	inventory: [Inventory!]!
-	note: String!
-}
-
-type Inventory {
+type LipidInventory implements Inventory {
 	id: ID!
 	supplier: Supplier!
 	purchaseDate: Time!
 	expiryDate: Time
 	cost: Float!
 	weight: Float!
+}
+
+type Fragrance {
+	id: ID!
+	name: String!
+	gramsPerLiter: Float!
+	inventory: [Inventory!]!
+	note: String!
 }
 
 type Supplier {
