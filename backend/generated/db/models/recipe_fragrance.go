@@ -24,69 +24,69 @@ import (
 
 // RecipeFragrance is an object representing the database table.
 type RecipeFragrance struct {
+	ID          int       `boil:"id" json:"id" toml:"id" yaml:"id"`
 	CreatedAt   time.Time `boil:"created_at" json:"created_at" toml:"created_at" yaml:"created_at"`
 	UpdatedAt   time.Time `boil:"updated_at" json:"updated_at" toml:"updated_at" yaml:"updated_at"`
 	DeletedAt   null.Time `boil:"deleted_at" json:"deleted_at,omitempty" toml:"deleted_at" yaml:"deleted_at,omitempty"`
-	ID          string    `boil:"id" json:"id" toml:"id" yaml:"id"`
 	Percentage  float64   `boil:"percentage" json:"percentage" toml:"percentage" yaml:"percentage"`
-	Weight      float64   `boil:"weight" json:"weight" toml:"weight" yaml:"weight"`
 	FragranceID int       `boil:"fragrance_id" json:"fragrance_id" toml:"fragrance_id" yaml:"fragrance_id"`
+	RecipeID    int       `boil:"recipe_id" json:"recipe_id" toml:"recipe_id" yaml:"recipe_id"`
 
 	R *recipeFragranceR `boil:"-" json:"-" toml:"-" yaml:"-"`
 	L recipeFragranceL  `boil:"-" json:"-" toml:"-" yaml:"-"`
 }
 
 var RecipeFragranceColumns = struct {
+	ID          string
 	CreatedAt   string
 	UpdatedAt   string
 	DeletedAt   string
-	ID          string
 	Percentage  string
-	Weight      string
 	FragranceID string
+	RecipeID    string
 }{
+	ID:          "id",
 	CreatedAt:   "created_at",
 	UpdatedAt:   "updated_at",
 	DeletedAt:   "deleted_at",
-	ID:          "id",
 	Percentage:  "percentage",
-	Weight:      "weight",
 	FragranceID: "fragrance_id",
+	RecipeID:    "recipe_id",
 }
 
 // Generated where
 
 var RecipeFragranceWhere = struct {
+	ID          whereHelperint
 	CreatedAt   whereHelpertime_Time
 	UpdatedAt   whereHelpertime_Time
 	DeletedAt   whereHelpernull_Time
-	ID          whereHelperstring
 	Percentage  whereHelperfloat64
-	Weight      whereHelperfloat64
 	FragranceID whereHelperint
+	RecipeID    whereHelperint
 }{
+	ID:          whereHelperint{field: "\"recipe_fragrance\".\"id\""},
 	CreatedAt:   whereHelpertime_Time{field: "\"recipe_fragrance\".\"created_at\""},
 	UpdatedAt:   whereHelpertime_Time{field: "\"recipe_fragrance\".\"updated_at\""},
 	DeletedAt:   whereHelpernull_Time{field: "\"recipe_fragrance\".\"deleted_at\""},
-	ID:          whereHelperstring{field: "\"recipe_fragrance\".\"id\""},
 	Percentage:  whereHelperfloat64{field: "\"recipe_fragrance\".\"percentage\""},
-	Weight:      whereHelperfloat64{field: "\"recipe_fragrance\".\"weight\""},
 	FragranceID: whereHelperint{field: "\"recipe_fragrance\".\"fragrance_id\""},
+	RecipeID:    whereHelperint{field: "\"recipe_fragrance\".\"recipe_id\""},
 }
 
 // RecipeFragranceRels is where relationship names are stored.
 var RecipeFragranceRels = struct {
-	Fragrance        string
-	FragranceRecipes string
+	Fragrance string
+	Recipe    string
 }{
-	Fragrance:        "Fragrance",
-	FragranceRecipes: "FragranceRecipes",
+	Fragrance: "Fragrance",
+	Recipe:    "Recipe",
 }
 
 // recipeFragranceR is where relationships are stored.
 type recipeFragranceR struct {
-	Fragrance        *Fragrance  `boil:"Fragrance" json:"Fragrance" toml:"Fragrance" yaml:"Fragrance"`
-	FragranceRecipes RecipeSlice `boil:"FragranceRecipes" json:"FragranceRecipes" toml:"FragranceRecipes" yaml:"FragranceRecipes"`
+	Fragrance *Fragrance `boil:"Fragrance" json:"Fragrance" toml:"Fragrance" yaml:"Fragrance"`
+	Recipe    *Recipe    `boil:"Recipe" json:"Recipe" toml:"Recipe" yaml:"Recipe"`
 }
 
 // NewStruct creates a new relationship struct
@@ -98,9 +98,9 @@ func (*recipeFragranceR) NewStruct() *recipeFragranceR {
 type recipeFragranceL struct{}
 
 var (
-	recipeFragranceAllColumns            = []string{"created_at", "updated_at", "deleted_at", "id", "percentage", "weight", "fragrance_id"}
-	recipeFragranceColumnsWithoutDefault = []string{"created_at", "updated_at", "deleted_at", "id", "percentage", "weight", "fragrance_id"}
-	recipeFragranceColumnsWithDefault    = []string{}
+	recipeFragranceAllColumns            = []string{"id", "created_at", "updated_at", "deleted_at", "percentage", "fragrance_id", "recipe_id"}
+	recipeFragranceColumnsWithoutDefault = []string{"created_at", "updated_at", "deleted_at", "percentage", "fragrance_id", "recipe_id"}
+	recipeFragranceColumnsWithDefault    = []string{"id"}
 	recipeFragrancePrimaryKeyColumns     = []string{"id"}
 )
 
@@ -394,24 +394,17 @@ func (o *RecipeFragrance) Fragrance(mods ...qm.QueryMod) fragranceQuery {
 	return query
 }
 
-// FragranceRecipes retrieves all the recipe's Recipes with an executor via fragrances_id column.
-func (o *RecipeFragrance) FragranceRecipes(mods ...qm.QueryMod) recipeQuery {
-	var queryMods []qm.QueryMod
-	if len(mods) != 0 {
-		queryMods = append(queryMods, mods...)
+// Recipe pointed to by the foreign key.
+func (o *RecipeFragrance) Recipe(mods ...qm.QueryMod) recipeQuery {
+	queryMods := []qm.QueryMod{
+		qm.Where("\"id\" = ?", o.RecipeID),
+		qmhelper.WhereIsNull("deleted_at"),
 	}
 
-	queryMods = append(queryMods,
-		qm.Where("\"recipe\".\"fragrances_id\"=?", o.ID),
-		qmhelper.WhereIsNull("\"recipe\".\"deleted_at\""),
-	)
+	queryMods = append(queryMods, mods...)
 
 	query := Recipes(queryMods...)
 	queries.SetFrom(query.Query, "\"recipe\"")
-
-	if len(queries.GetSelect(query.Query)) == 0 {
-		queries.SetSelect(query.Query, []string{"\"recipe\".*"})
-	}
 
 	return query
 }
@@ -513,9 +506,9 @@ func (recipeFragranceL) LoadFragrance(ctx context.Context, e boil.ContextExecuto
 	return nil
 }
 
-// LoadFragranceRecipes allows an eager lookup of values, cached into the
-// loaded structs of the objects. This is for a 1-M or N-M relationship.
-func (recipeFragranceL) LoadFragranceRecipes(ctx context.Context, e boil.ContextExecutor, singular bool, maybeRecipeFragrance interface{}, mods queries.Applicator) error {
+// LoadRecipe allows an eager lookup of values, cached into the
+// loaded structs of the objects. This is for an N-1 relationship.
+func (recipeFragranceL) LoadRecipe(ctx context.Context, e boil.ContextExecutor, singular bool, maybeRecipeFragrance interface{}, mods queries.Applicator) error {
 	var slice []*RecipeFragrance
 	var object *RecipeFragrance
 
@@ -530,7 +523,8 @@ func (recipeFragranceL) LoadFragranceRecipes(ctx context.Context, e boil.Context
 		if object.R == nil {
 			object.R = &recipeFragranceR{}
 		}
-		args = append(args, object.ID)
+		args = append(args, object.RecipeID)
+
 	} else {
 	Outer:
 		for _, obj := range slice {
@@ -539,12 +533,13 @@ func (recipeFragranceL) LoadFragranceRecipes(ctx context.Context, e boil.Context
 			}
 
 			for _, a := range args {
-				if a == obj.ID {
+				if a == obj.RecipeID {
 					continue Outer
 				}
 			}
 
-			args = append(args, obj.ID)
+			args = append(args, obj.RecipeID)
+
 		}
 	}
 
@@ -554,7 +549,7 @@ func (recipeFragranceL) LoadFragranceRecipes(ctx context.Context, e boil.Context
 
 	query := NewQuery(
 		qm.From(`recipe`),
-		qm.WhereIn(`recipe.fragrances_id in ?`, args...),
+		qm.WhereIn(`recipe.id in ?`, args...),
 		qmhelper.WhereIsNull(`recipe.deleted_at`),
 	)
 	if mods != nil {
@@ -563,37 +558,43 @@ func (recipeFragranceL) LoadFragranceRecipes(ctx context.Context, e boil.Context
 
 	results, err := query.QueryContext(ctx, e)
 	if err != nil {
-		return errors.Wrap(err, "failed to eager load recipe")
+		return errors.Wrap(err, "failed to eager load Recipe")
 	}
 
 	var resultSlice []*Recipe
 	if err = queries.Bind(results, &resultSlice); err != nil {
-		return errors.Wrap(err, "failed to bind eager loaded slice recipe")
+		return errors.Wrap(err, "failed to bind eager loaded slice Recipe")
 	}
 
 	if err = results.Close(); err != nil {
-		return errors.Wrap(err, "failed to close results in eager load on recipe")
+		return errors.Wrap(err, "failed to close results of eager load for recipe")
 	}
 	if err = results.Err(); err != nil {
 		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for recipe")
 	}
 
-	if len(recipeAfterSelectHooks) != 0 {
+	if len(recipeFragranceAfterSelectHooks) != 0 {
 		for _, obj := range resultSlice {
 			if err := obj.doAfterSelectHooks(ctx, e); err != nil {
 				return err
 			}
 		}
 	}
-	if singular {
-		object.R.FragranceRecipes = resultSlice
+
+	if len(resultSlice) == 0 {
 		return nil
 	}
 
-	for _, foreign := range resultSlice {
-		for _, local := range slice {
-			if local.ID == foreign.FragrancesID {
-				local.R.FragranceRecipes = append(local.R.FragranceRecipes, foreign)
+	if singular {
+		foreign := resultSlice[0]
+		object.R.Recipe = foreign
+		return nil
+	}
+
+	for _, local := range slice {
+		for _, foreign := range resultSlice {
+			if local.RecipeID == foreign.ID {
+				local.R.Recipe = foreign
 				break
 			}
 		}
@@ -649,56 +650,50 @@ func (o *RecipeFragrance) SetFragrance(ctx context.Context, exec boil.ContextExe
 	return nil
 }
 
-// AddFragranceRecipes adds the given related objects to the existing relationships
-// of the recipe_fragrance, optionally inserting them as new records.
-// Appends related to o.R.FragranceRecipes.
-// Sets related.R.Fragrance appropriately.
-func (o *RecipeFragrance) AddFragranceRecipes(ctx context.Context, exec boil.ContextExecutor, insert bool, related ...*Recipe) error {
+// SetRecipe of the recipeFragrance to the related item.
+// Sets o.R.Recipe to related.
+// Adds o to related.R.RecipeFragrances.
+func (o *RecipeFragrance) SetRecipe(ctx context.Context, exec boil.ContextExecutor, insert bool, related *Recipe) error {
 	var err error
-	for _, rel := range related {
-		if insert {
-			rel.FragrancesID = o.ID
-			if err = rel.Insert(ctx, exec, boil.Infer()); err != nil {
-				return errors.Wrap(err, "failed to insert into foreign table")
-			}
-		} else {
-			updateQuery := fmt.Sprintf(
-				"UPDATE \"recipe\" SET %s WHERE %s",
-				strmangle.SetParamNames("\"", "\"", 1, []string{"fragrances_id"}),
-				strmangle.WhereClause("\"", "\"", 2, recipePrimaryKeyColumns),
-			)
-			values := []interface{}{o.ID, rel.ID}
-
-			if boil.IsDebug(ctx) {
-				writer := boil.DebugWriterFrom(ctx)
-				fmt.Fprintln(writer, updateQuery)
-				fmt.Fprintln(writer, values)
-			}
-			if _, err = exec.ExecContext(ctx, updateQuery, values...); err != nil {
-				return errors.Wrap(err, "failed to update foreign table")
-			}
-
-			rel.FragrancesID = o.ID
+	if insert {
+		if err = related.Insert(ctx, exec, boil.Infer()); err != nil {
+			return errors.Wrap(err, "failed to insert into foreign table")
 		}
 	}
 
+	updateQuery := fmt.Sprintf(
+		"UPDATE \"recipe_fragrance\" SET %s WHERE %s",
+		strmangle.SetParamNames("\"", "\"", 1, []string{"recipe_id"}),
+		strmangle.WhereClause("\"", "\"", 2, recipeFragrancePrimaryKeyColumns),
+	)
+	values := []interface{}{related.ID, o.ID}
+
+	if boil.IsDebug(ctx) {
+		writer := boil.DebugWriterFrom(ctx)
+		fmt.Fprintln(writer, updateQuery)
+		fmt.Fprintln(writer, values)
+	}
+	if _, err = exec.ExecContext(ctx, updateQuery, values...); err != nil {
+		return errors.Wrap(err, "failed to update local table")
+	}
+
+	o.RecipeID = related.ID
 	if o.R == nil {
 		o.R = &recipeFragranceR{
-			FragranceRecipes: related,
+			Recipe: related,
 		}
 	} else {
-		o.R.FragranceRecipes = append(o.R.FragranceRecipes, related...)
+		o.R.Recipe = related
 	}
 
-	for _, rel := range related {
-		if rel.R == nil {
-			rel.R = &recipeR{
-				Fragrance: o,
-			}
-		} else {
-			rel.R.Fragrance = o
+	if related.R == nil {
+		related.R = &recipeR{
+			RecipeFragrances: RecipeFragranceSlice{o},
 		}
+	} else {
+		related.R.RecipeFragrances = append(related.R.RecipeFragrances, o)
 	}
+
 	return nil
 }
 
@@ -710,7 +705,7 @@ func RecipeFragrances(mods ...qm.QueryMod) recipeFragranceQuery {
 
 // FindRecipeFragrance retrieves a single record by ID with an executor.
 // If selectCols is empty Find will return all columns.
-func FindRecipeFragrance(ctx context.Context, exec boil.ContextExecutor, iD string, selectCols ...string) (*RecipeFragrance, error) {
+func FindRecipeFragrance(ctx context.Context, exec boil.ContextExecutor, iD int, selectCols ...string) (*RecipeFragrance, error) {
 	recipeFragranceObj := &RecipeFragrance{}
 
 	sel := "*"
@@ -1269,7 +1264,7 @@ func (o *RecipeFragranceSlice) ReloadAll(ctx context.Context, exec boil.ContextE
 }
 
 // RecipeFragranceExists checks if the RecipeFragrance row exists.
-func RecipeFragranceExists(ctx context.Context, exec boil.ContextExecutor, iD string) (bool, error) {
+func RecipeFragranceExists(ctx context.Context, exec boil.ContextExecutor, iD int) (bool, error) {
 	var exists bool
 	sql := "select exists(select 1 from \"recipe_fragrance\" where \"id\"=$1 and \"deleted_at\" is null limit 1)"
 

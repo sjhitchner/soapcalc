@@ -595,159 +595,6 @@ func testRecipeLipidsInsertWhitelist(t *testing.T) {
 	}
 }
 
-func testRecipeLipidToManyLipidRecipes(t *testing.T) {
-	var err error
-	ctx := context.Background()
-	tx := MustTx(boil.BeginTx(ctx, nil))
-	defer func() { _ = tx.Rollback() }()
-
-	var a RecipeLipid
-	var b, c Recipe
-
-	seed := randomize.NewSeed()
-	if err = randomize.Struct(seed, &a, recipeLipidDBTypes, true, recipeLipidColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize RecipeLipid struct: %s", err)
-	}
-
-	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
-
-	if err = randomize.Struct(seed, &b, recipeDBTypes, false, recipeColumnsWithDefault...); err != nil {
-		t.Fatal(err)
-	}
-	if err = randomize.Struct(seed, &c, recipeDBTypes, false, recipeColumnsWithDefault...); err != nil {
-		t.Fatal(err)
-	}
-
-	b.LipidsID = a.ID
-	c.LipidsID = a.ID
-
-	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
-	if err = c.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
-
-	check, err := a.LipidRecipes().All(ctx, tx)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	bFound, cFound := false, false
-	for _, v := range check {
-		if v.LipidsID == b.LipidsID {
-			bFound = true
-		}
-		if v.LipidsID == c.LipidsID {
-			cFound = true
-		}
-	}
-
-	if !bFound {
-		t.Error("expected to find b")
-	}
-	if !cFound {
-		t.Error("expected to find c")
-	}
-
-	slice := RecipeLipidSlice{&a}
-	if err = a.L.LoadLipidRecipes(ctx, tx, false, (*[]*RecipeLipid)(&slice), nil); err != nil {
-		t.Fatal(err)
-	}
-	if got := len(a.R.LipidRecipes); got != 2 {
-		t.Error("number of eager loaded records wrong, got:", got)
-	}
-
-	a.R.LipidRecipes = nil
-	if err = a.L.LoadLipidRecipes(ctx, tx, true, &a, nil); err != nil {
-		t.Fatal(err)
-	}
-	if got := len(a.R.LipidRecipes); got != 2 {
-		t.Error("number of eager loaded records wrong, got:", got)
-	}
-
-	if t.Failed() {
-		t.Logf("%#v", check)
-	}
-}
-
-func testRecipeLipidToManyAddOpLipidRecipes(t *testing.T) {
-	var err error
-
-	ctx := context.Background()
-	tx := MustTx(boil.BeginTx(ctx, nil))
-	defer func() { _ = tx.Rollback() }()
-
-	var a RecipeLipid
-	var b, c, d, e Recipe
-
-	seed := randomize.NewSeed()
-	if err = randomize.Struct(seed, &a, recipeLipidDBTypes, false, strmangle.SetComplement(recipeLipidPrimaryKeyColumns, recipeLipidColumnsWithoutDefault)...); err != nil {
-		t.Fatal(err)
-	}
-	foreigners := []*Recipe{&b, &c, &d, &e}
-	for _, x := range foreigners {
-		if err = randomize.Struct(seed, x, recipeDBTypes, false, strmangle.SetComplement(recipePrimaryKeyColumns, recipeColumnsWithoutDefault)...); err != nil {
-			t.Fatal(err)
-		}
-	}
-
-	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
-	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
-	if err = c.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
-
-	foreignersSplitByInsertion := [][]*Recipe{
-		{&b, &c},
-		{&d, &e},
-	}
-
-	for i, x := range foreignersSplitByInsertion {
-		err = a.AddLipidRecipes(ctx, tx, i != 0, x...)
-		if err != nil {
-			t.Fatal(err)
-		}
-
-		first := x[0]
-		second := x[1]
-
-		if a.ID != first.LipidsID {
-			t.Error("foreign key was wrong value", a.ID, first.LipidsID)
-		}
-		if a.ID != second.LipidsID {
-			t.Error("foreign key was wrong value", a.ID, second.LipidsID)
-		}
-
-		if first.R.Lipid != &a {
-			t.Error("relationship was not added properly to the foreign slice")
-		}
-		if second.R.Lipid != &a {
-			t.Error("relationship was not added properly to the foreign slice")
-		}
-
-		if a.R.LipidRecipes[i*2] != first {
-			t.Error("relationship struct slice not set to correct value")
-		}
-		if a.R.LipidRecipes[i*2+1] != second {
-			t.Error("relationship struct slice not set to correct value")
-		}
-
-		count, err := a.LipidRecipes().Count(ctx, tx)
-		if err != nil {
-			t.Fatal(err)
-		}
-		if want := int64((i + 1) * 2); count != want {
-			t.Error("want", want, "got", count)
-		}
-	}
-}
 func testRecipeLipidToOneLipidUsingLipid(t *testing.T) {
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
@@ -795,6 +642,57 @@ func testRecipeLipidToOneLipidUsingLipid(t *testing.T) {
 		t.Fatal(err)
 	}
 	if local.R.Lipid == nil {
+		t.Error("struct should have been eager loaded")
+	}
+}
+
+func testRecipeLipidToOneRecipeUsingRecipe(t *testing.T) {
+	ctx := context.Background()
+	tx := MustTx(boil.BeginTx(ctx, nil))
+	defer func() { _ = tx.Rollback() }()
+
+	var local RecipeLipid
+	var foreign Recipe
+
+	seed := randomize.NewSeed()
+	if err := randomize.Struct(seed, &local, recipeLipidDBTypes, false, recipeLipidColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize RecipeLipid struct: %s", err)
+	}
+	if err := randomize.Struct(seed, &foreign, recipeDBTypes, false, recipeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Recipe struct: %s", err)
+	}
+
+	if err := foreign.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+
+	local.RecipeID = foreign.ID
+	if err := local.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+
+	check, err := local.Recipe().One(ctx, tx)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if check.ID != foreign.ID {
+		t.Errorf("want: %v, got %v", foreign.ID, check.ID)
+	}
+
+	slice := RecipeLipidSlice{&local}
+	if err = local.L.LoadRecipe(ctx, tx, false, (*[]*RecipeLipid)(&slice), nil); err != nil {
+		t.Fatal(err)
+	}
+	if local.R.Recipe == nil {
+		t.Error("struct should have been eager loaded")
+	}
+
+	local.R.Recipe = nil
+	if err = local.L.LoadRecipe(ctx, tx, true, &local, nil); err != nil {
+		t.Fatal(err)
+	}
+	if local.R.Recipe == nil {
 		t.Error("struct should have been eager loaded")
 	}
 }
@@ -853,6 +751,63 @@ func testRecipeLipidToOneSetOpLipidUsingLipid(t *testing.T) {
 
 		if a.LipidID != x.ID {
 			t.Error("foreign key was wrong value", a.LipidID, x.ID)
+		}
+	}
+}
+func testRecipeLipidToOneSetOpRecipeUsingRecipe(t *testing.T) {
+	var err error
+
+	ctx := context.Background()
+	tx := MustTx(boil.BeginTx(ctx, nil))
+	defer func() { _ = tx.Rollback() }()
+
+	var a RecipeLipid
+	var b, c Recipe
+
+	seed := randomize.NewSeed()
+	if err = randomize.Struct(seed, &a, recipeLipidDBTypes, false, strmangle.SetComplement(recipeLipidPrimaryKeyColumns, recipeLipidColumnsWithoutDefault)...); err != nil {
+		t.Fatal(err)
+	}
+	if err = randomize.Struct(seed, &b, recipeDBTypes, false, strmangle.SetComplement(recipePrimaryKeyColumns, recipeColumnsWithoutDefault)...); err != nil {
+		t.Fatal(err)
+	}
+	if err = randomize.Struct(seed, &c, recipeDBTypes, false, strmangle.SetComplement(recipePrimaryKeyColumns, recipeColumnsWithoutDefault)...); err != nil {
+		t.Fatal(err)
+	}
+
+	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+
+	for i, x := range []*Recipe{&b, &c} {
+		err = a.SetRecipe(ctx, tx, i != 0, x)
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		if a.R.Recipe != x {
+			t.Error("relationship struct not set to correct value")
+		}
+
+		if x.R.RecipeLipids[0] != &a {
+			t.Error("failed to append to foreign relationship struct")
+		}
+		if a.RecipeID != x.ID {
+			t.Error("foreign key was wrong value", a.RecipeID)
+		}
+
+		zero := reflect.Zero(reflect.TypeOf(a.RecipeID))
+		reflect.Indirect(reflect.ValueOf(&a.RecipeID)).Set(zero)
+
+		if err = a.Reload(ctx, tx); err != nil {
+			t.Fatal("failed to reload", err)
+		}
+
+		if a.RecipeID != x.ID {
+			t.Error("foreign key was wrong value", a.RecipeID, x.ID)
 		}
 	}
 }
@@ -931,7 +886,7 @@ func testRecipeLipidsSelect(t *testing.T) {
 }
 
 var (
-	recipeLipidDBTypes = map[string]string{`CreatedAt`: `timestamp with time zone`, `UpdatedAt`: `timestamp with time zone`, `DeletedAt`: `timestamp with time zone`, `ID`: `character varying`, `Percentage`: `double precision`, `Weight`: `double precision`, `Cost`: `double precision`, `LipidID`: `integer`}
+	recipeLipidDBTypes = map[string]string{`ID`: `integer`, `CreatedAt`: `timestamp with time zone`, `UpdatedAt`: `timestamp with time zone`, `DeletedAt`: `timestamp with time zone`, `Percentage`: `double precision`, `LipidID`: `integer`, `RecipeID`: `integer`}
 	_                  = bytes.MinRead
 )
 

@@ -26,11 +26,19 @@ func TestUpsert(t *testing.T) {
 
 	t.Run("RecipeAdditives", testRecipeAdditivesUpsert)
 
+	t.Run("RecipeBatches", testRecipeBatchesUpsert)
+
+	t.Run("RecipeBatchAdditives", testRecipeBatchAdditivesUpsert)
+
+	t.Run("RecipeBatchFragrances", testRecipeBatchFragrancesUpsert)
+
+	t.Run("RecipeBatchLipids", testRecipeBatchLipidsUpsert)
+
+	t.Run("RecipeBatchLyes", testRecipeBatchLyesUpsert)
+
 	t.Run("RecipeFragrances", testRecipeFragrancesUpsert)
 
 	t.Run("RecipeLipids", testRecipeLipidsUpsert)
-
-	t.Run("RecipeLyes", testRecipeLyesUpsert)
 
 	t.Run("Suppliers", testSuppliersUpsert)
 }

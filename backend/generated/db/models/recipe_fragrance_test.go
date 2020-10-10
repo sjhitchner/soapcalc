@@ -595,159 +595,6 @@ func testRecipeFragrancesInsertWhitelist(t *testing.T) {
 	}
 }
 
-func testRecipeFragranceToManyFragranceRecipes(t *testing.T) {
-	var err error
-	ctx := context.Background()
-	tx := MustTx(boil.BeginTx(ctx, nil))
-	defer func() { _ = tx.Rollback() }()
-
-	var a RecipeFragrance
-	var b, c Recipe
-
-	seed := randomize.NewSeed()
-	if err = randomize.Struct(seed, &a, recipeFragranceDBTypes, true, recipeFragranceColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize RecipeFragrance struct: %s", err)
-	}
-
-	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
-
-	if err = randomize.Struct(seed, &b, recipeDBTypes, false, recipeColumnsWithDefault...); err != nil {
-		t.Fatal(err)
-	}
-	if err = randomize.Struct(seed, &c, recipeDBTypes, false, recipeColumnsWithDefault...); err != nil {
-		t.Fatal(err)
-	}
-
-	b.FragrancesID = a.ID
-	c.FragrancesID = a.ID
-
-	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
-	if err = c.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
-
-	check, err := a.FragranceRecipes().All(ctx, tx)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	bFound, cFound := false, false
-	for _, v := range check {
-		if v.FragrancesID == b.FragrancesID {
-			bFound = true
-		}
-		if v.FragrancesID == c.FragrancesID {
-			cFound = true
-		}
-	}
-
-	if !bFound {
-		t.Error("expected to find b")
-	}
-	if !cFound {
-		t.Error("expected to find c")
-	}
-
-	slice := RecipeFragranceSlice{&a}
-	if err = a.L.LoadFragranceRecipes(ctx, tx, false, (*[]*RecipeFragrance)(&slice), nil); err != nil {
-		t.Fatal(err)
-	}
-	if got := len(a.R.FragranceRecipes); got != 2 {
-		t.Error("number of eager loaded records wrong, got:", got)
-	}
-
-	a.R.FragranceRecipes = nil
-	if err = a.L.LoadFragranceRecipes(ctx, tx, true, &a, nil); err != nil {
-		t.Fatal(err)
-	}
-	if got := len(a.R.FragranceRecipes); got != 2 {
-		t.Error("number of eager loaded records wrong, got:", got)
-	}
-
-	if t.Failed() {
-		t.Logf("%#v", check)
-	}
-}
-
-func testRecipeFragranceToManyAddOpFragranceRecipes(t *testing.T) {
-	var err error
-
-	ctx := context.Background()
-	tx := MustTx(boil.BeginTx(ctx, nil))
-	defer func() { _ = tx.Rollback() }()
-
-	var a RecipeFragrance
-	var b, c, d, e Recipe
-
-	seed := randomize.NewSeed()
-	if err = randomize.Struct(seed, &a, recipeFragranceDBTypes, false, strmangle.SetComplement(recipeFragrancePrimaryKeyColumns, recipeFragranceColumnsWithoutDefault)...); err != nil {
-		t.Fatal(err)
-	}
-	foreigners := []*Recipe{&b, &c, &d, &e}
-	for _, x := range foreigners {
-		if err = randomize.Struct(seed, x, recipeDBTypes, false, strmangle.SetComplement(recipePrimaryKeyColumns, recipeColumnsWithoutDefault)...); err != nil {
-			t.Fatal(err)
-		}
-	}
-
-	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
-	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
-	if err = c.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
-
-	foreignersSplitByInsertion := [][]*Recipe{
-		{&b, &c},
-		{&d, &e},
-	}
-
-	for i, x := range foreignersSplitByInsertion {
-		err = a.AddFragranceRecipes(ctx, tx, i != 0, x...)
-		if err != nil {
-			t.Fatal(err)
-		}
-
-		first := x[0]
-		second := x[1]
-
-		if a.ID != first.FragrancesID {
-			t.Error("foreign key was wrong value", a.ID, first.FragrancesID)
-		}
-		if a.ID != second.FragrancesID {
-			t.Error("foreign key was wrong value", a.ID, second.FragrancesID)
-		}
-
-		if first.R.Fragrance != &a {
-			t.Error("relationship was not added properly to the foreign slice")
-		}
-		if second.R.Fragrance != &a {
-			t.Error("relationship was not added properly to the foreign slice")
-		}
-
-		if a.R.FragranceRecipes[i*2] != first {
-			t.Error("relationship struct slice not set to correct value")
-		}
-		if a.R.FragranceRecipes[i*2+1] != second {
-			t.Error("relationship struct slice not set to correct value")
-		}
-
-		count, err := a.FragranceRecipes().Count(ctx, tx)
-		if err != nil {
-			t.Fatal(err)
-		}
-		if want := int64((i + 1) * 2); count != want {
-			t.Error("want", want, "got", count)
-		}
-	}
-}
 func testRecipeFragranceToOneFragranceUsingFragrance(t *testing.T) {
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
@@ -795,6 +642,57 @@ func testRecipeFragranceToOneFragranceUsingFragrance(t *testing.T) {
 		t.Fatal(err)
 	}
 	if local.R.Fragrance == nil {
+		t.Error("struct should have been eager loaded")
+	}
+}
+
+func testRecipeFragranceToOneRecipeUsingRecipe(t *testing.T) {
+	ctx := context.Background()
+	tx := MustTx(boil.BeginTx(ctx, nil))
+	defer func() { _ = tx.Rollback() }()
+
+	var local RecipeFragrance
+	var foreign Recipe
+
+	seed := randomize.NewSeed()
+	if err := randomize.Struct(seed, &local, recipeFragranceDBTypes, false, recipeFragranceColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize RecipeFragrance struct: %s", err)
+	}
+	if err := randomize.Struct(seed, &foreign, recipeDBTypes, false, recipeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Recipe struct: %s", err)
+	}
+
+	if err := foreign.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+
+	local.RecipeID = foreign.ID
+	if err := local.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+
+	check, err := local.Recipe().One(ctx, tx)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if check.ID != foreign.ID {
+		t.Errorf("want: %v, got %v", foreign.ID, check.ID)
+	}
+
+	slice := RecipeFragranceSlice{&local}
+	if err = local.L.LoadRecipe(ctx, tx, false, (*[]*RecipeFragrance)(&slice), nil); err != nil {
+		t.Fatal(err)
+	}
+	if local.R.Recipe == nil {
+		t.Error("struct should have been eager loaded")
+	}
+
+	local.R.Recipe = nil
+	if err = local.L.LoadRecipe(ctx, tx, true, &local, nil); err != nil {
+		t.Fatal(err)
+	}
+	if local.R.Recipe == nil {
 		t.Error("struct should have been eager loaded")
 	}
 }
@@ -853,6 +751,63 @@ func testRecipeFragranceToOneSetOpFragranceUsingFragrance(t *testing.T) {
 
 		if a.FragranceID != x.ID {
 			t.Error("foreign key was wrong value", a.FragranceID, x.ID)
+		}
+	}
+}
+func testRecipeFragranceToOneSetOpRecipeUsingRecipe(t *testing.T) {
+	var err error
+
+	ctx := context.Background()
+	tx := MustTx(boil.BeginTx(ctx, nil))
+	defer func() { _ = tx.Rollback() }()
+
+	var a RecipeFragrance
+	var b, c Recipe
+
+	seed := randomize.NewSeed()
+	if err = randomize.Struct(seed, &a, recipeFragranceDBTypes, false, strmangle.SetComplement(recipeFragrancePrimaryKeyColumns, recipeFragranceColumnsWithoutDefault)...); err != nil {
+		t.Fatal(err)
+	}
+	if err = randomize.Struct(seed, &b, recipeDBTypes, false, strmangle.SetComplement(recipePrimaryKeyColumns, recipeColumnsWithoutDefault)...); err != nil {
+		t.Fatal(err)
+	}
+	if err = randomize.Struct(seed, &c, recipeDBTypes, false, strmangle.SetComplement(recipePrimaryKeyColumns, recipeColumnsWithoutDefault)...); err != nil {
+		t.Fatal(err)
+	}
+
+	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+
+	for i, x := range []*Recipe{&b, &c} {
+		err = a.SetRecipe(ctx, tx, i != 0, x)
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		if a.R.Recipe != x {
+			t.Error("relationship struct not set to correct value")
+		}
+
+		if x.R.RecipeFragrances[0] != &a {
+			t.Error("failed to append to foreign relationship struct")
+		}
+		if a.RecipeID != x.ID {
+			t.Error("foreign key was wrong value", a.RecipeID)
+		}
+
+		zero := reflect.Zero(reflect.TypeOf(a.RecipeID))
+		reflect.Indirect(reflect.ValueOf(&a.RecipeID)).Set(zero)
+
+		if err = a.Reload(ctx, tx); err != nil {
+			t.Fatal("failed to reload", err)
+		}
+
+		if a.RecipeID != x.ID {
+			t.Error("foreign key was wrong value", a.RecipeID, x.ID)
 		}
 	}
 }
@@ -931,7 +886,7 @@ func testRecipeFragrancesSelect(t *testing.T) {
 }
 
 var (
-	recipeFragranceDBTypes = map[string]string{`CreatedAt`: `timestamp with time zone`, `UpdatedAt`: `timestamp with time zone`, `DeletedAt`: `timestamp with time zone`, `ID`: `character varying`, `Percentage`: `double precision`, `Weight`: `double precision`, `FragranceID`: `integer`}
+	recipeFragranceDBTypes = map[string]string{`ID`: `integer`, `CreatedAt`: `timestamp with time zone`, `UpdatedAt`: `timestamp with time zone`, `DeletedAt`: `timestamp with time zone`, `Percentage`: `double precision`, `FragranceID`: `integer`, `RecipeID`: `integer`}
 	_                      = bytes.MinRead
 )
 

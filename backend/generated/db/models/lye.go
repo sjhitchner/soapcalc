@@ -76,14 +76,14 @@ var LyeWhere = struct {
 
 // LyeRels is where relationship names are stored.
 var LyeRels = struct {
-	RecipeLyes string
+	RecipeBatchLyes string
 }{
-	RecipeLyes: "RecipeLyes",
+	RecipeBatchLyes: "RecipeBatchLyes",
 }
 
 // lyeR is where relationships are stored.
 type lyeR struct {
-	RecipeLyes RecipeLyeSlice `boil:"RecipeLyes" json:"RecipeLyes" toml:"RecipeLyes" yaml:"RecipeLyes"`
+	RecipeBatchLyes RecipeBatchLyeSlice `boil:"RecipeBatchLyes" json:"RecipeBatchLyes" toml:"RecipeBatchLyes" yaml:"RecipeBatchLyes"`
 }
 
 // NewStruct creates a new relationship struct
@@ -376,31 +376,31 @@ func (q lyeQuery) Exists(ctx context.Context, exec boil.ContextExecutor) (bool, 
 	return count > 0, nil
 }
 
-// RecipeLyes retrieves all the recipe_lye's RecipeLyes with an executor.
-func (o *Lye) RecipeLyes(mods ...qm.QueryMod) recipeLyeQuery {
+// RecipeBatchLyes retrieves all the recipe_batch_lye's RecipeBatchLyes with an executor.
+func (o *Lye) RecipeBatchLyes(mods ...qm.QueryMod) recipeBatchLyeQuery {
 	var queryMods []qm.QueryMod
 	if len(mods) != 0 {
 		queryMods = append(queryMods, mods...)
 	}
 
 	queryMods = append(queryMods,
-		qm.Where("\"recipe_lye\".\"lye_id\"=?", o.ID),
-		qmhelper.WhereIsNull("\"recipe_lye\".\"deleted_at\""),
+		qm.Where("\"recipe_batch_lye\".\"lye_id\"=?", o.ID),
+		qmhelper.WhereIsNull("\"recipe_batch_lye\".\"deleted_at\""),
 	)
 
-	query := RecipeLyes(queryMods...)
-	queries.SetFrom(query.Query, "\"recipe_lye\"")
+	query := RecipeBatchLyes(queryMods...)
+	queries.SetFrom(query.Query, "\"recipe_batch_lye\"")
 
 	if len(queries.GetSelect(query.Query)) == 0 {
-		queries.SetSelect(query.Query, []string{"\"recipe_lye\".*"})
+		queries.SetSelect(query.Query, []string{"\"recipe_batch_lye\".*"})
 	}
 
 	return query
 }
 
-// LoadRecipeLyes allows an eager lookup of values, cached into the
+// LoadRecipeBatchLyes allows an eager lookup of values, cached into the
 // loaded structs of the objects. This is for a 1-M or N-M relationship.
-func (lyeL) LoadRecipeLyes(ctx context.Context, e boil.ContextExecutor, singular bool, maybeLye interface{}, mods queries.Applicator) error {
+func (lyeL) LoadRecipeBatchLyes(ctx context.Context, e boil.ContextExecutor, singular bool, maybeLye interface{}, mods queries.Applicator) error {
 	var slice []*Lye
 	var object *Lye
 
@@ -438,9 +438,9 @@ func (lyeL) LoadRecipeLyes(ctx context.Context, e boil.ContextExecutor, singular
 	}
 
 	query := NewQuery(
-		qm.From(`recipe_lye`),
-		qm.WhereIn(`recipe_lye.lye_id in ?`, args...),
-		qmhelper.WhereIsNull(`recipe_lye.deleted_at`),
+		qm.From(`recipe_batch_lye`),
+		qm.WhereIn(`recipe_batch_lye.lye_id in ?`, args...),
+		qmhelper.WhereIsNull(`recipe_batch_lye.deleted_at`),
 	)
 	if mods != nil {
 		mods.Apply(query)
@@ -448,22 +448,22 @@ func (lyeL) LoadRecipeLyes(ctx context.Context, e boil.ContextExecutor, singular
 
 	results, err := query.QueryContext(ctx, e)
 	if err != nil {
-		return errors.Wrap(err, "failed to eager load recipe_lye")
+		return errors.Wrap(err, "failed to eager load recipe_batch_lye")
 	}
 
-	var resultSlice []*RecipeLye
+	var resultSlice []*RecipeBatchLye
 	if err = queries.Bind(results, &resultSlice); err != nil {
-		return errors.Wrap(err, "failed to bind eager loaded slice recipe_lye")
+		return errors.Wrap(err, "failed to bind eager loaded slice recipe_batch_lye")
 	}
 
 	if err = results.Close(); err != nil {
-		return errors.Wrap(err, "failed to close results in eager load on recipe_lye")
+		return errors.Wrap(err, "failed to close results in eager load on recipe_batch_lye")
 	}
 	if err = results.Err(); err != nil {
-		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for recipe_lye")
+		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for recipe_batch_lye")
 	}
 
-	if len(recipeLyeAfterSelectHooks) != 0 {
+	if len(recipeBatchLyeAfterSelectHooks) != 0 {
 		for _, obj := range resultSlice {
 			if err := obj.doAfterSelectHooks(ctx, e); err != nil {
 				return err
@@ -471,14 +471,14 @@ func (lyeL) LoadRecipeLyes(ctx context.Context, e boil.ContextExecutor, singular
 		}
 	}
 	if singular {
-		object.R.RecipeLyes = resultSlice
+		object.R.RecipeBatchLyes = resultSlice
 		return nil
 	}
 
 	for _, foreign := range resultSlice {
 		for _, local := range slice {
 			if local.ID == foreign.LyeID {
-				local.R.RecipeLyes = append(local.R.RecipeLyes, foreign)
+				local.R.RecipeBatchLyes = append(local.R.RecipeBatchLyes, foreign)
 				break
 			}
 		}
@@ -487,11 +487,11 @@ func (lyeL) LoadRecipeLyes(ctx context.Context, e boil.ContextExecutor, singular
 	return nil
 }
 
-// AddRecipeLyes adds the given related objects to the existing relationships
+// AddRecipeBatchLyes adds the given related objects to the existing relationships
 // of the lye, optionally inserting them as new records.
-// Appends related to o.R.RecipeLyes.
+// Appends related to o.R.RecipeBatchLyes.
 // Sets related.R.Lye appropriately.
-func (o *Lye) AddRecipeLyes(ctx context.Context, exec boil.ContextExecutor, insert bool, related ...*RecipeLye) error {
+func (o *Lye) AddRecipeBatchLyes(ctx context.Context, exec boil.ContextExecutor, insert bool, related ...*RecipeBatchLye) error {
 	var err error
 	for _, rel := range related {
 		if insert {
@@ -501,9 +501,9 @@ func (o *Lye) AddRecipeLyes(ctx context.Context, exec boil.ContextExecutor, inse
 			}
 		} else {
 			updateQuery := fmt.Sprintf(
-				"UPDATE \"recipe_lye\" SET %s WHERE %s",
+				"UPDATE \"recipe_batch_lye\" SET %s WHERE %s",
 				strmangle.SetParamNames("\"", "\"", 1, []string{"lye_id"}),
-				strmangle.WhereClause("\"", "\"", 2, recipeLyePrimaryKeyColumns),
+				strmangle.WhereClause("\"", "\"", 2, recipeBatchLyePrimaryKeyColumns),
 			)
 			values := []interface{}{o.ID, rel.ID}
 
@@ -522,15 +522,15 @@ func (o *Lye) AddRecipeLyes(ctx context.Context, exec boil.ContextExecutor, inse
 
 	if o.R == nil {
 		o.R = &lyeR{
-			RecipeLyes: related,
+			RecipeBatchLyes: related,
 		}
 	} else {
-		o.R.RecipeLyes = append(o.R.RecipeLyes, related...)
+		o.R.RecipeBatchLyes = append(o.R.RecipeBatchLyes, related...)
 	}
 
 	for _, rel := range related {
 		if rel.R == nil {
-			rel.R = &recipeLyeR{
+			rel.R = &recipeBatchLyeR{
 				Lye: o,
 			}
 		} else {

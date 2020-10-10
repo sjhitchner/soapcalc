@@ -24,74 +24,69 @@ import (
 
 // RecipeAdditive is an object representing the database table.
 type RecipeAdditive struct {
+	ID         int       `boil:"id" json:"id" toml:"id" yaml:"id"`
 	CreatedAt  time.Time `boil:"created_at" json:"created_at" toml:"created_at" yaml:"created_at"`
 	UpdatedAt  time.Time `boil:"updated_at" json:"updated_at" toml:"updated_at" yaml:"updated_at"`
 	DeletedAt  null.Time `boil:"deleted_at" json:"deleted_at,omitempty" toml:"deleted_at" yaml:"deleted_at,omitempty"`
-	ID         string    `boil:"id" json:"id" toml:"id" yaml:"id"`
 	Percentage float64   `boil:"percentage" json:"percentage" toml:"percentage" yaml:"percentage"`
-	Weight     float64   `boil:"weight" json:"weight" toml:"weight" yaml:"weight"`
-	Cost       float64   `boil:"cost" json:"cost" toml:"cost" yaml:"cost"`
 	AdditiveID int       `boil:"additive_id" json:"additive_id" toml:"additive_id" yaml:"additive_id"`
+	RecipeID   int       `boil:"recipe_id" json:"recipe_id" toml:"recipe_id" yaml:"recipe_id"`
 
 	R *recipeAdditiveR `boil:"-" json:"-" toml:"-" yaml:"-"`
 	L recipeAdditiveL  `boil:"-" json:"-" toml:"-" yaml:"-"`
 }
 
 var RecipeAdditiveColumns = struct {
+	ID         string
 	CreatedAt  string
 	UpdatedAt  string
 	DeletedAt  string
-	ID         string
 	Percentage string
-	Weight     string
-	Cost       string
 	AdditiveID string
+	RecipeID   string
 }{
+	ID:         "id",
 	CreatedAt:  "created_at",
 	UpdatedAt:  "updated_at",
 	DeletedAt:  "deleted_at",
-	ID:         "id",
 	Percentage: "percentage",
-	Weight:     "weight",
-	Cost:       "cost",
 	AdditiveID: "additive_id",
+	RecipeID:   "recipe_id",
 }
 
 // Generated where
 
 var RecipeAdditiveWhere = struct {
+	ID         whereHelperint
 	CreatedAt  whereHelpertime_Time
 	UpdatedAt  whereHelpertime_Time
 	DeletedAt  whereHelpernull_Time
-	ID         whereHelperstring
 	Percentage whereHelperfloat64
-	Weight     whereHelperfloat64
-	Cost       whereHelperfloat64
 	AdditiveID whereHelperint
+	RecipeID   whereHelperint
 }{
+	ID:         whereHelperint{field: "\"recipe_additive\".\"id\""},
 	CreatedAt:  whereHelpertime_Time{field: "\"recipe_additive\".\"created_at\""},
 	UpdatedAt:  whereHelpertime_Time{field: "\"recipe_additive\".\"updated_at\""},
 	DeletedAt:  whereHelpernull_Time{field: "\"recipe_additive\".\"deleted_at\""},
-	ID:         whereHelperstring{field: "\"recipe_additive\".\"id\""},
 	Percentage: whereHelperfloat64{field: "\"recipe_additive\".\"percentage\""},
-	Weight:     whereHelperfloat64{field: "\"recipe_additive\".\"weight\""},
-	Cost:       whereHelperfloat64{field: "\"recipe_additive\".\"cost\""},
 	AdditiveID: whereHelperint{field: "\"recipe_additive\".\"additive_id\""},
+	RecipeID:   whereHelperint{field: "\"recipe_additive\".\"recipe_id\""},
 }
 
 // RecipeAdditiveRels is where relationship names are stored.
 var RecipeAdditiveRels = struct {
-	Additive        string
-	AdditiveRecipes string
+	Additive string
+	Recipe   string
 }{
-	Additive:        "Additive",
-	AdditiveRecipes: "AdditiveRecipes",
+	Additive: "Additive",
+	Recipe:   "Recipe",
 }
 
 // recipeAdditiveR is where relationships are stored.
 type recipeAdditiveR struct {
-	Additive        *Additive   `boil:"Additive" json:"Additive" toml:"Additive" yaml:"Additive"`
-	AdditiveRecipes RecipeSlice `boil:"AdditiveRecipes" json:"AdditiveRecipes" toml:"AdditiveRecipes" yaml:"AdditiveRecipes"`
+	Additive *Additive `boil:"Additive" json:"Additive" toml:"Additive" yaml:"Additive"`
+	Recipe   *Recipe   `boil:"Recipe" json:"Recipe" toml:"Recipe" yaml:"Recipe"`
 }
 
 // NewStruct creates a new relationship struct
@@ -103,9 +98,9 @@ func (*recipeAdditiveR) NewStruct() *recipeAdditiveR {
 type recipeAdditiveL struct{}
 
 var (
-	recipeAdditiveAllColumns            = []string{"created_at", "updated_at", "deleted_at", "id", "percentage", "weight", "cost", "additive_id"}
-	recipeAdditiveColumnsWithoutDefault = []string{"created_at", "updated_at", "deleted_at", "id", "percentage", "weight", "cost", "additive_id"}
-	recipeAdditiveColumnsWithDefault    = []string{}
+	recipeAdditiveAllColumns            = []string{"id", "created_at", "updated_at", "deleted_at", "percentage", "additive_id", "recipe_id"}
+	recipeAdditiveColumnsWithoutDefault = []string{"created_at", "updated_at", "deleted_at", "percentage", "additive_id", "recipe_id"}
+	recipeAdditiveColumnsWithDefault    = []string{"id"}
 	recipeAdditivePrimaryKeyColumns     = []string{"id"}
 )
 
@@ -399,24 +394,17 @@ func (o *RecipeAdditive) Additive(mods ...qm.QueryMod) additiveQuery {
 	return query
 }
 
-// AdditiveRecipes retrieves all the recipe's Recipes with an executor via additives_id column.
-func (o *RecipeAdditive) AdditiveRecipes(mods ...qm.QueryMod) recipeQuery {
-	var queryMods []qm.QueryMod
-	if len(mods) != 0 {
-		queryMods = append(queryMods, mods...)
+// Recipe pointed to by the foreign key.
+func (o *RecipeAdditive) Recipe(mods ...qm.QueryMod) recipeQuery {
+	queryMods := []qm.QueryMod{
+		qm.Where("\"id\" = ?", o.RecipeID),
+		qmhelper.WhereIsNull("deleted_at"),
 	}
 
-	queryMods = append(queryMods,
-		qm.Where("\"recipe\".\"additives_id\"=?", o.ID),
-		qmhelper.WhereIsNull("\"recipe\".\"deleted_at\""),
-	)
+	queryMods = append(queryMods, mods...)
 
 	query := Recipes(queryMods...)
 	queries.SetFrom(query.Query, "\"recipe\"")
-
-	if len(queries.GetSelect(query.Query)) == 0 {
-		queries.SetSelect(query.Query, []string{"\"recipe\".*"})
-	}
 
 	return query
 }
@@ -518,9 +506,9 @@ func (recipeAdditiveL) LoadAdditive(ctx context.Context, e boil.ContextExecutor,
 	return nil
 }
 
-// LoadAdditiveRecipes allows an eager lookup of values, cached into the
-// loaded structs of the objects. This is for a 1-M or N-M relationship.
-func (recipeAdditiveL) LoadAdditiveRecipes(ctx context.Context, e boil.ContextExecutor, singular bool, maybeRecipeAdditive interface{}, mods queries.Applicator) error {
+// LoadRecipe allows an eager lookup of values, cached into the
+// loaded structs of the objects. This is for an N-1 relationship.
+func (recipeAdditiveL) LoadRecipe(ctx context.Context, e boil.ContextExecutor, singular bool, maybeRecipeAdditive interface{}, mods queries.Applicator) error {
 	var slice []*RecipeAdditive
 	var object *RecipeAdditive
 
@@ -535,7 +523,8 @@ func (recipeAdditiveL) LoadAdditiveRecipes(ctx context.Context, e boil.ContextEx
 		if object.R == nil {
 			object.R = &recipeAdditiveR{}
 		}
-		args = append(args, object.ID)
+		args = append(args, object.RecipeID)
+
 	} else {
 	Outer:
 		for _, obj := range slice {
@@ -544,12 +533,13 @@ func (recipeAdditiveL) LoadAdditiveRecipes(ctx context.Context, e boil.ContextEx
 			}
 
 			for _, a := range args {
-				if a == obj.ID {
+				if a == obj.RecipeID {
 					continue Outer
 				}
 			}
 
-			args = append(args, obj.ID)
+			args = append(args, obj.RecipeID)
+
 		}
 	}
 
@@ -559,7 +549,7 @@ func (recipeAdditiveL) LoadAdditiveRecipes(ctx context.Context, e boil.ContextEx
 
 	query := NewQuery(
 		qm.From(`recipe`),
-		qm.WhereIn(`recipe.additives_id in ?`, args...),
+		qm.WhereIn(`recipe.id in ?`, args...),
 		qmhelper.WhereIsNull(`recipe.deleted_at`),
 	)
 	if mods != nil {
@@ -568,37 +558,43 @@ func (recipeAdditiveL) LoadAdditiveRecipes(ctx context.Context, e boil.ContextEx
 
 	results, err := query.QueryContext(ctx, e)
 	if err != nil {
-		return errors.Wrap(err, "failed to eager load recipe")
+		return errors.Wrap(err, "failed to eager load Recipe")
 	}
 
 	var resultSlice []*Recipe
 	if err = queries.Bind(results, &resultSlice); err != nil {
-		return errors.Wrap(err, "failed to bind eager loaded slice recipe")
+		return errors.Wrap(err, "failed to bind eager loaded slice Recipe")
 	}
 
 	if err = results.Close(); err != nil {
-		return errors.Wrap(err, "failed to close results in eager load on recipe")
+		return errors.Wrap(err, "failed to close results of eager load for recipe")
 	}
 	if err = results.Err(); err != nil {
 		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for recipe")
 	}
 
-	if len(recipeAfterSelectHooks) != 0 {
+	if len(recipeAdditiveAfterSelectHooks) != 0 {
 		for _, obj := range resultSlice {
 			if err := obj.doAfterSelectHooks(ctx, e); err != nil {
 				return err
 			}
 		}
 	}
-	if singular {
-		object.R.AdditiveRecipes = resultSlice
+
+	if len(resultSlice) == 0 {
 		return nil
 	}
 
-	for _, foreign := range resultSlice {
-		for _, local := range slice {
-			if local.ID == foreign.AdditivesID {
-				local.R.AdditiveRecipes = append(local.R.AdditiveRecipes, foreign)
+	if singular {
+		foreign := resultSlice[0]
+		object.R.Recipe = foreign
+		return nil
+	}
+
+	for _, local := range slice {
+		for _, foreign := range resultSlice {
+			if local.RecipeID == foreign.ID {
+				local.R.Recipe = foreign
 				break
 			}
 		}
@@ -654,56 +650,50 @@ func (o *RecipeAdditive) SetAdditive(ctx context.Context, exec boil.ContextExecu
 	return nil
 }
 
-// AddAdditiveRecipes adds the given related objects to the existing relationships
-// of the recipe_additive, optionally inserting them as new records.
-// Appends related to o.R.AdditiveRecipes.
-// Sets related.R.Additive appropriately.
-func (o *RecipeAdditive) AddAdditiveRecipes(ctx context.Context, exec boil.ContextExecutor, insert bool, related ...*Recipe) error {
+// SetRecipe of the recipeAdditive to the related item.
+// Sets o.R.Recipe to related.
+// Adds o to related.R.RecipeAdditives.
+func (o *RecipeAdditive) SetRecipe(ctx context.Context, exec boil.ContextExecutor, insert bool, related *Recipe) error {
 	var err error
-	for _, rel := range related {
-		if insert {
-			rel.AdditivesID = o.ID
-			if err = rel.Insert(ctx, exec, boil.Infer()); err != nil {
-				return errors.Wrap(err, "failed to insert into foreign table")
-			}
-		} else {
-			updateQuery := fmt.Sprintf(
-				"UPDATE \"recipe\" SET %s WHERE %s",
-				strmangle.SetParamNames("\"", "\"", 1, []string{"additives_id"}),
-				strmangle.WhereClause("\"", "\"", 2, recipePrimaryKeyColumns),
-			)
-			values := []interface{}{o.ID, rel.ID}
-
-			if boil.IsDebug(ctx) {
-				writer := boil.DebugWriterFrom(ctx)
-				fmt.Fprintln(writer, updateQuery)
-				fmt.Fprintln(writer, values)
-			}
-			if _, err = exec.ExecContext(ctx, updateQuery, values...); err != nil {
-				return errors.Wrap(err, "failed to update foreign table")
-			}
-
-			rel.AdditivesID = o.ID
+	if insert {
+		if err = related.Insert(ctx, exec, boil.Infer()); err != nil {
+			return errors.Wrap(err, "failed to insert into foreign table")
 		}
 	}
 
+	updateQuery := fmt.Sprintf(
+		"UPDATE \"recipe_additive\" SET %s WHERE %s",
+		strmangle.SetParamNames("\"", "\"", 1, []string{"recipe_id"}),
+		strmangle.WhereClause("\"", "\"", 2, recipeAdditivePrimaryKeyColumns),
+	)
+	values := []interface{}{related.ID, o.ID}
+
+	if boil.IsDebug(ctx) {
+		writer := boil.DebugWriterFrom(ctx)
+		fmt.Fprintln(writer, updateQuery)
+		fmt.Fprintln(writer, values)
+	}
+	if _, err = exec.ExecContext(ctx, updateQuery, values...); err != nil {
+		return errors.Wrap(err, "failed to update local table")
+	}
+
+	o.RecipeID = related.ID
 	if o.R == nil {
 		o.R = &recipeAdditiveR{
-			AdditiveRecipes: related,
+			Recipe: related,
 		}
 	} else {
-		o.R.AdditiveRecipes = append(o.R.AdditiveRecipes, related...)
+		o.R.Recipe = related
 	}
 
-	for _, rel := range related {
-		if rel.R == nil {
-			rel.R = &recipeR{
-				Additive: o,
-			}
-		} else {
-			rel.R.Additive = o
+	if related.R == nil {
+		related.R = &recipeR{
+			RecipeAdditives: RecipeAdditiveSlice{o},
 		}
+	} else {
+		related.R.RecipeAdditives = append(related.R.RecipeAdditives, o)
 	}
+
 	return nil
 }
 
@@ -715,7 +705,7 @@ func RecipeAdditives(mods ...qm.QueryMod) recipeAdditiveQuery {
 
 // FindRecipeAdditive retrieves a single record by ID with an executor.
 // If selectCols is empty Find will return all columns.
-func FindRecipeAdditive(ctx context.Context, exec boil.ContextExecutor, iD string, selectCols ...string) (*RecipeAdditive, error) {
+func FindRecipeAdditive(ctx context.Context, exec boil.ContextExecutor, iD int, selectCols ...string) (*RecipeAdditive, error) {
 	recipeAdditiveObj := &RecipeAdditive{}
 
 	sel := "*"
@@ -1274,7 +1264,7 @@ func (o *RecipeAdditiveSlice) ReloadAll(ctx context.Context, exec boil.ContextEx
 }
 
 // RecipeAdditiveExists checks if the RecipeAdditive row exists.
-func RecipeAdditiveExists(ctx context.Context, exec boil.ContextExecutor, iD string) (bool, error) {
+func RecipeAdditiveExists(ctx context.Context, exec boil.ContextExecutor, iD int) (bool, error) {
 	var exists bool
 	sql := "select exists(select 1 from \"recipe_additive\" where \"id\"=$1 and \"deleted_at\" is null limit 1)"
 

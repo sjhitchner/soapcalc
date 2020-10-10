@@ -24,69 +24,74 @@ import (
 
 // LyeInventory is an object representing the database table.
 type LyeInventory struct {
-	ID           int       `boil:"id" json:"id" toml:"id" yaml:"id"`
-	CreatedAt    time.Time `boil:"created_at" json:"created_at" toml:"created_at" yaml:"created_at"`
-	UpdatedAt    time.Time `boil:"updated_at" json:"updated_at" toml:"updated_at" yaml:"updated_at"`
-	DeletedAt    null.Time `boil:"deleted_at" json:"deleted_at,omitempty" toml:"deleted_at" yaml:"deleted_at,omitempty"`
-	PurchaseDate time.Time `boil:"purchase_date" json:"purchase_date" toml:"purchase_date" yaml:"purchase_date"`
-	ExpiryDate   time.Time `boil:"expiry_date" json:"expiry_date" toml:"expiry_date" yaml:"expiry_date"`
-	Cost         float64   `boil:"cost" json:"cost" toml:"cost" yaml:"cost"`
-	Weight       float64   `boil:"weight" json:"weight" toml:"weight" yaml:"weight"`
-	LyeID        int       `boil:"lye_id" json:"lye_id" toml:"lye_id" yaml:"lye_id"`
-	SupplierID   int       `boil:"supplier_id" json:"supplier_id" toml:"supplier_id" yaml:"supplier_id"`
+	ID            int       `boil:"id" json:"id" toml:"id" yaml:"id"`
+	CreatedAt     time.Time `boil:"created_at" json:"created_at" toml:"created_at" yaml:"created_at"`
+	UpdatedAt     time.Time `boil:"updated_at" json:"updated_at" toml:"updated_at" yaml:"updated_at"`
+	DeletedAt     null.Time `boil:"deleted_at" json:"deleted_at,omitempty" toml:"deleted_at" yaml:"deleted_at,omitempty"`
+	PurchaseDate  time.Time `boil:"purchase_date" json:"purchase_date" toml:"purchase_date" yaml:"purchase_date"`
+	ExpiryDate    time.Time `boil:"expiry_date" json:"expiry_date" toml:"expiry_date" yaml:"expiry_date"`
+	Cost          float64   `boil:"cost" json:"cost" toml:"cost" yaml:"cost"`
+	Weight        float64   `boil:"weight" json:"weight" toml:"weight" yaml:"weight"`
+	Concentration float64   `boil:"concentration" json:"concentration" toml:"concentration" yaml:"concentration"`
+	LyeID         int       `boil:"lye_id" json:"lye_id" toml:"lye_id" yaml:"lye_id"`
+	SupplierID    int       `boil:"supplier_id" json:"supplier_id" toml:"supplier_id" yaml:"supplier_id"`
 
 	R *lyeInventoryR `boil:"-" json:"-" toml:"-" yaml:"-"`
 	L lyeInventoryL  `boil:"-" json:"-" toml:"-" yaml:"-"`
 }
 
 var LyeInventoryColumns = struct {
-	ID           string
-	CreatedAt    string
-	UpdatedAt    string
-	DeletedAt    string
-	PurchaseDate string
-	ExpiryDate   string
-	Cost         string
-	Weight       string
-	LyeID        string
-	SupplierID   string
+	ID            string
+	CreatedAt     string
+	UpdatedAt     string
+	DeletedAt     string
+	PurchaseDate  string
+	ExpiryDate    string
+	Cost          string
+	Weight        string
+	Concentration string
+	LyeID         string
+	SupplierID    string
 }{
-	ID:           "id",
-	CreatedAt:    "created_at",
-	UpdatedAt:    "updated_at",
-	DeletedAt:    "deleted_at",
-	PurchaseDate: "purchase_date",
-	ExpiryDate:   "expiry_date",
-	Cost:         "cost",
-	Weight:       "weight",
-	LyeID:        "lye_id",
-	SupplierID:   "supplier_id",
+	ID:            "id",
+	CreatedAt:     "created_at",
+	UpdatedAt:     "updated_at",
+	DeletedAt:     "deleted_at",
+	PurchaseDate:  "purchase_date",
+	ExpiryDate:    "expiry_date",
+	Cost:          "cost",
+	Weight:        "weight",
+	Concentration: "concentration",
+	LyeID:         "lye_id",
+	SupplierID:    "supplier_id",
 }
 
 // Generated where
 
 var LyeInventoryWhere = struct {
-	ID           whereHelperint
-	CreatedAt    whereHelpertime_Time
-	UpdatedAt    whereHelpertime_Time
-	DeletedAt    whereHelpernull_Time
-	PurchaseDate whereHelpertime_Time
-	ExpiryDate   whereHelpertime_Time
-	Cost         whereHelperfloat64
-	Weight       whereHelperfloat64
-	LyeID        whereHelperint
-	SupplierID   whereHelperint
+	ID            whereHelperint
+	CreatedAt     whereHelpertime_Time
+	UpdatedAt     whereHelpertime_Time
+	DeletedAt     whereHelpernull_Time
+	PurchaseDate  whereHelpertime_Time
+	ExpiryDate    whereHelpertime_Time
+	Cost          whereHelperfloat64
+	Weight        whereHelperfloat64
+	Concentration whereHelperfloat64
+	LyeID         whereHelperint
+	SupplierID    whereHelperint
 }{
-	ID:           whereHelperint{field: "\"lye_inventory\".\"id\""},
-	CreatedAt:    whereHelpertime_Time{field: "\"lye_inventory\".\"created_at\""},
-	UpdatedAt:    whereHelpertime_Time{field: "\"lye_inventory\".\"updated_at\""},
-	DeletedAt:    whereHelpernull_Time{field: "\"lye_inventory\".\"deleted_at\""},
-	PurchaseDate: whereHelpertime_Time{field: "\"lye_inventory\".\"purchase_date\""},
-	ExpiryDate:   whereHelpertime_Time{field: "\"lye_inventory\".\"expiry_date\""},
-	Cost:         whereHelperfloat64{field: "\"lye_inventory\".\"cost\""},
-	Weight:       whereHelperfloat64{field: "\"lye_inventory\".\"weight\""},
-	LyeID:        whereHelperint{field: "\"lye_inventory\".\"lye_id\""},
-	SupplierID:   whereHelperint{field: "\"lye_inventory\".\"supplier_id\""},
+	ID:            whereHelperint{field: "\"lye_inventory\".\"id\""},
+	CreatedAt:     whereHelpertime_Time{field: "\"lye_inventory\".\"created_at\""},
+	UpdatedAt:     whereHelpertime_Time{field: "\"lye_inventory\".\"updated_at\""},
+	DeletedAt:     whereHelpernull_Time{field: "\"lye_inventory\".\"deleted_at\""},
+	PurchaseDate:  whereHelpertime_Time{field: "\"lye_inventory\".\"purchase_date\""},
+	ExpiryDate:    whereHelpertime_Time{field: "\"lye_inventory\".\"expiry_date\""},
+	Cost:          whereHelperfloat64{field: "\"lye_inventory\".\"cost\""},
+	Weight:        whereHelperfloat64{field: "\"lye_inventory\".\"weight\""},
+	Concentration: whereHelperfloat64{field: "\"lye_inventory\".\"concentration\""},
+	LyeID:         whereHelperint{field: "\"lye_inventory\".\"lye_id\""},
+	SupplierID:    whereHelperint{field: "\"lye_inventory\".\"supplier_id\""},
 }
 
 // LyeInventoryRels is where relationship names are stored.
@@ -116,8 +121,8 @@ func (*lyeInventoryR) NewStruct() *lyeInventoryR {
 type lyeInventoryL struct{}
 
 var (
-	lyeInventoryAllColumns            = []string{"id", "created_at", "updated_at", "deleted_at", "purchase_date", "expiry_date", "cost", "weight", "lye_id", "supplier_id"}
-	lyeInventoryColumnsWithoutDefault = []string{"created_at", "updated_at", "deleted_at", "purchase_date", "expiry_date", "cost", "weight", "lye_id", "supplier_id"}
+	lyeInventoryAllColumns            = []string{"id", "created_at", "updated_at", "deleted_at", "purchase_date", "expiry_date", "cost", "weight", "concentration", "lye_id", "supplier_id"}
+	lyeInventoryColumnsWithoutDefault = []string{"created_at", "updated_at", "deleted_at", "purchase_date", "expiry_date", "cost", "weight", "concentration", "lye_id", "supplier_id"}
 	lyeInventoryColumnsWithDefault    = []string{"id"}
 	lyeInventoryPrimaryKeyColumns     = []string{"id"}
 )

@@ -1039,7 +1039,7 @@ func testLyeInventoriesSelect(t *testing.T) {
 }
 
 var (
-	lyeInventoryDBTypes = map[string]string{`ID`: `integer`, `CreatedAt`: `timestamp with time zone`, `UpdatedAt`: `timestamp with time zone`, `DeletedAt`: `timestamp with time zone`, `PurchaseDate`: `timestamp with time zone`, `ExpiryDate`: `timestamp with time zone`, `Cost`: `double precision`, `Weight`: `double precision`, `LyeID`: `integer`, `SupplierID`: `integer`}
+	lyeInventoryDBTypes = map[string]string{`ID`: `integer`, `CreatedAt`: `timestamp with time zone`, `UpdatedAt`: `timestamp with time zone`, `DeletedAt`: `timestamp with time zone`, `PurchaseDate`: `timestamp with time zone`, `ExpiryDate`: `timestamp with time zone`, `Cost`: `double precision`, `Weight`: `double precision`, `Concentration`: `double precision`, `LyeID`: `integer`, `SupplierID`: `integer`}
 	_                   = bytes.MinRead
 )
 

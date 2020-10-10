@@ -595,14 +595,14 @@ func testLyesInsertWhitelist(t *testing.T) {
 	}
 }
 
-func testLyeToManyRecipeLyes(t *testing.T) {
+func testLyeToManyRecipeBatchLyes(t *testing.T) {
 	var err error
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
 
 	var a Lye
-	var b, c RecipeLye
+	var b, c RecipeBatchLye
 
 	seed := randomize.NewSeed()
 	if err = randomize.Struct(seed, &a, lyeDBTypes, true, lyeColumnsWithDefault...); err != nil {
@@ -613,10 +613,10 @@ func testLyeToManyRecipeLyes(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if err = randomize.Struct(seed, &b, recipeLyeDBTypes, false, recipeLyeColumnsWithDefault...); err != nil {
+	if err = randomize.Struct(seed, &b, recipeBatchLyeDBTypes, false, recipeBatchLyeColumnsWithDefault...); err != nil {
 		t.Fatal(err)
 	}
-	if err = randomize.Struct(seed, &c, recipeLyeDBTypes, false, recipeLyeColumnsWithDefault...); err != nil {
+	if err = randomize.Struct(seed, &c, recipeBatchLyeDBTypes, false, recipeBatchLyeColumnsWithDefault...); err != nil {
 		t.Fatal(err)
 	}
 
@@ -630,7 +630,7 @@ func testLyeToManyRecipeLyes(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	check, err := a.RecipeLyes().All(ctx, tx)
+	check, err := a.RecipeBatchLyes().All(ctx, tx)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -653,18 +653,18 @@ func testLyeToManyRecipeLyes(t *testing.T) {
 	}
 
 	slice := LyeSlice{&a}
-	if err = a.L.LoadRecipeLyes(ctx, tx, false, (*[]*Lye)(&slice), nil); err != nil {
+	if err = a.L.LoadRecipeBatchLyes(ctx, tx, false, (*[]*Lye)(&slice), nil); err != nil {
 		t.Fatal(err)
 	}
-	if got := len(a.R.RecipeLyes); got != 2 {
+	if got := len(a.R.RecipeBatchLyes); got != 2 {
 		t.Error("number of eager loaded records wrong, got:", got)
 	}
 
-	a.R.RecipeLyes = nil
-	if err = a.L.LoadRecipeLyes(ctx, tx, true, &a, nil); err != nil {
+	a.R.RecipeBatchLyes = nil
+	if err = a.L.LoadRecipeBatchLyes(ctx, tx, true, &a, nil); err != nil {
 		t.Fatal(err)
 	}
-	if got := len(a.R.RecipeLyes); got != 2 {
+	if got := len(a.R.RecipeBatchLyes); got != 2 {
 		t.Error("number of eager loaded records wrong, got:", got)
 	}
 
@@ -673,7 +673,7 @@ func testLyeToManyRecipeLyes(t *testing.T) {
 	}
 }
 
-func testLyeToManyAddOpRecipeLyes(t *testing.T) {
+func testLyeToManyAddOpRecipeBatchLyes(t *testing.T) {
 	var err error
 
 	ctx := context.Background()
@@ -681,15 +681,15 @@ func testLyeToManyAddOpRecipeLyes(t *testing.T) {
 	defer func() { _ = tx.Rollback() }()
 
 	var a Lye
-	var b, c, d, e RecipeLye
+	var b, c, d, e RecipeBatchLye
 
 	seed := randomize.NewSeed()
 	if err = randomize.Struct(seed, &a, lyeDBTypes, false, strmangle.SetComplement(lyePrimaryKeyColumns, lyeColumnsWithoutDefault)...); err != nil {
 		t.Fatal(err)
 	}
-	foreigners := []*RecipeLye{&b, &c, &d, &e}
+	foreigners := []*RecipeBatchLye{&b, &c, &d, &e}
 	for _, x := range foreigners {
-		if err = randomize.Struct(seed, x, recipeLyeDBTypes, false, strmangle.SetComplement(recipeLyePrimaryKeyColumns, recipeLyeColumnsWithoutDefault)...); err != nil {
+		if err = randomize.Struct(seed, x, recipeBatchLyeDBTypes, false, strmangle.SetComplement(recipeBatchLyePrimaryKeyColumns, recipeBatchLyeColumnsWithoutDefault)...); err != nil {
 			t.Fatal(err)
 		}
 	}
@@ -704,13 +704,13 @@ func testLyeToManyAddOpRecipeLyes(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	foreignersSplitByInsertion := [][]*RecipeLye{
+	foreignersSplitByInsertion := [][]*RecipeBatchLye{
 		{&b, &c},
 		{&d, &e},
 	}
 
 	for i, x := range foreignersSplitByInsertion {
-		err = a.AddRecipeLyes(ctx, tx, i != 0, x...)
+		err = a.AddRecipeBatchLyes(ctx, tx, i != 0, x...)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -732,14 +732,14 @@ func testLyeToManyAddOpRecipeLyes(t *testing.T) {
 			t.Error("relationship was not added properly to the foreign slice")
 		}
 
-		if a.R.RecipeLyes[i*2] != first {
+		if a.R.RecipeBatchLyes[i*2] != first {
 			t.Error("relationship struct slice not set to correct value")
 		}
-		if a.R.RecipeLyes[i*2+1] != second {
+		if a.R.RecipeBatchLyes[i*2+1] != second {
 			t.Error("relationship struct slice not set to correct value")
 		}
 
-		count, err := a.RecipeLyes().Count(ctx, tx)
+		count, err := a.RecipeBatchLyes().Count(ctx, tx)
 		if err != nil {
 			t.Fatal(err)
 		}

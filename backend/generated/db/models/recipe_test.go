@@ -595,213 +595,8 @@ func testRecipesInsertWhitelist(t *testing.T) {
 	}
 }
 
-func testRecipeToOneRecipeAdditiveUsingAdditive(t *testing.T) {
-	ctx := context.Background()
-	tx := MustTx(boil.BeginTx(ctx, nil))
-	defer func() { _ = tx.Rollback() }()
-
-	var local Recipe
-	var foreign RecipeAdditive
-
-	seed := randomize.NewSeed()
-	if err := randomize.Struct(seed, &local, recipeDBTypes, false, recipeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize Recipe struct: %s", err)
-	}
-	if err := randomize.Struct(seed, &foreign, recipeAdditiveDBTypes, false, recipeAdditiveColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize RecipeAdditive struct: %s", err)
-	}
-
-	if err := foreign.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
-
-	local.AdditivesID = foreign.ID
-	if err := local.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
-
-	check, err := local.Additive().One(ctx, tx)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	if check.ID != foreign.ID {
-		t.Errorf("want: %v, got %v", foreign.ID, check.ID)
-	}
-
-	slice := RecipeSlice{&local}
-	if err = local.L.LoadAdditive(ctx, tx, false, (*[]*Recipe)(&slice), nil); err != nil {
-		t.Fatal(err)
-	}
-	if local.R.Additive == nil {
-		t.Error("struct should have been eager loaded")
-	}
-
-	local.R.Additive = nil
-	if err = local.L.LoadAdditive(ctx, tx, true, &local, nil); err != nil {
-		t.Fatal(err)
-	}
-	if local.R.Additive == nil {
-		t.Error("struct should have been eager loaded")
-	}
-}
-
-func testRecipeToOneRecipeFragranceUsingFragrance(t *testing.T) {
-	ctx := context.Background()
-	tx := MustTx(boil.BeginTx(ctx, nil))
-	defer func() { _ = tx.Rollback() }()
-
-	var local Recipe
-	var foreign RecipeFragrance
-
-	seed := randomize.NewSeed()
-	if err := randomize.Struct(seed, &local, recipeDBTypes, false, recipeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize Recipe struct: %s", err)
-	}
-	if err := randomize.Struct(seed, &foreign, recipeFragranceDBTypes, false, recipeFragranceColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize RecipeFragrance struct: %s", err)
-	}
-
-	if err := foreign.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
-
-	local.FragrancesID = foreign.ID
-	if err := local.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
-
-	check, err := local.Fragrance().One(ctx, tx)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	if check.ID != foreign.ID {
-		t.Errorf("want: %v, got %v", foreign.ID, check.ID)
-	}
-
-	slice := RecipeSlice{&local}
-	if err = local.L.LoadFragrance(ctx, tx, false, (*[]*Recipe)(&slice), nil); err != nil {
-		t.Fatal(err)
-	}
-	if local.R.Fragrance == nil {
-		t.Error("struct should have been eager loaded")
-	}
-
-	local.R.Fragrance = nil
-	if err = local.L.LoadFragrance(ctx, tx, true, &local, nil); err != nil {
-		t.Fatal(err)
-	}
-	if local.R.Fragrance == nil {
-		t.Error("struct should have been eager loaded")
-	}
-}
-
-func testRecipeToOneRecipeLipidUsingLipid(t *testing.T) {
-	ctx := context.Background()
-	tx := MustTx(boil.BeginTx(ctx, nil))
-	defer func() { _ = tx.Rollback() }()
-
-	var local Recipe
-	var foreign RecipeLipid
-
-	seed := randomize.NewSeed()
-	if err := randomize.Struct(seed, &local, recipeDBTypes, false, recipeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize Recipe struct: %s", err)
-	}
-	if err := randomize.Struct(seed, &foreign, recipeLipidDBTypes, false, recipeLipidColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize RecipeLipid struct: %s", err)
-	}
-
-	if err := foreign.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
-
-	local.LipidsID = foreign.ID
-	if err := local.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
-
-	check, err := local.Lipid().One(ctx, tx)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	if check.ID != foreign.ID {
-		t.Errorf("want: %v, got %v", foreign.ID, check.ID)
-	}
-
-	slice := RecipeSlice{&local}
-	if err = local.L.LoadLipid(ctx, tx, false, (*[]*Recipe)(&slice), nil); err != nil {
-		t.Fatal(err)
-	}
-	if local.R.Lipid == nil {
-		t.Error("struct should have been eager loaded")
-	}
-
-	local.R.Lipid = nil
-	if err = local.L.LoadLipid(ctx, tx, true, &local, nil); err != nil {
-		t.Fatal(err)
-	}
-	if local.R.Lipid == nil {
-		t.Error("struct should have been eager loaded")
-	}
-}
-
-func testRecipeToOneRecipeLyeUsingLye(t *testing.T) {
-	ctx := context.Background()
-	tx := MustTx(boil.BeginTx(ctx, nil))
-	defer func() { _ = tx.Rollback() }()
-
-	var local Recipe
-	var foreign RecipeLye
-
-	seed := randomize.NewSeed()
-	if err := randomize.Struct(seed, &local, recipeDBTypes, false, recipeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize Recipe struct: %s", err)
-	}
-	if err := randomize.Struct(seed, &foreign, recipeLyeDBTypes, false, recipeLyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize RecipeLye struct: %s", err)
-	}
-
-	if err := foreign.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
-
-	local.LyeID = foreign.ID
-	if err := local.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
-
-	check, err := local.Lye().One(ctx, tx)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	if check.ID != foreign.ID {
-		t.Errorf("want: %v, got %v", foreign.ID, check.ID)
-	}
-
-	slice := RecipeSlice{&local}
-	if err = local.L.LoadLye(ctx, tx, false, (*[]*Recipe)(&slice), nil); err != nil {
-		t.Fatal(err)
-	}
-	if local.R.Lye == nil {
-		t.Error("struct should have been eager loaded")
-	}
-
-	local.R.Lye = nil
-	if err = local.L.LoadLye(ctx, tx, true, &local, nil); err != nil {
-		t.Fatal(err)
-	}
-	if local.R.Lye == nil {
-		t.Error("struct should have been eager loaded")
-	}
-}
-
-func testRecipeToOneSetOpRecipeAdditiveUsingAdditive(t *testing.T) {
+func testRecipeToManyRecipeAdditives(t *testing.T) {
 	var err error
-
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
@@ -810,55 +605,154 @@ func testRecipeToOneSetOpRecipeAdditiveUsingAdditive(t *testing.T) {
 	var b, c RecipeAdditive
 
 	seed := randomize.NewSeed()
-	if err = randomize.Struct(seed, &a, recipeDBTypes, false, strmangle.SetComplement(recipePrimaryKeyColumns, recipeColumnsWithoutDefault)...); err != nil {
-		t.Fatal(err)
-	}
-	if err = randomize.Struct(seed, &b, recipeAdditiveDBTypes, false, strmangle.SetComplement(recipeAdditivePrimaryKeyColumns, recipeAdditiveColumnsWithoutDefault)...); err != nil {
-		t.Fatal(err)
-	}
-	if err = randomize.Struct(seed, &c, recipeAdditiveDBTypes, false, strmangle.SetComplement(recipeAdditivePrimaryKeyColumns, recipeAdditiveColumnsWithoutDefault)...); err != nil {
-		t.Fatal(err)
+	if err = randomize.Struct(seed, &a, recipeDBTypes, true, recipeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Recipe struct: %s", err)
 	}
 
 	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
 		t.Fatal(err)
 	}
-	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
+
+	if err = randomize.Struct(seed, &b, recipeAdditiveDBTypes, false, recipeAdditiveColumnsWithDefault...); err != nil {
+		t.Fatal(err)
+	}
+	if err = randomize.Struct(seed, &c, recipeAdditiveDBTypes, false, recipeAdditiveColumnsWithDefault...); err != nil {
 		t.Fatal(err)
 	}
 
-	for i, x := range []*RecipeAdditive{&b, &c} {
-		err = a.SetAdditive(ctx, tx, i != 0, x)
-		if err != nil {
-			t.Fatal(err)
-		}
+	b.RecipeID = a.ID
+	c.RecipeID = a.ID
 
-		if a.R.Additive != x {
-			t.Error("relationship struct not set to correct value")
-		}
+	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+	if err = c.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
 
-		if x.R.AdditiveRecipes[0] != &a {
-			t.Error("failed to append to foreign relationship struct")
-		}
-		if a.AdditivesID != x.ID {
-			t.Error("foreign key was wrong value", a.AdditivesID)
-		}
+	check, err := a.RecipeAdditives().All(ctx, tx)
+	if err != nil {
+		t.Fatal(err)
+	}
 
-		zero := reflect.Zero(reflect.TypeOf(a.AdditivesID))
-		reflect.Indirect(reflect.ValueOf(&a.AdditivesID)).Set(zero)
-
-		if err = a.Reload(ctx, tx); err != nil {
-			t.Fatal("failed to reload", err)
+	bFound, cFound := false, false
+	for _, v := range check {
+		if v.RecipeID == b.RecipeID {
+			bFound = true
 		}
-
-		if a.AdditivesID != x.ID {
-			t.Error("foreign key was wrong value", a.AdditivesID, x.ID)
+		if v.RecipeID == c.RecipeID {
+			cFound = true
 		}
 	}
-}
-func testRecipeToOneSetOpRecipeFragranceUsingFragrance(t *testing.T) {
-	var err error
 
+	if !bFound {
+		t.Error("expected to find b")
+	}
+	if !cFound {
+		t.Error("expected to find c")
+	}
+
+	slice := RecipeSlice{&a}
+	if err = a.L.LoadRecipeAdditives(ctx, tx, false, (*[]*Recipe)(&slice), nil); err != nil {
+		t.Fatal(err)
+	}
+	if got := len(a.R.RecipeAdditives); got != 2 {
+		t.Error("number of eager loaded records wrong, got:", got)
+	}
+
+	a.R.RecipeAdditives = nil
+	if err = a.L.LoadRecipeAdditives(ctx, tx, true, &a, nil); err != nil {
+		t.Fatal(err)
+	}
+	if got := len(a.R.RecipeAdditives); got != 2 {
+		t.Error("number of eager loaded records wrong, got:", got)
+	}
+
+	if t.Failed() {
+		t.Logf("%#v", check)
+	}
+}
+
+func testRecipeToManyRecipeBatches(t *testing.T) {
+	var err error
+	ctx := context.Background()
+	tx := MustTx(boil.BeginTx(ctx, nil))
+	defer func() { _ = tx.Rollback() }()
+
+	var a Recipe
+	var b, c RecipeBatch
+
+	seed := randomize.NewSeed()
+	if err = randomize.Struct(seed, &a, recipeDBTypes, true, recipeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Recipe struct: %s", err)
+	}
+
+	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+
+	if err = randomize.Struct(seed, &b, recipeBatchDBTypes, false, recipeBatchColumnsWithDefault...); err != nil {
+		t.Fatal(err)
+	}
+	if err = randomize.Struct(seed, &c, recipeBatchDBTypes, false, recipeBatchColumnsWithDefault...); err != nil {
+		t.Fatal(err)
+	}
+
+	b.RecipeID = a.ID
+	c.RecipeID = a.ID
+
+	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+	if err = c.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+
+	check, err := a.RecipeBatches().All(ctx, tx)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	bFound, cFound := false, false
+	for _, v := range check {
+		if v.RecipeID == b.RecipeID {
+			bFound = true
+		}
+		if v.RecipeID == c.RecipeID {
+			cFound = true
+		}
+	}
+
+	if !bFound {
+		t.Error("expected to find b")
+	}
+	if !cFound {
+		t.Error("expected to find c")
+	}
+
+	slice := RecipeSlice{&a}
+	if err = a.L.LoadRecipeBatches(ctx, tx, false, (*[]*Recipe)(&slice), nil); err != nil {
+		t.Fatal(err)
+	}
+	if got := len(a.R.RecipeBatches); got != 2 {
+		t.Error("number of eager loaded records wrong, got:", got)
+	}
+
+	a.R.RecipeBatches = nil
+	if err = a.L.LoadRecipeBatches(ctx, tx, true, &a, nil); err != nil {
+		t.Fatal(err)
+	}
+	if got := len(a.R.RecipeBatches); got != 2 {
+		t.Error("number of eager loaded records wrong, got:", got)
+	}
+
+	if t.Failed() {
+		t.Logf("%#v", check)
+	}
+}
+
+func testRecipeToManyRecipeFragrances(t *testing.T) {
+	var err error
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
@@ -867,55 +761,76 @@ func testRecipeToOneSetOpRecipeFragranceUsingFragrance(t *testing.T) {
 	var b, c RecipeFragrance
 
 	seed := randomize.NewSeed()
-	if err = randomize.Struct(seed, &a, recipeDBTypes, false, strmangle.SetComplement(recipePrimaryKeyColumns, recipeColumnsWithoutDefault)...); err != nil {
-		t.Fatal(err)
-	}
-	if err = randomize.Struct(seed, &b, recipeFragranceDBTypes, false, strmangle.SetComplement(recipeFragrancePrimaryKeyColumns, recipeFragranceColumnsWithoutDefault)...); err != nil {
-		t.Fatal(err)
-	}
-	if err = randomize.Struct(seed, &c, recipeFragranceDBTypes, false, strmangle.SetComplement(recipeFragrancePrimaryKeyColumns, recipeFragranceColumnsWithoutDefault)...); err != nil {
-		t.Fatal(err)
+	if err = randomize.Struct(seed, &a, recipeDBTypes, true, recipeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Recipe struct: %s", err)
 	}
 
 	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
 		t.Fatal(err)
 	}
-	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
+
+	if err = randomize.Struct(seed, &b, recipeFragranceDBTypes, false, recipeFragranceColumnsWithDefault...); err != nil {
+		t.Fatal(err)
+	}
+	if err = randomize.Struct(seed, &c, recipeFragranceDBTypes, false, recipeFragranceColumnsWithDefault...); err != nil {
 		t.Fatal(err)
 	}
 
-	for i, x := range []*RecipeFragrance{&b, &c} {
-		err = a.SetFragrance(ctx, tx, i != 0, x)
-		if err != nil {
-			t.Fatal(err)
-		}
+	b.RecipeID = a.ID
+	c.RecipeID = a.ID
 
-		if a.R.Fragrance != x {
-			t.Error("relationship struct not set to correct value")
-		}
+	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+	if err = c.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
 
-		if x.R.FragranceRecipes[0] != &a {
-			t.Error("failed to append to foreign relationship struct")
-		}
-		if a.FragrancesID != x.ID {
-			t.Error("foreign key was wrong value", a.FragrancesID)
-		}
+	check, err := a.RecipeFragrances().All(ctx, tx)
+	if err != nil {
+		t.Fatal(err)
+	}
 
-		zero := reflect.Zero(reflect.TypeOf(a.FragrancesID))
-		reflect.Indirect(reflect.ValueOf(&a.FragrancesID)).Set(zero)
-
-		if err = a.Reload(ctx, tx); err != nil {
-			t.Fatal("failed to reload", err)
+	bFound, cFound := false, false
+	for _, v := range check {
+		if v.RecipeID == b.RecipeID {
+			bFound = true
 		}
-
-		if a.FragrancesID != x.ID {
-			t.Error("foreign key was wrong value", a.FragrancesID, x.ID)
+		if v.RecipeID == c.RecipeID {
+			cFound = true
 		}
 	}
-}
-func testRecipeToOneSetOpRecipeLipidUsingLipid(t *testing.T) {
-	var err error
 
+	if !bFound {
+		t.Error("expected to find b")
+	}
+	if !cFound {
+		t.Error("expected to find c")
+	}
+
+	slice := RecipeSlice{&a}
+	if err = a.L.LoadRecipeFragrances(ctx, tx, false, (*[]*Recipe)(&slice), nil); err != nil {
+		t.Fatal(err)
+	}
+	if got := len(a.R.RecipeFragrances); got != 2 {
+		t.Error("number of eager loaded records wrong, got:", got)
+	}
+
+	a.R.RecipeFragrances = nil
+	if err = a.L.LoadRecipeFragrances(ctx, tx, true, &a, nil); err != nil {
+		t.Fatal(err)
+	}
+	if got := len(a.R.RecipeFragrances); got != 2 {
+		t.Error("number of eager loaded records wrong, got:", got)
+	}
+
+	if t.Failed() {
+		t.Logf("%#v", check)
+	}
+}
+
+func testRecipeToManyRecipeLipids(t *testing.T) {
+	var err error
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
@@ -924,53 +839,75 @@ func testRecipeToOneSetOpRecipeLipidUsingLipid(t *testing.T) {
 	var b, c RecipeLipid
 
 	seed := randomize.NewSeed()
-	if err = randomize.Struct(seed, &a, recipeDBTypes, false, strmangle.SetComplement(recipePrimaryKeyColumns, recipeColumnsWithoutDefault)...); err != nil {
-		t.Fatal(err)
-	}
-	if err = randomize.Struct(seed, &b, recipeLipidDBTypes, false, strmangle.SetComplement(recipeLipidPrimaryKeyColumns, recipeLipidColumnsWithoutDefault)...); err != nil {
-		t.Fatal(err)
-	}
-	if err = randomize.Struct(seed, &c, recipeLipidDBTypes, false, strmangle.SetComplement(recipeLipidPrimaryKeyColumns, recipeLipidColumnsWithoutDefault)...); err != nil {
-		t.Fatal(err)
+	if err = randomize.Struct(seed, &a, recipeDBTypes, true, recipeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Recipe struct: %s", err)
 	}
 
 	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
 		t.Fatal(err)
 	}
-	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
+
+	if err = randomize.Struct(seed, &b, recipeLipidDBTypes, false, recipeLipidColumnsWithDefault...); err != nil {
+		t.Fatal(err)
+	}
+	if err = randomize.Struct(seed, &c, recipeLipidDBTypes, false, recipeLipidColumnsWithDefault...); err != nil {
 		t.Fatal(err)
 	}
 
-	for i, x := range []*RecipeLipid{&b, &c} {
-		err = a.SetLipid(ctx, tx, i != 0, x)
-		if err != nil {
-			t.Fatal(err)
-		}
+	b.RecipeID = a.ID
+	c.RecipeID = a.ID
 
-		if a.R.Lipid != x {
-			t.Error("relationship struct not set to correct value")
-		}
+	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+	if err = c.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
 
-		if x.R.LipidRecipes[0] != &a {
-			t.Error("failed to append to foreign relationship struct")
-		}
-		if a.LipidsID != x.ID {
-			t.Error("foreign key was wrong value", a.LipidsID)
-		}
+	check, err := a.RecipeLipids().All(ctx, tx)
+	if err != nil {
+		t.Fatal(err)
+	}
 
-		zero := reflect.Zero(reflect.TypeOf(a.LipidsID))
-		reflect.Indirect(reflect.ValueOf(&a.LipidsID)).Set(zero)
-
-		if err = a.Reload(ctx, tx); err != nil {
-			t.Fatal("failed to reload", err)
+	bFound, cFound := false, false
+	for _, v := range check {
+		if v.RecipeID == b.RecipeID {
+			bFound = true
 		}
-
-		if a.LipidsID != x.ID {
-			t.Error("foreign key was wrong value", a.LipidsID, x.ID)
+		if v.RecipeID == c.RecipeID {
+			cFound = true
 		}
 	}
+
+	if !bFound {
+		t.Error("expected to find b")
+	}
+	if !cFound {
+		t.Error("expected to find c")
+	}
+
+	slice := RecipeSlice{&a}
+	if err = a.L.LoadRecipeLipids(ctx, tx, false, (*[]*Recipe)(&slice), nil); err != nil {
+		t.Fatal(err)
+	}
+	if got := len(a.R.RecipeLipids); got != 2 {
+		t.Error("number of eager loaded records wrong, got:", got)
+	}
+
+	a.R.RecipeLipids = nil
+	if err = a.L.LoadRecipeLipids(ctx, tx, true, &a, nil); err != nil {
+		t.Fatal(err)
+	}
+	if got := len(a.R.RecipeLipids); got != 2 {
+		t.Error("number of eager loaded records wrong, got:", got)
+	}
+
+	if t.Failed() {
+		t.Logf("%#v", check)
+	}
 }
-func testRecipeToOneSetOpRecipeLyeUsingLye(t *testing.T) {
+
+func testRecipeToManyAddOpRecipeAdditives(t *testing.T) {
 	var err error
 
 	ctx := context.Background()
@@ -978,17 +915,17 @@ func testRecipeToOneSetOpRecipeLyeUsingLye(t *testing.T) {
 	defer func() { _ = tx.Rollback() }()
 
 	var a Recipe
-	var b, c RecipeLye
+	var b, c, d, e RecipeAdditive
 
 	seed := randomize.NewSeed()
 	if err = randomize.Struct(seed, &a, recipeDBTypes, false, strmangle.SetComplement(recipePrimaryKeyColumns, recipeColumnsWithoutDefault)...); err != nil {
 		t.Fatal(err)
 	}
-	if err = randomize.Struct(seed, &b, recipeLyeDBTypes, false, strmangle.SetComplement(recipeLyePrimaryKeyColumns, recipeLyeColumnsWithoutDefault)...); err != nil {
-		t.Fatal(err)
-	}
-	if err = randomize.Struct(seed, &c, recipeLyeDBTypes, false, strmangle.SetComplement(recipeLyePrimaryKeyColumns, recipeLyeColumnsWithoutDefault)...); err != nil {
-		t.Fatal(err)
+	foreigners := []*RecipeAdditive{&b, &c, &d, &e}
+	for _, x := range foreigners {
+		if err = randomize.Struct(seed, x, recipeAdditiveDBTypes, false, strmangle.SetComplement(recipeAdditivePrimaryKeyColumns, recipeAdditiveColumnsWithoutDefault)...); err != nil {
+			t.Fatal(err)
+		}
 	}
 
 	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
@@ -997,33 +934,276 @@ func testRecipeToOneSetOpRecipeLyeUsingLye(t *testing.T) {
 	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
 		t.Fatal(err)
 	}
+	if err = c.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
 
-	for i, x := range []*RecipeLye{&b, &c} {
-		err = a.SetLye(ctx, tx, i != 0, x)
+	foreignersSplitByInsertion := [][]*RecipeAdditive{
+		{&b, &c},
+		{&d, &e},
+	}
+
+	for i, x := range foreignersSplitByInsertion {
+		err = a.AddRecipeAdditives(ctx, tx, i != 0, x...)
 		if err != nil {
 			t.Fatal(err)
 		}
 
-		if a.R.Lye != x {
-			t.Error("relationship struct not set to correct value")
+		first := x[0]
+		second := x[1]
+
+		if a.ID != first.RecipeID {
+			t.Error("foreign key was wrong value", a.ID, first.RecipeID)
+		}
+		if a.ID != second.RecipeID {
+			t.Error("foreign key was wrong value", a.ID, second.RecipeID)
 		}
 
-		if x.R.LyeRecipes[0] != &a {
-			t.Error("failed to append to foreign relationship struct")
+		if first.R.Recipe != &a {
+			t.Error("relationship was not added properly to the foreign slice")
 		}
-		if a.LyeID != x.ID {
-			t.Error("foreign key was wrong value", a.LyeID)
-		}
-
-		zero := reflect.Zero(reflect.TypeOf(a.LyeID))
-		reflect.Indirect(reflect.ValueOf(&a.LyeID)).Set(zero)
-
-		if err = a.Reload(ctx, tx); err != nil {
-			t.Fatal("failed to reload", err)
+		if second.R.Recipe != &a {
+			t.Error("relationship was not added properly to the foreign slice")
 		}
 
-		if a.LyeID != x.ID {
-			t.Error("foreign key was wrong value", a.LyeID, x.ID)
+		if a.R.RecipeAdditives[i*2] != first {
+			t.Error("relationship struct slice not set to correct value")
+		}
+		if a.R.RecipeAdditives[i*2+1] != second {
+			t.Error("relationship struct slice not set to correct value")
+		}
+
+		count, err := a.RecipeAdditives().Count(ctx, tx)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if want := int64((i + 1) * 2); count != want {
+			t.Error("want", want, "got", count)
+		}
+	}
+}
+func testRecipeToManyAddOpRecipeBatches(t *testing.T) {
+	var err error
+
+	ctx := context.Background()
+	tx := MustTx(boil.BeginTx(ctx, nil))
+	defer func() { _ = tx.Rollback() }()
+
+	var a Recipe
+	var b, c, d, e RecipeBatch
+
+	seed := randomize.NewSeed()
+	if err = randomize.Struct(seed, &a, recipeDBTypes, false, strmangle.SetComplement(recipePrimaryKeyColumns, recipeColumnsWithoutDefault)...); err != nil {
+		t.Fatal(err)
+	}
+	foreigners := []*RecipeBatch{&b, &c, &d, &e}
+	for _, x := range foreigners {
+		if err = randomize.Struct(seed, x, recipeBatchDBTypes, false, strmangle.SetComplement(recipeBatchPrimaryKeyColumns, recipeBatchColumnsWithoutDefault)...); err != nil {
+			t.Fatal(err)
+		}
+	}
+
+	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+	if err = c.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+
+	foreignersSplitByInsertion := [][]*RecipeBatch{
+		{&b, &c},
+		{&d, &e},
+	}
+
+	for i, x := range foreignersSplitByInsertion {
+		err = a.AddRecipeBatches(ctx, tx, i != 0, x...)
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		first := x[0]
+		second := x[1]
+
+		if a.ID != first.RecipeID {
+			t.Error("foreign key was wrong value", a.ID, first.RecipeID)
+		}
+		if a.ID != second.RecipeID {
+			t.Error("foreign key was wrong value", a.ID, second.RecipeID)
+		}
+
+		if first.R.Recipe != &a {
+			t.Error("relationship was not added properly to the foreign slice")
+		}
+		if second.R.Recipe != &a {
+			t.Error("relationship was not added properly to the foreign slice")
+		}
+
+		if a.R.RecipeBatches[i*2] != first {
+			t.Error("relationship struct slice not set to correct value")
+		}
+		if a.R.RecipeBatches[i*2+1] != second {
+			t.Error("relationship struct slice not set to correct value")
+		}
+
+		count, err := a.RecipeBatches().Count(ctx, tx)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if want := int64((i + 1) * 2); count != want {
+			t.Error("want", want, "got", count)
+		}
+	}
+}
+func testRecipeToManyAddOpRecipeFragrances(t *testing.T) {
+	var err error
+
+	ctx := context.Background()
+	tx := MustTx(boil.BeginTx(ctx, nil))
+	defer func() { _ = tx.Rollback() }()
+
+	var a Recipe
+	var b, c, d, e RecipeFragrance
+
+	seed := randomize.NewSeed()
+	if err = randomize.Struct(seed, &a, recipeDBTypes, false, strmangle.SetComplement(recipePrimaryKeyColumns, recipeColumnsWithoutDefault)...); err != nil {
+		t.Fatal(err)
+	}
+	foreigners := []*RecipeFragrance{&b, &c, &d, &e}
+	for _, x := range foreigners {
+		if err = randomize.Struct(seed, x, recipeFragranceDBTypes, false, strmangle.SetComplement(recipeFragrancePrimaryKeyColumns, recipeFragranceColumnsWithoutDefault)...); err != nil {
+			t.Fatal(err)
+		}
+	}
+
+	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+	if err = c.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+
+	foreignersSplitByInsertion := [][]*RecipeFragrance{
+		{&b, &c},
+		{&d, &e},
+	}
+
+	for i, x := range foreignersSplitByInsertion {
+		err = a.AddRecipeFragrances(ctx, tx, i != 0, x...)
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		first := x[0]
+		second := x[1]
+
+		if a.ID != first.RecipeID {
+			t.Error("foreign key was wrong value", a.ID, first.RecipeID)
+		}
+		if a.ID != second.RecipeID {
+			t.Error("foreign key was wrong value", a.ID, second.RecipeID)
+		}
+
+		if first.R.Recipe != &a {
+			t.Error("relationship was not added properly to the foreign slice")
+		}
+		if second.R.Recipe != &a {
+			t.Error("relationship was not added properly to the foreign slice")
+		}
+
+		if a.R.RecipeFragrances[i*2] != first {
+			t.Error("relationship struct slice not set to correct value")
+		}
+		if a.R.RecipeFragrances[i*2+1] != second {
+			t.Error("relationship struct slice not set to correct value")
+		}
+
+		count, err := a.RecipeFragrances().Count(ctx, tx)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if want := int64((i + 1) * 2); count != want {
+			t.Error("want", want, "got", count)
+		}
+	}
+}
+func testRecipeToManyAddOpRecipeLipids(t *testing.T) {
+	var err error
+
+	ctx := context.Background()
+	tx := MustTx(boil.BeginTx(ctx, nil))
+	defer func() { _ = tx.Rollback() }()
+
+	var a Recipe
+	var b, c, d, e RecipeLipid
+
+	seed := randomize.NewSeed()
+	if err = randomize.Struct(seed, &a, recipeDBTypes, false, strmangle.SetComplement(recipePrimaryKeyColumns, recipeColumnsWithoutDefault)...); err != nil {
+		t.Fatal(err)
+	}
+	foreigners := []*RecipeLipid{&b, &c, &d, &e}
+	for _, x := range foreigners {
+		if err = randomize.Struct(seed, x, recipeLipidDBTypes, false, strmangle.SetComplement(recipeLipidPrimaryKeyColumns, recipeLipidColumnsWithoutDefault)...); err != nil {
+			t.Fatal(err)
+		}
+	}
+
+	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+	if err = c.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+
+	foreignersSplitByInsertion := [][]*RecipeLipid{
+		{&b, &c},
+		{&d, &e},
+	}
+
+	for i, x := range foreignersSplitByInsertion {
+		err = a.AddRecipeLipids(ctx, tx, i != 0, x...)
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		first := x[0]
+		second := x[1]
+
+		if a.ID != first.RecipeID {
+			t.Error("foreign key was wrong value", a.ID, first.RecipeID)
+		}
+		if a.ID != second.RecipeID {
+			t.Error("foreign key was wrong value", a.ID, second.RecipeID)
+		}
+
+		if first.R.Recipe != &a {
+			t.Error("relationship was not added properly to the foreign slice")
+		}
+		if second.R.Recipe != &a {
+			t.Error("relationship was not added properly to the foreign slice")
+		}
+
+		if a.R.RecipeLipids[i*2] != first {
+			t.Error("relationship struct slice not set to correct value")
+		}
+		if a.R.RecipeLipids[i*2+1] != second {
+			t.Error("relationship struct slice not set to correct value")
+		}
+
+		count, err := a.RecipeLipids().Count(ctx, tx)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if want := int64((i + 1) * 2); count != want {
+			t.Error("want", want, "got", count)
 		}
 	}
 }
@@ -1102,7 +1282,7 @@ func testRecipesSelect(t *testing.T) {
 }
 
 var (
-	recipeDBTypes = map[string]string{`CreatedAt`: `timestamp with time zone`, `UpdatedAt`: `timestamp with time zone`, `DeletedAt`: `timestamp with time zone`, `ID`: `character varying`, `Name`: `character varying`, `Lipidweight`: `double precision`, `Cost`: `double precision`, `Note`: `text`, `AdditivesID`: `character varying`, `FragrancesID`: `character varying`, `LipidsID`: `character varying`, `LyeID`: `character varying`}
+	recipeDBTypes = map[string]string{`ID`: `integer`, `CreatedAt`: `timestamp with time zone`, `UpdatedAt`: `timestamp with time zone`, `DeletedAt`: `timestamp with time zone`, `Name`: `character varying`, `Note`: `text`}
 	_             = bytes.MinRead
 )
 
