@@ -26,13 +26,23 @@ class InventoryModel(models.Model):
     weight = models.FloatField()
 
 
+class Supplier(BaseModel):
+
+    class Meta:
+        db_table = 'supplier'
+
+    name = models.CharField(max_length=100)
+    website = models.CharField(max_length=255)
+    note = models.TextField(blank=True)
+
+
 class Additive(BaseModel):
 
     class Meta:
         db_table = 'additive'
 
     name = models.CharField(max_length=100)
-#    note = models.TextField(blank=True)
+    note = models.TextField(blank=True)
 
 
 class AdditiveInventory(BaseModel, InventoryModel):
@@ -49,7 +59,6 @@ class Fragrance(BaseModel):
         db_table = 'fragrance'
 
     name = models.CharField(max_length=100)
-    grams_per_liter = models.FloatField()
     note = models.TextField(blank=True)
 
 
@@ -59,16 +68,6 @@ class FragranceInventory(BaseModel, InventoryModel):
         db_table = 'fragrance_inventory'
 
     fragrance = models.ForeignKey('Fragrance', on_delete=models.PROTECT)
-
-
-class Supplier(BaseModel):
-
-    class Meta:
-        db_table = 'supplier'
-
-    name = models.CharField(max_length=100)
-    website = models.CharField(max_length=255)
-    note = models.TextField(blank=True)
 
 
 class Lipid(BaseModel):
@@ -123,6 +122,7 @@ class LyeInventory(BaseModel, InventoryModel):
         db_table = 'lye_inventory'
 
     lye = models.ForeignKey('LyeInventory', on_delete=models.PROTECT)
+    concentration = models.FloatField()
 
 
 class Recipe(BaseModel):
@@ -130,14 +130,7 @@ class Recipe(BaseModel):
     class Meta:
         db_table = 'recipe'
 
-    id = models.CharField(primary_key=True, max_length=36, default=uuid.uuid1)
     name = models.CharField(max_length=100)
-    lye = models.ForeignKey('RecipeLye', on_delete=models.CASCADE)
-    additives = models.ForeignKey('RecipeAdditive', on_delete=models.CASCADE)
-    lipids = models.ForeignKey('RecipeLipid', on_delete=models.CASCADE)
-    lipidweight = models.FloatField()
-    fragrances = models.ForeignKey('RecipeFragrance', on_delete=models.CASCADE)
-    cost = models.FloatField()
     note = models.TextField(blank=True)
 
 
@@ -146,11 +139,9 @@ class RecipeAdditive(BaseModel):
     class Meta:
         db_table = 'recipe_additive'
 
-    id = models.CharField(primary_key=True, max_length=36, default=uuid.uuid1)
+    recipe = models.ForeignKey('Recipe', on_delete=models.PROTECT)
     additive = models.ForeignKey('Additive', on_delete=models.PROTECT)
     percentage = models.FloatField()
-    weight = models.FloatField()
-    cost = models.FloatField()
 
 
 class RecipeFragrance(BaseModel):
@@ -158,10 +149,9 @@ class RecipeFragrance(BaseModel):
     class Meta:
         db_table = 'recipe_fragrance'
 
-    id = models.CharField(primary_key=True, max_length=36, default=uuid.uuid1)
+    recipe = models.ForeignKey('Recipe', on_delete=models.PROTECT)
     fragrance = models.ForeignKey('Fragrance', on_delete=models.PROTECT)
     percentage = models.FloatField()
-    weight = models.FloatField()
 
 
 class RecipeLipid(BaseModel):
@@ -169,22 +159,63 @@ class RecipeLipid(BaseModel):
     class Meta:
         db_table = 'recipe_lipid'
 
-    id = models.CharField(primary_key=True, max_length=36, default=uuid.uuid1)
+    recipe = models.ForeignKey('Recipe', on_delete=models.PROTECT)
     lipid = models.ForeignKey('Lipid', on_delete=models.PROTECT)
     percentage = models.FloatField()
-    weight = models.FloatField()
-    cost = models.FloatField()
 
 
-class RecipeLye(BaseModel):
+class RecipeBatch(BaseModel):
 
     class Meta:
-        db_table = 'recipe_lye'
+        db_table = 'recipe_batch'
 
-    id = models.CharField(primary_key=True, max_length=36, default=uuid.uuid1)
+    recipe = models.ForeignKey('Recipe', on_delete=models.PROTECT)
+    batch_id = models.CharField(max_length=16)
+    production_date = models.DateTimeField()
+    cured_produced = models.DateTimeField()
+    note = models.TextField(blank=True)
+
+    lipid_weight = models.FloatField()
+    production_weight = models.FloatField()
+    cured_weight = models.FloatField()
+
+
+class RecipeBatchLye(BaseModel):
+
+    class Meta:
+        db_table = 'recipe_batch_lye'
+
     lye = models.ForeignKey('Lye', on_delete=models.PROTECT)
     weight = models.FloatField()
-    concentration = models.FloatField()
     discount = models.FloatField()
     cost = models.FloatField()
 
+
+class RecipeBatchAdditive(BaseModel):
+
+    class Meta:
+        db_table = 'recipe_batch_additive'
+
+    additive = models.ForeignKey('Additive', on_delete=models.PROTECT)
+    weight = models.FloatField()
+    cost = models.FloatField()
+
+
+class RecipeBatchFragrance(BaseModel):
+
+    class Meta:
+        db_table = 'recipe_batch_fragrance'
+
+    fragrance = models.ForeignKey('Fragrance', on_delete=models.PROTECT)
+    weight = models.FloatField()
+    cost = models.FloatField()
+
+
+class RecipeBatchLipid(BaseModel):
+
+    class Meta:
+        db_table = 'recipe_batch_lipid'
+
+    lipid = models.ForeignKey('Lipid', on_delete=models.PROTECT)
+    weight = models.FloatField()
+    cost = models.FloatField()

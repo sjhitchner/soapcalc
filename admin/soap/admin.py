@@ -7,11 +7,16 @@ from .models import (
     Lipid,
     LipidInventory,
     Lye,
+    LyeInventory,
     Recipe,
     RecipeAdditive,
     RecipeFragrance,
     RecipeLipid,
-    RecipeLye,
+    RecipeBatch,
+    RecipeBatchAdditive,
+    RecipeBatchFragrance,
+    RecipeBatchLipid,
+    RecipeBatchLye,
 )
 
 
@@ -51,6 +56,21 @@ class RecipeLipidAdmin(admin.ModelAdmin):
 class RecipeLyeAdmin(admin.ModelAdmin):
     pass
 
+class RecipeBatchAdmin(admin.ModelAdmin):
+    pass
+
+class RecipeBatchAdditiveAdmin(admin.ModelAdmin):
+    pass
+
+class RecipeBatchFragranceAdmin(admin.ModelAdmin):
+    pass
+
+class RecipeBatchLipidAdmin(admin.ModelAdmin):
+    pass
+
+class RecipeBatchLyeAdmin(admin.ModelAdmin):
+    pass
+
 
 admin.site.register(Additive, AdditiveAdmin)
 admin.site.register(Fragrance, FragranceAdmin)
@@ -63,4 +83,9 @@ admin.site.register(Recipe, RecipeAdmin)
 admin.site.register(RecipeAdditive, RecipeAdditiveAdmin)
 admin.site.register(RecipeFragrance, RecipeFragranceAdmin)
 admin.site.register(RecipeLipid, RecipeLipidAdmin)
-admin.site.register(RecipeLye, RecipeLyeAdmin)
+admin.site.register(RecipeBatch, RecipeBatchAdmin)
+admin.site.register(RecipeBatchAdditive, RecipeBatchAdditiveAdmin)
+admin.site.register(RecipeBatchFragrance, RecipeBatchFragranceAdmin)
+admin.site.register(RecipeBatchLipid, RecipeBatchLipidAdmin)
+admin.site.register(RecipeBatchLye, RecipeBatchLyeAdmin)
+
