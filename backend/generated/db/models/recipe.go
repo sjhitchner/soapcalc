@@ -22,8 +22,8 @@ import (
 	"github.com/volatiletech/strmangle"
 )
 
-// SoapRecipe is an object representing the database table.
-type SoapRecipe struct {
+// Recipe is an object representing the database table.
+type Recipe struct {
 	CreatedAt    time.Time `boil:"created_at" json:"created_at" toml:"created_at" yaml:"created_at"`
 	UpdatedAt    time.Time `boil:"updated_at" json:"updated_at" toml:"updated_at" yaml:"updated_at"`
 	DeletedAt    null.Time `boil:"deleted_at" json:"deleted_at,omitempty" toml:"deleted_at" yaml:"deleted_at,omitempty"`
@@ -37,11 +37,11 @@ type SoapRecipe struct {
 	LipidsID     string    `boil:"lipids_id" json:"lipids_id" toml:"lipids_id" yaml:"lipids_id"`
 	LyeID        string    `boil:"lye_id" json:"lye_id" toml:"lye_id" yaml:"lye_id"`
 
-	R *soapRecipeR `boil:"-" json:"-" toml:"-" yaml:"-"`
-	L soapRecipeL  `boil:"-" json:"-" toml:"-" yaml:"-"`
+	R *recipeR `boil:"-" json:"-" toml:"-" yaml:"-"`
+	L recipeL  `boil:"-" json:"-" toml:"-" yaml:"-"`
 }
 
-var SoapRecipeColumns = struct {
+var RecipeColumns = struct {
 	CreatedAt    string
 	UpdatedAt    string
 	DeletedAt    string
@@ -71,7 +71,7 @@ var SoapRecipeColumns = struct {
 
 // Generated where
 
-var SoapRecipeWhere = struct {
+var RecipeWhere = struct {
 	CreatedAt    whereHelpertime_Time
 	UpdatedAt    whereHelpertime_Time
 	DeletedAt    whereHelpernull_Time
@@ -85,22 +85,22 @@ var SoapRecipeWhere = struct {
 	LipidsID     whereHelperstring
 	LyeID        whereHelperstring
 }{
-	CreatedAt:    whereHelpertime_Time{field: "\"soap_recipe\".\"created_at\""},
-	UpdatedAt:    whereHelpertime_Time{field: "\"soap_recipe\".\"updated_at\""},
-	DeletedAt:    whereHelpernull_Time{field: "\"soap_recipe\".\"deleted_at\""},
-	ID:           whereHelperstring{field: "\"soap_recipe\".\"id\""},
-	Name:         whereHelperstring{field: "\"soap_recipe\".\"name\""},
-	Lipidweight:  whereHelperfloat64{field: "\"soap_recipe\".\"lipidweight\""},
-	Cost:         whereHelperfloat64{field: "\"soap_recipe\".\"cost\""},
-	Note:         whereHelperstring{field: "\"soap_recipe\".\"note\""},
-	AdditivesID:  whereHelperstring{field: "\"soap_recipe\".\"additives_id\""},
-	FragrancesID: whereHelperstring{field: "\"soap_recipe\".\"fragrances_id\""},
-	LipidsID:     whereHelperstring{field: "\"soap_recipe\".\"lipids_id\""},
-	LyeID:        whereHelperstring{field: "\"soap_recipe\".\"lye_id\""},
+	CreatedAt:    whereHelpertime_Time{field: "\"recipe\".\"created_at\""},
+	UpdatedAt:    whereHelpertime_Time{field: "\"recipe\".\"updated_at\""},
+	DeletedAt:    whereHelpernull_Time{field: "\"recipe\".\"deleted_at\""},
+	ID:           whereHelperstring{field: "\"recipe\".\"id\""},
+	Name:         whereHelperstring{field: "\"recipe\".\"name\""},
+	Lipidweight:  whereHelperfloat64{field: "\"recipe\".\"lipidweight\""},
+	Cost:         whereHelperfloat64{field: "\"recipe\".\"cost\""},
+	Note:         whereHelperstring{field: "\"recipe\".\"note\""},
+	AdditivesID:  whereHelperstring{field: "\"recipe\".\"additives_id\""},
+	FragrancesID: whereHelperstring{field: "\"recipe\".\"fragrances_id\""},
+	LipidsID:     whereHelperstring{field: "\"recipe\".\"lipids_id\""},
+	LyeID:        whereHelperstring{field: "\"recipe\".\"lye_id\""},
 }
 
-// SoapRecipeRels is where relationship names are stored.
-var SoapRecipeRels = struct {
+// RecipeRels is where relationship names are stored.
+var RecipeRels = struct {
 	Additive  string
 	Fragrance string
 	Lipid     string
@@ -112,52 +112,52 @@ var SoapRecipeRels = struct {
 	Lye:       "Lye",
 }
 
-// soapRecipeR is where relationships are stored.
-type soapRecipeR struct {
-	Additive  *SoapRecipeadditive  `boil:"Additive" json:"Additive" toml:"Additive" yaml:"Additive"`
-	Fragrance *SoapRecipefragrance `boil:"Fragrance" json:"Fragrance" toml:"Fragrance" yaml:"Fragrance"`
-	Lipid     *SoapRecipelipid     `boil:"Lipid" json:"Lipid" toml:"Lipid" yaml:"Lipid"`
-	Lye       *SoapRecipelye       `boil:"Lye" json:"Lye" toml:"Lye" yaml:"Lye"`
+// recipeR is where relationships are stored.
+type recipeR struct {
+	Additive  *RecipeAdditive  `boil:"Additive" json:"Additive" toml:"Additive" yaml:"Additive"`
+	Fragrance *RecipeFragrance `boil:"Fragrance" json:"Fragrance" toml:"Fragrance" yaml:"Fragrance"`
+	Lipid     *RecipeLipid     `boil:"Lipid" json:"Lipid" toml:"Lipid" yaml:"Lipid"`
+	Lye       *RecipeLye       `boil:"Lye" json:"Lye" toml:"Lye" yaml:"Lye"`
 }
 
 // NewStruct creates a new relationship struct
-func (*soapRecipeR) NewStruct() *soapRecipeR {
-	return &soapRecipeR{}
+func (*recipeR) NewStruct() *recipeR {
+	return &recipeR{}
 }
 
-// soapRecipeL is where Load methods for each relationship are stored.
-type soapRecipeL struct{}
+// recipeL is where Load methods for each relationship are stored.
+type recipeL struct{}
 
 var (
-	soapRecipeAllColumns            = []string{"created_at", "updated_at", "deleted_at", "id", "name", "lipidweight", "cost", "note", "additives_id", "fragrances_id", "lipids_id", "lye_id"}
-	soapRecipeColumnsWithoutDefault = []string{"created_at", "updated_at", "deleted_at", "id", "name", "lipidweight", "cost", "note", "additives_id", "fragrances_id", "lipids_id", "lye_id"}
-	soapRecipeColumnsWithDefault    = []string{}
-	soapRecipePrimaryKeyColumns     = []string{"id"}
+	recipeAllColumns            = []string{"created_at", "updated_at", "deleted_at", "id", "name", "lipidweight", "cost", "note", "additives_id", "fragrances_id", "lipids_id", "lye_id"}
+	recipeColumnsWithoutDefault = []string{"created_at", "updated_at", "deleted_at", "id", "name", "lipidweight", "cost", "note", "additives_id", "fragrances_id", "lipids_id", "lye_id"}
+	recipeColumnsWithDefault    = []string{}
+	recipePrimaryKeyColumns     = []string{"id"}
 )
 
 type (
-	// SoapRecipeSlice is an alias for a slice of pointers to SoapRecipe.
-	// This should generally be used opposed to []SoapRecipe.
-	SoapRecipeSlice []*SoapRecipe
-	// SoapRecipeHook is the signature for custom SoapRecipe hook methods
-	SoapRecipeHook func(context.Context, boil.ContextExecutor, *SoapRecipe) error
+	// RecipeSlice is an alias for a slice of pointers to Recipe.
+	// This should generally be used opposed to []Recipe.
+	RecipeSlice []*Recipe
+	// RecipeHook is the signature for custom Recipe hook methods
+	RecipeHook func(context.Context, boil.ContextExecutor, *Recipe) error
 
-	soapRecipeQuery struct {
+	recipeQuery struct {
 		*queries.Query
 	}
 )
 
 // Cache for insert, update and upsert
 var (
-	soapRecipeType                 = reflect.TypeOf(&SoapRecipe{})
-	soapRecipeMapping              = queries.MakeStructMapping(soapRecipeType)
-	soapRecipePrimaryKeyMapping, _ = queries.BindMapping(soapRecipeType, soapRecipeMapping, soapRecipePrimaryKeyColumns)
-	soapRecipeInsertCacheMut       sync.RWMutex
-	soapRecipeInsertCache          = make(map[string]insertCache)
-	soapRecipeUpdateCacheMut       sync.RWMutex
-	soapRecipeUpdateCache          = make(map[string]updateCache)
-	soapRecipeUpsertCacheMut       sync.RWMutex
-	soapRecipeUpsertCache          = make(map[string]insertCache)
+	recipeType                 = reflect.TypeOf(&Recipe{})
+	recipeMapping              = queries.MakeStructMapping(recipeType)
+	recipePrimaryKeyMapping, _ = queries.BindMapping(recipeType, recipeMapping, recipePrimaryKeyColumns)
+	recipeInsertCacheMut       sync.RWMutex
+	recipeInsertCache          = make(map[string]insertCache)
+	recipeUpdateCacheMut       sync.RWMutex
+	recipeUpdateCache          = make(map[string]updateCache)
+	recipeUpsertCacheMut       sync.RWMutex
+	recipeUpsertCache          = make(map[string]insertCache)
 )
 
 var (
@@ -168,24 +168,24 @@ var (
 	_ = qmhelper.Where
 )
 
-var soapRecipeBeforeInsertHooks []SoapRecipeHook
-var soapRecipeBeforeUpdateHooks []SoapRecipeHook
-var soapRecipeBeforeDeleteHooks []SoapRecipeHook
-var soapRecipeBeforeUpsertHooks []SoapRecipeHook
+var recipeBeforeInsertHooks []RecipeHook
+var recipeBeforeUpdateHooks []RecipeHook
+var recipeBeforeDeleteHooks []RecipeHook
+var recipeBeforeUpsertHooks []RecipeHook
 
-var soapRecipeAfterInsertHooks []SoapRecipeHook
-var soapRecipeAfterSelectHooks []SoapRecipeHook
-var soapRecipeAfterUpdateHooks []SoapRecipeHook
-var soapRecipeAfterDeleteHooks []SoapRecipeHook
-var soapRecipeAfterUpsertHooks []SoapRecipeHook
+var recipeAfterInsertHooks []RecipeHook
+var recipeAfterSelectHooks []RecipeHook
+var recipeAfterUpdateHooks []RecipeHook
+var recipeAfterDeleteHooks []RecipeHook
+var recipeAfterUpsertHooks []RecipeHook
 
 // doBeforeInsertHooks executes all "before insert" hooks.
-func (o *SoapRecipe) doBeforeInsertHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Recipe) doBeforeInsertHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range soapRecipeBeforeInsertHooks {
+	for _, hook := range recipeBeforeInsertHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -195,12 +195,12 @@ func (o *SoapRecipe) doBeforeInsertHooks(ctx context.Context, exec boil.ContextE
 }
 
 // doBeforeUpdateHooks executes all "before Update" hooks.
-func (o *SoapRecipe) doBeforeUpdateHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Recipe) doBeforeUpdateHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range soapRecipeBeforeUpdateHooks {
+	for _, hook := range recipeBeforeUpdateHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -210,12 +210,12 @@ func (o *SoapRecipe) doBeforeUpdateHooks(ctx context.Context, exec boil.ContextE
 }
 
 // doBeforeDeleteHooks executes all "before Delete" hooks.
-func (o *SoapRecipe) doBeforeDeleteHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Recipe) doBeforeDeleteHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range soapRecipeBeforeDeleteHooks {
+	for _, hook := range recipeBeforeDeleteHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -225,12 +225,12 @@ func (o *SoapRecipe) doBeforeDeleteHooks(ctx context.Context, exec boil.ContextE
 }
 
 // doBeforeUpsertHooks executes all "before Upsert" hooks.
-func (o *SoapRecipe) doBeforeUpsertHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Recipe) doBeforeUpsertHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range soapRecipeBeforeUpsertHooks {
+	for _, hook := range recipeBeforeUpsertHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -240,12 +240,12 @@ func (o *SoapRecipe) doBeforeUpsertHooks(ctx context.Context, exec boil.ContextE
 }
 
 // doAfterInsertHooks executes all "after Insert" hooks.
-func (o *SoapRecipe) doAfterInsertHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Recipe) doAfterInsertHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range soapRecipeAfterInsertHooks {
+	for _, hook := range recipeAfterInsertHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -255,12 +255,12 @@ func (o *SoapRecipe) doAfterInsertHooks(ctx context.Context, exec boil.ContextEx
 }
 
 // doAfterSelectHooks executes all "after Select" hooks.
-func (o *SoapRecipe) doAfterSelectHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Recipe) doAfterSelectHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range soapRecipeAfterSelectHooks {
+	for _, hook := range recipeAfterSelectHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -270,12 +270,12 @@ func (o *SoapRecipe) doAfterSelectHooks(ctx context.Context, exec boil.ContextEx
 }
 
 // doAfterUpdateHooks executes all "after Update" hooks.
-func (o *SoapRecipe) doAfterUpdateHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Recipe) doAfterUpdateHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range soapRecipeAfterUpdateHooks {
+	for _, hook := range recipeAfterUpdateHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -285,12 +285,12 @@ func (o *SoapRecipe) doAfterUpdateHooks(ctx context.Context, exec boil.ContextEx
 }
 
 // doAfterDeleteHooks executes all "after Delete" hooks.
-func (o *SoapRecipe) doAfterDeleteHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Recipe) doAfterDeleteHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range soapRecipeAfterDeleteHooks {
+	for _, hook := range recipeAfterDeleteHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -300,12 +300,12 @@ func (o *SoapRecipe) doAfterDeleteHooks(ctx context.Context, exec boil.ContextEx
 }
 
 // doAfterUpsertHooks executes all "after Upsert" hooks.
-func (o *SoapRecipe) doAfterUpsertHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Recipe) doAfterUpsertHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range soapRecipeAfterUpsertHooks {
+	for _, hook := range recipeAfterUpsertHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -314,33 +314,33 @@ func (o *SoapRecipe) doAfterUpsertHooks(ctx context.Context, exec boil.ContextEx
 	return nil
 }
 
-// AddSoapRecipeHook registers your hook function for all future operations.
-func AddSoapRecipeHook(hookPoint boil.HookPoint, soapRecipeHook SoapRecipeHook) {
+// AddRecipeHook registers your hook function for all future operations.
+func AddRecipeHook(hookPoint boil.HookPoint, recipeHook RecipeHook) {
 	switch hookPoint {
 	case boil.BeforeInsertHook:
-		soapRecipeBeforeInsertHooks = append(soapRecipeBeforeInsertHooks, soapRecipeHook)
+		recipeBeforeInsertHooks = append(recipeBeforeInsertHooks, recipeHook)
 	case boil.BeforeUpdateHook:
-		soapRecipeBeforeUpdateHooks = append(soapRecipeBeforeUpdateHooks, soapRecipeHook)
+		recipeBeforeUpdateHooks = append(recipeBeforeUpdateHooks, recipeHook)
 	case boil.BeforeDeleteHook:
-		soapRecipeBeforeDeleteHooks = append(soapRecipeBeforeDeleteHooks, soapRecipeHook)
+		recipeBeforeDeleteHooks = append(recipeBeforeDeleteHooks, recipeHook)
 	case boil.BeforeUpsertHook:
-		soapRecipeBeforeUpsertHooks = append(soapRecipeBeforeUpsertHooks, soapRecipeHook)
+		recipeBeforeUpsertHooks = append(recipeBeforeUpsertHooks, recipeHook)
 	case boil.AfterInsertHook:
-		soapRecipeAfterInsertHooks = append(soapRecipeAfterInsertHooks, soapRecipeHook)
+		recipeAfterInsertHooks = append(recipeAfterInsertHooks, recipeHook)
 	case boil.AfterSelectHook:
-		soapRecipeAfterSelectHooks = append(soapRecipeAfterSelectHooks, soapRecipeHook)
+		recipeAfterSelectHooks = append(recipeAfterSelectHooks, recipeHook)
 	case boil.AfterUpdateHook:
-		soapRecipeAfterUpdateHooks = append(soapRecipeAfterUpdateHooks, soapRecipeHook)
+		recipeAfterUpdateHooks = append(recipeAfterUpdateHooks, recipeHook)
 	case boil.AfterDeleteHook:
-		soapRecipeAfterDeleteHooks = append(soapRecipeAfterDeleteHooks, soapRecipeHook)
+		recipeAfterDeleteHooks = append(recipeAfterDeleteHooks, recipeHook)
 	case boil.AfterUpsertHook:
-		soapRecipeAfterUpsertHooks = append(soapRecipeAfterUpsertHooks, soapRecipeHook)
+		recipeAfterUpsertHooks = append(recipeAfterUpsertHooks, recipeHook)
 	}
 }
 
-// One returns a single soapRecipe record from the query.
-func (q soapRecipeQuery) One(ctx context.Context, exec boil.ContextExecutor) (*SoapRecipe, error) {
-	o := &SoapRecipe{}
+// One returns a single recipe record from the query.
+func (q recipeQuery) One(ctx context.Context, exec boil.ContextExecutor) (*Recipe, error) {
+	o := &Recipe{}
 
 	queries.SetLimit(q.Query, 1)
 
@@ -349,7 +349,7 @@ func (q soapRecipeQuery) One(ctx context.Context, exec boil.ContextExecutor) (*S
 		if errors.Cause(err) == sql.ErrNoRows {
 			return nil, sql.ErrNoRows
 		}
-		return nil, errors.Wrap(err, "models: failed to execute a one query for soap_recipe")
+		return nil, errors.Wrap(err, "models: failed to execute a one query for recipe")
 	}
 
 	if err := o.doAfterSelectHooks(ctx, exec); err != nil {
@@ -359,16 +359,16 @@ func (q soapRecipeQuery) One(ctx context.Context, exec boil.ContextExecutor) (*S
 	return o, nil
 }
 
-// All returns all SoapRecipe records from the query.
-func (q soapRecipeQuery) All(ctx context.Context, exec boil.ContextExecutor) (SoapRecipeSlice, error) {
-	var o []*SoapRecipe
+// All returns all Recipe records from the query.
+func (q recipeQuery) All(ctx context.Context, exec boil.ContextExecutor) (RecipeSlice, error) {
+	var o []*Recipe
 
 	err := q.Bind(ctx, exec, &o)
 	if err != nil {
-		return nil, errors.Wrap(err, "models: failed to assign all query results to SoapRecipe slice")
+		return nil, errors.Wrap(err, "models: failed to assign all query results to Recipe slice")
 	}
 
-	if len(soapRecipeAfterSelectHooks) != 0 {
+	if len(recipeAfterSelectHooks) != 0 {
 		for _, obj := range o {
 			if err := obj.doAfterSelectHooks(ctx, exec); err != nil {
 				return o, err
@@ -379,8 +379,8 @@ func (q soapRecipeQuery) All(ctx context.Context, exec boil.ContextExecutor) (So
 	return o, nil
 }
 
-// Count returns the count of all SoapRecipe records in the query.
-func (q soapRecipeQuery) Count(ctx context.Context, exec boil.ContextExecutor) (int64, error) {
+// Count returns the count of all Recipe records in the query.
+func (q recipeQuery) Count(ctx context.Context, exec boil.ContextExecutor) (int64, error) {
 	var count int64
 
 	queries.SetSelect(q.Query, nil)
@@ -388,14 +388,14 @@ func (q soapRecipeQuery) Count(ctx context.Context, exec boil.ContextExecutor) (
 
 	err := q.Query.QueryRowContext(ctx, exec).Scan(&count)
 	if err != nil {
-		return 0, errors.Wrap(err, "models: failed to count soap_recipe rows")
+		return 0, errors.Wrap(err, "models: failed to count recipe rows")
 	}
 
 	return count, nil
 }
 
 // Exists checks if the row exists in the table.
-func (q soapRecipeQuery) Exists(ctx context.Context, exec boil.ContextExecutor) (bool, error) {
+func (q recipeQuery) Exists(ctx context.Context, exec boil.ContextExecutor) (bool, error) {
 	var count int64
 
 	queries.SetSelect(q.Query, nil)
@@ -404,14 +404,14 @@ func (q soapRecipeQuery) Exists(ctx context.Context, exec boil.ContextExecutor) 
 
 	err := q.Query.QueryRowContext(ctx, exec).Scan(&count)
 	if err != nil {
-		return false, errors.Wrap(err, "models: failed to check if soap_recipe exists")
+		return false, errors.Wrap(err, "models: failed to check if recipe exists")
 	}
 
 	return count > 0, nil
 }
 
 // Additive pointed to by the foreign key.
-func (o *SoapRecipe) Additive(mods ...qm.QueryMod) soapRecipeadditiveQuery {
+func (o *Recipe) Additive(mods ...qm.QueryMod) recipeAdditiveQuery {
 	queryMods := []qm.QueryMod{
 		qm.Where("\"id\" = ?", o.AdditivesID),
 		qmhelper.WhereIsNull("deleted_at"),
@@ -419,14 +419,14 @@ func (o *SoapRecipe) Additive(mods ...qm.QueryMod) soapRecipeadditiveQuery {
 
 	queryMods = append(queryMods, mods...)
 
-	query := SoapRecipeadditives(queryMods...)
-	queries.SetFrom(query.Query, "\"soap_recipeadditive\"")
+	query := RecipeAdditives(queryMods...)
+	queries.SetFrom(query.Query, "\"recipe_additive\"")
 
 	return query
 }
 
 // Fragrance pointed to by the foreign key.
-func (o *SoapRecipe) Fragrance(mods ...qm.QueryMod) soapRecipefragranceQuery {
+func (o *Recipe) Fragrance(mods ...qm.QueryMod) recipeFragranceQuery {
 	queryMods := []qm.QueryMod{
 		qm.Where("\"id\" = ?", o.FragrancesID),
 		qmhelper.WhereIsNull("deleted_at"),
@@ -434,14 +434,14 @@ func (o *SoapRecipe) Fragrance(mods ...qm.QueryMod) soapRecipefragranceQuery {
 
 	queryMods = append(queryMods, mods...)
 
-	query := SoapRecipefragrances(queryMods...)
-	queries.SetFrom(query.Query, "\"soap_recipefragrance\"")
+	query := RecipeFragrances(queryMods...)
+	queries.SetFrom(query.Query, "\"recipe_fragrance\"")
 
 	return query
 }
 
 // Lipid pointed to by the foreign key.
-func (o *SoapRecipe) Lipid(mods ...qm.QueryMod) soapRecipelipidQuery {
+func (o *Recipe) Lipid(mods ...qm.QueryMod) recipeLipidQuery {
 	queryMods := []qm.QueryMod{
 		qm.Where("\"id\" = ?", o.LipidsID),
 		qmhelper.WhereIsNull("deleted_at"),
@@ -449,14 +449,14 @@ func (o *SoapRecipe) Lipid(mods ...qm.QueryMod) soapRecipelipidQuery {
 
 	queryMods = append(queryMods, mods...)
 
-	query := SoapRecipelipids(queryMods...)
-	queries.SetFrom(query.Query, "\"soap_recipelipid\"")
+	query := RecipeLipids(queryMods...)
+	queries.SetFrom(query.Query, "\"recipe_lipid\"")
 
 	return query
 }
 
 // Lye pointed to by the foreign key.
-func (o *SoapRecipe) Lye(mods ...qm.QueryMod) soapRecipelyeQuery {
+func (o *Recipe) Lye(mods ...qm.QueryMod) recipeLyeQuery {
 	queryMods := []qm.QueryMod{
 		qm.Where("\"id\" = ?", o.LyeID),
 		qmhelper.WhereIsNull("deleted_at"),
@@ -464,28 +464,28 @@ func (o *SoapRecipe) Lye(mods ...qm.QueryMod) soapRecipelyeQuery {
 
 	queryMods = append(queryMods, mods...)
 
-	query := SoapRecipelyes(queryMods...)
-	queries.SetFrom(query.Query, "\"soap_recipelye\"")
+	query := RecipeLyes(queryMods...)
+	queries.SetFrom(query.Query, "\"recipe_lye\"")
 
 	return query
 }
 
 // LoadAdditive allows an eager lookup of values, cached into the
 // loaded structs of the objects. This is for an N-1 relationship.
-func (soapRecipeL) LoadAdditive(ctx context.Context, e boil.ContextExecutor, singular bool, maybeSoapRecipe interface{}, mods queries.Applicator) error {
-	var slice []*SoapRecipe
-	var object *SoapRecipe
+func (recipeL) LoadAdditive(ctx context.Context, e boil.ContextExecutor, singular bool, maybeRecipe interface{}, mods queries.Applicator) error {
+	var slice []*Recipe
+	var object *Recipe
 
 	if singular {
-		object = maybeSoapRecipe.(*SoapRecipe)
+		object = maybeRecipe.(*Recipe)
 	} else {
-		slice = *maybeSoapRecipe.(*[]*SoapRecipe)
+		slice = *maybeRecipe.(*[]*Recipe)
 	}
 
 	args := make([]interface{}, 0, 1)
 	if singular {
 		if object.R == nil {
-			object.R = &soapRecipeR{}
+			object.R = &recipeR{}
 		}
 		args = append(args, object.AdditivesID)
 
@@ -493,7 +493,7 @@ func (soapRecipeL) LoadAdditive(ctx context.Context, e boil.ContextExecutor, sin
 	Outer:
 		for _, obj := range slice {
 			if obj.R == nil {
-				obj.R = &soapRecipeR{}
+				obj.R = &recipeR{}
 			}
 
 			for _, a := range args {
@@ -512,9 +512,9 @@ func (soapRecipeL) LoadAdditive(ctx context.Context, e boil.ContextExecutor, sin
 	}
 
 	query := NewQuery(
-		qm.From(`soap_recipeadditive`),
-		qm.WhereIn(`soap_recipeadditive.id in ?`, args...),
-		qmhelper.WhereIsNull(`soap_recipeadditive.deleted_at`),
+		qm.From(`recipe_additive`),
+		qm.WhereIn(`recipe_additive.id in ?`, args...),
+		qmhelper.WhereIsNull(`recipe_additive.deleted_at`),
 	)
 	if mods != nil {
 		mods.Apply(query)
@@ -522,22 +522,22 @@ func (soapRecipeL) LoadAdditive(ctx context.Context, e boil.ContextExecutor, sin
 
 	results, err := query.QueryContext(ctx, e)
 	if err != nil {
-		return errors.Wrap(err, "failed to eager load SoapRecipeadditive")
+		return errors.Wrap(err, "failed to eager load RecipeAdditive")
 	}
 
-	var resultSlice []*SoapRecipeadditive
+	var resultSlice []*RecipeAdditive
 	if err = queries.Bind(results, &resultSlice); err != nil {
-		return errors.Wrap(err, "failed to bind eager loaded slice SoapRecipeadditive")
+		return errors.Wrap(err, "failed to bind eager loaded slice RecipeAdditive")
 	}
 
 	if err = results.Close(); err != nil {
-		return errors.Wrap(err, "failed to close results of eager load for soap_recipeadditive")
+		return errors.Wrap(err, "failed to close results of eager load for recipe_additive")
 	}
 	if err = results.Err(); err != nil {
-		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for soap_recipeadditive")
+		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for recipe_additive")
 	}
 
-	if len(soapRecipeAfterSelectHooks) != 0 {
+	if len(recipeAfterSelectHooks) != 0 {
 		for _, obj := range resultSlice {
 			if err := obj.doAfterSelectHooks(ctx, e); err != nil {
 				return err
@@ -569,20 +569,20 @@ func (soapRecipeL) LoadAdditive(ctx context.Context, e boil.ContextExecutor, sin
 
 // LoadFragrance allows an eager lookup of values, cached into the
 // loaded structs of the objects. This is for an N-1 relationship.
-func (soapRecipeL) LoadFragrance(ctx context.Context, e boil.ContextExecutor, singular bool, maybeSoapRecipe interface{}, mods queries.Applicator) error {
-	var slice []*SoapRecipe
-	var object *SoapRecipe
+func (recipeL) LoadFragrance(ctx context.Context, e boil.ContextExecutor, singular bool, maybeRecipe interface{}, mods queries.Applicator) error {
+	var slice []*Recipe
+	var object *Recipe
 
 	if singular {
-		object = maybeSoapRecipe.(*SoapRecipe)
+		object = maybeRecipe.(*Recipe)
 	} else {
-		slice = *maybeSoapRecipe.(*[]*SoapRecipe)
+		slice = *maybeRecipe.(*[]*Recipe)
 	}
 
 	args := make([]interface{}, 0, 1)
 	if singular {
 		if object.R == nil {
-			object.R = &soapRecipeR{}
+			object.R = &recipeR{}
 		}
 		args = append(args, object.FragrancesID)
 
@@ -590,7 +590,7 @@ func (soapRecipeL) LoadFragrance(ctx context.Context, e boil.ContextExecutor, si
 	Outer:
 		for _, obj := range slice {
 			if obj.R == nil {
-				obj.R = &soapRecipeR{}
+				obj.R = &recipeR{}
 			}
 
 			for _, a := range args {
@@ -609,9 +609,9 @@ func (soapRecipeL) LoadFragrance(ctx context.Context, e boil.ContextExecutor, si
 	}
 
 	query := NewQuery(
-		qm.From(`soap_recipefragrance`),
-		qm.WhereIn(`soap_recipefragrance.id in ?`, args...),
-		qmhelper.WhereIsNull(`soap_recipefragrance.deleted_at`),
+		qm.From(`recipe_fragrance`),
+		qm.WhereIn(`recipe_fragrance.id in ?`, args...),
+		qmhelper.WhereIsNull(`recipe_fragrance.deleted_at`),
 	)
 	if mods != nil {
 		mods.Apply(query)
@@ -619,22 +619,22 @@ func (soapRecipeL) LoadFragrance(ctx context.Context, e boil.ContextExecutor, si
 
 	results, err := query.QueryContext(ctx, e)
 	if err != nil {
-		return errors.Wrap(err, "failed to eager load SoapRecipefragrance")
+		return errors.Wrap(err, "failed to eager load RecipeFragrance")
 	}
 
-	var resultSlice []*SoapRecipefragrance
+	var resultSlice []*RecipeFragrance
 	if err = queries.Bind(results, &resultSlice); err != nil {
-		return errors.Wrap(err, "failed to bind eager loaded slice SoapRecipefragrance")
+		return errors.Wrap(err, "failed to bind eager loaded slice RecipeFragrance")
 	}
 
 	if err = results.Close(); err != nil {
-		return errors.Wrap(err, "failed to close results of eager load for soap_recipefragrance")
+		return errors.Wrap(err, "failed to close results of eager load for recipe_fragrance")
 	}
 	if err = results.Err(); err != nil {
-		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for soap_recipefragrance")
+		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for recipe_fragrance")
 	}
 
-	if len(soapRecipeAfterSelectHooks) != 0 {
+	if len(recipeAfterSelectHooks) != 0 {
 		for _, obj := range resultSlice {
 			if err := obj.doAfterSelectHooks(ctx, e); err != nil {
 				return err
@@ -666,20 +666,20 @@ func (soapRecipeL) LoadFragrance(ctx context.Context, e boil.ContextExecutor, si
 
 // LoadLipid allows an eager lookup of values, cached into the
 // loaded structs of the objects. This is for an N-1 relationship.
-func (soapRecipeL) LoadLipid(ctx context.Context, e boil.ContextExecutor, singular bool, maybeSoapRecipe interface{}, mods queries.Applicator) error {
-	var slice []*SoapRecipe
-	var object *SoapRecipe
+func (recipeL) LoadLipid(ctx context.Context, e boil.ContextExecutor, singular bool, maybeRecipe interface{}, mods queries.Applicator) error {
+	var slice []*Recipe
+	var object *Recipe
 
 	if singular {
-		object = maybeSoapRecipe.(*SoapRecipe)
+		object = maybeRecipe.(*Recipe)
 	} else {
-		slice = *maybeSoapRecipe.(*[]*SoapRecipe)
+		slice = *maybeRecipe.(*[]*Recipe)
 	}
 
 	args := make([]interface{}, 0, 1)
 	if singular {
 		if object.R == nil {
-			object.R = &soapRecipeR{}
+			object.R = &recipeR{}
 		}
 		args = append(args, object.LipidsID)
 
@@ -687,7 +687,7 @@ func (soapRecipeL) LoadLipid(ctx context.Context, e boil.ContextExecutor, singul
 	Outer:
 		for _, obj := range slice {
 			if obj.R == nil {
-				obj.R = &soapRecipeR{}
+				obj.R = &recipeR{}
 			}
 
 			for _, a := range args {
@@ -706,9 +706,9 @@ func (soapRecipeL) LoadLipid(ctx context.Context, e boil.ContextExecutor, singul
 	}
 
 	query := NewQuery(
-		qm.From(`soap_recipelipid`),
-		qm.WhereIn(`soap_recipelipid.id in ?`, args...),
-		qmhelper.WhereIsNull(`soap_recipelipid.deleted_at`),
+		qm.From(`recipe_lipid`),
+		qm.WhereIn(`recipe_lipid.id in ?`, args...),
+		qmhelper.WhereIsNull(`recipe_lipid.deleted_at`),
 	)
 	if mods != nil {
 		mods.Apply(query)
@@ -716,22 +716,22 @@ func (soapRecipeL) LoadLipid(ctx context.Context, e boil.ContextExecutor, singul
 
 	results, err := query.QueryContext(ctx, e)
 	if err != nil {
-		return errors.Wrap(err, "failed to eager load SoapRecipelipid")
+		return errors.Wrap(err, "failed to eager load RecipeLipid")
 	}
 
-	var resultSlice []*SoapRecipelipid
+	var resultSlice []*RecipeLipid
 	if err = queries.Bind(results, &resultSlice); err != nil {
-		return errors.Wrap(err, "failed to bind eager loaded slice SoapRecipelipid")
+		return errors.Wrap(err, "failed to bind eager loaded slice RecipeLipid")
 	}
 
 	if err = results.Close(); err != nil {
-		return errors.Wrap(err, "failed to close results of eager load for soap_recipelipid")
+		return errors.Wrap(err, "failed to close results of eager load for recipe_lipid")
 	}
 	if err = results.Err(); err != nil {
-		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for soap_recipelipid")
+		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for recipe_lipid")
 	}
 
-	if len(soapRecipeAfterSelectHooks) != 0 {
+	if len(recipeAfterSelectHooks) != 0 {
 		for _, obj := range resultSlice {
 			if err := obj.doAfterSelectHooks(ctx, e); err != nil {
 				return err
@@ -763,20 +763,20 @@ func (soapRecipeL) LoadLipid(ctx context.Context, e boil.ContextExecutor, singul
 
 // LoadLye allows an eager lookup of values, cached into the
 // loaded structs of the objects. This is for an N-1 relationship.
-func (soapRecipeL) LoadLye(ctx context.Context, e boil.ContextExecutor, singular bool, maybeSoapRecipe interface{}, mods queries.Applicator) error {
-	var slice []*SoapRecipe
-	var object *SoapRecipe
+func (recipeL) LoadLye(ctx context.Context, e boil.ContextExecutor, singular bool, maybeRecipe interface{}, mods queries.Applicator) error {
+	var slice []*Recipe
+	var object *Recipe
 
 	if singular {
-		object = maybeSoapRecipe.(*SoapRecipe)
+		object = maybeRecipe.(*Recipe)
 	} else {
-		slice = *maybeSoapRecipe.(*[]*SoapRecipe)
+		slice = *maybeRecipe.(*[]*Recipe)
 	}
 
 	args := make([]interface{}, 0, 1)
 	if singular {
 		if object.R == nil {
-			object.R = &soapRecipeR{}
+			object.R = &recipeR{}
 		}
 		args = append(args, object.LyeID)
 
@@ -784,7 +784,7 @@ func (soapRecipeL) LoadLye(ctx context.Context, e boil.ContextExecutor, singular
 	Outer:
 		for _, obj := range slice {
 			if obj.R == nil {
-				obj.R = &soapRecipeR{}
+				obj.R = &recipeR{}
 			}
 
 			for _, a := range args {
@@ -803,9 +803,9 @@ func (soapRecipeL) LoadLye(ctx context.Context, e boil.ContextExecutor, singular
 	}
 
 	query := NewQuery(
-		qm.From(`soap_recipelye`),
-		qm.WhereIn(`soap_recipelye.id in ?`, args...),
-		qmhelper.WhereIsNull(`soap_recipelye.deleted_at`),
+		qm.From(`recipe_lye`),
+		qm.WhereIn(`recipe_lye.id in ?`, args...),
+		qmhelper.WhereIsNull(`recipe_lye.deleted_at`),
 	)
 	if mods != nil {
 		mods.Apply(query)
@@ -813,22 +813,22 @@ func (soapRecipeL) LoadLye(ctx context.Context, e boil.ContextExecutor, singular
 
 	results, err := query.QueryContext(ctx, e)
 	if err != nil {
-		return errors.Wrap(err, "failed to eager load SoapRecipelye")
+		return errors.Wrap(err, "failed to eager load RecipeLye")
 	}
 
-	var resultSlice []*SoapRecipelye
+	var resultSlice []*RecipeLye
 	if err = queries.Bind(results, &resultSlice); err != nil {
-		return errors.Wrap(err, "failed to bind eager loaded slice SoapRecipelye")
+		return errors.Wrap(err, "failed to bind eager loaded slice RecipeLye")
 	}
 
 	if err = results.Close(); err != nil {
-		return errors.Wrap(err, "failed to close results of eager load for soap_recipelye")
+		return errors.Wrap(err, "failed to close results of eager load for recipe_lye")
 	}
 	if err = results.Err(); err != nil {
-		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for soap_recipelye")
+		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for recipe_lye")
 	}
 
-	if len(soapRecipeAfterSelectHooks) != 0 {
+	if len(recipeAfterSelectHooks) != 0 {
 		for _, obj := range resultSlice {
 			if err := obj.doAfterSelectHooks(ctx, e); err != nil {
 				return err
@@ -858,10 +858,10 @@ func (soapRecipeL) LoadLye(ctx context.Context, e boil.ContextExecutor, singular
 	return nil
 }
 
-// SetAdditive of the soapRecipe to the related item.
+// SetAdditive of the recipe to the related item.
 // Sets o.R.Additive to related.
-// Adds o to related.R.AdditiveSoapRecipes.
-func (o *SoapRecipe) SetAdditive(ctx context.Context, exec boil.ContextExecutor, insert bool, related *SoapRecipeadditive) error {
+// Adds o to related.R.AdditiveRecipes.
+func (o *Recipe) SetAdditive(ctx context.Context, exec boil.ContextExecutor, insert bool, related *RecipeAdditive) error {
 	var err error
 	if insert {
 		if err = related.Insert(ctx, exec, boil.Infer()); err != nil {
@@ -870,9 +870,9 @@ func (o *SoapRecipe) SetAdditive(ctx context.Context, exec boil.ContextExecutor,
 	}
 
 	updateQuery := fmt.Sprintf(
-		"UPDATE \"soap_recipe\" SET %s WHERE %s",
+		"UPDATE \"recipe\" SET %s WHERE %s",
 		strmangle.SetParamNames("\"", "\"", 1, []string{"additives_id"}),
-		strmangle.WhereClause("\"", "\"", 2, soapRecipePrimaryKeyColumns),
+		strmangle.WhereClause("\"", "\"", 2, recipePrimaryKeyColumns),
 	)
 	values := []interface{}{related.ID, o.ID}
 
@@ -887,7 +887,7 @@ func (o *SoapRecipe) SetAdditive(ctx context.Context, exec boil.ContextExecutor,
 
 	o.AdditivesID = related.ID
 	if o.R == nil {
-		o.R = &soapRecipeR{
+		o.R = &recipeR{
 			Additive: related,
 		}
 	} else {
@@ -895,20 +895,20 @@ func (o *SoapRecipe) SetAdditive(ctx context.Context, exec boil.ContextExecutor,
 	}
 
 	if related.R == nil {
-		related.R = &soapRecipeadditiveR{
-			AdditiveSoapRecipes: SoapRecipeSlice{o},
+		related.R = &recipeAdditiveR{
+			AdditiveRecipes: RecipeSlice{o},
 		}
 	} else {
-		related.R.AdditiveSoapRecipes = append(related.R.AdditiveSoapRecipes, o)
+		related.R.AdditiveRecipes = append(related.R.AdditiveRecipes, o)
 	}
 
 	return nil
 }
 
-// SetFragrance of the soapRecipe to the related item.
+// SetFragrance of the recipe to the related item.
 // Sets o.R.Fragrance to related.
-// Adds o to related.R.FragranceSoapRecipes.
-func (o *SoapRecipe) SetFragrance(ctx context.Context, exec boil.ContextExecutor, insert bool, related *SoapRecipefragrance) error {
+// Adds o to related.R.FragranceRecipes.
+func (o *Recipe) SetFragrance(ctx context.Context, exec boil.ContextExecutor, insert bool, related *RecipeFragrance) error {
 	var err error
 	if insert {
 		if err = related.Insert(ctx, exec, boil.Infer()); err != nil {
@@ -917,9 +917,9 @@ func (o *SoapRecipe) SetFragrance(ctx context.Context, exec boil.ContextExecutor
 	}
 
 	updateQuery := fmt.Sprintf(
-		"UPDATE \"soap_recipe\" SET %s WHERE %s",
+		"UPDATE \"recipe\" SET %s WHERE %s",
 		strmangle.SetParamNames("\"", "\"", 1, []string{"fragrances_id"}),
-		strmangle.WhereClause("\"", "\"", 2, soapRecipePrimaryKeyColumns),
+		strmangle.WhereClause("\"", "\"", 2, recipePrimaryKeyColumns),
 	)
 	values := []interface{}{related.ID, o.ID}
 
@@ -934,7 +934,7 @@ func (o *SoapRecipe) SetFragrance(ctx context.Context, exec boil.ContextExecutor
 
 	o.FragrancesID = related.ID
 	if o.R == nil {
-		o.R = &soapRecipeR{
+		o.R = &recipeR{
 			Fragrance: related,
 		}
 	} else {
@@ -942,20 +942,20 @@ func (o *SoapRecipe) SetFragrance(ctx context.Context, exec boil.ContextExecutor
 	}
 
 	if related.R == nil {
-		related.R = &soapRecipefragranceR{
-			FragranceSoapRecipes: SoapRecipeSlice{o},
+		related.R = &recipeFragranceR{
+			FragranceRecipes: RecipeSlice{o},
 		}
 	} else {
-		related.R.FragranceSoapRecipes = append(related.R.FragranceSoapRecipes, o)
+		related.R.FragranceRecipes = append(related.R.FragranceRecipes, o)
 	}
 
 	return nil
 }
 
-// SetLipid of the soapRecipe to the related item.
+// SetLipid of the recipe to the related item.
 // Sets o.R.Lipid to related.
-// Adds o to related.R.LipidSoapRecipes.
-func (o *SoapRecipe) SetLipid(ctx context.Context, exec boil.ContextExecutor, insert bool, related *SoapRecipelipid) error {
+// Adds o to related.R.LipidRecipes.
+func (o *Recipe) SetLipid(ctx context.Context, exec boil.ContextExecutor, insert bool, related *RecipeLipid) error {
 	var err error
 	if insert {
 		if err = related.Insert(ctx, exec, boil.Infer()); err != nil {
@@ -964,9 +964,9 @@ func (o *SoapRecipe) SetLipid(ctx context.Context, exec boil.ContextExecutor, in
 	}
 
 	updateQuery := fmt.Sprintf(
-		"UPDATE \"soap_recipe\" SET %s WHERE %s",
+		"UPDATE \"recipe\" SET %s WHERE %s",
 		strmangle.SetParamNames("\"", "\"", 1, []string{"lipids_id"}),
-		strmangle.WhereClause("\"", "\"", 2, soapRecipePrimaryKeyColumns),
+		strmangle.WhereClause("\"", "\"", 2, recipePrimaryKeyColumns),
 	)
 	values := []interface{}{related.ID, o.ID}
 
@@ -981,7 +981,7 @@ func (o *SoapRecipe) SetLipid(ctx context.Context, exec boil.ContextExecutor, in
 
 	o.LipidsID = related.ID
 	if o.R == nil {
-		o.R = &soapRecipeR{
+		o.R = &recipeR{
 			Lipid: related,
 		}
 	} else {
@@ -989,20 +989,20 @@ func (o *SoapRecipe) SetLipid(ctx context.Context, exec boil.ContextExecutor, in
 	}
 
 	if related.R == nil {
-		related.R = &soapRecipelipidR{
-			LipidSoapRecipes: SoapRecipeSlice{o},
+		related.R = &recipeLipidR{
+			LipidRecipes: RecipeSlice{o},
 		}
 	} else {
-		related.R.LipidSoapRecipes = append(related.R.LipidSoapRecipes, o)
+		related.R.LipidRecipes = append(related.R.LipidRecipes, o)
 	}
 
 	return nil
 }
 
-// SetLye of the soapRecipe to the related item.
+// SetLye of the recipe to the related item.
 // Sets o.R.Lye to related.
-// Adds o to related.R.LyeSoapRecipes.
-func (o *SoapRecipe) SetLye(ctx context.Context, exec boil.ContextExecutor, insert bool, related *SoapRecipelye) error {
+// Adds o to related.R.LyeRecipes.
+func (o *Recipe) SetLye(ctx context.Context, exec boil.ContextExecutor, insert bool, related *RecipeLye) error {
 	var err error
 	if insert {
 		if err = related.Insert(ctx, exec, boil.Infer()); err != nil {
@@ -1011,9 +1011,9 @@ func (o *SoapRecipe) SetLye(ctx context.Context, exec boil.ContextExecutor, inse
 	}
 
 	updateQuery := fmt.Sprintf(
-		"UPDATE \"soap_recipe\" SET %s WHERE %s",
+		"UPDATE \"recipe\" SET %s WHERE %s",
 		strmangle.SetParamNames("\"", "\"", 1, []string{"lye_id"}),
-		strmangle.WhereClause("\"", "\"", 2, soapRecipePrimaryKeyColumns),
+		strmangle.WhereClause("\"", "\"", 2, recipePrimaryKeyColumns),
 	)
 	values := []interface{}{related.ID, o.ID}
 
@@ -1028,7 +1028,7 @@ func (o *SoapRecipe) SetLye(ctx context.Context, exec boil.ContextExecutor, inse
 
 	o.LyeID = related.ID
 	if o.R == nil {
-		o.R = &soapRecipeR{
+		o.R = &recipeR{
 			Lye: related,
 		}
 	} else {
@@ -1036,53 +1036,53 @@ func (o *SoapRecipe) SetLye(ctx context.Context, exec boil.ContextExecutor, inse
 	}
 
 	if related.R == nil {
-		related.R = &soapRecipelyeR{
-			LyeSoapRecipes: SoapRecipeSlice{o},
+		related.R = &recipeLyeR{
+			LyeRecipes: RecipeSlice{o},
 		}
 	} else {
-		related.R.LyeSoapRecipes = append(related.R.LyeSoapRecipes, o)
+		related.R.LyeRecipes = append(related.R.LyeRecipes, o)
 	}
 
 	return nil
 }
 
-// SoapRecipes retrieves all the records using an executor.
-func SoapRecipes(mods ...qm.QueryMod) soapRecipeQuery {
-	mods = append(mods, qm.From("\"soap_recipe\""), qmhelper.WhereIsNull("\"soap_recipe\".\"deleted_at\""))
-	return soapRecipeQuery{NewQuery(mods...)}
+// Recipes retrieves all the records using an executor.
+func Recipes(mods ...qm.QueryMod) recipeQuery {
+	mods = append(mods, qm.From("\"recipe\""), qmhelper.WhereIsNull("\"recipe\".\"deleted_at\""))
+	return recipeQuery{NewQuery(mods...)}
 }
 
-// FindSoapRecipe retrieves a single record by ID with an executor.
+// FindRecipe retrieves a single record by ID with an executor.
 // If selectCols is empty Find will return all columns.
-func FindSoapRecipe(ctx context.Context, exec boil.ContextExecutor, iD string, selectCols ...string) (*SoapRecipe, error) {
-	soapRecipeObj := &SoapRecipe{}
+func FindRecipe(ctx context.Context, exec boil.ContextExecutor, iD string, selectCols ...string) (*Recipe, error) {
+	recipeObj := &Recipe{}
 
 	sel := "*"
 	if len(selectCols) > 0 {
 		sel = strings.Join(strmangle.IdentQuoteSlice(dialect.LQ, dialect.RQ, selectCols), ",")
 	}
 	query := fmt.Sprintf(
-		"select %s from \"soap_recipe\" where \"id\"=$1 and \"deleted_at\" is null", sel,
+		"select %s from \"recipe\" where \"id\"=$1 and \"deleted_at\" is null", sel,
 	)
 
 	q := queries.Raw(query, iD)
 
-	err := q.Bind(ctx, exec, soapRecipeObj)
+	err := q.Bind(ctx, exec, recipeObj)
 	if err != nil {
 		if errors.Cause(err) == sql.ErrNoRows {
 			return nil, sql.ErrNoRows
 		}
-		return nil, errors.Wrap(err, "models: unable to select from soap_recipe")
+		return nil, errors.Wrap(err, "models: unable to select from recipe")
 	}
 
-	return soapRecipeObj, nil
+	return recipeObj, nil
 }
 
 // Insert a single record using an executor.
 // See boil.Columns.InsertColumnSet documentation to understand column list inference for inserts.
-func (o *SoapRecipe) Insert(ctx context.Context, exec boil.ContextExecutor, columns boil.Columns) error {
+func (o *Recipe) Insert(ctx context.Context, exec boil.ContextExecutor, columns boil.Columns) error {
 	if o == nil {
-		return errors.New("models: no soap_recipe provided for insertion")
+		return errors.New("models: no recipe provided for insertion")
 	}
 
 	var err error
@@ -1101,33 +1101,33 @@ func (o *SoapRecipe) Insert(ctx context.Context, exec boil.ContextExecutor, colu
 		return err
 	}
 
-	nzDefaults := queries.NonZeroDefaultSet(soapRecipeColumnsWithDefault, o)
+	nzDefaults := queries.NonZeroDefaultSet(recipeColumnsWithDefault, o)
 
 	key := makeCacheKey(columns, nzDefaults)
-	soapRecipeInsertCacheMut.RLock()
-	cache, cached := soapRecipeInsertCache[key]
-	soapRecipeInsertCacheMut.RUnlock()
+	recipeInsertCacheMut.RLock()
+	cache, cached := recipeInsertCache[key]
+	recipeInsertCacheMut.RUnlock()
 
 	if !cached {
 		wl, returnColumns := columns.InsertColumnSet(
-			soapRecipeAllColumns,
-			soapRecipeColumnsWithDefault,
-			soapRecipeColumnsWithoutDefault,
+			recipeAllColumns,
+			recipeColumnsWithDefault,
+			recipeColumnsWithoutDefault,
 			nzDefaults,
 		)
 
-		cache.valueMapping, err = queries.BindMapping(soapRecipeType, soapRecipeMapping, wl)
+		cache.valueMapping, err = queries.BindMapping(recipeType, recipeMapping, wl)
 		if err != nil {
 			return err
 		}
-		cache.retMapping, err = queries.BindMapping(soapRecipeType, soapRecipeMapping, returnColumns)
+		cache.retMapping, err = queries.BindMapping(recipeType, recipeMapping, returnColumns)
 		if err != nil {
 			return err
 		}
 		if len(wl) != 0 {
-			cache.query = fmt.Sprintf("INSERT INTO \"soap_recipe\" (\"%s\") %%sVALUES (%s)%%s", strings.Join(wl, "\",\""), strmangle.Placeholders(dialect.UseIndexPlaceholders, len(wl), 1, 1))
+			cache.query = fmt.Sprintf("INSERT INTO \"recipe\" (\"%s\") %%sVALUES (%s)%%s", strings.Join(wl, "\",\""), strmangle.Placeholders(dialect.UseIndexPlaceholders, len(wl), 1, 1))
 		} else {
-			cache.query = "INSERT INTO \"soap_recipe\" %sDEFAULT VALUES%s"
+			cache.query = "INSERT INTO \"recipe\" %sDEFAULT VALUES%s"
 		}
 
 		var queryOutput, queryReturning string
@@ -1155,22 +1155,22 @@ func (o *SoapRecipe) Insert(ctx context.Context, exec boil.ContextExecutor, colu
 	}
 
 	if err != nil {
-		return errors.Wrap(err, "models: unable to insert into soap_recipe")
+		return errors.Wrap(err, "models: unable to insert into recipe")
 	}
 
 	if !cached {
-		soapRecipeInsertCacheMut.Lock()
-		soapRecipeInsertCache[key] = cache
-		soapRecipeInsertCacheMut.Unlock()
+		recipeInsertCacheMut.Lock()
+		recipeInsertCache[key] = cache
+		recipeInsertCacheMut.Unlock()
 	}
 
 	return o.doAfterInsertHooks(ctx, exec)
 }
 
-// Update uses an executor to update the SoapRecipe.
+// Update uses an executor to update the Recipe.
 // See boil.Columns.UpdateColumnSet documentation to understand column list inference for updates.
 // Update does not automatically update the record in case of default values. Use .Reload() to refresh the records.
-func (o *SoapRecipe) Update(ctx context.Context, exec boil.ContextExecutor, columns boil.Columns) (int64, error) {
+func (o *Recipe) Update(ctx context.Context, exec boil.ContextExecutor, columns boil.Columns) (int64, error) {
 	if !boil.TimestampsAreSkipped(ctx) {
 		currTime := time.Now().In(boil.GetLocation())
 
@@ -1182,28 +1182,28 @@ func (o *SoapRecipe) Update(ctx context.Context, exec boil.ContextExecutor, colu
 		return 0, err
 	}
 	key := makeCacheKey(columns, nil)
-	soapRecipeUpdateCacheMut.RLock()
-	cache, cached := soapRecipeUpdateCache[key]
-	soapRecipeUpdateCacheMut.RUnlock()
+	recipeUpdateCacheMut.RLock()
+	cache, cached := recipeUpdateCache[key]
+	recipeUpdateCacheMut.RUnlock()
 
 	if !cached {
 		wl := columns.UpdateColumnSet(
-			soapRecipeAllColumns,
-			soapRecipePrimaryKeyColumns,
+			recipeAllColumns,
+			recipePrimaryKeyColumns,
 		)
 
 		if !columns.IsWhitelist() {
 			wl = strmangle.SetComplement(wl, []string{"created_at"})
 		}
 		if len(wl) == 0 {
-			return 0, errors.New("models: unable to update soap_recipe, could not build whitelist")
+			return 0, errors.New("models: unable to update recipe, could not build whitelist")
 		}
 
-		cache.query = fmt.Sprintf("UPDATE \"soap_recipe\" SET %s WHERE %s",
+		cache.query = fmt.Sprintf("UPDATE \"recipe\" SET %s WHERE %s",
 			strmangle.SetParamNames("\"", "\"", 1, wl),
-			strmangle.WhereClause("\"", "\"", len(wl)+1, soapRecipePrimaryKeyColumns),
+			strmangle.WhereClause("\"", "\"", len(wl)+1, recipePrimaryKeyColumns),
 		)
-		cache.valueMapping, err = queries.BindMapping(soapRecipeType, soapRecipeMapping, append(wl, soapRecipePrimaryKeyColumns...))
+		cache.valueMapping, err = queries.BindMapping(recipeType, recipeMapping, append(wl, recipePrimaryKeyColumns...))
 		if err != nil {
 			return 0, err
 		}
@@ -1219,42 +1219,42 @@ func (o *SoapRecipe) Update(ctx context.Context, exec boil.ContextExecutor, colu
 	var result sql.Result
 	result, err = exec.ExecContext(ctx, cache.query, values...)
 	if err != nil {
-		return 0, errors.Wrap(err, "models: unable to update soap_recipe row")
+		return 0, errors.Wrap(err, "models: unable to update recipe row")
 	}
 
 	rowsAff, err := result.RowsAffected()
 	if err != nil {
-		return 0, errors.Wrap(err, "models: failed to get rows affected by update for soap_recipe")
+		return 0, errors.Wrap(err, "models: failed to get rows affected by update for recipe")
 	}
 
 	if !cached {
-		soapRecipeUpdateCacheMut.Lock()
-		soapRecipeUpdateCache[key] = cache
-		soapRecipeUpdateCacheMut.Unlock()
+		recipeUpdateCacheMut.Lock()
+		recipeUpdateCache[key] = cache
+		recipeUpdateCacheMut.Unlock()
 	}
 
 	return rowsAff, o.doAfterUpdateHooks(ctx, exec)
 }
 
 // UpdateAll updates all rows with the specified column values.
-func (q soapRecipeQuery) UpdateAll(ctx context.Context, exec boil.ContextExecutor, cols M) (int64, error) {
+func (q recipeQuery) UpdateAll(ctx context.Context, exec boil.ContextExecutor, cols M) (int64, error) {
 	queries.SetUpdate(q.Query, cols)
 
 	result, err := q.Query.ExecContext(ctx, exec)
 	if err != nil {
-		return 0, errors.Wrap(err, "models: unable to update all for soap_recipe")
+		return 0, errors.Wrap(err, "models: unable to update all for recipe")
 	}
 
 	rowsAff, err := result.RowsAffected()
 	if err != nil {
-		return 0, errors.Wrap(err, "models: unable to retrieve rows affected for soap_recipe")
+		return 0, errors.Wrap(err, "models: unable to retrieve rows affected for recipe")
 	}
 
 	return rowsAff, nil
 }
 
 // UpdateAll updates all rows with the specified column values, using an executor.
-func (o SoapRecipeSlice) UpdateAll(ctx context.Context, exec boil.ContextExecutor, cols M) (int64, error) {
+func (o RecipeSlice) UpdateAll(ctx context.Context, exec boil.ContextExecutor, cols M) (int64, error) {
 	ln := int64(len(o))
 	if ln == 0 {
 		return 0, nil
@@ -1276,13 +1276,13 @@ func (o SoapRecipeSlice) UpdateAll(ctx context.Context, exec boil.ContextExecuto
 
 	// Append all of the primary key values for each column
 	for _, obj := range o {
-		pkeyArgs := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(obj)), soapRecipePrimaryKeyMapping)
+		pkeyArgs := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(obj)), recipePrimaryKeyMapping)
 		args = append(args, pkeyArgs...)
 	}
 
-	sql := fmt.Sprintf("UPDATE \"soap_recipe\" SET %s WHERE %s",
+	sql := fmt.Sprintf("UPDATE \"recipe\" SET %s WHERE %s",
 		strmangle.SetParamNames("\"", "\"", 1, colNames),
-		strmangle.WhereClauseRepeated(string(dialect.LQ), string(dialect.RQ), len(colNames)+1, soapRecipePrimaryKeyColumns, len(o)))
+		strmangle.WhereClauseRepeated(string(dialect.LQ), string(dialect.RQ), len(colNames)+1, recipePrimaryKeyColumns, len(o)))
 
 	if boil.IsDebug(ctx) {
 		writer := boil.DebugWriterFrom(ctx)
@@ -1291,21 +1291,21 @@ func (o SoapRecipeSlice) UpdateAll(ctx context.Context, exec boil.ContextExecuto
 	}
 	result, err := exec.ExecContext(ctx, sql, args...)
 	if err != nil {
-		return 0, errors.Wrap(err, "models: unable to update all in soapRecipe slice")
+		return 0, errors.Wrap(err, "models: unable to update all in recipe slice")
 	}
 
 	rowsAff, err := result.RowsAffected()
 	if err != nil {
-		return 0, errors.Wrap(err, "models: unable to retrieve rows affected all in update all soapRecipe")
+		return 0, errors.Wrap(err, "models: unable to retrieve rows affected all in update all recipe")
 	}
 	return rowsAff, nil
 }
 
 // Upsert attempts an insert using an executor, and does an update or ignore on conflict.
 // See boil.Columns documentation for how to properly use updateColumns and insertColumns.
-func (o *SoapRecipe) Upsert(ctx context.Context, exec boil.ContextExecutor, updateOnConflict bool, conflictColumns []string, updateColumns, insertColumns boil.Columns) error {
+func (o *Recipe) Upsert(ctx context.Context, exec boil.ContextExecutor, updateOnConflict bool, conflictColumns []string, updateColumns, insertColumns boil.Columns) error {
 	if o == nil {
-		return errors.New("models: no soap_recipe provided for upsert")
+		return errors.New("models: no recipe provided for upsert")
 	}
 	if !boil.TimestampsAreSkipped(ctx) {
 		currTime := time.Now().In(boil.GetLocation())
@@ -1320,7 +1320,7 @@ func (o *SoapRecipe) Upsert(ctx context.Context, exec boil.ContextExecutor, upda
 		return err
 	}
 
-	nzDefaults := queries.NonZeroDefaultSet(soapRecipeColumnsWithDefault, o)
+	nzDefaults := queries.NonZeroDefaultSet(recipeColumnsWithDefault, o)
 
 	// Build cache key in-line uglily - mysql vs psql problems
 	buf := strmangle.GetBuffer()
@@ -1350,41 +1350,41 @@ func (o *SoapRecipe) Upsert(ctx context.Context, exec boil.ContextExecutor, upda
 	key := buf.String()
 	strmangle.PutBuffer(buf)
 
-	soapRecipeUpsertCacheMut.RLock()
-	cache, cached := soapRecipeUpsertCache[key]
-	soapRecipeUpsertCacheMut.RUnlock()
+	recipeUpsertCacheMut.RLock()
+	cache, cached := recipeUpsertCache[key]
+	recipeUpsertCacheMut.RUnlock()
 
 	var err error
 
 	if !cached {
 		insert, ret := insertColumns.InsertColumnSet(
-			soapRecipeAllColumns,
-			soapRecipeColumnsWithDefault,
-			soapRecipeColumnsWithoutDefault,
+			recipeAllColumns,
+			recipeColumnsWithDefault,
+			recipeColumnsWithoutDefault,
 			nzDefaults,
 		)
 		update := updateColumns.UpdateColumnSet(
-			soapRecipeAllColumns,
-			soapRecipePrimaryKeyColumns,
+			recipeAllColumns,
+			recipePrimaryKeyColumns,
 		)
 
 		if updateOnConflict && len(update) == 0 {
-			return errors.New("models: unable to upsert soap_recipe, could not build update column list")
+			return errors.New("models: unable to upsert recipe, could not build update column list")
 		}
 
 		conflict := conflictColumns
 		if len(conflict) == 0 {
-			conflict = make([]string, len(soapRecipePrimaryKeyColumns))
-			copy(conflict, soapRecipePrimaryKeyColumns)
+			conflict = make([]string, len(recipePrimaryKeyColumns))
+			copy(conflict, recipePrimaryKeyColumns)
 		}
-		cache.query = buildUpsertQueryPostgres(dialect, "\"soap_recipe\"", updateOnConflict, ret, update, conflict, insert)
+		cache.query = buildUpsertQueryPostgres(dialect, "\"recipe\"", updateOnConflict, ret, update, conflict, insert)
 
-		cache.valueMapping, err = queries.BindMapping(soapRecipeType, soapRecipeMapping, insert)
+		cache.valueMapping, err = queries.BindMapping(recipeType, recipeMapping, insert)
 		if err != nil {
 			return err
 		}
 		if len(ret) != 0 {
-			cache.retMapping, err = queries.BindMapping(soapRecipeType, soapRecipeMapping, ret)
+			cache.retMapping, err = queries.BindMapping(recipeType, recipeMapping, ret)
 			if err != nil {
 				return err
 			}
@@ -1412,23 +1412,23 @@ func (o *SoapRecipe) Upsert(ctx context.Context, exec boil.ContextExecutor, upda
 		_, err = exec.ExecContext(ctx, cache.query, vals...)
 	}
 	if err != nil {
-		return errors.Wrap(err, "models: unable to upsert soap_recipe")
+		return errors.Wrap(err, "models: unable to upsert recipe")
 	}
 
 	if !cached {
-		soapRecipeUpsertCacheMut.Lock()
-		soapRecipeUpsertCache[key] = cache
-		soapRecipeUpsertCacheMut.Unlock()
+		recipeUpsertCacheMut.Lock()
+		recipeUpsertCache[key] = cache
+		recipeUpsertCacheMut.Unlock()
 	}
 
 	return o.doAfterUpsertHooks(ctx, exec)
 }
 
-// Delete deletes a single SoapRecipe record with an executor.
+// Delete deletes a single Recipe record with an executor.
 // Delete will match against the primary key column to find the record to delete.
-func (o *SoapRecipe) Delete(ctx context.Context, exec boil.ContextExecutor, hardDelete bool) (int64, error) {
+func (o *Recipe) Delete(ctx context.Context, exec boil.ContextExecutor, hardDelete bool) (int64, error) {
 	if o == nil {
-		return 0, errors.New("models: no SoapRecipe provided for delete")
+		return 0, errors.New("models: no Recipe provided for delete")
 	}
 
 	if err := o.doBeforeDeleteHooks(ctx, exec); err != nil {
@@ -1440,16 +1440,16 @@ func (o *SoapRecipe) Delete(ctx context.Context, exec boil.ContextExecutor, hard
 		args []interface{}
 	)
 	if hardDelete {
-		args = queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(o)), soapRecipePrimaryKeyMapping)
-		sql = "DELETE FROM \"soap_recipe\" WHERE \"id\"=$1"
+		args = queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(o)), recipePrimaryKeyMapping)
+		sql = "DELETE FROM \"recipe\" WHERE \"id\"=$1"
 	} else {
 		currTime := time.Now().In(boil.GetLocation())
 		o.DeletedAt = null.TimeFrom(currTime)
 		wl := []string{"deleted_at"}
-		sql = fmt.Sprintf("UPDATE \"soap_recipe\" SET %s WHERE \"id\"=$2",
+		sql = fmt.Sprintf("UPDATE \"recipe\" SET %s WHERE \"id\"=$2",
 			strmangle.SetParamNames("\"", "\"", 1, wl),
 		)
-		valueMapping, err := queries.BindMapping(soapRecipeType, soapRecipeMapping, append(wl, soapRecipePrimaryKeyColumns...))
+		valueMapping, err := queries.BindMapping(recipeType, recipeMapping, append(wl, recipePrimaryKeyColumns...))
 		if err != nil {
 			return 0, err
 		}
@@ -1463,12 +1463,12 @@ func (o *SoapRecipe) Delete(ctx context.Context, exec boil.ContextExecutor, hard
 	}
 	result, err := exec.ExecContext(ctx, sql, args...)
 	if err != nil {
-		return 0, errors.Wrap(err, "models: unable to delete from soap_recipe")
+		return 0, errors.Wrap(err, "models: unable to delete from recipe")
 	}
 
 	rowsAff, err := result.RowsAffected()
 	if err != nil {
-		return 0, errors.Wrap(err, "models: failed to get rows affected by delete for soap_recipe")
+		return 0, errors.Wrap(err, "models: failed to get rows affected by delete for recipe")
 	}
 
 	if err := o.doAfterDeleteHooks(ctx, exec); err != nil {
@@ -1479,9 +1479,9 @@ func (o *SoapRecipe) Delete(ctx context.Context, exec boil.ContextExecutor, hard
 }
 
 // DeleteAll deletes all matching rows.
-func (q soapRecipeQuery) DeleteAll(ctx context.Context, exec boil.ContextExecutor, hardDelete bool) (int64, error) {
+func (q recipeQuery) DeleteAll(ctx context.Context, exec boil.ContextExecutor, hardDelete bool) (int64, error) {
 	if q.Query == nil {
-		return 0, errors.New("models: no soapRecipeQuery provided for delete all")
+		return 0, errors.New("models: no recipeQuery provided for delete all")
 	}
 
 	if hardDelete {
@@ -1493,24 +1493,24 @@ func (q soapRecipeQuery) DeleteAll(ctx context.Context, exec boil.ContextExecuto
 
 	result, err := q.Query.ExecContext(ctx, exec)
 	if err != nil {
-		return 0, errors.Wrap(err, "models: unable to delete all from soap_recipe")
+		return 0, errors.Wrap(err, "models: unable to delete all from recipe")
 	}
 
 	rowsAff, err := result.RowsAffected()
 	if err != nil {
-		return 0, errors.Wrap(err, "models: failed to get rows affected by deleteall for soap_recipe")
+		return 0, errors.Wrap(err, "models: failed to get rows affected by deleteall for recipe")
 	}
 
 	return rowsAff, nil
 }
 
 // DeleteAll deletes all rows in the slice, using an executor.
-func (o SoapRecipeSlice) DeleteAll(ctx context.Context, exec boil.ContextExecutor, hardDelete bool) (int64, error) {
+func (o RecipeSlice) DeleteAll(ctx context.Context, exec boil.ContextExecutor, hardDelete bool) (int64, error) {
 	if len(o) == 0 {
 		return 0, nil
 	}
 
-	if len(soapRecipeBeforeDeleteHooks) != 0 {
+	if len(recipeBeforeDeleteHooks) != 0 {
 		for _, obj := range o {
 			if err := obj.doBeforeDeleteHooks(ctx, exec); err != nil {
 				return 0, err
@@ -1524,21 +1524,21 @@ func (o SoapRecipeSlice) DeleteAll(ctx context.Context, exec boil.ContextExecuto
 	)
 	if hardDelete {
 		for _, obj := range o {
-			pkeyArgs := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(obj)), soapRecipePrimaryKeyMapping)
+			pkeyArgs := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(obj)), recipePrimaryKeyMapping)
 			args = append(args, pkeyArgs...)
 		}
-		sql = "DELETE FROM \"soap_recipe\" WHERE " +
-			strmangle.WhereClauseRepeated(string(dialect.LQ), string(dialect.RQ), 1, soapRecipePrimaryKeyColumns, len(o))
+		sql = "DELETE FROM \"recipe\" WHERE " +
+			strmangle.WhereClauseRepeated(string(dialect.LQ), string(dialect.RQ), 1, recipePrimaryKeyColumns, len(o))
 	} else {
 		currTime := time.Now().In(boil.GetLocation())
 		for _, obj := range o {
-			pkeyArgs := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(obj)), soapRecipePrimaryKeyMapping)
+			pkeyArgs := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(obj)), recipePrimaryKeyMapping)
 			args = append(args, pkeyArgs...)
 			obj.DeletedAt = null.TimeFrom(currTime)
 		}
 		wl := []string{"deleted_at"}
-		sql = fmt.Sprintf("UPDATE \"soap_recipe\" SET %s WHERE "+
-			strmangle.WhereClauseRepeated(string(dialect.LQ), string(dialect.RQ), 2, soapRecipePrimaryKeyColumns, len(o)),
+		sql = fmt.Sprintf("UPDATE \"recipe\" SET %s WHERE "+
+			strmangle.WhereClauseRepeated(string(dialect.LQ), string(dialect.RQ), 2, recipePrimaryKeyColumns, len(o)),
 			strmangle.SetParamNames("\"", "\"", 1, wl),
 		)
 		args = append([]interface{}{currTime}, args...)
@@ -1551,15 +1551,15 @@ func (o SoapRecipeSlice) DeleteAll(ctx context.Context, exec boil.ContextExecuto
 	}
 	result, err := exec.ExecContext(ctx, sql, args...)
 	if err != nil {
-		return 0, errors.Wrap(err, "models: unable to delete all from soapRecipe slice")
+		return 0, errors.Wrap(err, "models: unable to delete all from recipe slice")
 	}
 
 	rowsAff, err := result.RowsAffected()
 	if err != nil {
-		return 0, errors.Wrap(err, "models: failed to get rows affected by deleteall for soap_recipe")
+		return 0, errors.Wrap(err, "models: failed to get rows affected by deleteall for recipe")
 	}
 
-	if len(soapRecipeAfterDeleteHooks) != 0 {
+	if len(recipeAfterDeleteHooks) != 0 {
 		for _, obj := range o {
 			if err := obj.doAfterDeleteHooks(ctx, exec); err != nil {
 				return 0, err
@@ -1572,8 +1572,8 @@ func (o SoapRecipeSlice) DeleteAll(ctx context.Context, exec boil.ContextExecuto
 
 // Reload refetches the object from the database
 // using the primary keys with an executor.
-func (o *SoapRecipe) Reload(ctx context.Context, exec boil.ContextExecutor) error {
-	ret, err := FindSoapRecipe(ctx, exec, o.ID)
+func (o *Recipe) Reload(ctx context.Context, exec boil.ContextExecutor) error {
+	ret, err := FindRecipe(ctx, exec, o.ID)
 	if err != nil {
 		return err
 	}
@@ -1584,27 +1584,27 @@ func (o *SoapRecipe) Reload(ctx context.Context, exec boil.ContextExecutor) erro
 
 // ReloadAll refetches every row with matching primary key column values
 // and overwrites the original object slice with the newly updated slice.
-func (o *SoapRecipeSlice) ReloadAll(ctx context.Context, exec boil.ContextExecutor) error {
+func (o *RecipeSlice) ReloadAll(ctx context.Context, exec boil.ContextExecutor) error {
 	if o == nil || len(*o) == 0 {
 		return nil
 	}
 
-	slice := SoapRecipeSlice{}
+	slice := RecipeSlice{}
 	var args []interface{}
 	for _, obj := range *o {
-		pkeyArgs := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(obj)), soapRecipePrimaryKeyMapping)
+		pkeyArgs := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(obj)), recipePrimaryKeyMapping)
 		args = append(args, pkeyArgs...)
 	}
 
-	sql := "SELECT \"soap_recipe\".* FROM \"soap_recipe\" WHERE " +
-		strmangle.WhereClauseRepeated(string(dialect.LQ), string(dialect.RQ), 1, soapRecipePrimaryKeyColumns, len(*o)) +
+	sql := "SELECT \"recipe\".* FROM \"recipe\" WHERE " +
+		strmangle.WhereClauseRepeated(string(dialect.LQ), string(dialect.RQ), 1, recipePrimaryKeyColumns, len(*o)) +
 		"and \"deleted_at\" is null"
 
 	q := queries.Raw(sql, args...)
 
 	err := q.Bind(ctx, exec, &slice)
 	if err != nil {
-		return errors.Wrap(err, "models: unable to reload all in SoapRecipeSlice")
+		return errors.Wrap(err, "models: unable to reload all in RecipeSlice")
 	}
 
 	*o = slice
@@ -1612,10 +1612,10 @@ func (o *SoapRecipeSlice) ReloadAll(ctx context.Context, exec boil.ContextExecut
 	return nil
 }
 
-// SoapRecipeExists checks if the SoapRecipe row exists.
-func SoapRecipeExists(ctx context.Context, exec boil.ContextExecutor, iD string) (bool, error) {
+// RecipeExists checks if the Recipe row exists.
+func RecipeExists(ctx context.Context, exec boil.ContextExecutor, iD string) (bool, error) {
 	var exists bool
-	sql := "select exists(select 1 from \"soap_recipe\" where \"id\"=$1 and \"deleted_at\" is null limit 1)"
+	sql := "select exists(select 1 from \"recipe\" where \"id\"=$1 and \"deleted_at\" is null limit 1)"
 
 	if boil.IsDebug(ctx) {
 		writer := boil.DebugWriterFrom(ctx)
@@ -1626,7 +1626,7 @@ func SoapRecipeExists(ctx context.Context, exec boil.ContextExecutor, iD string)
 
 	err := row.Scan(&exists)
 	if err != nil {
-		return false, errors.Wrap(err, "models: unable to check if soap_recipe exists")
+		return false, errors.Wrap(err, "models: unable to check if recipe exists")
 	}
 
 	return exists, nil

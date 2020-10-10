@@ -22,8 +22,8 @@ import (
 	"github.com/volatiletech/strmangle"
 )
 
-// SoapLipid is an object representing the database table.
-type SoapLipid struct {
+// Lipid is an object representing the database table.
+type Lipid struct {
 	ID           int       `boil:"id" json:"id" toml:"id" yaml:"id"`
 	CreatedAt    time.Time `boil:"created_at" json:"created_at" toml:"created_at" yaml:"created_at"`
 	UpdatedAt    time.Time `boil:"updated_at" json:"updated_at" toml:"updated_at" yaml:"updated_at"`
@@ -46,11 +46,11 @@ type SoapLipid struct {
 	Ins          int       `boil:"ins" json:"ins" toml:"ins" yaml:"ins"`
 	InciName     string    `boil:"inci_name" json:"inci_name" toml:"inci_name" yaml:"inci_name"`
 
-	R *soapLipidR `boil:"-" json:"-" toml:"-" yaml:"-"`
-	L soapLipidL  `boil:"-" json:"-" toml:"-" yaml:"-"`
+	R *lipidR `boil:"-" json:"-" toml:"-" yaml:"-"`
+	L lipidL  `boil:"-" json:"-" toml:"-" yaml:"-"`
 }
 
-var SoapLipidColumns = struct {
+var LipidColumns = struct {
 	ID           string
 	CreatedAt    string
 	UpdatedAt    string
@@ -98,7 +98,7 @@ var SoapLipidColumns = struct {
 
 // Generated where
 
-var SoapLipidWhere = struct {
+var LipidWhere = struct {
 	ID           whereHelperint
 	CreatedAt    whereHelpertime_Time
 	UpdatedAt    whereHelpertime_Time
@@ -121,82 +121,82 @@ var SoapLipidWhere = struct {
 	Ins          whereHelperint
 	InciName     whereHelperstring
 }{
-	ID:           whereHelperint{field: "\"soap_lipid\".\"id\""},
-	CreatedAt:    whereHelpertime_Time{field: "\"soap_lipid\".\"created_at\""},
-	UpdatedAt:    whereHelpertime_Time{field: "\"soap_lipid\".\"updated_at\""},
-	DeletedAt:    whereHelpernull_Time{field: "\"soap_lipid\".\"deleted_at\""},
-	Name:         whereHelperstring{field: "\"soap_lipid\".\"name\""},
-	Lauric:       whereHelperint{field: "\"soap_lipid\".\"lauric\""},
-	Myristic:     whereHelperint{field: "\"soap_lipid\".\"myristic\""},
-	Palmitic:     whereHelperint{field: "\"soap_lipid\".\"palmitic\""},
-	Stearic:      whereHelperint{field: "\"soap_lipid\".\"stearic\""},
-	Ricinoleic:   whereHelperint{field: "\"soap_lipid\".\"ricinoleic\""},
-	Oleic:        whereHelperint{field: "\"soap_lipid\".\"oleic\""},
-	Linoleic:     whereHelperint{field: "\"soap_lipid\".\"linoleic\""},
-	Linolenic:    whereHelperint{field: "\"soap_lipid\".\"linolenic\""},
-	Hardness:     whereHelperint{field: "\"soap_lipid\".\"hardness\""},
-	Cleansing:    whereHelperint{field: "\"soap_lipid\".\"cleansing\""},
-	Conditioning: whereHelperint{field: "\"soap_lipid\".\"conditioning\""},
-	Bubbly:       whereHelperint{field: "\"soap_lipid\".\"bubbly\""},
-	Creamy:       whereHelperint{field: "\"soap_lipid\".\"creamy\""},
-	Iodine:       whereHelperint{field: "\"soap_lipid\".\"iodine\""},
-	Ins:          whereHelperint{field: "\"soap_lipid\".\"ins\""},
-	InciName:     whereHelperstring{field: "\"soap_lipid\".\"inci_name\""},
+	ID:           whereHelperint{field: "\"lipid\".\"id\""},
+	CreatedAt:    whereHelpertime_Time{field: "\"lipid\".\"created_at\""},
+	UpdatedAt:    whereHelpertime_Time{field: "\"lipid\".\"updated_at\""},
+	DeletedAt:    whereHelpernull_Time{field: "\"lipid\".\"deleted_at\""},
+	Name:         whereHelperstring{field: "\"lipid\".\"name\""},
+	Lauric:       whereHelperint{field: "\"lipid\".\"lauric\""},
+	Myristic:     whereHelperint{field: "\"lipid\".\"myristic\""},
+	Palmitic:     whereHelperint{field: "\"lipid\".\"palmitic\""},
+	Stearic:      whereHelperint{field: "\"lipid\".\"stearic\""},
+	Ricinoleic:   whereHelperint{field: "\"lipid\".\"ricinoleic\""},
+	Oleic:        whereHelperint{field: "\"lipid\".\"oleic\""},
+	Linoleic:     whereHelperint{field: "\"lipid\".\"linoleic\""},
+	Linolenic:    whereHelperint{field: "\"lipid\".\"linolenic\""},
+	Hardness:     whereHelperint{field: "\"lipid\".\"hardness\""},
+	Cleansing:    whereHelperint{field: "\"lipid\".\"cleansing\""},
+	Conditioning: whereHelperint{field: "\"lipid\".\"conditioning\""},
+	Bubbly:       whereHelperint{field: "\"lipid\".\"bubbly\""},
+	Creamy:       whereHelperint{field: "\"lipid\".\"creamy\""},
+	Iodine:       whereHelperint{field: "\"lipid\".\"iodine\""},
+	Ins:          whereHelperint{field: "\"lipid\".\"ins\""},
+	InciName:     whereHelperstring{field: "\"lipid\".\"inci_name\""},
 }
 
-// SoapLipidRels is where relationship names are stored.
-var SoapLipidRels = struct {
-	LipidSoapLipidinventories string
-	LipidSoapRecipelipids     string
+// LipidRels is where relationship names are stored.
+var LipidRels = struct {
+	LipidInventories string
+	RecipeLipids     string
 }{
-	LipidSoapLipidinventories: "LipidSoapLipidinventories",
-	LipidSoapRecipelipids:     "LipidSoapRecipelipids",
+	LipidInventories: "LipidInventories",
+	RecipeLipids:     "RecipeLipids",
 }
 
-// soapLipidR is where relationships are stored.
-type soapLipidR struct {
-	LipidSoapLipidinventories SoapLipidinventorySlice `boil:"LipidSoapLipidinventories" json:"LipidSoapLipidinventories" toml:"LipidSoapLipidinventories" yaml:"LipidSoapLipidinventories"`
-	LipidSoapRecipelipids     SoapRecipelipidSlice    `boil:"LipidSoapRecipelipids" json:"LipidSoapRecipelipids" toml:"LipidSoapRecipelipids" yaml:"LipidSoapRecipelipids"`
+// lipidR is where relationships are stored.
+type lipidR struct {
+	LipidInventories LipidInventorySlice `boil:"LipidInventories" json:"LipidInventories" toml:"LipidInventories" yaml:"LipidInventories"`
+	RecipeLipids     RecipeLipidSlice    `boil:"RecipeLipids" json:"RecipeLipids" toml:"RecipeLipids" yaml:"RecipeLipids"`
 }
 
 // NewStruct creates a new relationship struct
-func (*soapLipidR) NewStruct() *soapLipidR {
-	return &soapLipidR{}
+func (*lipidR) NewStruct() *lipidR {
+	return &lipidR{}
 }
 
-// soapLipidL is where Load methods for each relationship are stored.
-type soapLipidL struct{}
+// lipidL is where Load methods for each relationship are stored.
+type lipidL struct{}
 
 var (
-	soapLipidAllColumns            = []string{"id", "created_at", "updated_at", "deleted_at", "name", "lauric", "myristic", "palmitic", "stearic", "ricinoleic", "oleic", "linoleic", "linolenic", "hardness", "cleansing", "conditioning", "bubbly", "creamy", "iodine", "ins", "inci_name"}
-	soapLipidColumnsWithoutDefault = []string{"created_at", "updated_at", "deleted_at", "name", "lauric", "myristic", "palmitic", "stearic", "ricinoleic", "oleic", "linoleic", "linolenic", "hardness", "cleansing", "conditioning", "bubbly", "creamy", "iodine", "ins", "inci_name"}
-	soapLipidColumnsWithDefault    = []string{"id"}
-	soapLipidPrimaryKeyColumns     = []string{"id"}
+	lipidAllColumns            = []string{"id", "created_at", "updated_at", "deleted_at", "name", "lauric", "myristic", "palmitic", "stearic", "ricinoleic", "oleic", "linoleic", "linolenic", "hardness", "cleansing", "conditioning", "bubbly", "creamy", "iodine", "ins", "inci_name"}
+	lipidColumnsWithoutDefault = []string{"created_at", "updated_at", "deleted_at", "name", "lauric", "myristic", "palmitic", "stearic", "ricinoleic", "oleic", "linoleic", "linolenic", "hardness", "cleansing", "conditioning", "bubbly", "creamy", "iodine", "ins", "inci_name"}
+	lipidColumnsWithDefault    = []string{"id"}
+	lipidPrimaryKeyColumns     = []string{"id"}
 )
 
 type (
-	// SoapLipidSlice is an alias for a slice of pointers to SoapLipid.
-	// This should generally be used opposed to []SoapLipid.
-	SoapLipidSlice []*SoapLipid
-	// SoapLipidHook is the signature for custom SoapLipid hook methods
-	SoapLipidHook func(context.Context, boil.ContextExecutor, *SoapLipid) error
+	// LipidSlice is an alias for a slice of pointers to Lipid.
+	// This should generally be used opposed to []Lipid.
+	LipidSlice []*Lipid
+	// LipidHook is the signature for custom Lipid hook methods
+	LipidHook func(context.Context, boil.ContextExecutor, *Lipid) error
 
-	soapLipidQuery struct {
+	lipidQuery struct {
 		*queries.Query
 	}
 )
 
 // Cache for insert, update and upsert
 var (
-	soapLipidType                 = reflect.TypeOf(&SoapLipid{})
-	soapLipidMapping              = queries.MakeStructMapping(soapLipidType)
-	soapLipidPrimaryKeyMapping, _ = queries.BindMapping(soapLipidType, soapLipidMapping, soapLipidPrimaryKeyColumns)
-	soapLipidInsertCacheMut       sync.RWMutex
-	soapLipidInsertCache          = make(map[string]insertCache)
-	soapLipidUpdateCacheMut       sync.RWMutex
-	soapLipidUpdateCache          = make(map[string]updateCache)
-	soapLipidUpsertCacheMut       sync.RWMutex
-	soapLipidUpsertCache          = make(map[string]insertCache)
+	lipidType                 = reflect.TypeOf(&Lipid{})
+	lipidMapping              = queries.MakeStructMapping(lipidType)
+	lipidPrimaryKeyMapping, _ = queries.BindMapping(lipidType, lipidMapping, lipidPrimaryKeyColumns)
+	lipidInsertCacheMut       sync.RWMutex
+	lipidInsertCache          = make(map[string]insertCache)
+	lipidUpdateCacheMut       sync.RWMutex
+	lipidUpdateCache          = make(map[string]updateCache)
+	lipidUpsertCacheMut       sync.RWMutex
+	lipidUpsertCache          = make(map[string]insertCache)
 )
 
 var (
@@ -207,24 +207,24 @@ var (
 	_ = qmhelper.Where
 )
 
-var soapLipidBeforeInsertHooks []SoapLipidHook
-var soapLipidBeforeUpdateHooks []SoapLipidHook
-var soapLipidBeforeDeleteHooks []SoapLipidHook
-var soapLipidBeforeUpsertHooks []SoapLipidHook
+var lipidBeforeInsertHooks []LipidHook
+var lipidBeforeUpdateHooks []LipidHook
+var lipidBeforeDeleteHooks []LipidHook
+var lipidBeforeUpsertHooks []LipidHook
 
-var soapLipidAfterInsertHooks []SoapLipidHook
-var soapLipidAfterSelectHooks []SoapLipidHook
-var soapLipidAfterUpdateHooks []SoapLipidHook
-var soapLipidAfterDeleteHooks []SoapLipidHook
-var soapLipidAfterUpsertHooks []SoapLipidHook
+var lipidAfterInsertHooks []LipidHook
+var lipidAfterSelectHooks []LipidHook
+var lipidAfterUpdateHooks []LipidHook
+var lipidAfterDeleteHooks []LipidHook
+var lipidAfterUpsertHooks []LipidHook
 
 // doBeforeInsertHooks executes all "before insert" hooks.
-func (o *SoapLipid) doBeforeInsertHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Lipid) doBeforeInsertHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range soapLipidBeforeInsertHooks {
+	for _, hook := range lipidBeforeInsertHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -234,12 +234,12 @@ func (o *SoapLipid) doBeforeInsertHooks(ctx context.Context, exec boil.ContextEx
 }
 
 // doBeforeUpdateHooks executes all "before Update" hooks.
-func (o *SoapLipid) doBeforeUpdateHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Lipid) doBeforeUpdateHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range soapLipidBeforeUpdateHooks {
+	for _, hook := range lipidBeforeUpdateHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -249,12 +249,12 @@ func (o *SoapLipid) doBeforeUpdateHooks(ctx context.Context, exec boil.ContextEx
 }
 
 // doBeforeDeleteHooks executes all "before Delete" hooks.
-func (o *SoapLipid) doBeforeDeleteHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Lipid) doBeforeDeleteHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range soapLipidBeforeDeleteHooks {
+	for _, hook := range lipidBeforeDeleteHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -264,12 +264,12 @@ func (o *SoapLipid) doBeforeDeleteHooks(ctx context.Context, exec boil.ContextEx
 }
 
 // doBeforeUpsertHooks executes all "before Upsert" hooks.
-func (o *SoapLipid) doBeforeUpsertHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Lipid) doBeforeUpsertHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range soapLipidBeforeUpsertHooks {
+	for _, hook := range lipidBeforeUpsertHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -279,12 +279,12 @@ func (o *SoapLipid) doBeforeUpsertHooks(ctx context.Context, exec boil.ContextEx
 }
 
 // doAfterInsertHooks executes all "after Insert" hooks.
-func (o *SoapLipid) doAfterInsertHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Lipid) doAfterInsertHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range soapLipidAfterInsertHooks {
+	for _, hook := range lipidAfterInsertHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -294,12 +294,12 @@ func (o *SoapLipid) doAfterInsertHooks(ctx context.Context, exec boil.ContextExe
 }
 
 // doAfterSelectHooks executes all "after Select" hooks.
-func (o *SoapLipid) doAfterSelectHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Lipid) doAfterSelectHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range soapLipidAfterSelectHooks {
+	for _, hook := range lipidAfterSelectHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -309,12 +309,12 @@ func (o *SoapLipid) doAfterSelectHooks(ctx context.Context, exec boil.ContextExe
 }
 
 // doAfterUpdateHooks executes all "after Update" hooks.
-func (o *SoapLipid) doAfterUpdateHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Lipid) doAfterUpdateHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range soapLipidAfterUpdateHooks {
+	for _, hook := range lipidAfterUpdateHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -324,12 +324,12 @@ func (o *SoapLipid) doAfterUpdateHooks(ctx context.Context, exec boil.ContextExe
 }
 
 // doAfterDeleteHooks executes all "after Delete" hooks.
-func (o *SoapLipid) doAfterDeleteHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Lipid) doAfterDeleteHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range soapLipidAfterDeleteHooks {
+	for _, hook := range lipidAfterDeleteHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -339,12 +339,12 @@ func (o *SoapLipid) doAfterDeleteHooks(ctx context.Context, exec boil.ContextExe
 }
 
 // doAfterUpsertHooks executes all "after Upsert" hooks.
-func (o *SoapLipid) doAfterUpsertHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Lipid) doAfterUpsertHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range soapLipidAfterUpsertHooks {
+	for _, hook := range lipidAfterUpsertHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -353,33 +353,33 @@ func (o *SoapLipid) doAfterUpsertHooks(ctx context.Context, exec boil.ContextExe
 	return nil
 }
 
-// AddSoapLipidHook registers your hook function for all future operations.
-func AddSoapLipidHook(hookPoint boil.HookPoint, soapLipidHook SoapLipidHook) {
+// AddLipidHook registers your hook function for all future operations.
+func AddLipidHook(hookPoint boil.HookPoint, lipidHook LipidHook) {
 	switch hookPoint {
 	case boil.BeforeInsertHook:
-		soapLipidBeforeInsertHooks = append(soapLipidBeforeInsertHooks, soapLipidHook)
+		lipidBeforeInsertHooks = append(lipidBeforeInsertHooks, lipidHook)
 	case boil.BeforeUpdateHook:
-		soapLipidBeforeUpdateHooks = append(soapLipidBeforeUpdateHooks, soapLipidHook)
+		lipidBeforeUpdateHooks = append(lipidBeforeUpdateHooks, lipidHook)
 	case boil.BeforeDeleteHook:
-		soapLipidBeforeDeleteHooks = append(soapLipidBeforeDeleteHooks, soapLipidHook)
+		lipidBeforeDeleteHooks = append(lipidBeforeDeleteHooks, lipidHook)
 	case boil.BeforeUpsertHook:
-		soapLipidBeforeUpsertHooks = append(soapLipidBeforeUpsertHooks, soapLipidHook)
+		lipidBeforeUpsertHooks = append(lipidBeforeUpsertHooks, lipidHook)
 	case boil.AfterInsertHook:
-		soapLipidAfterInsertHooks = append(soapLipidAfterInsertHooks, soapLipidHook)
+		lipidAfterInsertHooks = append(lipidAfterInsertHooks, lipidHook)
 	case boil.AfterSelectHook:
-		soapLipidAfterSelectHooks = append(soapLipidAfterSelectHooks, soapLipidHook)
+		lipidAfterSelectHooks = append(lipidAfterSelectHooks, lipidHook)
 	case boil.AfterUpdateHook:
-		soapLipidAfterUpdateHooks = append(soapLipidAfterUpdateHooks, soapLipidHook)
+		lipidAfterUpdateHooks = append(lipidAfterUpdateHooks, lipidHook)
 	case boil.AfterDeleteHook:
-		soapLipidAfterDeleteHooks = append(soapLipidAfterDeleteHooks, soapLipidHook)
+		lipidAfterDeleteHooks = append(lipidAfterDeleteHooks, lipidHook)
 	case boil.AfterUpsertHook:
-		soapLipidAfterUpsertHooks = append(soapLipidAfterUpsertHooks, soapLipidHook)
+		lipidAfterUpsertHooks = append(lipidAfterUpsertHooks, lipidHook)
 	}
 }
 
-// One returns a single soapLipid record from the query.
-func (q soapLipidQuery) One(ctx context.Context, exec boil.ContextExecutor) (*SoapLipid, error) {
-	o := &SoapLipid{}
+// One returns a single lipid record from the query.
+func (q lipidQuery) One(ctx context.Context, exec boil.ContextExecutor) (*Lipid, error) {
+	o := &Lipid{}
 
 	queries.SetLimit(q.Query, 1)
 
@@ -388,7 +388,7 @@ func (q soapLipidQuery) One(ctx context.Context, exec boil.ContextExecutor) (*So
 		if errors.Cause(err) == sql.ErrNoRows {
 			return nil, sql.ErrNoRows
 		}
-		return nil, errors.Wrap(err, "models: failed to execute a one query for soap_lipid")
+		return nil, errors.Wrap(err, "models: failed to execute a one query for lipid")
 	}
 
 	if err := o.doAfterSelectHooks(ctx, exec); err != nil {
@@ -398,16 +398,16 @@ func (q soapLipidQuery) One(ctx context.Context, exec boil.ContextExecutor) (*So
 	return o, nil
 }
 
-// All returns all SoapLipid records from the query.
-func (q soapLipidQuery) All(ctx context.Context, exec boil.ContextExecutor) (SoapLipidSlice, error) {
-	var o []*SoapLipid
+// All returns all Lipid records from the query.
+func (q lipidQuery) All(ctx context.Context, exec boil.ContextExecutor) (LipidSlice, error) {
+	var o []*Lipid
 
 	err := q.Bind(ctx, exec, &o)
 	if err != nil {
-		return nil, errors.Wrap(err, "models: failed to assign all query results to SoapLipid slice")
+		return nil, errors.Wrap(err, "models: failed to assign all query results to Lipid slice")
 	}
 
-	if len(soapLipidAfterSelectHooks) != 0 {
+	if len(lipidAfterSelectHooks) != 0 {
 		for _, obj := range o {
 			if err := obj.doAfterSelectHooks(ctx, exec); err != nil {
 				return o, err
@@ -418,8 +418,8 @@ func (q soapLipidQuery) All(ctx context.Context, exec boil.ContextExecutor) (Soa
 	return o, nil
 }
 
-// Count returns the count of all SoapLipid records in the query.
-func (q soapLipidQuery) Count(ctx context.Context, exec boil.ContextExecutor) (int64, error) {
+// Count returns the count of all Lipid records in the query.
+func (q lipidQuery) Count(ctx context.Context, exec boil.ContextExecutor) (int64, error) {
 	var count int64
 
 	queries.SetSelect(q.Query, nil)
@@ -427,14 +427,14 @@ func (q soapLipidQuery) Count(ctx context.Context, exec boil.ContextExecutor) (i
 
 	err := q.Query.QueryRowContext(ctx, exec).Scan(&count)
 	if err != nil {
-		return 0, errors.Wrap(err, "models: failed to count soap_lipid rows")
+		return 0, errors.Wrap(err, "models: failed to count lipid rows")
 	}
 
 	return count, nil
 }
 
 // Exists checks if the row exists in the table.
-func (q soapLipidQuery) Exists(ctx context.Context, exec boil.ContextExecutor) (bool, error) {
+func (q lipidQuery) Exists(ctx context.Context, exec boil.ContextExecutor) (bool, error) {
 	var count int64
 
 	queries.SetSelect(q.Query, nil)
@@ -443,79 +443,79 @@ func (q soapLipidQuery) Exists(ctx context.Context, exec boil.ContextExecutor) (
 
 	err := q.Query.QueryRowContext(ctx, exec).Scan(&count)
 	if err != nil {
-		return false, errors.Wrap(err, "models: failed to check if soap_lipid exists")
+		return false, errors.Wrap(err, "models: failed to check if lipid exists")
 	}
 
 	return count > 0, nil
 }
 
-// LipidSoapLipidinventories retrieves all the soap_lipidinventory's SoapLipidinventories with an executor via lipid_id column.
-func (o *SoapLipid) LipidSoapLipidinventories(mods ...qm.QueryMod) soapLipidinventoryQuery {
+// LipidInventories retrieves all the lipid_inventory's LipidInventories with an executor.
+func (o *Lipid) LipidInventories(mods ...qm.QueryMod) lipidInventoryQuery {
 	var queryMods []qm.QueryMod
 	if len(mods) != 0 {
 		queryMods = append(queryMods, mods...)
 	}
 
 	queryMods = append(queryMods,
-		qm.Where("\"soap_lipidinventory\".\"lipid_id\"=?", o.ID),
-		qmhelper.WhereIsNull("\"soap_lipidinventory\".\"deleted_at\""),
+		qm.Where("\"lipid_inventory\".\"lipid_id\"=?", o.ID),
+		qmhelper.WhereIsNull("\"lipid_inventory\".\"deleted_at\""),
 	)
 
-	query := SoapLipidinventories(queryMods...)
-	queries.SetFrom(query.Query, "\"soap_lipidinventory\"")
+	query := LipidInventories(queryMods...)
+	queries.SetFrom(query.Query, "\"lipid_inventory\"")
 
 	if len(queries.GetSelect(query.Query)) == 0 {
-		queries.SetSelect(query.Query, []string{"\"soap_lipidinventory\".*"})
+		queries.SetSelect(query.Query, []string{"\"lipid_inventory\".*"})
 	}
 
 	return query
 }
 
-// LipidSoapRecipelipids retrieves all the soap_recipelipid's SoapRecipelipids with an executor via lipid_id column.
-func (o *SoapLipid) LipidSoapRecipelipids(mods ...qm.QueryMod) soapRecipelipidQuery {
+// RecipeLipids retrieves all the recipe_lipid's RecipeLipids with an executor.
+func (o *Lipid) RecipeLipids(mods ...qm.QueryMod) recipeLipidQuery {
 	var queryMods []qm.QueryMod
 	if len(mods) != 0 {
 		queryMods = append(queryMods, mods...)
 	}
 
 	queryMods = append(queryMods,
-		qm.Where("\"soap_recipelipid\".\"lipid_id\"=?", o.ID),
-		qmhelper.WhereIsNull("\"soap_recipelipid\".\"deleted_at\""),
+		qm.Where("\"recipe_lipid\".\"lipid_id\"=?", o.ID),
+		qmhelper.WhereIsNull("\"recipe_lipid\".\"deleted_at\""),
 	)
 
-	query := SoapRecipelipids(queryMods...)
-	queries.SetFrom(query.Query, "\"soap_recipelipid\"")
+	query := RecipeLipids(queryMods...)
+	queries.SetFrom(query.Query, "\"recipe_lipid\"")
 
 	if len(queries.GetSelect(query.Query)) == 0 {
-		queries.SetSelect(query.Query, []string{"\"soap_recipelipid\".*"})
+		queries.SetSelect(query.Query, []string{"\"recipe_lipid\".*"})
 	}
 
 	return query
 }
 
-// LoadLipidSoapLipidinventories allows an eager lookup of values, cached into the
+// LoadLipidInventories allows an eager lookup of values, cached into the
 // loaded structs of the objects. This is for a 1-M or N-M relationship.
-func (soapLipidL) LoadLipidSoapLipidinventories(ctx context.Context, e boil.ContextExecutor, singular bool, maybeSoapLipid interface{}, mods queries.Applicator) error {
-	var slice []*SoapLipid
-	var object *SoapLipid
+func (lipidL) LoadLipidInventories(ctx context.Context, e boil.ContextExecutor, singular bool, maybeLipid interface{}, mods queries.Applicator) error {
+	var slice []*Lipid
+	var object *Lipid
 
 	if singular {
-		object = maybeSoapLipid.(*SoapLipid)
+		object = maybeLipid.(*Lipid)
 	} else {
-		slice = *maybeSoapLipid.(*[]*SoapLipid)
+		slice = *maybeLipid.(*[]*Lipid)
 	}
 
 	args := make([]interface{}, 0, 1)
 	if singular {
 		if object.R == nil {
-			object.R = &soapLipidR{}
+			object.R = &lipidR{}
 		}
 		args = append(args, object.ID)
 	} else {
 	Outer:
 		for _, obj := range slice {
 			if obj.R == nil {
-				obj.R = &soapLipidR{}
+				obj.R = &lipidR{}
 			}
 
 			for _, a := range args {
@@ -533,9 +533,9 @@ func (soapLipidL) LoadLipidSoapLipidinventories(ctx context.Context, e boil.Cont
 	}
 
 	query := NewQuery(
-		qm.From(`soap_lipidinventory`),
-		qm.WhereIn(`soap_lipidinventory.lipid_id in ?`, args...),
-		qmhelper.WhereIsNull(`soap_lipidinventory.deleted_at`),
+		qm.From(`lipid_inventory`),
+		qm.WhereIn(`lipid_inventory.lipid_id in ?`, args...),
+		qmhelper.WhereIsNull(`lipid_inventory.deleted_at`),
 	)
 	if mods != nil {
 		mods.Apply(query)
@@ -543,22 +543,22 @@ func (soapLipidL) LoadLipidSoapLipidinventories(ctx context.Context, e boil.Cont
 
 	results, err := query.QueryContext(ctx, e)
 	if err != nil {
-		return errors.Wrap(err, "failed to eager load soap_lipidinventory")
+		return errors.Wrap(err, "failed to eager load lipid_inventory")
 	}
 
-	var resultSlice []*SoapLipidinventory
+	var resultSlice []*LipidInventory
 	if err = queries.Bind(results, &resultSlice); err != nil {
-		return errors.Wrap(err, "failed to bind eager loaded slice soap_lipidinventory")
+		return errors.Wrap(err, "failed to bind eager loaded slice lipid_inventory")
 	}
 
 	if err = results.Close(); err != nil {
-		return errors.Wrap(err, "failed to close results in eager load on soap_lipidinventory")
+		return errors.Wrap(err, "failed to close results in eager load on lipid_inventory")
 	}
 	if err = results.Err(); err != nil {
-		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for soap_lipidinventory")
+		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for lipid_inventory")
 	}
 
-	if len(soapLipidinventoryAfterSelectHooks) != 0 {
+	if len(lipidInventoryAfterSelectHooks) != 0 {
 		for _, obj := range resultSlice {
 			if err := obj.doAfterSelectHooks(ctx, e); err != nil {
 				return err
@@ -566,14 +566,14 @@ func (soapLipidL) LoadLipidSoapLipidinventories(ctx context.Context, e boil.Cont
 		}
 	}
 	if singular {
-		object.R.LipidSoapLipidinventories = resultSlice
+		object.R.LipidInventories = resultSlice
 		return nil
 	}
 
 	for _, foreign := range resultSlice {
 		for _, local := range slice {
 			if local.ID == foreign.LipidID {
-				local.R.LipidSoapLipidinventories = append(local.R.LipidSoapLipidinventories, foreign)
+				local.R.LipidInventories = append(local.R.LipidInventories, foreign)
 				break
 			}
 		}
@@ -582,29 +582,29 @@ func (soapLipidL) LoadLipidSoapLipidinventories(ctx context.Context, e boil.Cont
 	return nil
 }
 
-// LoadLipidSoapRecipelipids allows an eager lookup of values, cached into the
+// LoadRecipeLipids allows an eager lookup of values, cached into the
 // loaded structs of the objects. This is for a 1-M or N-M relationship.
-func (soapLipidL) LoadLipidSoapRecipelipids(ctx context.Context, e boil.ContextExecutor, singular bool, maybeSoapLipid interface{}, mods queries.Applicator) error {
-	var slice []*SoapLipid
-	var object *SoapLipid
+func (lipidL) LoadRecipeLipids(ctx context.Context, e boil.ContextExecutor, singular bool, maybeLipid interface{}, mods queries.Applicator) error {
+	var slice []*Lipid
+	var object *Lipid
 
 	if singular {
-		object = maybeSoapLipid.(*SoapLipid)
+		object = maybeLipid.(*Lipid)
 	} else {
-		slice = *maybeSoapLipid.(*[]*SoapLipid)
+		slice = *maybeLipid.(*[]*Lipid)
 	}
 
 	args := make([]interface{}, 0, 1)
 	if singular {
 		if object.R == nil {
-			object.R = &soapLipidR{}
+			object.R = &lipidR{}
 		}
 		args = append(args, object.ID)
 	} else {
 	Outer:
 		for _, obj := range slice {
 			if obj.R == nil {
-				obj.R = &soapLipidR{}
+				obj.R = &lipidR{}
 			}
 
 			for _, a := range args {
@@ -622,9 +622,9 @@ func (soapLipidL) LoadLipidSoapRecipelipids(ctx context.Context, e boil.ContextE
 	}
 
 	query := NewQuery(
-		qm.From(`soap_recipelipid`),
-		qm.WhereIn(`soap_recipelipid.lipid_id in ?`, args...),
-		qmhelper.WhereIsNull(`soap_recipelipid.deleted_at`),
+		qm.From(`recipe_lipid`),
+		qm.WhereIn(`recipe_lipid.lipid_id in ?`, args...),
+		qmhelper.WhereIsNull(`recipe_lipid.deleted_at`),
 	)
 	if mods != nil {
 		mods.Apply(query)
@@ -632,22 +632,22 @@ func (soapLipidL) LoadLipidSoapRecipelipids(ctx context.Context, e boil.ContextE
 
 	results, err := query.QueryContext(ctx, e)
 	if err != nil {
-		return errors.Wrap(err, "failed to eager load soap_recipelipid")
+		return errors.Wrap(err, "failed to eager load recipe_lipid")
 	}
 
-	var resultSlice []*SoapRecipelipid
+	var resultSlice []*RecipeLipid
 	if err = queries.Bind(results, &resultSlice); err != nil {
-		return errors.Wrap(err, "failed to bind eager loaded slice soap_recipelipid")
+		return errors.Wrap(err, "failed to bind eager loaded slice recipe_lipid")
 	}
 
 	if err = results.Close(); err != nil {
-		return errors.Wrap(err, "failed to close results in eager load on soap_recipelipid")
+		return errors.Wrap(err, "failed to close results in eager load on recipe_lipid")
 	}
 	if err = results.Err(); err != nil {
-		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for soap_recipelipid")
+		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for recipe_lipid")
 	}
 
-	if len(soapRecipelipidAfterSelectHooks) != 0 {
+	if len(recipeLipidAfterSelectHooks) != 0 {
 		for _, obj := range resultSlice {
 			if err := obj.doAfterSelectHooks(ctx, e); err != nil {
 				return err
@@ -655,14 +655,14 @@ func (soapLipidL) LoadLipidSoapRecipelipids(ctx context.Context, e boil.ContextE
 		}
 	}
 	if singular {
-		object.R.LipidSoapRecipelipids = resultSlice
+		object.R.RecipeLipids = resultSlice
 		return nil
 	}
 
 	for _, foreign := range resultSlice {
 		for _, local := range slice {
 			if local.ID == foreign.LipidID {
-				local.R.LipidSoapRecipelipids = append(local.R.LipidSoapRecipelipids, foreign)
+				local.R.RecipeLipids = append(local.R.RecipeLipids, foreign)
 				break
 			}
 		}
@@ -671,11 +671,11 @@ func (soapLipidL) LoadLipidSoapRecipelipids(ctx context.Context, e boil.ContextE
 	return nil
 }
 
-// AddLipidSoapLipidinventories adds the given related objects to the existing relationships
-// of the soap_lipid, optionally inserting them as new records.
-// Appends related to o.R.LipidSoapLipidinventories.
+// AddLipidInventories adds the given related objects to the existing relationships
+// of the lipid, optionally inserting them as new records.
+// Appends related to o.R.LipidInventories.
 // Sets related.R.Lipid appropriately.
-func (o *SoapLipid) AddLipidSoapLipidinventories(ctx context.Context, exec boil.ContextExecutor, insert bool, related ...*SoapLipidinventory) error {
+func (o *Lipid) AddLipidInventories(ctx context.Context, exec boil.ContextExecutor, insert bool, related ...*LipidInventory) error {
 	var err error
 	for _, rel := range related {
 		if insert {
@@ -685,9 +685,9 @@ func (o *SoapLipid) AddLipidSoapLipidinventories(ctx context.Context, exec boil.
 			}
 		} else {
 			updateQuery := fmt.Sprintf(
-				"UPDATE \"soap_lipidinventory\" SET %s WHERE %s",
+				"UPDATE \"lipid_inventory\" SET %s WHERE %s",
 				strmangle.SetParamNames("\"", "\"", 1, []string{"lipid_id"}),
-				strmangle.WhereClause("\"", "\"", 2, soapLipidinventoryPrimaryKeyColumns),
+				strmangle.WhereClause("\"", "\"", 2, lipidInventoryPrimaryKeyColumns),
 			)
 			values := []interface{}{o.ID, rel.ID}
 
@@ -705,16 +705,16 @@ func (o *SoapLipid) AddLipidSoapLipidinventories(ctx context.Context, exec boil.
 	}
 
 	if o.R == nil {
-		o.R = &soapLipidR{
-			LipidSoapLipidinventories: related,
+		o.R = &lipidR{
+			LipidInventories: related,
 		}
 	} else {
-		o.R.LipidSoapLipidinventories = append(o.R.LipidSoapLipidinventories, related...)
+		o.R.LipidInventories = append(o.R.LipidInventories, related...)
 	}
 
 	for _, rel := range related {
 		if rel.R == nil {
-			rel.R = &soapLipidinventoryR{
+			rel.R = &lipidInventoryR{
 				Lipid: o,
 			}
 		} else {
@@ -724,11 +724,11 @@ func (o *SoapLipid) AddLipidSoapLipidinventories(ctx context.Context, exec boil.
 	return nil
 }
 
-// AddLipidSoapRecipelipids adds the given related objects to the existing relationships
-// of the soap_lipid, optionally inserting them as new records.
-// Appends related to o.R.LipidSoapRecipelipids.
+// AddRecipeLipids adds the given related objects to the existing relationships
+// of the lipid, optionally inserting them as new records.
+// Appends related to o.R.RecipeLipids.
 // Sets related.R.Lipid appropriately.
-func (o *SoapLipid) AddLipidSoapRecipelipids(ctx context.Context, exec boil.ContextExecutor, insert bool, related ...*SoapRecipelipid) error {
+func (o *Lipid) AddRecipeLipids(ctx context.Context, exec boil.ContextExecutor, insert bool, related ...*RecipeLipid) error {
 	var err error
 	for _, rel := range related {
 		if insert {
@@ -738,9 +738,9 @@ func (o *SoapLipid) AddLipidSoapRecipelipids(ctx context.Context, exec boil.Cont
 			}
 		} else {
 			updateQuery := fmt.Sprintf(
-				"UPDATE \"soap_recipelipid\" SET %s WHERE %s",
+				"UPDATE \"recipe_lipid\" SET %s WHERE %s",
 				strmangle.SetParamNames("\"", "\"", 1, []string{"lipid_id"}),
-				strmangle.WhereClause("\"", "\"", 2, soapRecipelipidPrimaryKeyColumns),
+				strmangle.WhereClause("\"", "\"", 2, recipeLipidPrimaryKeyColumns),
 			)
 			values := []interface{}{o.ID, rel.ID}
 
@@ -758,16 +758,16 @@ func (o *SoapLipid) AddLipidSoapRecipelipids(ctx context.Context, exec boil.Cont
 	}
 
 	if o.R == nil {
-		o.R = &soapLipidR{
-			LipidSoapRecipelipids: related,
+		o.R = &lipidR{
+			RecipeLipids: related,
 		}
 	} else {
-		o.R.LipidSoapRecipelipids = append(o.R.LipidSoapRecipelipids, related...)
+		o.R.RecipeLipids = append(o.R.RecipeLipids, related...)
 	}
 
 	for _, rel := range related {
 		if rel.R == nil {
-			rel.R = &soapRecipelipidR{
+			rel.R = &recipeLipidR{
 				Lipid: o,
 			}
 		} else {
@@ -777,43 +777,43 @@ func (o *SoapLipid) AddLipidSoapRecipelipids(ctx context.Context, exec boil.Cont
 	return nil
 }
 
-// SoapLipids retrieves all the records using an executor.
-func SoapLipids(mods ...qm.QueryMod) soapLipidQuery {
-	mods = append(mods, qm.From("\"soap_lipid\""), qmhelper.WhereIsNull("\"soap_lipid\".\"deleted_at\""))
-	return soapLipidQuery{NewQuery(mods...)}
+// Lipids retrieves all the records using an executor.
+func Lipids(mods ...qm.QueryMod) lipidQuery {
+	mods = append(mods, qm.From("\"lipid\""), qmhelper.WhereIsNull("\"lipid\".\"deleted_at\""))
+	return lipidQuery{NewQuery(mods...)}
 }
 
-// FindSoapLipid retrieves a single record by ID with an executor.
+// FindLipid retrieves a single record by ID with an executor.
 // If selectCols is empty Find will return all columns.
-func FindSoapLipid(ctx context.Context, exec boil.ContextExecutor, iD int, selectCols ...string) (*SoapLipid, error) {
-	soapLipidObj := &SoapLipid{}
+func FindLipid(ctx context.Context, exec boil.ContextExecutor, iD int, selectCols ...string) (*Lipid, error) {
+	lipidObj := &Lipid{}
 
 	sel := "*"
 	if len(selectCols) > 0 {
 		sel = strings.Join(strmangle.IdentQuoteSlice(dialect.LQ, dialect.RQ, selectCols), ",")
 	}
 	query := fmt.Sprintf(
-		"select %s from \"soap_lipid\" where \"id\"=$1 and \"deleted_at\" is null", sel,
+		"select %s from \"lipid\" where \"id\"=$1 and \"deleted_at\" is null", sel,
 	)
 
 	q := queries.Raw(query, iD)
 
-	err := q.Bind(ctx, exec, soapLipidObj)
+	err := q.Bind(ctx, exec, lipidObj)
 	if err != nil {
 		if errors.Cause(err) == sql.ErrNoRows {
 			return nil, sql.ErrNoRows
 		}
-		return nil, errors.Wrap(err, "models: unable to select from soap_lipid")
+		return nil, errors.Wrap(err, "models: unable to select from lipid")
 	}
 
-	return soapLipidObj, nil
+	return lipidObj, nil
 }
 
 // Insert a single record using an executor.
 // See boil.Columns.InsertColumnSet documentation to understand column list inference for inserts.
-func (o *SoapLipid) Insert(ctx context.Context, exec boil.ContextExecutor, columns boil.Columns) error {
+func (o *Lipid) Insert(ctx context.Context, exec boil.ContextExecutor, columns boil.Columns) error {
 	if o == nil {
-		return errors.New("models: no soap_lipid provided for insertion")
+		return errors.New("models: no lipid provided for insertion")
 	}
 
 	var err error
@@ -832,33 +832,33 @@ func (o *SoapLipid) Insert(ctx context.Context, exec boil.ContextExecutor, colum
 		return err
 	}
 
-	nzDefaults := queries.NonZeroDefaultSet(soapLipidColumnsWithDefault, o)
+	nzDefaults := queries.NonZeroDefaultSet(lipidColumnsWithDefault, o)
 
 	key := makeCacheKey(columns, nzDefaults)
-	soapLipidInsertCacheMut.RLock()
-	cache, cached := soapLipidInsertCache[key]
-	soapLipidInsertCacheMut.RUnlock()
+	lipidInsertCacheMut.RLock()
+	cache, cached := lipidInsertCache[key]
+	lipidInsertCacheMut.RUnlock()
 
 	if !cached {
 		wl, returnColumns := columns.InsertColumnSet(
-			soapLipidAllColumns,
-			soapLipidColumnsWithDefault,
-			soapLipidColumnsWithoutDefault,
+			lipidAllColumns,
+			lipidColumnsWithDefault,
+			lipidColumnsWithoutDefault,
 			nzDefaults,
 		)
 
-		cache.valueMapping, err = queries.BindMapping(soapLipidType, soapLipidMapping, wl)
+		cache.valueMapping, err = queries.BindMapping(lipidType, lipidMapping, wl)
 		if err != nil {
 			return err
 		}
-		cache.retMapping, err = queries.BindMapping(soapLipidType, soapLipidMapping, returnColumns)
+		cache.retMapping, err = queries.BindMapping(lipidType, lipidMapping, returnColumns)
 		if err != nil {
 			return err
 		}
 		if len(wl) != 0 {
-			cache.query = fmt.Sprintf("INSERT INTO \"soap_lipid\" (\"%s\") %%sVALUES (%s)%%s", strings.Join(wl, "\",\""), strmangle.Placeholders(dialect.UseIndexPlaceholders, len(wl), 1, 1))
+			cache.query = fmt.Sprintf("INSERT INTO \"lipid\" (\"%s\") %%sVALUES (%s)%%s", strings.Join(wl, "\",\""), strmangle.Placeholders(dialect.UseIndexPlaceholders, len(wl), 1, 1))
 		} else {
-			cache.query = "INSERT INTO \"soap_lipid\" %sDEFAULT VALUES%s"
+			cache.query = "INSERT INTO \"lipid\" %sDEFAULT VALUES%s"
 		}
 
 		var queryOutput, queryReturning string
@@ -886,22 +886,22 @@ func (o *SoapLipid) Insert(ctx context.Context, exec boil.ContextExecutor, colum
 	}
 
 	if err != nil {
-		return errors.Wrap(err, "models: unable to insert into soap_lipid")
+		return errors.Wrap(err, "models: unable to insert into lipid")
 	}
 
 	if !cached {
-		soapLipidInsertCacheMut.Lock()
-		soapLipidInsertCache[key] = cache
-		soapLipidInsertCacheMut.Unlock()
+		lipidInsertCacheMut.Lock()
+		lipidInsertCache[key] = cache
+		lipidInsertCacheMut.Unlock()
 	}
 
 	return o.doAfterInsertHooks(ctx, exec)
 }
 
-// Update uses an executor to update the SoapLipid.
+// Update uses an executor to update the Lipid.
 // See boil.Columns.UpdateColumnSet documentation to understand column list inference for updates.
 // Update does not automatically update the record in case of default values. Use .Reload() to refresh the records.
-func (o *SoapLipid) Update(ctx context.Context, exec boil.ContextExecutor, columns boil.Columns) (int64, error) {
+func (o *Lipid) Update(ctx context.Context, exec boil.ContextExecutor, columns boil.Columns) (int64, error) {
 	if !boil.TimestampsAreSkipped(ctx) {
 		currTime := time.Now().In(boil.GetLocation())
 
@@ -913,28 +913,28 @@ func (o *SoapLipid) Update(ctx context.Context, exec boil.ContextExecutor, colum
 		return 0, err
 	}
 	key := makeCacheKey(columns, nil)
-	soapLipidUpdateCacheMut.RLock()
-	cache, cached := soapLipidUpdateCache[key]
-	soapLipidUpdateCacheMut.RUnlock()
+	lipidUpdateCacheMut.RLock()
+	cache, cached := lipidUpdateCache[key]
+	lipidUpdateCacheMut.RUnlock()
 
 	if !cached {
 		wl := columns.UpdateColumnSet(
-			soapLipidAllColumns,
-			soapLipidPrimaryKeyColumns,
+			lipidAllColumns,
+			lipidPrimaryKeyColumns,
 		)
 
 		if !columns.IsWhitelist() {
 			wl = strmangle.SetComplement(wl, []string{"created_at"})
 		}
 		if len(wl) == 0 {
-			return 0, errors.New("models: unable to update soap_lipid, could not build whitelist")
+			return 0, errors.New("models: unable to update lipid, could not build whitelist")
 		}
 
-		cache.query = fmt.Sprintf("UPDATE \"soap_lipid\" SET %s WHERE %s",
+		cache.query = fmt.Sprintf("UPDATE \"lipid\" SET %s WHERE %s",
 			strmangle.SetParamNames("\"", "\"", 1, wl),
-			strmangle.WhereClause("\"", "\"", len(wl)+1, soapLipidPrimaryKeyColumns),
+			strmangle.WhereClause("\"", "\"", len(wl)+1, lipidPrimaryKeyColumns),
 		)
-		cache.valueMapping, err = queries.BindMapping(soapLipidType, soapLipidMapping, append(wl, soapLipidPrimaryKeyColumns...))
+		cache.valueMapping, err = queries.BindMapping(lipidType, lipidMapping, append(wl, lipidPrimaryKeyColumns...))
 		if err != nil {
 			return 0, err
 		}
@@ -950,42 +950,42 @@ func (o *SoapLipid) Update(ctx context.Context, exec boil.ContextExecutor, colum
 	var result sql.Result
 	result, err = exec.ExecContext(ctx, cache.query, values...)
 	if err != nil {
-		return 0, errors.Wrap(err, "models: unable to update soap_lipid row")
+		return 0, errors.Wrap(err, "models: unable to update lipid row")
 	}
 
 	rowsAff, err := result.RowsAffected()
 	if err != nil {
-		return 0, errors.Wrap(err, "models: failed to get rows affected by update for soap_lipid")
+		return 0, errors.Wrap(err, "models: failed to get rows affected by update for lipid")
 	}
 
 	if !cached {
-		soapLipidUpdateCacheMut.Lock()
-		soapLipidUpdateCache[key] = cache
-		soapLipidUpdateCacheMut.Unlock()
+		lipidUpdateCacheMut.Lock()
+		lipidUpdateCache[key] = cache
+		lipidUpdateCacheMut.Unlock()
 	}
 
 	return rowsAff, o.doAfterUpdateHooks(ctx, exec)
 }
 
 // UpdateAll updates all rows with the specified column values.
-func (q soapLipidQuery) UpdateAll(ctx context.Context, exec boil.ContextExecutor, cols M) (int64, error) {
+func (q lipidQuery) UpdateAll(ctx context.Context, exec boil.ContextExecutor, cols M) (int64, error) {
 	queries.SetUpdate(q.Query, cols)
 
 	result, err := q.Query.ExecContext(ctx, exec)
 	if err != nil {
-		return 0, errors.Wrap(err, "models: unable to update all for soap_lipid")
+		return 0, errors.Wrap(err, "models: unable to update all for lipid")
 	}
 
 	rowsAff, err := result.RowsAffected()
 	if err != nil {
-		return 0, errors.Wrap(err, "models: unable to retrieve rows affected for soap_lipid")
+		return 0, errors.Wrap(err, "models: unable to retrieve rows affected for lipid")
 	}
 
 	return rowsAff, nil
 }
 
 // UpdateAll updates all rows with the specified column values, using an executor.
-func (o SoapLipidSlice) UpdateAll(ctx context.Context, exec boil.ContextExecutor, cols M) (int64, error) {
+func (o LipidSlice) UpdateAll(ctx context.Context, exec boil.ContextExecutor, cols M) (int64, error) {
 	ln := int64(len(o))
 	if ln == 0 {
 		return 0, nil
@@ -1007,13 +1007,13 @@ func (o SoapLipidSlice) UpdateAll(ctx context.Context, exec boil.ContextExecutor
 
 	// Append all of the primary key values for each column
 	for _, obj := range o {
-		pkeyArgs := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(obj)), soapLipidPrimaryKeyMapping)
+		pkeyArgs := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(obj)), lipidPrimaryKeyMapping)
 		args = append(args, pkeyArgs...)
 	}
 
-	sql := fmt.Sprintf("UPDATE \"soap_lipid\" SET %s WHERE %s",
+	sql := fmt.Sprintf("UPDATE \"lipid\" SET %s WHERE %s",
 		strmangle.SetParamNames("\"", "\"", 1, colNames),
-		strmangle.WhereClauseRepeated(string(dialect.LQ), string(dialect.RQ), len(colNames)+1, soapLipidPrimaryKeyColumns, len(o)))
+		strmangle.WhereClauseRepeated(string(dialect.LQ), string(dialect.RQ), len(colNames)+1, lipidPrimaryKeyColumns, len(o)))
 
 	if boil.IsDebug(ctx) {
 		writer := boil.DebugWriterFrom(ctx)
@@ -1022,21 +1022,21 @@ func (o SoapLipidSlice) UpdateAll(ctx context.Context, exec boil.ContextExecutor
 	}
 	result, err := exec.ExecContext(ctx, sql, args...)
 	if err != nil {
-		return 0, errors.Wrap(err, "models: unable to update all in soapLipid slice")
+		return 0, errors.Wrap(err, "models: unable to update all in lipid slice")
 	}
 
 	rowsAff, err := result.RowsAffected()
 	if err != nil {
-		return 0, errors.Wrap(err, "models: unable to retrieve rows affected all in update all soapLipid")
+		return 0, errors.Wrap(err, "models: unable to retrieve rows affected all in update all lipid")
 	}
 	return rowsAff, nil
 }
 
 // Upsert attempts an insert using an executor, and does an update or ignore on conflict.
 // See boil.Columns documentation for how to properly use updateColumns and insertColumns.
-func (o *SoapLipid) Upsert(ctx context.Context, exec boil.ContextExecutor, updateOnConflict bool, conflictColumns []string, updateColumns, insertColumns boil.Columns) error {
+func (o *Lipid) Upsert(ctx context.Context, exec boil.ContextExecutor, updateOnConflict bool, conflictColumns []string, updateColumns, insertColumns boil.Columns) error {
 	if o == nil {
-		return errors.New("models: no soap_lipid provided for upsert")
+		return errors.New("models: no lipid provided for upsert")
 	}
 	if !boil.TimestampsAreSkipped(ctx) {
 		currTime := time.Now().In(boil.GetLocation())
@@ -1051,7 +1051,7 @@ func (o *SoapLipid) Upsert(ctx context.Context, exec boil.ContextExecutor, updat
 		return err
 	}
 
-	nzDefaults := queries.NonZeroDefaultSet(soapLipidColumnsWithDefault, o)
+	nzDefaults := queries.NonZeroDefaultSet(lipidColumnsWithDefault, o)
 
 	// Build cache key in-line uglily - mysql vs psql problems
 	buf := strmangle.GetBuffer()
@@ -1081,41 +1081,41 @@ func (o *SoapLipid) Upsert(ctx context.Context, exec boil.ContextExecutor, updat
 	key := buf.String()
 	strmangle.PutBuffer(buf)
 
-	soapLipidUpsertCacheMut.RLock()
-	cache, cached := soapLipidUpsertCache[key]
-	soapLipidUpsertCacheMut.RUnlock()
+	lipidUpsertCacheMut.RLock()
+	cache, cached := lipidUpsertCache[key]
+	lipidUpsertCacheMut.RUnlock()
 
 	var err error
 
 	if !cached {
 		insert, ret := insertColumns.InsertColumnSet(
-			soapLipidAllColumns,
-			soapLipidColumnsWithDefault,
-			soapLipidColumnsWithoutDefault,
+			lipidAllColumns,
+			lipidColumnsWithDefault,
+			lipidColumnsWithoutDefault,
 			nzDefaults,
 		)
 		update := updateColumns.UpdateColumnSet(
-			soapLipidAllColumns,
-			soapLipidPrimaryKeyColumns,
+			lipidAllColumns,
+			lipidPrimaryKeyColumns,
 		)
 
 		if updateOnConflict && len(update) == 0 {
-			return errors.New("models: unable to upsert soap_lipid, could not build update column list")
+			return errors.New("models: unable to upsert lipid, could not build update column list")
 		}
 
 		conflict := conflictColumns
 		if len(conflict) == 0 {
-			conflict = make([]string, len(soapLipidPrimaryKeyColumns))
-			copy(conflict, soapLipidPrimaryKeyColumns)
+			conflict = make([]string, len(lipidPrimaryKeyColumns))
+			copy(conflict, lipidPrimaryKeyColumns)
 		}
-		cache.query = buildUpsertQueryPostgres(dialect, "\"soap_lipid\"", updateOnConflict, ret, update, conflict, insert)
+		cache.query = buildUpsertQueryPostgres(dialect, "\"lipid\"", updateOnConflict, ret, update, conflict, insert)
 
-		cache.valueMapping, err = queries.BindMapping(soapLipidType, soapLipidMapping, insert)
+		cache.valueMapping, err = queries.BindMapping(lipidType, lipidMapping, insert)
 		if err != nil {
 			return err
 		}
 		if len(ret) != 0 {
-			cache.retMapping, err = queries.BindMapping(soapLipidType, soapLipidMapping, ret)
+			cache.retMapping, err = queries.BindMapping(lipidType, lipidMapping, ret)
 			if err != nil {
 				return err
 			}
@@ -1143,23 +1143,23 @@ func (o *SoapLipid) Upsert(ctx context.Context, exec boil.ContextExecutor, updat
 		_, err = exec.ExecContext(ctx, cache.query, vals...)
 	}
 	if err != nil {
-		return errors.Wrap(err, "models: unable to upsert soap_lipid")
+		return errors.Wrap(err, "models: unable to upsert lipid")
 	}
 
 	if !cached {
-		soapLipidUpsertCacheMut.Lock()
-		soapLipidUpsertCache[key] = cache
-		soapLipidUpsertCacheMut.Unlock()
+		lipidUpsertCacheMut.Lock()
+		lipidUpsertCache[key] = cache
+		lipidUpsertCacheMut.Unlock()
 	}
 
 	return o.doAfterUpsertHooks(ctx, exec)
 }
 
-// Delete deletes a single SoapLipid record with an executor.
+// Delete deletes a single Lipid record with an executor.
 // Delete will match against the primary key column to find the record to delete.
-func (o *SoapLipid) Delete(ctx context.Context, exec boil.ContextExecutor, hardDelete bool) (int64, error) {
+func (o *Lipid) Delete(ctx context.Context, exec boil.ContextExecutor, hardDelete bool) (int64, error) {
 	if o == nil {
-		return 0, errors.New("models: no SoapLipid provided for delete")
+		return 0, errors.New("models: no Lipid provided for delete")
 	}
 
 	if err := o.doBeforeDeleteHooks(ctx, exec); err != nil {
@@ -1171,16 +1171,16 @@ func (o *SoapLipid) Delete(ctx context.Context, exec boil.ContextExecutor, hardD
 		args []interface{}
 	)
 	if hardDelete {
-		args = queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(o)), soapLipidPrimaryKeyMapping)
-		sql = "DELETE FROM \"soap_lipid\" WHERE \"id\"=$1"
+		args = queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(o)), lipidPrimaryKeyMapping)
+		sql = "DELETE FROM \"lipid\" WHERE \"id\"=$1"
 	} else {
 		currTime := time.Now().In(boil.GetLocation())
 		o.DeletedAt = null.TimeFrom(currTime)
 		wl := []string{"deleted_at"}
-		sql = fmt.Sprintf("UPDATE \"soap_lipid\" SET %s WHERE \"id\"=$2",
+		sql = fmt.Sprintf("UPDATE \"lipid\" SET %s WHERE \"id\"=$2",
 			strmangle.SetParamNames("\"", "\"", 1, wl),
 		)
-		valueMapping, err := queries.BindMapping(soapLipidType, soapLipidMapping, append(wl, soapLipidPrimaryKeyColumns...))
+		valueMapping, err := queries.BindMapping(lipidType, lipidMapping, append(wl, lipidPrimaryKeyColumns...))
 		if err != nil {
 			return 0, err
 		}
@@ -1194,12 +1194,12 @@ func (o *SoapLipid) Delete(ctx context.Context, exec boil.ContextExecutor, hardD
 	}
 	result, err := exec.ExecContext(ctx, sql, args...)
 	if err != nil {
-		return 0, errors.Wrap(err, "models: unable to delete from soap_lipid")
+		return 0, errors.Wrap(err, "models: unable to delete from lipid")
 	}
 
 	rowsAff, err := result.RowsAffected()
 	if err != nil {
-		return 0, errors.Wrap(err, "models: failed to get rows affected by delete for soap_lipid")
+		return 0, errors.Wrap(err, "models: failed to get rows affected by delete for lipid")
 	}
 
 	if err := o.doAfterDeleteHooks(ctx, exec); err != nil {
@@ -1210,9 +1210,9 @@ func (o *SoapLipid) Delete(ctx context.Context, exec boil.ContextExecutor, hardD
 }
 
 // DeleteAll deletes all matching rows.
-func (q soapLipidQuery) DeleteAll(ctx context.Context, exec boil.ContextExecutor, hardDelete bool) (int64, error) {
+func (q lipidQuery) DeleteAll(ctx context.Context, exec boil.ContextExecutor, hardDelete bool) (int64, error) {
 	if q.Query == nil {
-		return 0, errors.New("models: no soapLipidQuery provided for delete all")
+		return 0, errors.New("models: no lipidQuery provided for delete all")
 	}
 
 	if hardDelete {
@@ -1224,24 +1224,24 @@ func (q soapLipidQuery) DeleteAll(ctx context.Context, exec boil.ContextExecutor
 
 	result, err := q.Query.ExecContext(ctx, exec)
 	if err != nil {
-		return 0, errors.Wrap(err, "models: unable to delete all from soap_lipid")
+		return 0, errors.Wrap(err, "models: unable to delete all from lipid")
 	}
 
 	rowsAff, err := result.RowsAffected()
 	if err != nil {
-		return 0, errors.Wrap(err, "models: failed to get rows affected by deleteall for soap_lipid")
+		return 0, errors.Wrap(err, "models: failed to get rows affected by deleteall for lipid")
 	}
 
 	return rowsAff, nil
 }
 
 // DeleteAll deletes all rows in the slice, using an executor.
-func (o SoapLipidSlice) DeleteAll(ctx context.Context, exec boil.ContextExecutor, hardDelete bool) (int64, error) {
+func (o LipidSlice) DeleteAll(ctx context.Context, exec boil.ContextExecutor, hardDelete bool) (int64, error) {
 	if len(o) == 0 {
 		return 0, nil
 	}
 
-	if len(soapLipidBeforeDeleteHooks) != 0 {
+	if len(lipidBeforeDeleteHooks) != 0 {
 		for _, obj := range o {
 			if err := obj.doBeforeDeleteHooks(ctx, exec); err != nil {
 				return 0, err
@@ -1255,21 +1255,21 @@ func (o SoapLipidSlice) DeleteAll(ctx context.Context, exec boil.ContextExecutor
 	)
 	if hardDelete {
 		for _, obj := range o {
-			pkeyArgs := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(obj)), soapLipidPrimaryKeyMapping)
+			pkeyArgs := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(obj)), lipidPrimaryKeyMapping)
 			args = append(args, pkeyArgs...)
 		}
-		sql = "DELETE FROM \"soap_lipid\" WHERE " +
-			strmangle.WhereClauseRepeated(string(dialect.LQ), string(dialect.RQ), 1, soapLipidPrimaryKeyColumns, len(o))
+		sql = "DELETE FROM \"lipid\" WHERE " +
+			strmangle.WhereClauseRepeated(string(dialect.LQ), string(dialect.RQ), 1, lipidPrimaryKeyColumns, len(o))
 	} else {
 		currTime := time.Now().In(boil.GetLocation())
 		for _, obj := range o {
-			pkeyArgs := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(obj)), soapLipidPrimaryKeyMapping)
+			pkeyArgs := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(obj)), lipidPrimaryKeyMapping)
 			args = append(args, pkeyArgs...)
 			obj.DeletedAt = null.TimeFrom(currTime)
 		}
 		wl := []string{"deleted_at"}
-		sql = fmt.Sprintf("UPDATE \"soap_lipid\" SET %s WHERE "+
-			strmangle.WhereClauseRepeated(string(dialect.LQ), string(dialect.RQ), 2, soapLipidPrimaryKeyColumns, len(o)),
+		sql = fmt.Sprintf("UPDATE \"lipid\" SET %s WHERE "+
+			strmangle.WhereClauseRepeated(string(dialect.LQ), string(dialect.RQ), 2, lipidPrimaryKeyColumns, len(o)),
 			strmangle.SetParamNames("\"", "\"", 1, wl),
 		)
 		args = append([]interface{}{currTime}, args...)
@@ -1282,15 +1282,15 @@ func (o SoapLipidSlice) DeleteAll(ctx context.Context, exec boil.ContextExecutor
 	}
 	result, err := exec.ExecContext(ctx, sql, args...)
 	if err != nil {
-		return 0, errors.Wrap(err, "models: unable to delete all from soapLipid slice")
+		return 0, errors.Wrap(err, "models: unable to delete all from lipid slice")
 	}
 
 	rowsAff, err := result.RowsAffected()
 	if err != nil {
-		return 0, errors.Wrap(err, "models: failed to get rows affected by deleteall for soap_lipid")
+		return 0, errors.Wrap(err, "models: failed to get rows affected by deleteall for lipid")
 	}
 
-	if len(soapLipidAfterDeleteHooks) != 0 {
+	if len(lipidAfterDeleteHooks) != 0 {
 		for _, obj := range o {
 			if err := obj.doAfterDeleteHooks(ctx, exec); err != nil {
 				return 0, err
@@ -1303,8 +1303,8 @@ func (o SoapLipidSlice) DeleteAll(ctx context.Context, exec boil.ContextExecutor
 
 // Reload refetches the object from the database
 // using the primary keys with an executor.
-func (o *SoapLipid) Reload(ctx context.Context, exec boil.ContextExecutor) error {
-	ret, err := FindSoapLipid(ctx, exec, o.ID)
+func (o *Lipid) Reload(ctx context.Context, exec boil.ContextExecutor) error {
+	ret, err := FindLipid(ctx, exec, o.ID)
 	if err != nil {
 		return err
 	}
@@ -1315,27 +1315,27 @@ func (o *SoapLipid) Reload(ctx context.Context, exec boil.ContextExecutor) error
 
 // ReloadAll refetches every row with matching primary key column values
 // and overwrites the original object slice with the newly updated slice.
-func (o *SoapLipidSlice) ReloadAll(ctx context.Context, exec boil.ContextExecutor) error {
+func (o *LipidSlice) ReloadAll(ctx context.Context, exec boil.ContextExecutor) error {
 	if o == nil || len(*o) == 0 {
 		return nil
 	}
 
-	slice := SoapLipidSlice{}
+	slice := LipidSlice{}
 	var args []interface{}
 	for _, obj := range *o {
-		pkeyArgs := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(obj)), soapLipidPrimaryKeyMapping)
+		pkeyArgs := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(obj)), lipidPrimaryKeyMapping)
 		args = append(args, pkeyArgs...)
 	}
 
-	sql := "SELECT \"soap_lipid\".* FROM \"soap_lipid\" WHERE " +
-		strmangle.WhereClauseRepeated(string(dialect.LQ), string(dialect.RQ), 1, soapLipidPrimaryKeyColumns, len(*o)) +
+	sql := "SELECT \"lipid\".* FROM \"lipid\" WHERE " +
+		strmangle.WhereClauseRepeated(string(dialect.LQ), string(dialect.RQ), 1, lipidPrimaryKeyColumns, len(*o)) +
 		"and \"deleted_at\" is null"
 
 	q := queries.Raw(sql, args...)
 
 	err := q.Bind(ctx, exec, &slice)
 	if err != nil {
-		return errors.Wrap(err, "models: unable to reload all in SoapLipidSlice")
+		return errors.Wrap(err, "models: unable to reload all in LipidSlice")
 	}
 
 	*o = slice
@@ -1343,10 +1343,10 @@ func (o *SoapLipidSlice) ReloadAll(ctx context.Context, exec boil.ContextExecuto
 	return nil
 }
 
-// SoapLipidExists checks if the SoapLipid row exists.
-func SoapLipidExists(ctx context.Context, exec boil.ContextExecutor, iD int) (bool, error) {
+// LipidExists checks if the Lipid row exists.
+func LipidExists(ctx context.Context, exec boil.ContextExecutor, iD int) (bool, error) {
 	var exists bool
-	sql := "select exists(select 1 from \"soap_lipid\" where \"id\"=$1 and \"deleted_at\" is null limit 1)"
+	sql := "select exists(select 1 from \"lipid\" where \"id\"=$1 and \"deleted_at\" is null limit 1)"
 
 	if boil.IsDebug(ctx) {
 		writer := boil.DebugWriterFrom(ctx)
@@ -1357,7 +1357,7 @@ func SoapLipidExists(ctx context.Context, exec boil.ContextExecutor, iD int) (bo
 
 	err := row.Scan(&exists)
 	if err != nil {
-		return false, errors.Wrap(err, "models: unable to check if soap_lipid exists")
+		return false, errors.Wrap(err, "models: unable to check if lipid exists")
 	}
 
 	return exists, nil

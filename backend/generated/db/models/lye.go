@@ -22,8 +22,8 @@ import (
 	"github.com/volatiletech/strmangle"
 )
 
-// SoapLye is an object representing the database table.
-type SoapLye struct {
+// Lye is an object representing the database table.
+type Lye struct {
 	ID        int       `boil:"id" json:"id" toml:"id" yaml:"id"`
 	CreatedAt time.Time `boil:"created_at" json:"created_at" toml:"created_at" yaml:"created_at"`
 	UpdatedAt time.Time `boil:"updated_at" json:"updated_at" toml:"updated_at" yaml:"updated_at"`
@@ -32,11 +32,11 @@ type SoapLye struct {
 	Name      string    `boil:"name" json:"name" toml:"name" yaml:"name"`
 	Note      string    `boil:"note" json:"note" toml:"note" yaml:"note"`
 
-	R *soapLyeR `boil:"-" json:"-" toml:"-" yaml:"-"`
-	L soapLyeL  `boil:"-" json:"-" toml:"-" yaml:"-"`
+	R *lyeR `boil:"-" json:"-" toml:"-" yaml:"-"`
+	L lyeL  `boil:"-" json:"-" toml:"-" yaml:"-"`
 }
 
-var SoapLyeColumns = struct {
+var LyeColumns = struct {
 	ID        string
 	CreatedAt string
 	UpdatedAt string
@@ -56,7 +56,7 @@ var SoapLyeColumns = struct {
 
 // Generated where
 
-var SoapLyeWhere = struct {
+var LyeWhere = struct {
 	ID        whereHelperint
 	CreatedAt whereHelpertime_Time
 	UpdatedAt whereHelpertime_Time
@@ -65,65 +65,65 @@ var SoapLyeWhere = struct {
 	Name      whereHelperstring
 	Note      whereHelperstring
 }{
-	ID:        whereHelperint{field: "\"soap_lye\".\"id\""},
-	CreatedAt: whereHelpertime_Time{field: "\"soap_lye\".\"created_at\""},
-	UpdatedAt: whereHelpertime_Time{field: "\"soap_lye\".\"updated_at\""},
-	DeletedAt: whereHelpernull_Time{field: "\"soap_lye\".\"deleted_at\""},
-	Kind:      whereHelperstring{field: "\"soap_lye\".\"kind\""},
-	Name:      whereHelperstring{field: "\"soap_lye\".\"name\""},
-	Note:      whereHelperstring{field: "\"soap_lye\".\"note\""},
+	ID:        whereHelperint{field: "\"lye\".\"id\""},
+	CreatedAt: whereHelpertime_Time{field: "\"lye\".\"created_at\""},
+	UpdatedAt: whereHelpertime_Time{field: "\"lye\".\"updated_at\""},
+	DeletedAt: whereHelpernull_Time{field: "\"lye\".\"deleted_at\""},
+	Kind:      whereHelperstring{field: "\"lye\".\"kind\""},
+	Name:      whereHelperstring{field: "\"lye\".\"name\""},
+	Note:      whereHelperstring{field: "\"lye\".\"note\""},
 }
 
-// SoapLyeRels is where relationship names are stored.
-var SoapLyeRels = struct {
-	LyeSoapRecipelyes string
+// LyeRels is where relationship names are stored.
+var LyeRels = struct {
+	RecipeLyes string
 }{
-	LyeSoapRecipelyes: "LyeSoapRecipelyes",
+	RecipeLyes: "RecipeLyes",
 }
 
-// soapLyeR is where relationships are stored.
-type soapLyeR struct {
-	LyeSoapRecipelyes SoapRecipelyeSlice `boil:"LyeSoapRecipelyes" json:"LyeSoapRecipelyes" toml:"LyeSoapRecipelyes" yaml:"LyeSoapRecipelyes"`
+// lyeR is where relationships are stored.
+type lyeR struct {
+	RecipeLyes RecipeLyeSlice `boil:"RecipeLyes" json:"RecipeLyes" toml:"RecipeLyes" yaml:"RecipeLyes"`
 }
 
 // NewStruct creates a new relationship struct
-func (*soapLyeR) NewStruct() *soapLyeR {
-	return &soapLyeR{}
+func (*lyeR) NewStruct() *lyeR {
+	return &lyeR{}
 }
 
-// soapLyeL is where Load methods for each relationship are stored.
-type soapLyeL struct{}
+// lyeL is where Load methods for each relationship are stored.
+type lyeL struct{}
 
 var (
-	soapLyeAllColumns            = []string{"id", "created_at", "updated_at", "deleted_at", "kind", "name", "note"}
-	soapLyeColumnsWithoutDefault = []string{"created_at", "updated_at", "deleted_at", "kind", "name", "note"}
-	soapLyeColumnsWithDefault    = []string{"id"}
-	soapLyePrimaryKeyColumns     = []string{"id"}
+	lyeAllColumns            = []string{"id", "created_at", "updated_at", "deleted_at", "kind", "name", "note"}
+	lyeColumnsWithoutDefault = []string{"created_at", "updated_at", "deleted_at", "kind", "name", "note"}
+	lyeColumnsWithDefault    = []string{"id"}
+	lyePrimaryKeyColumns     = []string{"id"}
 )
 
 type (
-	// SoapLyeSlice is an alias for a slice of pointers to SoapLye.
-	// This should generally be used opposed to []SoapLye.
-	SoapLyeSlice []*SoapLye
-	// SoapLyeHook is the signature for custom SoapLye hook methods
-	SoapLyeHook func(context.Context, boil.ContextExecutor, *SoapLye) error
+	// LyeSlice is an alias for a slice of pointers to Lye.
+	// This should generally be used opposed to []Lye.
+	LyeSlice []*Lye
+	// LyeHook is the signature for custom Lye hook methods
+	LyeHook func(context.Context, boil.ContextExecutor, *Lye) error
 
-	soapLyeQuery struct {
+	lyeQuery struct {
 		*queries.Query
 	}
 )
 
 // Cache for insert, update and upsert
 var (
-	soapLyeType                 = reflect.TypeOf(&SoapLye{})
-	soapLyeMapping              = queries.MakeStructMapping(soapLyeType)
-	soapLyePrimaryKeyMapping, _ = queries.BindMapping(soapLyeType, soapLyeMapping, soapLyePrimaryKeyColumns)
-	soapLyeInsertCacheMut       sync.RWMutex
-	soapLyeInsertCache          = make(map[string]insertCache)
-	soapLyeUpdateCacheMut       sync.RWMutex
-	soapLyeUpdateCache          = make(map[string]updateCache)
-	soapLyeUpsertCacheMut       sync.RWMutex
-	soapLyeUpsertCache          = make(map[string]insertCache)
+	lyeType                 = reflect.TypeOf(&Lye{})
+	lyeMapping              = queries.MakeStructMapping(lyeType)
+	lyePrimaryKeyMapping, _ = queries.BindMapping(lyeType, lyeMapping, lyePrimaryKeyColumns)
+	lyeInsertCacheMut       sync.RWMutex
+	lyeInsertCache          = make(map[string]insertCache)
+	lyeUpdateCacheMut       sync.RWMutex
+	lyeUpdateCache          = make(map[string]updateCache)
+	lyeUpsertCacheMut       sync.RWMutex
+	lyeUpsertCache          = make(map[string]insertCache)
 )
 
 var (
@@ -134,24 +134,24 @@ var (
 	_ = qmhelper.Where
 )
 
-var soapLyeBeforeInsertHooks []SoapLyeHook
-var soapLyeBeforeUpdateHooks []SoapLyeHook
-var soapLyeBeforeDeleteHooks []SoapLyeHook
-var soapLyeBeforeUpsertHooks []SoapLyeHook
+var lyeBeforeInsertHooks []LyeHook
+var lyeBeforeUpdateHooks []LyeHook
+var lyeBeforeDeleteHooks []LyeHook
+var lyeBeforeUpsertHooks []LyeHook
 
-var soapLyeAfterInsertHooks []SoapLyeHook
-var soapLyeAfterSelectHooks []SoapLyeHook
-var soapLyeAfterUpdateHooks []SoapLyeHook
-var soapLyeAfterDeleteHooks []SoapLyeHook
-var soapLyeAfterUpsertHooks []SoapLyeHook
+var lyeAfterInsertHooks []LyeHook
+var lyeAfterSelectHooks []LyeHook
+var lyeAfterUpdateHooks []LyeHook
+var lyeAfterDeleteHooks []LyeHook
+var lyeAfterUpsertHooks []LyeHook
 
 // doBeforeInsertHooks executes all "before insert" hooks.
-func (o *SoapLye) doBeforeInsertHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Lye) doBeforeInsertHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range soapLyeBeforeInsertHooks {
+	for _, hook := range lyeBeforeInsertHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -161,12 +161,12 @@ func (o *SoapLye) doBeforeInsertHooks(ctx context.Context, exec boil.ContextExec
 }
 
 // doBeforeUpdateHooks executes all "before Update" hooks.
-func (o *SoapLye) doBeforeUpdateHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Lye) doBeforeUpdateHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range soapLyeBeforeUpdateHooks {
+	for _, hook := range lyeBeforeUpdateHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -176,12 +176,12 @@ func (o *SoapLye) doBeforeUpdateHooks(ctx context.Context, exec boil.ContextExec
 }
 
 // doBeforeDeleteHooks executes all "before Delete" hooks.
-func (o *SoapLye) doBeforeDeleteHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Lye) doBeforeDeleteHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range soapLyeBeforeDeleteHooks {
+	for _, hook := range lyeBeforeDeleteHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -191,12 +191,12 @@ func (o *SoapLye) doBeforeDeleteHooks(ctx context.Context, exec boil.ContextExec
 }
 
 // doBeforeUpsertHooks executes all "before Upsert" hooks.
-func (o *SoapLye) doBeforeUpsertHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Lye) doBeforeUpsertHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range soapLyeBeforeUpsertHooks {
+	for _, hook := range lyeBeforeUpsertHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -206,12 +206,12 @@ func (o *SoapLye) doBeforeUpsertHooks(ctx context.Context, exec boil.ContextExec
 }
 
 // doAfterInsertHooks executes all "after Insert" hooks.
-func (o *SoapLye) doAfterInsertHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Lye) doAfterInsertHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range soapLyeAfterInsertHooks {
+	for _, hook := range lyeAfterInsertHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -221,12 +221,12 @@ func (o *SoapLye) doAfterInsertHooks(ctx context.Context, exec boil.ContextExecu
 }
 
 // doAfterSelectHooks executes all "after Select" hooks.
-func (o *SoapLye) doAfterSelectHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Lye) doAfterSelectHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range soapLyeAfterSelectHooks {
+	for _, hook := range lyeAfterSelectHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -236,12 +236,12 @@ func (o *SoapLye) doAfterSelectHooks(ctx context.Context, exec boil.ContextExecu
 }
 
 // doAfterUpdateHooks executes all "after Update" hooks.
-func (o *SoapLye) doAfterUpdateHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Lye) doAfterUpdateHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range soapLyeAfterUpdateHooks {
+	for _, hook := range lyeAfterUpdateHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -251,12 +251,12 @@ func (o *SoapLye) doAfterUpdateHooks(ctx context.Context, exec boil.ContextExecu
 }
 
 // doAfterDeleteHooks executes all "after Delete" hooks.
-func (o *SoapLye) doAfterDeleteHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Lye) doAfterDeleteHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range soapLyeAfterDeleteHooks {
+	for _, hook := range lyeAfterDeleteHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -266,12 +266,12 @@ func (o *SoapLye) doAfterDeleteHooks(ctx context.Context, exec boil.ContextExecu
 }
 
 // doAfterUpsertHooks executes all "after Upsert" hooks.
-func (o *SoapLye) doAfterUpsertHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Lye) doAfterUpsertHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range soapLyeAfterUpsertHooks {
+	for _, hook := range lyeAfterUpsertHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -280,33 +280,33 @@ func (o *SoapLye) doAfterUpsertHooks(ctx context.Context, exec boil.ContextExecu
 	return nil
 }
 
-// AddSoapLyeHook registers your hook function for all future operations.
-func AddSoapLyeHook(hookPoint boil.HookPoint, soapLyeHook SoapLyeHook) {
+// AddLyeHook registers your hook function for all future operations.
+func AddLyeHook(hookPoint boil.HookPoint, lyeHook LyeHook) {
 	switch hookPoint {
 	case boil.BeforeInsertHook:
-		soapLyeBeforeInsertHooks = append(soapLyeBeforeInsertHooks, soapLyeHook)
+		lyeBeforeInsertHooks = append(lyeBeforeInsertHooks, lyeHook)
 	case boil.BeforeUpdateHook:
-		soapLyeBeforeUpdateHooks = append(soapLyeBeforeUpdateHooks, soapLyeHook)
+		lyeBeforeUpdateHooks = append(lyeBeforeUpdateHooks, lyeHook)
 	case boil.BeforeDeleteHook:
-		soapLyeBeforeDeleteHooks = append(soapLyeBeforeDeleteHooks, soapLyeHook)
+		lyeBeforeDeleteHooks = append(lyeBeforeDeleteHooks, lyeHook)
 	case boil.BeforeUpsertHook:
-		soapLyeBeforeUpsertHooks = append(soapLyeBeforeUpsertHooks, soapLyeHook)
+		lyeBeforeUpsertHooks = append(lyeBeforeUpsertHooks, lyeHook)
 	case boil.AfterInsertHook:
-		soapLyeAfterInsertHooks = append(soapLyeAfterInsertHooks, soapLyeHook)
+		lyeAfterInsertHooks = append(lyeAfterInsertHooks, lyeHook)
 	case boil.AfterSelectHook:
-		soapLyeAfterSelectHooks = append(soapLyeAfterSelectHooks, soapLyeHook)
+		lyeAfterSelectHooks = append(lyeAfterSelectHooks, lyeHook)
 	case boil.AfterUpdateHook:
-		soapLyeAfterUpdateHooks = append(soapLyeAfterUpdateHooks, soapLyeHook)
+		lyeAfterUpdateHooks = append(lyeAfterUpdateHooks, lyeHook)
 	case boil.AfterDeleteHook:
-		soapLyeAfterDeleteHooks = append(soapLyeAfterDeleteHooks, soapLyeHook)
+		lyeAfterDeleteHooks = append(lyeAfterDeleteHooks, lyeHook)
 	case boil.AfterUpsertHook:
-		soapLyeAfterUpsertHooks = append(soapLyeAfterUpsertHooks, soapLyeHook)
+		lyeAfterUpsertHooks = append(lyeAfterUpsertHooks, lyeHook)
 	}
 }
 
-// One returns a single soapLye record from the query.
-func (q soapLyeQuery) One(ctx context.Context, exec boil.ContextExecutor) (*SoapLye, error) {
-	o := &SoapLye{}
+// One returns a single lye record from the query.
+func (q lyeQuery) One(ctx context.Context, exec boil.ContextExecutor) (*Lye, error) {
+	o := &Lye{}
 
 	queries.SetLimit(q.Query, 1)
 
@@ -315,7 +315,7 @@ func (q soapLyeQuery) One(ctx context.Context, exec boil.ContextExecutor) (*Soap
 		if errors.Cause(err) == sql.ErrNoRows {
 			return nil, sql.ErrNoRows
 		}
-		return nil, errors.Wrap(err, "models: failed to execute a one query for soap_lye")
+		return nil, errors.Wrap(err, "models: failed to execute a one query for lye")
 	}
 
 	if err := o.doAfterSelectHooks(ctx, exec); err != nil {
@@ -325,16 +325,16 @@ func (q soapLyeQuery) One(ctx context.Context, exec boil.ContextExecutor) (*Soap
 	return o, nil
 }
 
-// All returns all SoapLye records from the query.
-func (q soapLyeQuery) All(ctx context.Context, exec boil.ContextExecutor) (SoapLyeSlice, error) {
-	var o []*SoapLye
+// All returns all Lye records from the query.
+func (q lyeQuery) All(ctx context.Context, exec boil.ContextExecutor) (LyeSlice, error) {
+	var o []*Lye
 
 	err := q.Bind(ctx, exec, &o)
 	if err != nil {
-		return nil, errors.Wrap(err, "models: failed to assign all query results to SoapLye slice")
+		return nil, errors.Wrap(err, "models: failed to assign all query results to Lye slice")
 	}
 
-	if len(soapLyeAfterSelectHooks) != 0 {
+	if len(lyeAfterSelectHooks) != 0 {
 		for _, obj := range o {
 			if err := obj.doAfterSelectHooks(ctx, exec); err != nil {
 				return o, err
@@ -345,8 +345,8 @@ func (q soapLyeQuery) All(ctx context.Context, exec boil.ContextExecutor) (SoapL
 	return o, nil
 }
 
-// Count returns the count of all SoapLye records in the query.
-func (q soapLyeQuery) Count(ctx context.Context, exec boil.ContextExecutor) (int64, error) {
+// Count returns the count of all Lye records in the query.
+func (q lyeQuery) Count(ctx context.Context, exec boil.ContextExecutor) (int64, error) {
 	var count int64
 
 	queries.SetSelect(q.Query, nil)
@@ -354,14 +354,14 @@ func (q soapLyeQuery) Count(ctx context.Context, exec boil.ContextExecutor) (int
 
 	err := q.Query.QueryRowContext(ctx, exec).Scan(&count)
 	if err != nil {
-		return 0, errors.Wrap(err, "models: failed to count soap_lye rows")
+		return 0, errors.Wrap(err, "models: failed to count lye rows")
 	}
 
 	return count, nil
 }
 
 // Exists checks if the row exists in the table.
-func (q soapLyeQuery) Exists(ctx context.Context, exec boil.ContextExecutor) (bool, error) {
+func (q lyeQuery) Exists(ctx context.Context, exec boil.ContextExecutor) (bool, error) {
 	var count int64
 
 	queries.SetSelect(q.Query, nil)
@@ -370,57 +370,57 @@ func (q soapLyeQuery) Exists(ctx context.Context, exec boil.ContextExecutor) (bo
 
 	err := q.Query.QueryRowContext(ctx, exec).Scan(&count)
 	if err != nil {
-		return false, errors.Wrap(err, "models: failed to check if soap_lye exists")
+		return false, errors.Wrap(err, "models: failed to check if lye exists")
 	}
 
 	return count > 0, nil
 }
 
-// LyeSoapRecipelyes retrieves all the soap_recipelye's SoapRecipelyes with an executor via lye_id column.
-func (o *SoapLye) LyeSoapRecipelyes(mods ...qm.QueryMod) soapRecipelyeQuery {
+// RecipeLyes retrieves all the recipe_lye's RecipeLyes with an executor.
+func (o *Lye) RecipeLyes(mods ...qm.QueryMod) recipeLyeQuery {
 	var queryMods []qm.QueryMod
 	if len(mods) != 0 {
 		queryMods = append(queryMods, mods...)
 	}
 
 	queryMods = append(queryMods,
-		qm.Where("\"soap_recipelye\".\"lye_id\"=?", o.ID),
-		qmhelper.WhereIsNull("\"soap_recipelye\".\"deleted_at\""),
+		qm.Where("\"recipe_lye\".\"lye_id\"=?", o.ID),
+		qmhelper.WhereIsNull("\"recipe_lye\".\"deleted_at\""),
 	)
 
-	query := SoapRecipelyes(queryMods...)
-	queries.SetFrom(query.Query, "\"soap_recipelye\"")
+	query := RecipeLyes(queryMods...)
+	queries.SetFrom(query.Query, "\"recipe_lye\"")
 
 	if len(queries.GetSelect(query.Query)) == 0 {
-		queries.SetSelect(query.Query, []string{"\"soap_recipelye\".*"})
+		queries.SetSelect(query.Query, []string{"\"recipe_lye\".*"})
 	}
 
 	return query
 }
 
-// LoadLyeSoapRecipelyes allows an eager lookup of values, cached into the
+// LoadRecipeLyes allows an eager lookup of values, cached into the
 // loaded structs of the objects. This is for a 1-M or N-M relationship.
-func (soapLyeL) LoadLyeSoapRecipelyes(ctx context.Context, e boil.ContextExecutor, singular bool, maybeSoapLye interface{}, mods queries.Applicator) error {
-	var slice []*SoapLye
-	var object *SoapLye
+func (lyeL) LoadRecipeLyes(ctx context.Context, e boil.ContextExecutor, singular bool, maybeLye interface{}, mods queries.Applicator) error {
+	var slice []*Lye
+	var object *Lye
 
 	if singular {
-		object = maybeSoapLye.(*SoapLye)
+		object = maybeLye.(*Lye)
 	} else {
-		slice = *maybeSoapLye.(*[]*SoapLye)
+		slice = *maybeLye.(*[]*Lye)
 	}
 
 	args := make([]interface{}, 0, 1)
 	if singular {
 		if object.R == nil {
-			object.R = &soapLyeR{}
+			object.R = &lyeR{}
 		}
 		args = append(args, object.ID)
 	} else {
 	Outer:
 		for _, obj := range slice {
 			if obj.R == nil {
-				obj.R = &soapLyeR{}
+				obj.R = &lyeR{}
 			}
 
 			for _, a := range args {
@@ -438,9 +438,9 @@ func (soapLyeL) LoadLyeSoapRecipelyes(ctx context.Context, e boil.ContextExecuto
 	}
 
 	query := NewQuery(
-		qm.From(`soap_recipelye`),
-		qm.WhereIn(`soap_recipelye.lye_id in ?`, args...),
-		qmhelper.WhereIsNull(`soap_recipelye.deleted_at`),
+		qm.From(`recipe_lye`),
+		qm.WhereIn(`recipe_lye.lye_id in ?`, args...),
+		qmhelper.WhereIsNull(`recipe_lye.deleted_at`),
 	)
 	if mods != nil {
 		mods.Apply(query)
@@ -448,22 +448,22 @@ func (soapLyeL) LoadLyeSoapRecipelyes(ctx context.Context, e boil.ContextExecuto
 
 	results, err := query.QueryContext(ctx, e)
 	if err != nil {
-		return errors.Wrap(err, "failed to eager load soap_recipelye")
+		return errors.Wrap(err, "failed to eager load recipe_lye")
 	}
 
-	var resultSlice []*SoapRecipelye
+	var resultSlice []*RecipeLye
 	if err = queries.Bind(results, &resultSlice); err != nil {
-		return errors.Wrap(err, "failed to bind eager loaded slice soap_recipelye")
+		return errors.Wrap(err, "failed to bind eager loaded slice recipe_lye")
 	}
 
 	if err = results.Close(); err != nil {
-		return errors.Wrap(err, "failed to close results in eager load on soap_recipelye")
+		return errors.Wrap(err, "failed to close results in eager load on recipe_lye")
 	}
 	if err = results.Err(); err != nil {
-		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for soap_recipelye")
+		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for recipe_lye")
 	}
 
-	if len(soapRecipelyeAfterSelectHooks) != 0 {
+	if len(recipeLyeAfterSelectHooks) != 0 {
 		for _, obj := range resultSlice {
 			if err := obj.doAfterSelectHooks(ctx, e); err != nil {
 				return err
@@ -471,14 +471,14 @@ func (soapLyeL) LoadLyeSoapRecipelyes(ctx context.Context, e boil.ContextExecuto
 		}
 	}
 	if singular {
-		object.R.LyeSoapRecipelyes = resultSlice
+		object.R.RecipeLyes = resultSlice
 		return nil
 	}
 
 	for _, foreign := range resultSlice {
 		for _, local := range slice {
 			if local.ID == foreign.LyeID {
-				local.R.LyeSoapRecipelyes = append(local.R.LyeSoapRecipelyes, foreign)
+				local.R.RecipeLyes = append(local.R.RecipeLyes, foreign)
 				break
 			}
 		}
@@ -487,11 +487,11 @@ func (soapLyeL) LoadLyeSoapRecipelyes(ctx context.Context, e boil.ContextExecuto
 	return nil
 }
 
-// AddLyeSoapRecipelyes adds the given related objects to the existing relationships
-// of the soap_lye, optionally inserting them as new records.
-// Appends related to o.R.LyeSoapRecipelyes.
+// AddRecipeLyes adds the given related objects to the existing relationships
+// of the lye, optionally inserting them as new records.
+// Appends related to o.R.RecipeLyes.
 // Sets related.R.Lye appropriately.
-func (o *SoapLye) AddLyeSoapRecipelyes(ctx context.Context, exec boil.ContextExecutor, insert bool, related ...*SoapRecipelye) error {
+func (o *Lye) AddRecipeLyes(ctx context.Context, exec boil.ContextExecutor, insert bool, related ...*RecipeLye) error {
 	var err error
 	for _, rel := range related {
 		if insert {
@@ -501,9 +501,9 @@ func (o *SoapLye) AddLyeSoapRecipelyes(ctx context.Context, exec boil.ContextExe
 			}
 		} else {
 			updateQuery := fmt.Sprintf(
-				"UPDATE \"soap_recipelye\" SET %s WHERE %s",
+				"UPDATE \"recipe_lye\" SET %s WHERE %s",
 				strmangle.SetParamNames("\"", "\"", 1, []string{"lye_id"}),
-				strmangle.WhereClause("\"", "\"", 2, soapRecipelyePrimaryKeyColumns),
+				strmangle.WhereClause("\"", "\"", 2, recipeLyePrimaryKeyColumns),
 			)
 			values := []interface{}{o.ID, rel.ID}
 
@@ -521,16 +521,16 @@ func (o *SoapLye) AddLyeSoapRecipelyes(ctx context.Context, exec boil.ContextExe
 	}
 
 	if o.R == nil {
-		o.R = &soapLyeR{
-			LyeSoapRecipelyes: related,
+		o.R = &lyeR{
+			RecipeLyes: related,
 		}
 	} else {
-		o.R.LyeSoapRecipelyes = append(o.R.LyeSoapRecipelyes, related...)
+		o.R.RecipeLyes = append(o.R.RecipeLyes, related...)
 	}
 
 	for _, rel := range related {
 		if rel.R == nil {
-			rel.R = &soapRecipelyeR{
+			rel.R = &recipeLyeR{
 				Lye: o,
 			}
 		} else {
@@ -540,43 +540,43 @@ func (o *SoapLye) AddLyeSoapRecipelyes(ctx context.Context, exec boil.ContextExe
 	return nil
 }
 
-// SoapLyes retrieves all the records using an executor.
-func SoapLyes(mods ...qm.QueryMod) soapLyeQuery {
-	mods = append(mods, qm.From("\"soap_lye\""), qmhelper.WhereIsNull("\"soap_lye\".\"deleted_at\""))
-	return soapLyeQuery{NewQuery(mods...)}
+// Lyes retrieves all the records using an executor.
+func Lyes(mods ...qm.QueryMod) lyeQuery {
+	mods = append(mods, qm.From("\"lye\""), qmhelper.WhereIsNull("\"lye\".\"deleted_at\""))
+	return lyeQuery{NewQuery(mods...)}
 }
 
-// FindSoapLye retrieves a single record by ID with an executor.
+// FindLye retrieves a single record by ID with an executor.
 // If selectCols is empty Find will return all columns.
-func FindSoapLye(ctx context.Context, exec boil.ContextExecutor, iD int, selectCols ...string) (*SoapLye, error) {
-	soapLyeObj := &SoapLye{}
+func FindLye(ctx context.Context, exec boil.ContextExecutor, iD int, selectCols ...string) (*Lye, error) {
+	lyeObj := &Lye{}
 
 	sel := "*"
 	if len(selectCols) > 0 {
 		sel = strings.Join(strmangle.IdentQuoteSlice(dialect.LQ, dialect.RQ, selectCols), ",")
 	}
 	query := fmt.Sprintf(
-		"select %s from \"soap_lye\" where \"id\"=$1 and \"deleted_at\" is null", sel,
+		"select %s from \"lye\" where \"id\"=$1 and \"deleted_at\" is null", sel,
 	)
 
 	q := queries.Raw(query, iD)
 
-	err := q.Bind(ctx, exec, soapLyeObj)
+	err := q.Bind(ctx, exec, lyeObj)
 	if err != nil {
 		if errors.Cause(err) == sql.ErrNoRows {
 			return nil, sql.ErrNoRows
 		}
-		return nil, errors.Wrap(err, "models: unable to select from soap_lye")
+		return nil, errors.Wrap(err, "models: unable to select from lye")
 	}
 
-	return soapLyeObj, nil
+	return lyeObj, nil
 }
 
 // Insert a single record using an executor.
 // See boil.Columns.InsertColumnSet documentation to understand column list inference for inserts.
-func (o *SoapLye) Insert(ctx context.Context, exec boil.ContextExecutor, columns boil.Columns) error {
+func (o *Lye) Insert(ctx context.Context, exec boil.ContextExecutor, columns boil.Columns) error {
 	if o == nil {
-		return errors.New("models: no soap_lye provided for insertion")
+		return errors.New("models: no lye provided for insertion")
 	}
 
 	var err error
@@ -595,33 +595,33 @@ func (o *SoapLye) Insert(ctx context.Context, exec boil.ContextExecutor, columns
 		return err
 	}
 
-	nzDefaults := queries.NonZeroDefaultSet(soapLyeColumnsWithDefault, o)
+	nzDefaults := queries.NonZeroDefaultSet(lyeColumnsWithDefault, o)
 
 	key := makeCacheKey(columns, nzDefaults)
-	soapLyeInsertCacheMut.RLock()
-	cache, cached := soapLyeInsertCache[key]
-	soapLyeInsertCacheMut.RUnlock()
+	lyeInsertCacheMut.RLock()
+	cache, cached := lyeInsertCache[key]
+	lyeInsertCacheMut.RUnlock()
 
 	if !cached {
 		wl, returnColumns := columns.InsertColumnSet(
-			soapLyeAllColumns,
-			soapLyeColumnsWithDefault,
-			soapLyeColumnsWithoutDefault,
+			lyeAllColumns,
+			lyeColumnsWithDefault,
+			lyeColumnsWithoutDefault,
 			nzDefaults,
 		)
 
-		cache.valueMapping, err = queries.BindMapping(soapLyeType, soapLyeMapping, wl)
+		cache.valueMapping, err = queries.BindMapping(lyeType, lyeMapping, wl)
 		if err != nil {
 			return err
 		}
-		cache.retMapping, err = queries.BindMapping(soapLyeType, soapLyeMapping, returnColumns)
+		cache.retMapping, err = queries.BindMapping(lyeType, lyeMapping, returnColumns)
 		if err != nil {
 			return err
 		}
 		if len(wl) != 0 {
-			cache.query = fmt.Sprintf("INSERT INTO \"soap_lye\" (\"%s\") %%sVALUES (%s)%%s", strings.Join(wl, "\",\""), strmangle.Placeholders(dialect.UseIndexPlaceholders, len(wl), 1, 1))
+			cache.query = fmt.Sprintf("INSERT INTO \"lye\" (\"%s\") %%sVALUES (%s)%%s", strings.Join(wl, "\",\""), strmangle.Placeholders(dialect.UseIndexPlaceholders, len(wl), 1, 1))
 		} else {
-			cache.query = "INSERT INTO \"soap_lye\" %sDEFAULT VALUES%s"
+			cache.query = "INSERT INTO \"lye\" %sDEFAULT VALUES%s"
 		}
 
 		var queryOutput, queryReturning string
@@ -649,22 +649,22 @@ func (o *SoapLye) Insert(ctx context.Context, exec boil.ContextExecutor, columns
 	}
 
 	if err != nil {
-		return errors.Wrap(err, "models: unable to insert into soap_lye")
+		return errors.Wrap(err, "models: unable to insert into lye")
 	}
 
 	if !cached {
-		soapLyeInsertCacheMut.Lock()
-		soapLyeInsertCache[key] = cache
-		soapLyeInsertCacheMut.Unlock()
+		lyeInsertCacheMut.Lock()
+		lyeInsertCache[key] = cache
+		lyeInsertCacheMut.Unlock()
 	}
 
 	return o.doAfterInsertHooks(ctx, exec)
 }
 
-// Update uses an executor to update the SoapLye.
+// Update uses an executor to update the Lye.
 // See boil.Columns.UpdateColumnSet documentation to understand column list inference for updates.
 // Update does not automatically update the record in case of default values. Use .Reload() to refresh the records.
-func (o *SoapLye) Update(ctx context.Context, exec boil.ContextExecutor, columns boil.Columns) (int64, error) {
+func (o *Lye) Update(ctx context.Context, exec boil.ContextExecutor, columns boil.Columns) (int64, error) {
 	if !boil.TimestampsAreSkipped(ctx) {
 		currTime := time.Now().In(boil.GetLocation())
 
@@ -676,28 +676,28 @@ func (o *SoapLye) Update(ctx context.Context, exec boil.ContextExecutor, columns
 		return 0, err
 	}
 	key := makeCacheKey(columns, nil)
-	soapLyeUpdateCacheMut.RLock()
-	cache, cached := soapLyeUpdateCache[key]
-	soapLyeUpdateCacheMut.RUnlock()
+	lyeUpdateCacheMut.RLock()
+	cache, cached := lyeUpdateCache[key]
+	lyeUpdateCacheMut.RUnlock()
 
 	if !cached {
 		wl := columns.UpdateColumnSet(
-			soapLyeAllColumns,
-			soapLyePrimaryKeyColumns,
+			lyeAllColumns,
+			lyePrimaryKeyColumns,
 		)
 
 		if !columns.IsWhitelist() {
 			wl = strmangle.SetComplement(wl, []string{"created_at"})
 		}
 		if len(wl) == 0 {
-			return 0, errors.New("models: unable to update soap_lye, could not build whitelist")
+			return 0, errors.New("models: unable to update lye, could not build whitelist")
 		}
 
-		cache.query = fmt.Sprintf("UPDATE \"soap_lye\" SET %s WHERE %s",
+		cache.query = fmt.Sprintf("UPDATE \"lye\" SET %s WHERE %s",
 			strmangle.SetParamNames("\"", "\"", 1, wl),
-			strmangle.WhereClause("\"", "\"", len(wl)+1, soapLyePrimaryKeyColumns),
+			strmangle.WhereClause("\"", "\"", len(wl)+1, lyePrimaryKeyColumns),
 		)
-		cache.valueMapping, err = queries.BindMapping(soapLyeType, soapLyeMapping, append(wl, soapLyePrimaryKeyColumns...))
+		cache.valueMapping, err = queries.BindMapping(lyeType, lyeMapping, append(wl, lyePrimaryKeyColumns...))
 		if err != nil {
 			return 0, err
 		}
@@ -713,42 +713,42 @@ func (o *SoapLye) Update(ctx context.Context, exec boil.ContextExecutor, columns
 	var result sql.Result
 	result, err = exec.ExecContext(ctx, cache.query, values...)
 	if err != nil {
-		return 0, errors.Wrap(err, "models: unable to update soap_lye row")
+		return 0, errors.Wrap(err, "models: unable to update lye row")
 	}
 
 	rowsAff, err := result.RowsAffected()
 	if err != nil {
-		return 0, errors.Wrap(err, "models: failed to get rows affected by update for soap_lye")
+		return 0, errors.Wrap(err, "models: failed to get rows affected by update for lye")
 	}
 
 	if !cached {
-		soapLyeUpdateCacheMut.Lock()
-		soapLyeUpdateCache[key] = cache
-		soapLyeUpdateCacheMut.Unlock()
+		lyeUpdateCacheMut.Lock()
+		lyeUpdateCache[key] = cache
+		lyeUpdateCacheMut.Unlock()
 	}
 
 	return rowsAff, o.doAfterUpdateHooks(ctx, exec)
 }
 
 // UpdateAll updates all rows with the specified column values.
-func (q soapLyeQuery) UpdateAll(ctx context.Context, exec boil.ContextExecutor, cols M) (int64, error) {
+func (q lyeQuery) UpdateAll(ctx context.Context, exec boil.ContextExecutor, cols M) (int64, error) {
 	queries.SetUpdate(q.Query, cols)
 
 	result, err := q.Query.ExecContext(ctx, exec)
 	if err != nil {
-		return 0, errors.Wrap(err, "models: unable to update all for soap_lye")
+		return 0, errors.Wrap(err, "models: unable to update all for lye")
 	}
 
 	rowsAff, err := result.RowsAffected()
 	if err != nil {
-		return 0, errors.Wrap(err, "models: unable to retrieve rows affected for soap_lye")
+		return 0, errors.Wrap(err, "models: unable to retrieve rows affected for lye")
 	}
 
 	return rowsAff, nil
 }
 
 // UpdateAll updates all rows with the specified column values, using an executor.
-func (o SoapLyeSlice) UpdateAll(ctx context.Context, exec boil.ContextExecutor, cols M) (int64, error) {
+func (o LyeSlice) UpdateAll(ctx context.Context, exec boil.ContextExecutor, cols M) (int64, error) {
 	ln := int64(len(o))
 	if ln == 0 {
 		return 0, nil
@@ -770,13 +770,13 @@ func (o SoapLyeSlice) UpdateAll(ctx context.Context, exec boil.ContextExecutor, 
 
 	// Append all of the primary key values for each column
 	for _, obj := range o {
-		pkeyArgs := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(obj)), soapLyePrimaryKeyMapping)
+		pkeyArgs := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(obj)), lyePrimaryKeyMapping)
 		args = append(args, pkeyArgs...)
 	}
 
-	sql := fmt.Sprintf("UPDATE \"soap_lye\" SET %s WHERE %s",
+	sql := fmt.Sprintf("UPDATE \"lye\" SET %s WHERE %s",
 		strmangle.SetParamNames("\"", "\"", 1, colNames),
-		strmangle.WhereClauseRepeated(string(dialect.LQ), string(dialect.RQ), len(colNames)+1, soapLyePrimaryKeyColumns, len(o)))
+		strmangle.WhereClauseRepeated(string(dialect.LQ), string(dialect.RQ), len(colNames)+1, lyePrimaryKeyColumns, len(o)))
 
 	if boil.IsDebug(ctx) {
 		writer := boil.DebugWriterFrom(ctx)
@@ -785,21 +785,21 @@ func (o SoapLyeSlice) UpdateAll(ctx context.Context, exec boil.ContextExecutor, 
 	}
 	result, err := exec.ExecContext(ctx, sql, args...)
 	if err != nil {
-		return 0, errors.Wrap(err, "models: unable to update all in soapLye slice")
+		return 0, errors.Wrap(err, "models: unable to update all in lye slice")
 	}
 
 	rowsAff, err := result.RowsAffected()
 	if err != nil {
-		return 0, errors.Wrap(err, "models: unable to retrieve rows affected all in update all soapLye")
+		return 0, errors.Wrap(err, "models: unable to retrieve rows affected all in update all lye")
 	}
 	return rowsAff, nil
 }
 
 // Upsert attempts an insert using an executor, and does an update or ignore on conflict.
 // See boil.Columns documentation for how to properly use updateColumns and insertColumns.
-func (o *SoapLye) Upsert(ctx context.Context, exec boil.ContextExecutor, updateOnConflict bool, conflictColumns []string, updateColumns, insertColumns boil.Columns) error {
+func (o *Lye) Upsert(ctx context.Context, exec boil.ContextExecutor, updateOnConflict bool, conflictColumns []string, updateColumns, insertColumns boil.Columns) error {
 	if o == nil {
-		return errors.New("models: no soap_lye provided for upsert")
+		return errors.New("models: no lye provided for upsert")
 	}
 	if !boil.TimestampsAreSkipped(ctx) {
 		currTime := time.Now().In(boil.GetLocation())
@@ -814,7 +814,7 @@ func (o *SoapLye) Upsert(ctx context.Context, exec boil.ContextExecutor, updateO
 		return err
 	}
 
-	nzDefaults := queries.NonZeroDefaultSet(soapLyeColumnsWithDefault, o)
+	nzDefaults := queries.NonZeroDefaultSet(lyeColumnsWithDefault, o)
 
 	// Build cache key in-line uglily - mysql vs psql problems
 	buf := strmangle.GetBuffer()
@@ -844,41 +844,41 @@ func (o *SoapLye) Upsert(ctx context.Context, exec boil.ContextExecutor, updateO
 	key := buf.String()
 	strmangle.PutBuffer(buf)
 
-	soapLyeUpsertCacheMut.RLock()
-	cache, cached := soapLyeUpsertCache[key]
-	soapLyeUpsertCacheMut.RUnlock()
+	lyeUpsertCacheMut.RLock()
+	cache, cached := lyeUpsertCache[key]
+	lyeUpsertCacheMut.RUnlock()
 
 	var err error
 
 	if !cached {
 		insert, ret := insertColumns.InsertColumnSet(
-			soapLyeAllColumns,
-			soapLyeColumnsWithDefault,
-			soapLyeColumnsWithoutDefault,
+			lyeAllColumns,
+			lyeColumnsWithDefault,
+			lyeColumnsWithoutDefault,
 			nzDefaults,
 		)
 		update := updateColumns.UpdateColumnSet(
-			soapLyeAllColumns,
-			soapLyePrimaryKeyColumns,
+			lyeAllColumns,
+			lyePrimaryKeyColumns,
 		)
 
 		if updateOnConflict && len(update) == 0 {
-			return errors.New("models: unable to upsert soap_lye, could not build update column list")
+			return errors.New("models: unable to upsert lye, could not build update column list")
 		}
 
 		conflict := conflictColumns
 		if len(conflict) == 0 {
-			conflict = make([]string, len(soapLyePrimaryKeyColumns))
-			copy(conflict, soapLyePrimaryKeyColumns)
+			conflict = make([]string, len(lyePrimaryKeyColumns))
+			copy(conflict, lyePrimaryKeyColumns)
 		}
-		cache.query = buildUpsertQueryPostgres(dialect, "\"soap_lye\"", updateOnConflict, ret, update, conflict, insert)
+		cache.query = buildUpsertQueryPostgres(dialect, "\"lye\"", updateOnConflict, ret, update, conflict, insert)
 
-		cache.valueMapping, err = queries.BindMapping(soapLyeType, soapLyeMapping, insert)
+		cache.valueMapping, err = queries.BindMapping(lyeType, lyeMapping, insert)
 		if err != nil {
 			return err
 		}
 		if len(ret) != 0 {
-			cache.retMapping, err = queries.BindMapping(soapLyeType, soapLyeMapping, ret)
+			cache.retMapping, err = queries.BindMapping(lyeType, lyeMapping, ret)
 			if err != nil {
 				return err
 			}
@@ -906,23 +906,23 @@ func (o *SoapLye) Upsert(ctx context.Context, exec boil.ContextExecutor, updateO
 		_, err = exec.ExecContext(ctx, cache.query, vals...)
 	}
 	if err != nil {
-		return errors.Wrap(err, "models: unable to upsert soap_lye")
+		return errors.Wrap(err, "models: unable to upsert lye")
 	}
 
 	if !cached {
-		soapLyeUpsertCacheMut.Lock()
-		soapLyeUpsertCache[key] = cache
-		soapLyeUpsertCacheMut.Unlock()
+		lyeUpsertCacheMut.Lock()
+		lyeUpsertCache[key] = cache
+		lyeUpsertCacheMut.Unlock()
 	}
 
 	return o.doAfterUpsertHooks(ctx, exec)
 }
 
-// Delete deletes a single SoapLye record with an executor.
+// Delete deletes a single Lye record with an executor.
 // Delete will match against the primary key column to find the record to delete.
-func (o *SoapLye) Delete(ctx context.Context, exec boil.ContextExecutor, hardDelete bool) (int64, error) {
+func (o *Lye) Delete(ctx context.Context, exec boil.ContextExecutor, hardDelete bool) (int64, error) {
 	if o == nil {
-		return 0, errors.New("models: no SoapLye provided for delete")
+		return 0, errors.New("models: no Lye provided for delete")
 	}
 
 	if err := o.doBeforeDeleteHooks(ctx, exec); err != nil {
@@ -934,16 +934,16 @@ func (o *SoapLye) Delete(ctx context.Context, exec boil.ContextExecutor, hardDel
 		args []interface{}
 	)
 	if hardDelete {
-		args = queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(o)), soapLyePrimaryKeyMapping)
-		sql = "DELETE FROM \"soap_lye\" WHERE \"id\"=$1"
+		args = queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(o)), lyePrimaryKeyMapping)
+		sql = "DELETE FROM \"lye\" WHERE \"id\"=$1"
 	} else {
 		currTime := time.Now().In(boil.GetLocation())
 		o.DeletedAt = null.TimeFrom(currTime)
 		wl := []string{"deleted_at"}
-		sql = fmt.Sprintf("UPDATE \"soap_lye\" SET %s WHERE \"id\"=$2",
+		sql = fmt.Sprintf("UPDATE \"lye\" SET %s WHERE \"id\"=$2",
 			strmangle.SetParamNames("\"", "\"", 1, wl),
 		)
-		valueMapping, err := queries.BindMapping(soapLyeType, soapLyeMapping, append(wl, soapLyePrimaryKeyColumns...))
+		valueMapping, err := queries.BindMapping(lyeType, lyeMapping, append(wl, lyePrimaryKeyColumns...))
 		if err != nil {
 			return 0, err
 		}
@@ -957,12 +957,12 @@ func (o *SoapLye) Delete(ctx context.Context, exec boil.ContextExecutor, hardDel
 	}
 	result, err := exec.ExecContext(ctx, sql, args...)
 	if err != nil {
-		return 0, errors.Wrap(err, "models: unable to delete from soap_lye")
+		return 0, errors.Wrap(err, "models: unable to delete from lye")
 	}
 
 	rowsAff, err := result.RowsAffected()
 	if err != nil {
-		return 0, errors.Wrap(err, "models: failed to get rows affected by delete for soap_lye")
+		return 0, errors.Wrap(err, "models: failed to get rows affected by delete for lye")
 	}
 
 	if err := o.doAfterDeleteHooks(ctx, exec); err != nil {
@@ -973,9 +973,9 @@ func (o *SoapLye) Delete(ctx context.Context, exec boil.ContextExecutor, hardDel
 }
 
 // DeleteAll deletes all matching rows.
-func (q soapLyeQuery) DeleteAll(ctx context.Context, exec boil.ContextExecutor, hardDelete bool) (int64, error) {
+func (q lyeQuery) DeleteAll(ctx context.Context, exec boil.ContextExecutor, hardDelete bool) (int64, error) {
 	if q.Query == nil {
-		return 0, errors.New("models: no soapLyeQuery provided for delete all")
+		return 0, errors.New("models: no lyeQuery provided for delete all")
 	}
 
 	if hardDelete {
@@ -987,24 +987,24 @@ func (q soapLyeQuery) DeleteAll(ctx context.Context, exec boil.ContextExecutor, 
 
 	result, err := q.Query.ExecContext(ctx, exec)
 	if err != nil {
-		return 0, errors.Wrap(err, "models: unable to delete all from soap_lye")
+		return 0, errors.Wrap(err, "models: unable to delete all from lye")
 	}
 
 	rowsAff, err := result.RowsAffected()
 	if err != nil {
-		return 0, errors.Wrap(err, "models: failed to get rows affected by deleteall for soap_lye")
+		return 0, errors.Wrap(err, "models: failed to get rows affected by deleteall for lye")
 	}
 
 	return rowsAff, nil
 }
 
 // DeleteAll deletes all rows in the slice, using an executor.
-func (o SoapLyeSlice) DeleteAll(ctx context.Context, exec boil.ContextExecutor, hardDelete bool) (int64, error) {
+func (o LyeSlice) DeleteAll(ctx context.Context, exec boil.ContextExecutor, hardDelete bool) (int64, error) {
 	if len(o) == 0 {
 		return 0, nil
 	}
 
-	if len(soapLyeBeforeDeleteHooks) != 0 {
+	if len(lyeBeforeDeleteHooks) != 0 {
 		for _, obj := range o {
 			if err := obj.doBeforeDeleteHooks(ctx, exec); err != nil {
 				return 0, err
@@ -1018,21 +1018,21 @@ func (o SoapLyeSlice) DeleteAll(ctx context.Context, exec boil.ContextExecutor, 
 	)
 	if hardDelete {
 		for _, obj := range o {
-			pkeyArgs := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(obj)), soapLyePrimaryKeyMapping)
+			pkeyArgs := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(obj)), lyePrimaryKeyMapping)
 			args = append(args, pkeyArgs...)
 		}
-		sql = "DELETE FROM \"soap_lye\" WHERE " +
-			strmangle.WhereClauseRepeated(string(dialect.LQ), string(dialect.RQ), 1, soapLyePrimaryKeyColumns, len(o))
+		sql = "DELETE FROM \"lye\" WHERE " +
+			strmangle.WhereClauseRepeated(string(dialect.LQ), string(dialect.RQ), 1, lyePrimaryKeyColumns, len(o))
 	} else {
 		currTime := time.Now().In(boil.GetLocation())
 		for _, obj := range o {
-			pkeyArgs := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(obj)), soapLyePrimaryKeyMapping)
+			pkeyArgs := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(obj)), lyePrimaryKeyMapping)
 			args = append(args, pkeyArgs...)
 			obj.DeletedAt = null.TimeFrom(currTime)
 		}
 		wl := []string{"deleted_at"}
-		sql = fmt.Sprintf("UPDATE \"soap_lye\" SET %s WHERE "+
-			strmangle.WhereClauseRepeated(string(dialect.LQ), string(dialect.RQ), 2, soapLyePrimaryKeyColumns, len(o)),
+		sql = fmt.Sprintf("UPDATE \"lye\" SET %s WHERE "+
+			strmangle.WhereClauseRepeated(string(dialect.LQ), string(dialect.RQ), 2, lyePrimaryKeyColumns, len(o)),
 			strmangle.SetParamNames("\"", "\"", 1, wl),
 		)
 		args = append([]interface{}{currTime}, args...)
@@ -1045,15 +1045,15 @@ func (o SoapLyeSlice) DeleteAll(ctx context.Context, exec boil.ContextExecutor, 
 	}
 	result, err := exec.ExecContext(ctx, sql, args...)
 	if err != nil {
-		return 0, errors.Wrap(err, "models: unable to delete all from soapLye slice")
+		return 0, errors.Wrap(err, "models: unable to delete all from lye slice")
 	}
 
 	rowsAff, err := result.RowsAffected()
 	if err != nil {
-		return 0, errors.Wrap(err, "models: failed to get rows affected by deleteall for soap_lye")
+		return 0, errors.Wrap(err, "models: failed to get rows affected by deleteall for lye")
 	}
 
-	if len(soapLyeAfterDeleteHooks) != 0 {
+	if len(lyeAfterDeleteHooks) != 0 {
 		for _, obj := range o {
 			if err := obj.doAfterDeleteHooks(ctx, exec); err != nil {
 				return 0, err
@@ -1066,8 +1066,8 @@ func (o SoapLyeSlice) DeleteAll(ctx context.Context, exec boil.ContextExecutor, 
 
 // Reload refetches the object from the database
 // using the primary keys with an executor.
-func (o *SoapLye) Reload(ctx context.Context, exec boil.ContextExecutor) error {
-	ret, err := FindSoapLye(ctx, exec, o.ID)
+func (o *Lye) Reload(ctx context.Context, exec boil.ContextExecutor) error {
+	ret, err := FindLye(ctx, exec, o.ID)
 	if err != nil {
 		return err
 	}
@@ -1078,27 +1078,27 @@ func (o *SoapLye) Reload(ctx context.Context, exec boil.ContextExecutor) error {
 
 // ReloadAll refetches every row with matching primary key column values
 // and overwrites the original object slice with the newly updated slice.
-func (o *SoapLyeSlice) ReloadAll(ctx context.Context, exec boil.ContextExecutor) error {
+func (o *LyeSlice) ReloadAll(ctx context.Context, exec boil.ContextExecutor) error {
 	if o == nil || len(*o) == 0 {
 		return nil
 	}
 
-	slice := SoapLyeSlice{}
+	slice := LyeSlice{}
 	var args []interface{}
 	for _, obj := range *o {
-		pkeyArgs := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(obj)), soapLyePrimaryKeyMapping)
+		pkeyArgs := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(obj)), lyePrimaryKeyMapping)
 		args = append(args, pkeyArgs...)
 	}
 
-	sql := "SELECT \"soap_lye\".* FROM \"soap_lye\" WHERE " +
-		strmangle.WhereClauseRepeated(string(dialect.LQ), string(dialect.RQ), 1, soapLyePrimaryKeyColumns, len(*o)) +
+	sql := "SELECT \"lye\".* FROM \"lye\" WHERE " +
+		strmangle.WhereClauseRepeated(string(dialect.LQ), string(dialect.RQ), 1, lyePrimaryKeyColumns, len(*o)) +
 		"and \"deleted_at\" is null"
 
 	q := queries.Raw(sql, args...)
 
 	err := q.Bind(ctx, exec, &slice)
 	if err != nil {
-		return errors.Wrap(err, "models: unable to reload all in SoapLyeSlice")
+		return errors.Wrap(err, "models: unable to reload all in LyeSlice")
 	}
 
 	*o = slice
@@ -1106,10 +1106,10 @@ func (o *SoapLyeSlice) ReloadAll(ctx context.Context, exec boil.ContextExecutor)
 	return nil
 }
 
-// SoapLyeExists checks if the SoapLye row exists.
-func SoapLyeExists(ctx context.Context, exec boil.ContextExecutor, iD int) (bool, error) {
+// LyeExists checks if the Lye row exists.
+func LyeExists(ctx context.Context, exec boil.ContextExecutor, iD int) (bool, error) {
 	var exists bool
-	sql := "select exists(select 1 from \"soap_lye\" where \"id\"=$1 and \"deleted_at\" is null limit 1)"
+	sql := "select exists(select 1 from \"lye\" where \"id\"=$1 and \"deleted_at\" is null limit 1)"
 
 	if boil.IsDebug(ctx) {
 		writer := boil.DebugWriterFrom(ctx)
@@ -1120,7 +1120,7 @@ func SoapLyeExists(ctx context.Context, exec boil.ContextExecutor, iD int) (bool
 
 	err := row.Scan(&exists)
 	if err != nil {
-		return false, errors.Wrap(err, "models: unable to check if soap_lye exists")
+		return false, errors.Wrap(err, "models: unable to check if lye exists")
 	}
 
 	return exists, nil

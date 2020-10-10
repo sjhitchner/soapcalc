@@ -4,33 +4,33 @@
 package models
 
 var TableNames = struct {
-	SoapAdditive           string
-	SoapAdditiveinventory  string
-	SoapFragrance          string
-	SoapFragranceinventory string
-	SoapLipid              string
-	SoapLipidinventory     string
-	SoapLye                string
-	SoapLyeinventory       string
-	SoapRecipe             string
-	SoapRecipeadditive     string
-	SoapRecipefragrance    string
-	SoapRecipelipid        string
-	SoapRecipelye          string
-	SoapSupplier           string
+	Additive           string
+	AdditiveInventory  string
+	Fragrance          string
+	FragranceInventory string
+	Lipid              string
+	LipidInventory     string
+	Lye                string
+	LyeInventory       string
+	Recipe             string
+	RecipeAdditive     string
+	RecipeFragrance    string
+	RecipeLipid        string
+	RecipeLye          string
+	Supplier           string
 }{
-	SoapAdditive:           "soap_additive",
-	SoapAdditiveinventory:  "soap_additiveinventory",
-	SoapFragrance:          "soap_fragrance",
-	SoapFragranceinventory: "soap_fragranceinventory",
-	SoapLipid:              "soap_lipid",
-	SoapLipidinventory:     "soap_lipidinventory",
-	SoapLye:                "soap_lye",
-	SoapLyeinventory:       "soap_lyeinventory",
-	SoapRecipe:             "soap_recipe",
-	SoapRecipeadditive:     "soap_recipeadditive",
-	SoapRecipefragrance:    "soap_recipefragrance",
-	SoapRecipelipid:        "soap_recipelipid",
-	SoapRecipelye:          "soap_recipelye",
-	SoapSupplier:           "soap_supplier",
+	Additive:           "additive",
+	AdditiveInventory:  "additive_inventory",
+	Fragrance:          "fragrance",
+	FragranceInventory: "fragrance_inventory",
+	Lipid:              "lipid",
+	LipidInventory:     "lipid_inventory",
+	Lye:                "lye",
+	LyeInventory:       "lye_inventory",
+	Recipe:             "recipe",
+	RecipeAdditive:     "recipe_additive",
+	RecipeFragrance:    "recipe_fragrance",
+	RecipeLipid:        "recipe_lipid",
+	RecipeLye:          "recipe_lye",
+	Supplier:           "supplier",
 }

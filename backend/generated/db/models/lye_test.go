@@ -21,24 +21,24 @@ var (
 	_ = queries.Equal
 )
 
-func testSoapLyes(t *testing.T) {
+func testLyes(t *testing.T) {
 	t.Parallel()
 
-	query := SoapLyes()
+	query := Lyes()
 
 	if query.Query == nil {
 		t.Error("expected a query, got nothing")
 	}
 }
 
-func testSoapLyesSoftDelete(t *testing.T) {
+func testLyesSoftDelete(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapLye{}
-	if err = randomize.Struct(seed, o, soapLyeDBTypes, true, soapLyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLye struct: %s", err)
+	o := &Lye{}
+	if err = randomize.Struct(seed, o, lyeDBTypes, true, lyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Lye struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -54,7 +54,7 @@ func testSoapLyesSoftDelete(t *testing.T) {
 		t.Error("should only have deleted one row, but affected:", rowsAff)
 	}
 
-	count, err := SoapLyes().Count(ctx, tx)
+	count, err := Lyes().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -64,14 +64,14 @@ func testSoapLyesSoftDelete(t *testing.T) {
 	}
 }
 
-func testSoapLyesQuerySoftDeleteAll(t *testing.T) {
+func testLyesQuerySoftDeleteAll(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapLye{}
-	if err = randomize.Struct(seed, o, soapLyeDBTypes, true, soapLyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLye struct: %s", err)
+	o := &Lye{}
+	if err = randomize.Struct(seed, o, lyeDBTypes, true, lyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Lye struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -81,13 +81,13 @@ func testSoapLyesQuerySoftDeleteAll(t *testing.T) {
 		t.Error(err)
 	}
 
-	if rowsAff, err := SoapLyes().DeleteAll(ctx, tx, false); err != nil {
+	if rowsAff, err := Lyes().DeleteAll(ctx, tx, false); err != nil {
 		t.Error(err)
 	} else if rowsAff != 1 {
 		t.Error("should only have deleted one row, but affected:", rowsAff)
 	}
 
-	count, err := SoapLyes().Count(ctx, tx)
+	count, err := Lyes().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -97,14 +97,14 @@ func testSoapLyesQuerySoftDeleteAll(t *testing.T) {
 	}
 }
 
-func testSoapLyesSliceSoftDeleteAll(t *testing.T) {
+func testLyesSliceSoftDeleteAll(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapLye{}
-	if err = randomize.Struct(seed, o, soapLyeDBTypes, true, soapLyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLye struct: %s", err)
+	o := &Lye{}
+	if err = randomize.Struct(seed, o, lyeDBTypes, true, lyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Lye struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -114,7 +114,7 @@ func testSoapLyesSliceSoftDeleteAll(t *testing.T) {
 		t.Error(err)
 	}
 
-	slice := SoapLyeSlice{o}
+	slice := LyeSlice{o}
 
 	if rowsAff, err := slice.DeleteAll(ctx, tx, false); err != nil {
 		t.Error(err)
@@ -122,7 +122,7 @@ func testSoapLyesSliceSoftDeleteAll(t *testing.T) {
 		t.Error("should only have deleted one row, but affected:", rowsAff)
 	}
 
-	count, err := SoapLyes().Count(ctx, tx)
+	count, err := Lyes().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -132,14 +132,14 @@ func testSoapLyesSliceSoftDeleteAll(t *testing.T) {
 	}
 }
 
-func testSoapLyesDelete(t *testing.T) {
+func testLyesDelete(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapLye{}
-	if err = randomize.Struct(seed, o, soapLyeDBTypes, true, soapLyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLye struct: %s", err)
+	o := &Lye{}
+	if err = randomize.Struct(seed, o, lyeDBTypes, true, lyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Lye struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -155,7 +155,7 @@ func testSoapLyesDelete(t *testing.T) {
 		t.Error("should only have deleted one row, but affected:", rowsAff)
 	}
 
-	count, err := SoapLyes().Count(ctx, tx)
+	count, err := Lyes().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -165,14 +165,14 @@ func testSoapLyesDelete(t *testing.T) {
 	}
 }
 
-func testSoapLyesQueryDeleteAll(t *testing.T) {
+func testLyesQueryDeleteAll(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapLye{}
-	if err = randomize.Struct(seed, o, soapLyeDBTypes, true, soapLyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLye struct: %s", err)
+	o := &Lye{}
+	if err = randomize.Struct(seed, o, lyeDBTypes, true, lyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Lye struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -182,13 +182,13 @@ func testSoapLyesQueryDeleteAll(t *testing.T) {
 		t.Error(err)
 	}
 
-	if rowsAff, err := SoapLyes().DeleteAll(ctx, tx, true); err != nil {
+	if rowsAff, err := Lyes().DeleteAll(ctx, tx, true); err != nil {
 		t.Error(err)
 	} else if rowsAff != 1 {
 		t.Error("should only have deleted one row, but affected:", rowsAff)
 	}
 
-	count, err := SoapLyes().Count(ctx, tx)
+	count, err := Lyes().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -198,14 +198,14 @@ func testSoapLyesQueryDeleteAll(t *testing.T) {
 	}
 }
 
-func testSoapLyesSliceDeleteAll(t *testing.T) {
+func testLyesSliceDeleteAll(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapLye{}
-	if err = randomize.Struct(seed, o, soapLyeDBTypes, true, soapLyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLye struct: %s", err)
+	o := &Lye{}
+	if err = randomize.Struct(seed, o, lyeDBTypes, true, lyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Lye struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -215,7 +215,7 @@ func testSoapLyesSliceDeleteAll(t *testing.T) {
 		t.Error(err)
 	}
 
-	slice := SoapLyeSlice{o}
+	slice := LyeSlice{o}
 
 	if rowsAff, err := slice.DeleteAll(ctx, tx, true); err != nil {
 		t.Error(err)
@@ -223,7 +223,7 @@ func testSoapLyesSliceDeleteAll(t *testing.T) {
 		t.Error("should only have deleted one row, but affected:", rowsAff)
 	}
 
-	count, err := SoapLyes().Count(ctx, tx)
+	count, err := Lyes().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -233,14 +233,14 @@ func testSoapLyesSliceDeleteAll(t *testing.T) {
 	}
 }
 
-func testSoapLyesExists(t *testing.T) {
+func testLyesExists(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapLye{}
-	if err = randomize.Struct(seed, o, soapLyeDBTypes, true, soapLyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLye struct: %s", err)
+	o := &Lye{}
+	if err = randomize.Struct(seed, o, lyeDBTypes, true, lyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Lye struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -250,23 +250,23 @@ func testSoapLyesExists(t *testing.T) {
 		t.Error(err)
 	}
 
-	e, err := SoapLyeExists(ctx, tx, o.ID)
+	e, err := LyeExists(ctx, tx, o.ID)
 	if err != nil {
-		t.Errorf("Unable to check if SoapLye exists: %s", err)
+		t.Errorf("Unable to check if Lye exists: %s", err)
 	}
 	if !e {
-		t.Errorf("Expected SoapLyeExists to return true, but got false.")
+		t.Errorf("Expected LyeExists to return true, but got false.")
 	}
 }
 
-func testSoapLyesFind(t *testing.T) {
+func testLyesFind(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapLye{}
-	if err = randomize.Struct(seed, o, soapLyeDBTypes, true, soapLyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLye struct: %s", err)
+	o := &Lye{}
+	if err = randomize.Struct(seed, o, lyeDBTypes, true, lyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Lye struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -276,24 +276,24 @@ func testSoapLyesFind(t *testing.T) {
 		t.Error(err)
 	}
 
-	soapLyeFound, err := FindSoapLye(ctx, tx, o.ID)
+	lyeFound, err := FindLye(ctx, tx, o.ID)
 	if err != nil {
 		t.Error(err)
 	}
 
-	if soapLyeFound == nil {
+	if lyeFound == nil {
 		t.Error("want a record, got nil")
 	}
 }
 
-func testSoapLyesBind(t *testing.T) {
+func testLyesBind(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapLye{}
-	if err = randomize.Struct(seed, o, soapLyeDBTypes, true, soapLyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLye struct: %s", err)
+	o := &Lye{}
+	if err = randomize.Struct(seed, o, lyeDBTypes, true, lyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Lye struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -303,19 +303,19 @@ func testSoapLyesBind(t *testing.T) {
 		t.Error(err)
 	}
 
-	if err = SoapLyes().Bind(ctx, tx, o); err != nil {
+	if err = Lyes().Bind(ctx, tx, o); err != nil {
 		t.Error(err)
 	}
 }
 
-func testSoapLyesOne(t *testing.T) {
+func testLyesOne(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapLye{}
-	if err = randomize.Struct(seed, o, soapLyeDBTypes, true, soapLyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLye struct: %s", err)
+	o := &Lye{}
+	if err = randomize.Struct(seed, o, lyeDBTypes, true, lyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Lye struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -325,38 +325,38 @@ func testSoapLyesOne(t *testing.T) {
 		t.Error(err)
 	}
 
-	if x, err := SoapLyes().One(ctx, tx); err != nil {
+	if x, err := Lyes().One(ctx, tx); err != nil {
 		t.Error(err)
 	} else if x == nil {
 		t.Error("expected to get a non nil record")
 	}
 }
 
-func testSoapLyesAll(t *testing.T) {
+func testLyesAll(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	soapLyeOne := &SoapLye{}
-	soapLyeTwo := &SoapLye{}
-	if err = randomize.Struct(seed, soapLyeOne, soapLyeDBTypes, false, soapLyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLye struct: %s", err)
+	lyeOne := &Lye{}
+	lyeTwo := &Lye{}
+	if err = randomize.Struct(seed, lyeOne, lyeDBTypes, false, lyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Lye struct: %s", err)
 	}
-	if err = randomize.Struct(seed, soapLyeTwo, soapLyeDBTypes, false, soapLyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLye struct: %s", err)
+	if err = randomize.Struct(seed, lyeTwo, lyeDBTypes, false, lyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Lye struct: %s", err)
 	}
 
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
-	if err = soapLyeOne.Insert(ctx, tx, boil.Infer()); err != nil {
+	if err = lyeOne.Insert(ctx, tx, boil.Infer()); err != nil {
 		t.Error(err)
 	}
-	if err = soapLyeTwo.Insert(ctx, tx, boil.Infer()); err != nil {
+	if err = lyeTwo.Insert(ctx, tx, boil.Infer()); err != nil {
 		t.Error(err)
 	}
 
-	slice, err := SoapLyes().All(ctx, tx)
+	slice, err := Lyes().All(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -366,31 +366,31 @@ func testSoapLyesAll(t *testing.T) {
 	}
 }
 
-func testSoapLyesCount(t *testing.T) {
+func testLyesCount(t *testing.T) {
 	t.Parallel()
 
 	var err error
 	seed := randomize.NewSeed()
-	soapLyeOne := &SoapLye{}
-	soapLyeTwo := &SoapLye{}
-	if err = randomize.Struct(seed, soapLyeOne, soapLyeDBTypes, false, soapLyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLye struct: %s", err)
+	lyeOne := &Lye{}
+	lyeTwo := &Lye{}
+	if err = randomize.Struct(seed, lyeOne, lyeDBTypes, false, lyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Lye struct: %s", err)
 	}
-	if err = randomize.Struct(seed, soapLyeTwo, soapLyeDBTypes, false, soapLyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLye struct: %s", err)
+	if err = randomize.Struct(seed, lyeTwo, lyeDBTypes, false, lyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Lye struct: %s", err)
 	}
 
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
-	if err = soapLyeOne.Insert(ctx, tx, boil.Infer()); err != nil {
+	if err = lyeOne.Insert(ctx, tx, boil.Infer()); err != nil {
 		t.Error(err)
 	}
-	if err = soapLyeTwo.Insert(ctx, tx, boil.Infer()); err != nil {
+	if err = lyeTwo.Insert(ctx, tx, boil.Infer()); err != nil {
 		t.Error(err)
 	}
 
-	count, err := SoapLyes().Count(ctx, tx)
+	count, err := Lyes().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -400,155 +400,155 @@ func testSoapLyesCount(t *testing.T) {
 	}
 }
 
-func soapLyeBeforeInsertHook(ctx context.Context, e boil.ContextExecutor, o *SoapLye) error {
-	*o = SoapLye{}
+func lyeBeforeInsertHook(ctx context.Context, e boil.ContextExecutor, o *Lye) error {
+	*o = Lye{}
 	return nil
 }
 
-func soapLyeAfterInsertHook(ctx context.Context, e boil.ContextExecutor, o *SoapLye) error {
-	*o = SoapLye{}
+func lyeAfterInsertHook(ctx context.Context, e boil.ContextExecutor, o *Lye) error {
+	*o = Lye{}
 	return nil
 }
 
-func soapLyeAfterSelectHook(ctx context.Context, e boil.ContextExecutor, o *SoapLye) error {
-	*o = SoapLye{}
+func lyeAfterSelectHook(ctx context.Context, e boil.ContextExecutor, o *Lye) error {
+	*o = Lye{}
 	return nil
 }
 
-func soapLyeBeforeUpdateHook(ctx context.Context, e boil.ContextExecutor, o *SoapLye) error {
-	*o = SoapLye{}
+func lyeBeforeUpdateHook(ctx context.Context, e boil.ContextExecutor, o *Lye) error {
+	*o = Lye{}
 	return nil
 }
 
-func soapLyeAfterUpdateHook(ctx context.Context, e boil.ContextExecutor, o *SoapLye) error {
-	*o = SoapLye{}
+func lyeAfterUpdateHook(ctx context.Context, e boil.ContextExecutor, o *Lye) error {
+	*o = Lye{}
 	return nil
 }
 
-func soapLyeBeforeDeleteHook(ctx context.Context, e boil.ContextExecutor, o *SoapLye) error {
-	*o = SoapLye{}
+func lyeBeforeDeleteHook(ctx context.Context, e boil.ContextExecutor, o *Lye) error {
+	*o = Lye{}
 	return nil
 }
 
-func soapLyeAfterDeleteHook(ctx context.Context, e boil.ContextExecutor, o *SoapLye) error {
-	*o = SoapLye{}
+func lyeAfterDeleteHook(ctx context.Context, e boil.ContextExecutor, o *Lye) error {
+	*o = Lye{}
 	return nil
 }
 
-func soapLyeBeforeUpsertHook(ctx context.Context, e boil.ContextExecutor, o *SoapLye) error {
-	*o = SoapLye{}
+func lyeBeforeUpsertHook(ctx context.Context, e boil.ContextExecutor, o *Lye) error {
+	*o = Lye{}
 	return nil
 }
 
-func soapLyeAfterUpsertHook(ctx context.Context, e boil.ContextExecutor, o *SoapLye) error {
-	*o = SoapLye{}
+func lyeAfterUpsertHook(ctx context.Context, e boil.ContextExecutor, o *Lye) error {
+	*o = Lye{}
 	return nil
 }
 
-func testSoapLyesHooks(t *testing.T) {
+func testLyesHooks(t *testing.T) {
 	t.Parallel()
 
 	var err error
 
 	ctx := context.Background()
-	empty := &SoapLye{}
-	o := &SoapLye{}
+	empty := &Lye{}
+	o := &Lye{}
 
 	seed := randomize.NewSeed()
-	if err = randomize.Struct(seed, o, soapLyeDBTypes, false); err != nil {
-		t.Errorf("Unable to randomize SoapLye object: %s", err)
+	if err = randomize.Struct(seed, o, lyeDBTypes, false); err != nil {
+		t.Errorf("Unable to randomize Lye object: %s", err)
 	}
 
-	AddSoapLyeHook(boil.BeforeInsertHook, soapLyeBeforeInsertHook)
+	AddLyeHook(boil.BeforeInsertHook, lyeBeforeInsertHook)
 	if err = o.doBeforeInsertHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doBeforeInsertHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected BeforeInsertHook function to empty object, but got: %#v", o)
 	}
-	soapLyeBeforeInsertHooks = []SoapLyeHook{}
+	lyeBeforeInsertHooks = []LyeHook{}
 
-	AddSoapLyeHook(boil.AfterInsertHook, soapLyeAfterInsertHook)
+	AddLyeHook(boil.AfterInsertHook, lyeAfterInsertHook)
 	if err = o.doAfterInsertHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doAfterInsertHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected AfterInsertHook function to empty object, but got: %#v", o)
 	}
-	soapLyeAfterInsertHooks = []SoapLyeHook{}
+	lyeAfterInsertHooks = []LyeHook{}
 
-	AddSoapLyeHook(boil.AfterSelectHook, soapLyeAfterSelectHook)
+	AddLyeHook(boil.AfterSelectHook, lyeAfterSelectHook)
 	if err = o.doAfterSelectHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doAfterSelectHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected AfterSelectHook function to empty object, but got: %#v", o)
 	}
-	soapLyeAfterSelectHooks = []SoapLyeHook{}
+	lyeAfterSelectHooks = []LyeHook{}
 
-	AddSoapLyeHook(boil.BeforeUpdateHook, soapLyeBeforeUpdateHook)
+	AddLyeHook(boil.BeforeUpdateHook, lyeBeforeUpdateHook)
 	if err = o.doBeforeUpdateHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doBeforeUpdateHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected BeforeUpdateHook function to empty object, but got: %#v", o)
 	}
-	soapLyeBeforeUpdateHooks = []SoapLyeHook{}
+	lyeBeforeUpdateHooks = []LyeHook{}
 
-	AddSoapLyeHook(boil.AfterUpdateHook, soapLyeAfterUpdateHook)
+	AddLyeHook(boil.AfterUpdateHook, lyeAfterUpdateHook)
 	if err = o.doAfterUpdateHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doAfterUpdateHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected AfterUpdateHook function to empty object, but got: %#v", o)
 	}
-	soapLyeAfterUpdateHooks = []SoapLyeHook{}
+	lyeAfterUpdateHooks = []LyeHook{}
 
-	AddSoapLyeHook(boil.BeforeDeleteHook, soapLyeBeforeDeleteHook)
+	AddLyeHook(boil.BeforeDeleteHook, lyeBeforeDeleteHook)
 	if err = o.doBeforeDeleteHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doBeforeDeleteHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected BeforeDeleteHook function to empty object, but got: %#v", o)
 	}
-	soapLyeBeforeDeleteHooks = []SoapLyeHook{}
+	lyeBeforeDeleteHooks = []LyeHook{}
 
-	AddSoapLyeHook(boil.AfterDeleteHook, soapLyeAfterDeleteHook)
+	AddLyeHook(boil.AfterDeleteHook, lyeAfterDeleteHook)
 	if err = o.doAfterDeleteHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doAfterDeleteHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected AfterDeleteHook function to empty object, but got: %#v", o)
 	}
-	soapLyeAfterDeleteHooks = []SoapLyeHook{}
+	lyeAfterDeleteHooks = []LyeHook{}
 
-	AddSoapLyeHook(boil.BeforeUpsertHook, soapLyeBeforeUpsertHook)
+	AddLyeHook(boil.BeforeUpsertHook, lyeBeforeUpsertHook)
 	if err = o.doBeforeUpsertHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doBeforeUpsertHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected BeforeUpsertHook function to empty object, but got: %#v", o)
 	}
-	soapLyeBeforeUpsertHooks = []SoapLyeHook{}
+	lyeBeforeUpsertHooks = []LyeHook{}
 
-	AddSoapLyeHook(boil.AfterUpsertHook, soapLyeAfterUpsertHook)
+	AddLyeHook(boil.AfterUpsertHook, lyeAfterUpsertHook)
 	if err = o.doAfterUpsertHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doAfterUpsertHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected AfterUpsertHook function to empty object, but got: %#v", o)
 	}
-	soapLyeAfterUpsertHooks = []SoapLyeHook{}
+	lyeAfterUpsertHooks = []LyeHook{}
 }
 
-func testSoapLyesInsert(t *testing.T) {
+func testLyesInsert(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapLye{}
-	if err = randomize.Struct(seed, o, soapLyeDBTypes, true, soapLyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLye struct: %s", err)
+	o := &Lye{}
+	if err = randomize.Struct(seed, o, lyeDBTypes, true, lyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Lye struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -558,7 +558,7 @@ func testSoapLyesInsert(t *testing.T) {
 		t.Error(err)
 	}
 
-	count, err := SoapLyes().Count(ctx, tx)
+	count, err := Lyes().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -568,24 +568,24 @@ func testSoapLyesInsert(t *testing.T) {
 	}
 }
 
-func testSoapLyesInsertWhitelist(t *testing.T) {
+func testLyesInsertWhitelist(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapLye{}
-	if err = randomize.Struct(seed, o, soapLyeDBTypes, true); err != nil {
-		t.Errorf("Unable to randomize SoapLye struct: %s", err)
+	o := &Lye{}
+	if err = randomize.Struct(seed, o, lyeDBTypes, true); err != nil {
+		t.Errorf("Unable to randomize Lye struct: %s", err)
 	}
 
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
-	if err = o.Insert(ctx, tx, boil.Whitelist(soapLyeColumnsWithoutDefault...)); err != nil {
+	if err = o.Insert(ctx, tx, boil.Whitelist(lyeColumnsWithoutDefault...)); err != nil {
 		t.Error(err)
 	}
 
-	count, err := SoapLyes().Count(ctx, tx)
+	count, err := Lyes().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -595,28 +595,28 @@ func testSoapLyesInsertWhitelist(t *testing.T) {
 	}
 }
 
-func testSoapLyeToManyLyeSoapRecipelyes(t *testing.T) {
+func testLyeToManyRecipeLyes(t *testing.T) {
 	var err error
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
 
-	var a SoapLye
-	var b, c SoapRecipelye
+	var a Lye
+	var b, c RecipeLye
 
 	seed := randomize.NewSeed()
-	if err = randomize.Struct(seed, &a, soapLyeDBTypes, true, soapLyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLye struct: %s", err)
+	if err = randomize.Struct(seed, &a, lyeDBTypes, true, lyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Lye struct: %s", err)
 	}
 
 	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
 		t.Fatal(err)
 	}
 
-	if err = randomize.Struct(seed, &b, soapRecipelyeDBTypes, false, soapRecipelyeColumnsWithDefault...); err != nil {
+	if err = randomize.Struct(seed, &b, recipeLyeDBTypes, false, recipeLyeColumnsWithDefault...); err != nil {
 		t.Fatal(err)
 	}
-	if err = randomize.Struct(seed, &c, soapRecipelyeDBTypes, false, soapRecipelyeColumnsWithDefault...); err != nil {
+	if err = randomize.Struct(seed, &c, recipeLyeDBTypes, false, recipeLyeColumnsWithDefault...); err != nil {
 		t.Fatal(err)
 	}
 
@@ -630,7 +630,7 @@ func testSoapLyeToManyLyeSoapRecipelyes(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	check, err := a.LyeSoapRecipelyes().All(ctx, tx)
+	check, err := a.RecipeLyes().All(ctx, tx)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -652,19 +652,19 @@ func testSoapLyeToManyLyeSoapRecipelyes(t *testing.T) {
 		t.Error("expected to find c")
 	}
 
-	slice := SoapLyeSlice{&a}
-	if err = a.L.LoadLyeSoapRecipelyes(ctx, tx, false, (*[]*SoapLye)(&slice), nil); err != nil {
+	slice := LyeSlice{&a}
+	if err = a.L.LoadRecipeLyes(ctx, tx, false, (*[]*Lye)(&slice), nil); err != nil {
 		t.Fatal(err)
 	}
-	if got := len(a.R.LyeSoapRecipelyes); got != 2 {
+	if got := len(a.R.RecipeLyes); got != 2 {
 		t.Error("number of eager loaded records wrong, got:", got)
 	}
 
-	a.R.LyeSoapRecipelyes = nil
-	if err = a.L.LoadLyeSoapRecipelyes(ctx, tx, true, &a, nil); err != nil {
+	a.R.RecipeLyes = nil
+	if err = a.L.LoadRecipeLyes(ctx, tx, true, &a, nil); err != nil {
 		t.Fatal(err)
 	}
-	if got := len(a.R.LyeSoapRecipelyes); got != 2 {
+	if got := len(a.R.RecipeLyes); got != 2 {
 		t.Error("number of eager loaded records wrong, got:", got)
 	}
 
@@ -673,23 +673,23 @@ func testSoapLyeToManyLyeSoapRecipelyes(t *testing.T) {
 	}
 }
 
-func testSoapLyeToManyAddOpLyeSoapRecipelyes(t *testing.T) {
+func testLyeToManyAddOpRecipeLyes(t *testing.T) {
 	var err error
 
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
 
-	var a SoapLye
-	var b, c, d, e SoapRecipelye
+	var a Lye
+	var b, c, d, e RecipeLye
 
 	seed := randomize.NewSeed()
-	if err = randomize.Struct(seed, &a, soapLyeDBTypes, false, strmangle.SetComplement(soapLyePrimaryKeyColumns, soapLyeColumnsWithoutDefault)...); err != nil {
+	if err = randomize.Struct(seed, &a, lyeDBTypes, false, strmangle.SetComplement(lyePrimaryKeyColumns, lyeColumnsWithoutDefault)...); err != nil {
 		t.Fatal(err)
 	}
-	foreigners := []*SoapRecipelye{&b, &c, &d, &e}
+	foreigners := []*RecipeLye{&b, &c, &d, &e}
 	for _, x := range foreigners {
-		if err = randomize.Struct(seed, x, soapRecipelyeDBTypes, false, strmangle.SetComplement(soapRecipelyePrimaryKeyColumns, soapRecipelyeColumnsWithoutDefault)...); err != nil {
+		if err = randomize.Struct(seed, x, recipeLyeDBTypes, false, strmangle.SetComplement(recipeLyePrimaryKeyColumns, recipeLyeColumnsWithoutDefault)...); err != nil {
 			t.Fatal(err)
 		}
 	}
@@ -704,13 +704,13 @@ func testSoapLyeToManyAddOpLyeSoapRecipelyes(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	foreignersSplitByInsertion := [][]*SoapRecipelye{
+	foreignersSplitByInsertion := [][]*RecipeLye{
 		{&b, &c},
 		{&d, &e},
 	}
 
 	for i, x := range foreignersSplitByInsertion {
-		err = a.AddLyeSoapRecipelyes(ctx, tx, i != 0, x...)
+		err = a.AddRecipeLyes(ctx, tx, i != 0, x...)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -732,14 +732,14 @@ func testSoapLyeToManyAddOpLyeSoapRecipelyes(t *testing.T) {
 			t.Error("relationship was not added properly to the foreign slice")
 		}
 
-		if a.R.LyeSoapRecipelyes[i*2] != first {
+		if a.R.RecipeLyes[i*2] != first {
 			t.Error("relationship struct slice not set to correct value")
 		}
-		if a.R.LyeSoapRecipelyes[i*2+1] != second {
+		if a.R.RecipeLyes[i*2+1] != second {
 			t.Error("relationship struct slice not set to correct value")
 		}
 
-		count, err := a.LyeSoapRecipelyes().Count(ctx, tx)
+		count, err := a.RecipeLyes().Count(ctx, tx)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -749,14 +749,14 @@ func testSoapLyeToManyAddOpLyeSoapRecipelyes(t *testing.T) {
 	}
 }
 
-func testSoapLyesReload(t *testing.T) {
+func testLyesReload(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapLye{}
-	if err = randomize.Struct(seed, o, soapLyeDBTypes, true, soapLyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLye struct: %s", err)
+	o := &Lye{}
+	if err = randomize.Struct(seed, o, lyeDBTypes, true, lyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Lye struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -771,14 +771,14 @@ func testSoapLyesReload(t *testing.T) {
 	}
 }
 
-func testSoapLyesReloadAll(t *testing.T) {
+func testLyesReloadAll(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapLye{}
-	if err = randomize.Struct(seed, o, soapLyeDBTypes, true, soapLyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLye struct: %s", err)
+	o := &Lye{}
+	if err = randomize.Struct(seed, o, lyeDBTypes, true, lyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Lye struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -788,21 +788,21 @@ func testSoapLyesReloadAll(t *testing.T) {
 		t.Error(err)
 	}
 
-	slice := SoapLyeSlice{o}
+	slice := LyeSlice{o}
 
 	if err = slice.ReloadAll(ctx, tx); err != nil {
 		t.Error(err)
 	}
 }
 
-func testSoapLyesSelect(t *testing.T) {
+func testLyesSelect(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapLye{}
-	if err = randomize.Struct(seed, o, soapLyeDBTypes, true, soapLyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLye struct: %s", err)
+	o := &Lye{}
+	if err = randomize.Struct(seed, o, lyeDBTypes, true, lyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Lye struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -812,7 +812,7 @@ func testSoapLyesSelect(t *testing.T) {
 		t.Error(err)
 	}
 
-	slice, err := SoapLyes().All(ctx, tx)
+	slice, err := Lyes().All(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -823,25 +823,25 @@ func testSoapLyesSelect(t *testing.T) {
 }
 
 var (
-	soapLyeDBTypes = map[string]string{`ID`: `integer`, `CreatedAt`: `timestamp with time zone`, `UpdatedAt`: `timestamp with time zone`, `DeletedAt`: `timestamp with time zone`, `Kind`: `character varying`, `Name`: `character varying`, `Note`: `text`}
-	_              = bytes.MinRead
+	lyeDBTypes = map[string]string{`ID`: `integer`, `CreatedAt`: `timestamp with time zone`, `UpdatedAt`: `timestamp with time zone`, `DeletedAt`: `timestamp with time zone`, `Kind`: `character varying`, `Name`: `character varying`, `Note`: `text`}
+	_          = bytes.MinRead
 )
 
-func testSoapLyesUpdate(t *testing.T) {
+func testLyesUpdate(t *testing.T) {
 	t.Parallel()
 
-	if 0 == len(soapLyePrimaryKeyColumns) {
+	if 0 == len(lyePrimaryKeyColumns) {
 		t.Skip("Skipping table with no primary key columns")
 	}
-	if len(soapLyeAllColumns) == len(soapLyePrimaryKeyColumns) {
+	if len(lyeAllColumns) == len(lyePrimaryKeyColumns) {
 		t.Skip("Skipping table with only primary key columns")
 	}
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapLye{}
-	if err = randomize.Struct(seed, o, soapLyeDBTypes, true, soapLyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLye struct: %s", err)
+	o := &Lye{}
+	if err = randomize.Struct(seed, o, lyeDBTypes, true, lyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Lye struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -851,7 +851,7 @@ func testSoapLyesUpdate(t *testing.T) {
 		t.Error(err)
 	}
 
-	count, err := SoapLyes().Count(ctx, tx)
+	count, err := Lyes().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -860,8 +860,8 @@ func testSoapLyesUpdate(t *testing.T) {
 		t.Error("want one record, got:", count)
 	}
 
-	if err = randomize.Struct(seed, o, soapLyeDBTypes, true, soapLyePrimaryKeyColumns...); err != nil {
-		t.Errorf("Unable to randomize SoapLye struct: %s", err)
+	if err = randomize.Struct(seed, o, lyeDBTypes, true, lyePrimaryKeyColumns...); err != nil {
+		t.Errorf("Unable to randomize Lye struct: %s", err)
 	}
 
 	if rowsAff, err := o.Update(ctx, tx, boil.Infer()); err != nil {
@@ -871,18 +871,18 @@ func testSoapLyesUpdate(t *testing.T) {
 	}
 }
 
-func testSoapLyesSliceUpdateAll(t *testing.T) {
+func testLyesSliceUpdateAll(t *testing.T) {
 	t.Parallel()
 
-	if len(soapLyeAllColumns) == len(soapLyePrimaryKeyColumns) {
+	if len(lyeAllColumns) == len(lyePrimaryKeyColumns) {
 		t.Skip("Skipping table with only primary key columns")
 	}
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapLye{}
-	if err = randomize.Struct(seed, o, soapLyeDBTypes, true, soapLyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLye struct: %s", err)
+	o := &Lye{}
+	if err = randomize.Struct(seed, o, lyeDBTypes, true, lyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Lye struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -892,7 +892,7 @@ func testSoapLyesSliceUpdateAll(t *testing.T) {
 		t.Error(err)
 	}
 
-	count, err := SoapLyes().Count(ctx, tx)
+	count, err := Lyes().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -901,18 +901,18 @@ func testSoapLyesSliceUpdateAll(t *testing.T) {
 		t.Error("want one record, got:", count)
 	}
 
-	if err = randomize.Struct(seed, o, soapLyeDBTypes, true, soapLyePrimaryKeyColumns...); err != nil {
-		t.Errorf("Unable to randomize SoapLye struct: %s", err)
+	if err = randomize.Struct(seed, o, lyeDBTypes, true, lyePrimaryKeyColumns...); err != nil {
+		t.Errorf("Unable to randomize Lye struct: %s", err)
 	}
 
 	// Remove Primary keys and unique columns from what we plan to update
 	var fields []string
-	if strmangle.StringSliceMatch(soapLyeAllColumns, soapLyePrimaryKeyColumns) {
-		fields = soapLyeAllColumns
+	if strmangle.StringSliceMatch(lyeAllColumns, lyePrimaryKeyColumns) {
+		fields = lyeAllColumns
 	} else {
 		fields = strmangle.SetComplement(
-			soapLyeAllColumns,
-			soapLyePrimaryKeyColumns,
+			lyeAllColumns,
+			lyePrimaryKeyColumns,
 		)
 	}
 
@@ -930,7 +930,7 @@ func testSoapLyesSliceUpdateAll(t *testing.T) {
 		}
 	}
 
-	slice := SoapLyeSlice{o}
+	slice := LyeSlice{o}
 	if rowsAff, err := slice.UpdateAll(ctx, tx, updateMap); err != nil {
 		t.Error(err)
 	} else if rowsAff != 1 {
@@ -938,29 +938,29 @@ func testSoapLyesSliceUpdateAll(t *testing.T) {
 	}
 }
 
-func testSoapLyesUpsert(t *testing.T) {
+func testLyesUpsert(t *testing.T) {
 	t.Parallel()
 
-	if len(soapLyeAllColumns) == len(soapLyePrimaryKeyColumns) {
+	if len(lyeAllColumns) == len(lyePrimaryKeyColumns) {
 		t.Skip("Skipping table with only primary key columns")
 	}
 
 	seed := randomize.NewSeed()
 	var err error
 	// Attempt the INSERT side of an UPSERT
-	o := SoapLye{}
-	if err = randomize.Struct(seed, &o, soapLyeDBTypes, true); err != nil {
-		t.Errorf("Unable to randomize SoapLye struct: %s", err)
+	o := Lye{}
+	if err = randomize.Struct(seed, &o, lyeDBTypes, true); err != nil {
+		t.Errorf("Unable to randomize Lye struct: %s", err)
 	}
 
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
 	if err = o.Upsert(ctx, tx, false, nil, boil.Infer(), boil.Infer()); err != nil {
-		t.Errorf("Unable to upsert SoapLye: %s", err)
+		t.Errorf("Unable to upsert Lye: %s", err)
 	}
 
-	count, err := SoapLyes().Count(ctx, tx)
+	count, err := Lyes().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -969,15 +969,15 @@ func testSoapLyesUpsert(t *testing.T) {
 	}
 
 	// Attempt the UPDATE side of an UPSERT
-	if err = randomize.Struct(seed, &o, soapLyeDBTypes, false, soapLyePrimaryKeyColumns...); err != nil {
-		t.Errorf("Unable to randomize SoapLye struct: %s", err)
+	if err = randomize.Struct(seed, &o, lyeDBTypes, false, lyePrimaryKeyColumns...); err != nil {
+		t.Errorf("Unable to randomize Lye struct: %s", err)
 	}
 
 	if err = o.Upsert(ctx, tx, true, nil, boil.Infer(), boil.Infer()); err != nil {
-		t.Errorf("Unable to upsert SoapLye: %s", err)
+		t.Errorf("Unable to upsert Lye: %s", err)
 	}
 
-	count, err = SoapLyes().Count(ctx, tx)
+	count, err = Lyes().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}

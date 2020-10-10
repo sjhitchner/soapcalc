@@ -21,24 +21,24 @@ var (
 	_ = queries.Equal
 )
 
-func testSoapRecipelyes(t *testing.T) {
+func testRecipeLyes(t *testing.T) {
 	t.Parallel()
 
-	query := SoapRecipelyes()
+	query := RecipeLyes()
 
 	if query.Query == nil {
 		t.Error("expected a query, got nothing")
 	}
 }
 
-func testSoapRecipelyesSoftDelete(t *testing.T) {
+func testRecipeLyesSoftDelete(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapRecipelye{}
-	if err = randomize.Struct(seed, o, soapRecipelyeDBTypes, true, soapRecipelyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapRecipelye struct: %s", err)
+	o := &RecipeLye{}
+	if err = randomize.Struct(seed, o, recipeLyeDBTypes, true, recipeLyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize RecipeLye struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -54,7 +54,7 @@ func testSoapRecipelyesSoftDelete(t *testing.T) {
 		t.Error("should only have deleted one row, but affected:", rowsAff)
 	}
 
-	count, err := SoapRecipelyes().Count(ctx, tx)
+	count, err := RecipeLyes().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -64,14 +64,14 @@ func testSoapRecipelyesSoftDelete(t *testing.T) {
 	}
 }
 
-func testSoapRecipelyesQuerySoftDeleteAll(t *testing.T) {
+func testRecipeLyesQuerySoftDeleteAll(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapRecipelye{}
-	if err = randomize.Struct(seed, o, soapRecipelyeDBTypes, true, soapRecipelyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapRecipelye struct: %s", err)
+	o := &RecipeLye{}
+	if err = randomize.Struct(seed, o, recipeLyeDBTypes, true, recipeLyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize RecipeLye struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -81,13 +81,13 @@ func testSoapRecipelyesQuerySoftDeleteAll(t *testing.T) {
 		t.Error(err)
 	}
 
-	if rowsAff, err := SoapRecipelyes().DeleteAll(ctx, tx, false); err != nil {
+	if rowsAff, err := RecipeLyes().DeleteAll(ctx, tx, false); err != nil {
 		t.Error(err)
 	} else if rowsAff != 1 {
 		t.Error("should only have deleted one row, but affected:", rowsAff)
 	}
 
-	count, err := SoapRecipelyes().Count(ctx, tx)
+	count, err := RecipeLyes().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -97,14 +97,14 @@ func testSoapRecipelyesQuerySoftDeleteAll(t *testing.T) {
 	}
 }
 
-func testSoapRecipelyesSliceSoftDeleteAll(t *testing.T) {
+func testRecipeLyesSliceSoftDeleteAll(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapRecipelye{}
-	if err = randomize.Struct(seed, o, soapRecipelyeDBTypes, true, soapRecipelyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapRecipelye struct: %s", err)
+	o := &RecipeLye{}
+	if err = randomize.Struct(seed, o, recipeLyeDBTypes, true, recipeLyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize RecipeLye struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -114,7 +114,7 @@ func testSoapRecipelyesSliceSoftDeleteAll(t *testing.T) {
 		t.Error(err)
 	}
 
-	slice := SoapRecipelyeSlice{o}
+	slice := RecipeLyeSlice{o}
 
 	if rowsAff, err := slice.DeleteAll(ctx, tx, false); err != nil {
 		t.Error(err)
@@ -122,7 +122,7 @@ func testSoapRecipelyesSliceSoftDeleteAll(t *testing.T) {
 		t.Error("should only have deleted one row, but affected:", rowsAff)
 	}
 
-	count, err := SoapRecipelyes().Count(ctx, tx)
+	count, err := RecipeLyes().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -132,14 +132,14 @@ func testSoapRecipelyesSliceSoftDeleteAll(t *testing.T) {
 	}
 }
 
-func testSoapRecipelyesDelete(t *testing.T) {
+func testRecipeLyesDelete(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapRecipelye{}
-	if err = randomize.Struct(seed, o, soapRecipelyeDBTypes, true, soapRecipelyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapRecipelye struct: %s", err)
+	o := &RecipeLye{}
+	if err = randomize.Struct(seed, o, recipeLyeDBTypes, true, recipeLyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize RecipeLye struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -155,7 +155,7 @@ func testSoapRecipelyesDelete(t *testing.T) {
 		t.Error("should only have deleted one row, but affected:", rowsAff)
 	}
 
-	count, err := SoapRecipelyes().Count(ctx, tx)
+	count, err := RecipeLyes().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -165,14 +165,14 @@ func testSoapRecipelyesDelete(t *testing.T) {
 	}
 }
 
-func testSoapRecipelyesQueryDeleteAll(t *testing.T) {
+func testRecipeLyesQueryDeleteAll(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapRecipelye{}
-	if err = randomize.Struct(seed, o, soapRecipelyeDBTypes, true, soapRecipelyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapRecipelye struct: %s", err)
+	o := &RecipeLye{}
+	if err = randomize.Struct(seed, o, recipeLyeDBTypes, true, recipeLyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize RecipeLye struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -182,13 +182,13 @@ func testSoapRecipelyesQueryDeleteAll(t *testing.T) {
 		t.Error(err)
 	}
 
-	if rowsAff, err := SoapRecipelyes().DeleteAll(ctx, tx, true); err != nil {
+	if rowsAff, err := RecipeLyes().DeleteAll(ctx, tx, true); err != nil {
 		t.Error(err)
 	} else if rowsAff != 1 {
 		t.Error("should only have deleted one row, but affected:", rowsAff)
 	}
 
-	count, err := SoapRecipelyes().Count(ctx, tx)
+	count, err := RecipeLyes().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -198,14 +198,14 @@ func testSoapRecipelyesQueryDeleteAll(t *testing.T) {
 	}
 }
 
-func testSoapRecipelyesSliceDeleteAll(t *testing.T) {
+func testRecipeLyesSliceDeleteAll(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapRecipelye{}
-	if err = randomize.Struct(seed, o, soapRecipelyeDBTypes, true, soapRecipelyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapRecipelye struct: %s", err)
+	o := &RecipeLye{}
+	if err = randomize.Struct(seed, o, recipeLyeDBTypes, true, recipeLyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize RecipeLye struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -215,7 +215,7 @@ func testSoapRecipelyesSliceDeleteAll(t *testing.T) {
 		t.Error(err)
 	}
 
-	slice := SoapRecipelyeSlice{o}
+	slice := RecipeLyeSlice{o}
 
 	if rowsAff, err := slice.DeleteAll(ctx, tx, true); err != nil {
 		t.Error(err)
@@ -223,7 +223,7 @@ func testSoapRecipelyesSliceDeleteAll(t *testing.T) {
 		t.Error("should only have deleted one row, but affected:", rowsAff)
 	}
 
-	count, err := SoapRecipelyes().Count(ctx, tx)
+	count, err := RecipeLyes().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -233,14 +233,14 @@ func testSoapRecipelyesSliceDeleteAll(t *testing.T) {
 	}
 }
 
-func testSoapRecipelyesExists(t *testing.T) {
+func testRecipeLyesExists(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapRecipelye{}
-	if err = randomize.Struct(seed, o, soapRecipelyeDBTypes, true, soapRecipelyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapRecipelye struct: %s", err)
+	o := &RecipeLye{}
+	if err = randomize.Struct(seed, o, recipeLyeDBTypes, true, recipeLyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize RecipeLye struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -250,23 +250,23 @@ func testSoapRecipelyesExists(t *testing.T) {
 		t.Error(err)
 	}
 
-	e, err := SoapRecipelyeExists(ctx, tx, o.ID)
+	e, err := RecipeLyeExists(ctx, tx, o.ID)
 	if err != nil {
-		t.Errorf("Unable to check if SoapRecipelye exists: %s", err)
+		t.Errorf("Unable to check if RecipeLye exists: %s", err)
 	}
 	if !e {
-		t.Errorf("Expected SoapRecipelyeExists to return true, but got false.")
+		t.Errorf("Expected RecipeLyeExists to return true, but got false.")
 	}
 }
 
-func testSoapRecipelyesFind(t *testing.T) {
+func testRecipeLyesFind(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapRecipelye{}
-	if err = randomize.Struct(seed, o, soapRecipelyeDBTypes, true, soapRecipelyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapRecipelye struct: %s", err)
+	o := &RecipeLye{}
+	if err = randomize.Struct(seed, o, recipeLyeDBTypes, true, recipeLyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize RecipeLye struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -276,24 +276,24 @@ func testSoapRecipelyesFind(t *testing.T) {
 		t.Error(err)
 	}
 
-	soapRecipelyeFound, err := FindSoapRecipelye(ctx, tx, o.ID)
+	recipeLyeFound, err := FindRecipeLye(ctx, tx, o.ID)
 	if err != nil {
 		t.Error(err)
 	}
 
-	if soapRecipelyeFound == nil {
+	if recipeLyeFound == nil {
 		t.Error("want a record, got nil")
 	}
 }
 
-func testSoapRecipelyesBind(t *testing.T) {
+func testRecipeLyesBind(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapRecipelye{}
-	if err = randomize.Struct(seed, o, soapRecipelyeDBTypes, true, soapRecipelyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapRecipelye struct: %s", err)
+	o := &RecipeLye{}
+	if err = randomize.Struct(seed, o, recipeLyeDBTypes, true, recipeLyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize RecipeLye struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -303,19 +303,19 @@ func testSoapRecipelyesBind(t *testing.T) {
 		t.Error(err)
 	}
 
-	if err = SoapRecipelyes().Bind(ctx, tx, o); err != nil {
+	if err = RecipeLyes().Bind(ctx, tx, o); err != nil {
 		t.Error(err)
 	}
 }
 
-func testSoapRecipelyesOne(t *testing.T) {
+func testRecipeLyesOne(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapRecipelye{}
-	if err = randomize.Struct(seed, o, soapRecipelyeDBTypes, true, soapRecipelyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapRecipelye struct: %s", err)
+	o := &RecipeLye{}
+	if err = randomize.Struct(seed, o, recipeLyeDBTypes, true, recipeLyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize RecipeLye struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -325,38 +325,38 @@ func testSoapRecipelyesOne(t *testing.T) {
 		t.Error(err)
 	}
 
-	if x, err := SoapRecipelyes().One(ctx, tx); err != nil {
+	if x, err := RecipeLyes().One(ctx, tx); err != nil {
 		t.Error(err)
 	} else if x == nil {
 		t.Error("expected to get a non nil record")
 	}
 }
 
-func testSoapRecipelyesAll(t *testing.T) {
+func testRecipeLyesAll(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	soapRecipelyeOne := &SoapRecipelye{}
-	soapRecipelyeTwo := &SoapRecipelye{}
-	if err = randomize.Struct(seed, soapRecipelyeOne, soapRecipelyeDBTypes, false, soapRecipelyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapRecipelye struct: %s", err)
+	recipeLyeOne := &RecipeLye{}
+	recipeLyeTwo := &RecipeLye{}
+	if err = randomize.Struct(seed, recipeLyeOne, recipeLyeDBTypes, false, recipeLyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize RecipeLye struct: %s", err)
 	}
-	if err = randomize.Struct(seed, soapRecipelyeTwo, soapRecipelyeDBTypes, false, soapRecipelyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapRecipelye struct: %s", err)
+	if err = randomize.Struct(seed, recipeLyeTwo, recipeLyeDBTypes, false, recipeLyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize RecipeLye struct: %s", err)
 	}
 
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
-	if err = soapRecipelyeOne.Insert(ctx, tx, boil.Infer()); err != nil {
+	if err = recipeLyeOne.Insert(ctx, tx, boil.Infer()); err != nil {
 		t.Error(err)
 	}
-	if err = soapRecipelyeTwo.Insert(ctx, tx, boil.Infer()); err != nil {
+	if err = recipeLyeTwo.Insert(ctx, tx, boil.Infer()); err != nil {
 		t.Error(err)
 	}
 
-	slice, err := SoapRecipelyes().All(ctx, tx)
+	slice, err := RecipeLyes().All(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -366,31 +366,31 @@ func testSoapRecipelyesAll(t *testing.T) {
 	}
 }
 
-func testSoapRecipelyesCount(t *testing.T) {
+func testRecipeLyesCount(t *testing.T) {
 	t.Parallel()
 
 	var err error
 	seed := randomize.NewSeed()
-	soapRecipelyeOne := &SoapRecipelye{}
-	soapRecipelyeTwo := &SoapRecipelye{}
-	if err = randomize.Struct(seed, soapRecipelyeOne, soapRecipelyeDBTypes, false, soapRecipelyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapRecipelye struct: %s", err)
+	recipeLyeOne := &RecipeLye{}
+	recipeLyeTwo := &RecipeLye{}
+	if err = randomize.Struct(seed, recipeLyeOne, recipeLyeDBTypes, false, recipeLyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize RecipeLye struct: %s", err)
 	}
-	if err = randomize.Struct(seed, soapRecipelyeTwo, soapRecipelyeDBTypes, false, soapRecipelyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapRecipelye struct: %s", err)
+	if err = randomize.Struct(seed, recipeLyeTwo, recipeLyeDBTypes, false, recipeLyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize RecipeLye struct: %s", err)
 	}
 
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
-	if err = soapRecipelyeOne.Insert(ctx, tx, boil.Infer()); err != nil {
+	if err = recipeLyeOne.Insert(ctx, tx, boil.Infer()); err != nil {
 		t.Error(err)
 	}
-	if err = soapRecipelyeTwo.Insert(ctx, tx, boil.Infer()); err != nil {
+	if err = recipeLyeTwo.Insert(ctx, tx, boil.Infer()); err != nil {
 		t.Error(err)
 	}
 
-	count, err := SoapRecipelyes().Count(ctx, tx)
+	count, err := RecipeLyes().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -400,155 +400,155 @@ func testSoapRecipelyesCount(t *testing.T) {
 	}
 }
 
-func soapRecipelyeBeforeInsertHook(ctx context.Context, e boil.ContextExecutor, o *SoapRecipelye) error {
-	*o = SoapRecipelye{}
+func recipeLyeBeforeInsertHook(ctx context.Context, e boil.ContextExecutor, o *RecipeLye) error {
+	*o = RecipeLye{}
 	return nil
 }
 
-func soapRecipelyeAfterInsertHook(ctx context.Context, e boil.ContextExecutor, o *SoapRecipelye) error {
-	*o = SoapRecipelye{}
+func recipeLyeAfterInsertHook(ctx context.Context, e boil.ContextExecutor, o *RecipeLye) error {
+	*o = RecipeLye{}
 	return nil
 }
 
-func soapRecipelyeAfterSelectHook(ctx context.Context, e boil.ContextExecutor, o *SoapRecipelye) error {
-	*o = SoapRecipelye{}
+func recipeLyeAfterSelectHook(ctx context.Context, e boil.ContextExecutor, o *RecipeLye) error {
+	*o = RecipeLye{}
 	return nil
 }
 
-func soapRecipelyeBeforeUpdateHook(ctx context.Context, e boil.ContextExecutor, o *SoapRecipelye) error {
-	*o = SoapRecipelye{}
+func recipeLyeBeforeUpdateHook(ctx context.Context, e boil.ContextExecutor, o *RecipeLye) error {
+	*o = RecipeLye{}
 	return nil
 }
 
-func soapRecipelyeAfterUpdateHook(ctx context.Context, e boil.ContextExecutor, o *SoapRecipelye) error {
-	*o = SoapRecipelye{}
+func recipeLyeAfterUpdateHook(ctx context.Context, e boil.ContextExecutor, o *RecipeLye) error {
+	*o = RecipeLye{}
 	return nil
 }
 
-func soapRecipelyeBeforeDeleteHook(ctx context.Context, e boil.ContextExecutor, o *SoapRecipelye) error {
-	*o = SoapRecipelye{}
+func recipeLyeBeforeDeleteHook(ctx context.Context, e boil.ContextExecutor, o *RecipeLye) error {
+	*o = RecipeLye{}
 	return nil
 }
 
-func soapRecipelyeAfterDeleteHook(ctx context.Context, e boil.ContextExecutor, o *SoapRecipelye) error {
-	*o = SoapRecipelye{}
+func recipeLyeAfterDeleteHook(ctx context.Context, e boil.ContextExecutor, o *RecipeLye) error {
+	*o = RecipeLye{}
 	return nil
 }
 
-func soapRecipelyeBeforeUpsertHook(ctx context.Context, e boil.ContextExecutor, o *SoapRecipelye) error {
-	*o = SoapRecipelye{}
+func recipeLyeBeforeUpsertHook(ctx context.Context, e boil.ContextExecutor, o *RecipeLye) error {
+	*o = RecipeLye{}
 	return nil
 }
 
-func soapRecipelyeAfterUpsertHook(ctx context.Context, e boil.ContextExecutor, o *SoapRecipelye) error {
-	*o = SoapRecipelye{}
+func recipeLyeAfterUpsertHook(ctx context.Context, e boil.ContextExecutor, o *RecipeLye) error {
+	*o = RecipeLye{}
 	return nil
 }
 
-func testSoapRecipelyesHooks(t *testing.T) {
+func testRecipeLyesHooks(t *testing.T) {
 	t.Parallel()
 
 	var err error
 
 	ctx := context.Background()
-	empty := &SoapRecipelye{}
-	o := &SoapRecipelye{}
+	empty := &RecipeLye{}
+	o := &RecipeLye{}
 
 	seed := randomize.NewSeed()
-	if err = randomize.Struct(seed, o, soapRecipelyeDBTypes, false); err != nil {
-		t.Errorf("Unable to randomize SoapRecipelye object: %s", err)
+	if err = randomize.Struct(seed, o, recipeLyeDBTypes, false); err != nil {
+		t.Errorf("Unable to randomize RecipeLye object: %s", err)
 	}
 
-	AddSoapRecipelyeHook(boil.BeforeInsertHook, soapRecipelyeBeforeInsertHook)
+	AddRecipeLyeHook(boil.BeforeInsertHook, recipeLyeBeforeInsertHook)
 	if err = o.doBeforeInsertHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doBeforeInsertHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected BeforeInsertHook function to empty object, but got: %#v", o)
 	}
-	soapRecipelyeBeforeInsertHooks = []SoapRecipelyeHook{}
+	recipeLyeBeforeInsertHooks = []RecipeLyeHook{}
 
-	AddSoapRecipelyeHook(boil.AfterInsertHook, soapRecipelyeAfterInsertHook)
+	AddRecipeLyeHook(boil.AfterInsertHook, recipeLyeAfterInsertHook)
 	if err = o.doAfterInsertHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doAfterInsertHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected AfterInsertHook function to empty object, but got: %#v", o)
 	}
-	soapRecipelyeAfterInsertHooks = []SoapRecipelyeHook{}
+	recipeLyeAfterInsertHooks = []RecipeLyeHook{}
 
-	AddSoapRecipelyeHook(boil.AfterSelectHook, soapRecipelyeAfterSelectHook)
+	AddRecipeLyeHook(boil.AfterSelectHook, recipeLyeAfterSelectHook)
 	if err = o.doAfterSelectHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doAfterSelectHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected AfterSelectHook function to empty object, but got: %#v", o)
 	}
-	soapRecipelyeAfterSelectHooks = []SoapRecipelyeHook{}
+	recipeLyeAfterSelectHooks = []RecipeLyeHook{}
 
-	AddSoapRecipelyeHook(boil.BeforeUpdateHook, soapRecipelyeBeforeUpdateHook)
+	AddRecipeLyeHook(boil.BeforeUpdateHook, recipeLyeBeforeUpdateHook)
 	if err = o.doBeforeUpdateHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doBeforeUpdateHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected BeforeUpdateHook function to empty object, but got: %#v", o)
 	}
-	soapRecipelyeBeforeUpdateHooks = []SoapRecipelyeHook{}
+	recipeLyeBeforeUpdateHooks = []RecipeLyeHook{}
 
-	AddSoapRecipelyeHook(boil.AfterUpdateHook, soapRecipelyeAfterUpdateHook)
+	AddRecipeLyeHook(boil.AfterUpdateHook, recipeLyeAfterUpdateHook)
 	if err = o.doAfterUpdateHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doAfterUpdateHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected AfterUpdateHook function to empty object, but got: %#v", o)
 	}
-	soapRecipelyeAfterUpdateHooks = []SoapRecipelyeHook{}
+	recipeLyeAfterUpdateHooks = []RecipeLyeHook{}
 
-	AddSoapRecipelyeHook(boil.BeforeDeleteHook, soapRecipelyeBeforeDeleteHook)
+	AddRecipeLyeHook(boil.BeforeDeleteHook, recipeLyeBeforeDeleteHook)
 	if err = o.doBeforeDeleteHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doBeforeDeleteHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected BeforeDeleteHook function to empty object, but got: %#v", o)
 	}
-	soapRecipelyeBeforeDeleteHooks = []SoapRecipelyeHook{}
+	recipeLyeBeforeDeleteHooks = []RecipeLyeHook{}
 
-	AddSoapRecipelyeHook(boil.AfterDeleteHook, soapRecipelyeAfterDeleteHook)
+	AddRecipeLyeHook(boil.AfterDeleteHook, recipeLyeAfterDeleteHook)
 	if err = o.doAfterDeleteHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doAfterDeleteHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected AfterDeleteHook function to empty object, but got: %#v", o)
 	}
-	soapRecipelyeAfterDeleteHooks = []SoapRecipelyeHook{}
+	recipeLyeAfterDeleteHooks = []RecipeLyeHook{}
 
-	AddSoapRecipelyeHook(boil.BeforeUpsertHook, soapRecipelyeBeforeUpsertHook)
+	AddRecipeLyeHook(boil.BeforeUpsertHook, recipeLyeBeforeUpsertHook)
 	if err = o.doBeforeUpsertHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doBeforeUpsertHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected BeforeUpsertHook function to empty object, but got: %#v", o)
 	}
-	soapRecipelyeBeforeUpsertHooks = []SoapRecipelyeHook{}
+	recipeLyeBeforeUpsertHooks = []RecipeLyeHook{}
 
-	AddSoapRecipelyeHook(boil.AfterUpsertHook, soapRecipelyeAfterUpsertHook)
+	AddRecipeLyeHook(boil.AfterUpsertHook, recipeLyeAfterUpsertHook)
 	if err = o.doAfterUpsertHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doAfterUpsertHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected AfterUpsertHook function to empty object, but got: %#v", o)
 	}
-	soapRecipelyeAfterUpsertHooks = []SoapRecipelyeHook{}
+	recipeLyeAfterUpsertHooks = []RecipeLyeHook{}
 }
 
-func testSoapRecipelyesInsert(t *testing.T) {
+func testRecipeLyesInsert(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapRecipelye{}
-	if err = randomize.Struct(seed, o, soapRecipelyeDBTypes, true, soapRecipelyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapRecipelye struct: %s", err)
+	o := &RecipeLye{}
+	if err = randomize.Struct(seed, o, recipeLyeDBTypes, true, recipeLyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize RecipeLye struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -558,7 +558,7 @@ func testSoapRecipelyesInsert(t *testing.T) {
 		t.Error(err)
 	}
 
-	count, err := SoapRecipelyes().Count(ctx, tx)
+	count, err := RecipeLyes().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -568,24 +568,24 @@ func testSoapRecipelyesInsert(t *testing.T) {
 	}
 }
 
-func testSoapRecipelyesInsertWhitelist(t *testing.T) {
+func testRecipeLyesInsertWhitelist(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapRecipelye{}
-	if err = randomize.Struct(seed, o, soapRecipelyeDBTypes, true); err != nil {
-		t.Errorf("Unable to randomize SoapRecipelye struct: %s", err)
+	o := &RecipeLye{}
+	if err = randomize.Struct(seed, o, recipeLyeDBTypes, true); err != nil {
+		t.Errorf("Unable to randomize RecipeLye struct: %s", err)
 	}
 
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
-	if err = o.Insert(ctx, tx, boil.Whitelist(soapRecipelyeColumnsWithoutDefault...)); err != nil {
+	if err = o.Insert(ctx, tx, boil.Whitelist(recipeLyeColumnsWithoutDefault...)); err != nil {
 		t.Error(err)
 	}
 
-	count, err := SoapRecipelyes().Count(ctx, tx)
+	count, err := RecipeLyes().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -595,28 +595,28 @@ func testSoapRecipelyesInsertWhitelist(t *testing.T) {
 	}
 }
 
-func testSoapRecipelyeToManyLyeSoapRecipes(t *testing.T) {
+func testRecipeLyeToManyLyeRecipes(t *testing.T) {
 	var err error
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
 
-	var a SoapRecipelye
-	var b, c SoapRecipe
+	var a RecipeLye
+	var b, c Recipe
 
 	seed := randomize.NewSeed()
-	if err = randomize.Struct(seed, &a, soapRecipelyeDBTypes, true, soapRecipelyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapRecipelye struct: %s", err)
+	if err = randomize.Struct(seed, &a, recipeLyeDBTypes, true, recipeLyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize RecipeLye struct: %s", err)
 	}
 
 	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
 		t.Fatal(err)
 	}
 
-	if err = randomize.Struct(seed, &b, soapRecipeDBTypes, false, soapRecipeColumnsWithDefault...); err != nil {
+	if err = randomize.Struct(seed, &b, recipeDBTypes, false, recipeColumnsWithDefault...); err != nil {
 		t.Fatal(err)
 	}
-	if err = randomize.Struct(seed, &c, soapRecipeDBTypes, false, soapRecipeColumnsWithDefault...); err != nil {
+	if err = randomize.Struct(seed, &c, recipeDBTypes, false, recipeColumnsWithDefault...); err != nil {
 		t.Fatal(err)
 	}
 
@@ -630,7 +630,7 @@ func testSoapRecipelyeToManyLyeSoapRecipes(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	check, err := a.LyeSoapRecipes().All(ctx, tx)
+	check, err := a.LyeRecipes().All(ctx, tx)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -652,19 +652,19 @@ func testSoapRecipelyeToManyLyeSoapRecipes(t *testing.T) {
 		t.Error("expected to find c")
 	}
 
-	slice := SoapRecipelyeSlice{&a}
-	if err = a.L.LoadLyeSoapRecipes(ctx, tx, false, (*[]*SoapRecipelye)(&slice), nil); err != nil {
+	slice := RecipeLyeSlice{&a}
+	if err = a.L.LoadLyeRecipes(ctx, tx, false, (*[]*RecipeLye)(&slice), nil); err != nil {
 		t.Fatal(err)
 	}
-	if got := len(a.R.LyeSoapRecipes); got != 2 {
+	if got := len(a.R.LyeRecipes); got != 2 {
 		t.Error("number of eager loaded records wrong, got:", got)
 	}
 
-	a.R.LyeSoapRecipes = nil
-	if err = a.L.LoadLyeSoapRecipes(ctx, tx, true, &a, nil); err != nil {
+	a.R.LyeRecipes = nil
+	if err = a.L.LoadLyeRecipes(ctx, tx, true, &a, nil); err != nil {
 		t.Fatal(err)
 	}
-	if got := len(a.R.LyeSoapRecipes); got != 2 {
+	if got := len(a.R.LyeRecipes); got != 2 {
 		t.Error("number of eager loaded records wrong, got:", got)
 	}
 
@@ -673,23 +673,23 @@ func testSoapRecipelyeToManyLyeSoapRecipes(t *testing.T) {
 	}
 }
 
-func testSoapRecipelyeToManyAddOpLyeSoapRecipes(t *testing.T) {
+func testRecipeLyeToManyAddOpLyeRecipes(t *testing.T) {
 	var err error
 
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
 
-	var a SoapRecipelye
-	var b, c, d, e SoapRecipe
+	var a RecipeLye
+	var b, c, d, e Recipe
 
 	seed := randomize.NewSeed()
-	if err = randomize.Struct(seed, &a, soapRecipelyeDBTypes, false, strmangle.SetComplement(soapRecipelyePrimaryKeyColumns, soapRecipelyeColumnsWithoutDefault)...); err != nil {
+	if err = randomize.Struct(seed, &a, recipeLyeDBTypes, false, strmangle.SetComplement(recipeLyePrimaryKeyColumns, recipeLyeColumnsWithoutDefault)...); err != nil {
 		t.Fatal(err)
 	}
-	foreigners := []*SoapRecipe{&b, &c, &d, &e}
+	foreigners := []*Recipe{&b, &c, &d, &e}
 	for _, x := range foreigners {
-		if err = randomize.Struct(seed, x, soapRecipeDBTypes, false, strmangle.SetComplement(soapRecipePrimaryKeyColumns, soapRecipeColumnsWithoutDefault)...); err != nil {
+		if err = randomize.Struct(seed, x, recipeDBTypes, false, strmangle.SetComplement(recipePrimaryKeyColumns, recipeColumnsWithoutDefault)...); err != nil {
 			t.Fatal(err)
 		}
 	}
@@ -704,13 +704,13 @@ func testSoapRecipelyeToManyAddOpLyeSoapRecipes(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	foreignersSplitByInsertion := [][]*SoapRecipe{
+	foreignersSplitByInsertion := [][]*Recipe{
 		{&b, &c},
 		{&d, &e},
 	}
 
 	for i, x := range foreignersSplitByInsertion {
-		err = a.AddLyeSoapRecipes(ctx, tx, i != 0, x...)
+		err = a.AddLyeRecipes(ctx, tx, i != 0, x...)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -732,14 +732,14 @@ func testSoapRecipelyeToManyAddOpLyeSoapRecipes(t *testing.T) {
 			t.Error("relationship was not added properly to the foreign slice")
 		}
 
-		if a.R.LyeSoapRecipes[i*2] != first {
+		if a.R.LyeRecipes[i*2] != first {
 			t.Error("relationship struct slice not set to correct value")
 		}
-		if a.R.LyeSoapRecipes[i*2+1] != second {
+		if a.R.LyeRecipes[i*2+1] != second {
 			t.Error("relationship struct slice not set to correct value")
 		}
 
-		count, err := a.LyeSoapRecipes().Count(ctx, tx)
+		count, err := a.LyeRecipes().Count(ctx, tx)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -748,20 +748,20 @@ func testSoapRecipelyeToManyAddOpLyeSoapRecipes(t *testing.T) {
 		}
 	}
 }
-func testSoapRecipelyeToOneSoapLyeUsingLye(t *testing.T) {
+func testRecipeLyeToOneLyeUsingLye(t *testing.T) {
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
 
-	var local SoapRecipelye
-	var foreign SoapLye
+	var local RecipeLye
+	var foreign Lye
 
 	seed := randomize.NewSeed()
-	if err := randomize.Struct(seed, &local, soapRecipelyeDBTypes, false, soapRecipelyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapRecipelye struct: %s", err)
+	if err := randomize.Struct(seed, &local, recipeLyeDBTypes, false, recipeLyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize RecipeLye struct: %s", err)
 	}
-	if err := randomize.Struct(seed, &foreign, soapLyeDBTypes, false, soapLyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLye struct: %s", err)
+	if err := randomize.Struct(seed, &foreign, lyeDBTypes, false, lyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Lye struct: %s", err)
 	}
 
 	if err := foreign.Insert(ctx, tx, boil.Infer()); err != nil {
@@ -782,8 +782,8 @@ func testSoapRecipelyeToOneSoapLyeUsingLye(t *testing.T) {
 		t.Errorf("want: %v, got %v", foreign.ID, check.ID)
 	}
 
-	slice := SoapRecipelyeSlice{&local}
-	if err = local.L.LoadLye(ctx, tx, false, (*[]*SoapRecipelye)(&slice), nil); err != nil {
+	slice := RecipeLyeSlice{&local}
+	if err = local.L.LoadLye(ctx, tx, false, (*[]*RecipeLye)(&slice), nil); err != nil {
 		t.Fatal(err)
 	}
 	if local.R.Lye == nil {
@@ -799,24 +799,24 @@ func testSoapRecipelyeToOneSoapLyeUsingLye(t *testing.T) {
 	}
 }
 
-func testSoapRecipelyeToOneSetOpSoapLyeUsingLye(t *testing.T) {
+func testRecipeLyeToOneSetOpLyeUsingLye(t *testing.T) {
 	var err error
 
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
 
-	var a SoapRecipelye
-	var b, c SoapLye
+	var a RecipeLye
+	var b, c Lye
 
 	seed := randomize.NewSeed()
-	if err = randomize.Struct(seed, &a, soapRecipelyeDBTypes, false, strmangle.SetComplement(soapRecipelyePrimaryKeyColumns, soapRecipelyeColumnsWithoutDefault)...); err != nil {
+	if err = randomize.Struct(seed, &a, recipeLyeDBTypes, false, strmangle.SetComplement(recipeLyePrimaryKeyColumns, recipeLyeColumnsWithoutDefault)...); err != nil {
 		t.Fatal(err)
 	}
-	if err = randomize.Struct(seed, &b, soapLyeDBTypes, false, strmangle.SetComplement(soapLyePrimaryKeyColumns, soapLyeColumnsWithoutDefault)...); err != nil {
+	if err = randomize.Struct(seed, &b, lyeDBTypes, false, strmangle.SetComplement(lyePrimaryKeyColumns, lyeColumnsWithoutDefault)...); err != nil {
 		t.Fatal(err)
 	}
-	if err = randomize.Struct(seed, &c, soapLyeDBTypes, false, strmangle.SetComplement(soapLyePrimaryKeyColumns, soapLyeColumnsWithoutDefault)...); err != nil {
+	if err = randomize.Struct(seed, &c, lyeDBTypes, false, strmangle.SetComplement(lyePrimaryKeyColumns, lyeColumnsWithoutDefault)...); err != nil {
 		t.Fatal(err)
 	}
 
@@ -827,7 +827,7 @@ func testSoapRecipelyeToOneSetOpSoapLyeUsingLye(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	for i, x := range []*SoapLye{&b, &c} {
+	for i, x := range []*Lye{&b, &c} {
 		err = a.SetLye(ctx, tx, i != 0, x)
 		if err != nil {
 			t.Fatal(err)
@@ -837,7 +837,7 @@ func testSoapRecipelyeToOneSetOpSoapLyeUsingLye(t *testing.T) {
 			t.Error("relationship struct not set to correct value")
 		}
 
-		if x.R.LyeSoapRecipelyes[0] != &a {
+		if x.R.RecipeLyes[0] != &a {
 			t.Error("failed to append to foreign relationship struct")
 		}
 		if a.LyeID != x.ID {
@@ -857,14 +857,14 @@ func testSoapRecipelyeToOneSetOpSoapLyeUsingLye(t *testing.T) {
 	}
 }
 
-func testSoapRecipelyesReload(t *testing.T) {
+func testRecipeLyesReload(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapRecipelye{}
-	if err = randomize.Struct(seed, o, soapRecipelyeDBTypes, true, soapRecipelyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapRecipelye struct: %s", err)
+	o := &RecipeLye{}
+	if err = randomize.Struct(seed, o, recipeLyeDBTypes, true, recipeLyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize RecipeLye struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -879,14 +879,14 @@ func testSoapRecipelyesReload(t *testing.T) {
 	}
 }
 
-func testSoapRecipelyesReloadAll(t *testing.T) {
+func testRecipeLyesReloadAll(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapRecipelye{}
-	if err = randomize.Struct(seed, o, soapRecipelyeDBTypes, true, soapRecipelyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapRecipelye struct: %s", err)
+	o := &RecipeLye{}
+	if err = randomize.Struct(seed, o, recipeLyeDBTypes, true, recipeLyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize RecipeLye struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -896,21 +896,21 @@ func testSoapRecipelyesReloadAll(t *testing.T) {
 		t.Error(err)
 	}
 
-	slice := SoapRecipelyeSlice{o}
+	slice := RecipeLyeSlice{o}
 
 	if err = slice.ReloadAll(ctx, tx); err != nil {
 		t.Error(err)
 	}
 }
 
-func testSoapRecipelyesSelect(t *testing.T) {
+func testRecipeLyesSelect(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapRecipelye{}
-	if err = randomize.Struct(seed, o, soapRecipelyeDBTypes, true, soapRecipelyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapRecipelye struct: %s", err)
+	o := &RecipeLye{}
+	if err = randomize.Struct(seed, o, recipeLyeDBTypes, true, recipeLyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize RecipeLye struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -920,7 +920,7 @@ func testSoapRecipelyesSelect(t *testing.T) {
 		t.Error(err)
 	}
 
-	slice, err := SoapRecipelyes().All(ctx, tx)
+	slice, err := RecipeLyes().All(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -931,25 +931,25 @@ func testSoapRecipelyesSelect(t *testing.T) {
 }
 
 var (
-	soapRecipelyeDBTypes = map[string]string{`CreatedAt`: `timestamp with time zone`, `UpdatedAt`: `timestamp with time zone`, `DeletedAt`: `timestamp with time zone`, `ID`: `character varying`, `Weight`: `double precision`, `Concentration`: `double precision`, `Discount`: `double precision`, `Cost`: `double precision`, `LyeID`: `integer`}
-	_                    = bytes.MinRead
+	recipeLyeDBTypes = map[string]string{`CreatedAt`: `timestamp with time zone`, `UpdatedAt`: `timestamp with time zone`, `DeletedAt`: `timestamp with time zone`, `ID`: `character varying`, `Weight`: `double precision`, `Concentration`: `double precision`, `Discount`: `double precision`, `Cost`: `double precision`, `LyeID`: `integer`}
+	_                = bytes.MinRead
 )
 
-func testSoapRecipelyesUpdate(t *testing.T) {
+func testRecipeLyesUpdate(t *testing.T) {
 	t.Parallel()
 
-	if 0 == len(soapRecipelyePrimaryKeyColumns) {
+	if 0 == len(recipeLyePrimaryKeyColumns) {
 		t.Skip("Skipping table with no primary key columns")
 	}
-	if len(soapRecipelyeAllColumns) == len(soapRecipelyePrimaryKeyColumns) {
+	if len(recipeLyeAllColumns) == len(recipeLyePrimaryKeyColumns) {
 		t.Skip("Skipping table with only primary key columns")
 	}
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapRecipelye{}
-	if err = randomize.Struct(seed, o, soapRecipelyeDBTypes, true, soapRecipelyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapRecipelye struct: %s", err)
+	o := &RecipeLye{}
+	if err = randomize.Struct(seed, o, recipeLyeDBTypes, true, recipeLyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize RecipeLye struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -959,7 +959,7 @@ func testSoapRecipelyesUpdate(t *testing.T) {
 		t.Error(err)
 	}
 
-	count, err := SoapRecipelyes().Count(ctx, tx)
+	count, err := RecipeLyes().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -968,8 +968,8 @@ func testSoapRecipelyesUpdate(t *testing.T) {
 		t.Error("want one record, got:", count)
 	}
 
-	if err = randomize.Struct(seed, o, soapRecipelyeDBTypes, true, soapRecipelyePrimaryKeyColumns...); err != nil {
-		t.Errorf("Unable to randomize SoapRecipelye struct: %s", err)
+	if err = randomize.Struct(seed, o, recipeLyeDBTypes, true, recipeLyePrimaryKeyColumns...); err != nil {
+		t.Errorf("Unable to randomize RecipeLye struct: %s", err)
 	}
 
 	if rowsAff, err := o.Update(ctx, tx, boil.Infer()); err != nil {
@@ -979,18 +979,18 @@ func testSoapRecipelyesUpdate(t *testing.T) {
 	}
 }
 
-func testSoapRecipelyesSliceUpdateAll(t *testing.T) {
+func testRecipeLyesSliceUpdateAll(t *testing.T) {
 	t.Parallel()
 
-	if len(soapRecipelyeAllColumns) == len(soapRecipelyePrimaryKeyColumns) {
+	if len(recipeLyeAllColumns) == len(recipeLyePrimaryKeyColumns) {
 		t.Skip("Skipping table with only primary key columns")
 	}
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapRecipelye{}
-	if err = randomize.Struct(seed, o, soapRecipelyeDBTypes, true, soapRecipelyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapRecipelye struct: %s", err)
+	o := &RecipeLye{}
+	if err = randomize.Struct(seed, o, recipeLyeDBTypes, true, recipeLyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize RecipeLye struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -1000,7 +1000,7 @@ func testSoapRecipelyesSliceUpdateAll(t *testing.T) {
 		t.Error(err)
 	}
 
-	count, err := SoapRecipelyes().Count(ctx, tx)
+	count, err := RecipeLyes().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -1009,18 +1009,18 @@ func testSoapRecipelyesSliceUpdateAll(t *testing.T) {
 		t.Error("want one record, got:", count)
 	}
 
-	if err = randomize.Struct(seed, o, soapRecipelyeDBTypes, true, soapRecipelyePrimaryKeyColumns...); err != nil {
-		t.Errorf("Unable to randomize SoapRecipelye struct: %s", err)
+	if err = randomize.Struct(seed, o, recipeLyeDBTypes, true, recipeLyePrimaryKeyColumns...); err != nil {
+		t.Errorf("Unable to randomize RecipeLye struct: %s", err)
 	}
 
 	// Remove Primary keys and unique columns from what we plan to update
 	var fields []string
-	if strmangle.StringSliceMatch(soapRecipelyeAllColumns, soapRecipelyePrimaryKeyColumns) {
-		fields = soapRecipelyeAllColumns
+	if strmangle.StringSliceMatch(recipeLyeAllColumns, recipeLyePrimaryKeyColumns) {
+		fields = recipeLyeAllColumns
 	} else {
 		fields = strmangle.SetComplement(
-			soapRecipelyeAllColumns,
-			soapRecipelyePrimaryKeyColumns,
+			recipeLyeAllColumns,
+			recipeLyePrimaryKeyColumns,
 		)
 	}
 
@@ -1038,7 +1038,7 @@ func testSoapRecipelyesSliceUpdateAll(t *testing.T) {
 		}
 	}
 
-	slice := SoapRecipelyeSlice{o}
+	slice := RecipeLyeSlice{o}
 	if rowsAff, err := slice.UpdateAll(ctx, tx, updateMap); err != nil {
 		t.Error(err)
 	} else if rowsAff != 1 {
@@ -1046,29 +1046,29 @@ func testSoapRecipelyesSliceUpdateAll(t *testing.T) {
 	}
 }
 
-func testSoapRecipelyesUpsert(t *testing.T) {
+func testRecipeLyesUpsert(t *testing.T) {
 	t.Parallel()
 
-	if len(soapRecipelyeAllColumns) == len(soapRecipelyePrimaryKeyColumns) {
+	if len(recipeLyeAllColumns) == len(recipeLyePrimaryKeyColumns) {
 		t.Skip("Skipping table with only primary key columns")
 	}
 
 	seed := randomize.NewSeed()
 	var err error
 	// Attempt the INSERT side of an UPSERT
-	o := SoapRecipelye{}
-	if err = randomize.Struct(seed, &o, soapRecipelyeDBTypes, true); err != nil {
-		t.Errorf("Unable to randomize SoapRecipelye struct: %s", err)
+	o := RecipeLye{}
+	if err = randomize.Struct(seed, &o, recipeLyeDBTypes, true); err != nil {
+		t.Errorf("Unable to randomize RecipeLye struct: %s", err)
 	}
 
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
 	if err = o.Upsert(ctx, tx, false, nil, boil.Infer(), boil.Infer()); err != nil {
-		t.Errorf("Unable to upsert SoapRecipelye: %s", err)
+		t.Errorf("Unable to upsert RecipeLye: %s", err)
 	}
 
-	count, err := SoapRecipelyes().Count(ctx, tx)
+	count, err := RecipeLyes().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -1077,15 +1077,15 @@ func testSoapRecipelyesUpsert(t *testing.T) {
 	}
 
 	// Attempt the UPDATE side of an UPSERT
-	if err = randomize.Struct(seed, &o, soapRecipelyeDBTypes, false, soapRecipelyePrimaryKeyColumns...); err != nil {
-		t.Errorf("Unable to randomize SoapRecipelye struct: %s", err)
+	if err = randomize.Struct(seed, &o, recipeLyeDBTypes, false, recipeLyePrimaryKeyColumns...); err != nil {
+		t.Errorf("Unable to randomize RecipeLye struct: %s", err)
 	}
 
 	if err = o.Upsert(ctx, tx, true, nil, boil.Infer(), boil.Infer()); err != nil {
-		t.Errorf("Unable to upsert SoapRecipelye: %s", err)
+		t.Errorf("Unable to upsert RecipeLye: %s", err)
 	}
 
-	count, err = SoapRecipelyes().Count(ctx, tx)
+	count, err = RecipeLyes().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}

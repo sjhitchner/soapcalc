@@ -21,24 +21,24 @@ var (
 	_ = queries.Equal
 )
 
-func testSoapLipids(t *testing.T) {
+func testAdditives(t *testing.T) {
 	t.Parallel()
 
-	query := SoapLipids()
+	query := Additives()
 
 	if query.Query == nil {
 		t.Error("expected a query, got nothing")
 	}
 }
 
-func testSoapLipidsSoftDelete(t *testing.T) {
+func testAdditivesSoftDelete(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapLipid{}
-	if err = randomize.Struct(seed, o, soapLipidDBTypes, true, soapLipidColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLipid struct: %s", err)
+	o := &Additive{}
+	if err = randomize.Struct(seed, o, additiveDBTypes, true, additiveColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Additive struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -54,7 +54,7 @@ func testSoapLipidsSoftDelete(t *testing.T) {
 		t.Error("should only have deleted one row, but affected:", rowsAff)
 	}
 
-	count, err := SoapLipids().Count(ctx, tx)
+	count, err := Additives().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -64,14 +64,14 @@ func testSoapLipidsSoftDelete(t *testing.T) {
 	}
 }
 
-func testSoapLipidsQuerySoftDeleteAll(t *testing.T) {
+func testAdditivesQuerySoftDeleteAll(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapLipid{}
-	if err = randomize.Struct(seed, o, soapLipidDBTypes, true, soapLipidColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLipid struct: %s", err)
+	o := &Additive{}
+	if err = randomize.Struct(seed, o, additiveDBTypes, true, additiveColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Additive struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -81,13 +81,13 @@ func testSoapLipidsQuerySoftDeleteAll(t *testing.T) {
 		t.Error(err)
 	}
 
-	if rowsAff, err := SoapLipids().DeleteAll(ctx, tx, false); err != nil {
+	if rowsAff, err := Additives().DeleteAll(ctx, tx, false); err != nil {
 		t.Error(err)
 	} else if rowsAff != 1 {
 		t.Error("should only have deleted one row, but affected:", rowsAff)
 	}
 
-	count, err := SoapLipids().Count(ctx, tx)
+	count, err := Additives().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -97,14 +97,14 @@ func testSoapLipidsQuerySoftDeleteAll(t *testing.T) {
 	}
 }
 
-func testSoapLipidsSliceSoftDeleteAll(t *testing.T) {
+func testAdditivesSliceSoftDeleteAll(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapLipid{}
-	if err = randomize.Struct(seed, o, soapLipidDBTypes, true, soapLipidColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLipid struct: %s", err)
+	o := &Additive{}
+	if err = randomize.Struct(seed, o, additiveDBTypes, true, additiveColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Additive struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -114,7 +114,7 @@ func testSoapLipidsSliceSoftDeleteAll(t *testing.T) {
 		t.Error(err)
 	}
 
-	slice := SoapLipidSlice{o}
+	slice := AdditiveSlice{o}
 
 	if rowsAff, err := slice.DeleteAll(ctx, tx, false); err != nil {
 		t.Error(err)
@@ -122,7 +122,7 @@ func testSoapLipidsSliceSoftDeleteAll(t *testing.T) {
 		t.Error("should only have deleted one row, but affected:", rowsAff)
 	}
 
-	count, err := SoapLipids().Count(ctx, tx)
+	count, err := Additives().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -132,14 +132,14 @@ func testSoapLipidsSliceSoftDeleteAll(t *testing.T) {
 	}
 }
 
-func testSoapLipidsDelete(t *testing.T) {
+func testAdditivesDelete(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapLipid{}
-	if err = randomize.Struct(seed, o, soapLipidDBTypes, true, soapLipidColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLipid struct: %s", err)
+	o := &Additive{}
+	if err = randomize.Struct(seed, o, additiveDBTypes, true, additiveColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Additive struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -155,7 +155,7 @@ func testSoapLipidsDelete(t *testing.T) {
 		t.Error("should only have deleted one row, but affected:", rowsAff)
 	}
 
-	count, err := SoapLipids().Count(ctx, tx)
+	count, err := Additives().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -165,14 +165,14 @@ func testSoapLipidsDelete(t *testing.T) {
 	}
 }
 
-func testSoapLipidsQueryDeleteAll(t *testing.T) {
+func testAdditivesQueryDeleteAll(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapLipid{}
-	if err = randomize.Struct(seed, o, soapLipidDBTypes, true, soapLipidColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLipid struct: %s", err)
+	o := &Additive{}
+	if err = randomize.Struct(seed, o, additiveDBTypes, true, additiveColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Additive struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -182,13 +182,13 @@ func testSoapLipidsQueryDeleteAll(t *testing.T) {
 		t.Error(err)
 	}
 
-	if rowsAff, err := SoapLipids().DeleteAll(ctx, tx, true); err != nil {
+	if rowsAff, err := Additives().DeleteAll(ctx, tx, true); err != nil {
 		t.Error(err)
 	} else if rowsAff != 1 {
 		t.Error("should only have deleted one row, but affected:", rowsAff)
 	}
 
-	count, err := SoapLipids().Count(ctx, tx)
+	count, err := Additives().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -198,14 +198,14 @@ func testSoapLipidsQueryDeleteAll(t *testing.T) {
 	}
 }
 
-func testSoapLipidsSliceDeleteAll(t *testing.T) {
+func testAdditivesSliceDeleteAll(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapLipid{}
-	if err = randomize.Struct(seed, o, soapLipidDBTypes, true, soapLipidColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLipid struct: %s", err)
+	o := &Additive{}
+	if err = randomize.Struct(seed, o, additiveDBTypes, true, additiveColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Additive struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -215,7 +215,7 @@ func testSoapLipidsSliceDeleteAll(t *testing.T) {
 		t.Error(err)
 	}
 
-	slice := SoapLipidSlice{o}
+	slice := AdditiveSlice{o}
 
 	if rowsAff, err := slice.DeleteAll(ctx, tx, true); err != nil {
 		t.Error(err)
@@ -223,7 +223,7 @@ func testSoapLipidsSliceDeleteAll(t *testing.T) {
 		t.Error("should only have deleted one row, but affected:", rowsAff)
 	}
 
-	count, err := SoapLipids().Count(ctx, tx)
+	count, err := Additives().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -233,14 +233,14 @@ func testSoapLipidsSliceDeleteAll(t *testing.T) {
 	}
 }
 
-func testSoapLipidsExists(t *testing.T) {
+func testAdditivesExists(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapLipid{}
-	if err = randomize.Struct(seed, o, soapLipidDBTypes, true, soapLipidColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLipid struct: %s", err)
+	o := &Additive{}
+	if err = randomize.Struct(seed, o, additiveDBTypes, true, additiveColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Additive struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -250,23 +250,23 @@ func testSoapLipidsExists(t *testing.T) {
 		t.Error(err)
 	}
 
-	e, err := SoapLipidExists(ctx, tx, o.ID)
+	e, err := AdditiveExists(ctx, tx, o.ID)
 	if err != nil {
-		t.Errorf("Unable to check if SoapLipid exists: %s", err)
+		t.Errorf("Unable to check if Additive exists: %s", err)
 	}
 	if !e {
-		t.Errorf("Expected SoapLipidExists to return true, but got false.")
+		t.Errorf("Expected AdditiveExists to return true, but got false.")
 	}
 }
 
-func testSoapLipidsFind(t *testing.T) {
+func testAdditivesFind(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapLipid{}
-	if err = randomize.Struct(seed, o, soapLipidDBTypes, true, soapLipidColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLipid struct: %s", err)
+	o := &Additive{}
+	if err = randomize.Struct(seed, o, additiveDBTypes, true, additiveColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Additive struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -276,24 +276,24 @@ func testSoapLipidsFind(t *testing.T) {
 		t.Error(err)
 	}
 
-	soapLipidFound, err := FindSoapLipid(ctx, tx, o.ID)
+	additiveFound, err := FindAdditive(ctx, tx, o.ID)
 	if err != nil {
 		t.Error(err)
 	}
 
-	if soapLipidFound == nil {
+	if additiveFound == nil {
 		t.Error("want a record, got nil")
 	}
 }
 
-func testSoapLipidsBind(t *testing.T) {
+func testAdditivesBind(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapLipid{}
-	if err = randomize.Struct(seed, o, soapLipidDBTypes, true, soapLipidColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLipid struct: %s", err)
+	o := &Additive{}
+	if err = randomize.Struct(seed, o, additiveDBTypes, true, additiveColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Additive struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -303,19 +303,19 @@ func testSoapLipidsBind(t *testing.T) {
 		t.Error(err)
 	}
 
-	if err = SoapLipids().Bind(ctx, tx, o); err != nil {
+	if err = Additives().Bind(ctx, tx, o); err != nil {
 		t.Error(err)
 	}
 }
 
-func testSoapLipidsOne(t *testing.T) {
+func testAdditivesOne(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapLipid{}
-	if err = randomize.Struct(seed, o, soapLipidDBTypes, true, soapLipidColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLipid struct: %s", err)
+	o := &Additive{}
+	if err = randomize.Struct(seed, o, additiveDBTypes, true, additiveColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Additive struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -325,38 +325,38 @@ func testSoapLipidsOne(t *testing.T) {
 		t.Error(err)
 	}
 
-	if x, err := SoapLipids().One(ctx, tx); err != nil {
+	if x, err := Additives().One(ctx, tx); err != nil {
 		t.Error(err)
 	} else if x == nil {
 		t.Error("expected to get a non nil record")
 	}
 }
 
-func testSoapLipidsAll(t *testing.T) {
+func testAdditivesAll(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	soapLipidOne := &SoapLipid{}
-	soapLipidTwo := &SoapLipid{}
-	if err = randomize.Struct(seed, soapLipidOne, soapLipidDBTypes, false, soapLipidColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLipid struct: %s", err)
+	additiveOne := &Additive{}
+	additiveTwo := &Additive{}
+	if err = randomize.Struct(seed, additiveOne, additiveDBTypes, false, additiveColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Additive struct: %s", err)
 	}
-	if err = randomize.Struct(seed, soapLipidTwo, soapLipidDBTypes, false, soapLipidColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLipid struct: %s", err)
+	if err = randomize.Struct(seed, additiveTwo, additiveDBTypes, false, additiveColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Additive struct: %s", err)
 	}
 
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
-	if err = soapLipidOne.Insert(ctx, tx, boil.Infer()); err != nil {
+	if err = additiveOne.Insert(ctx, tx, boil.Infer()); err != nil {
 		t.Error(err)
 	}
-	if err = soapLipidTwo.Insert(ctx, tx, boil.Infer()); err != nil {
+	if err = additiveTwo.Insert(ctx, tx, boil.Infer()); err != nil {
 		t.Error(err)
 	}
 
-	slice, err := SoapLipids().All(ctx, tx)
+	slice, err := Additives().All(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -366,31 +366,31 @@ func testSoapLipidsAll(t *testing.T) {
 	}
 }
 
-func testSoapLipidsCount(t *testing.T) {
+func testAdditivesCount(t *testing.T) {
 	t.Parallel()
 
 	var err error
 	seed := randomize.NewSeed()
-	soapLipidOne := &SoapLipid{}
-	soapLipidTwo := &SoapLipid{}
-	if err = randomize.Struct(seed, soapLipidOne, soapLipidDBTypes, false, soapLipidColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLipid struct: %s", err)
+	additiveOne := &Additive{}
+	additiveTwo := &Additive{}
+	if err = randomize.Struct(seed, additiveOne, additiveDBTypes, false, additiveColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Additive struct: %s", err)
 	}
-	if err = randomize.Struct(seed, soapLipidTwo, soapLipidDBTypes, false, soapLipidColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLipid struct: %s", err)
+	if err = randomize.Struct(seed, additiveTwo, additiveDBTypes, false, additiveColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Additive struct: %s", err)
 	}
 
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
-	if err = soapLipidOne.Insert(ctx, tx, boil.Infer()); err != nil {
+	if err = additiveOne.Insert(ctx, tx, boil.Infer()); err != nil {
 		t.Error(err)
 	}
-	if err = soapLipidTwo.Insert(ctx, tx, boil.Infer()); err != nil {
+	if err = additiveTwo.Insert(ctx, tx, boil.Infer()); err != nil {
 		t.Error(err)
 	}
 
-	count, err := SoapLipids().Count(ctx, tx)
+	count, err := Additives().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -400,155 +400,155 @@ func testSoapLipidsCount(t *testing.T) {
 	}
 }
 
-func soapLipidBeforeInsertHook(ctx context.Context, e boil.ContextExecutor, o *SoapLipid) error {
-	*o = SoapLipid{}
+func additiveBeforeInsertHook(ctx context.Context, e boil.ContextExecutor, o *Additive) error {
+	*o = Additive{}
 	return nil
 }
 
-func soapLipidAfterInsertHook(ctx context.Context, e boil.ContextExecutor, o *SoapLipid) error {
-	*o = SoapLipid{}
+func additiveAfterInsertHook(ctx context.Context, e boil.ContextExecutor, o *Additive) error {
+	*o = Additive{}
 	return nil
 }
 
-func soapLipidAfterSelectHook(ctx context.Context, e boil.ContextExecutor, o *SoapLipid) error {
-	*o = SoapLipid{}
+func additiveAfterSelectHook(ctx context.Context, e boil.ContextExecutor, o *Additive) error {
+	*o = Additive{}
 	return nil
 }
 
-func soapLipidBeforeUpdateHook(ctx context.Context, e boil.ContextExecutor, o *SoapLipid) error {
-	*o = SoapLipid{}
+func additiveBeforeUpdateHook(ctx context.Context, e boil.ContextExecutor, o *Additive) error {
+	*o = Additive{}
 	return nil
 }
 
-func soapLipidAfterUpdateHook(ctx context.Context, e boil.ContextExecutor, o *SoapLipid) error {
-	*o = SoapLipid{}
+func additiveAfterUpdateHook(ctx context.Context, e boil.ContextExecutor, o *Additive) error {
+	*o = Additive{}
 	return nil
 }
 
-func soapLipidBeforeDeleteHook(ctx context.Context, e boil.ContextExecutor, o *SoapLipid) error {
-	*o = SoapLipid{}
+func additiveBeforeDeleteHook(ctx context.Context, e boil.ContextExecutor, o *Additive) error {
+	*o = Additive{}
 	return nil
 }
 
-func soapLipidAfterDeleteHook(ctx context.Context, e boil.ContextExecutor, o *SoapLipid) error {
-	*o = SoapLipid{}
+func additiveAfterDeleteHook(ctx context.Context, e boil.ContextExecutor, o *Additive) error {
+	*o = Additive{}
 	return nil
 }
 
-func soapLipidBeforeUpsertHook(ctx context.Context, e boil.ContextExecutor, o *SoapLipid) error {
-	*o = SoapLipid{}
+func additiveBeforeUpsertHook(ctx context.Context, e boil.ContextExecutor, o *Additive) error {
+	*o = Additive{}
 	return nil
 }
 
-func soapLipidAfterUpsertHook(ctx context.Context, e boil.ContextExecutor, o *SoapLipid) error {
-	*o = SoapLipid{}
+func additiveAfterUpsertHook(ctx context.Context, e boil.ContextExecutor, o *Additive) error {
+	*o = Additive{}
 	return nil
 }
 
-func testSoapLipidsHooks(t *testing.T) {
+func testAdditivesHooks(t *testing.T) {
 	t.Parallel()
 
 	var err error
 
 	ctx := context.Background()
-	empty := &SoapLipid{}
-	o := &SoapLipid{}
+	empty := &Additive{}
+	o := &Additive{}
 
 	seed := randomize.NewSeed()
-	if err = randomize.Struct(seed, o, soapLipidDBTypes, false); err != nil {
-		t.Errorf("Unable to randomize SoapLipid object: %s", err)
+	if err = randomize.Struct(seed, o, additiveDBTypes, false); err != nil {
+		t.Errorf("Unable to randomize Additive object: %s", err)
 	}
 
-	AddSoapLipidHook(boil.BeforeInsertHook, soapLipidBeforeInsertHook)
+	AddAdditiveHook(boil.BeforeInsertHook, additiveBeforeInsertHook)
 	if err = o.doBeforeInsertHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doBeforeInsertHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected BeforeInsertHook function to empty object, but got: %#v", o)
 	}
-	soapLipidBeforeInsertHooks = []SoapLipidHook{}
+	additiveBeforeInsertHooks = []AdditiveHook{}
 
-	AddSoapLipidHook(boil.AfterInsertHook, soapLipidAfterInsertHook)
+	AddAdditiveHook(boil.AfterInsertHook, additiveAfterInsertHook)
 	if err = o.doAfterInsertHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doAfterInsertHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected AfterInsertHook function to empty object, but got: %#v", o)
 	}
-	soapLipidAfterInsertHooks = []SoapLipidHook{}
+	additiveAfterInsertHooks = []AdditiveHook{}
 
-	AddSoapLipidHook(boil.AfterSelectHook, soapLipidAfterSelectHook)
+	AddAdditiveHook(boil.AfterSelectHook, additiveAfterSelectHook)
 	if err = o.doAfterSelectHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doAfterSelectHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected AfterSelectHook function to empty object, but got: %#v", o)
 	}
-	soapLipidAfterSelectHooks = []SoapLipidHook{}
+	additiveAfterSelectHooks = []AdditiveHook{}
 
-	AddSoapLipidHook(boil.BeforeUpdateHook, soapLipidBeforeUpdateHook)
+	AddAdditiveHook(boil.BeforeUpdateHook, additiveBeforeUpdateHook)
 	if err = o.doBeforeUpdateHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doBeforeUpdateHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected BeforeUpdateHook function to empty object, but got: %#v", o)
 	}
-	soapLipidBeforeUpdateHooks = []SoapLipidHook{}
+	additiveBeforeUpdateHooks = []AdditiveHook{}
 
-	AddSoapLipidHook(boil.AfterUpdateHook, soapLipidAfterUpdateHook)
+	AddAdditiveHook(boil.AfterUpdateHook, additiveAfterUpdateHook)
 	if err = o.doAfterUpdateHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doAfterUpdateHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected AfterUpdateHook function to empty object, but got: %#v", o)
 	}
-	soapLipidAfterUpdateHooks = []SoapLipidHook{}
+	additiveAfterUpdateHooks = []AdditiveHook{}
 
-	AddSoapLipidHook(boil.BeforeDeleteHook, soapLipidBeforeDeleteHook)
+	AddAdditiveHook(boil.BeforeDeleteHook, additiveBeforeDeleteHook)
 	if err = o.doBeforeDeleteHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doBeforeDeleteHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected BeforeDeleteHook function to empty object, but got: %#v", o)
 	}
-	soapLipidBeforeDeleteHooks = []SoapLipidHook{}
+	additiveBeforeDeleteHooks = []AdditiveHook{}
 
-	AddSoapLipidHook(boil.AfterDeleteHook, soapLipidAfterDeleteHook)
+	AddAdditiveHook(boil.AfterDeleteHook, additiveAfterDeleteHook)
 	if err = o.doAfterDeleteHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doAfterDeleteHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected AfterDeleteHook function to empty object, but got: %#v", o)
 	}
-	soapLipidAfterDeleteHooks = []SoapLipidHook{}
+	additiveAfterDeleteHooks = []AdditiveHook{}
 
-	AddSoapLipidHook(boil.BeforeUpsertHook, soapLipidBeforeUpsertHook)
+	AddAdditiveHook(boil.BeforeUpsertHook, additiveBeforeUpsertHook)
 	if err = o.doBeforeUpsertHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doBeforeUpsertHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected BeforeUpsertHook function to empty object, but got: %#v", o)
 	}
-	soapLipidBeforeUpsertHooks = []SoapLipidHook{}
+	additiveBeforeUpsertHooks = []AdditiveHook{}
 
-	AddSoapLipidHook(boil.AfterUpsertHook, soapLipidAfterUpsertHook)
+	AddAdditiveHook(boil.AfterUpsertHook, additiveAfterUpsertHook)
 	if err = o.doAfterUpsertHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doAfterUpsertHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected AfterUpsertHook function to empty object, but got: %#v", o)
 	}
-	soapLipidAfterUpsertHooks = []SoapLipidHook{}
+	additiveAfterUpsertHooks = []AdditiveHook{}
 }
 
-func testSoapLipidsInsert(t *testing.T) {
+func testAdditivesInsert(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapLipid{}
-	if err = randomize.Struct(seed, o, soapLipidDBTypes, true, soapLipidColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLipid struct: %s", err)
+	o := &Additive{}
+	if err = randomize.Struct(seed, o, additiveDBTypes, true, additiveColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Additive struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -558,7 +558,7 @@ func testSoapLipidsInsert(t *testing.T) {
 		t.Error(err)
 	}
 
-	count, err := SoapLipids().Count(ctx, tx)
+	count, err := Additives().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -568,24 +568,24 @@ func testSoapLipidsInsert(t *testing.T) {
 	}
 }
 
-func testSoapLipidsInsertWhitelist(t *testing.T) {
+func testAdditivesInsertWhitelist(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapLipid{}
-	if err = randomize.Struct(seed, o, soapLipidDBTypes, true); err != nil {
-		t.Errorf("Unable to randomize SoapLipid struct: %s", err)
+	o := &Additive{}
+	if err = randomize.Struct(seed, o, additiveDBTypes, true); err != nil {
+		t.Errorf("Unable to randomize Additive struct: %s", err)
 	}
 
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
-	if err = o.Insert(ctx, tx, boil.Whitelist(soapLipidColumnsWithoutDefault...)); err != nil {
+	if err = o.Insert(ctx, tx, boil.Whitelist(additiveColumnsWithoutDefault...)); err != nil {
 		t.Error(err)
 	}
 
-	count, err := SoapLipids().Count(ctx, tx)
+	count, err := Additives().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -595,33 +595,33 @@ func testSoapLipidsInsertWhitelist(t *testing.T) {
 	}
 }
 
-func testSoapLipidToManyLipidSoapLipidinventories(t *testing.T) {
+func testAdditiveToManyAdditiveInventories(t *testing.T) {
 	var err error
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
 
-	var a SoapLipid
-	var b, c SoapLipidinventory
+	var a Additive
+	var b, c AdditiveInventory
 
 	seed := randomize.NewSeed()
-	if err = randomize.Struct(seed, &a, soapLipidDBTypes, true, soapLipidColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLipid struct: %s", err)
+	if err = randomize.Struct(seed, &a, additiveDBTypes, true, additiveColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Additive struct: %s", err)
 	}
 
 	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
 		t.Fatal(err)
 	}
 
-	if err = randomize.Struct(seed, &b, soapLipidinventoryDBTypes, false, soapLipidinventoryColumnsWithDefault...); err != nil {
+	if err = randomize.Struct(seed, &b, additiveInventoryDBTypes, false, additiveInventoryColumnsWithDefault...); err != nil {
 		t.Fatal(err)
 	}
-	if err = randomize.Struct(seed, &c, soapLipidinventoryDBTypes, false, soapLipidinventoryColumnsWithDefault...); err != nil {
+	if err = randomize.Struct(seed, &c, additiveInventoryDBTypes, false, additiveInventoryColumnsWithDefault...); err != nil {
 		t.Fatal(err)
 	}
 
-	b.LipidID = a.ID
-	c.LipidID = a.ID
+	b.AdditiveID = a.ID
+	c.AdditiveID = a.ID
 
 	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
 		t.Fatal(err)
@@ -630,17 +630,17 @@ func testSoapLipidToManyLipidSoapLipidinventories(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	check, err := a.LipidSoapLipidinventories().All(ctx, tx)
+	check, err := a.AdditiveInventories().All(ctx, tx)
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	bFound, cFound := false, false
 	for _, v := range check {
-		if v.LipidID == b.LipidID {
+		if v.AdditiveID == b.AdditiveID {
 			bFound = true
 		}
-		if v.LipidID == c.LipidID {
+		if v.AdditiveID == c.AdditiveID {
 			cFound = true
 		}
 	}
@@ -652,19 +652,19 @@ func testSoapLipidToManyLipidSoapLipidinventories(t *testing.T) {
 		t.Error("expected to find c")
 	}
 
-	slice := SoapLipidSlice{&a}
-	if err = a.L.LoadLipidSoapLipidinventories(ctx, tx, false, (*[]*SoapLipid)(&slice), nil); err != nil {
+	slice := AdditiveSlice{&a}
+	if err = a.L.LoadAdditiveInventories(ctx, tx, false, (*[]*Additive)(&slice), nil); err != nil {
 		t.Fatal(err)
 	}
-	if got := len(a.R.LipidSoapLipidinventories); got != 2 {
+	if got := len(a.R.AdditiveInventories); got != 2 {
 		t.Error("number of eager loaded records wrong, got:", got)
 	}
 
-	a.R.LipidSoapLipidinventories = nil
-	if err = a.L.LoadLipidSoapLipidinventories(ctx, tx, true, &a, nil); err != nil {
+	a.R.AdditiveInventories = nil
+	if err = a.L.LoadAdditiveInventories(ctx, tx, true, &a, nil); err != nil {
 		t.Fatal(err)
 	}
-	if got := len(a.R.LipidSoapLipidinventories); got != 2 {
+	if got := len(a.R.AdditiveInventories); got != 2 {
 		t.Error("number of eager loaded records wrong, got:", got)
 	}
 
@@ -673,33 +673,33 @@ func testSoapLipidToManyLipidSoapLipidinventories(t *testing.T) {
 	}
 }
 
-func testSoapLipidToManyLipidSoapRecipelipids(t *testing.T) {
+func testAdditiveToManyRecipeAdditives(t *testing.T) {
 	var err error
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
 
-	var a SoapLipid
-	var b, c SoapRecipelipid
+	var a Additive
+	var b, c RecipeAdditive
 
 	seed := randomize.NewSeed()
-	if err = randomize.Struct(seed, &a, soapLipidDBTypes, true, soapLipidColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLipid struct: %s", err)
+	if err = randomize.Struct(seed, &a, additiveDBTypes, true, additiveColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Additive struct: %s", err)
 	}
 
 	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
 		t.Fatal(err)
 	}
 
-	if err = randomize.Struct(seed, &b, soapRecipelipidDBTypes, false, soapRecipelipidColumnsWithDefault...); err != nil {
+	if err = randomize.Struct(seed, &b, recipeAdditiveDBTypes, false, recipeAdditiveColumnsWithDefault...); err != nil {
 		t.Fatal(err)
 	}
-	if err = randomize.Struct(seed, &c, soapRecipelipidDBTypes, false, soapRecipelipidColumnsWithDefault...); err != nil {
+	if err = randomize.Struct(seed, &c, recipeAdditiveDBTypes, false, recipeAdditiveColumnsWithDefault...); err != nil {
 		t.Fatal(err)
 	}
 
-	b.LipidID = a.ID
-	c.LipidID = a.ID
+	b.AdditiveID = a.ID
+	c.AdditiveID = a.ID
 
 	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
 		t.Fatal(err)
@@ -708,17 +708,17 @@ func testSoapLipidToManyLipidSoapRecipelipids(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	check, err := a.LipidSoapRecipelipids().All(ctx, tx)
+	check, err := a.RecipeAdditives().All(ctx, tx)
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	bFound, cFound := false, false
 	for _, v := range check {
-		if v.LipidID == b.LipidID {
+		if v.AdditiveID == b.AdditiveID {
 			bFound = true
 		}
-		if v.LipidID == c.LipidID {
+		if v.AdditiveID == c.AdditiveID {
 			cFound = true
 		}
 	}
@@ -730,19 +730,19 @@ func testSoapLipidToManyLipidSoapRecipelipids(t *testing.T) {
 		t.Error("expected to find c")
 	}
 
-	slice := SoapLipidSlice{&a}
-	if err = a.L.LoadLipidSoapRecipelipids(ctx, tx, false, (*[]*SoapLipid)(&slice), nil); err != nil {
+	slice := AdditiveSlice{&a}
+	if err = a.L.LoadRecipeAdditives(ctx, tx, false, (*[]*Additive)(&slice), nil); err != nil {
 		t.Fatal(err)
 	}
-	if got := len(a.R.LipidSoapRecipelipids); got != 2 {
+	if got := len(a.R.RecipeAdditives); got != 2 {
 		t.Error("number of eager loaded records wrong, got:", got)
 	}
 
-	a.R.LipidSoapRecipelipids = nil
-	if err = a.L.LoadLipidSoapRecipelipids(ctx, tx, true, &a, nil); err != nil {
+	a.R.RecipeAdditives = nil
+	if err = a.L.LoadRecipeAdditives(ctx, tx, true, &a, nil); err != nil {
 		t.Fatal(err)
 	}
-	if got := len(a.R.LipidSoapRecipelipids); got != 2 {
+	if got := len(a.R.RecipeAdditives); got != 2 {
 		t.Error("number of eager loaded records wrong, got:", got)
 	}
 
@@ -751,23 +751,23 @@ func testSoapLipidToManyLipidSoapRecipelipids(t *testing.T) {
 	}
 }
 
-func testSoapLipidToManyAddOpLipidSoapLipidinventories(t *testing.T) {
+func testAdditiveToManyAddOpAdditiveInventories(t *testing.T) {
 	var err error
 
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
 
-	var a SoapLipid
-	var b, c, d, e SoapLipidinventory
+	var a Additive
+	var b, c, d, e AdditiveInventory
 
 	seed := randomize.NewSeed()
-	if err = randomize.Struct(seed, &a, soapLipidDBTypes, false, strmangle.SetComplement(soapLipidPrimaryKeyColumns, soapLipidColumnsWithoutDefault)...); err != nil {
+	if err = randomize.Struct(seed, &a, additiveDBTypes, false, strmangle.SetComplement(additivePrimaryKeyColumns, additiveColumnsWithoutDefault)...); err != nil {
 		t.Fatal(err)
 	}
-	foreigners := []*SoapLipidinventory{&b, &c, &d, &e}
+	foreigners := []*AdditiveInventory{&b, &c, &d, &e}
 	for _, x := range foreigners {
-		if err = randomize.Struct(seed, x, soapLipidinventoryDBTypes, false, strmangle.SetComplement(soapLipidinventoryPrimaryKeyColumns, soapLipidinventoryColumnsWithoutDefault)...); err != nil {
+		if err = randomize.Struct(seed, x, additiveInventoryDBTypes, false, strmangle.SetComplement(additiveInventoryPrimaryKeyColumns, additiveInventoryColumnsWithoutDefault)...); err != nil {
 			t.Fatal(err)
 		}
 	}
@@ -782,13 +782,13 @@ func testSoapLipidToManyAddOpLipidSoapLipidinventories(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	foreignersSplitByInsertion := [][]*SoapLipidinventory{
+	foreignersSplitByInsertion := [][]*AdditiveInventory{
 		{&b, &c},
 		{&d, &e},
 	}
 
 	for i, x := range foreignersSplitByInsertion {
-		err = a.AddLipidSoapLipidinventories(ctx, tx, i != 0, x...)
+		err = a.AddAdditiveInventories(ctx, tx, i != 0, x...)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -796,28 +796,28 @@ func testSoapLipidToManyAddOpLipidSoapLipidinventories(t *testing.T) {
 		first := x[0]
 		second := x[1]
 
-		if a.ID != first.LipidID {
-			t.Error("foreign key was wrong value", a.ID, first.LipidID)
+		if a.ID != first.AdditiveID {
+			t.Error("foreign key was wrong value", a.ID, first.AdditiveID)
 		}
-		if a.ID != second.LipidID {
-			t.Error("foreign key was wrong value", a.ID, second.LipidID)
+		if a.ID != second.AdditiveID {
+			t.Error("foreign key was wrong value", a.ID, second.AdditiveID)
 		}
 
-		if first.R.Lipid != &a {
+		if first.R.Additive != &a {
 			t.Error("relationship was not added properly to the foreign slice")
 		}
-		if second.R.Lipid != &a {
+		if second.R.Additive != &a {
 			t.Error("relationship was not added properly to the foreign slice")
 		}
 
-		if a.R.LipidSoapLipidinventories[i*2] != first {
+		if a.R.AdditiveInventories[i*2] != first {
 			t.Error("relationship struct slice not set to correct value")
 		}
-		if a.R.LipidSoapLipidinventories[i*2+1] != second {
+		if a.R.AdditiveInventories[i*2+1] != second {
 			t.Error("relationship struct slice not set to correct value")
 		}
 
-		count, err := a.LipidSoapLipidinventories().Count(ctx, tx)
+		count, err := a.AdditiveInventories().Count(ctx, tx)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -826,23 +826,23 @@ func testSoapLipidToManyAddOpLipidSoapLipidinventories(t *testing.T) {
 		}
 	}
 }
-func testSoapLipidToManyAddOpLipidSoapRecipelipids(t *testing.T) {
+func testAdditiveToManyAddOpRecipeAdditives(t *testing.T) {
 	var err error
 
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
 
-	var a SoapLipid
-	var b, c, d, e SoapRecipelipid
+	var a Additive
+	var b, c, d, e RecipeAdditive
 
 	seed := randomize.NewSeed()
-	if err = randomize.Struct(seed, &a, soapLipidDBTypes, false, strmangle.SetComplement(soapLipidPrimaryKeyColumns, soapLipidColumnsWithoutDefault)...); err != nil {
+	if err = randomize.Struct(seed, &a, additiveDBTypes, false, strmangle.SetComplement(additivePrimaryKeyColumns, additiveColumnsWithoutDefault)...); err != nil {
 		t.Fatal(err)
 	}
-	foreigners := []*SoapRecipelipid{&b, &c, &d, &e}
+	foreigners := []*RecipeAdditive{&b, &c, &d, &e}
 	for _, x := range foreigners {
-		if err = randomize.Struct(seed, x, soapRecipelipidDBTypes, false, strmangle.SetComplement(soapRecipelipidPrimaryKeyColumns, soapRecipelipidColumnsWithoutDefault)...); err != nil {
+		if err = randomize.Struct(seed, x, recipeAdditiveDBTypes, false, strmangle.SetComplement(recipeAdditivePrimaryKeyColumns, recipeAdditiveColumnsWithoutDefault)...); err != nil {
 			t.Fatal(err)
 		}
 	}
@@ -857,13 +857,13 @@ func testSoapLipidToManyAddOpLipidSoapRecipelipids(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	foreignersSplitByInsertion := [][]*SoapRecipelipid{
+	foreignersSplitByInsertion := [][]*RecipeAdditive{
 		{&b, &c},
 		{&d, &e},
 	}
 
 	for i, x := range foreignersSplitByInsertion {
-		err = a.AddLipidSoapRecipelipids(ctx, tx, i != 0, x...)
+		err = a.AddRecipeAdditives(ctx, tx, i != 0, x...)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -871,28 +871,28 @@ func testSoapLipidToManyAddOpLipidSoapRecipelipids(t *testing.T) {
 		first := x[0]
 		second := x[1]
 
-		if a.ID != first.LipidID {
-			t.Error("foreign key was wrong value", a.ID, first.LipidID)
+		if a.ID != first.AdditiveID {
+			t.Error("foreign key was wrong value", a.ID, first.AdditiveID)
 		}
-		if a.ID != second.LipidID {
-			t.Error("foreign key was wrong value", a.ID, second.LipidID)
+		if a.ID != second.AdditiveID {
+			t.Error("foreign key was wrong value", a.ID, second.AdditiveID)
 		}
 
-		if first.R.Lipid != &a {
+		if first.R.Additive != &a {
 			t.Error("relationship was not added properly to the foreign slice")
 		}
-		if second.R.Lipid != &a {
+		if second.R.Additive != &a {
 			t.Error("relationship was not added properly to the foreign slice")
 		}
 
-		if a.R.LipidSoapRecipelipids[i*2] != first {
+		if a.R.RecipeAdditives[i*2] != first {
 			t.Error("relationship struct slice not set to correct value")
 		}
-		if a.R.LipidSoapRecipelipids[i*2+1] != second {
+		if a.R.RecipeAdditives[i*2+1] != second {
 			t.Error("relationship struct slice not set to correct value")
 		}
 
-		count, err := a.LipidSoapRecipelipids().Count(ctx, tx)
+		count, err := a.RecipeAdditives().Count(ctx, tx)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -902,14 +902,14 @@ func testSoapLipidToManyAddOpLipidSoapRecipelipids(t *testing.T) {
 	}
 }
 
-func testSoapLipidsReload(t *testing.T) {
+func testAdditivesReload(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapLipid{}
-	if err = randomize.Struct(seed, o, soapLipidDBTypes, true, soapLipidColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLipid struct: %s", err)
+	o := &Additive{}
+	if err = randomize.Struct(seed, o, additiveDBTypes, true, additiveColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Additive struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -924,14 +924,14 @@ func testSoapLipidsReload(t *testing.T) {
 	}
 }
 
-func testSoapLipidsReloadAll(t *testing.T) {
+func testAdditivesReloadAll(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapLipid{}
-	if err = randomize.Struct(seed, o, soapLipidDBTypes, true, soapLipidColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLipid struct: %s", err)
+	o := &Additive{}
+	if err = randomize.Struct(seed, o, additiveDBTypes, true, additiveColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Additive struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -941,21 +941,21 @@ func testSoapLipidsReloadAll(t *testing.T) {
 		t.Error(err)
 	}
 
-	slice := SoapLipidSlice{o}
+	slice := AdditiveSlice{o}
 
 	if err = slice.ReloadAll(ctx, tx); err != nil {
 		t.Error(err)
 	}
 }
 
-func testSoapLipidsSelect(t *testing.T) {
+func testAdditivesSelect(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapLipid{}
-	if err = randomize.Struct(seed, o, soapLipidDBTypes, true, soapLipidColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLipid struct: %s", err)
+	o := &Additive{}
+	if err = randomize.Struct(seed, o, additiveDBTypes, true, additiveColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Additive struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -965,7 +965,7 @@ func testSoapLipidsSelect(t *testing.T) {
 		t.Error(err)
 	}
 
-	slice, err := SoapLipids().All(ctx, tx)
+	slice, err := Additives().All(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -976,25 +976,25 @@ func testSoapLipidsSelect(t *testing.T) {
 }
 
 var (
-	soapLipidDBTypes = map[string]string{`ID`: `integer`, `CreatedAt`: `timestamp with time zone`, `UpdatedAt`: `timestamp with time zone`, `DeletedAt`: `timestamp with time zone`, `Name`: `character varying`, `Lauric`: `integer`, `Myristic`: `integer`, `Palmitic`: `integer`, `Stearic`: `integer`, `Ricinoleic`: `integer`, `Oleic`: `integer`, `Linoleic`: `integer`, `Linolenic`: `integer`, `Hardness`: `integer`, `Cleansing`: `integer`, `Conditioning`: `integer`, `Bubbly`: `integer`, `Creamy`: `integer`, `Iodine`: `integer`, `Ins`: `integer`, `InciName`: `character varying`}
-	_                = bytes.MinRead
+	additiveDBTypes = map[string]string{`ID`: `integer`, `CreatedAt`: `timestamp with time zone`, `UpdatedAt`: `timestamp with time zone`, `DeletedAt`: `timestamp with time zone`, `Name`: `character varying`}
+	_               = bytes.MinRead
 )
 
-func testSoapLipidsUpdate(t *testing.T) {
+func testAdditivesUpdate(t *testing.T) {
 	t.Parallel()
 
-	if 0 == len(soapLipidPrimaryKeyColumns) {
+	if 0 == len(additivePrimaryKeyColumns) {
 		t.Skip("Skipping table with no primary key columns")
 	}
-	if len(soapLipidAllColumns) == len(soapLipidPrimaryKeyColumns) {
+	if len(additiveAllColumns) == len(additivePrimaryKeyColumns) {
 		t.Skip("Skipping table with only primary key columns")
 	}
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapLipid{}
-	if err = randomize.Struct(seed, o, soapLipidDBTypes, true, soapLipidColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLipid struct: %s", err)
+	o := &Additive{}
+	if err = randomize.Struct(seed, o, additiveDBTypes, true, additiveColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Additive struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -1004,7 +1004,7 @@ func testSoapLipidsUpdate(t *testing.T) {
 		t.Error(err)
 	}
 
-	count, err := SoapLipids().Count(ctx, tx)
+	count, err := Additives().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -1013,8 +1013,8 @@ func testSoapLipidsUpdate(t *testing.T) {
 		t.Error("want one record, got:", count)
 	}
 
-	if err = randomize.Struct(seed, o, soapLipidDBTypes, true, soapLipidPrimaryKeyColumns...); err != nil {
-		t.Errorf("Unable to randomize SoapLipid struct: %s", err)
+	if err = randomize.Struct(seed, o, additiveDBTypes, true, additivePrimaryKeyColumns...); err != nil {
+		t.Errorf("Unable to randomize Additive struct: %s", err)
 	}
 
 	if rowsAff, err := o.Update(ctx, tx, boil.Infer()); err != nil {
@@ -1024,18 +1024,18 @@ func testSoapLipidsUpdate(t *testing.T) {
 	}
 }
 
-func testSoapLipidsSliceUpdateAll(t *testing.T) {
+func testAdditivesSliceUpdateAll(t *testing.T) {
 	t.Parallel()
 
-	if len(soapLipidAllColumns) == len(soapLipidPrimaryKeyColumns) {
+	if len(additiveAllColumns) == len(additivePrimaryKeyColumns) {
 		t.Skip("Skipping table with only primary key columns")
 	}
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapLipid{}
-	if err = randomize.Struct(seed, o, soapLipidDBTypes, true, soapLipidColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapLipid struct: %s", err)
+	o := &Additive{}
+	if err = randomize.Struct(seed, o, additiveDBTypes, true, additiveColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Additive struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -1045,7 +1045,7 @@ func testSoapLipidsSliceUpdateAll(t *testing.T) {
 		t.Error(err)
 	}
 
-	count, err := SoapLipids().Count(ctx, tx)
+	count, err := Additives().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -1054,18 +1054,18 @@ func testSoapLipidsSliceUpdateAll(t *testing.T) {
 		t.Error("want one record, got:", count)
 	}
 
-	if err = randomize.Struct(seed, o, soapLipidDBTypes, true, soapLipidPrimaryKeyColumns...); err != nil {
-		t.Errorf("Unable to randomize SoapLipid struct: %s", err)
+	if err = randomize.Struct(seed, o, additiveDBTypes, true, additivePrimaryKeyColumns...); err != nil {
+		t.Errorf("Unable to randomize Additive struct: %s", err)
 	}
 
 	// Remove Primary keys and unique columns from what we plan to update
 	var fields []string
-	if strmangle.StringSliceMatch(soapLipidAllColumns, soapLipidPrimaryKeyColumns) {
-		fields = soapLipidAllColumns
+	if strmangle.StringSliceMatch(additiveAllColumns, additivePrimaryKeyColumns) {
+		fields = additiveAllColumns
 	} else {
 		fields = strmangle.SetComplement(
-			soapLipidAllColumns,
-			soapLipidPrimaryKeyColumns,
+			additiveAllColumns,
+			additivePrimaryKeyColumns,
 		)
 	}
 
@@ -1083,7 +1083,7 @@ func testSoapLipidsSliceUpdateAll(t *testing.T) {
 		}
 	}
 
-	slice := SoapLipidSlice{o}
+	slice := AdditiveSlice{o}
 	if rowsAff, err := slice.UpdateAll(ctx, tx, updateMap); err != nil {
 		t.Error(err)
 	} else if rowsAff != 1 {
@@ -1091,29 +1091,29 @@ func testSoapLipidsSliceUpdateAll(t *testing.T) {
 	}
 }
 
-func testSoapLipidsUpsert(t *testing.T) {
+func testAdditivesUpsert(t *testing.T) {
 	t.Parallel()
 
-	if len(soapLipidAllColumns) == len(soapLipidPrimaryKeyColumns) {
+	if len(additiveAllColumns) == len(additivePrimaryKeyColumns) {
 		t.Skip("Skipping table with only primary key columns")
 	}
 
 	seed := randomize.NewSeed()
 	var err error
 	// Attempt the INSERT side of an UPSERT
-	o := SoapLipid{}
-	if err = randomize.Struct(seed, &o, soapLipidDBTypes, true); err != nil {
-		t.Errorf("Unable to randomize SoapLipid struct: %s", err)
+	o := Additive{}
+	if err = randomize.Struct(seed, &o, additiveDBTypes, true); err != nil {
+		t.Errorf("Unable to randomize Additive struct: %s", err)
 	}
 
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
 	if err = o.Upsert(ctx, tx, false, nil, boil.Infer(), boil.Infer()); err != nil {
-		t.Errorf("Unable to upsert SoapLipid: %s", err)
+		t.Errorf("Unable to upsert Additive: %s", err)
 	}
 
-	count, err := SoapLipids().Count(ctx, tx)
+	count, err := Additives().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -1122,15 +1122,15 @@ func testSoapLipidsUpsert(t *testing.T) {
 	}
 
 	// Attempt the UPDATE side of an UPSERT
-	if err = randomize.Struct(seed, &o, soapLipidDBTypes, false, soapLipidPrimaryKeyColumns...); err != nil {
-		t.Errorf("Unable to randomize SoapLipid struct: %s", err)
+	if err = randomize.Struct(seed, &o, additiveDBTypes, false, additivePrimaryKeyColumns...); err != nil {
+		t.Errorf("Unable to randomize Additive struct: %s", err)
 	}
 
 	if err = o.Upsert(ctx, tx, true, nil, boil.Infer(), boil.Infer()); err != nil {
-		t.Errorf("Unable to upsert SoapLipid: %s", err)
+		t.Errorf("Unable to upsert Additive: %s", err)
 	}
 
-	count, err = SoapLipids().Count(ctx, tx)
+	count, err = Additives().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}

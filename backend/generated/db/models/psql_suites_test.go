@@ -6,31 +6,31 @@ package models
 import "testing"
 
 func TestUpsert(t *testing.T) {
-	t.Run("SoapAdditives", testSoapAdditivesUpsert)
+	t.Run("Additives", testAdditivesUpsert)
 
-	t.Run("SoapAdditiveinventories", testSoapAdditiveinventoriesUpsert)
+	t.Run("AdditiveInventories", testAdditiveInventoriesUpsert)
 
-	t.Run("SoapFragrances", testSoapFragrancesUpsert)
+	t.Run("Fragrances", testFragrancesUpsert)
 
-	t.Run("SoapFragranceinventories", testSoapFragranceinventoriesUpsert)
+	t.Run("FragranceInventories", testFragranceInventoriesUpsert)
 
-	t.Run("SoapLipids", testSoapLipidsUpsert)
+	t.Run("Lipids", testLipidsUpsert)
 
-	t.Run("SoapLipidinventories", testSoapLipidinventoriesUpsert)
+	t.Run("LipidInventories", testLipidInventoriesUpsert)
 
-	t.Run("SoapLyes", testSoapLyesUpsert)
+	t.Run("Lyes", testLyesUpsert)
 
-	t.Run("SoapLyeinventories", testSoapLyeinventoriesUpsert)
+	t.Run("LyeInventories", testLyeInventoriesUpsert)
 
-	t.Run("SoapRecipes", testSoapRecipesUpsert)
+	t.Run("Recipes", testRecipesUpsert)
 
-	t.Run("SoapRecipeadditives", testSoapRecipeadditivesUpsert)
+	t.Run("RecipeAdditives", testRecipeAdditivesUpsert)
 
-	t.Run("SoapRecipefragrances", testSoapRecipefragrancesUpsert)
+	t.Run("RecipeFragrances", testRecipeFragrancesUpsert)
 
-	t.Run("SoapRecipelipids", testSoapRecipelipidsUpsert)
+	t.Run("RecipeLipids", testRecipeLipidsUpsert)
 
-	t.Run("SoapRecipelyes", testSoapRecipelyesUpsert)
+	t.Run("RecipeLyes", testRecipeLyesUpsert)
 
-	t.Run("SoapSuppliers", testSoapSuppliersUpsert)
+	t.Run("Suppliers", testSuppliersUpsert)
 }

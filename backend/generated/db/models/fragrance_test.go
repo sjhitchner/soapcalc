@@ -21,24 +21,24 @@ var (
 	_ = queries.Equal
 )
 
-func testSoapFragrances(t *testing.T) {
+func testFragrances(t *testing.T) {
 	t.Parallel()
 
-	query := SoapFragrances()
+	query := Fragrances()
 
 	if query.Query == nil {
 		t.Error("expected a query, got nothing")
 	}
 }
 
-func testSoapFragrancesSoftDelete(t *testing.T) {
+func testFragrancesSoftDelete(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapFragrance{}
-	if err = randomize.Struct(seed, o, soapFragranceDBTypes, true, soapFragranceColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapFragrance struct: %s", err)
+	o := &Fragrance{}
+	if err = randomize.Struct(seed, o, fragranceDBTypes, true, fragranceColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Fragrance struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -54,7 +54,7 @@ func testSoapFragrancesSoftDelete(t *testing.T) {
 		t.Error("should only have deleted one row, but affected:", rowsAff)
 	}
 
-	count, err := SoapFragrances().Count(ctx, tx)
+	count, err := Fragrances().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -64,14 +64,14 @@ func testSoapFragrancesSoftDelete(t *testing.T) {
 	}
 }
 
-func testSoapFragrancesQuerySoftDeleteAll(t *testing.T) {
+func testFragrancesQuerySoftDeleteAll(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapFragrance{}
-	if err = randomize.Struct(seed, o, soapFragranceDBTypes, true, soapFragranceColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapFragrance struct: %s", err)
+	o := &Fragrance{}
+	if err = randomize.Struct(seed, o, fragranceDBTypes, true, fragranceColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Fragrance struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -81,13 +81,13 @@ func testSoapFragrancesQuerySoftDeleteAll(t *testing.T) {
 		t.Error(err)
 	}
 
-	if rowsAff, err := SoapFragrances().DeleteAll(ctx, tx, false); err != nil {
+	if rowsAff, err := Fragrances().DeleteAll(ctx, tx, false); err != nil {
 		t.Error(err)
 	} else if rowsAff != 1 {
 		t.Error("should only have deleted one row, but affected:", rowsAff)
 	}
 
-	count, err := SoapFragrances().Count(ctx, tx)
+	count, err := Fragrances().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -97,14 +97,14 @@ func testSoapFragrancesQuerySoftDeleteAll(t *testing.T) {
 	}
 }
 
-func testSoapFragrancesSliceSoftDeleteAll(t *testing.T) {
+func testFragrancesSliceSoftDeleteAll(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapFragrance{}
-	if err = randomize.Struct(seed, o, soapFragranceDBTypes, true, soapFragranceColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapFragrance struct: %s", err)
+	o := &Fragrance{}
+	if err = randomize.Struct(seed, o, fragranceDBTypes, true, fragranceColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Fragrance struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -114,7 +114,7 @@ func testSoapFragrancesSliceSoftDeleteAll(t *testing.T) {
 		t.Error(err)
 	}
 
-	slice := SoapFragranceSlice{o}
+	slice := FragranceSlice{o}
 
 	if rowsAff, err := slice.DeleteAll(ctx, tx, false); err != nil {
 		t.Error(err)
@@ -122,7 +122,7 @@ func testSoapFragrancesSliceSoftDeleteAll(t *testing.T) {
 		t.Error("should only have deleted one row, but affected:", rowsAff)
 	}
 
-	count, err := SoapFragrances().Count(ctx, tx)
+	count, err := Fragrances().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -132,14 +132,14 @@ func testSoapFragrancesSliceSoftDeleteAll(t *testing.T) {
 	}
 }
 
-func testSoapFragrancesDelete(t *testing.T) {
+func testFragrancesDelete(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapFragrance{}
-	if err = randomize.Struct(seed, o, soapFragranceDBTypes, true, soapFragranceColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapFragrance struct: %s", err)
+	o := &Fragrance{}
+	if err = randomize.Struct(seed, o, fragranceDBTypes, true, fragranceColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Fragrance struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -155,7 +155,7 @@ func testSoapFragrancesDelete(t *testing.T) {
 		t.Error("should only have deleted one row, but affected:", rowsAff)
 	}
 
-	count, err := SoapFragrances().Count(ctx, tx)
+	count, err := Fragrances().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -165,14 +165,14 @@ func testSoapFragrancesDelete(t *testing.T) {
 	}
 }
 
-func testSoapFragrancesQueryDeleteAll(t *testing.T) {
+func testFragrancesQueryDeleteAll(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapFragrance{}
-	if err = randomize.Struct(seed, o, soapFragranceDBTypes, true, soapFragranceColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapFragrance struct: %s", err)
+	o := &Fragrance{}
+	if err = randomize.Struct(seed, o, fragranceDBTypes, true, fragranceColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Fragrance struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -182,13 +182,13 @@ func testSoapFragrancesQueryDeleteAll(t *testing.T) {
 		t.Error(err)
 	}
 
-	if rowsAff, err := SoapFragrances().DeleteAll(ctx, tx, true); err != nil {
+	if rowsAff, err := Fragrances().DeleteAll(ctx, tx, true); err != nil {
 		t.Error(err)
 	} else if rowsAff != 1 {
 		t.Error("should only have deleted one row, but affected:", rowsAff)
 	}
 
-	count, err := SoapFragrances().Count(ctx, tx)
+	count, err := Fragrances().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -198,14 +198,14 @@ func testSoapFragrancesQueryDeleteAll(t *testing.T) {
 	}
 }
 
-func testSoapFragrancesSliceDeleteAll(t *testing.T) {
+func testFragrancesSliceDeleteAll(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapFragrance{}
-	if err = randomize.Struct(seed, o, soapFragranceDBTypes, true, soapFragranceColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapFragrance struct: %s", err)
+	o := &Fragrance{}
+	if err = randomize.Struct(seed, o, fragranceDBTypes, true, fragranceColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Fragrance struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -215,7 +215,7 @@ func testSoapFragrancesSliceDeleteAll(t *testing.T) {
 		t.Error(err)
 	}
 
-	slice := SoapFragranceSlice{o}
+	slice := FragranceSlice{o}
 
 	if rowsAff, err := slice.DeleteAll(ctx, tx, true); err != nil {
 		t.Error(err)
@@ -223,7 +223,7 @@ func testSoapFragrancesSliceDeleteAll(t *testing.T) {
 		t.Error("should only have deleted one row, but affected:", rowsAff)
 	}
 
-	count, err := SoapFragrances().Count(ctx, tx)
+	count, err := Fragrances().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -233,14 +233,14 @@ func testSoapFragrancesSliceDeleteAll(t *testing.T) {
 	}
 }
 
-func testSoapFragrancesExists(t *testing.T) {
+func testFragrancesExists(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapFragrance{}
-	if err = randomize.Struct(seed, o, soapFragranceDBTypes, true, soapFragranceColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapFragrance struct: %s", err)
+	o := &Fragrance{}
+	if err = randomize.Struct(seed, o, fragranceDBTypes, true, fragranceColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Fragrance struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -250,23 +250,23 @@ func testSoapFragrancesExists(t *testing.T) {
 		t.Error(err)
 	}
 
-	e, err := SoapFragranceExists(ctx, tx, o.ID)
+	e, err := FragranceExists(ctx, tx, o.ID)
 	if err != nil {
-		t.Errorf("Unable to check if SoapFragrance exists: %s", err)
+		t.Errorf("Unable to check if Fragrance exists: %s", err)
 	}
 	if !e {
-		t.Errorf("Expected SoapFragranceExists to return true, but got false.")
+		t.Errorf("Expected FragranceExists to return true, but got false.")
 	}
 }
 
-func testSoapFragrancesFind(t *testing.T) {
+func testFragrancesFind(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapFragrance{}
-	if err = randomize.Struct(seed, o, soapFragranceDBTypes, true, soapFragranceColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapFragrance struct: %s", err)
+	o := &Fragrance{}
+	if err = randomize.Struct(seed, o, fragranceDBTypes, true, fragranceColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Fragrance struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -276,24 +276,24 @@ func testSoapFragrancesFind(t *testing.T) {
 		t.Error(err)
 	}
 
-	soapFragranceFound, err := FindSoapFragrance(ctx, tx, o.ID)
+	fragranceFound, err := FindFragrance(ctx, tx, o.ID)
 	if err != nil {
 		t.Error(err)
 	}
 
-	if soapFragranceFound == nil {
+	if fragranceFound == nil {
 		t.Error("want a record, got nil")
 	}
 }
 
-func testSoapFragrancesBind(t *testing.T) {
+func testFragrancesBind(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapFragrance{}
-	if err = randomize.Struct(seed, o, soapFragranceDBTypes, true, soapFragranceColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapFragrance struct: %s", err)
+	o := &Fragrance{}
+	if err = randomize.Struct(seed, o, fragranceDBTypes, true, fragranceColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Fragrance struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -303,19 +303,19 @@ func testSoapFragrancesBind(t *testing.T) {
 		t.Error(err)
 	}
 
-	if err = SoapFragrances().Bind(ctx, tx, o); err != nil {
+	if err = Fragrances().Bind(ctx, tx, o); err != nil {
 		t.Error(err)
 	}
 }
 
-func testSoapFragrancesOne(t *testing.T) {
+func testFragrancesOne(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapFragrance{}
-	if err = randomize.Struct(seed, o, soapFragranceDBTypes, true, soapFragranceColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapFragrance struct: %s", err)
+	o := &Fragrance{}
+	if err = randomize.Struct(seed, o, fragranceDBTypes, true, fragranceColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Fragrance struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -325,38 +325,38 @@ func testSoapFragrancesOne(t *testing.T) {
 		t.Error(err)
 	}
 
-	if x, err := SoapFragrances().One(ctx, tx); err != nil {
+	if x, err := Fragrances().One(ctx, tx); err != nil {
 		t.Error(err)
 	} else if x == nil {
 		t.Error("expected to get a non nil record")
 	}
 }
 
-func testSoapFragrancesAll(t *testing.T) {
+func testFragrancesAll(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	soapFragranceOne := &SoapFragrance{}
-	soapFragranceTwo := &SoapFragrance{}
-	if err = randomize.Struct(seed, soapFragranceOne, soapFragranceDBTypes, false, soapFragranceColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapFragrance struct: %s", err)
+	fragranceOne := &Fragrance{}
+	fragranceTwo := &Fragrance{}
+	if err = randomize.Struct(seed, fragranceOne, fragranceDBTypes, false, fragranceColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Fragrance struct: %s", err)
 	}
-	if err = randomize.Struct(seed, soapFragranceTwo, soapFragranceDBTypes, false, soapFragranceColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapFragrance struct: %s", err)
+	if err = randomize.Struct(seed, fragranceTwo, fragranceDBTypes, false, fragranceColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Fragrance struct: %s", err)
 	}
 
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
-	if err = soapFragranceOne.Insert(ctx, tx, boil.Infer()); err != nil {
+	if err = fragranceOne.Insert(ctx, tx, boil.Infer()); err != nil {
 		t.Error(err)
 	}
-	if err = soapFragranceTwo.Insert(ctx, tx, boil.Infer()); err != nil {
+	if err = fragranceTwo.Insert(ctx, tx, boil.Infer()); err != nil {
 		t.Error(err)
 	}
 
-	slice, err := SoapFragrances().All(ctx, tx)
+	slice, err := Fragrances().All(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -366,31 +366,31 @@ func testSoapFragrancesAll(t *testing.T) {
 	}
 }
 
-func testSoapFragrancesCount(t *testing.T) {
+func testFragrancesCount(t *testing.T) {
 	t.Parallel()
 
 	var err error
 	seed := randomize.NewSeed()
-	soapFragranceOne := &SoapFragrance{}
-	soapFragranceTwo := &SoapFragrance{}
-	if err = randomize.Struct(seed, soapFragranceOne, soapFragranceDBTypes, false, soapFragranceColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapFragrance struct: %s", err)
+	fragranceOne := &Fragrance{}
+	fragranceTwo := &Fragrance{}
+	if err = randomize.Struct(seed, fragranceOne, fragranceDBTypes, false, fragranceColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Fragrance struct: %s", err)
 	}
-	if err = randomize.Struct(seed, soapFragranceTwo, soapFragranceDBTypes, false, soapFragranceColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapFragrance struct: %s", err)
+	if err = randomize.Struct(seed, fragranceTwo, fragranceDBTypes, false, fragranceColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Fragrance struct: %s", err)
 	}
 
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
-	if err = soapFragranceOne.Insert(ctx, tx, boil.Infer()); err != nil {
+	if err = fragranceOne.Insert(ctx, tx, boil.Infer()); err != nil {
 		t.Error(err)
 	}
-	if err = soapFragranceTwo.Insert(ctx, tx, boil.Infer()); err != nil {
+	if err = fragranceTwo.Insert(ctx, tx, boil.Infer()); err != nil {
 		t.Error(err)
 	}
 
-	count, err := SoapFragrances().Count(ctx, tx)
+	count, err := Fragrances().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -400,155 +400,155 @@ func testSoapFragrancesCount(t *testing.T) {
 	}
 }
 
-func soapFragranceBeforeInsertHook(ctx context.Context, e boil.ContextExecutor, o *SoapFragrance) error {
-	*o = SoapFragrance{}
+func fragranceBeforeInsertHook(ctx context.Context, e boil.ContextExecutor, o *Fragrance) error {
+	*o = Fragrance{}
 	return nil
 }
 
-func soapFragranceAfterInsertHook(ctx context.Context, e boil.ContextExecutor, o *SoapFragrance) error {
-	*o = SoapFragrance{}
+func fragranceAfterInsertHook(ctx context.Context, e boil.ContextExecutor, o *Fragrance) error {
+	*o = Fragrance{}
 	return nil
 }
 
-func soapFragranceAfterSelectHook(ctx context.Context, e boil.ContextExecutor, o *SoapFragrance) error {
-	*o = SoapFragrance{}
+func fragranceAfterSelectHook(ctx context.Context, e boil.ContextExecutor, o *Fragrance) error {
+	*o = Fragrance{}
 	return nil
 }
 
-func soapFragranceBeforeUpdateHook(ctx context.Context, e boil.ContextExecutor, o *SoapFragrance) error {
-	*o = SoapFragrance{}
+func fragranceBeforeUpdateHook(ctx context.Context, e boil.ContextExecutor, o *Fragrance) error {
+	*o = Fragrance{}
 	return nil
 }
 
-func soapFragranceAfterUpdateHook(ctx context.Context, e boil.ContextExecutor, o *SoapFragrance) error {
-	*o = SoapFragrance{}
+func fragranceAfterUpdateHook(ctx context.Context, e boil.ContextExecutor, o *Fragrance) error {
+	*o = Fragrance{}
 	return nil
 }
 
-func soapFragranceBeforeDeleteHook(ctx context.Context, e boil.ContextExecutor, o *SoapFragrance) error {
-	*o = SoapFragrance{}
+func fragranceBeforeDeleteHook(ctx context.Context, e boil.ContextExecutor, o *Fragrance) error {
+	*o = Fragrance{}
 	return nil
 }
 
-func soapFragranceAfterDeleteHook(ctx context.Context, e boil.ContextExecutor, o *SoapFragrance) error {
-	*o = SoapFragrance{}
+func fragranceAfterDeleteHook(ctx context.Context, e boil.ContextExecutor, o *Fragrance) error {
+	*o = Fragrance{}
 	return nil
 }
 
-func soapFragranceBeforeUpsertHook(ctx context.Context, e boil.ContextExecutor, o *SoapFragrance) error {
-	*o = SoapFragrance{}
+func fragranceBeforeUpsertHook(ctx context.Context, e boil.ContextExecutor, o *Fragrance) error {
+	*o = Fragrance{}
 	return nil
 }
 
-func soapFragranceAfterUpsertHook(ctx context.Context, e boil.ContextExecutor, o *SoapFragrance) error {
-	*o = SoapFragrance{}
+func fragranceAfterUpsertHook(ctx context.Context, e boil.ContextExecutor, o *Fragrance) error {
+	*o = Fragrance{}
 	return nil
 }
 
-func testSoapFragrancesHooks(t *testing.T) {
+func testFragrancesHooks(t *testing.T) {
 	t.Parallel()
 
 	var err error
 
 	ctx := context.Background()
-	empty := &SoapFragrance{}
-	o := &SoapFragrance{}
+	empty := &Fragrance{}
+	o := &Fragrance{}
 
 	seed := randomize.NewSeed()
-	if err = randomize.Struct(seed, o, soapFragranceDBTypes, false); err != nil {
-		t.Errorf("Unable to randomize SoapFragrance object: %s", err)
+	if err = randomize.Struct(seed, o, fragranceDBTypes, false); err != nil {
+		t.Errorf("Unable to randomize Fragrance object: %s", err)
 	}
 
-	AddSoapFragranceHook(boil.BeforeInsertHook, soapFragranceBeforeInsertHook)
+	AddFragranceHook(boil.BeforeInsertHook, fragranceBeforeInsertHook)
 	if err = o.doBeforeInsertHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doBeforeInsertHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected BeforeInsertHook function to empty object, but got: %#v", o)
 	}
-	soapFragranceBeforeInsertHooks = []SoapFragranceHook{}
+	fragranceBeforeInsertHooks = []FragranceHook{}
 
-	AddSoapFragranceHook(boil.AfterInsertHook, soapFragranceAfterInsertHook)
+	AddFragranceHook(boil.AfterInsertHook, fragranceAfterInsertHook)
 	if err = o.doAfterInsertHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doAfterInsertHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected AfterInsertHook function to empty object, but got: %#v", o)
 	}
-	soapFragranceAfterInsertHooks = []SoapFragranceHook{}
+	fragranceAfterInsertHooks = []FragranceHook{}
 
-	AddSoapFragranceHook(boil.AfterSelectHook, soapFragranceAfterSelectHook)
+	AddFragranceHook(boil.AfterSelectHook, fragranceAfterSelectHook)
 	if err = o.doAfterSelectHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doAfterSelectHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected AfterSelectHook function to empty object, but got: %#v", o)
 	}
-	soapFragranceAfterSelectHooks = []SoapFragranceHook{}
+	fragranceAfterSelectHooks = []FragranceHook{}
 
-	AddSoapFragranceHook(boil.BeforeUpdateHook, soapFragranceBeforeUpdateHook)
+	AddFragranceHook(boil.BeforeUpdateHook, fragranceBeforeUpdateHook)
 	if err = o.doBeforeUpdateHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doBeforeUpdateHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected BeforeUpdateHook function to empty object, but got: %#v", o)
 	}
-	soapFragranceBeforeUpdateHooks = []SoapFragranceHook{}
+	fragranceBeforeUpdateHooks = []FragranceHook{}
 
-	AddSoapFragranceHook(boil.AfterUpdateHook, soapFragranceAfterUpdateHook)
+	AddFragranceHook(boil.AfterUpdateHook, fragranceAfterUpdateHook)
 	if err = o.doAfterUpdateHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doAfterUpdateHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected AfterUpdateHook function to empty object, but got: %#v", o)
 	}
-	soapFragranceAfterUpdateHooks = []SoapFragranceHook{}
+	fragranceAfterUpdateHooks = []FragranceHook{}
 
-	AddSoapFragranceHook(boil.BeforeDeleteHook, soapFragranceBeforeDeleteHook)
+	AddFragranceHook(boil.BeforeDeleteHook, fragranceBeforeDeleteHook)
 	if err = o.doBeforeDeleteHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doBeforeDeleteHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected BeforeDeleteHook function to empty object, but got: %#v", o)
 	}
-	soapFragranceBeforeDeleteHooks = []SoapFragranceHook{}
+	fragranceBeforeDeleteHooks = []FragranceHook{}
 
-	AddSoapFragranceHook(boil.AfterDeleteHook, soapFragranceAfterDeleteHook)
+	AddFragranceHook(boil.AfterDeleteHook, fragranceAfterDeleteHook)
 	if err = o.doAfterDeleteHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doAfterDeleteHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected AfterDeleteHook function to empty object, but got: %#v", o)
 	}
-	soapFragranceAfterDeleteHooks = []SoapFragranceHook{}
+	fragranceAfterDeleteHooks = []FragranceHook{}
 
-	AddSoapFragranceHook(boil.BeforeUpsertHook, soapFragranceBeforeUpsertHook)
+	AddFragranceHook(boil.BeforeUpsertHook, fragranceBeforeUpsertHook)
 	if err = o.doBeforeUpsertHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doBeforeUpsertHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected BeforeUpsertHook function to empty object, but got: %#v", o)
 	}
-	soapFragranceBeforeUpsertHooks = []SoapFragranceHook{}
+	fragranceBeforeUpsertHooks = []FragranceHook{}
 
-	AddSoapFragranceHook(boil.AfterUpsertHook, soapFragranceAfterUpsertHook)
+	AddFragranceHook(boil.AfterUpsertHook, fragranceAfterUpsertHook)
 	if err = o.doAfterUpsertHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doAfterUpsertHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected AfterUpsertHook function to empty object, but got: %#v", o)
 	}
-	soapFragranceAfterUpsertHooks = []SoapFragranceHook{}
+	fragranceAfterUpsertHooks = []FragranceHook{}
 }
 
-func testSoapFragrancesInsert(t *testing.T) {
+func testFragrancesInsert(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapFragrance{}
-	if err = randomize.Struct(seed, o, soapFragranceDBTypes, true, soapFragranceColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapFragrance struct: %s", err)
+	o := &Fragrance{}
+	if err = randomize.Struct(seed, o, fragranceDBTypes, true, fragranceColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Fragrance struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -558,7 +558,7 @@ func testSoapFragrancesInsert(t *testing.T) {
 		t.Error(err)
 	}
 
-	count, err := SoapFragrances().Count(ctx, tx)
+	count, err := Fragrances().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -568,24 +568,24 @@ func testSoapFragrancesInsert(t *testing.T) {
 	}
 }
 
-func testSoapFragrancesInsertWhitelist(t *testing.T) {
+func testFragrancesInsertWhitelist(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapFragrance{}
-	if err = randomize.Struct(seed, o, soapFragranceDBTypes, true); err != nil {
-		t.Errorf("Unable to randomize SoapFragrance struct: %s", err)
+	o := &Fragrance{}
+	if err = randomize.Struct(seed, o, fragranceDBTypes, true); err != nil {
+		t.Errorf("Unable to randomize Fragrance struct: %s", err)
 	}
 
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
-	if err = o.Insert(ctx, tx, boil.Whitelist(soapFragranceColumnsWithoutDefault...)); err != nil {
+	if err = o.Insert(ctx, tx, boil.Whitelist(fragranceColumnsWithoutDefault...)); err != nil {
 		t.Error(err)
 	}
 
-	count, err := SoapFragrances().Count(ctx, tx)
+	count, err := Fragrances().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -595,28 +595,28 @@ func testSoapFragrancesInsertWhitelist(t *testing.T) {
 	}
 }
 
-func testSoapFragranceToManyFragranceSoapFragranceinventories(t *testing.T) {
+func testFragranceToManyFragranceInventories(t *testing.T) {
 	var err error
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
 
-	var a SoapFragrance
-	var b, c SoapFragranceinventory
+	var a Fragrance
+	var b, c FragranceInventory
 
 	seed := randomize.NewSeed()
-	if err = randomize.Struct(seed, &a, soapFragranceDBTypes, true, soapFragranceColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapFragrance struct: %s", err)
+	if err = randomize.Struct(seed, &a, fragranceDBTypes, true, fragranceColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Fragrance struct: %s", err)
 	}
 
 	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
 		t.Fatal(err)
 	}
 
-	if err = randomize.Struct(seed, &b, soapFragranceinventoryDBTypes, false, soapFragranceinventoryColumnsWithDefault...); err != nil {
+	if err = randomize.Struct(seed, &b, fragranceInventoryDBTypes, false, fragranceInventoryColumnsWithDefault...); err != nil {
 		t.Fatal(err)
 	}
-	if err = randomize.Struct(seed, &c, soapFragranceinventoryDBTypes, false, soapFragranceinventoryColumnsWithDefault...); err != nil {
+	if err = randomize.Struct(seed, &c, fragranceInventoryDBTypes, false, fragranceInventoryColumnsWithDefault...); err != nil {
 		t.Fatal(err)
 	}
 
@@ -630,7 +630,7 @@ func testSoapFragranceToManyFragranceSoapFragranceinventories(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	check, err := a.FragranceSoapFragranceinventories().All(ctx, tx)
+	check, err := a.FragranceInventories().All(ctx, tx)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -652,19 +652,19 @@ func testSoapFragranceToManyFragranceSoapFragranceinventories(t *testing.T) {
 		t.Error("expected to find c")
 	}
 
-	slice := SoapFragranceSlice{&a}
-	if err = a.L.LoadFragranceSoapFragranceinventories(ctx, tx, false, (*[]*SoapFragrance)(&slice), nil); err != nil {
+	slice := FragranceSlice{&a}
+	if err = a.L.LoadFragranceInventories(ctx, tx, false, (*[]*Fragrance)(&slice), nil); err != nil {
 		t.Fatal(err)
 	}
-	if got := len(a.R.FragranceSoapFragranceinventories); got != 2 {
+	if got := len(a.R.FragranceInventories); got != 2 {
 		t.Error("number of eager loaded records wrong, got:", got)
 	}
 
-	a.R.FragranceSoapFragranceinventories = nil
-	if err = a.L.LoadFragranceSoapFragranceinventories(ctx, tx, true, &a, nil); err != nil {
+	a.R.FragranceInventories = nil
+	if err = a.L.LoadFragranceInventories(ctx, tx, true, &a, nil); err != nil {
 		t.Fatal(err)
 	}
-	if got := len(a.R.FragranceSoapFragranceinventories); got != 2 {
+	if got := len(a.R.FragranceInventories); got != 2 {
 		t.Error("number of eager loaded records wrong, got:", got)
 	}
 
@@ -673,28 +673,28 @@ func testSoapFragranceToManyFragranceSoapFragranceinventories(t *testing.T) {
 	}
 }
 
-func testSoapFragranceToManyFragranceSoapRecipefragrances(t *testing.T) {
+func testFragranceToManyRecipeFragrances(t *testing.T) {
 	var err error
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
 
-	var a SoapFragrance
-	var b, c SoapRecipefragrance
+	var a Fragrance
+	var b, c RecipeFragrance
 
 	seed := randomize.NewSeed()
-	if err = randomize.Struct(seed, &a, soapFragranceDBTypes, true, soapFragranceColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapFragrance struct: %s", err)
+	if err = randomize.Struct(seed, &a, fragranceDBTypes, true, fragranceColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Fragrance struct: %s", err)
 	}
 
 	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
 		t.Fatal(err)
 	}
 
-	if err = randomize.Struct(seed, &b, soapRecipefragranceDBTypes, false, soapRecipefragranceColumnsWithDefault...); err != nil {
+	if err = randomize.Struct(seed, &b, recipeFragranceDBTypes, false, recipeFragranceColumnsWithDefault...); err != nil {
 		t.Fatal(err)
 	}
-	if err = randomize.Struct(seed, &c, soapRecipefragranceDBTypes, false, soapRecipefragranceColumnsWithDefault...); err != nil {
+	if err = randomize.Struct(seed, &c, recipeFragranceDBTypes, false, recipeFragranceColumnsWithDefault...); err != nil {
 		t.Fatal(err)
 	}
 
@@ -708,7 +708,7 @@ func testSoapFragranceToManyFragranceSoapRecipefragrances(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	check, err := a.FragranceSoapRecipefragrances().All(ctx, tx)
+	check, err := a.RecipeFragrances().All(ctx, tx)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -730,19 +730,19 @@ func testSoapFragranceToManyFragranceSoapRecipefragrances(t *testing.T) {
 		t.Error("expected to find c")
 	}
 
-	slice := SoapFragranceSlice{&a}
-	if err = a.L.LoadFragranceSoapRecipefragrances(ctx, tx, false, (*[]*SoapFragrance)(&slice), nil); err != nil {
+	slice := FragranceSlice{&a}
+	if err = a.L.LoadRecipeFragrances(ctx, tx, false, (*[]*Fragrance)(&slice), nil); err != nil {
 		t.Fatal(err)
 	}
-	if got := len(a.R.FragranceSoapRecipefragrances); got != 2 {
+	if got := len(a.R.RecipeFragrances); got != 2 {
 		t.Error("number of eager loaded records wrong, got:", got)
 	}
 
-	a.R.FragranceSoapRecipefragrances = nil
-	if err = a.L.LoadFragranceSoapRecipefragrances(ctx, tx, true, &a, nil); err != nil {
+	a.R.RecipeFragrances = nil
+	if err = a.L.LoadRecipeFragrances(ctx, tx, true, &a, nil); err != nil {
 		t.Fatal(err)
 	}
-	if got := len(a.R.FragranceSoapRecipefragrances); got != 2 {
+	if got := len(a.R.RecipeFragrances); got != 2 {
 		t.Error("number of eager loaded records wrong, got:", got)
 	}
 
@@ -751,23 +751,23 @@ func testSoapFragranceToManyFragranceSoapRecipefragrances(t *testing.T) {
 	}
 }
 
-func testSoapFragranceToManyAddOpFragranceSoapFragranceinventories(t *testing.T) {
+func testFragranceToManyAddOpFragranceInventories(t *testing.T) {
 	var err error
 
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
 
-	var a SoapFragrance
-	var b, c, d, e SoapFragranceinventory
+	var a Fragrance
+	var b, c, d, e FragranceInventory
 
 	seed := randomize.NewSeed()
-	if err = randomize.Struct(seed, &a, soapFragranceDBTypes, false, strmangle.SetComplement(soapFragrancePrimaryKeyColumns, soapFragranceColumnsWithoutDefault)...); err != nil {
+	if err = randomize.Struct(seed, &a, fragranceDBTypes, false, strmangle.SetComplement(fragrancePrimaryKeyColumns, fragranceColumnsWithoutDefault)...); err != nil {
 		t.Fatal(err)
 	}
-	foreigners := []*SoapFragranceinventory{&b, &c, &d, &e}
+	foreigners := []*FragranceInventory{&b, &c, &d, &e}
 	for _, x := range foreigners {
-		if err = randomize.Struct(seed, x, soapFragranceinventoryDBTypes, false, strmangle.SetComplement(soapFragranceinventoryPrimaryKeyColumns, soapFragranceinventoryColumnsWithoutDefault)...); err != nil {
+		if err = randomize.Struct(seed, x, fragranceInventoryDBTypes, false, strmangle.SetComplement(fragranceInventoryPrimaryKeyColumns, fragranceInventoryColumnsWithoutDefault)...); err != nil {
 			t.Fatal(err)
 		}
 	}
@@ -782,13 +782,13 @@ func testSoapFragranceToManyAddOpFragranceSoapFragranceinventories(t *testing.T)
 		t.Fatal(err)
 	}
 
-	foreignersSplitByInsertion := [][]*SoapFragranceinventory{
+	foreignersSplitByInsertion := [][]*FragranceInventory{
 		{&b, &c},
 		{&d, &e},
 	}
 
 	for i, x := range foreignersSplitByInsertion {
-		err = a.AddFragranceSoapFragranceinventories(ctx, tx, i != 0, x...)
+		err = a.AddFragranceInventories(ctx, tx, i != 0, x...)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -810,14 +810,14 @@ func testSoapFragranceToManyAddOpFragranceSoapFragranceinventories(t *testing.T)
 			t.Error("relationship was not added properly to the foreign slice")
 		}
 
-		if a.R.FragranceSoapFragranceinventories[i*2] != first {
+		if a.R.FragranceInventories[i*2] != first {
 			t.Error("relationship struct slice not set to correct value")
 		}
-		if a.R.FragranceSoapFragranceinventories[i*2+1] != second {
+		if a.R.FragranceInventories[i*2+1] != second {
 			t.Error("relationship struct slice not set to correct value")
 		}
 
-		count, err := a.FragranceSoapFragranceinventories().Count(ctx, tx)
+		count, err := a.FragranceInventories().Count(ctx, tx)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -826,23 +826,23 @@ func testSoapFragranceToManyAddOpFragranceSoapFragranceinventories(t *testing.T)
 		}
 	}
 }
-func testSoapFragranceToManyAddOpFragranceSoapRecipefragrances(t *testing.T) {
+func testFragranceToManyAddOpRecipeFragrances(t *testing.T) {
 	var err error
 
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
 
-	var a SoapFragrance
-	var b, c, d, e SoapRecipefragrance
+	var a Fragrance
+	var b, c, d, e RecipeFragrance
 
 	seed := randomize.NewSeed()
-	if err = randomize.Struct(seed, &a, soapFragranceDBTypes, false, strmangle.SetComplement(soapFragrancePrimaryKeyColumns, soapFragranceColumnsWithoutDefault)...); err != nil {
+	if err = randomize.Struct(seed, &a, fragranceDBTypes, false, strmangle.SetComplement(fragrancePrimaryKeyColumns, fragranceColumnsWithoutDefault)...); err != nil {
 		t.Fatal(err)
 	}
-	foreigners := []*SoapRecipefragrance{&b, &c, &d, &e}
+	foreigners := []*RecipeFragrance{&b, &c, &d, &e}
 	for _, x := range foreigners {
-		if err = randomize.Struct(seed, x, soapRecipefragranceDBTypes, false, strmangle.SetComplement(soapRecipefragrancePrimaryKeyColumns, soapRecipefragranceColumnsWithoutDefault)...); err != nil {
+		if err = randomize.Struct(seed, x, recipeFragranceDBTypes, false, strmangle.SetComplement(recipeFragrancePrimaryKeyColumns, recipeFragranceColumnsWithoutDefault)...); err != nil {
 			t.Fatal(err)
 		}
 	}
@@ -857,13 +857,13 @@ func testSoapFragranceToManyAddOpFragranceSoapRecipefragrances(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	foreignersSplitByInsertion := [][]*SoapRecipefragrance{
+	foreignersSplitByInsertion := [][]*RecipeFragrance{
 		{&b, &c},
 		{&d, &e},
 	}
 
 	for i, x := range foreignersSplitByInsertion {
-		err = a.AddFragranceSoapRecipefragrances(ctx, tx, i != 0, x...)
+		err = a.AddRecipeFragrances(ctx, tx, i != 0, x...)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -885,14 +885,14 @@ func testSoapFragranceToManyAddOpFragranceSoapRecipefragrances(t *testing.T) {
 			t.Error("relationship was not added properly to the foreign slice")
 		}
 
-		if a.R.FragranceSoapRecipefragrances[i*2] != first {
+		if a.R.RecipeFragrances[i*2] != first {
 			t.Error("relationship struct slice not set to correct value")
 		}
-		if a.R.FragranceSoapRecipefragrances[i*2+1] != second {
+		if a.R.RecipeFragrances[i*2+1] != second {
 			t.Error("relationship struct slice not set to correct value")
 		}
 
-		count, err := a.FragranceSoapRecipefragrances().Count(ctx, tx)
+		count, err := a.RecipeFragrances().Count(ctx, tx)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -902,14 +902,14 @@ func testSoapFragranceToManyAddOpFragranceSoapRecipefragrances(t *testing.T) {
 	}
 }
 
-func testSoapFragrancesReload(t *testing.T) {
+func testFragrancesReload(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapFragrance{}
-	if err = randomize.Struct(seed, o, soapFragranceDBTypes, true, soapFragranceColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapFragrance struct: %s", err)
+	o := &Fragrance{}
+	if err = randomize.Struct(seed, o, fragranceDBTypes, true, fragranceColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Fragrance struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -924,14 +924,14 @@ func testSoapFragrancesReload(t *testing.T) {
 	}
 }
 
-func testSoapFragrancesReloadAll(t *testing.T) {
+func testFragrancesReloadAll(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapFragrance{}
-	if err = randomize.Struct(seed, o, soapFragranceDBTypes, true, soapFragranceColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapFragrance struct: %s", err)
+	o := &Fragrance{}
+	if err = randomize.Struct(seed, o, fragranceDBTypes, true, fragranceColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Fragrance struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -941,21 +941,21 @@ func testSoapFragrancesReloadAll(t *testing.T) {
 		t.Error(err)
 	}
 
-	slice := SoapFragranceSlice{o}
+	slice := FragranceSlice{o}
 
 	if err = slice.ReloadAll(ctx, tx); err != nil {
 		t.Error(err)
 	}
 }
 
-func testSoapFragrancesSelect(t *testing.T) {
+func testFragrancesSelect(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapFragrance{}
-	if err = randomize.Struct(seed, o, soapFragranceDBTypes, true, soapFragranceColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapFragrance struct: %s", err)
+	o := &Fragrance{}
+	if err = randomize.Struct(seed, o, fragranceDBTypes, true, fragranceColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Fragrance struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -965,7 +965,7 @@ func testSoapFragrancesSelect(t *testing.T) {
 		t.Error(err)
 	}
 
-	slice, err := SoapFragrances().All(ctx, tx)
+	slice, err := Fragrances().All(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -976,25 +976,25 @@ func testSoapFragrancesSelect(t *testing.T) {
 }
 
 var (
-	soapFragranceDBTypes = map[string]string{`ID`: `integer`, `CreatedAt`: `timestamp with time zone`, `UpdatedAt`: `timestamp with time zone`, `DeletedAt`: `timestamp with time zone`, `Name`: `character varying`, `GramsPerLiter`: `double precision`, `Note`: `text`}
-	_                    = bytes.MinRead
+	fragranceDBTypes = map[string]string{`ID`: `integer`, `CreatedAt`: `timestamp with time zone`, `UpdatedAt`: `timestamp with time zone`, `DeletedAt`: `timestamp with time zone`, `Name`: `character varying`, `GramsPerLiter`: `double precision`, `Note`: `text`}
+	_                = bytes.MinRead
 )
 
-func testSoapFragrancesUpdate(t *testing.T) {
+func testFragrancesUpdate(t *testing.T) {
 	t.Parallel()
 
-	if 0 == len(soapFragrancePrimaryKeyColumns) {
+	if 0 == len(fragrancePrimaryKeyColumns) {
 		t.Skip("Skipping table with no primary key columns")
 	}
-	if len(soapFragranceAllColumns) == len(soapFragrancePrimaryKeyColumns) {
+	if len(fragranceAllColumns) == len(fragrancePrimaryKeyColumns) {
 		t.Skip("Skipping table with only primary key columns")
 	}
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapFragrance{}
-	if err = randomize.Struct(seed, o, soapFragranceDBTypes, true, soapFragranceColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapFragrance struct: %s", err)
+	o := &Fragrance{}
+	if err = randomize.Struct(seed, o, fragranceDBTypes, true, fragranceColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Fragrance struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -1004,7 +1004,7 @@ func testSoapFragrancesUpdate(t *testing.T) {
 		t.Error(err)
 	}
 
-	count, err := SoapFragrances().Count(ctx, tx)
+	count, err := Fragrances().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -1013,8 +1013,8 @@ func testSoapFragrancesUpdate(t *testing.T) {
 		t.Error("want one record, got:", count)
 	}
 
-	if err = randomize.Struct(seed, o, soapFragranceDBTypes, true, soapFragrancePrimaryKeyColumns...); err != nil {
-		t.Errorf("Unable to randomize SoapFragrance struct: %s", err)
+	if err = randomize.Struct(seed, o, fragranceDBTypes, true, fragrancePrimaryKeyColumns...); err != nil {
+		t.Errorf("Unable to randomize Fragrance struct: %s", err)
 	}
 
 	if rowsAff, err := o.Update(ctx, tx, boil.Infer()); err != nil {
@@ -1024,18 +1024,18 @@ func testSoapFragrancesUpdate(t *testing.T) {
 	}
 }
 
-func testSoapFragrancesSliceUpdateAll(t *testing.T) {
+func testFragrancesSliceUpdateAll(t *testing.T) {
 	t.Parallel()
 
-	if len(soapFragranceAllColumns) == len(soapFragrancePrimaryKeyColumns) {
+	if len(fragranceAllColumns) == len(fragrancePrimaryKeyColumns) {
 		t.Skip("Skipping table with only primary key columns")
 	}
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapFragrance{}
-	if err = randomize.Struct(seed, o, soapFragranceDBTypes, true, soapFragranceColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapFragrance struct: %s", err)
+	o := &Fragrance{}
+	if err = randomize.Struct(seed, o, fragranceDBTypes, true, fragranceColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Fragrance struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -1045,7 +1045,7 @@ func testSoapFragrancesSliceUpdateAll(t *testing.T) {
 		t.Error(err)
 	}
 
-	count, err := SoapFragrances().Count(ctx, tx)
+	count, err := Fragrances().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -1054,18 +1054,18 @@ func testSoapFragrancesSliceUpdateAll(t *testing.T) {
 		t.Error("want one record, got:", count)
 	}
 
-	if err = randomize.Struct(seed, o, soapFragranceDBTypes, true, soapFragrancePrimaryKeyColumns...); err != nil {
-		t.Errorf("Unable to randomize SoapFragrance struct: %s", err)
+	if err = randomize.Struct(seed, o, fragranceDBTypes, true, fragrancePrimaryKeyColumns...); err != nil {
+		t.Errorf("Unable to randomize Fragrance struct: %s", err)
 	}
 
 	// Remove Primary keys and unique columns from what we plan to update
 	var fields []string
-	if strmangle.StringSliceMatch(soapFragranceAllColumns, soapFragrancePrimaryKeyColumns) {
-		fields = soapFragranceAllColumns
+	if strmangle.StringSliceMatch(fragranceAllColumns, fragrancePrimaryKeyColumns) {
+		fields = fragranceAllColumns
 	} else {
 		fields = strmangle.SetComplement(
-			soapFragranceAllColumns,
-			soapFragrancePrimaryKeyColumns,
+			fragranceAllColumns,
+			fragrancePrimaryKeyColumns,
 		)
 	}
 
@@ -1083,7 +1083,7 @@ func testSoapFragrancesSliceUpdateAll(t *testing.T) {
 		}
 	}
 
-	slice := SoapFragranceSlice{o}
+	slice := FragranceSlice{o}
 	if rowsAff, err := slice.UpdateAll(ctx, tx, updateMap); err != nil {
 		t.Error(err)
 	} else if rowsAff != 1 {
@@ -1091,29 +1091,29 @@ func testSoapFragrancesSliceUpdateAll(t *testing.T) {
 	}
 }
 
-func testSoapFragrancesUpsert(t *testing.T) {
+func testFragrancesUpsert(t *testing.T) {
 	t.Parallel()
 
-	if len(soapFragranceAllColumns) == len(soapFragrancePrimaryKeyColumns) {
+	if len(fragranceAllColumns) == len(fragrancePrimaryKeyColumns) {
 		t.Skip("Skipping table with only primary key columns")
 	}
 
 	seed := randomize.NewSeed()
 	var err error
 	// Attempt the INSERT side of an UPSERT
-	o := SoapFragrance{}
-	if err = randomize.Struct(seed, &o, soapFragranceDBTypes, true); err != nil {
-		t.Errorf("Unable to randomize SoapFragrance struct: %s", err)
+	o := Fragrance{}
+	if err = randomize.Struct(seed, &o, fragranceDBTypes, true); err != nil {
+		t.Errorf("Unable to randomize Fragrance struct: %s", err)
 	}
 
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
 	if err = o.Upsert(ctx, tx, false, nil, boil.Infer(), boil.Infer()); err != nil {
-		t.Errorf("Unable to upsert SoapFragrance: %s", err)
+		t.Errorf("Unable to upsert Fragrance: %s", err)
 	}
 
-	count, err := SoapFragrances().Count(ctx, tx)
+	count, err := Fragrances().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -1122,15 +1122,15 @@ func testSoapFragrancesUpsert(t *testing.T) {
 	}
 
 	// Attempt the UPDATE side of an UPSERT
-	if err = randomize.Struct(seed, &o, soapFragranceDBTypes, false, soapFragrancePrimaryKeyColumns...); err != nil {
-		t.Errorf("Unable to randomize SoapFragrance struct: %s", err)
+	if err = randomize.Struct(seed, &o, fragranceDBTypes, false, fragrancePrimaryKeyColumns...); err != nil {
+		t.Errorf("Unable to randomize Fragrance struct: %s", err)
 	}
 
 	if err = o.Upsert(ctx, tx, true, nil, boil.Infer(), boil.Infer()); err != nil {
-		t.Errorf("Unable to upsert SoapFragrance: %s", err)
+		t.Errorf("Unable to upsert Fragrance: %s", err)
 	}
 
-	count, err = SoapFragrances().Count(ctx, tx)
+	count, err = Fragrances().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}

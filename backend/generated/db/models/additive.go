@@ -22,19 +22,19 @@ import (
 	"github.com/volatiletech/strmangle"
 )
 
-// SoapAdditive is an object representing the database table.
-type SoapAdditive struct {
+// Additive is an object representing the database table.
+type Additive struct {
 	ID        int       `boil:"id" json:"id" toml:"id" yaml:"id"`
 	CreatedAt time.Time `boil:"created_at" json:"created_at" toml:"created_at" yaml:"created_at"`
 	UpdatedAt time.Time `boil:"updated_at" json:"updated_at" toml:"updated_at" yaml:"updated_at"`
 	DeletedAt null.Time `boil:"deleted_at" json:"deleted_at,omitempty" toml:"deleted_at" yaml:"deleted_at,omitempty"`
 	Name      string    `boil:"name" json:"name" toml:"name" yaml:"name"`
 
-	R *soapAdditiveR `boil:"-" json:"-" toml:"-" yaml:"-"`
-	L soapAdditiveL  `boil:"-" json:"-" toml:"-" yaml:"-"`
+	R *additiveR `boil:"-" json:"-" toml:"-" yaml:"-"`
+	L additiveL  `boil:"-" json:"-" toml:"-" yaml:"-"`
 }
 
-var SoapAdditiveColumns = struct {
+var AdditiveColumns = struct {
 	ID        string
 	CreatedAt string
 	UpdatedAt string
@@ -140,73 +140,73 @@ func (w whereHelperstring) NIN(slice []string) qm.QueryMod {
 	return qm.WhereNotIn(fmt.Sprintf("%s NOT IN ?", w.field), values...)
 }
 
-var SoapAdditiveWhere = struct {
+var AdditiveWhere = struct {
 	ID        whereHelperint
 	CreatedAt whereHelpertime_Time
 	UpdatedAt whereHelpertime_Time
 	DeletedAt whereHelpernull_Time
 	Name      whereHelperstring
 }{
-	ID:        whereHelperint{field: "\"soap_additive\".\"id\""},
-	CreatedAt: whereHelpertime_Time{field: "\"soap_additive\".\"created_at\""},
-	UpdatedAt: whereHelpertime_Time{field: "\"soap_additive\".\"updated_at\""},
-	DeletedAt: whereHelpernull_Time{field: "\"soap_additive\".\"deleted_at\""},
-	Name:      whereHelperstring{field: "\"soap_additive\".\"name\""},
+	ID:        whereHelperint{field: "\"additive\".\"id\""},
+	CreatedAt: whereHelpertime_Time{field: "\"additive\".\"created_at\""},
+	UpdatedAt: whereHelpertime_Time{field: "\"additive\".\"updated_at\""},
+	DeletedAt: whereHelpernull_Time{field: "\"additive\".\"deleted_at\""},
+	Name:      whereHelperstring{field: "\"additive\".\"name\""},
 }
 
-// SoapAdditiveRels is where relationship names are stored.
-var SoapAdditiveRels = struct {
-	AdditiveSoapAdditiveinventories string
-	AdditiveSoapRecipeadditives     string
+// AdditiveRels is where relationship names are stored.
+var AdditiveRels = struct {
+	AdditiveInventories string
+	RecipeAdditives     string
 }{
-	AdditiveSoapAdditiveinventories: "AdditiveSoapAdditiveinventories",
-	AdditiveSoapRecipeadditives:     "AdditiveSoapRecipeadditives",
+	AdditiveInventories: "AdditiveInventories",
+	RecipeAdditives:     "RecipeAdditives",
 }
 
-// soapAdditiveR is where relationships are stored.
-type soapAdditiveR struct {
-	AdditiveSoapAdditiveinventories SoapAdditiveinventorySlice `boil:"AdditiveSoapAdditiveinventories" json:"AdditiveSoapAdditiveinventories" toml:"AdditiveSoapAdditiveinventories" yaml:"AdditiveSoapAdditiveinventories"`
-	AdditiveSoapRecipeadditives     SoapRecipeadditiveSlice    `boil:"AdditiveSoapRecipeadditives" json:"AdditiveSoapRecipeadditives" toml:"AdditiveSoapRecipeadditives" yaml:"AdditiveSoapRecipeadditives"`
+// additiveR is where relationships are stored.
+type additiveR struct {
+	AdditiveInventories AdditiveInventorySlice `boil:"AdditiveInventories" json:"AdditiveInventories" toml:"AdditiveInventories" yaml:"AdditiveInventories"`
+	RecipeAdditives     RecipeAdditiveSlice    `boil:"RecipeAdditives" json:"RecipeAdditives" toml:"RecipeAdditives" yaml:"RecipeAdditives"`
 }
 
 // NewStruct creates a new relationship struct
-func (*soapAdditiveR) NewStruct() *soapAdditiveR {
-	return &soapAdditiveR{}
+func (*additiveR) NewStruct() *additiveR {
+	return &additiveR{}
 }
 
-// soapAdditiveL is where Load methods for each relationship are stored.
-type soapAdditiveL struct{}
+// additiveL is where Load methods for each relationship are stored.
+type additiveL struct{}
 
 var (
-	soapAdditiveAllColumns            = []string{"id", "created_at", "updated_at", "deleted_at", "name"}
-	soapAdditiveColumnsWithoutDefault = []string{"created_at", "updated_at", "deleted_at", "name"}
-	soapAdditiveColumnsWithDefault    = []string{"id"}
-	soapAdditivePrimaryKeyColumns     = []string{"id"}
+	additiveAllColumns            = []string{"id", "created_at", "updated_at", "deleted_at", "name"}
+	additiveColumnsWithoutDefault = []string{"created_at", "updated_at", "deleted_at", "name"}
+	additiveColumnsWithDefault    = []string{"id"}
+	additivePrimaryKeyColumns     = []string{"id"}
 )
 
 type (
-	// SoapAdditiveSlice is an alias for a slice of pointers to SoapAdditive.
-	// This should generally be used opposed to []SoapAdditive.
-	SoapAdditiveSlice []*SoapAdditive
-	// SoapAdditiveHook is the signature for custom SoapAdditive hook methods
-	SoapAdditiveHook func(context.Context, boil.ContextExecutor, *SoapAdditive) error
+	// AdditiveSlice is an alias for a slice of pointers to Additive.
+	// This should generally be used opposed to []Additive.
+	AdditiveSlice []*Additive
+	// AdditiveHook is the signature for custom Additive hook methods
+	AdditiveHook func(context.Context, boil.ContextExecutor, *Additive) error
 
-	soapAdditiveQuery struct {
+	additiveQuery struct {
 		*queries.Query
 	}
 )
 
 // Cache for insert, update and upsert
 var (
-	soapAdditiveType                 = reflect.TypeOf(&SoapAdditive{})
-	soapAdditiveMapping              = queries.MakeStructMapping(soapAdditiveType)
-	soapAdditivePrimaryKeyMapping, _ = queries.BindMapping(soapAdditiveType, soapAdditiveMapping, soapAdditivePrimaryKeyColumns)
-	soapAdditiveInsertCacheMut       sync.RWMutex
-	soapAdditiveInsertCache          = make(map[string]insertCache)
-	soapAdditiveUpdateCacheMut       sync.RWMutex
-	soapAdditiveUpdateCache          = make(map[string]updateCache)
-	soapAdditiveUpsertCacheMut       sync.RWMutex
-	soapAdditiveUpsertCache          = make(map[string]insertCache)
+	additiveType                 = reflect.TypeOf(&Additive{})
+	additiveMapping              = queries.MakeStructMapping(additiveType)
+	additivePrimaryKeyMapping, _ = queries.BindMapping(additiveType, additiveMapping, additivePrimaryKeyColumns)
+	additiveInsertCacheMut       sync.RWMutex
+	additiveInsertCache          = make(map[string]insertCache)
+	additiveUpdateCacheMut       sync.RWMutex
+	additiveUpdateCache          = make(map[string]updateCache)
+	additiveUpsertCacheMut       sync.RWMutex
+	additiveUpsertCache          = make(map[string]insertCache)
 )
 
 var (
@@ -217,24 +217,24 @@ var (
 	_ = qmhelper.Where
 )
 
-var soapAdditiveBeforeInsertHooks []SoapAdditiveHook
-var soapAdditiveBeforeUpdateHooks []SoapAdditiveHook
-var soapAdditiveBeforeDeleteHooks []SoapAdditiveHook
-var soapAdditiveBeforeUpsertHooks []SoapAdditiveHook
+var additiveBeforeInsertHooks []AdditiveHook
+var additiveBeforeUpdateHooks []AdditiveHook
+var additiveBeforeDeleteHooks []AdditiveHook
+var additiveBeforeUpsertHooks []AdditiveHook
 
-var soapAdditiveAfterInsertHooks []SoapAdditiveHook
-var soapAdditiveAfterSelectHooks []SoapAdditiveHook
-var soapAdditiveAfterUpdateHooks []SoapAdditiveHook
-var soapAdditiveAfterDeleteHooks []SoapAdditiveHook
-var soapAdditiveAfterUpsertHooks []SoapAdditiveHook
+var additiveAfterInsertHooks []AdditiveHook
+var additiveAfterSelectHooks []AdditiveHook
+var additiveAfterUpdateHooks []AdditiveHook
+var additiveAfterDeleteHooks []AdditiveHook
+var additiveAfterUpsertHooks []AdditiveHook
 
 // doBeforeInsertHooks executes all "before insert" hooks.
-func (o *SoapAdditive) doBeforeInsertHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Additive) doBeforeInsertHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range soapAdditiveBeforeInsertHooks {
+	for _, hook := range additiveBeforeInsertHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -244,12 +244,12 @@ func (o *SoapAdditive) doBeforeInsertHooks(ctx context.Context, exec boil.Contex
 }
 
 // doBeforeUpdateHooks executes all "before Update" hooks.
-func (o *SoapAdditive) doBeforeUpdateHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Additive) doBeforeUpdateHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range soapAdditiveBeforeUpdateHooks {
+	for _, hook := range additiveBeforeUpdateHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -259,12 +259,12 @@ func (o *SoapAdditive) doBeforeUpdateHooks(ctx context.Context, exec boil.Contex
 }
 
 // doBeforeDeleteHooks executes all "before Delete" hooks.
-func (o *SoapAdditive) doBeforeDeleteHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Additive) doBeforeDeleteHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range soapAdditiveBeforeDeleteHooks {
+	for _, hook := range additiveBeforeDeleteHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -274,12 +274,12 @@ func (o *SoapAdditive) doBeforeDeleteHooks(ctx context.Context, exec boil.Contex
 }
 
 // doBeforeUpsertHooks executes all "before Upsert" hooks.
-func (o *SoapAdditive) doBeforeUpsertHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Additive) doBeforeUpsertHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range soapAdditiveBeforeUpsertHooks {
+	for _, hook := range additiveBeforeUpsertHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -289,12 +289,12 @@ func (o *SoapAdditive) doBeforeUpsertHooks(ctx context.Context, exec boil.Contex
 }
 
 // doAfterInsertHooks executes all "after Insert" hooks.
-func (o *SoapAdditive) doAfterInsertHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Additive) doAfterInsertHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range soapAdditiveAfterInsertHooks {
+	for _, hook := range additiveAfterInsertHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -304,12 +304,12 @@ func (o *SoapAdditive) doAfterInsertHooks(ctx context.Context, exec boil.Context
 }
 
 // doAfterSelectHooks executes all "after Select" hooks.
-func (o *SoapAdditive) doAfterSelectHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Additive) doAfterSelectHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range soapAdditiveAfterSelectHooks {
+	for _, hook := range additiveAfterSelectHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -319,12 +319,12 @@ func (o *SoapAdditive) doAfterSelectHooks(ctx context.Context, exec boil.Context
 }
 
 // doAfterUpdateHooks executes all "after Update" hooks.
-func (o *SoapAdditive) doAfterUpdateHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Additive) doAfterUpdateHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range soapAdditiveAfterUpdateHooks {
+	for _, hook := range additiveAfterUpdateHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -334,12 +334,12 @@ func (o *SoapAdditive) doAfterUpdateHooks(ctx context.Context, exec boil.Context
 }
 
 // doAfterDeleteHooks executes all "after Delete" hooks.
-func (o *SoapAdditive) doAfterDeleteHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Additive) doAfterDeleteHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range soapAdditiveAfterDeleteHooks {
+	for _, hook := range additiveAfterDeleteHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -349,12 +349,12 @@ func (o *SoapAdditive) doAfterDeleteHooks(ctx context.Context, exec boil.Context
 }
 
 // doAfterUpsertHooks executes all "after Upsert" hooks.
-func (o *SoapAdditive) doAfterUpsertHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
+func (o *Additive) doAfterUpsertHooks(ctx context.Context, exec boil.ContextExecutor) (err error) {
 	if boil.HooksAreSkipped(ctx) {
 		return nil
 	}
 
-	for _, hook := range soapAdditiveAfterUpsertHooks {
+	for _, hook := range additiveAfterUpsertHooks {
 		if err := hook(ctx, exec, o); err != nil {
 			return err
 		}
@@ -363,33 +363,33 @@ func (o *SoapAdditive) doAfterUpsertHooks(ctx context.Context, exec boil.Context
 	return nil
 }
 
-// AddSoapAdditiveHook registers your hook function for all future operations.
-func AddSoapAdditiveHook(hookPoint boil.HookPoint, soapAdditiveHook SoapAdditiveHook) {
+// AddAdditiveHook registers your hook function for all future operations.
+func AddAdditiveHook(hookPoint boil.HookPoint, additiveHook AdditiveHook) {
 	switch hookPoint {
 	case boil.BeforeInsertHook:
-		soapAdditiveBeforeInsertHooks = append(soapAdditiveBeforeInsertHooks, soapAdditiveHook)
+		additiveBeforeInsertHooks = append(additiveBeforeInsertHooks, additiveHook)
 	case boil.BeforeUpdateHook:
-		soapAdditiveBeforeUpdateHooks = append(soapAdditiveBeforeUpdateHooks, soapAdditiveHook)
+		additiveBeforeUpdateHooks = append(additiveBeforeUpdateHooks, additiveHook)
 	case boil.BeforeDeleteHook:
-		soapAdditiveBeforeDeleteHooks = append(soapAdditiveBeforeDeleteHooks, soapAdditiveHook)
+		additiveBeforeDeleteHooks = append(additiveBeforeDeleteHooks, additiveHook)
 	case boil.BeforeUpsertHook:
-		soapAdditiveBeforeUpsertHooks = append(soapAdditiveBeforeUpsertHooks, soapAdditiveHook)
+		additiveBeforeUpsertHooks = append(additiveBeforeUpsertHooks, additiveHook)
 	case boil.AfterInsertHook:
-		soapAdditiveAfterInsertHooks = append(soapAdditiveAfterInsertHooks, soapAdditiveHook)
+		additiveAfterInsertHooks = append(additiveAfterInsertHooks, additiveHook)
 	case boil.AfterSelectHook:
-		soapAdditiveAfterSelectHooks = append(soapAdditiveAfterSelectHooks, soapAdditiveHook)
+		additiveAfterSelectHooks = append(additiveAfterSelectHooks, additiveHook)
 	case boil.AfterUpdateHook:
-		soapAdditiveAfterUpdateHooks = append(soapAdditiveAfterUpdateHooks, soapAdditiveHook)
+		additiveAfterUpdateHooks = append(additiveAfterUpdateHooks, additiveHook)
 	case boil.AfterDeleteHook:
-		soapAdditiveAfterDeleteHooks = append(soapAdditiveAfterDeleteHooks, soapAdditiveHook)
+		additiveAfterDeleteHooks = append(additiveAfterDeleteHooks, additiveHook)
 	case boil.AfterUpsertHook:
-		soapAdditiveAfterUpsertHooks = append(soapAdditiveAfterUpsertHooks, soapAdditiveHook)
+		additiveAfterUpsertHooks = append(additiveAfterUpsertHooks, additiveHook)
 	}
 }
 
-// One returns a single soapAdditive record from the query.
-func (q soapAdditiveQuery) One(ctx context.Context, exec boil.ContextExecutor) (*SoapAdditive, error) {
-	o := &SoapAdditive{}
+// One returns a single additive record from the query.
+func (q additiveQuery) One(ctx context.Context, exec boil.ContextExecutor) (*Additive, error) {
+	o := &Additive{}
 
 	queries.SetLimit(q.Query, 1)
 
@@ -398,7 +398,7 @@ func (q soapAdditiveQuery) One(ctx context.Context, exec boil.ContextExecutor) (
 		if errors.Cause(err) == sql.ErrNoRows {
 			return nil, sql.ErrNoRows
 		}
-		return nil, errors.Wrap(err, "models: failed to execute a one query for soap_additive")
+		return nil, errors.Wrap(err, "models: failed to execute a one query for additive")
 	}
 
 	if err := o.doAfterSelectHooks(ctx, exec); err != nil {
@@ -408,16 +408,16 @@ func (q soapAdditiveQuery) One(ctx context.Context, exec boil.ContextExecutor) (
 	return o, nil
 }
 
-// All returns all SoapAdditive records from the query.
-func (q soapAdditiveQuery) All(ctx context.Context, exec boil.ContextExecutor) (SoapAdditiveSlice, error) {
-	var o []*SoapAdditive
+// All returns all Additive records from the query.
+func (q additiveQuery) All(ctx context.Context, exec boil.ContextExecutor) (AdditiveSlice, error) {
+	var o []*Additive
 
 	err := q.Bind(ctx, exec, &o)
 	if err != nil {
-		return nil, errors.Wrap(err, "models: failed to assign all query results to SoapAdditive slice")
+		return nil, errors.Wrap(err, "models: failed to assign all query results to Additive slice")
 	}
 
-	if len(soapAdditiveAfterSelectHooks) != 0 {
+	if len(additiveAfterSelectHooks) != 0 {
 		for _, obj := range o {
 			if err := obj.doAfterSelectHooks(ctx, exec); err != nil {
 				return o, err
@@ -428,8 +428,8 @@ func (q soapAdditiveQuery) All(ctx context.Context, exec boil.ContextExecutor) (
 	return o, nil
 }
 
-// Count returns the count of all SoapAdditive records in the query.
-func (q soapAdditiveQuery) Count(ctx context.Context, exec boil.ContextExecutor) (int64, error) {
+// Count returns the count of all Additive records in the query.
+func (q additiveQuery) Count(ctx context.Context, exec boil.ContextExecutor) (int64, error) {
 	var count int64
 
 	queries.SetSelect(q.Query, nil)
@@ -437,14 +437,14 @@ func (q soapAdditiveQuery) Count(ctx context.Context, exec boil.ContextExecutor)
 
 	err := q.Query.QueryRowContext(ctx, exec).Scan(&count)
 	if err != nil {
-		return 0, errors.Wrap(err, "models: failed to count soap_additive rows")
+		return 0, errors.Wrap(err, "models: failed to count additive rows")
 	}
 
 	return count, nil
 }
 
 // Exists checks if the row exists in the table.
-func (q soapAdditiveQuery) Exists(ctx context.Context, exec boil.ContextExecutor) (bool, error) {
+func (q additiveQuery) Exists(ctx context.Context, exec boil.ContextExecutor) (bool, error) {
 	var count int64
 
 	queries.SetSelect(q.Query, nil)
@@ -453,79 +453,79 @@ func (q soapAdditiveQuery) Exists(ctx context.Context, exec boil.ContextExecutor
 
 	err := q.Query.QueryRowContext(ctx, exec).Scan(&count)
 	if err != nil {
-		return false, errors.Wrap(err, "models: failed to check if soap_additive exists")
+		return false, errors.Wrap(err, "models: failed to check if additive exists")
 	}
 
 	return count > 0, nil
 }
 
-// AdditiveSoapAdditiveinventories retrieves all the soap_additiveinventory's SoapAdditiveinventories with an executor via additive_id column.
-func (o *SoapAdditive) AdditiveSoapAdditiveinventories(mods ...qm.QueryMod) soapAdditiveinventoryQuery {
+// AdditiveInventories retrieves all the additive_inventory's AdditiveInventories with an executor.
+func (o *Additive) AdditiveInventories(mods ...qm.QueryMod) additiveInventoryQuery {
 	var queryMods []qm.QueryMod
 	if len(mods) != 0 {
 		queryMods = append(queryMods, mods...)
 	}
 
 	queryMods = append(queryMods,
-		qm.Where("\"soap_additiveinventory\".\"additive_id\"=?", o.ID),
-		qmhelper.WhereIsNull("\"soap_additiveinventory\".\"deleted_at\""),
+		qm.Where("\"additive_inventory\".\"additive_id\"=?", o.ID),
+		qmhelper.WhereIsNull("\"additive_inventory\".\"deleted_at\""),
 	)
 
-	query := SoapAdditiveinventories(queryMods...)
-	queries.SetFrom(query.Query, "\"soap_additiveinventory\"")
+	query := AdditiveInventories(queryMods...)
+	queries.SetFrom(query.Query, "\"additive_inventory\"")
 
 	if len(queries.GetSelect(query.Query)) == 0 {
-		queries.SetSelect(query.Query, []string{"\"soap_additiveinventory\".*"})
+		queries.SetSelect(query.Query, []string{"\"additive_inventory\".*"})
 	}
 
 	return query
 }
 
-// AdditiveSoapRecipeadditives retrieves all the soap_recipeadditive's SoapRecipeadditives with an executor via additive_id column.
-func (o *SoapAdditive) AdditiveSoapRecipeadditives(mods ...qm.QueryMod) soapRecipeadditiveQuery {
+// RecipeAdditives retrieves all the recipe_additive's RecipeAdditives with an executor.
+func (o *Additive) RecipeAdditives(mods ...qm.QueryMod) recipeAdditiveQuery {
 	var queryMods []qm.QueryMod
 	if len(mods) != 0 {
 		queryMods = append(queryMods, mods...)
 	}
 
 	queryMods = append(queryMods,
-		qm.Where("\"soap_recipeadditive\".\"additive_id\"=?", o.ID),
-		qmhelper.WhereIsNull("\"soap_recipeadditive\".\"deleted_at\""),
+		qm.Where("\"recipe_additive\".\"additive_id\"=?", o.ID),
+		qmhelper.WhereIsNull("\"recipe_additive\".\"deleted_at\""),
 	)
 
-	query := SoapRecipeadditives(queryMods...)
-	queries.SetFrom(query.Query, "\"soap_recipeadditive\"")
+	query := RecipeAdditives(queryMods...)
+	queries.SetFrom(query.Query, "\"recipe_additive\"")
 
 	if len(queries.GetSelect(query.Query)) == 0 {
-		queries.SetSelect(query.Query, []string{"\"soap_recipeadditive\".*"})
+		queries.SetSelect(query.Query, []string{"\"recipe_additive\".*"})
 	}
 
 	return query
 }
 
-// LoadAdditiveSoapAdditiveinventories allows an eager lookup of values, cached into the
+// LoadAdditiveInventories allows an eager lookup of values, cached into the
 // loaded structs of the objects. This is for a 1-M or N-M relationship.
-func (soapAdditiveL) LoadAdditiveSoapAdditiveinventories(ctx context.Context, e boil.ContextExecutor, singular bool, maybeSoapAdditive interface{}, mods queries.Applicator) error {
-	var slice []*SoapAdditive
-	var object *SoapAdditive
+func (additiveL) LoadAdditiveInventories(ctx context.Context, e boil.ContextExecutor, singular bool, maybeAdditive interface{}, mods queries.Applicator) error {
+	var slice []*Additive
+	var object *Additive
 
 	if singular {
-		object = maybeSoapAdditive.(*SoapAdditive)
+		object = maybeAdditive.(*Additive)
 	} else {
-		slice = *maybeSoapAdditive.(*[]*SoapAdditive)
+		slice = *maybeAdditive.(*[]*Additive)
 	}
 
 	args := make([]interface{}, 0, 1)
 	if singular {
 		if object.R == nil {
-			object.R = &soapAdditiveR{}
+			object.R = &additiveR{}
 		}
 		args = append(args, object.ID)
 	} else {
 	Outer:
 		for _, obj := range slice {
 			if obj.R == nil {
-				obj.R = &soapAdditiveR{}
+				obj.R = &additiveR{}
 			}
 
 			for _, a := range args {
@@ -543,9 +543,9 @@ func (soapAdditiveL) LoadAdditiveSoapAdditiveinventories(ctx context.Context, e 
 	}
 
 	query := NewQuery(
-		qm.From(`soap_additiveinventory`),
-		qm.WhereIn(`soap_additiveinventory.additive_id in ?`, args...),
-		qmhelper.WhereIsNull(`soap_additiveinventory.deleted_at`),
+		qm.From(`additive_inventory`),
+		qm.WhereIn(`additive_inventory.additive_id in ?`, args...),
+		qmhelper.WhereIsNull(`additive_inventory.deleted_at`),
 	)
 	if mods != nil {
 		mods.Apply(query)
@@ -553,22 +553,22 @@ func (soapAdditiveL) LoadAdditiveSoapAdditiveinventories(ctx context.Context, e 
 
 	results, err := query.QueryContext(ctx, e)
 	if err != nil {
-		return errors.Wrap(err, "failed to eager load soap_additiveinventory")
+		return errors.Wrap(err, "failed to eager load additive_inventory")
 	}
 
-	var resultSlice []*SoapAdditiveinventory
+	var resultSlice []*AdditiveInventory
 	if err = queries.Bind(results, &resultSlice); err != nil {
-		return errors.Wrap(err, "failed to bind eager loaded slice soap_additiveinventory")
+		return errors.Wrap(err, "failed to bind eager loaded slice additive_inventory")
 	}
 
 	if err = results.Close(); err != nil {
-		return errors.Wrap(err, "failed to close results in eager load on soap_additiveinventory")
+		return errors.Wrap(err, "failed to close results in eager load on additive_inventory")
 	}
 	if err = results.Err(); err != nil {
-		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for soap_additiveinventory")
+		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for additive_inventory")
 	}
 
-	if len(soapAdditiveinventoryAfterSelectHooks) != 0 {
+	if len(additiveInventoryAfterSelectHooks) != 0 {
 		for _, obj := range resultSlice {
 			if err := obj.doAfterSelectHooks(ctx, e); err != nil {
 				return err
@@ -576,14 +576,14 @@ func (soapAdditiveL) LoadAdditiveSoapAdditiveinventories(ctx context.Context, e 
 		}
 	}
 	if singular {
-		object.R.AdditiveSoapAdditiveinventories = resultSlice
+		object.R.AdditiveInventories = resultSlice
 		return nil
 	}
 
 	for _, foreign := range resultSlice {
 		for _, local := range slice {
 			if local.ID == foreign.AdditiveID {
-				local.R.AdditiveSoapAdditiveinventories = append(local.R.AdditiveSoapAdditiveinventories, foreign)
+				local.R.AdditiveInventories = append(local.R.AdditiveInventories, foreign)
 				break
 			}
 		}
@@ -592,29 +592,29 @@ func (soapAdditiveL) LoadAdditiveSoapAdditiveinventories(ctx context.Context, e 
 	return nil
 }
 
-// LoadAdditiveSoapRecipeadditives allows an eager lookup of values, cached into the
+// LoadRecipeAdditives allows an eager lookup of values, cached into the
 // loaded structs of the objects. This is for a 1-M or N-M relationship.
-func (soapAdditiveL) LoadAdditiveSoapRecipeadditives(ctx context.Context, e boil.ContextExecutor, singular bool, maybeSoapAdditive interface{}, mods queries.Applicator) error {
-	var slice []*SoapAdditive
-	var object *SoapAdditive
+func (additiveL) LoadRecipeAdditives(ctx context.Context, e boil.ContextExecutor, singular bool, maybeAdditive interface{}, mods queries.Applicator) error {
+	var slice []*Additive
+	var object *Additive
 
 	if singular {
-		object = maybeSoapAdditive.(*SoapAdditive)
+		object = maybeAdditive.(*Additive)
 	} else {
-		slice = *maybeSoapAdditive.(*[]*SoapAdditive)
+		slice = *maybeAdditive.(*[]*Additive)
 	}
 
 	args := make([]interface{}, 0, 1)
 	if singular {
 		if object.R == nil {
-			object.R = &soapAdditiveR{}
+			object.R = &additiveR{}
 		}
 		args = append(args, object.ID)
 	} else {
 	Outer:
 		for _, obj := range slice {
 			if obj.R == nil {
-				obj.R = &soapAdditiveR{}
+				obj.R = &additiveR{}
 			}
 
 			for _, a := range args {
@@ -632,9 +632,9 @@ func (soapAdditiveL) LoadAdditiveSoapRecipeadditives(ctx context.Context, e boil
 	}
 
 	query := NewQuery(
-		qm.From(`soap_recipeadditive`),
-		qm.WhereIn(`soap_recipeadditive.additive_id in ?`, args...),
-		qmhelper.WhereIsNull(`soap_recipeadditive.deleted_at`),
+		qm.From(`recipe_additive`),
+		qm.WhereIn(`recipe_additive.additive_id in ?`, args...),
+		qmhelper.WhereIsNull(`recipe_additive.deleted_at`),
 	)
 	if mods != nil {
 		mods.Apply(query)
@@ -642,22 +642,22 @@ func (soapAdditiveL) LoadAdditiveSoapRecipeadditives(ctx context.Context, e boil
 
 	results, err := query.QueryContext(ctx, e)
 	if err != nil {
-		return errors.Wrap(err, "failed to eager load soap_recipeadditive")
+		return errors.Wrap(err, "failed to eager load recipe_additive")
 	}
 
-	var resultSlice []*SoapRecipeadditive
+	var resultSlice []*RecipeAdditive
 	if err = queries.Bind(results, &resultSlice); err != nil {
-		return errors.Wrap(err, "failed to bind eager loaded slice soap_recipeadditive")
+		return errors.Wrap(err, "failed to bind eager loaded slice recipe_additive")
 	}
 
 	if err = results.Close(); err != nil {
-		return errors.Wrap(err, "failed to close results in eager load on soap_recipeadditive")
+		return errors.Wrap(err, "failed to close results in eager load on recipe_additive")
 	}
 	if err = results.Err(); err != nil {
-		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for soap_recipeadditive")
+		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for recipe_additive")
 	}
 
-	if len(soapRecipeadditiveAfterSelectHooks) != 0 {
+	if len(recipeAdditiveAfterSelectHooks) != 0 {
 		for _, obj := range resultSlice {
 			if err := obj.doAfterSelectHooks(ctx, e); err != nil {
 				return err
@@ -665,14 +665,14 @@ func (soapAdditiveL) LoadAdditiveSoapRecipeadditives(ctx context.Context, e boil
 		}
 	}
 	if singular {
-		object.R.AdditiveSoapRecipeadditives = resultSlice
+		object.R.RecipeAdditives = resultSlice
 		return nil
 	}
 
 	for _, foreign := range resultSlice {
 		for _, local := range slice {
 			if local.ID == foreign.AdditiveID {
-				local.R.AdditiveSoapRecipeadditives = append(local.R.AdditiveSoapRecipeadditives, foreign)
+				local.R.RecipeAdditives = append(local.R.RecipeAdditives, foreign)
 				break
 			}
 		}
@@ -681,11 +681,11 @@ func (soapAdditiveL) LoadAdditiveSoapRecipeadditives(ctx context.Context, e boil
 	return nil
 }
 
-// AddAdditiveSoapAdditiveinventories adds the given related objects to the existing relationships
-// of the soap_additive, optionally inserting them as new records.
-// Appends related to o.R.AdditiveSoapAdditiveinventories.
+// AddAdditiveInventories adds the given related objects to the existing relationships
+// of the additive, optionally inserting them as new records.
+// Appends related to o.R.AdditiveInventories.
 // Sets related.R.Additive appropriately.
-func (o *SoapAdditive) AddAdditiveSoapAdditiveinventories(ctx context.Context, exec boil.ContextExecutor, insert bool, related ...*SoapAdditiveinventory) error {
+func (o *Additive) AddAdditiveInventories(ctx context.Context, exec boil.ContextExecutor, insert bool, related ...*AdditiveInventory) error {
 	var err error
 	for _, rel := range related {
 		if insert {
@@ -695,9 +695,9 @@ func (o *SoapAdditive) AddAdditiveSoapAdditiveinventories(ctx context.Context, e
 			}
 		} else {
 			updateQuery := fmt.Sprintf(
-				"UPDATE \"soap_additiveinventory\" SET %s WHERE %s",
+				"UPDATE \"additive_inventory\" SET %s WHERE %s",
 				strmangle.SetParamNames("\"", "\"", 1, []string{"additive_id"}),
-				strmangle.WhereClause("\"", "\"", 2, soapAdditiveinventoryPrimaryKeyColumns),
+				strmangle.WhereClause("\"", "\"", 2, additiveInventoryPrimaryKeyColumns),
 			)
 			values := []interface{}{o.ID, rel.ID}
 
@@ -715,16 +715,16 @@ func (o *SoapAdditive) AddAdditiveSoapAdditiveinventories(ctx context.Context, e
 	}
 
 	if o.R == nil {
-		o.R = &soapAdditiveR{
-			AdditiveSoapAdditiveinventories: related,
+		o.R = &additiveR{
+			AdditiveInventories: related,
 		}
 	} else {
-		o.R.AdditiveSoapAdditiveinventories = append(o.R.AdditiveSoapAdditiveinventories, related...)
+		o.R.AdditiveInventories = append(o.R.AdditiveInventories, related...)
 	}
 
 	for _, rel := range related {
 		if rel.R == nil {
-			rel.R = &soapAdditiveinventoryR{
+			rel.R = &additiveInventoryR{
 				Additive: o,
 			}
 		} else {
@@ -734,11 +734,11 @@ func (o *SoapAdditive) AddAdditiveSoapAdditiveinventories(ctx context.Context, e
 	return nil
 }
 
-// AddAdditiveSoapRecipeadditives adds the given related objects to the existing relationships
-// of the soap_additive, optionally inserting them as new records.
-// Appends related to o.R.AdditiveSoapRecipeadditives.
+// AddRecipeAdditives adds the given related objects to the existing relationships
+// of the additive, optionally inserting them as new records.
+// Appends related to o.R.RecipeAdditives.
 // Sets related.R.Additive appropriately.
-func (o *SoapAdditive) AddAdditiveSoapRecipeadditives(ctx context.Context, exec boil.ContextExecutor, insert bool, related ...*SoapRecipeadditive) error {
+func (o *Additive) AddRecipeAdditives(ctx context.Context, exec boil.ContextExecutor, insert bool, related ...*RecipeAdditive) error {
 	var err error
 	for _, rel := range related {
 		if insert {
@@ -748,9 +748,9 @@ func (o *SoapAdditive) AddAdditiveSoapRecipeadditives(ctx context.Context, exec 
 			}
 		} else {
 			updateQuery := fmt.Sprintf(
-				"UPDATE \"soap_recipeadditive\" SET %s WHERE %s",
+				"UPDATE \"recipe_additive\" SET %s WHERE %s",
 				strmangle.SetParamNames("\"", "\"", 1, []string{"additive_id"}),
-				strmangle.WhereClause("\"", "\"", 2, soapRecipeadditivePrimaryKeyColumns),
+				strmangle.WhereClause("\"", "\"", 2, recipeAdditivePrimaryKeyColumns),
 			)
 			values := []interface{}{o.ID, rel.ID}
 
@@ -768,16 +768,16 @@ func (o *SoapAdditive) AddAdditiveSoapRecipeadditives(ctx context.Context, exec 
 	}
 
 	if o.R == nil {
-		o.R = &soapAdditiveR{
-			AdditiveSoapRecipeadditives: related,
+		o.R = &additiveR{
+			RecipeAdditives: related,
 		}
 	} else {
-		o.R.AdditiveSoapRecipeadditives = append(o.R.AdditiveSoapRecipeadditives, related...)
+		o.R.RecipeAdditives = append(o.R.RecipeAdditives, related...)
 	}
 
 	for _, rel := range related {
 		if rel.R == nil {
-			rel.R = &soapRecipeadditiveR{
+			rel.R = &recipeAdditiveR{
 				Additive: o,
 			}
 		} else {
@@ -787,43 +787,43 @@ func (o *SoapAdditive) AddAdditiveSoapRecipeadditives(ctx context.Context, exec 
 	return nil
 }
 
-// SoapAdditives retrieves all the records using an executor.
-func SoapAdditives(mods ...qm.QueryMod) soapAdditiveQuery {
-	mods = append(mods, qm.From("\"soap_additive\""), qmhelper.WhereIsNull("\"soap_additive\".\"deleted_at\""))
-	return soapAdditiveQuery{NewQuery(mods...)}
+// Additives retrieves all the records using an executor.
+func Additives(mods ...qm.QueryMod) additiveQuery {
+	mods = append(mods, qm.From("\"additive\""), qmhelper.WhereIsNull("\"additive\".\"deleted_at\""))
+	return additiveQuery{NewQuery(mods...)}
 }
 
-// FindSoapAdditive retrieves a single record by ID with an executor.
+// FindAdditive retrieves a single record by ID with an executor.
 // If selectCols is empty Find will return all columns.
-func FindSoapAdditive(ctx context.Context, exec boil.ContextExecutor, iD int, selectCols ...string) (*SoapAdditive, error) {
-	soapAdditiveObj := &SoapAdditive{}
+func FindAdditive(ctx context.Context, exec boil.ContextExecutor, iD int, selectCols ...string) (*Additive, error) {
+	additiveObj := &Additive{}
 
 	sel := "*"
 	if len(selectCols) > 0 {
 		sel = strings.Join(strmangle.IdentQuoteSlice(dialect.LQ, dialect.RQ, selectCols), ",")
 	}
 	query := fmt.Sprintf(
-		"select %s from \"soap_additive\" where \"id\"=$1 and \"deleted_at\" is null", sel,
+		"select %s from \"additive\" where \"id\"=$1 and \"deleted_at\" is null", sel,
 	)
 
 	q := queries.Raw(query, iD)
 
-	err := q.Bind(ctx, exec, soapAdditiveObj)
+	err := q.Bind(ctx, exec, additiveObj)
 	if err != nil {
 		if errors.Cause(err) == sql.ErrNoRows {
 			return nil, sql.ErrNoRows
 		}
-		return nil, errors.Wrap(err, "models: unable to select from soap_additive")
+		return nil, errors.Wrap(err, "models: unable to select from additive")
 	}
 
-	return soapAdditiveObj, nil
+	return additiveObj, nil
 }
 
 // Insert a single record using an executor.
 // See boil.Columns.InsertColumnSet documentation to understand column list inference for inserts.
-func (o *SoapAdditive) Insert(ctx context.Context, exec boil.ContextExecutor, columns boil.Columns) error {
+func (o *Additive) Insert(ctx context.Context, exec boil.ContextExecutor, columns boil.Columns) error {
 	if o == nil {
-		return errors.New("models: no soap_additive provided for insertion")
+		return errors.New("models: no additive provided for insertion")
 	}
 
 	var err error
@@ -842,33 +842,33 @@ func (o *SoapAdditive) Insert(ctx context.Context, exec boil.ContextExecutor, co
 		return err
 	}
 
-	nzDefaults := queries.NonZeroDefaultSet(soapAdditiveColumnsWithDefault, o)
+	nzDefaults := queries.NonZeroDefaultSet(additiveColumnsWithDefault, o)
 
 	key := makeCacheKey(columns, nzDefaults)
-	soapAdditiveInsertCacheMut.RLock()
-	cache, cached := soapAdditiveInsertCache[key]
-	soapAdditiveInsertCacheMut.RUnlock()
+	additiveInsertCacheMut.RLock()
+	cache, cached := additiveInsertCache[key]
+	additiveInsertCacheMut.RUnlock()
 
 	if !cached {
 		wl, returnColumns := columns.InsertColumnSet(
-			soapAdditiveAllColumns,
-			soapAdditiveColumnsWithDefault,
-			soapAdditiveColumnsWithoutDefault,
+			additiveAllColumns,
+			additiveColumnsWithDefault,
+			additiveColumnsWithoutDefault,
 			nzDefaults,
 		)
 
-		cache.valueMapping, err = queries.BindMapping(soapAdditiveType, soapAdditiveMapping, wl)
+		cache.valueMapping, err = queries.BindMapping(additiveType, additiveMapping, wl)
 		if err != nil {
 			return err
 		}
-		cache.retMapping, err = queries.BindMapping(soapAdditiveType, soapAdditiveMapping, returnColumns)
+		cache.retMapping, err = queries.BindMapping(additiveType, additiveMapping, returnColumns)
 		if err != nil {
 			return err
 		}
 		if len(wl) != 0 {
-			cache.query = fmt.Sprintf("INSERT INTO \"soap_additive\" (\"%s\") %%sVALUES (%s)%%s", strings.Join(wl, "\",\""), strmangle.Placeholders(dialect.UseIndexPlaceholders, len(wl), 1, 1))
+			cache.query = fmt.Sprintf("INSERT INTO \"additive\" (\"%s\") %%sVALUES (%s)%%s", strings.Join(wl, "\",\""), strmangle.Placeholders(dialect.UseIndexPlaceholders, len(wl), 1, 1))
 		} else {
-			cache.query = "INSERT INTO \"soap_additive\" %sDEFAULT VALUES%s"
+			cache.query = "INSERT INTO \"additive\" %sDEFAULT VALUES%s"
 		}
 
 		var queryOutput, queryReturning string
@@ -896,22 +896,22 @@ func (o *SoapAdditive) Insert(ctx context.Context, exec boil.ContextExecutor, co
 	}
 
 	if err != nil {
-		return errors.Wrap(err, "models: unable to insert into soap_additive")
+		return errors.Wrap(err, "models: unable to insert into additive")
 	}
 
 	if !cached {
-		soapAdditiveInsertCacheMut.Lock()
-		soapAdditiveInsertCache[key] = cache
-		soapAdditiveInsertCacheMut.Unlock()
+		additiveInsertCacheMut.Lock()
+		additiveInsertCache[key] = cache
+		additiveInsertCacheMut.Unlock()
 	}
 
 	return o.doAfterInsertHooks(ctx, exec)
 }
 
-// Update uses an executor to update the SoapAdditive.
+// Update uses an executor to update the Additive.
 // See boil.Columns.UpdateColumnSet documentation to understand column list inference for updates.
 // Update does not automatically update the record in case of default values. Use .Reload() to refresh the records.
-func (o *SoapAdditive) Update(ctx context.Context, exec boil.ContextExecutor, columns boil.Columns) (int64, error) {
+func (o *Additive) Update(ctx context.Context, exec boil.ContextExecutor, columns boil.Columns) (int64, error) {
 	if !boil.TimestampsAreSkipped(ctx) {
 		currTime := time.Now().In(boil.GetLocation())
 
@@ -923,28 +923,28 @@ func (o *SoapAdditive) Update(ctx context.Context, exec boil.ContextExecutor, co
 		return 0, err
 	}
 	key := makeCacheKey(columns, nil)
-	soapAdditiveUpdateCacheMut.RLock()
-	cache, cached := soapAdditiveUpdateCache[key]
-	soapAdditiveUpdateCacheMut.RUnlock()
+	additiveUpdateCacheMut.RLock()
+	cache, cached := additiveUpdateCache[key]
+	additiveUpdateCacheMut.RUnlock()
 
 	if !cached {
 		wl := columns.UpdateColumnSet(
-			soapAdditiveAllColumns,
-			soapAdditivePrimaryKeyColumns,
+			additiveAllColumns,
+			additivePrimaryKeyColumns,
 		)
 
 		if !columns.IsWhitelist() {
 			wl = strmangle.SetComplement(wl, []string{"created_at"})
 		}
 		if len(wl) == 0 {
-			return 0, errors.New("models: unable to update soap_additive, could not build whitelist")
+			return 0, errors.New("models: unable to update additive, could not build whitelist")
 		}
 
-		cache.query = fmt.Sprintf("UPDATE \"soap_additive\" SET %s WHERE %s",
+		cache.query = fmt.Sprintf("UPDATE \"additive\" SET %s WHERE %s",
 			strmangle.SetParamNames("\"", "\"", 1, wl),
-			strmangle.WhereClause("\"", "\"", len(wl)+1, soapAdditivePrimaryKeyColumns),
+			strmangle.WhereClause("\"", "\"", len(wl)+1, additivePrimaryKeyColumns),
 		)
-		cache.valueMapping, err = queries.BindMapping(soapAdditiveType, soapAdditiveMapping, append(wl, soapAdditivePrimaryKeyColumns...))
+		cache.valueMapping, err = queries.BindMapping(additiveType, additiveMapping, append(wl, additivePrimaryKeyColumns...))
 		if err != nil {
 			return 0, err
 		}
@@ -960,42 +960,42 @@ func (o *SoapAdditive) Update(ctx context.Context, exec boil.ContextExecutor, co
 	var result sql.Result
 	result, err = exec.ExecContext(ctx, cache.query, values...)
 	if err != nil {
-		return 0, errors.Wrap(err, "models: unable to update soap_additive row")
+		return 0, errors.Wrap(err, "models: unable to update additive row")
 	}
 
 	rowsAff, err := result.RowsAffected()
 	if err != nil {
-		return 0, errors.Wrap(err, "models: failed to get rows affected by update for soap_additive")
+		return 0, errors.Wrap(err, "models: failed to get rows affected by update for additive")
 	}
 
 	if !cached {
-		soapAdditiveUpdateCacheMut.Lock()
-		soapAdditiveUpdateCache[key] = cache
-		soapAdditiveUpdateCacheMut.Unlock()
+		additiveUpdateCacheMut.Lock()
+		additiveUpdateCache[key] = cache
+		additiveUpdateCacheMut.Unlock()
 	}
 
 	return rowsAff, o.doAfterUpdateHooks(ctx, exec)
 }
 
 // UpdateAll updates all rows with the specified column values.
-func (q soapAdditiveQuery) UpdateAll(ctx context.Context, exec boil.ContextExecutor, cols M) (int64, error) {
+func (q additiveQuery) UpdateAll(ctx context.Context, exec boil.ContextExecutor, cols M) (int64, error) {
 	queries.SetUpdate(q.Query, cols)
 
 	result, err := q.Query.ExecContext(ctx, exec)
 	if err != nil {
-		return 0, errors.Wrap(err, "models: unable to update all for soap_additive")
+		return 0, errors.Wrap(err, "models: unable to update all for additive")
 	}
 
 	rowsAff, err := result.RowsAffected()
 	if err != nil {
-		return 0, errors.Wrap(err, "models: unable to retrieve rows affected for soap_additive")
+		return 0, errors.Wrap(err, "models: unable to retrieve rows affected for additive")
 	}
 
 	return rowsAff, nil
 }
 
 // UpdateAll updates all rows with the specified column values, using an executor.
-func (o SoapAdditiveSlice) UpdateAll(ctx context.Context, exec boil.ContextExecutor, cols M) (int64, error) {
+func (o AdditiveSlice) UpdateAll(ctx context.Context, exec boil.ContextExecutor, cols M) (int64, error) {
 	ln := int64(len(o))
 	if ln == 0 {
 		return 0, nil
@@ -1017,13 +1017,13 @@ func (o SoapAdditiveSlice) UpdateAll(ctx context.Context, exec boil.ContextExecu
 
 	// Append all of the primary key values for each column
 	for _, obj := range o {
-		pkeyArgs := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(obj)), soapAdditivePrimaryKeyMapping)
+		pkeyArgs := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(obj)), additivePrimaryKeyMapping)
 		args = append(args, pkeyArgs...)
 	}
 
-	sql := fmt.Sprintf("UPDATE \"soap_additive\" SET %s WHERE %s",
+	sql := fmt.Sprintf("UPDATE \"additive\" SET %s WHERE %s",
 		strmangle.SetParamNames("\"", "\"", 1, colNames),
-		strmangle.WhereClauseRepeated(string(dialect.LQ), string(dialect.RQ), len(colNames)+1, soapAdditivePrimaryKeyColumns, len(o)))
+		strmangle.WhereClauseRepeated(string(dialect.LQ), string(dialect.RQ), len(colNames)+1, additivePrimaryKeyColumns, len(o)))
 
 	if boil.IsDebug(ctx) {
 		writer := boil.DebugWriterFrom(ctx)
@@ -1032,21 +1032,21 @@ func (o SoapAdditiveSlice) UpdateAll(ctx context.Context, exec boil.ContextExecu
 	}
 	result, err := exec.ExecContext(ctx, sql, args...)
 	if err != nil {
-		return 0, errors.Wrap(err, "models: unable to update all in soapAdditive slice")
+		return 0, errors.Wrap(err, "models: unable to update all in additive slice")
 	}
 
 	rowsAff, err := result.RowsAffected()
 	if err != nil {
-		return 0, errors.Wrap(err, "models: unable to retrieve rows affected all in update all soapAdditive")
+		return 0, errors.Wrap(err, "models: unable to retrieve rows affected all in update all additive")
 	}
 	return rowsAff, nil
 }
 
 // Upsert attempts an insert using an executor, and does an update or ignore on conflict.
 // See boil.Columns documentation for how to properly use updateColumns and insertColumns.
-func (o *SoapAdditive) Upsert(ctx context.Context, exec boil.ContextExecutor, updateOnConflict bool, conflictColumns []string, updateColumns, insertColumns boil.Columns) error {
+func (o *Additive) Upsert(ctx context.Context, exec boil.ContextExecutor, updateOnConflict bool, conflictColumns []string, updateColumns, insertColumns boil.Columns) error {
 	if o == nil {
-		return errors.New("models: no soap_additive provided for upsert")
+		return errors.New("models: no additive provided for upsert")
 	}
 	if !boil.TimestampsAreSkipped(ctx) {
 		currTime := time.Now().In(boil.GetLocation())
@@ -1061,7 +1061,7 @@ func (o *SoapAdditive) Upsert(ctx context.Context, exec boil.ContextExecutor, up
 		return err
 	}
 
-	nzDefaults := queries.NonZeroDefaultSet(soapAdditiveColumnsWithDefault, o)
+	nzDefaults := queries.NonZeroDefaultSet(additiveColumnsWithDefault, o)
 
 	// Build cache key in-line uglily - mysql vs psql problems
 	buf := strmangle.GetBuffer()
@@ -1091,41 +1091,41 @@ func (o *SoapAdditive) Upsert(ctx context.Context, exec boil.ContextExecutor, up
 	key := buf.String()
 	strmangle.PutBuffer(buf)
 
-	soapAdditiveUpsertCacheMut.RLock()
-	cache, cached := soapAdditiveUpsertCache[key]
-	soapAdditiveUpsertCacheMut.RUnlock()
+	additiveUpsertCacheMut.RLock()
+	cache, cached := additiveUpsertCache[key]
+	additiveUpsertCacheMut.RUnlock()
 
 	var err error
 
 	if !cached {
 		insert, ret := insertColumns.InsertColumnSet(
-			soapAdditiveAllColumns,
-			soapAdditiveColumnsWithDefault,
-			soapAdditiveColumnsWithoutDefault,
+			additiveAllColumns,
+			additiveColumnsWithDefault,
+			additiveColumnsWithoutDefault,
 			nzDefaults,
 		)
 		update := updateColumns.UpdateColumnSet(
-			soapAdditiveAllColumns,
-			soapAdditivePrimaryKeyColumns,
+			additiveAllColumns,
+			additivePrimaryKeyColumns,
 		)
 
 		if updateOnConflict && len(update) == 0 {
-			return errors.New("models: unable to upsert soap_additive, could not build update column list")
+			return errors.New("models: unable to upsert additive, could not build update column list")
 		}
 
 		conflict := conflictColumns
 		if len(conflict) == 0 {
-			conflict = make([]string, len(soapAdditivePrimaryKeyColumns))
-			copy(conflict, soapAdditivePrimaryKeyColumns)
+			conflict = make([]string, len(additivePrimaryKeyColumns))
+			copy(conflict, additivePrimaryKeyColumns)
 		}
-		cache.query = buildUpsertQueryPostgres(dialect, "\"soap_additive\"", updateOnConflict, ret, update, conflict, insert)
+		cache.query = buildUpsertQueryPostgres(dialect, "\"additive\"", updateOnConflict, ret, update, conflict, insert)
 
-		cache.valueMapping, err = queries.BindMapping(soapAdditiveType, soapAdditiveMapping, insert)
+		cache.valueMapping, err = queries.BindMapping(additiveType, additiveMapping, insert)
 		if err != nil {
 			return err
 		}
 		if len(ret) != 0 {
-			cache.retMapping, err = queries.BindMapping(soapAdditiveType, soapAdditiveMapping, ret)
+			cache.retMapping, err = queries.BindMapping(additiveType, additiveMapping, ret)
 			if err != nil {
 				return err
 			}
@@ -1153,23 +1153,23 @@ func (o *SoapAdditive) Upsert(ctx context.Context, exec boil.ContextExecutor, up
 		_, err = exec.ExecContext(ctx, cache.query, vals...)
 	}
 	if err != nil {
-		return errors.Wrap(err, "models: unable to upsert soap_additive")
+		return errors.Wrap(err, "models: unable to upsert additive")
 	}
 
 	if !cached {
-		soapAdditiveUpsertCacheMut.Lock()
-		soapAdditiveUpsertCache[key] = cache
-		soapAdditiveUpsertCacheMut.Unlock()
+		additiveUpsertCacheMut.Lock()
+		additiveUpsertCache[key] = cache
+		additiveUpsertCacheMut.Unlock()
 	}
 
 	return o.doAfterUpsertHooks(ctx, exec)
 }
 
-// Delete deletes a single SoapAdditive record with an executor.
+// Delete deletes a single Additive record with an executor.
 // Delete will match against the primary key column to find the record to delete.
-func (o *SoapAdditive) Delete(ctx context.Context, exec boil.ContextExecutor, hardDelete bool) (int64, error) {
+func (o *Additive) Delete(ctx context.Context, exec boil.ContextExecutor, hardDelete bool) (int64, error) {
 	if o == nil {
-		return 0, errors.New("models: no SoapAdditive provided for delete")
+		return 0, errors.New("models: no Additive provided for delete")
 	}
 
 	if err := o.doBeforeDeleteHooks(ctx, exec); err != nil {
@@ -1181,16 +1181,16 @@ func (o *SoapAdditive) Delete(ctx context.Context, exec boil.ContextExecutor, ha
 		args []interface{}
 	)
 	if hardDelete {
-		args = queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(o)), soapAdditivePrimaryKeyMapping)
-		sql = "DELETE FROM \"soap_additive\" WHERE \"id\"=$1"
+		args = queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(o)), additivePrimaryKeyMapping)
+		sql = "DELETE FROM \"additive\" WHERE \"id\"=$1"
 	} else {
 		currTime := time.Now().In(boil.GetLocation())
 		o.DeletedAt = null.TimeFrom(currTime)
 		wl := []string{"deleted_at"}
-		sql = fmt.Sprintf("UPDATE \"soap_additive\" SET %s WHERE \"id\"=$2",
+		sql = fmt.Sprintf("UPDATE \"additive\" SET %s WHERE \"id\"=$2",
 			strmangle.SetParamNames("\"", "\"", 1, wl),
 		)
-		valueMapping, err := queries.BindMapping(soapAdditiveType, soapAdditiveMapping, append(wl, soapAdditivePrimaryKeyColumns...))
+		valueMapping, err := queries.BindMapping(additiveType, additiveMapping, append(wl, additivePrimaryKeyColumns...))
 		if err != nil {
 			return 0, err
 		}
@@ -1204,12 +1204,12 @@ func (o *SoapAdditive) Delete(ctx context.Context, exec boil.ContextExecutor, ha
 	}
 	result, err := exec.ExecContext(ctx, sql, args...)
 	if err != nil {
-		return 0, errors.Wrap(err, "models: unable to delete from soap_additive")
+		return 0, errors.Wrap(err, "models: unable to delete from additive")
 	}
 
 	rowsAff, err := result.RowsAffected()
 	if err != nil {
-		return 0, errors.Wrap(err, "models: failed to get rows affected by delete for soap_additive")
+		return 0, errors.Wrap(err, "models: failed to get rows affected by delete for additive")
 	}
 
 	if err := o.doAfterDeleteHooks(ctx, exec); err != nil {
@@ -1220,9 +1220,9 @@ func (o *SoapAdditive) Delete(ctx context.Context, exec boil.ContextExecutor, ha
 }
 
 // DeleteAll deletes all matching rows.
-func (q soapAdditiveQuery) DeleteAll(ctx context.Context, exec boil.ContextExecutor, hardDelete bool) (int64, error) {
+func (q additiveQuery) DeleteAll(ctx context.Context, exec boil.ContextExecutor, hardDelete bool) (int64, error) {
 	if q.Query == nil {
-		return 0, errors.New("models: no soapAdditiveQuery provided for delete all")
+		return 0, errors.New("models: no additiveQuery provided for delete all")
 	}
 
 	if hardDelete {
@@ -1234,24 +1234,24 @@ func (q soapAdditiveQuery) DeleteAll(ctx context.Context, exec boil.ContextExecu
 
 	result, err := q.Query.ExecContext(ctx, exec)
 	if err != nil {
-		return 0, errors.Wrap(err, "models: unable to delete all from soap_additive")
+		return 0, errors.Wrap(err, "models: unable to delete all from additive")
 	}
 
 	rowsAff, err := result.RowsAffected()
 	if err != nil {
-		return 0, errors.Wrap(err, "models: failed to get rows affected by deleteall for soap_additive")
+		return 0, errors.Wrap(err, "models: failed to get rows affected by deleteall for additive")
 	}
 
 	return rowsAff, nil
 }
 
 // DeleteAll deletes all rows in the slice, using an executor.
-func (o SoapAdditiveSlice) DeleteAll(ctx context.Context, exec boil.ContextExecutor, hardDelete bool) (int64, error) {
+func (o AdditiveSlice) DeleteAll(ctx context.Context, exec boil.ContextExecutor, hardDelete bool) (int64, error) {
 	if len(o) == 0 {
 		return 0, nil
 	}
 
-	if len(soapAdditiveBeforeDeleteHooks) != 0 {
+	if len(additiveBeforeDeleteHooks) != 0 {
 		for _, obj := range o {
 			if err := obj.doBeforeDeleteHooks(ctx, exec); err != nil {
 				return 0, err
@@ -1265,21 +1265,21 @@ func (o SoapAdditiveSlice) DeleteAll(ctx context.Context, exec boil.ContextExecu
 	)
 	if hardDelete {
 		for _, obj := range o {
-			pkeyArgs := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(obj)), soapAdditivePrimaryKeyMapping)
+			pkeyArgs := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(obj)), additivePrimaryKeyMapping)
 			args = append(args, pkeyArgs...)
 		}
-		sql = "DELETE FROM \"soap_additive\" WHERE " +
-			strmangle.WhereClauseRepeated(string(dialect.LQ), string(dialect.RQ), 1, soapAdditivePrimaryKeyColumns, len(o))
+		sql = "DELETE FROM \"additive\" WHERE " +
+			strmangle.WhereClauseRepeated(string(dialect.LQ), string(dialect.RQ), 1, additivePrimaryKeyColumns, len(o))
 	} else {
 		currTime := time.Now().In(boil.GetLocation())
 		for _, obj := range o {
-			pkeyArgs := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(obj)), soapAdditivePrimaryKeyMapping)
+			pkeyArgs := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(obj)), additivePrimaryKeyMapping)
 			args = append(args, pkeyArgs...)
 			obj.DeletedAt = null.TimeFrom(currTime)
 		}
 		wl := []string{"deleted_at"}
-		sql = fmt.Sprintf("UPDATE \"soap_additive\" SET %s WHERE "+
-			strmangle.WhereClauseRepeated(string(dialect.LQ), string(dialect.RQ), 2, soapAdditivePrimaryKeyColumns, len(o)),
+		sql = fmt.Sprintf("UPDATE \"additive\" SET %s WHERE "+
+			strmangle.WhereClauseRepeated(string(dialect.LQ), string(dialect.RQ), 2, additivePrimaryKeyColumns, len(o)),
 			strmangle.SetParamNames("\"", "\"", 1, wl),
 		)
 		args = append([]interface{}{currTime}, args...)
@@ -1292,15 +1292,15 @@ func (o SoapAdditiveSlice) DeleteAll(ctx context.Context, exec boil.ContextExecu
 	}
 	result, err := exec.ExecContext(ctx, sql, args...)
 	if err != nil {
-		return 0, errors.Wrap(err, "models: unable to delete all from soapAdditive slice")
+		return 0, errors.Wrap(err, "models: unable to delete all from additive slice")
 	}
 
 	rowsAff, err := result.RowsAffected()
 	if err != nil {
-		return 0, errors.Wrap(err, "models: failed to get rows affected by deleteall for soap_additive")
+		return 0, errors.Wrap(err, "models: failed to get rows affected by deleteall for additive")
 	}
 
-	if len(soapAdditiveAfterDeleteHooks) != 0 {
+	if len(additiveAfterDeleteHooks) != 0 {
 		for _, obj := range o {
 			if err := obj.doAfterDeleteHooks(ctx, exec); err != nil {
 				return 0, err
@@ -1313,8 +1313,8 @@ func (o SoapAdditiveSlice) DeleteAll(ctx context.Context, exec boil.ContextExecu
 
 // Reload refetches the object from the database
 // using the primary keys with an executor.
-func (o *SoapAdditive) Reload(ctx context.Context, exec boil.ContextExecutor) error {
-	ret, err := FindSoapAdditive(ctx, exec, o.ID)
+func (o *Additive) Reload(ctx context.Context, exec boil.ContextExecutor) error {
+	ret, err := FindAdditive(ctx, exec, o.ID)
 	if err != nil {
 		return err
 	}
@@ -1325,27 +1325,27 @@ func (o *SoapAdditive) Reload(ctx context.Context, exec boil.ContextExecutor) er
 
 // ReloadAll refetches every row with matching primary key column values
 // and overwrites the original object slice with the newly updated slice.
-func (o *SoapAdditiveSlice) ReloadAll(ctx context.Context, exec boil.ContextExecutor) error {
+func (o *AdditiveSlice) ReloadAll(ctx context.Context, exec boil.ContextExecutor) error {
 	if o == nil || len(*o) == 0 {
 		return nil
 	}
 
-	slice := SoapAdditiveSlice{}
+	slice := AdditiveSlice{}
 	var args []interface{}
 	for _, obj := range *o {
-		pkeyArgs := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(obj)), soapAdditivePrimaryKeyMapping)
+		pkeyArgs := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(obj)), additivePrimaryKeyMapping)
 		args = append(args, pkeyArgs...)
 	}
 
-	sql := "SELECT \"soap_additive\".* FROM \"soap_additive\" WHERE " +
-		strmangle.WhereClauseRepeated(string(dialect.LQ), string(dialect.RQ), 1, soapAdditivePrimaryKeyColumns, len(*o)) +
+	sql := "SELECT \"additive\".* FROM \"additive\" WHERE " +
+		strmangle.WhereClauseRepeated(string(dialect.LQ), string(dialect.RQ), 1, additivePrimaryKeyColumns, len(*o)) +
 		"and \"deleted_at\" is null"
 
 	q := queries.Raw(sql, args...)
 
 	err := q.Bind(ctx, exec, &slice)
 	if err != nil {
-		return errors.Wrap(err, "models: unable to reload all in SoapAdditiveSlice")
+		return errors.Wrap(err, "models: unable to reload all in AdditiveSlice")
 	}
 
 	*o = slice
@@ -1353,10 +1353,10 @@ func (o *SoapAdditiveSlice) ReloadAll(ctx context.Context, exec boil.ContextExec
 	return nil
 }
 
-// SoapAdditiveExists checks if the SoapAdditive row exists.
-func SoapAdditiveExists(ctx context.Context, exec boil.ContextExecutor, iD int) (bool, error) {
+// AdditiveExists checks if the Additive row exists.
+func AdditiveExists(ctx context.Context, exec boil.ContextExecutor, iD int) (bool, error) {
 	var exists bool
-	sql := "select exists(select 1 from \"soap_additive\" where \"id\"=$1 and \"deleted_at\" is null limit 1)"
+	sql := "select exists(select 1 from \"additive\" where \"id\"=$1 and \"deleted_at\" is null limit 1)"
 
 	if boil.IsDebug(ctx) {
 		writer := boil.DebugWriterFrom(ctx)
@@ -1367,7 +1367,7 @@ func SoapAdditiveExists(ctx context.Context, exec boil.ContextExecutor, iD int) 
 
 	err := row.Scan(&exists)
 	if err != nil {
-		return false, errors.Wrap(err, "models: unable to check if soap_additive exists")
+		return false, errors.Wrap(err, "models: unable to check if additive exists")
 	}
 
 	return exists, nil

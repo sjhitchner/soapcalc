@@ -21,24 +21,24 @@ var (
 	_ = queries.Equal
 )
 
-func testSoapSuppliers(t *testing.T) {
+func testSuppliers(t *testing.T) {
 	t.Parallel()
 
-	query := SoapSuppliers()
+	query := Suppliers()
 
 	if query.Query == nil {
 		t.Error("expected a query, got nothing")
 	}
 }
 
-func testSoapSuppliersSoftDelete(t *testing.T) {
+func testSuppliersSoftDelete(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapSupplier{}
-	if err = randomize.Struct(seed, o, soapSupplierDBTypes, true, soapSupplierColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapSupplier struct: %s", err)
+	o := &Supplier{}
+	if err = randomize.Struct(seed, o, supplierDBTypes, true, supplierColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Supplier struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -54,7 +54,7 @@ func testSoapSuppliersSoftDelete(t *testing.T) {
 		t.Error("should only have deleted one row, but affected:", rowsAff)
 	}
 
-	count, err := SoapSuppliers().Count(ctx, tx)
+	count, err := Suppliers().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -64,14 +64,14 @@ func testSoapSuppliersSoftDelete(t *testing.T) {
 	}
 }
 
-func testSoapSuppliersQuerySoftDeleteAll(t *testing.T) {
+func testSuppliersQuerySoftDeleteAll(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapSupplier{}
-	if err = randomize.Struct(seed, o, soapSupplierDBTypes, true, soapSupplierColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapSupplier struct: %s", err)
+	o := &Supplier{}
+	if err = randomize.Struct(seed, o, supplierDBTypes, true, supplierColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Supplier struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -81,13 +81,13 @@ func testSoapSuppliersQuerySoftDeleteAll(t *testing.T) {
 		t.Error(err)
 	}
 
-	if rowsAff, err := SoapSuppliers().DeleteAll(ctx, tx, false); err != nil {
+	if rowsAff, err := Suppliers().DeleteAll(ctx, tx, false); err != nil {
 		t.Error(err)
 	} else if rowsAff != 1 {
 		t.Error("should only have deleted one row, but affected:", rowsAff)
 	}
 
-	count, err := SoapSuppliers().Count(ctx, tx)
+	count, err := Suppliers().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -97,14 +97,14 @@ func testSoapSuppliersQuerySoftDeleteAll(t *testing.T) {
 	}
 }
 
-func testSoapSuppliersSliceSoftDeleteAll(t *testing.T) {
+func testSuppliersSliceSoftDeleteAll(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapSupplier{}
-	if err = randomize.Struct(seed, o, soapSupplierDBTypes, true, soapSupplierColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapSupplier struct: %s", err)
+	o := &Supplier{}
+	if err = randomize.Struct(seed, o, supplierDBTypes, true, supplierColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Supplier struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -114,7 +114,7 @@ func testSoapSuppliersSliceSoftDeleteAll(t *testing.T) {
 		t.Error(err)
 	}
 
-	slice := SoapSupplierSlice{o}
+	slice := SupplierSlice{o}
 
 	if rowsAff, err := slice.DeleteAll(ctx, tx, false); err != nil {
 		t.Error(err)
@@ -122,7 +122,7 @@ func testSoapSuppliersSliceSoftDeleteAll(t *testing.T) {
 		t.Error("should only have deleted one row, but affected:", rowsAff)
 	}
 
-	count, err := SoapSuppliers().Count(ctx, tx)
+	count, err := Suppliers().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -132,14 +132,14 @@ func testSoapSuppliersSliceSoftDeleteAll(t *testing.T) {
 	}
 }
 
-func testSoapSuppliersDelete(t *testing.T) {
+func testSuppliersDelete(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapSupplier{}
-	if err = randomize.Struct(seed, o, soapSupplierDBTypes, true, soapSupplierColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapSupplier struct: %s", err)
+	o := &Supplier{}
+	if err = randomize.Struct(seed, o, supplierDBTypes, true, supplierColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Supplier struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -155,7 +155,7 @@ func testSoapSuppliersDelete(t *testing.T) {
 		t.Error("should only have deleted one row, but affected:", rowsAff)
 	}
 
-	count, err := SoapSuppliers().Count(ctx, tx)
+	count, err := Suppliers().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -165,14 +165,14 @@ func testSoapSuppliersDelete(t *testing.T) {
 	}
 }
 
-func testSoapSuppliersQueryDeleteAll(t *testing.T) {
+func testSuppliersQueryDeleteAll(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapSupplier{}
-	if err = randomize.Struct(seed, o, soapSupplierDBTypes, true, soapSupplierColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapSupplier struct: %s", err)
+	o := &Supplier{}
+	if err = randomize.Struct(seed, o, supplierDBTypes, true, supplierColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Supplier struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -182,13 +182,13 @@ func testSoapSuppliersQueryDeleteAll(t *testing.T) {
 		t.Error(err)
 	}
 
-	if rowsAff, err := SoapSuppliers().DeleteAll(ctx, tx, true); err != nil {
+	if rowsAff, err := Suppliers().DeleteAll(ctx, tx, true); err != nil {
 		t.Error(err)
 	} else if rowsAff != 1 {
 		t.Error("should only have deleted one row, but affected:", rowsAff)
 	}
 
-	count, err := SoapSuppliers().Count(ctx, tx)
+	count, err := Suppliers().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -198,14 +198,14 @@ func testSoapSuppliersQueryDeleteAll(t *testing.T) {
 	}
 }
 
-func testSoapSuppliersSliceDeleteAll(t *testing.T) {
+func testSuppliersSliceDeleteAll(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapSupplier{}
-	if err = randomize.Struct(seed, o, soapSupplierDBTypes, true, soapSupplierColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapSupplier struct: %s", err)
+	o := &Supplier{}
+	if err = randomize.Struct(seed, o, supplierDBTypes, true, supplierColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Supplier struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -215,7 +215,7 @@ func testSoapSuppliersSliceDeleteAll(t *testing.T) {
 		t.Error(err)
 	}
 
-	slice := SoapSupplierSlice{o}
+	slice := SupplierSlice{o}
 
 	if rowsAff, err := slice.DeleteAll(ctx, tx, true); err != nil {
 		t.Error(err)
@@ -223,7 +223,7 @@ func testSoapSuppliersSliceDeleteAll(t *testing.T) {
 		t.Error("should only have deleted one row, but affected:", rowsAff)
 	}
 
-	count, err := SoapSuppliers().Count(ctx, tx)
+	count, err := Suppliers().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -233,14 +233,14 @@ func testSoapSuppliersSliceDeleteAll(t *testing.T) {
 	}
 }
 
-func testSoapSuppliersExists(t *testing.T) {
+func testSuppliersExists(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapSupplier{}
-	if err = randomize.Struct(seed, o, soapSupplierDBTypes, true, soapSupplierColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapSupplier struct: %s", err)
+	o := &Supplier{}
+	if err = randomize.Struct(seed, o, supplierDBTypes, true, supplierColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Supplier struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -250,23 +250,23 @@ func testSoapSuppliersExists(t *testing.T) {
 		t.Error(err)
 	}
 
-	e, err := SoapSupplierExists(ctx, tx, o.ID)
+	e, err := SupplierExists(ctx, tx, o.ID)
 	if err != nil {
-		t.Errorf("Unable to check if SoapSupplier exists: %s", err)
+		t.Errorf("Unable to check if Supplier exists: %s", err)
 	}
 	if !e {
-		t.Errorf("Expected SoapSupplierExists to return true, but got false.")
+		t.Errorf("Expected SupplierExists to return true, but got false.")
 	}
 }
 
-func testSoapSuppliersFind(t *testing.T) {
+func testSuppliersFind(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapSupplier{}
-	if err = randomize.Struct(seed, o, soapSupplierDBTypes, true, soapSupplierColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapSupplier struct: %s", err)
+	o := &Supplier{}
+	if err = randomize.Struct(seed, o, supplierDBTypes, true, supplierColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Supplier struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -276,24 +276,24 @@ func testSoapSuppliersFind(t *testing.T) {
 		t.Error(err)
 	}
 
-	soapSupplierFound, err := FindSoapSupplier(ctx, tx, o.ID)
+	supplierFound, err := FindSupplier(ctx, tx, o.ID)
 	if err != nil {
 		t.Error(err)
 	}
 
-	if soapSupplierFound == nil {
+	if supplierFound == nil {
 		t.Error("want a record, got nil")
 	}
 }
 
-func testSoapSuppliersBind(t *testing.T) {
+func testSuppliersBind(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapSupplier{}
-	if err = randomize.Struct(seed, o, soapSupplierDBTypes, true, soapSupplierColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapSupplier struct: %s", err)
+	o := &Supplier{}
+	if err = randomize.Struct(seed, o, supplierDBTypes, true, supplierColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Supplier struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -303,19 +303,19 @@ func testSoapSuppliersBind(t *testing.T) {
 		t.Error(err)
 	}
 
-	if err = SoapSuppliers().Bind(ctx, tx, o); err != nil {
+	if err = Suppliers().Bind(ctx, tx, o); err != nil {
 		t.Error(err)
 	}
 }
 
-func testSoapSuppliersOne(t *testing.T) {
+func testSuppliersOne(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapSupplier{}
-	if err = randomize.Struct(seed, o, soapSupplierDBTypes, true, soapSupplierColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapSupplier struct: %s", err)
+	o := &Supplier{}
+	if err = randomize.Struct(seed, o, supplierDBTypes, true, supplierColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Supplier struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -325,38 +325,38 @@ func testSoapSuppliersOne(t *testing.T) {
 		t.Error(err)
 	}
 
-	if x, err := SoapSuppliers().One(ctx, tx); err != nil {
+	if x, err := Suppliers().One(ctx, tx); err != nil {
 		t.Error(err)
 	} else if x == nil {
 		t.Error("expected to get a non nil record")
 	}
 }
 
-func testSoapSuppliersAll(t *testing.T) {
+func testSuppliersAll(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	soapSupplierOne := &SoapSupplier{}
-	soapSupplierTwo := &SoapSupplier{}
-	if err = randomize.Struct(seed, soapSupplierOne, soapSupplierDBTypes, false, soapSupplierColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapSupplier struct: %s", err)
+	supplierOne := &Supplier{}
+	supplierTwo := &Supplier{}
+	if err = randomize.Struct(seed, supplierOne, supplierDBTypes, false, supplierColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Supplier struct: %s", err)
 	}
-	if err = randomize.Struct(seed, soapSupplierTwo, soapSupplierDBTypes, false, soapSupplierColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapSupplier struct: %s", err)
+	if err = randomize.Struct(seed, supplierTwo, supplierDBTypes, false, supplierColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Supplier struct: %s", err)
 	}
 
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
-	if err = soapSupplierOne.Insert(ctx, tx, boil.Infer()); err != nil {
+	if err = supplierOne.Insert(ctx, tx, boil.Infer()); err != nil {
 		t.Error(err)
 	}
-	if err = soapSupplierTwo.Insert(ctx, tx, boil.Infer()); err != nil {
+	if err = supplierTwo.Insert(ctx, tx, boil.Infer()); err != nil {
 		t.Error(err)
 	}
 
-	slice, err := SoapSuppliers().All(ctx, tx)
+	slice, err := Suppliers().All(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -366,31 +366,31 @@ func testSoapSuppliersAll(t *testing.T) {
 	}
 }
 
-func testSoapSuppliersCount(t *testing.T) {
+func testSuppliersCount(t *testing.T) {
 	t.Parallel()
 
 	var err error
 	seed := randomize.NewSeed()
-	soapSupplierOne := &SoapSupplier{}
-	soapSupplierTwo := &SoapSupplier{}
-	if err = randomize.Struct(seed, soapSupplierOne, soapSupplierDBTypes, false, soapSupplierColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapSupplier struct: %s", err)
+	supplierOne := &Supplier{}
+	supplierTwo := &Supplier{}
+	if err = randomize.Struct(seed, supplierOne, supplierDBTypes, false, supplierColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Supplier struct: %s", err)
 	}
-	if err = randomize.Struct(seed, soapSupplierTwo, soapSupplierDBTypes, false, soapSupplierColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapSupplier struct: %s", err)
+	if err = randomize.Struct(seed, supplierTwo, supplierDBTypes, false, supplierColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Supplier struct: %s", err)
 	}
 
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
-	if err = soapSupplierOne.Insert(ctx, tx, boil.Infer()); err != nil {
+	if err = supplierOne.Insert(ctx, tx, boil.Infer()); err != nil {
 		t.Error(err)
 	}
-	if err = soapSupplierTwo.Insert(ctx, tx, boil.Infer()); err != nil {
+	if err = supplierTwo.Insert(ctx, tx, boil.Infer()); err != nil {
 		t.Error(err)
 	}
 
-	count, err := SoapSuppliers().Count(ctx, tx)
+	count, err := Suppliers().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -400,155 +400,155 @@ func testSoapSuppliersCount(t *testing.T) {
 	}
 }
 
-func soapSupplierBeforeInsertHook(ctx context.Context, e boil.ContextExecutor, o *SoapSupplier) error {
-	*o = SoapSupplier{}
+func supplierBeforeInsertHook(ctx context.Context, e boil.ContextExecutor, o *Supplier) error {
+	*o = Supplier{}
 	return nil
 }
 
-func soapSupplierAfterInsertHook(ctx context.Context, e boil.ContextExecutor, o *SoapSupplier) error {
-	*o = SoapSupplier{}
+func supplierAfterInsertHook(ctx context.Context, e boil.ContextExecutor, o *Supplier) error {
+	*o = Supplier{}
 	return nil
 }
 
-func soapSupplierAfterSelectHook(ctx context.Context, e boil.ContextExecutor, o *SoapSupplier) error {
-	*o = SoapSupplier{}
+func supplierAfterSelectHook(ctx context.Context, e boil.ContextExecutor, o *Supplier) error {
+	*o = Supplier{}
 	return nil
 }
 
-func soapSupplierBeforeUpdateHook(ctx context.Context, e boil.ContextExecutor, o *SoapSupplier) error {
-	*o = SoapSupplier{}
+func supplierBeforeUpdateHook(ctx context.Context, e boil.ContextExecutor, o *Supplier) error {
+	*o = Supplier{}
 	return nil
 }
 
-func soapSupplierAfterUpdateHook(ctx context.Context, e boil.ContextExecutor, o *SoapSupplier) error {
-	*o = SoapSupplier{}
+func supplierAfterUpdateHook(ctx context.Context, e boil.ContextExecutor, o *Supplier) error {
+	*o = Supplier{}
 	return nil
 }
 
-func soapSupplierBeforeDeleteHook(ctx context.Context, e boil.ContextExecutor, o *SoapSupplier) error {
-	*o = SoapSupplier{}
+func supplierBeforeDeleteHook(ctx context.Context, e boil.ContextExecutor, o *Supplier) error {
+	*o = Supplier{}
 	return nil
 }
 
-func soapSupplierAfterDeleteHook(ctx context.Context, e boil.ContextExecutor, o *SoapSupplier) error {
-	*o = SoapSupplier{}
+func supplierAfterDeleteHook(ctx context.Context, e boil.ContextExecutor, o *Supplier) error {
+	*o = Supplier{}
 	return nil
 }
 
-func soapSupplierBeforeUpsertHook(ctx context.Context, e boil.ContextExecutor, o *SoapSupplier) error {
-	*o = SoapSupplier{}
+func supplierBeforeUpsertHook(ctx context.Context, e boil.ContextExecutor, o *Supplier) error {
+	*o = Supplier{}
 	return nil
 }
 
-func soapSupplierAfterUpsertHook(ctx context.Context, e boil.ContextExecutor, o *SoapSupplier) error {
-	*o = SoapSupplier{}
+func supplierAfterUpsertHook(ctx context.Context, e boil.ContextExecutor, o *Supplier) error {
+	*o = Supplier{}
 	return nil
 }
 
-func testSoapSuppliersHooks(t *testing.T) {
+func testSuppliersHooks(t *testing.T) {
 	t.Parallel()
 
 	var err error
 
 	ctx := context.Background()
-	empty := &SoapSupplier{}
-	o := &SoapSupplier{}
+	empty := &Supplier{}
+	o := &Supplier{}
 
 	seed := randomize.NewSeed()
-	if err = randomize.Struct(seed, o, soapSupplierDBTypes, false); err != nil {
-		t.Errorf("Unable to randomize SoapSupplier object: %s", err)
+	if err = randomize.Struct(seed, o, supplierDBTypes, false); err != nil {
+		t.Errorf("Unable to randomize Supplier object: %s", err)
 	}
 
-	AddSoapSupplierHook(boil.BeforeInsertHook, soapSupplierBeforeInsertHook)
+	AddSupplierHook(boil.BeforeInsertHook, supplierBeforeInsertHook)
 	if err = o.doBeforeInsertHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doBeforeInsertHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected BeforeInsertHook function to empty object, but got: %#v", o)
 	}
-	soapSupplierBeforeInsertHooks = []SoapSupplierHook{}
+	supplierBeforeInsertHooks = []SupplierHook{}
 
-	AddSoapSupplierHook(boil.AfterInsertHook, soapSupplierAfterInsertHook)
+	AddSupplierHook(boil.AfterInsertHook, supplierAfterInsertHook)
 	if err = o.doAfterInsertHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doAfterInsertHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected AfterInsertHook function to empty object, but got: %#v", o)
 	}
-	soapSupplierAfterInsertHooks = []SoapSupplierHook{}
+	supplierAfterInsertHooks = []SupplierHook{}
 
-	AddSoapSupplierHook(boil.AfterSelectHook, soapSupplierAfterSelectHook)
+	AddSupplierHook(boil.AfterSelectHook, supplierAfterSelectHook)
 	if err = o.doAfterSelectHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doAfterSelectHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected AfterSelectHook function to empty object, but got: %#v", o)
 	}
-	soapSupplierAfterSelectHooks = []SoapSupplierHook{}
+	supplierAfterSelectHooks = []SupplierHook{}
 
-	AddSoapSupplierHook(boil.BeforeUpdateHook, soapSupplierBeforeUpdateHook)
+	AddSupplierHook(boil.BeforeUpdateHook, supplierBeforeUpdateHook)
 	if err = o.doBeforeUpdateHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doBeforeUpdateHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected BeforeUpdateHook function to empty object, but got: %#v", o)
 	}
-	soapSupplierBeforeUpdateHooks = []SoapSupplierHook{}
+	supplierBeforeUpdateHooks = []SupplierHook{}
 
-	AddSoapSupplierHook(boil.AfterUpdateHook, soapSupplierAfterUpdateHook)
+	AddSupplierHook(boil.AfterUpdateHook, supplierAfterUpdateHook)
 	if err = o.doAfterUpdateHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doAfterUpdateHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected AfterUpdateHook function to empty object, but got: %#v", o)
 	}
-	soapSupplierAfterUpdateHooks = []SoapSupplierHook{}
+	supplierAfterUpdateHooks = []SupplierHook{}
 
-	AddSoapSupplierHook(boil.BeforeDeleteHook, soapSupplierBeforeDeleteHook)
+	AddSupplierHook(boil.BeforeDeleteHook, supplierBeforeDeleteHook)
 	if err = o.doBeforeDeleteHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doBeforeDeleteHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected BeforeDeleteHook function to empty object, but got: %#v", o)
 	}
-	soapSupplierBeforeDeleteHooks = []SoapSupplierHook{}
+	supplierBeforeDeleteHooks = []SupplierHook{}
 
-	AddSoapSupplierHook(boil.AfterDeleteHook, soapSupplierAfterDeleteHook)
+	AddSupplierHook(boil.AfterDeleteHook, supplierAfterDeleteHook)
 	if err = o.doAfterDeleteHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doAfterDeleteHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected AfterDeleteHook function to empty object, but got: %#v", o)
 	}
-	soapSupplierAfterDeleteHooks = []SoapSupplierHook{}
+	supplierAfterDeleteHooks = []SupplierHook{}
 
-	AddSoapSupplierHook(boil.BeforeUpsertHook, soapSupplierBeforeUpsertHook)
+	AddSupplierHook(boil.BeforeUpsertHook, supplierBeforeUpsertHook)
 	if err = o.doBeforeUpsertHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doBeforeUpsertHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected BeforeUpsertHook function to empty object, but got: %#v", o)
 	}
-	soapSupplierBeforeUpsertHooks = []SoapSupplierHook{}
+	supplierBeforeUpsertHooks = []SupplierHook{}
 
-	AddSoapSupplierHook(boil.AfterUpsertHook, soapSupplierAfterUpsertHook)
+	AddSupplierHook(boil.AfterUpsertHook, supplierAfterUpsertHook)
 	if err = o.doAfterUpsertHooks(ctx, nil); err != nil {
 		t.Errorf("Unable to execute doAfterUpsertHooks: %s", err)
 	}
 	if !reflect.DeepEqual(o, empty) {
 		t.Errorf("Expected AfterUpsertHook function to empty object, but got: %#v", o)
 	}
-	soapSupplierAfterUpsertHooks = []SoapSupplierHook{}
+	supplierAfterUpsertHooks = []SupplierHook{}
 }
 
-func testSoapSuppliersInsert(t *testing.T) {
+func testSuppliersInsert(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapSupplier{}
-	if err = randomize.Struct(seed, o, soapSupplierDBTypes, true, soapSupplierColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapSupplier struct: %s", err)
+	o := &Supplier{}
+	if err = randomize.Struct(seed, o, supplierDBTypes, true, supplierColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Supplier struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -558,7 +558,7 @@ func testSoapSuppliersInsert(t *testing.T) {
 		t.Error(err)
 	}
 
-	count, err := SoapSuppliers().Count(ctx, tx)
+	count, err := Suppliers().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -568,24 +568,24 @@ func testSoapSuppliersInsert(t *testing.T) {
 	}
 }
 
-func testSoapSuppliersInsertWhitelist(t *testing.T) {
+func testSuppliersInsertWhitelist(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapSupplier{}
-	if err = randomize.Struct(seed, o, soapSupplierDBTypes, true); err != nil {
-		t.Errorf("Unable to randomize SoapSupplier struct: %s", err)
+	o := &Supplier{}
+	if err = randomize.Struct(seed, o, supplierDBTypes, true); err != nil {
+		t.Errorf("Unable to randomize Supplier struct: %s", err)
 	}
 
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
-	if err = o.Insert(ctx, tx, boil.Whitelist(soapSupplierColumnsWithoutDefault...)); err != nil {
+	if err = o.Insert(ctx, tx, boil.Whitelist(supplierColumnsWithoutDefault...)); err != nil {
 		t.Error(err)
 	}
 
-	count, err := SoapSuppliers().Count(ctx, tx)
+	count, err := Suppliers().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -595,28 +595,28 @@ func testSoapSuppliersInsertWhitelist(t *testing.T) {
 	}
 }
 
-func testSoapSupplierToManySupplierSoapAdditiveinventories(t *testing.T) {
+func testSupplierToManyAdditiveInventories(t *testing.T) {
 	var err error
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
 
-	var a SoapSupplier
-	var b, c SoapAdditiveinventory
+	var a Supplier
+	var b, c AdditiveInventory
 
 	seed := randomize.NewSeed()
-	if err = randomize.Struct(seed, &a, soapSupplierDBTypes, true, soapSupplierColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapSupplier struct: %s", err)
+	if err = randomize.Struct(seed, &a, supplierDBTypes, true, supplierColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Supplier struct: %s", err)
 	}
 
 	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
 		t.Fatal(err)
 	}
 
-	if err = randomize.Struct(seed, &b, soapAdditiveinventoryDBTypes, false, soapAdditiveinventoryColumnsWithDefault...); err != nil {
+	if err = randomize.Struct(seed, &b, additiveInventoryDBTypes, false, additiveInventoryColumnsWithDefault...); err != nil {
 		t.Fatal(err)
 	}
-	if err = randomize.Struct(seed, &c, soapAdditiveinventoryDBTypes, false, soapAdditiveinventoryColumnsWithDefault...); err != nil {
+	if err = randomize.Struct(seed, &c, additiveInventoryDBTypes, false, additiveInventoryColumnsWithDefault...); err != nil {
 		t.Fatal(err)
 	}
 
@@ -630,7 +630,7 @@ func testSoapSupplierToManySupplierSoapAdditiveinventories(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	check, err := a.SupplierSoapAdditiveinventories().All(ctx, tx)
+	check, err := a.AdditiveInventories().All(ctx, tx)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -652,19 +652,19 @@ func testSoapSupplierToManySupplierSoapAdditiveinventories(t *testing.T) {
 		t.Error("expected to find c")
 	}
 
-	slice := SoapSupplierSlice{&a}
-	if err = a.L.LoadSupplierSoapAdditiveinventories(ctx, tx, false, (*[]*SoapSupplier)(&slice), nil); err != nil {
+	slice := SupplierSlice{&a}
+	if err = a.L.LoadAdditiveInventories(ctx, tx, false, (*[]*Supplier)(&slice), nil); err != nil {
 		t.Fatal(err)
 	}
-	if got := len(a.R.SupplierSoapAdditiveinventories); got != 2 {
+	if got := len(a.R.AdditiveInventories); got != 2 {
 		t.Error("number of eager loaded records wrong, got:", got)
 	}
 
-	a.R.SupplierSoapAdditiveinventories = nil
-	if err = a.L.LoadSupplierSoapAdditiveinventories(ctx, tx, true, &a, nil); err != nil {
+	a.R.AdditiveInventories = nil
+	if err = a.L.LoadAdditiveInventories(ctx, tx, true, &a, nil); err != nil {
 		t.Fatal(err)
 	}
-	if got := len(a.R.SupplierSoapAdditiveinventories); got != 2 {
+	if got := len(a.R.AdditiveInventories); got != 2 {
 		t.Error("number of eager loaded records wrong, got:", got)
 	}
 
@@ -673,28 +673,28 @@ func testSoapSupplierToManySupplierSoapAdditiveinventories(t *testing.T) {
 	}
 }
 
-func testSoapSupplierToManySupplierSoapFragranceinventories(t *testing.T) {
+func testSupplierToManyFragranceInventories(t *testing.T) {
 	var err error
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
 
-	var a SoapSupplier
-	var b, c SoapFragranceinventory
+	var a Supplier
+	var b, c FragranceInventory
 
 	seed := randomize.NewSeed()
-	if err = randomize.Struct(seed, &a, soapSupplierDBTypes, true, soapSupplierColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapSupplier struct: %s", err)
+	if err = randomize.Struct(seed, &a, supplierDBTypes, true, supplierColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Supplier struct: %s", err)
 	}
 
 	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
 		t.Fatal(err)
 	}
 
-	if err = randomize.Struct(seed, &b, soapFragranceinventoryDBTypes, false, soapFragranceinventoryColumnsWithDefault...); err != nil {
+	if err = randomize.Struct(seed, &b, fragranceInventoryDBTypes, false, fragranceInventoryColumnsWithDefault...); err != nil {
 		t.Fatal(err)
 	}
-	if err = randomize.Struct(seed, &c, soapFragranceinventoryDBTypes, false, soapFragranceinventoryColumnsWithDefault...); err != nil {
+	if err = randomize.Struct(seed, &c, fragranceInventoryDBTypes, false, fragranceInventoryColumnsWithDefault...); err != nil {
 		t.Fatal(err)
 	}
 
@@ -708,7 +708,7 @@ func testSoapSupplierToManySupplierSoapFragranceinventories(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	check, err := a.SupplierSoapFragranceinventories().All(ctx, tx)
+	check, err := a.FragranceInventories().All(ctx, tx)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -730,19 +730,19 @@ func testSoapSupplierToManySupplierSoapFragranceinventories(t *testing.T) {
 		t.Error("expected to find c")
 	}
 
-	slice := SoapSupplierSlice{&a}
-	if err = a.L.LoadSupplierSoapFragranceinventories(ctx, tx, false, (*[]*SoapSupplier)(&slice), nil); err != nil {
+	slice := SupplierSlice{&a}
+	if err = a.L.LoadFragranceInventories(ctx, tx, false, (*[]*Supplier)(&slice), nil); err != nil {
 		t.Fatal(err)
 	}
-	if got := len(a.R.SupplierSoapFragranceinventories); got != 2 {
+	if got := len(a.R.FragranceInventories); got != 2 {
 		t.Error("number of eager loaded records wrong, got:", got)
 	}
 
-	a.R.SupplierSoapFragranceinventories = nil
-	if err = a.L.LoadSupplierSoapFragranceinventories(ctx, tx, true, &a, nil); err != nil {
+	a.R.FragranceInventories = nil
+	if err = a.L.LoadFragranceInventories(ctx, tx, true, &a, nil); err != nil {
 		t.Fatal(err)
 	}
-	if got := len(a.R.SupplierSoapFragranceinventories); got != 2 {
+	if got := len(a.R.FragranceInventories); got != 2 {
 		t.Error("number of eager loaded records wrong, got:", got)
 	}
 
@@ -751,28 +751,28 @@ func testSoapSupplierToManySupplierSoapFragranceinventories(t *testing.T) {
 	}
 }
 
-func testSoapSupplierToManySupplierSoapLipidinventories(t *testing.T) {
+func testSupplierToManyLipidInventories(t *testing.T) {
 	var err error
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
 
-	var a SoapSupplier
-	var b, c SoapLipidinventory
+	var a Supplier
+	var b, c LipidInventory
 
 	seed := randomize.NewSeed()
-	if err = randomize.Struct(seed, &a, soapSupplierDBTypes, true, soapSupplierColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapSupplier struct: %s", err)
+	if err = randomize.Struct(seed, &a, supplierDBTypes, true, supplierColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Supplier struct: %s", err)
 	}
 
 	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
 		t.Fatal(err)
 	}
 
-	if err = randomize.Struct(seed, &b, soapLipidinventoryDBTypes, false, soapLipidinventoryColumnsWithDefault...); err != nil {
+	if err = randomize.Struct(seed, &b, lipidInventoryDBTypes, false, lipidInventoryColumnsWithDefault...); err != nil {
 		t.Fatal(err)
 	}
-	if err = randomize.Struct(seed, &c, soapLipidinventoryDBTypes, false, soapLipidinventoryColumnsWithDefault...); err != nil {
+	if err = randomize.Struct(seed, &c, lipidInventoryDBTypes, false, lipidInventoryColumnsWithDefault...); err != nil {
 		t.Fatal(err)
 	}
 
@@ -786,7 +786,7 @@ func testSoapSupplierToManySupplierSoapLipidinventories(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	check, err := a.SupplierSoapLipidinventories().All(ctx, tx)
+	check, err := a.LipidInventories().All(ctx, tx)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -808,19 +808,19 @@ func testSoapSupplierToManySupplierSoapLipidinventories(t *testing.T) {
 		t.Error("expected to find c")
 	}
 
-	slice := SoapSupplierSlice{&a}
-	if err = a.L.LoadSupplierSoapLipidinventories(ctx, tx, false, (*[]*SoapSupplier)(&slice), nil); err != nil {
+	slice := SupplierSlice{&a}
+	if err = a.L.LoadLipidInventories(ctx, tx, false, (*[]*Supplier)(&slice), nil); err != nil {
 		t.Fatal(err)
 	}
-	if got := len(a.R.SupplierSoapLipidinventories); got != 2 {
+	if got := len(a.R.LipidInventories); got != 2 {
 		t.Error("number of eager loaded records wrong, got:", got)
 	}
 
-	a.R.SupplierSoapLipidinventories = nil
-	if err = a.L.LoadSupplierSoapLipidinventories(ctx, tx, true, &a, nil); err != nil {
+	a.R.LipidInventories = nil
+	if err = a.L.LoadLipidInventories(ctx, tx, true, &a, nil); err != nil {
 		t.Fatal(err)
 	}
-	if got := len(a.R.SupplierSoapLipidinventories); got != 2 {
+	if got := len(a.R.LipidInventories); got != 2 {
 		t.Error("number of eager loaded records wrong, got:", got)
 	}
 
@@ -829,28 +829,28 @@ func testSoapSupplierToManySupplierSoapLipidinventories(t *testing.T) {
 	}
 }
 
-func testSoapSupplierToManySupplierSoapLyeinventories(t *testing.T) {
+func testSupplierToManyLyeInventories(t *testing.T) {
 	var err error
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
 
-	var a SoapSupplier
-	var b, c SoapLyeinventory
+	var a Supplier
+	var b, c LyeInventory
 
 	seed := randomize.NewSeed()
-	if err = randomize.Struct(seed, &a, soapSupplierDBTypes, true, soapSupplierColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapSupplier struct: %s", err)
+	if err = randomize.Struct(seed, &a, supplierDBTypes, true, supplierColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Supplier struct: %s", err)
 	}
 
 	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
 		t.Fatal(err)
 	}
 
-	if err = randomize.Struct(seed, &b, soapLyeinventoryDBTypes, false, soapLyeinventoryColumnsWithDefault...); err != nil {
+	if err = randomize.Struct(seed, &b, lyeInventoryDBTypes, false, lyeInventoryColumnsWithDefault...); err != nil {
 		t.Fatal(err)
 	}
-	if err = randomize.Struct(seed, &c, soapLyeinventoryDBTypes, false, soapLyeinventoryColumnsWithDefault...); err != nil {
+	if err = randomize.Struct(seed, &c, lyeInventoryDBTypes, false, lyeInventoryColumnsWithDefault...); err != nil {
 		t.Fatal(err)
 	}
 
@@ -864,7 +864,7 @@ func testSoapSupplierToManySupplierSoapLyeinventories(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	check, err := a.SupplierSoapLyeinventories().All(ctx, tx)
+	check, err := a.LyeInventories().All(ctx, tx)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -886,19 +886,19 @@ func testSoapSupplierToManySupplierSoapLyeinventories(t *testing.T) {
 		t.Error("expected to find c")
 	}
 
-	slice := SoapSupplierSlice{&a}
-	if err = a.L.LoadSupplierSoapLyeinventories(ctx, tx, false, (*[]*SoapSupplier)(&slice), nil); err != nil {
+	slice := SupplierSlice{&a}
+	if err = a.L.LoadLyeInventories(ctx, tx, false, (*[]*Supplier)(&slice), nil); err != nil {
 		t.Fatal(err)
 	}
-	if got := len(a.R.SupplierSoapLyeinventories); got != 2 {
+	if got := len(a.R.LyeInventories); got != 2 {
 		t.Error("number of eager loaded records wrong, got:", got)
 	}
 
-	a.R.SupplierSoapLyeinventories = nil
-	if err = a.L.LoadSupplierSoapLyeinventories(ctx, tx, true, &a, nil); err != nil {
+	a.R.LyeInventories = nil
+	if err = a.L.LoadLyeInventories(ctx, tx, true, &a, nil); err != nil {
 		t.Fatal(err)
 	}
-	if got := len(a.R.SupplierSoapLyeinventories); got != 2 {
+	if got := len(a.R.LyeInventories); got != 2 {
 		t.Error("number of eager loaded records wrong, got:", got)
 	}
 
@@ -907,23 +907,23 @@ func testSoapSupplierToManySupplierSoapLyeinventories(t *testing.T) {
 	}
 }
 
-func testSoapSupplierToManyAddOpSupplierSoapAdditiveinventories(t *testing.T) {
+func testSupplierToManyAddOpAdditiveInventories(t *testing.T) {
 	var err error
 
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
 
-	var a SoapSupplier
-	var b, c, d, e SoapAdditiveinventory
+	var a Supplier
+	var b, c, d, e AdditiveInventory
 
 	seed := randomize.NewSeed()
-	if err = randomize.Struct(seed, &a, soapSupplierDBTypes, false, strmangle.SetComplement(soapSupplierPrimaryKeyColumns, soapSupplierColumnsWithoutDefault)...); err != nil {
+	if err = randomize.Struct(seed, &a, supplierDBTypes, false, strmangle.SetComplement(supplierPrimaryKeyColumns, supplierColumnsWithoutDefault)...); err != nil {
 		t.Fatal(err)
 	}
-	foreigners := []*SoapAdditiveinventory{&b, &c, &d, &e}
+	foreigners := []*AdditiveInventory{&b, &c, &d, &e}
 	for _, x := range foreigners {
-		if err = randomize.Struct(seed, x, soapAdditiveinventoryDBTypes, false, strmangle.SetComplement(soapAdditiveinventoryPrimaryKeyColumns, soapAdditiveinventoryColumnsWithoutDefault)...); err != nil {
+		if err = randomize.Struct(seed, x, additiveInventoryDBTypes, false, strmangle.SetComplement(additiveInventoryPrimaryKeyColumns, additiveInventoryColumnsWithoutDefault)...); err != nil {
 			t.Fatal(err)
 		}
 	}
@@ -938,13 +938,13 @@ func testSoapSupplierToManyAddOpSupplierSoapAdditiveinventories(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	foreignersSplitByInsertion := [][]*SoapAdditiveinventory{
+	foreignersSplitByInsertion := [][]*AdditiveInventory{
 		{&b, &c},
 		{&d, &e},
 	}
 
 	for i, x := range foreignersSplitByInsertion {
-		err = a.AddSupplierSoapAdditiveinventories(ctx, tx, i != 0, x...)
+		err = a.AddAdditiveInventories(ctx, tx, i != 0, x...)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -966,14 +966,14 @@ func testSoapSupplierToManyAddOpSupplierSoapAdditiveinventories(t *testing.T) {
 			t.Error("relationship was not added properly to the foreign slice")
 		}
 
-		if a.R.SupplierSoapAdditiveinventories[i*2] != first {
+		if a.R.AdditiveInventories[i*2] != first {
 			t.Error("relationship struct slice not set to correct value")
 		}
-		if a.R.SupplierSoapAdditiveinventories[i*2+1] != second {
+		if a.R.AdditiveInventories[i*2+1] != second {
 			t.Error("relationship struct slice not set to correct value")
 		}
 
-		count, err := a.SupplierSoapAdditiveinventories().Count(ctx, tx)
+		count, err := a.AdditiveInventories().Count(ctx, tx)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -982,23 +982,23 @@ func testSoapSupplierToManyAddOpSupplierSoapAdditiveinventories(t *testing.T) {
 		}
 	}
 }
-func testSoapSupplierToManyAddOpSupplierSoapFragranceinventories(t *testing.T) {
+func testSupplierToManyAddOpFragranceInventories(t *testing.T) {
 	var err error
 
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
 
-	var a SoapSupplier
-	var b, c, d, e SoapFragranceinventory
+	var a Supplier
+	var b, c, d, e FragranceInventory
 
 	seed := randomize.NewSeed()
-	if err = randomize.Struct(seed, &a, soapSupplierDBTypes, false, strmangle.SetComplement(soapSupplierPrimaryKeyColumns, soapSupplierColumnsWithoutDefault)...); err != nil {
+	if err = randomize.Struct(seed, &a, supplierDBTypes, false, strmangle.SetComplement(supplierPrimaryKeyColumns, supplierColumnsWithoutDefault)...); err != nil {
 		t.Fatal(err)
 	}
-	foreigners := []*SoapFragranceinventory{&b, &c, &d, &e}
+	foreigners := []*FragranceInventory{&b, &c, &d, &e}
 	for _, x := range foreigners {
-		if err = randomize.Struct(seed, x, soapFragranceinventoryDBTypes, false, strmangle.SetComplement(soapFragranceinventoryPrimaryKeyColumns, soapFragranceinventoryColumnsWithoutDefault)...); err != nil {
+		if err = randomize.Struct(seed, x, fragranceInventoryDBTypes, false, strmangle.SetComplement(fragranceInventoryPrimaryKeyColumns, fragranceInventoryColumnsWithoutDefault)...); err != nil {
 			t.Fatal(err)
 		}
 	}
@@ -1013,13 +1013,13 @@ func testSoapSupplierToManyAddOpSupplierSoapFragranceinventories(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	foreignersSplitByInsertion := [][]*SoapFragranceinventory{
+	foreignersSplitByInsertion := [][]*FragranceInventory{
 		{&b, &c},
 		{&d, &e},
 	}
 
 	for i, x := range foreignersSplitByInsertion {
-		err = a.AddSupplierSoapFragranceinventories(ctx, tx, i != 0, x...)
+		err = a.AddFragranceInventories(ctx, tx, i != 0, x...)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -1041,14 +1041,14 @@ func testSoapSupplierToManyAddOpSupplierSoapFragranceinventories(t *testing.T) {
 			t.Error("relationship was not added properly to the foreign slice")
 		}
 
-		if a.R.SupplierSoapFragranceinventories[i*2] != first {
+		if a.R.FragranceInventories[i*2] != first {
 			t.Error("relationship struct slice not set to correct value")
 		}
-		if a.R.SupplierSoapFragranceinventories[i*2+1] != second {
+		if a.R.FragranceInventories[i*2+1] != second {
 			t.Error("relationship struct slice not set to correct value")
 		}
 
-		count, err := a.SupplierSoapFragranceinventories().Count(ctx, tx)
+		count, err := a.FragranceInventories().Count(ctx, tx)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -1057,23 +1057,23 @@ func testSoapSupplierToManyAddOpSupplierSoapFragranceinventories(t *testing.T) {
 		}
 	}
 }
-func testSoapSupplierToManyAddOpSupplierSoapLipidinventories(t *testing.T) {
+func testSupplierToManyAddOpLipidInventories(t *testing.T) {
 	var err error
 
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
 
-	var a SoapSupplier
-	var b, c, d, e SoapLipidinventory
+	var a Supplier
+	var b, c, d, e LipidInventory
 
 	seed := randomize.NewSeed()
-	if err = randomize.Struct(seed, &a, soapSupplierDBTypes, false, strmangle.SetComplement(soapSupplierPrimaryKeyColumns, soapSupplierColumnsWithoutDefault)...); err != nil {
+	if err = randomize.Struct(seed, &a, supplierDBTypes, false, strmangle.SetComplement(supplierPrimaryKeyColumns, supplierColumnsWithoutDefault)...); err != nil {
 		t.Fatal(err)
 	}
-	foreigners := []*SoapLipidinventory{&b, &c, &d, &e}
+	foreigners := []*LipidInventory{&b, &c, &d, &e}
 	for _, x := range foreigners {
-		if err = randomize.Struct(seed, x, soapLipidinventoryDBTypes, false, strmangle.SetComplement(soapLipidinventoryPrimaryKeyColumns, soapLipidinventoryColumnsWithoutDefault)...); err != nil {
+		if err = randomize.Struct(seed, x, lipidInventoryDBTypes, false, strmangle.SetComplement(lipidInventoryPrimaryKeyColumns, lipidInventoryColumnsWithoutDefault)...); err != nil {
 			t.Fatal(err)
 		}
 	}
@@ -1088,13 +1088,13 @@ func testSoapSupplierToManyAddOpSupplierSoapLipidinventories(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	foreignersSplitByInsertion := [][]*SoapLipidinventory{
+	foreignersSplitByInsertion := [][]*LipidInventory{
 		{&b, &c},
 		{&d, &e},
 	}
 
 	for i, x := range foreignersSplitByInsertion {
-		err = a.AddSupplierSoapLipidinventories(ctx, tx, i != 0, x...)
+		err = a.AddLipidInventories(ctx, tx, i != 0, x...)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -1116,14 +1116,14 @@ func testSoapSupplierToManyAddOpSupplierSoapLipidinventories(t *testing.T) {
 			t.Error("relationship was not added properly to the foreign slice")
 		}
 
-		if a.R.SupplierSoapLipidinventories[i*2] != first {
+		if a.R.LipidInventories[i*2] != first {
 			t.Error("relationship struct slice not set to correct value")
 		}
-		if a.R.SupplierSoapLipidinventories[i*2+1] != second {
+		if a.R.LipidInventories[i*2+1] != second {
 			t.Error("relationship struct slice not set to correct value")
 		}
 
-		count, err := a.SupplierSoapLipidinventories().Count(ctx, tx)
+		count, err := a.LipidInventories().Count(ctx, tx)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -1132,23 +1132,23 @@ func testSoapSupplierToManyAddOpSupplierSoapLipidinventories(t *testing.T) {
 		}
 	}
 }
-func testSoapSupplierToManyAddOpSupplierSoapLyeinventories(t *testing.T) {
+func testSupplierToManyAddOpLyeInventories(t *testing.T) {
 	var err error
 
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
 
-	var a SoapSupplier
-	var b, c, d, e SoapLyeinventory
+	var a Supplier
+	var b, c, d, e LyeInventory
 
 	seed := randomize.NewSeed()
-	if err = randomize.Struct(seed, &a, soapSupplierDBTypes, false, strmangle.SetComplement(soapSupplierPrimaryKeyColumns, soapSupplierColumnsWithoutDefault)...); err != nil {
+	if err = randomize.Struct(seed, &a, supplierDBTypes, false, strmangle.SetComplement(supplierPrimaryKeyColumns, supplierColumnsWithoutDefault)...); err != nil {
 		t.Fatal(err)
 	}
-	foreigners := []*SoapLyeinventory{&b, &c, &d, &e}
+	foreigners := []*LyeInventory{&b, &c, &d, &e}
 	for _, x := range foreigners {
-		if err = randomize.Struct(seed, x, soapLyeinventoryDBTypes, false, strmangle.SetComplement(soapLyeinventoryPrimaryKeyColumns, soapLyeinventoryColumnsWithoutDefault)...); err != nil {
+		if err = randomize.Struct(seed, x, lyeInventoryDBTypes, false, strmangle.SetComplement(lyeInventoryPrimaryKeyColumns, lyeInventoryColumnsWithoutDefault)...); err != nil {
 			t.Fatal(err)
 		}
 	}
@@ -1163,13 +1163,13 @@ func testSoapSupplierToManyAddOpSupplierSoapLyeinventories(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	foreignersSplitByInsertion := [][]*SoapLyeinventory{
+	foreignersSplitByInsertion := [][]*LyeInventory{
 		{&b, &c},
 		{&d, &e},
 	}
 
 	for i, x := range foreignersSplitByInsertion {
-		err = a.AddSupplierSoapLyeinventories(ctx, tx, i != 0, x...)
+		err = a.AddLyeInventories(ctx, tx, i != 0, x...)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -1191,14 +1191,14 @@ func testSoapSupplierToManyAddOpSupplierSoapLyeinventories(t *testing.T) {
 			t.Error("relationship was not added properly to the foreign slice")
 		}
 
-		if a.R.SupplierSoapLyeinventories[i*2] != first {
+		if a.R.LyeInventories[i*2] != first {
 			t.Error("relationship struct slice not set to correct value")
 		}
-		if a.R.SupplierSoapLyeinventories[i*2+1] != second {
+		if a.R.LyeInventories[i*2+1] != second {
 			t.Error("relationship struct slice not set to correct value")
 		}
 
-		count, err := a.SupplierSoapLyeinventories().Count(ctx, tx)
+		count, err := a.LyeInventories().Count(ctx, tx)
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -1208,14 +1208,14 @@ func testSoapSupplierToManyAddOpSupplierSoapLyeinventories(t *testing.T) {
 	}
 }
 
-func testSoapSuppliersReload(t *testing.T) {
+func testSuppliersReload(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapSupplier{}
-	if err = randomize.Struct(seed, o, soapSupplierDBTypes, true, soapSupplierColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapSupplier struct: %s", err)
+	o := &Supplier{}
+	if err = randomize.Struct(seed, o, supplierDBTypes, true, supplierColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Supplier struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -1230,14 +1230,14 @@ func testSoapSuppliersReload(t *testing.T) {
 	}
 }
 
-func testSoapSuppliersReloadAll(t *testing.T) {
+func testSuppliersReloadAll(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapSupplier{}
-	if err = randomize.Struct(seed, o, soapSupplierDBTypes, true, soapSupplierColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapSupplier struct: %s", err)
+	o := &Supplier{}
+	if err = randomize.Struct(seed, o, supplierDBTypes, true, supplierColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Supplier struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -1247,21 +1247,21 @@ func testSoapSuppliersReloadAll(t *testing.T) {
 		t.Error(err)
 	}
 
-	slice := SoapSupplierSlice{o}
+	slice := SupplierSlice{o}
 
 	if err = slice.ReloadAll(ctx, tx); err != nil {
 		t.Error(err)
 	}
 }
 
-func testSoapSuppliersSelect(t *testing.T) {
+func testSuppliersSelect(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapSupplier{}
-	if err = randomize.Struct(seed, o, soapSupplierDBTypes, true, soapSupplierColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapSupplier struct: %s", err)
+	o := &Supplier{}
+	if err = randomize.Struct(seed, o, supplierDBTypes, true, supplierColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Supplier struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -1271,7 +1271,7 @@ func testSoapSuppliersSelect(t *testing.T) {
 		t.Error(err)
 	}
 
-	slice, err := SoapSuppliers().All(ctx, tx)
+	slice, err := Suppliers().All(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -1282,25 +1282,25 @@ func testSoapSuppliersSelect(t *testing.T) {
 }
 
 var (
-	soapSupplierDBTypes = map[string]string{`ID`: `integer`, `CreatedAt`: `timestamp with time zone`, `UpdatedAt`: `timestamp with time zone`, `DeletedAt`: `timestamp with time zone`, `Name`: `character varying`, `Website`: `character varying`, `Note`: `text`}
-	_                   = bytes.MinRead
+	supplierDBTypes = map[string]string{`ID`: `integer`, `CreatedAt`: `timestamp with time zone`, `UpdatedAt`: `timestamp with time zone`, `DeletedAt`: `timestamp with time zone`, `Name`: `character varying`, `Website`: `character varying`, `Note`: `text`}
+	_               = bytes.MinRead
 )
 
-func testSoapSuppliersUpdate(t *testing.T) {
+func testSuppliersUpdate(t *testing.T) {
 	t.Parallel()
 
-	if 0 == len(soapSupplierPrimaryKeyColumns) {
+	if 0 == len(supplierPrimaryKeyColumns) {
 		t.Skip("Skipping table with no primary key columns")
 	}
-	if len(soapSupplierAllColumns) == len(soapSupplierPrimaryKeyColumns) {
+	if len(supplierAllColumns) == len(supplierPrimaryKeyColumns) {
 		t.Skip("Skipping table with only primary key columns")
 	}
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapSupplier{}
-	if err = randomize.Struct(seed, o, soapSupplierDBTypes, true, soapSupplierColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapSupplier struct: %s", err)
+	o := &Supplier{}
+	if err = randomize.Struct(seed, o, supplierDBTypes, true, supplierColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Supplier struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -1310,7 +1310,7 @@ func testSoapSuppliersUpdate(t *testing.T) {
 		t.Error(err)
 	}
 
-	count, err := SoapSuppliers().Count(ctx, tx)
+	count, err := Suppliers().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -1319,8 +1319,8 @@ func testSoapSuppliersUpdate(t *testing.T) {
 		t.Error("want one record, got:", count)
 	}
 
-	if err = randomize.Struct(seed, o, soapSupplierDBTypes, true, soapSupplierPrimaryKeyColumns...); err != nil {
-		t.Errorf("Unable to randomize SoapSupplier struct: %s", err)
+	if err = randomize.Struct(seed, o, supplierDBTypes, true, supplierPrimaryKeyColumns...); err != nil {
+		t.Errorf("Unable to randomize Supplier struct: %s", err)
 	}
 
 	if rowsAff, err := o.Update(ctx, tx, boil.Infer()); err != nil {
@@ -1330,18 +1330,18 @@ func testSoapSuppliersUpdate(t *testing.T) {
 	}
 }
 
-func testSoapSuppliersSliceUpdateAll(t *testing.T) {
+func testSuppliersSliceUpdateAll(t *testing.T) {
 	t.Parallel()
 
-	if len(soapSupplierAllColumns) == len(soapSupplierPrimaryKeyColumns) {
+	if len(supplierAllColumns) == len(supplierPrimaryKeyColumns) {
 		t.Skip("Skipping table with only primary key columns")
 	}
 
 	seed := randomize.NewSeed()
 	var err error
-	o := &SoapSupplier{}
-	if err = randomize.Struct(seed, o, soapSupplierDBTypes, true, soapSupplierColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize SoapSupplier struct: %s", err)
+	o := &Supplier{}
+	if err = randomize.Struct(seed, o, supplierDBTypes, true, supplierColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Supplier struct: %s", err)
 	}
 
 	ctx := context.Background()
@@ -1351,7 +1351,7 @@ func testSoapSuppliersSliceUpdateAll(t *testing.T) {
 		t.Error(err)
 	}
 
-	count, err := SoapSuppliers().Count(ctx, tx)
+	count, err := Suppliers().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -1360,18 +1360,18 @@ func testSoapSuppliersSliceUpdateAll(t *testing.T) {
 		t.Error("want one record, got:", count)
 	}
 
-	if err = randomize.Struct(seed, o, soapSupplierDBTypes, true, soapSupplierPrimaryKeyColumns...); err != nil {
-		t.Errorf("Unable to randomize SoapSupplier struct: %s", err)
+	if err = randomize.Struct(seed, o, supplierDBTypes, true, supplierPrimaryKeyColumns...); err != nil {
+		t.Errorf("Unable to randomize Supplier struct: %s", err)
 	}
 
 	// Remove Primary keys and unique columns from what we plan to update
 	var fields []string
-	if strmangle.StringSliceMatch(soapSupplierAllColumns, soapSupplierPrimaryKeyColumns) {
-		fields = soapSupplierAllColumns
+	if strmangle.StringSliceMatch(supplierAllColumns, supplierPrimaryKeyColumns) {
+		fields = supplierAllColumns
 	} else {
 		fields = strmangle.SetComplement(
-			soapSupplierAllColumns,
-			soapSupplierPrimaryKeyColumns,
+			supplierAllColumns,
+			supplierPrimaryKeyColumns,
 		)
 	}
 
@@ -1389,7 +1389,7 @@ func testSoapSuppliersSliceUpdateAll(t *testing.T) {
 		}
 	}
 
-	slice := SoapSupplierSlice{o}
+	slice := SupplierSlice{o}
 	if rowsAff, err := slice.UpdateAll(ctx, tx, updateMap); err != nil {
 		t.Error(err)
 	} else if rowsAff != 1 {
@@ -1397,29 +1397,29 @@ func testSoapSuppliersSliceUpdateAll(t *testing.T) {
 	}
 }
 
-func testSoapSuppliersUpsert(t *testing.T) {
+func testSuppliersUpsert(t *testing.T) {
 	t.Parallel()
 
-	if len(soapSupplierAllColumns) == len(soapSupplierPrimaryKeyColumns) {
+	if len(supplierAllColumns) == len(supplierPrimaryKeyColumns) {
 		t.Skip("Skipping table with only primary key columns")
 	}
 
 	seed := randomize.NewSeed()
 	var err error
 	// Attempt the INSERT side of an UPSERT
-	o := SoapSupplier{}
-	if err = randomize.Struct(seed, &o, soapSupplierDBTypes, true); err != nil {
-		t.Errorf("Unable to randomize SoapSupplier struct: %s", err)
+	o := Supplier{}
+	if err = randomize.Struct(seed, &o, supplierDBTypes, true); err != nil {
+		t.Errorf("Unable to randomize Supplier struct: %s", err)
 	}
 
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
 	if err = o.Upsert(ctx, tx, false, nil, boil.Infer(), boil.Infer()); err != nil {
-		t.Errorf("Unable to upsert SoapSupplier: %s", err)
+		t.Errorf("Unable to upsert Supplier: %s", err)
 	}
 
-	count, err := SoapSuppliers().Count(ctx, tx)
+	count, err := Suppliers().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -1428,15 +1428,15 @@ func testSoapSuppliersUpsert(t *testing.T) {
 	}
 
 	// Attempt the UPDATE side of an UPSERT
-	if err = randomize.Struct(seed, &o, soapSupplierDBTypes, false, soapSupplierPrimaryKeyColumns...); err != nil {
-		t.Errorf("Unable to randomize SoapSupplier struct: %s", err)
+	if err = randomize.Struct(seed, &o, supplierDBTypes, false, supplierPrimaryKeyColumns...); err != nil {
+		t.Errorf("Unable to randomize Supplier struct: %s", err)
 	}
 
 	if err = o.Upsert(ctx, tx, true, nil, boil.Infer(), boil.Infer()); err != nil {
-		t.Errorf("Unable to upsert SoapSupplier: %s", err)
+		t.Errorf("Unable to upsert Supplier: %s", err)
 	}
 
-	count, err = SoapSuppliers().Count(ctx, tx)
+	count, err = Suppliers().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
