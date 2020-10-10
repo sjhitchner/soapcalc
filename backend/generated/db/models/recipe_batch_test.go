@@ -778,7 +778,7 @@ func testRecipeBatchesSelect(t *testing.T) {
 }
 
 var (
-	recipeBatchDBTypes = map[string]string{`ID`: `integer`, `CreatedAt`: `timestamp with time zone`, `UpdatedAt`: `timestamp with time zone`, `DeletedAt`: `timestamp with time zone`, `BatchID`: `character varying`, `ProductionDate`: `timestamp with time zone`, `CuredProduced`: `timestamp with time zone`, `Note`: `text`, `LipidWeight`: `double precision`, `ProductionWeight`: `double precision`, `CuredWeight`: `double precision`, `RecipeID`: `integer`}
+	recipeBatchDBTypes = map[string]string{`ID`: `integer`, `CreatedAt`: `timestamp with time zone`, `UpdatedAt`: `timestamp with time zone`, `DeletedAt`: `timestamp with time zone`, `BatchID`: `character varying`, `ProductionDate`: `timestamp with time zone`, `SellableDate`: `timestamp with time zone`, `Note`: `text`, `LipidWeight`: `double precision`, `ProductionWeight`: `double precision`, `CuredWeight`: `double precision`, `RecipeID`: `integer`}
 	_                  = bytes.MinRead
 )
 

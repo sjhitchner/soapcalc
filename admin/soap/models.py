@@ -172,7 +172,7 @@ class RecipeBatch(BaseModel):
     recipe = models.ForeignKey('Recipe', on_delete=models.PROTECT)
     batch_id = models.CharField(max_length=16)
     production_date = models.DateTimeField()
-    cured_produced = models.DateTimeField()
+    sellable_date = models.DateTimeField()
     note = models.TextField(blank=True)
 
     lipid_weight = models.FloatField()

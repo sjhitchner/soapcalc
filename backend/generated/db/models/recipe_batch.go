@@ -30,7 +30,7 @@ type RecipeBatch struct {
 	DeletedAt        null.Time `boil:"deleted_at" json:"deleted_at,omitempty" toml:"deleted_at" yaml:"deleted_at,omitempty"`
 	BatchID          string    `boil:"batch_id" json:"batch_id" toml:"batch_id" yaml:"batch_id"`
 	ProductionDate   time.Time `boil:"production_date" json:"production_date" toml:"production_date" yaml:"production_date"`
-	CuredProduced    time.Time `boil:"cured_produced" json:"cured_produced" toml:"cured_produced" yaml:"cured_produced"`
+	SellableDate     time.Time `boil:"sellable_date" json:"sellable_date" toml:"sellable_date" yaml:"sellable_date"`
 	Note             string    `boil:"note" json:"note" toml:"note" yaml:"note"`
 	LipidWeight      float64   `boil:"lipid_weight" json:"lipid_weight" toml:"lipid_weight" yaml:"lipid_weight"`
 	ProductionWeight float64   `boil:"production_weight" json:"production_weight" toml:"production_weight" yaml:"production_weight"`
@@ -48,7 +48,7 @@ var RecipeBatchColumns = struct {
 	DeletedAt        string
 	BatchID          string
 	ProductionDate   string
-	CuredProduced    string
+	SellableDate     string
 	Note             string
 	LipidWeight      string
 	ProductionWeight string
@@ -61,7 +61,7 @@ var RecipeBatchColumns = struct {
 	DeletedAt:        "deleted_at",
 	BatchID:          "batch_id",
 	ProductionDate:   "production_date",
-	CuredProduced:    "cured_produced",
+	SellableDate:     "sellable_date",
 	Note:             "note",
 	LipidWeight:      "lipid_weight",
 	ProductionWeight: "production_weight",
@@ -78,7 +78,7 @@ var RecipeBatchWhere = struct {
 	DeletedAt        whereHelpernull_Time
 	BatchID          whereHelperstring
 	ProductionDate   whereHelpertime_Time
-	CuredProduced    whereHelpertime_Time
+	SellableDate     whereHelpertime_Time
 	Note             whereHelperstring
 	LipidWeight      whereHelperfloat64
 	ProductionWeight whereHelperfloat64
@@ -91,7 +91,7 @@ var RecipeBatchWhere = struct {
 	DeletedAt:        whereHelpernull_Time{field: "\"recipe_batch\".\"deleted_at\""},
 	BatchID:          whereHelperstring{field: "\"recipe_batch\".\"batch_id\""},
 	ProductionDate:   whereHelpertime_Time{field: "\"recipe_batch\".\"production_date\""},
-	CuredProduced:    whereHelpertime_Time{field: "\"recipe_batch\".\"cured_produced\""},
+	SellableDate:     whereHelpertime_Time{field: "\"recipe_batch\".\"sellable_date\""},
 	Note:             whereHelperstring{field: "\"recipe_batch\".\"note\""},
 	LipidWeight:      whereHelperfloat64{field: "\"recipe_batch\".\"lipid_weight\""},
 	ProductionWeight: whereHelperfloat64{field: "\"recipe_batch\".\"production_weight\""},
@@ -120,8 +120,8 @@ func (*recipeBatchR) NewStruct() *recipeBatchR {
 type recipeBatchL struct{}
 
 var (
-	recipeBatchAllColumns            = []string{"id", "created_at", "updated_at", "deleted_at", "batch_id", "production_date", "cured_produced", "note", "lipid_weight", "production_weight", "cured_weight", "recipe_id"}
-	recipeBatchColumnsWithoutDefault = []string{"created_at", "updated_at", "deleted_at", "batch_id", "production_date", "cured_produced", "note", "lipid_weight", "production_weight", "cured_weight", "recipe_id"}
+	recipeBatchAllColumns            = []string{"id", "created_at", "updated_at", "deleted_at", "batch_id", "production_date", "sellable_date", "note", "lipid_weight", "production_weight", "cured_weight", "recipe_id"}
+	recipeBatchColumnsWithoutDefault = []string{"created_at", "updated_at", "deleted_at", "batch_id", "production_date", "sellable_date", "note", "lipid_weight", "production_weight", "cured_weight", "recipe_id"}
 	recipeBatchColumnsWithDefault    = []string{"id"}
 	recipeBatchPrimaryKeyColumns     = []string{"id"}
 )
