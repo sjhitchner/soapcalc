@@ -170,7 +170,7 @@ class RecipeBatch(BaseModel):
         db_table = 'recipe_batch'
 
     recipe = models.ForeignKey('Recipe', on_delete=models.PROTECT)
-    batch_id = models.CharField(max_length=16)
+    batch = models.CharField(max_length=16)
     production_date = models.DateTimeField()
     sellable_date = models.DateTimeField()
     note = models.TextField(blank=True)
