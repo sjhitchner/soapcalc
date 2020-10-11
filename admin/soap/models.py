@@ -71,11 +71,21 @@ class FragranceInventory(BaseModel, InventoryModel):
 
 
 class Lipid(BaseModel):
+    FAMILIES = (
+        ('lauric', 'Lauric Oil'),
+        ('palmitic', 'Palmitic Oil'),
+        ('oleic', 'Oleic Oil'),
+        ('ricinoleic', 'Ricinoleic Oil'),
+        ('linoleic', 'Linoleic Oil'),
+        ('linolenic', 'Linolenic Oil'),
+    )
 
     class Meta:
         db_table = 'lipid'
 
     name = models.CharField(max_length=100)
+    naoh = models.FloatField()
+    family = models.CharField(max_length=50, choices=FAMILIES, default='oleic')
     lauric = models.IntegerField()
     myristic = models.IntegerField()
     palmitic = models.IntegerField()
@@ -186,7 +196,7 @@ class RecipeBatchLye(BaseModel):
         db_table = 'recipe_batch_lye'
 
     batch = models.ForeignKey('RecipeBatch', on_delete=models.CASCADE)
-    lye = models.ForeignKey('Lye', on_delete=models.PROTECT)
+    lye = models.OneToOneField('Lye', on_delete=models.PROTECT)
     weight = models.FloatField()
     discount = models.FloatField()
     cost = models.FloatField()
