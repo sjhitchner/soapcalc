@@ -2,173 +2,1202 @@
 
 package graphql
 
-import (
-	"fmt"
-	"io"
-	"strconv"
-	"time"
-)
-
 type Additive struct {
-	ID        string       `json:"id"`
-	Name      string       `json:"name"`
-	Note      string       `json:"note"`
-	Inventory []*Inventory `json:"inventory"`
+	ID                  string               `json:"id"`
+	Name                string               `json:"name"`
+	Note                string               `json:"note"`
+	DeletedAt           *int                 `json:"deletedAt"`
+	CreatedAt           int                  `json:"createdAt"`
+	UpdatedAt           int                  `json:"updatedAt"`
+	AdditiveInventories []*AdditiveInventory `json:"additiveInventories"`
 }
 
-type CreateRecipe struct {
-	Lye              LyeType `json:"lye"`
-	LipidWeight      float64 `json:"lipidWeight"`
-	LyeConcentration float64 `json:"lyeConcentration"`
-	LyeDiscount      float64 `json:"lyeDiscount"`
+type AdditiveCreateInput struct {
+	Name      string `json:"name"`
+	Note      string `json:"note"`
+	DeletedAt *int   `json:"deletedAt"`
+	CreatedAt int    `json:"createdAt"`
+	UpdatedAt int    `json:"updatedAt"`
+}
+
+type AdditiveDeletePayload struct {
+	ID string `json:"id"`
+}
+
+type AdditiveFilter struct {
+	Search *string        `json:"search"`
+	Where  *AdditiveWhere `json:"where"`
+}
+
+type AdditiveInventory struct {
+	ID           string    `json:"id"`
+	PurchaseDate int       `json:"purchaseDate"`
+	ExpiryDate   int       `json:"expiryDate"`
+	Cost         float64   `json:"cost"`
+	Weight       float64   `json:"weight"`
+	Additive     *Additive `json:"additive"`
+	Supplier     *Supplier `json:"supplier"`
+	CreatedAt    int       `json:"createdAt"`
+	DeletedAt    *int      `json:"deletedAt"`
+	UpdatedAt    int       `json:"updatedAt"`
+}
+
+type AdditiveInventoryCreateInput struct {
+	PurchaseDate int     `json:"purchaseDate"`
+	ExpiryDate   int     `json:"expiryDate"`
+	Cost         float64 `json:"cost"`
+	Weight       float64 `json:"weight"`
+	AdditiveID   string  `json:"additiveId"`
+	SupplierID   string  `json:"supplierId"`
+	CreatedAt    int     `json:"createdAt"`
+	DeletedAt    *int    `json:"deletedAt"`
+	UpdatedAt    int     `json:"updatedAt"`
+}
+
+type AdditiveInventoryDeletePayload struct {
+	ID string `json:"id"`
+}
+
+type AdditiveInventoryFilter struct {
+	Search *string                 `json:"search"`
+	Where  *AdditiveInventoryWhere `json:"where"`
+}
+
+type AdditiveInventoryPayload struct {
+	AdditiveInventory *AdditiveInventory `json:"additiveInventory"`
+}
+
+type AdditiveInventoryUpdateInput struct {
+	PurchaseDate *int     `json:"purchaseDate"`
+	ExpiryDate   *int     `json:"expiryDate"`
+	Cost         *float64 `json:"cost"`
+	Weight       *float64 `json:"weight"`
+	AdditiveID   *string  `json:"additiveId"`
+	SupplierID   *string  `json:"supplierId"`
+	CreatedAt    *int     `json:"createdAt"`
+	DeletedAt    *int     `json:"deletedAt"`
+	UpdatedAt    *int     `json:"updatedAt"`
+}
+
+type AdditiveInventoryWhere struct {
+	ID           *IDFilter               `json:"id"`
+	PurchaseDate *IntFilter              `json:"purchaseDate"`
+	ExpiryDate   *IntFilter              `json:"expiryDate"`
+	Cost         *FloatFilter            `json:"cost"`
+	Weight       *FloatFilter            `json:"weight"`
+	Additive     *AdditiveWhere          `json:"additive"`
+	Supplier     *SupplierWhere          `json:"supplier"`
+	CreatedAt    *IntFilter              `json:"createdAt"`
+	DeletedAt    *IntFilter              `json:"deletedAt"`
+	UpdatedAt    *IntFilter              `json:"updatedAt"`
+	Or           *AdditiveInventoryWhere `json:"or"`
+	And          *AdditiveInventoryWhere `json:"and"`
+}
+
+type AdditivePayload struct {
+	Additive *Additive `json:"additive"`
+}
+
+type AdditiveUpdateInput struct {
+	Name      *string `json:"name"`
+	Note      *string `json:"note"`
+	DeletedAt *int    `json:"deletedAt"`
+	CreatedAt *int    `json:"createdAt"`
+	UpdatedAt *int    `json:"updatedAt"`
+}
+
+type AdditiveWhere struct {
+	ID                  *IDFilter               `json:"id"`
+	Name                *StringFilter           `json:"name"`
+	Note                *StringFilter           `json:"note"`
+	DeletedAt           *IntFilter              `json:"deletedAt"`
+	CreatedAt           *IntFilter              `json:"createdAt"`
+	UpdatedAt           *IntFilter              `json:"updatedAt"`
+	AdditiveInventories *AdditiveInventoryWhere `json:"additiveInventories"`
+	Or                  *AdditiveWhere          `json:"or"`
+	And                 *AdditiveWhere          `json:"and"`
+}
+
+type BooleanFilter struct {
+	EqualTo    *bool `json:"equalTo"`
+	NotEqualTo *bool `json:"notEqualTo"`
+}
+
+type FloatFilter struct {
+	EqualTo           *float64  `json:"equalTo"`
+	NotEqualTo        *float64  `json:"notEqualTo"`
+	LessThan          *float64  `json:"lessThan"`
+	LessThanOrEqualTo *float64  `json:"lessThanOrEqualTo"`
+	MoreThan          *float64  `json:"moreThan"`
+	MoreThanOrEqualTo *float64  `json:"moreThanOrEqualTo"`
+	In                []float64 `json:"in"`
+	NotIn             []float64 `json:"notIn"`
 }
 
 type Fragrance struct {
-	ID            string       `json:"id"`
-	Name          string       `json:"name"`
-	GramsPerLiter float64      `json:"gramsPerLiter"`
-	Inventory     []*Inventory `json:"inventory"`
-	Note          string       `json:"note"`
+	ID                   string                `json:"id"`
+	Name                 string                `json:"name"`
+	Note                 string                `json:"note"`
+	DeletedAt            *int                  `json:"deletedAt"`
+	CreatedAt            int                   `json:"createdAt"`
+	UpdatedAt            int                   `json:"updatedAt"`
+	FragranceInventories []*FragranceInventory `json:"fragranceInventories"`
 }
 
-type Inventory struct {
+type FragranceCreateInput struct {
+	Name      string `json:"name"`
+	Note      string `json:"note"`
+	DeletedAt *int   `json:"deletedAt"`
+	CreatedAt int    `json:"createdAt"`
+	UpdatedAt int    `json:"updatedAt"`
+}
+
+type FragranceDeletePayload struct {
+	ID string `json:"id"`
+}
+
+type FragranceFilter struct {
+	Search *string         `json:"search"`
+	Where  *FragranceWhere `json:"where"`
+}
+
+type FragranceInventory struct {
 	ID           string     `json:"id"`
-	Supplier     *Supplier  `json:"supplier"`
-	PurchaseDate time.Time  `json:"purchaseDate"`
-	ExpiryDate   *time.Time `json:"expiryDate"`
+	PurchaseDate int        `json:"purchaseDate"`
+	ExpiryDate   int        `json:"expiryDate"`
 	Cost         float64    `json:"cost"`
 	Weight       float64    `json:"weight"`
+	Fragrance    *Fragrance `json:"fragrance"`
+	Supplier     *Supplier  `json:"supplier"`
+	DeletedAt    *int       `json:"deletedAt"`
+	CreatedAt    int        `json:"createdAt"`
+	UpdatedAt    int        `json:"updatedAt"`
+}
+
+type FragranceInventoryCreateInput struct {
+	PurchaseDate int     `json:"purchaseDate"`
+	ExpiryDate   int     `json:"expiryDate"`
+	Cost         float64 `json:"cost"`
+	Weight       float64 `json:"weight"`
+	FragranceID  string  `json:"fragranceId"`
+	SupplierID   string  `json:"supplierId"`
+	DeletedAt    *int    `json:"deletedAt"`
+	CreatedAt    int     `json:"createdAt"`
+	UpdatedAt    int     `json:"updatedAt"`
+}
+
+type FragranceInventoryDeletePayload struct {
+	ID string `json:"id"`
+}
+
+type FragranceInventoryFilter struct {
+	Search *string                  `json:"search"`
+	Where  *FragranceInventoryWhere `json:"where"`
+}
+
+type FragranceInventoryPayload struct {
+	FragranceInventory *FragranceInventory `json:"fragranceInventory"`
+}
+
+type FragranceInventoryUpdateInput struct {
+	PurchaseDate *int     `json:"purchaseDate"`
+	ExpiryDate   *int     `json:"expiryDate"`
+	Cost         *float64 `json:"cost"`
+	Weight       *float64 `json:"weight"`
+	FragranceID  *string  `json:"fragranceId"`
+	SupplierID   *string  `json:"supplierId"`
+	DeletedAt    *int     `json:"deletedAt"`
+	CreatedAt    *int     `json:"createdAt"`
+	UpdatedAt    *int     `json:"updatedAt"`
+}
+
+type FragranceInventoryWhere struct {
+	ID           *IDFilter                `json:"id"`
+	PurchaseDate *IntFilter               `json:"purchaseDate"`
+	ExpiryDate   *IntFilter               `json:"expiryDate"`
+	Cost         *FloatFilter             `json:"cost"`
+	Weight       *FloatFilter             `json:"weight"`
+	Fragrance    *FragranceWhere          `json:"fragrance"`
+	Supplier     *SupplierWhere           `json:"supplier"`
+	DeletedAt    *IntFilter               `json:"deletedAt"`
+	CreatedAt    *IntFilter               `json:"createdAt"`
+	UpdatedAt    *IntFilter               `json:"updatedAt"`
+	Or           *FragranceInventoryWhere `json:"or"`
+	And          *FragranceInventoryWhere `json:"and"`
+}
+
+type FragrancePayload struct {
+	Fragrance *Fragrance `json:"fragrance"`
+}
+
+type FragranceUpdateInput struct {
+	Name      *string `json:"name"`
+	Note      *string `json:"note"`
+	DeletedAt *int    `json:"deletedAt"`
+	CreatedAt *int    `json:"createdAt"`
+	UpdatedAt *int    `json:"updatedAt"`
+}
+
+type FragranceWhere struct {
+	ID                   *IDFilter                `json:"id"`
+	Name                 *StringFilter            `json:"name"`
+	Note                 *StringFilter            `json:"note"`
+	DeletedAt            *IntFilter               `json:"deletedAt"`
+	CreatedAt            *IntFilter               `json:"createdAt"`
+	UpdatedAt            *IntFilter               `json:"updatedAt"`
+	FragranceInventories *FragranceInventoryWhere `json:"fragranceInventories"`
+	Or                   *FragranceWhere          `json:"or"`
+	And                  *FragranceWhere          `json:"and"`
+}
+
+type IDFilter struct {
+	EqualTo    *string  `json:"equalTo"`
+	NotEqualTo *string  `json:"notEqualTo"`
+	In         []string `json:"in"`
+	NotIn      []string `json:"notIn"`
+}
+
+type IntFilter struct {
+	EqualTo           *int  `json:"equalTo"`
+	NotEqualTo        *int  `json:"notEqualTo"`
+	LessThan          *int  `json:"lessThan"`
+	LessThanOrEqualTo *int  `json:"lessThanOrEqualTo"`
+	MoreThan          *int  `json:"moreThan"`
+	MoreThanOrEqualTo *int  `json:"moreThanOrEqualTo"`
+	In                []int `json:"in"`
+	NotIn             []int `json:"notIn"`
 }
 
 type Lipid struct {
-	ID            string       `json:"id"`
-	Name          string       `json:"name"`
-	Type          string       `json:"type"`
-	Naoh          float64      `json:"naoh"`
-	Koh           float64      `json:"koh"`
-	InciName      string       `json:"inciName"`
-	GramsPerLiter float64      `json:"gramsPerLiter"`
-	Inventory     []*Inventory `json:"inventory"`
+	ID               string            `json:"id"`
+	Name             string            `json:"name"`
+	Lauric           int               `json:"lauric"`
+	Myristic         int               `json:"myristic"`
+	Palmitic         int               `json:"palmitic"`
+	Stearic          int               `json:"stearic"`
+	Ricinoleic       int               `json:"ricinoleic"`
+	Oleic            int               `json:"oleic"`
+	Linoleic         int               `json:"linoleic"`
+	Linolenic        int               `json:"linolenic"`
+	Hardness         int               `json:"hardness"`
+	Cleansing        int               `json:"cleansing"`
+	Conditioning     int               `json:"conditioning"`
+	Bubbly           int               `json:"bubbly"`
+	Creamy           int               `json:"creamy"`
+	Iodine           int               `json:"iodine"`
+	Ins              int               `json:"ins"`
+	InciName         string            `json:"inciName"`
+	Family           string            `json:"family"`
+	Naoh             float64           `json:"naoh"`
+	UpdatedAt        int               `json:"updatedAt"`
+	CreatedAt        int               `json:"createdAt"`
+	DeletedAt        *int              `json:"deletedAt"`
+	LipidInventories []*LipidInventory `json:"lipidInventories"`
+}
+
+type LipidCreateInput struct {
+	Name         string  `json:"name"`
+	Lauric       int     `json:"lauric"`
+	Myristic     int     `json:"myristic"`
+	Palmitic     int     `json:"palmitic"`
+	Stearic      int     `json:"stearic"`
+	Ricinoleic   int     `json:"ricinoleic"`
+	Oleic        int     `json:"oleic"`
+	Linoleic     int     `json:"linoleic"`
+	Linolenic    int     `json:"linolenic"`
+	Hardness     int     `json:"hardness"`
+	Cleansing    int     `json:"cleansing"`
+	Conditioning int     `json:"conditioning"`
+	Bubbly       int     `json:"bubbly"`
+	Creamy       int     `json:"creamy"`
+	Iodine       int     `json:"iodine"`
+	Ins          int     `json:"ins"`
+	InciName     string  `json:"inciName"`
+	Family       string  `json:"family"`
+	Naoh         float64 `json:"naoh"`
+	UpdatedAt    int     `json:"updatedAt"`
+	CreatedAt    int     `json:"createdAt"`
+	DeletedAt    *int    `json:"deletedAt"`
+}
+
+type LipidDeletePayload struct {
+	ID string `json:"id"`
+}
+
+type LipidFilter struct {
+	Search *string     `json:"search"`
+	Where  *LipidWhere `json:"where"`
+}
+
+type LipidInventory struct {
+	ID            string    `json:"id"`
+	PurchaseDate  int       `json:"purchaseDate"`
+	ExpiryDate    int       `json:"expiryDate"`
+	Cost          float64   `json:"cost"`
+	Weight        float64   `json:"weight"`
+	Sap           float64   `json:"sap"`
+	Naoh          float64   `json:"naoh"`
+	Koh           float64   `json:"koh"`
+	GramsPerLiter float64   `json:"gramsPerLiter"`
+	Lipid         *Lipid    `json:"lipid"`
+	Supplier      *Supplier `json:"supplier"`
+	CreatedAt     int       `json:"createdAt"`
+	DeletedAt     *int      `json:"deletedAt"`
+	UpdatedAt     int       `json:"updatedAt"`
+}
+
+type LipidInventoryCreateInput struct {
+	PurchaseDate  int     `json:"purchaseDate"`
+	ExpiryDate    int     `json:"expiryDate"`
+	Cost          float64 `json:"cost"`
+	Weight        float64 `json:"weight"`
+	Sap           float64 `json:"sap"`
+	Naoh          float64 `json:"naoh"`
+	Koh           float64 `json:"koh"`
+	GramsPerLiter float64 `json:"gramsPerLiter"`
+	LipidID       string  `json:"lipidId"`
+	SupplierID    string  `json:"supplierId"`
+	CreatedAt     int     `json:"createdAt"`
+	DeletedAt     *int    `json:"deletedAt"`
+	UpdatedAt     int     `json:"updatedAt"`
+}
+
+type LipidInventoryDeletePayload struct {
+	ID string `json:"id"`
+}
+
+type LipidInventoryFilter struct {
+	Search *string              `json:"search"`
+	Where  *LipidInventoryWhere `json:"where"`
+}
+
+type LipidInventoryPayload struct {
+	LipidInventory *LipidInventory `json:"lipidInventory"`
+}
+
+type LipidInventoryUpdateInput struct {
+	PurchaseDate  *int     `json:"purchaseDate"`
+	ExpiryDate    *int     `json:"expiryDate"`
+	Cost          *float64 `json:"cost"`
+	Weight        *float64 `json:"weight"`
+	Sap           *float64 `json:"sap"`
+	Naoh          *float64 `json:"naoh"`
+	Koh           *float64 `json:"koh"`
+	GramsPerLiter *float64 `json:"gramsPerLiter"`
+	LipidID       *string  `json:"lipidId"`
+	SupplierID    *string  `json:"supplierId"`
+	CreatedAt     *int     `json:"createdAt"`
+	DeletedAt     *int     `json:"deletedAt"`
+	UpdatedAt     *int     `json:"updatedAt"`
+}
+
+type LipidInventoryWhere struct {
+	ID            *IDFilter            `json:"id"`
+	PurchaseDate  *IntFilter           `json:"purchaseDate"`
+	ExpiryDate    *IntFilter           `json:"expiryDate"`
+	Cost          *FloatFilter         `json:"cost"`
+	Weight        *FloatFilter         `json:"weight"`
+	Sap           *FloatFilter         `json:"sap"`
+	Naoh          *FloatFilter         `json:"naoh"`
+	Koh           *FloatFilter         `json:"koh"`
+	GramsPerLiter *FloatFilter         `json:"gramsPerLiter"`
+	Lipid         *LipidWhere          `json:"lipid"`
+	Supplier      *SupplierWhere       `json:"supplier"`
+	CreatedAt     *IntFilter           `json:"createdAt"`
+	DeletedAt     *IntFilter           `json:"deletedAt"`
+	UpdatedAt     *IntFilter           `json:"updatedAt"`
+	Or            *LipidInventoryWhere `json:"or"`
+	And           *LipidInventoryWhere `json:"and"`
+}
+
+type LipidPayload struct {
+	Lipid *Lipid `json:"lipid"`
+}
+
+type LipidUpdateInput struct {
+	Name         *string  `json:"name"`
+	Lauric       *int     `json:"lauric"`
+	Myristic     *int     `json:"myristic"`
+	Palmitic     *int     `json:"palmitic"`
+	Stearic      *int     `json:"stearic"`
+	Ricinoleic   *int     `json:"ricinoleic"`
+	Oleic        *int     `json:"oleic"`
+	Linoleic     *int     `json:"linoleic"`
+	Linolenic    *int     `json:"linolenic"`
+	Hardness     *int     `json:"hardness"`
+	Cleansing    *int     `json:"cleansing"`
+	Conditioning *int     `json:"conditioning"`
+	Bubbly       *int     `json:"bubbly"`
+	Creamy       *int     `json:"creamy"`
+	Iodine       *int     `json:"iodine"`
+	Ins          *int     `json:"ins"`
+	InciName     *string  `json:"inciName"`
+	Family       *string  `json:"family"`
+	Naoh         *float64 `json:"naoh"`
+	UpdatedAt    *int     `json:"updatedAt"`
+	CreatedAt    *int     `json:"createdAt"`
+	DeletedAt    *int     `json:"deletedAt"`
+}
+
+type LipidWhere struct {
+	ID               *IDFilter            `json:"id"`
+	Name             *StringFilter        `json:"name"`
+	Lauric           *IntFilter           `json:"lauric"`
+	Myristic         *IntFilter           `json:"myristic"`
+	Palmitic         *IntFilter           `json:"palmitic"`
+	Stearic          *IntFilter           `json:"stearic"`
+	Ricinoleic       *IntFilter           `json:"ricinoleic"`
+	Oleic            *IntFilter           `json:"oleic"`
+	Linoleic         *IntFilter           `json:"linoleic"`
+	Linolenic        *IntFilter           `json:"linolenic"`
+	Hardness         *IntFilter           `json:"hardness"`
+	Cleansing        *IntFilter           `json:"cleansing"`
+	Conditioning     *IntFilter           `json:"conditioning"`
+	Bubbly           *IntFilter           `json:"bubbly"`
+	Creamy           *IntFilter           `json:"creamy"`
+	Iodine           *IntFilter           `json:"iodine"`
+	Ins              *IntFilter           `json:"ins"`
+	InciName         *StringFilter        `json:"inciName"`
+	Family           *StringFilter        `json:"family"`
+	Naoh             *FloatFilter         `json:"naoh"`
+	UpdatedAt        *IntFilter           `json:"updatedAt"`
+	CreatedAt        *IntFilter           `json:"createdAt"`
+	DeletedAt        *IntFilter           `json:"deletedAt"`
+	LipidInventories *LipidInventoryWhere `json:"lipidInventories"`
+	Or               *LipidWhere          `json:"or"`
+	And              *LipidWhere          `json:"and"`
 }
 
 type Lye struct {
-	ID        string       `json:"id"`
-	Name      string       `json:"name"`
-	Note      string       `json:"note"`
-	Inventory []*Inventory `json:"inventory"`
+	ID        string `json:"id"`
+	Kind      string `json:"kind"`
+	Name      string `json:"name"`
+	Note      string `json:"note"`
+	CreatedAt int    `json:"createdAt"`
+	UpdatedAt int    `json:"updatedAt"`
+	DeletedAt *int   `json:"deletedAt"`
+}
+
+type LyeCreateInput struct {
+	Kind      string `json:"kind"`
+	Name      string `json:"name"`
+	Note      string `json:"note"`
+	CreatedAt int    `json:"createdAt"`
+	UpdatedAt int    `json:"updatedAt"`
+	DeletedAt *int   `json:"deletedAt"`
+}
+
+type LyeDeletePayload struct {
+	ID string `json:"id"`
+}
+
+type LyeFilter struct {
+	Search *string   `json:"search"`
+	Where  *LyeWhere `json:"where"`
+}
+
+type LyeInventory struct {
+	ID                string          `json:"id"`
+	PurchaseDate      int             `json:"purchaseDate"`
+	ExpiryDate        int             `json:"expiryDate"`
+	Cost              float64         `json:"cost"`
+	Weight            float64         `json:"weight"`
+	Concentration     float64         `json:"concentration"`
+	Lye               *Lye            `json:"lye"`
+	Supplier          *Supplier       `json:"supplier"`
+	UpdatedAt         int             `json:"updatedAt"`
+	DeletedAt         *int            `json:"deletedAt"`
+	CreatedAt         int             `json:"createdAt"`
+	LyeLyeInventories []*LyeInventory `json:"lyeLyeInventories"`
+}
+
+type LyeInventoryCreateInput struct {
+	PurchaseDate  int     `json:"purchaseDate"`
+	ExpiryDate    int     `json:"expiryDate"`
+	Cost          float64 `json:"cost"`
+	Weight        float64 `json:"weight"`
+	Concentration float64 `json:"concentration"`
+	LyeID         string  `json:"lyeId"`
+	SupplierID    string  `json:"supplierId"`
+	UpdatedAt     int     `json:"updatedAt"`
+	DeletedAt     *int    `json:"deletedAt"`
+	CreatedAt     int     `json:"createdAt"`
+}
+
+type LyeInventoryDeletePayload struct {
+	ID string `json:"id"`
+}
+
+type LyeInventoryFilter struct {
+	Search *string            `json:"search"`
+	Where  *LyeInventoryWhere `json:"where"`
+}
+
+type LyeInventoryPayload struct {
+	LyeInventory *LyeInventory `json:"lyeInventory"`
+}
+
+type LyeInventoryUpdateInput struct {
+	PurchaseDate  *int     `json:"purchaseDate"`
+	ExpiryDate    *int     `json:"expiryDate"`
+	Cost          *float64 `json:"cost"`
+	Weight        *float64 `json:"weight"`
+	Concentration *float64 `json:"concentration"`
+	LyeID         *string  `json:"lyeId"`
+	SupplierID    *string  `json:"supplierId"`
+	UpdatedAt     *int     `json:"updatedAt"`
+	DeletedAt     *int     `json:"deletedAt"`
+	CreatedAt     *int     `json:"createdAt"`
+}
+
+type LyeInventoryWhere struct {
+	ID                *IDFilter          `json:"id"`
+	PurchaseDate      *IntFilter         `json:"purchaseDate"`
+	ExpiryDate        *IntFilter         `json:"expiryDate"`
+	Cost              *FloatFilter       `json:"cost"`
+	Weight            *FloatFilter       `json:"weight"`
+	Concentration     *FloatFilter       `json:"concentration"`
+	Lye               *LyeWhere          `json:"lye"`
+	Supplier          *SupplierWhere     `json:"supplier"`
+	UpdatedAt         *IntFilter         `json:"updatedAt"`
+	DeletedAt         *IntFilter         `json:"deletedAt"`
+	CreatedAt         *IntFilter         `json:"createdAt"`
+	LyeLyeInventories *LyeInventoryWhere `json:"lyeLyeInventories"`
+	Or                *LyeInventoryWhere `json:"or"`
+	And               *LyeInventoryWhere `json:"and"`
+}
+
+type LyePayload struct {
+	Lye *Lye `json:"lye"`
+}
+
+type LyeUpdateInput struct {
+	Kind      *string `json:"kind"`
+	Name      *string `json:"name"`
+	Note      *string `json:"note"`
+	CreatedAt *int    `json:"createdAt"`
+	UpdatedAt *int    `json:"updatedAt"`
+	DeletedAt *int    `json:"deletedAt"`
+}
+
+type LyeWhere struct {
+	ID              *IDFilter            `json:"id"`
+	Kind            *StringFilter        `json:"kind"`
+	Name            *StringFilter        `json:"name"`
+	Note            *StringFilter        `json:"note"`
+	CreatedAt       *IntFilter           `json:"createdAt"`
+	UpdatedAt       *IntFilter           `json:"updatedAt"`
+	DeletedAt       *IntFilter           `json:"deletedAt"`
+	RecipeBatchLyes *RecipeBatchLyeWhere `json:"recipeBatchLyes"`
+	Or              *LyeWhere            `json:"or"`
+	And             *LyeWhere            `json:"and"`
 }
 
 type Recipe struct {
-	ID          string             `json:"id"`
-	Name        string             `json:"name"`
-	Lye         *RecipeLye         `json:"lye"`
-	Additives   []*RecipeAdditive  `json:"additives"`
-	Lipids      []*RecipeLipid     `json:"lipids"`
-	LipidWeight float64            `json:"lipidWeight"`
-	Fragrances  []*RecipeFragrance `json:"fragrances"`
-	Quality     *RecipeQuality     `json:"quality"`
-	Composition *RecipeComposition `json:"composition"`
-	Cost        float64            `json:"cost"`
+	ID         string             `json:"id"`
+	Name       string             `json:"name"`
+	Note       string             `json:"note"`
+	UpdatedAt  int                `json:"updatedAt"`
+	CreatedAt  int                `json:"createdAt"`
+	DeletedAt  *int               `json:"deletedAt"`
+	Additives  []*RecipeAdditive  `json:"additives"`
+	Batches    []*RecipeBatch     `json:"batches"`
+	Fragrances []*RecipeFragrance `json:"fragrances"`
+	Lipids     []*RecipeLipid     `json:"lipids"`
 }
 
 type RecipeAdditive struct {
 	ID         string    `json:"id"`
-	Additive   *Additive `json:"additive"`
 	Percentage float64   `json:"percentage"`
-	Weight     float64   `json:"weight"`
-	Cost       float64   `json:"cost"`
+	Additive   *Additive `json:"additive"`
+	Recipe     *Recipe   `json:"recipe"`
+	DeletedAt  *int      `json:"deletedAt"`
+	UpdatedAt  int       `json:"updatedAt"`
+	CreatedAt  int       `json:"createdAt"`
 }
 
-type RecipeComposition struct {
-	ID         string `json:"id"`
-	Lauric     int    `json:"lauric"`
-	Myristic   int    `json:"myristic"`
-	Palmitic   int    `json:"palmitic"`
-	Stearic    int    `json:"stearic"`
-	Ricinoleic int    `json:"ricinoleic"`
-	Oleic      int    `json:"oleic"`
-	Linoleic   int    `json:"linoleic"`
-	Linolenic  int    `json:"linolenic"`
+type RecipeAdditiveCreateInput struct {
+	Percentage float64 `json:"percentage"`
+	AdditiveID string  `json:"additiveId"`
+	RecipeID   string  `json:"recipeId"`
+	DeletedAt  *int    `json:"deletedAt"`
+	UpdatedAt  int     `json:"updatedAt"`
+	CreatedAt  int     `json:"createdAt"`
+}
+
+type RecipeAdditiveDeletePayload struct {
+	ID string `json:"id"`
+}
+
+type RecipeAdditiveFilter struct {
+	Search *string              `json:"search"`
+	Where  *RecipeAdditiveWhere `json:"where"`
+}
+
+type RecipeAdditivePayload struct {
+	RecipeAdditive *RecipeAdditive `json:"recipeAdditive"`
+}
+
+type RecipeAdditiveUpdateInput struct {
+	Percentage *float64 `json:"percentage"`
+	AdditiveID *string  `json:"additiveId"`
+	RecipeID   *string  `json:"recipeId"`
+	DeletedAt  *int     `json:"deletedAt"`
+	UpdatedAt  *int     `json:"updatedAt"`
+	CreatedAt  *int     `json:"createdAt"`
+}
+
+type RecipeAdditiveWhere struct {
+	ID         *IDFilter            `json:"id"`
+	Percentage *FloatFilter         `json:"percentage"`
+	Additive   *AdditiveWhere       `json:"additive"`
+	Recipe     *RecipeWhere         `json:"recipe"`
+	DeletedAt  *IntFilter           `json:"deletedAt"`
+	UpdatedAt  *IntFilter           `json:"updatedAt"`
+	CreatedAt  *IntFilter           `json:"createdAt"`
+	Or         *RecipeAdditiveWhere `json:"or"`
+	And        *RecipeAdditiveWhere `json:"and"`
+}
+
+type RecipeBatch struct {
+	ID               string                  `json:"id"`
+	Tag              string                  `json:"tag"`
+	ProductionDate   int                     `json:"productionDate"`
+	SellableDate     int                     `json:"sellableDate"`
+	Note             string                  `json:"note"`
+	LipidWeight      float64                 `json:"lipidWeight"`
+	ProductionWeight float64                 `json:"productionWeight"`
+	CuredWeight      float64                 `json:"curedWeight"`
+	Recipe           *Recipe                 `json:"recipe"`
+	DeletedAt        *int                    `json:"deletedAt"`
+	UpdatedAt        int                     `json:"updatedAt"`
+	CreatedAt        int                     `json:"createdAt"`
+	Additives        []*RecipeBatchAdditive  `json:"additives"`
+	Fragrances       []*RecipeBatchFragrance `json:"fragrances"`
+	Lipids           []*RecipeBatchLipid     `json:"lipids"`
+	Lye              *RecipeBatchLye         `json:"lye"`
+}
+
+type RecipeBatchAdditive struct {
+	ID        string       `json:"id"`
+	Weight    float64      `json:"weight"`
+	Cost      float64      `json:"cost"`
+	Additive  *Additive    `json:"additive"`
+	Batch     *RecipeBatch `json:"batch"`
+	UpdatedAt int          `json:"updatedAt"`
+	DeletedAt *int         `json:"deletedAt"`
+	CreatedAt int          `json:"createdAt"`
+}
+
+type RecipeBatchAdditiveCreateInput struct {
+	Weight     float64 `json:"weight"`
+	Cost       float64 `json:"cost"`
+	AdditiveID string  `json:"additiveId"`
+	BatchID    string  `json:"batchId"`
+	UpdatedAt  int     `json:"updatedAt"`
+	DeletedAt  *int    `json:"deletedAt"`
+	CreatedAt  int     `json:"createdAt"`
+}
+
+type RecipeBatchAdditiveDeletePayload struct {
+	ID string `json:"id"`
+}
+
+type RecipeBatchAdditiveFilter struct {
+	Search *string                   `json:"search"`
+	Where  *RecipeBatchAdditiveWhere `json:"where"`
+}
+
+type RecipeBatchAdditivePayload struct {
+	RecipeBatchAdditive *RecipeBatchAdditive `json:"recipeBatchAdditive"`
+}
+
+type RecipeBatchAdditiveUpdateInput struct {
+	Weight     *float64 `json:"weight"`
+	Cost       *float64 `json:"cost"`
+	AdditiveID *string  `json:"additiveId"`
+	BatchID    *string  `json:"batchId"`
+	UpdatedAt  *int     `json:"updatedAt"`
+	DeletedAt  *int     `json:"deletedAt"`
+	CreatedAt  *int     `json:"createdAt"`
+}
+
+type RecipeBatchAdditiveWhere struct {
+	ID        *IDFilter                 `json:"id"`
+	Weight    *FloatFilter              `json:"weight"`
+	Cost      *FloatFilter              `json:"cost"`
+	Additive  *AdditiveWhere            `json:"additive"`
+	Batch     *RecipeBatchWhere         `json:"batch"`
+	UpdatedAt *IntFilter                `json:"updatedAt"`
+	DeletedAt *IntFilter                `json:"deletedAt"`
+	CreatedAt *IntFilter                `json:"createdAt"`
+	Or        *RecipeBatchAdditiveWhere `json:"or"`
+	And       *RecipeBatchAdditiveWhere `json:"and"`
+}
+
+type RecipeBatchCreateInput struct {
+	Tag              string  `json:"tag"`
+	ProductionDate   int     `json:"productionDate"`
+	SellableDate     int     `json:"sellableDate"`
+	Note             string  `json:"note"`
+	LipidWeight      float64 `json:"lipidWeight"`
+	ProductionWeight float64 `json:"productionWeight"`
+	CuredWeight      float64 `json:"curedWeight"`
+	RecipeID         string  `json:"recipeId"`
+	DeletedAt        *int    `json:"deletedAt"`
+	UpdatedAt        int     `json:"updatedAt"`
+	CreatedAt        int     `json:"createdAt"`
+}
+
+type RecipeBatchDeletePayload struct {
+	ID string `json:"id"`
+}
+
+type RecipeBatchFilter struct {
+	Search *string           `json:"search"`
+	Where  *RecipeBatchWhere `json:"where"`
+}
+
+type RecipeBatchFragrance struct {
+	ID        string       `json:"id"`
+	Weight    float64      `json:"weight"`
+	Cost      float64      `json:"cost"`
+	Fragrance *Fragrance   `json:"fragrance"`
+	Batch     *RecipeBatch `json:"batch"`
+	UpdatedAt int          `json:"updatedAt"`
+	DeletedAt *int         `json:"deletedAt"`
+	CreatedAt int          `json:"createdAt"`
+}
+
+type RecipeBatchFragranceCreateInput struct {
+	Weight      float64 `json:"weight"`
+	Cost        float64 `json:"cost"`
+	FragranceID string  `json:"fragranceId"`
+	BatchID     string  `json:"batchId"`
+	UpdatedAt   int     `json:"updatedAt"`
+	DeletedAt   *int    `json:"deletedAt"`
+	CreatedAt   int     `json:"createdAt"`
+}
+
+type RecipeBatchFragranceDeletePayload struct {
+	ID string `json:"id"`
+}
+
+type RecipeBatchFragranceFilter struct {
+	Search *string                    `json:"search"`
+	Where  *RecipeBatchFragranceWhere `json:"where"`
+}
+
+type RecipeBatchFragrancePayload struct {
+	RecipeBatchFragrance *RecipeBatchFragrance `json:"recipeBatchFragrance"`
+}
+
+type RecipeBatchFragranceUpdateInput struct {
+	Weight      *float64 `json:"weight"`
+	Cost        *float64 `json:"cost"`
+	FragranceID *string  `json:"fragranceId"`
+	BatchID     *string  `json:"batchId"`
+	UpdatedAt   *int     `json:"updatedAt"`
+	DeletedAt   *int     `json:"deletedAt"`
+	CreatedAt   *int     `json:"createdAt"`
+}
+
+type RecipeBatchFragranceWhere struct {
+	ID        *IDFilter                  `json:"id"`
+	Weight    *FloatFilter               `json:"weight"`
+	Cost      *FloatFilter               `json:"cost"`
+	Fragrance *FragranceWhere            `json:"fragrance"`
+	Batch     *RecipeBatchWhere          `json:"batch"`
+	UpdatedAt *IntFilter                 `json:"updatedAt"`
+	DeletedAt *IntFilter                 `json:"deletedAt"`
+	CreatedAt *IntFilter                 `json:"createdAt"`
+	Or        *RecipeBatchFragranceWhere `json:"or"`
+	And       *RecipeBatchFragranceWhere `json:"and"`
+}
+
+type RecipeBatchLipid struct {
+	ID        string       `json:"id"`
+	Weight    float64      `json:"weight"`
+	Cost      float64      `json:"cost"`
+	Lipid     *Lipid       `json:"lipid"`
+	Batch     *RecipeBatch `json:"batch"`
+	DeletedAt *int         `json:"deletedAt"`
+	CreatedAt int          `json:"createdAt"`
+	UpdatedAt int          `json:"updatedAt"`
+}
+
+type RecipeBatchLipidCreateInput struct {
+	Weight    float64 `json:"weight"`
+	Cost      float64 `json:"cost"`
+	LipidID   string  `json:"lipidId"`
+	BatchID   string  `json:"batchId"`
+	DeletedAt *int    `json:"deletedAt"`
+	CreatedAt int     `json:"createdAt"`
+	UpdatedAt int     `json:"updatedAt"`
+}
+
+type RecipeBatchLipidDeletePayload struct {
+	ID string `json:"id"`
+}
+
+type RecipeBatchLipidFilter struct {
+	Search *string                `json:"search"`
+	Where  *RecipeBatchLipidWhere `json:"where"`
+}
+
+type RecipeBatchLipidPayload struct {
+	RecipeBatchLipid *RecipeBatchLipid `json:"recipeBatchLipid"`
+}
+
+type RecipeBatchLipidUpdateInput struct {
+	Weight    *float64 `json:"weight"`
+	Cost      *float64 `json:"cost"`
+	LipidID   *string  `json:"lipidId"`
+	BatchID   *string  `json:"batchId"`
+	DeletedAt *int     `json:"deletedAt"`
+	CreatedAt *int     `json:"createdAt"`
+	UpdatedAt *int     `json:"updatedAt"`
+}
+
+type RecipeBatchLipidWhere struct {
+	ID        *IDFilter              `json:"id"`
+	Weight    *FloatFilter           `json:"weight"`
+	Cost      *FloatFilter           `json:"cost"`
+	Lipid     *LipidWhere            `json:"lipid"`
+	Batch     *RecipeBatchWhere      `json:"batch"`
+	DeletedAt *IntFilter             `json:"deletedAt"`
+	CreatedAt *IntFilter             `json:"createdAt"`
+	UpdatedAt *IntFilter             `json:"updatedAt"`
+	Or        *RecipeBatchLipidWhere `json:"or"`
+	And       *RecipeBatchLipidWhere `json:"and"`
+}
+
+type RecipeBatchLye struct {
+	ID        string       `json:"id"`
+	Weight    float64      `json:"weight"`
+	Discount  float64      `json:"discount"`
+	Cost      float64      `json:"cost"`
+	Lye       *Lye         `json:"lye"`
+	Batch     *RecipeBatch `json:"batch"`
+	UpdatedAt int          `json:"updatedAt"`
+	DeletedAt *int         `json:"deletedAt"`
+	CreatedAt int          `json:"createdAt"`
+}
+
+type RecipeBatchLyeCreateInput struct {
+	Weight    float64 `json:"weight"`
+	Discount  float64 `json:"discount"`
+	Cost      float64 `json:"cost"`
+	LyeID     string  `json:"lyeId"`
+	BatchID   string  `json:"batchId"`
+	UpdatedAt int     `json:"updatedAt"`
+	DeletedAt *int    `json:"deletedAt"`
+	CreatedAt int     `json:"createdAt"`
+}
+
+type RecipeBatchLyeDeletePayload struct {
+	ID string `json:"id"`
+}
+
+type RecipeBatchLyeFilter struct {
+	Search *string              `json:"search"`
+	Where  *RecipeBatchLyeWhere `json:"where"`
+}
+
+type RecipeBatchLyePayload struct {
+	RecipeBatchLye *RecipeBatchLye `json:"recipeBatchLye"`
+}
+
+type RecipeBatchLyeUpdateInput struct {
+	Weight    *float64 `json:"weight"`
+	Discount  *float64 `json:"discount"`
+	Cost      *float64 `json:"cost"`
+	LyeID     *string  `json:"lyeId"`
+	BatchID   *string  `json:"batchId"`
+	UpdatedAt *int     `json:"updatedAt"`
+	DeletedAt *int     `json:"deletedAt"`
+	CreatedAt *int     `json:"createdAt"`
+}
+
+type RecipeBatchLyeWhere struct {
+	ID        *IDFilter            `json:"id"`
+	Weight    *FloatFilter         `json:"weight"`
+	Discount  *FloatFilter         `json:"discount"`
+	Cost      *FloatFilter         `json:"cost"`
+	Lye       *LyeWhere            `json:"lye"`
+	Batch     *RecipeBatchWhere    `json:"batch"`
+	UpdatedAt *IntFilter           `json:"updatedAt"`
+	DeletedAt *IntFilter           `json:"deletedAt"`
+	CreatedAt *IntFilter           `json:"createdAt"`
+	Or        *RecipeBatchLyeWhere `json:"or"`
+	And       *RecipeBatchLyeWhere `json:"and"`
+}
+
+type RecipeBatchPayload struct {
+	RecipeBatch *RecipeBatch `json:"recipeBatch"`
+}
+
+type RecipeBatchUpdateInput struct {
+	Tag              *string  `json:"tag"`
+	ProductionDate   *int     `json:"productionDate"`
+	SellableDate     *int     `json:"sellableDate"`
+	Note             *string  `json:"note"`
+	LipidWeight      *float64 `json:"lipidWeight"`
+	ProductionWeight *float64 `json:"productionWeight"`
+	CuredWeight      *float64 `json:"curedWeight"`
+	RecipeID         *string  `json:"recipeId"`
+	DeletedAt        *int     `json:"deletedAt"`
+	UpdatedAt        *int     `json:"updatedAt"`
+	CreatedAt        *int     `json:"createdAt"`
+}
+
+type RecipeBatchWhere struct {
+	ID                         *IDFilter                  `json:"id"`
+	Tag                        *StringFilter              `json:"tag"`
+	ProductionDate             *IntFilter                 `json:"productionDate"`
+	SellableDate               *IntFilter                 `json:"sellableDate"`
+	Note                       *StringFilter              `json:"note"`
+	LipidWeight                *FloatFilter               `json:"lipidWeight"`
+	ProductionWeight           *FloatFilter               `json:"productionWeight"`
+	CuredWeight                *FloatFilter               `json:"curedWeight"`
+	Recipe                     *RecipeWhere               `json:"recipe"`
+	DeletedAt                  *IntFilter                 `json:"deletedAt"`
+	UpdatedAt                  *IntFilter                 `json:"updatedAt"`
+	CreatedAt                  *IntFilter                 `json:"createdAt"`
+	BatchRecipeBatchAdditives  *RecipeBatchAdditiveWhere  `json:"batchRecipeBatchAdditives"`
+	BatchRecipeBatchFragrances *RecipeBatchFragranceWhere `json:"batchRecipeBatchFragrances"`
+	BatchRecipeBatchLipids     *RecipeBatchLipidWhere     `json:"batchRecipeBatchLipids"`
+	BatchRecipeBatchLyes       *RecipeBatchLyeWhere       `json:"batchRecipeBatchLyes"`
+	Or                         *RecipeBatchWhere          `json:"or"`
+	And                        *RecipeBatchWhere          `json:"and"`
+}
+
+type RecipeCreateInput struct {
+	Name      string `json:"name"`
+	Note      string `json:"note"`
+	UpdatedAt int    `json:"updatedAt"`
+	CreatedAt int    `json:"createdAt"`
+	DeletedAt *int   `json:"deletedAt"`
+}
+
+type RecipeDeletePayload struct {
+	ID string `json:"id"`
+}
+
+type RecipeFilter struct {
+	Search *string      `json:"search"`
+	Where  *RecipeWhere `json:"where"`
 }
 
 type RecipeFragrance struct {
 	ID         string     `json:"id"`
-	Fragrance  *Fragrance `json:"fragrance"`
 	Percentage float64    `json:"percentage"`
-	Weight     float64    `json:"weight"`
+	Fragrance  *Fragrance `json:"fragrance"`
+	Recipe     *Recipe    `json:"recipe"`
+	DeletedAt  *int       `json:"deletedAt"`
+	CreatedAt  int        `json:"createdAt"`
+	UpdatedAt  int        `json:"updatedAt"`
+}
+
+type RecipeFragranceCreateInput struct {
+	Percentage  float64 `json:"percentage"`
+	FragranceID string  `json:"fragranceId"`
+	RecipeID    string  `json:"recipeId"`
+	DeletedAt   *int    `json:"deletedAt"`
+	CreatedAt   int     `json:"createdAt"`
+	UpdatedAt   int     `json:"updatedAt"`
+}
+
+type RecipeFragranceDeletePayload struct {
+	ID string `json:"id"`
+}
+
+type RecipeFragranceFilter struct {
+	Search *string               `json:"search"`
+	Where  *RecipeFragranceWhere `json:"where"`
+}
+
+type RecipeFragrancePayload struct {
+	RecipeFragrance *RecipeFragrance `json:"recipeFragrance"`
+}
+
+type RecipeFragranceUpdateInput struct {
+	Percentage  *float64 `json:"percentage"`
+	FragranceID *string  `json:"fragranceId"`
+	RecipeID    *string  `json:"recipeId"`
+	DeletedAt   *int     `json:"deletedAt"`
+	CreatedAt   *int     `json:"createdAt"`
+	UpdatedAt   *int     `json:"updatedAt"`
+}
+
+type RecipeFragranceWhere struct {
+	ID         *IDFilter             `json:"id"`
+	Percentage *FloatFilter          `json:"percentage"`
+	Fragrance  *FragranceWhere       `json:"fragrance"`
+	Recipe     *RecipeWhere          `json:"recipe"`
+	DeletedAt  *IntFilter            `json:"deletedAt"`
+	CreatedAt  *IntFilter            `json:"createdAt"`
+	UpdatedAt  *IntFilter            `json:"updatedAt"`
+	Or         *RecipeFragranceWhere `json:"or"`
+	And        *RecipeFragranceWhere `json:"and"`
 }
 
 type RecipeLipid struct {
 	ID         string  `json:"id"`
-	Lipid      *Lipid  `json:"lipid"`
 	Percentage float64 `json:"percentage"`
-	Weight     float64 `json:"weight"`
-	Cost       float64 `json:"cost"`
+	Lipid      *Lipid  `json:"lipid"`
+	Recipe     *Recipe `json:"recipe"`
+	CreatedAt  int     `json:"createdAt"`
+	DeletedAt  *int    `json:"deletedAt"`
+	UpdatedAt  int     `json:"updatedAt"`
 }
 
-type RecipeLye struct {
-	ID            string  `json:"id"`
-	Type          LyeType `json:"type"`
-	Weight        float64 `json:"weight"`
-	Concentration float64 `json:"concentration"`
-	Discount      float64 `json:"discount"`
-	Cost          float64 `json:"cost"`
+type RecipeLipidCreateInput struct {
+	Percentage float64 `json:"percentage"`
+	LipidID    string  `json:"lipidId"`
+	RecipeID   string  `json:"recipeId"`
+	CreatedAt  int     `json:"createdAt"`
+	DeletedAt  *int    `json:"deletedAt"`
+	UpdatedAt  int     `json:"updatedAt"`
 }
 
-type RecipeQuality struct {
-	ID           string `json:"id"`
-	Hardness     int    `json:"hardness"`
-	Cleansing    int    `json:"cleansing"`
-	Conditioning int    `json:"conditioning"`
-	Bubbly       int    `json:"bubbly"`
-	Creamy       int    `json:"creamy"`
-	Iodine       int    `json:"iodine"`
-	Ins          int    `json:"ins"`
+type RecipeLipidDeletePayload struct {
+	ID string `json:"id"`
+}
+
+type RecipeLipidFilter struct {
+	Search *string           `json:"search"`
+	Where  *RecipeLipidWhere `json:"where"`
+}
+
+type RecipeLipidPayload struct {
+	RecipeLipid *RecipeLipid `json:"recipeLipid"`
+}
+
+type RecipeLipidUpdateInput struct {
+	Percentage *float64 `json:"percentage"`
+	LipidID    *string  `json:"lipidId"`
+	RecipeID   *string  `json:"recipeId"`
+	CreatedAt  *int     `json:"createdAt"`
+	DeletedAt  *int     `json:"deletedAt"`
+	UpdatedAt  *int     `json:"updatedAt"`
+}
+
+type RecipeLipidWhere struct {
+	ID         *IDFilter         `json:"id"`
+	Percentage *FloatFilter      `json:"percentage"`
+	Lipid      *LipidWhere       `json:"lipid"`
+	Recipe     *RecipeWhere      `json:"recipe"`
+	CreatedAt  *IntFilter        `json:"createdAt"`
+	DeletedAt  *IntFilter        `json:"deletedAt"`
+	UpdatedAt  *IntFilter        `json:"updatedAt"`
+	Or         *RecipeLipidWhere `json:"or"`
+	And        *RecipeLipidWhere `json:"and"`
+}
+
+type RecipePayload struct {
+	Recipe *Recipe `json:"recipe"`
+}
+
+type RecipeUpdateInput struct {
+	Name      *string `json:"name"`
+	Note      *string `json:"note"`
+	UpdatedAt *int    `json:"updatedAt"`
+	CreatedAt *int    `json:"createdAt"`
+	DeletedAt *int    `json:"deletedAt"`
+}
+
+type RecipeWhere struct {
+	ID               *IDFilter             `json:"id"`
+	Name             *StringFilter         `json:"name"`
+	Note             *StringFilter         `json:"note"`
+	UpdatedAt        *IntFilter            `json:"updatedAt"`
+	CreatedAt        *IntFilter            `json:"createdAt"`
+	DeletedAt        *IntFilter            `json:"deletedAt"`
+	RecipeAdditives  *RecipeAdditiveWhere  `json:"recipeAdditives"`
+	RecipeBatches    *RecipeBatchWhere     `json:"recipeBatches"`
+	RecipeFragrances *RecipeFragranceWhere `json:"recipeFragrances"`
+	RecipeLipids     *RecipeLipidWhere     `json:"recipeLipids"`
+	Or               *RecipeWhere          `json:"or"`
+	And              *RecipeWhere          `json:"and"`
+}
+
+type StringFilter struct {
+	EqualTo            *string  `json:"equalTo"`
+	NotEqualTo         *string  `json:"notEqualTo"`
+	In                 []string `json:"in"`
+	NotIn              []string `json:"notIn"`
+	StartWith          *string  `json:"startWith"`
+	NotStartWith       *string  `json:"notStartWith"`
+	EndWith            *string  `json:"endWith"`
+	NotEndWith         *string  `json:"notEndWith"`
+	Contain            *string  `json:"contain"`
+	NotContain         *string  `json:"notContain"`
+	StartWithStrict    *string  `json:"startWithStrict"`
+	NotStartWithStrict *string  `json:"notStartWithStrict"`
+	EndWithStrict      *string  `json:"endWithStrict"`
+	NotEndWithStrict   *string  `json:"notEndWithStrict"`
+	ContainStrict      *string  `json:"containStrict"`
+	NotContainStrict   *string  `json:"notContainStrict"`
 }
 
 type Supplier struct {
-	ID   string `json:"id"`
-	Name string `json:"name"`
-	Note string `json:"note"`
+	ID                   string                `json:"id"`
+	Name                 string                `json:"name"`
+	Website              string                `json:"website"`
+	Note                 string                `json:"note"`
+	DeletedAt            *int                  `json:"deletedAt"`
+	UpdatedAt            int                   `json:"updatedAt"`
+	CreatedAt            int                   `json:"createdAt"`
+	AdditiveInventories  []*AdditiveInventory  `json:"additiveInventories"`
+	FragranceInventories []*FragranceInventory `json:"fragranceInventories"`
+	LipidInventories     []*LipidInventory     `json:"lipidInventories"`
+	LyeInventories       []*LyeInventory       `json:"lyeInventories"`
 }
 
-type LyeType string
-
-const (
-	LyeTypeNaOh LyeType = "NaOH"
-	LyeTypeKoh  LyeType = "KOH"
-)
-
-var AllLyeType = []LyeType{
-	LyeTypeNaOh,
-	LyeTypeKoh,
+type SupplierCreateInput struct {
+	Name      string `json:"name"`
+	Website   string `json:"website"`
+	Note      string `json:"note"`
+	DeletedAt *int   `json:"deletedAt"`
+	UpdatedAt int    `json:"updatedAt"`
+	CreatedAt int    `json:"createdAt"`
 }
 
-func (e LyeType) IsValid() bool {
-	switch e {
-	case LyeTypeNaOh, LyeTypeKoh:
-		return true
-	}
-	return false
+type SupplierDeletePayload struct {
+	ID string `json:"id"`
 }
 
-func (e LyeType) String() string {
-	return string(e)
+type SupplierFilter struct {
+	Search *string        `json:"search"`
+	Where  *SupplierWhere `json:"where"`
 }
 
-func (e *LyeType) UnmarshalGQL(v interface{}) error {
-	str, ok := v.(string)
-	if !ok {
-		return fmt.Errorf("enums must be strings")
-	}
-
-	*e = LyeType(str)
-	if !e.IsValid() {
-		return fmt.Errorf("%s is not a valid LyeType", str)
-	}
-	return nil
+type SupplierPayload struct {
+	Supplier *Supplier `json:"supplier"`
 }
 
-func (e LyeType) MarshalGQL(w io.Writer) {
-	fmt.Fprint(w, strconv.Quote(e.String()))
+type SupplierUpdateInput struct {
+	Name      *string `json:"name"`
+	Website   *string `json:"website"`
+	Note      *string `json:"note"`
+	DeletedAt *int    `json:"deletedAt"`
+	UpdatedAt *int    `json:"updatedAt"`
+	CreatedAt *int    `json:"createdAt"`
+}
+
+type SupplierWhere struct {
+	ID                   *IDFilter                `json:"id"`
+	Name                 *StringFilter            `json:"name"`
+	Website              *StringFilter            `json:"website"`
+	Note                 *StringFilter            `json:"note"`
+	DeletedAt            *IntFilter               `json:"deletedAt"`
+	UpdatedAt            *IntFilter               `json:"updatedAt"`
+	CreatedAt            *IntFilter               `json:"createdAt"`
+	AdditiveInventories  *AdditiveInventoryWhere  `json:"additiveInventories"`
+	FragranceInventories *FragranceInventoryWhere `json:"fragranceInventories"`
+	LipidInventories     *LipidInventoryWhere     `json:"lipidInventories"`
+	LyeInventories       *LyeInventoryWhere       `json:"lyeInventories"`
+	Or                   *SupplierWhere           `json:"or"`
+	And                  *SupplierWhere           `json:"and"`
 }
