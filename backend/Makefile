@@ -66,11 +66,24 @@ init: get_geoip get_cognito
 build_pkg: generate
 	cd pkg; go build ./...
 
-generate: protobufs
-	cd pkg; go generate ./...
+generate: sqlboiler gqlgen
+	# cd pkg; go generate ./...
+	go generate ./...
 
 gqlgen:
 	go run github.com/99designs/gqlgen generate
+
+sqlboiler:
+	sqlboiler psql --no-back-referencing --wipe --add-soft-deletes
+
+sqlgqlschema:
+	cd schema; rm -f soap.graphqls
+	go run github.com/web-ridge/sqlboiler-graphql-schema --input generated/db/models --output schema/soap.graphqls  \
+		--pagination=yes \
+        --batch-update=false \
+        --batch-create=false \
+        --batch-delete=false
+	# go run github.com/web-ridge/sqlboiler-graphql-schema --input generated/db/models --output schema/soap.graphqls --directives=isAuthenticated --pagination=yes
 
 protobufs:
 	test -n "$(PROTO_PATH)"
@@ -83,6 +96,9 @@ build: build_service
 # build service code
 build_service:
 	go build $(LDFLAGS) -o $(BIN_DIR)/$(SERVICE_BINARY_NAME) $(SERVICE_MAIN)
+
+migrate:
+	cd ../admin; python manage.py makemigrations && python manage.py migrate
 
 deploy_soap_list:
 	AWS_PROFILE=$(AWS_PROFILE) aws ecr list-images --repository-name soap | jq '.imageIds[].imageTag' | sort
