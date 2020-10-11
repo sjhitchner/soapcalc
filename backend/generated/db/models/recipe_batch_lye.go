@@ -32,6 +32,7 @@ type RecipeBatchLye struct {
 	Discount  float64   `boil:"discount" json:"discount" toml:"discount" yaml:"discount"`
 	Cost      float64   `boil:"cost" json:"cost" toml:"cost" yaml:"cost"`
 	LyeID     int       `boil:"lye_id" json:"lye_id" toml:"lye_id" yaml:"lye_id"`
+	BatchID   int       `boil:"batch_id" json:"batch_id" toml:"batch_id" yaml:"batch_id"`
 
 	R *recipeBatchLyeR `boil:"-" json:"-" toml:"-" yaml:"-"`
 	L recipeBatchLyeL  `boil:"-" json:"-" toml:"-" yaml:"-"`
@@ -46,6 +47,7 @@ var RecipeBatchLyeColumns = struct {
 	Discount  string
 	Cost      string
 	LyeID     string
+	BatchID   string
 }{
 	ID:        "id",
 	CreatedAt: "created_at",
@@ -55,6 +57,7 @@ var RecipeBatchLyeColumns = struct {
 	Discount:  "discount",
 	Cost:      "cost",
 	LyeID:     "lye_id",
+	BatchID:   "batch_id",
 }
 
 // Generated where
@@ -68,6 +71,7 @@ var RecipeBatchLyeWhere = struct {
 	Discount  whereHelperfloat64
 	Cost      whereHelperfloat64
 	LyeID     whereHelperint
+	BatchID   whereHelperint
 }{
 	ID:        whereHelperint{field: "\"recipe_batch_lye\".\"id\""},
 	CreatedAt: whereHelpertime_Time{field: "\"recipe_batch_lye\".\"created_at\""},
@@ -77,18 +81,22 @@ var RecipeBatchLyeWhere = struct {
 	Discount:  whereHelperfloat64{field: "\"recipe_batch_lye\".\"discount\""},
 	Cost:      whereHelperfloat64{field: "\"recipe_batch_lye\".\"cost\""},
 	LyeID:     whereHelperint{field: "\"recipe_batch_lye\".\"lye_id\""},
+	BatchID:   whereHelperint{field: "\"recipe_batch_lye\".\"batch_id\""},
 }
 
 // RecipeBatchLyeRels is where relationship names are stored.
 var RecipeBatchLyeRels = struct {
-	Lye string
+	Batch string
+	Lye   string
 }{
-	Lye: "Lye",
+	Batch: "Batch",
+	Lye:   "Lye",
 }
 
 // recipeBatchLyeR is where relationships are stored.
 type recipeBatchLyeR struct {
-	Lye *Lye `boil:"Lye" json:"Lye" toml:"Lye" yaml:"Lye"`
+	Batch *RecipeBatch `boil:"Batch" json:"Batch" toml:"Batch" yaml:"Batch"`
+	Lye   *Lye         `boil:"Lye" json:"Lye" toml:"Lye" yaml:"Lye"`
 }
 
 // NewStruct creates a new relationship struct
@@ -100,8 +108,8 @@ func (*recipeBatchLyeR) NewStruct() *recipeBatchLyeR {
 type recipeBatchLyeL struct{}
 
 var (
-	recipeBatchLyeAllColumns            = []string{"id", "created_at", "updated_at", "deleted_at", "weight", "discount", "cost", "lye_id"}
-	recipeBatchLyeColumnsWithoutDefault = []string{"created_at", "updated_at", "deleted_at", "weight", "discount", "cost", "lye_id"}
+	recipeBatchLyeAllColumns            = []string{"id", "created_at", "updated_at", "deleted_at", "weight", "discount", "cost", "lye_id", "batch_id"}
+	recipeBatchLyeColumnsWithoutDefault = []string{"created_at", "updated_at", "deleted_at", "weight", "discount", "cost", "lye_id", "batch_id"}
 	recipeBatchLyeColumnsWithDefault    = []string{"id"}
 	recipeBatchLyePrimaryKeyColumns     = []string{"id"}
 )
@@ -381,6 +389,21 @@ func (q recipeBatchLyeQuery) Exists(ctx context.Context, exec boil.ContextExecut
 	return count > 0, nil
 }
 
+// Batch pointed to by the foreign key.
+func (o *RecipeBatchLye) Batch(mods ...qm.QueryMod) recipeBatchQuery {
+	queryMods := []qm.QueryMod{
+		qm.Where("\"id\" = ?", o.BatchID),
+		qmhelper.WhereIsNull("deleted_at"),
+	}
+
+	queryMods = append(queryMods, mods...)
+
+	query := RecipeBatches(queryMods...)
+	queries.SetFrom(query.Query, "\"recipe_batch\"")
+
+	return query
+}
+
 // Lye pointed to by the foreign key.
 func (o *RecipeBatchLye) Lye(mods ...qm.QueryMod) lyeQuery {
 	queryMods := []qm.QueryMod{
@@ -394,6 +417,103 @@ func (o *RecipeBatchLye) Lye(mods ...qm.QueryMod) lyeQuery {
 	queries.SetFrom(query.Query, "\"lye\"")
 
 	return query
+}
+
+// LoadBatch allows an eager lookup of values, cached into the
+// loaded structs of the objects. This is for an N-1 relationship.
+func (recipeBatchLyeL) LoadBatch(ctx context.Context, e boil.ContextExecutor, singular bool, maybeRecipeBatchLye interface{}, mods queries.Applicator) error {
+	var slice []*RecipeBatchLye
+	var object *RecipeBatchLye
+
+	if singular {
+		object = maybeRecipeBatchLye.(*RecipeBatchLye)
+	} else {
+		slice = *maybeRecipeBatchLye.(*[]*RecipeBatchLye)
+	}
+
+	args := make([]interface{}, 0, 1)
+	if singular {
+		if object.R == nil {
+			object.R = &recipeBatchLyeR{}
+		}
+		args = append(args, object.BatchID)
+
+	} else {
+	Outer:
+		for _, obj := range slice {
+			if obj.R == nil {
+				obj.R = &recipeBatchLyeR{}
+			}
+
+			for _, a := range args {
+				if a == obj.BatchID {
+					continue Outer
+				}
+			}
+
+			args = append(args, obj.BatchID)
+
+		}
+	}
+
+	if len(args) == 0 {
+		return nil
+	}
+
+	query := NewQuery(
+		qm.From(`recipe_batch`),
+		qm.WhereIn(`recipe_batch.id in ?`, args...),
+		qmhelper.WhereIsNull(`recipe_batch.deleted_at`),
+	)
+	if mods != nil {
+		mods.Apply(query)
+	}
+
+	results, err := query.QueryContext(ctx, e)
+	if err != nil {
+		return errors.Wrap(err, "failed to eager load RecipeBatch")
+	}
+
+	var resultSlice []*RecipeBatch
+	if err = queries.Bind(results, &resultSlice); err != nil {
+		return errors.Wrap(err, "failed to bind eager loaded slice RecipeBatch")
+	}
+
+	if err = results.Close(); err != nil {
+		return errors.Wrap(err, "failed to close results of eager load for recipe_batch")
+	}
+	if err = results.Err(); err != nil {
+		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for recipe_batch")
+	}
+
+	if len(recipeBatchLyeAfterSelectHooks) != 0 {
+		for _, obj := range resultSlice {
+			if err := obj.doAfterSelectHooks(ctx, e); err != nil {
+				return err
+			}
+		}
+	}
+
+	if len(resultSlice) == 0 {
+		return nil
+	}
+
+	if singular {
+		foreign := resultSlice[0]
+		object.R.Batch = foreign
+		return nil
+	}
+
+	for _, local := range slice {
+		for _, foreign := range resultSlice {
+			if local.BatchID == foreign.ID {
+				local.R.Batch = foreign
+				break
+			}
+		}
+	}
+
+	return nil
 }
 
 // LoadLye allows an eager lookup of values, cached into the
@@ -488,6 +608,53 @@ func (recipeBatchLyeL) LoadLye(ctx context.Context, e boil.ContextExecutor, sing
 				break
 			}
 		}
+	}
+
+	return nil
+}
+
+// SetBatch of the recipeBatchLye to the related item.
+// Sets o.R.Batch to related.
+// Adds o to related.R.BatchRecipeBatchLyes.
+func (o *RecipeBatchLye) SetBatch(ctx context.Context, exec boil.ContextExecutor, insert bool, related *RecipeBatch) error {
+	var err error
+	if insert {
+		if err = related.Insert(ctx, exec, boil.Infer()); err != nil {
+			return errors.Wrap(err, "failed to insert into foreign table")
+		}
+	}
+
+	updateQuery := fmt.Sprintf(
+		"UPDATE \"recipe_batch_lye\" SET %s WHERE %s",
+		strmangle.SetParamNames("\"", "\"", 1, []string{"batch_id"}),
+		strmangle.WhereClause("\"", "\"", 2, recipeBatchLyePrimaryKeyColumns),
+	)
+	values := []interface{}{related.ID, o.ID}
+
+	if boil.IsDebug(ctx) {
+		writer := boil.DebugWriterFrom(ctx)
+		fmt.Fprintln(writer, updateQuery)
+		fmt.Fprintln(writer, values)
+	}
+	if _, err = exec.ExecContext(ctx, updateQuery, values...); err != nil {
+		return errors.Wrap(err, "failed to update local table")
+	}
+
+	o.BatchID = related.ID
+	if o.R == nil {
+		o.R = &recipeBatchLyeR{
+			Batch: related,
+		}
+	} else {
+		o.R.Batch = related
+	}
+
+	if related.R == nil {
+		related.R = &recipeBatchR{
+			BatchRecipeBatchLyes: RecipeBatchLyeSlice{o},
+		}
+	} else {
+		related.R.BatchRecipeBatchLyes = append(related.R.BatchRecipeBatchLyes, o)
 	}
 
 	return nil

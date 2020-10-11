@@ -1129,7 +1129,7 @@ func testLipidsSelect(t *testing.T) {
 }
 
 var (
-	lipidDBTypes = map[string]string{`ID`: `integer`, `CreatedAt`: `timestamp with time zone`, `UpdatedAt`: `timestamp with time zone`, `DeletedAt`: `timestamp with time zone`, `Name`: `character varying`, `Lauric`: `integer`, `Myristic`: `integer`, `Palmitic`: `integer`, `Stearic`: `integer`, `Ricinoleic`: `integer`, `Oleic`: `integer`, `Linoleic`: `integer`, `Linolenic`: `integer`, `Hardness`: `integer`, `Cleansing`: `integer`, `Conditioning`: `integer`, `Bubbly`: `integer`, `Creamy`: `integer`, `Iodine`: `integer`, `Ins`: `integer`, `InciName`: `character varying`}
+	lipidDBTypes = map[string]string{`ID`: `integer`, `CreatedAt`: `timestamp with time zone`, `UpdatedAt`: `timestamp with time zone`, `DeletedAt`: `timestamp with time zone`, `Name`: `character varying`, `Lauric`: `integer`, `Myristic`: `integer`, `Palmitic`: `integer`, `Stearic`: `integer`, `Ricinoleic`: `integer`, `Oleic`: `integer`, `Linoleic`: `integer`, `Linolenic`: `integer`, `Hardness`: `integer`, `Cleansing`: `integer`, `Conditioning`: `integer`, `Bubbly`: `integer`, `Creamy`: `integer`, `Iodine`: `integer`, `Ins`: `integer`, `InciName`: `character varying`, `Family`: `character varying`, `Naoh`: `double precision`}
 	_            = bytes.MinRead
 )
 

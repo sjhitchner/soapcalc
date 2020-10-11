@@ -31,6 +31,7 @@ type RecipeBatchAdditive struct {
 	Weight     float64   `boil:"weight" json:"weight" toml:"weight" yaml:"weight"`
 	Cost       float64   `boil:"cost" json:"cost" toml:"cost" yaml:"cost"`
 	AdditiveID int       `boil:"additive_id" json:"additive_id" toml:"additive_id" yaml:"additive_id"`
+	BatchID    int       `boil:"batch_id" json:"batch_id" toml:"batch_id" yaml:"batch_id"`
 
 	R *recipeBatchAdditiveR `boil:"-" json:"-" toml:"-" yaml:"-"`
 	L recipeBatchAdditiveL  `boil:"-" json:"-" toml:"-" yaml:"-"`
@@ -44,6 +45,7 @@ var RecipeBatchAdditiveColumns = struct {
 	Weight     string
 	Cost       string
 	AdditiveID string
+	BatchID    string
 }{
 	ID:         "id",
 	CreatedAt:  "created_at",
@@ -52,6 +54,7 @@ var RecipeBatchAdditiveColumns = struct {
 	Weight:     "weight",
 	Cost:       "cost",
 	AdditiveID: "additive_id",
+	BatchID:    "batch_id",
 }
 
 // Generated where
@@ -64,6 +67,7 @@ var RecipeBatchAdditiveWhere = struct {
 	Weight     whereHelperfloat64
 	Cost       whereHelperfloat64
 	AdditiveID whereHelperint
+	BatchID    whereHelperint
 }{
 	ID:         whereHelperint{field: "\"recipe_batch_additive\".\"id\""},
 	CreatedAt:  whereHelpertime_Time{field: "\"recipe_batch_additive\".\"created_at\""},
@@ -72,18 +76,22 @@ var RecipeBatchAdditiveWhere = struct {
 	Weight:     whereHelperfloat64{field: "\"recipe_batch_additive\".\"weight\""},
 	Cost:       whereHelperfloat64{field: "\"recipe_batch_additive\".\"cost\""},
 	AdditiveID: whereHelperint{field: "\"recipe_batch_additive\".\"additive_id\""},
+	BatchID:    whereHelperint{field: "\"recipe_batch_additive\".\"batch_id\""},
 }
 
 // RecipeBatchAdditiveRels is where relationship names are stored.
 var RecipeBatchAdditiveRels = struct {
 	Additive string
+	Batch    string
 }{
 	Additive: "Additive",
+	Batch:    "Batch",
 }
 
 // recipeBatchAdditiveR is where relationships are stored.
 type recipeBatchAdditiveR struct {
-	Additive *Additive `boil:"Additive" json:"Additive" toml:"Additive" yaml:"Additive"`
+	Additive *Additive    `boil:"Additive" json:"Additive" toml:"Additive" yaml:"Additive"`
+	Batch    *RecipeBatch `boil:"Batch" json:"Batch" toml:"Batch" yaml:"Batch"`
 }
 
 // NewStruct creates a new relationship struct
@@ -95,8 +103,8 @@ func (*recipeBatchAdditiveR) NewStruct() *recipeBatchAdditiveR {
 type recipeBatchAdditiveL struct{}
 
 var (
-	recipeBatchAdditiveAllColumns            = []string{"id", "created_at", "updated_at", "deleted_at", "weight", "cost", "additive_id"}
-	recipeBatchAdditiveColumnsWithoutDefault = []string{"created_at", "updated_at", "deleted_at", "weight", "cost", "additive_id"}
+	recipeBatchAdditiveAllColumns            = []string{"id", "created_at", "updated_at", "deleted_at", "weight", "cost", "additive_id", "batch_id"}
+	recipeBatchAdditiveColumnsWithoutDefault = []string{"created_at", "updated_at", "deleted_at", "weight", "cost", "additive_id", "batch_id"}
 	recipeBatchAdditiveColumnsWithDefault    = []string{"id"}
 	recipeBatchAdditivePrimaryKeyColumns     = []string{"id"}
 )
@@ -391,6 +399,21 @@ func (o *RecipeBatchAdditive) Additive(mods ...qm.QueryMod) additiveQuery {
 	return query
 }
 
+// Batch pointed to by the foreign key.
+func (o *RecipeBatchAdditive) Batch(mods ...qm.QueryMod) recipeBatchQuery {
+	queryMods := []qm.QueryMod{
+		qm.Where("\"id\" = ?", o.BatchID),
+		qmhelper.WhereIsNull("deleted_at"),
+	}
+
+	queryMods = append(queryMods, mods...)
+
+	query := RecipeBatches(queryMods...)
+	queries.SetFrom(query.Query, "\"recipe_batch\"")
+
+	return query
+}
+
 // LoadAdditive allows an eager lookup of values, cached into the
 // loaded structs of the objects. This is for an N-1 relationship.
 func (recipeBatchAdditiveL) LoadAdditive(ctx context.Context, e boil.ContextExecutor, singular bool, maybeRecipeBatchAdditive interface{}, mods queries.Applicator) error {
@@ -488,6 +511,103 @@ func (recipeBatchAdditiveL) LoadAdditive(ctx context.Context, e boil.ContextExec
 	return nil
 }
 
+// LoadBatch allows an eager lookup of values, cached into the
+// loaded structs of the objects. This is for an N-1 relationship.
+func (recipeBatchAdditiveL) LoadBatch(ctx context.Context, e boil.ContextExecutor, singular bool, maybeRecipeBatchAdditive interface{}, mods queries.Applicator) error {
+	var slice []*RecipeBatchAdditive
+	var object *RecipeBatchAdditive
+
+	if singular {
+		object = maybeRecipeBatchAdditive.(*RecipeBatchAdditive)
+	} else {
+		slice = *maybeRecipeBatchAdditive.(*[]*RecipeBatchAdditive)
+	}
+
+	args := make([]interface{}, 0, 1)
+	if singular {
+		if object.R == nil {
+			object.R = &recipeBatchAdditiveR{}
+		}
+		args = append(args, object.BatchID)
+
+	} else {
+	Outer:
+		for _, obj := range slice {
+			if obj.R == nil {
+				obj.R = &recipeBatchAdditiveR{}
+			}
+
+			for _, a := range args {
+				if a == obj.BatchID {
+					continue Outer
+				}
+			}
+
+			args = append(args, obj.BatchID)
+
+		}
+	}
+
+	if len(args) == 0 {
+		return nil
+	}
+
+	query := NewQuery(
+		qm.From(`recipe_batch`),
+		qm.WhereIn(`recipe_batch.id in ?`, args...),
+		qmhelper.WhereIsNull(`recipe_batch.deleted_at`),
+	)
+	if mods != nil {
+		mods.Apply(query)
+	}
+
+	results, err := query.QueryContext(ctx, e)
+	if err != nil {
+		return errors.Wrap(err, "failed to eager load RecipeBatch")
+	}
+
+	var resultSlice []*RecipeBatch
+	if err = queries.Bind(results, &resultSlice); err != nil {
+		return errors.Wrap(err, "failed to bind eager loaded slice RecipeBatch")
+	}
+
+	if err = results.Close(); err != nil {
+		return errors.Wrap(err, "failed to close results of eager load for recipe_batch")
+	}
+	if err = results.Err(); err != nil {
+		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for recipe_batch")
+	}
+
+	if len(recipeBatchAdditiveAfterSelectHooks) != 0 {
+		for _, obj := range resultSlice {
+			if err := obj.doAfterSelectHooks(ctx, e); err != nil {
+				return err
+			}
+		}
+	}
+
+	if len(resultSlice) == 0 {
+		return nil
+	}
+
+	if singular {
+		foreign := resultSlice[0]
+		object.R.Batch = foreign
+		return nil
+	}
+
+	for _, local := range slice {
+		for _, foreign := range resultSlice {
+			if local.BatchID == foreign.ID {
+				local.R.Batch = foreign
+				break
+			}
+		}
+	}
+
+	return nil
+}
+
 // SetAdditive of the recipeBatchAdditive to the related item.
 // Sets o.R.Additive to related.
 // Adds o to related.R.RecipeBatchAdditives.
@@ -530,6 +650,53 @@ func (o *RecipeBatchAdditive) SetAdditive(ctx context.Context, exec boil.Context
 		}
 	} else {
 		related.R.RecipeBatchAdditives = append(related.R.RecipeBatchAdditives, o)
+	}
+
+	return nil
+}
+
+// SetBatch of the recipeBatchAdditive to the related item.
+// Sets o.R.Batch to related.
+// Adds o to related.R.BatchRecipeBatchAdditives.
+func (o *RecipeBatchAdditive) SetBatch(ctx context.Context, exec boil.ContextExecutor, insert bool, related *RecipeBatch) error {
+	var err error
+	if insert {
+		if err = related.Insert(ctx, exec, boil.Infer()); err != nil {
+			return errors.Wrap(err, "failed to insert into foreign table")
+		}
+	}
+
+	updateQuery := fmt.Sprintf(
+		"UPDATE \"recipe_batch_additive\" SET %s WHERE %s",
+		strmangle.SetParamNames("\"", "\"", 1, []string{"batch_id"}),
+		strmangle.WhereClause("\"", "\"", 2, recipeBatchAdditivePrimaryKeyColumns),
+	)
+	values := []interface{}{related.ID, o.ID}
+
+	if boil.IsDebug(ctx) {
+		writer := boil.DebugWriterFrom(ctx)
+		fmt.Fprintln(writer, updateQuery)
+		fmt.Fprintln(writer, values)
+	}
+	if _, err = exec.ExecContext(ctx, updateQuery, values...); err != nil {
+		return errors.Wrap(err, "failed to update local table")
+	}
+
+	o.BatchID = related.ID
+	if o.R == nil {
+		o.R = &recipeBatchAdditiveR{
+			Batch: related,
+		}
+	} else {
+		o.R.Batch = related
+	}
+
+	if related.R == nil {
+		related.R = &recipeBatchR{
+			BatchRecipeBatchAdditives: RecipeBatchAdditiveSlice{o},
+		}
+	} else {
+		related.R.BatchRecipeBatchAdditives = append(related.R.BatchRecipeBatchAdditives, o)
 	}
 
 	return nil

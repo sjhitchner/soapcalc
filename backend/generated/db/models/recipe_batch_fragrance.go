@@ -31,6 +31,7 @@ type RecipeBatchFragrance struct {
 	Weight      float64   `boil:"weight" json:"weight" toml:"weight" yaml:"weight"`
 	Cost        float64   `boil:"cost" json:"cost" toml:"cost" yaml:"cost"`
 	FragranceID int       `boil:"fragrance_id" json:"fragrance_id" toml:"fragrance_id" yaml:"fragrance_id"`
+	BatchID     int       `boil:"batch_id" json:"batch_id" toml:"batch_id" yaml:"batch_id"`
 
 	R *recipeBatchFragranceR `boil:"-" json:"-" toml:"-" yaml:"-"`
 	L recipeBatchFragranceL  `boil:"-" json:"-" toml:"-" yaml:"-"`
@@ -44,6 +45,7 @@ var RecipeBatchFragranceColumns = struct {
 	Weight      string
 	Cost        string
 	FragranceID string
+	BatchID     string
 }{
 	ID:          "id",
 	CreatedAt:   "created_at",
@@ -52,6 +54,7 @@ var RecipeBatchFragranceColumns = struct {
 	Weight:      "weight",
 	Cost:        "cost",
 	FragranceID: "fragrance_id",
+	BatchID:     "batch_id",
 }
 
 // Generated where
@@ -64,6 +67,7 @@ var RecipeBatchFragranceWhere = struct {
 	Weight      whereHelperfloat64
 	Cost        whereHelperfloat64
 	FragranceID whereHelperint
+	BatchID     whereHelperint
 }{
 	ID:          whereHelperint{field: "\"recipe_batch_fragrance\".\"id\""},
 	CreatedAt:   whereHelpertime_Time{field: "\"recipe_batch_fragrance\".\"created_at\""},
@@ -72,18 +76,22 @@ var RecipeBatchFragranceWhere = struct {
 	Weight:      whereHelperfloat64{field: "\"recipe_batch_fragrance\".\"weight\""},
 	Cost:        whereHelperfloat64{field: "\"recipe_batch_fragrance\".\"cost\""},
 	FragranceID: whereHelperint{field: "\"recipe_batch_fragrance\".\"fragrance_id\""},
+	BatchID:     whereHelperint{field: "\"recipe_batch_fragrance\".\"batch_id\""},
 }
 
 // RecipeBatchFragranceRels is where relationship names are stored.
 var RecipeBatchFragranceRels = struct {
+	Batch     string
 	Fragrance string
 }{
+	Batch:     "Batch",
 	Fragrance: "Fragrance",
 }
 
 // recipeBatchFragranceR is where relationships are stored.
 type recipeBatchFragranceR struct {
-	Fragrance *Fragrance `boil:"Fragrance" json:"Fragrance" toml:"Fragrance" yaml:"Fragrance"`
+	Batch     *RecipeBatch `boil:"Batch" json:"Batch" toml:"Batch" yaml:"Batch"`
+	Fragrance *Fragrance   `boil:"Fragrance" json:"Fragrance" toml:"Fragrance" yaml:"Fragrance"`
 }
 
 // NewStruct creates a new relationship struct
@@ -95,8 +103,8 @@ func (*recipeBatchFragranceR) NewStruct() *recipeBatchFragranceR {
 type recipeBatchFragranceL struct{}
 
 var (
-	recipeBatchFragranceAllColumns            = []string{"id", "created_at", "updated_at", "deleted_at", "weight", "cost", "fragrance_id"}
-	recipeBatchFragranceColumnsWithoutDefault = []string{"created_at", "updated_at", "deleted_at", "weight", "cost", "fragrance_id"}
+	recipeBatchFragranceAllColumns            = []string{"id", "created_at", "updated_at", "deleted_at", "weight", "cost", "fragrance_id", "batch_id"}
+	recipeBatchFragranceColumnsWithoutDefault = []string{"created_at", "updated_at", "deleted_at", "weight", "cost", "fragrance_id", "batch_id"}
 	recipeBatchFragranceColumnsWithDefault    = []string{"id"}
 	recipeBatchFragrancePrimaryKeyColumns     = []string{"id"}
 )
@@ -376,6 +384,21 @@ func (q recipeBatchFragranceQuery) Exists(ctx context.Context, exec boil.Context
 	return count > 0, nil
 }
 
+// Batch pointed to by the foreign key.
+func (o *RecipeBatchFragrance) Batch(mods ...qm.QueryMod) recipeBatchQuery {
+	queryMods := []qm.QueryMod{
+		qm.Where("\"id\" = ?", o.BatchID),
+		qmhelper.WhereIsNull("deleted_at"),
+	}
+
+	queryMods = append(queryMods, mods...)
+
+	query := RecipeBatches(queryMods...)
+	queries.SetFrom(query.Query, "\"recipe_batch\"")
+
+	return query
+}
+
 // Fragrance pointed to by the foreign key.
 func (o *RecipeBatchFragrance) Fragrance(mods ...qm.QueryMod) fragranceQuery {
 	queryMods := []qm.QueryMod{
@@ -389,6 +412,103 @@ func (o *RecipeBatchFragrance) Fragrance(mods ...qm.QueryMod) fragranceQuery {
 	queries.SetFrom(query.Query, "\"fragrance\"")
 
 	return query
+}
+
+// LoadBatch allows an eager lookup of values, cached into the
+// loaded structs of the objects. This is for an N-1 relationship.
+func (recipeBatchFragranceL) LoadBatch(ctx context.Context, e boil.ContextExecutor, singular bool, maybeRecipeBatchFragrance interface{}, mods queries.Applicator) error {
+	var slice []*RecipeBatchFragrance
+	var object *RecipeBatchFragrance
+
+	if singular {
+		object = maybeRecipeBatchFragrance.(*RecipeBatchFragrance)
+	} else {
+		slice = *maybeRecipeBatchFragrance.(*[]*RecipeBatchFragrance)
+	}
+
+	args := make([]interface{}, 0, 1)
+	if singular {
+		if object.R == nil {
+			object.R = &recipeBatchFragranceR{}
+		}
+		args = append(args, object.BatchID)
+
+	} else {
+	Outer:
+		for _, obj := range slice {
+			if obj.R == nil {
+				obj.R = &recipeBatchFragranceR{}
+			}
+
+			for _, a := range args {
+				if a == obj.BatchID {
+					continue Outer
+				}
+			}
+
+			args = append(args, obj.BatchID)
+
+		}
+	}
+
+	if len(args) == 0 {
+		return nil
+	}
+
+	query := NewQuery(
+		qm.From(`recipe_batch`),
+		qm.WhereIn(`recipe_batch.id in ?`, args...),
+		qmhelper.WhereIsNull(`recipe_batch.deleted_at`),
+	)
+	if mods != nil {
+		mods.Apply(query)
+	}
+
+	results, err := query.QueryContext(ctx, e)
+	if err != nil {
+		return errors.Wrap(err, "failed to eager load RecipeBatch")
+	}
+
+	var resultSlice []*RecipeBatch
+	if err = queries.Bind(results, &resultSlice); err != nil {
+		return errors.Wrap(err, "failed to bind eager loaded slice RecipeBatch")
+	}
+
+	if err = results.Close(); err != nil {
+		return errors.Wrap(err, "failed to close results of eager load for recipe_batch")
+	}
+	if err = results.Err(); err != nil {
+		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for recipe_batch")
+	}
+
+	if len(recipeBatchFragranceAfterSelectHooks) != 0 {
+		for _, obj := range resultSlice {
+			if err := obj.doAfterSelectHooks(ctx, e); err != nil {
+				return err
+			}
+		}
+	}
+
+	if len(resultSlice) == 0 {
+		return nil
+	}
+
+	if singular {
+		foreign := resultSlice[0]
+		object.R.Batch = foreign
+		return nil
+	}
+
+	for _, local := range slice {
+		for _, foreign := range resultSlice {
+			if local.BatchID == foreign.ID {
+				local.R.Batch = foreign
+				break
+			}
+		}
+	}
+
+	return nil
 }
 
 // LoadFragrance allows an eager lookup of values, cached into the
@@ -483,6 +603,53 @@ func (recipeBatchFragranceL) LoadFragrance(ctx context.Context, e boil.ContextEx
 				break
 			}
 		}
+	}
+
+	return nil
+}
+
+// SetBatch of the recipeBatchFragrance to the related item.
+// Sets o.R.Batch to related.
+// Adds o to related.R.BatchRecipeBatchFragrances.
+func (o *RecipeBatchFragrance) SetBatch(ctx context.Context, exec boil.ContextExecutor, insert bool, related *RecipeBatch) error {
+	var err error
+	if insert {
+		if err = related.Insert(ctx, exec, boil.Infer()); err != nil {
+			return errors.Wrap(err, "failed to insert into foreign table")
+		}
+	}
+
+	updateQuery := fmt.Sprintf(
+		"UPDATE \"recipe_batch_fragrance\" SET %s WHERE %s",
+		strmangle.SetParamNames("\"", "\"", 1, []string{"batch_id"}),
+		strmangle.WhereClause("\"", "\"", 2, recipeBatchFragrancePrimaryKeyColumns),
+	)
+	values := []interface{}{related.ID, o.ID}
+
+	if boil.IsDebug(ctx) {
+		writer := boil.DebugWriterFrom(ctx)
+		fmt.Fprintln(writer, updateQuery)
+		fmt.Fprintln(writer, values)
+	}
+	if _, err = exec.ExecContext(ctx, updateQuery, values...); err != nil {
+		return errors.Wrap(err, "failed to update local table")
+	}
+
+	o.BatchID = related.ID
+	if o.R == nil {
+		o.R = &recipeBatchFragranceR{
+			Batch: related,
+		}
+	} else {
+		o.R.Batch = related
+	}
+
+	if related.R == nil {
+		related.R = &recipeBatchR{
+			BatchRecipeBatchFragrances: RecipeBatchFragranceSlice{o},
+		}
+	} else {
+		related.R.BatchRecipeBatchFragrances = append(related.R.BatchRecipeBatchFragrances, o)
 	}
 
 	return nil

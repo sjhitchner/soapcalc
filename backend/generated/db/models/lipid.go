@@ -45,6 +45,8 @@ type Lipid struct {
 	Iodine       int       `boil:"iodine" json:"iodine" toml:"iodine" yaml:"iodine"`
 	Ins          int       `boil:"ins" json:"ins" toml:"ins" yaml:"ins"`
 	InciName     string    `boil:"inci_name" json:"inci_name" toml:"inci_name" yaml:"inci_name"`
+	Family       string    `boil:"family" json:"family" toml:"family" yaml:"family"`
+	Naoh         float64   `boil:"naoh" json:"naoh" toml:"naoh" yaml:"naoh"`
 
 	R *lipidR `boil:"-" json:"-" toml:"-" yaml:"-"`
 	L lipidL  `boil:"-" json:"-" toml:"-" yaml:"-"`
@@ -72,6 +74,8 @@ var LipidColumns = struct {
 	Iodine       string
 	Ins          string
 	InciName     string
+	Family       string
+	Naoh         string
 }{
 	ID:           "id",
 	CreatedAt:    "created_at",
@@ -94,6 +98,8 @@ var LipidColumns = struct {
 	Iodine:       "iodine",
 	Ins:          "ins",
 	InciName:     "inci_name",
+	Family:       "family",
+	Naoh:         "naoh",
 }
 
 // Generated where
@@ -120,6 +126,8 @@ var LipidWhere = struct {
 	Iodine       whereHelperint
 	Ins          whereHelperint
 	InciName     whereHelperstring
+	Family       whereHelperstring
+	Naoh         whereHelperfloat64
 }{
 	ID:           whereHelperint{field: "\"lipid\".\"id\""},
 	CreatedAt:    whereHelpertime_Time{field: "\"lipid\".\"created_at\""},
@@ -142,6 +150,8 @@ var LipidWhere = struct {
 	Iodine:       whereHelperint{field: "\"lipid\".\"iodine\""},
 	Ins:          whereHelperint{field: "\"lipid\".\"ins\""},
 	InciName:     whereHelperstring{field: "\"lipid\".\"inci_name\""},
+	Family:       whereHelperstring{field: "\"lipid\".\"family\""},
+	Naoh:         whereHelperfloat64{field: "\"lipid\".\"naoh\""},
 }
 
 // LipidRels is where relationship names are stored.
@@ -171,8 +181,8 @@ func (*lipidR) NewStruct() *lipidR {
 type lipidL struct{}
 
 var (
-	lipidAllColumns            = []string{"id", "created_at", "updated_at", "deleted_at", "name", "lauric", "myristic", "palmitic", "stearic", "ricinoleic", "oleic", "linoleic", "linolenic", "hardness", "cleansing", "conditioning", "bubbly", "creamy", "iodine", "ins", "inci_name"}
-	lipidColumnsWithoutDefault = []string{"created_at", "updated_at", "deleted_at", "name", "lauric", "myristic", "palmitic", "stearic", "ricinoleic", "oleic", "linoleic", "linolenic", "hardness", "cleansing", "conditioning", "bubbly", "creamy", "iodine", "ins", "inci_name"}
+	lipidAllColumns            = []string{"id", "created_at", "updated_at", "deleted_at", "name", "lauric", "myristic", "palmitic", "stearic", "ricinoleic", "oleic", "linoleic", "linolenic", "hardness", "cleansing", "conditioning", "bubbly", "creamy", "iodine", "ins", "inci_name", "family", "naoh"}
+	lipidColumnsWithoutDefault = []string{"created_at", "updated_at", "deleted_at", "name", "lauric", "myristic", "palmitic", "stearic", "ricinoleic", "oleic", "linoleic", "linolenic", "hardness", "cleansing", "conditioning", "bubbly", "creamy", "iodine", "ins", "inci_name", "family", "naoh"}
 	lipidColumnsWithDefault    = []string{"id"}
 	lipidPrimaryKeyColumns     = []string{"id"}
 )

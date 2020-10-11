@@ -595,6 +595,57 @@ func testRecipeBatchFragrancesInsertWhitelist(t *testing.T) {
 	}
 }
 
+func testRecipeBatchFragranceToOneRecipeBatchUsingBatch(t *testing.T) {
+	ctx := context.Background()
+	tx := MustTx(boil.BeginTx(ctx, nil))
+	defer func() { _ = tx.Rollback() }()
+
+	var local RecipeBatchFragrance
+	var foreign RecipeBatch
+
+	seed := randomize.NewSeed()
+	if err := randomize.Struct(seed, &local, recipeBatchFragranceDBTypes, false, recipeBatchFragranceColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize RecipeBatchFragrance struct: %s", err)
+	}
+	if err := randomize.Struct(seed, &foreign, recipeBatchDBTypes, false, recipeBatchColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize RecipeBatch struct: %s", err)
+	}
+
+	if err := foreign.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+
+	local.BatchID = foreign.ID
+	if err := local.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+
+	check, err := local.Batch().One(ctx, tx)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if check.ID != foreign.ID {
+		t.Errorf("want: %v, got %v", foreign.ID, check.ID)
+	}
+
+	slice := RecipeBatchFragranceSlice{&local}
+	if err = local.L.LoadBatch(ctx, tx, false, (*[]*RecipeBatchFragrance)(&slice), nil); err != nil {
+		t.Fatal(err)
+	}
+	if local.R.Batch == nil {
+		t.Error("struct should have been eager loaded")
+	}
+
+	local.R.Batch = nil
+	if err = local.L.LoadBatch(ctx, tx, true, &local, nil); err != nil {
+		t.Fatal(err)
+	}
+	if local.R.Batch == nil {
+		t.Error("struct should have been eager loaded")
+	}
+}
+
 func testRecipeBatchFragranceToOneFragranceUsingFragrance(t *testing.T) {
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
@@ -646,6 +697,63 @@ func testRecipeBatchFragranceToOneFragranceUsingFragrance(t *testing.T) {
 	}
 }
 
+func testRecipeBatchFragranceToOneSetOpRecipeBatchUsingBatch(t *testing.T) {
+	var err error
+
+	ctx := context.Background()
+	tx := MustTx(boil.BeginTx(ctx, nil))
+	defer func() { _ = tx.Rollback() }()
+
+	var a RecipeBatchFragrance
+	var b, c RecipeBatch
+
+	seed := randomize.NewSeed()
+	if err = randomize.Struct(seed, &a, recipeBatchFragranceDBTypes, false, strmangle.SetComplement(recipeBatchFragrancePrimaryKeyColumns, recipeBatchFragranceColumnsWithoutDefault)...); err != nil {
+		t.Fatal(err)
+	}
+	if err = randomize.Struct(seed, &b, recipeBatchDBTypes, false, strmangle.SetComplement(recipeBatchPrimaryKeyColumns, recipeBatchColumnsWithoutDefault)...); err != nil {
+		t.Fatal(err)
+	}
+	if err = randomize.Struct(seed, &c, recipeBatchDBTypes, false, strmangle.SetComplement(recipeBatchPrimaryKeyColumns, recipeBatchColumnsWithoutDefault)...); err != nil {
+		t.Fatal(err)
+	}
+
+	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+
+	for i, x := range []*RecipeBatch{&b, &c} {
+		err = a.SetBatch(ctx, tx, i != 0, x)
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		if a.R.Batch != x {
+			t.Error("relationship struct not set to correct value")
+		}
+
+		if x.R.BatchRecipeBatchFragrances[0] != &a {
+			t.Error("failed to append to foreign relationship struct")
+		}
+		if a.BatchID != x.ID {
+			t.Error("foreign key was wrong value", a.BatchID)
+		}
+
+		zero := reflect.Zero(reflect.TypeOf(a.BatchID))
+		reflect.Indirect(reflect.ValueOf(&a.BatchID)).Set(zero)
+
+		if err = a.Reload(ctx, tx); err != nil {
+			t.Fatal("failed to reload", err)
+		}
+
+		if a.BatchID != x.ID {
+			t.Error("foreign key was wrong value", a.BatchID, x.ID)
+		}
+	}
+}
 func testRecipeBatchFragranceToOneSetOpFragranceUsingFragrance(t *testing.T) {
 	var err error
 
@@ -778,7 +886,7 @@ func testRecipeBatchFragrancesSelect(t *testing.T) {
 }
 
 var (
-	recipeBatchFragranceDBTypes = map[string]string{`ID`: `integer`, `CreatedAt`: `timestamp with time zone`, `UpdatedAt`: `timestamp with time zone`, `DeletedAt`: `timestamp with time zone`, `Weight`: `double precision`, `Cost`: `double precision`, `FragranceID`: `integer`}
+	recipeBatchFragranceDBTypes = map[string]string{`ID`: `integer`, `CreatedAt`: `timestamp with time zone`, `UpdatedAt`: `timestamp with time zone`, `DeletedAt`: `timestamp with time zone`, `Weight`: `double precision`, `Cost`: `double precision`, `FragranceID`: `integer`, `BatchID`: `integer`}
 	_                           = bytes.MinRead
 )
 

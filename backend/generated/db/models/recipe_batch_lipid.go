@@ -31,6 +31,7 @@ type RecipeBatchLipid struct {
 	Weight    float64   `boil:"weight" json:"weight" toml:"weight" yaml:"weight"`
 	Cost      float64   `boil:"cost" json:"cost" toml:"cost" yaml:"cost"`
 	LipidID   int       `boil:"lipid_id" json:"lipid_id" toml:"lipid_id" yaml:"lipid_id"`
+	BatchID   int       `boil:"batch_id" json:"batch_id" toml:"batch_id" yaml:"batch_id"`
 
 	R *recipeBatchLipidR `boil:"-" json:"-" toml:"-" yaml:"-"`
 	L recipeBatchLipidL  `boil:"-" json:"-" toml:"-" yaml:"-"`
@@ -44,6 +45,7 @@ var RecipeBatchLipidColumns = struct {
 	Weight    string
 	Cost      string
 	LipidID   string
+	BatchID   string
 }{
 	ID:        "id",
 	CreatedAt: "created_at",
@@ -52,6 +54,7 @@ var RecipeBatchLipidColumns = struct {
 	Weight:    "weight",
 	Cost:      "cost",
 	LipidID:   "lipid_id",
+	BatchID:   "batch_id",
 }
 
 // Generated where
@@ -64,6 +67,7 @@ var RecipeBatchLipidWhere = struct {
 	Weight    whereHelperfloat64
 	Cost      whereHelperfloat64
 	LipidID   whereHelperint
+	BatchID   whereHelperint
 }{
 	ID:        whereHelperint{field: "\"recipe_batch_lipid\".\"id\""},
 	CreatedAt: whereHelpertime_Time{field: "\"recipe_batch_lipid\".\"created_at\""},
@@ -72,18 +76,22 @@ var RecipeBatchLipidWhere = struct {
 	Weight:    whereHelperfloat64{field: "\"recipe_batch_lipid\".\"weight\""},
 	Cost:      whereHelperfloat64{field: "\"recipe_batch_lipid\".\"cost\""},
 	LipidID:   whereHelperint{field: "\"recipe_batch_lipid\".\"lipid_id\""},
+	BatchID:   whereHelperint{field: "\"recipe_batch_lipid\".\"batch_id\""},
 }
 
 // RecipeBatchLipidRels is where relationship names are stored.
 var RecipeBatchLipidRels = struct {
+	Batch string
 	Lipid string
 }{
+	Batch: "Batch",
 	Lipid: "Lipid",
 }
 
 // recipeBatchLipidR is where relationships are stored.
 type recipeBatchLipidR struct {
-	Lipid *Lipid `boil:"Lipid" json:"Lipid" toml:"Lipid" yaml:"Lipid"`
+	Batch *RecipeBatch `boil:"Batch" json:"Batch" toml:"Batch" yaml:"Batch"`
+	Lipid *Lipid       `boil:"Lipid" json:"Lipid" toml:"Lipid" yaml:"Lipid"`
 }
 
 // NewStruct creates a new relationship struct
@@ -95,8 +103,8 @@ func (*recipeBatchLipidR) NewStruct() *recipeBatchLipidR {
 type recipeBatchLipidL struct{}
 
 var (
-	recipeBatchLipidAllColumns            = []string{"id", "created_at", "updated_at", "deleted_at", "weight", "cost", "lipid_id"}
-	recipeBatchLipidColumnsWithoutDefault = []string{"created_at", "updated_at", "deleted_at", "weight", "cost", "lipid_id"}
+	recipeBatchLipidAllColumns            = []string{"id", "created_at", "updated_at", "deleted_at", "weight", "cost", "lipid_id", "batch_id"}
+	recipeBatchLipidColumnsWithoutDefault = []string{"created_at", "updated_at", "deleted_at", "weight", "cost", "lipid_id", "batch_id"}
 	recipeBatchLipidColumnsWithDefault    = []string{"id"}
 	recipeBatchLipidPrimaryKeyColumns     = []string{"id"}
 )
@@ -376,6 +384,21 @@ func (q recipeBatchLipidQuery) Exists(ctx context.Context, exec boil.ContextExec
 	return count > 0, nil
 }
 
+// Batch pointed to by the foreign key.
+func (o *RecipeBatchLipid) Batch(mods ...qm.QueryMod) recipeBatchQuery {
+	queryMods := []qm.QueryMod{
+		qm.Where("\"id\" = ?", o.BatchID),
+		qmhelper.WhereIsNull("deleted_at"),
+	}
+
+	queryMods = append(queryMods, mods...)
+
+	query := RecipeBatches(queryMods...)
+	queries.SetFrom(query.Query, "\"recipe_batch\"")
+
+	return query
+}
+
 // Lipid pointed to by the foreign key.
 func (o *RecipeBatchLipid) Lipid(mods ...qm.QueryMod) lipidQuery {
 	queryMods := []qm.QueryMod{
@@ -389,6 +412,103 @@ func (o *RecipeBatchLipid) Lipid(mods ...qm.QueryMod) lipidQuery {
 	queries.SetFrom(query.Query, "\"lipid\"")
 
 	return query
+}
+
+// LoadBatch allows an eager lookup of values, cached into the
+// loaded structs of the objects. This is for an N-1 relationship.
+func (recipeBatchLipidL) LoadBatch(ctx context.Context, e boil.ContextExecutor, singular bool, maybeRecipeBatchLipid interface{}, mods queries.Applicator) error {
+	var slice []*RecipeBatchLipid
+	var object *RecipeBatchLipid
+
+	if singular {
+		object = maybeRecipeBatchLipid.(*RecipeBatchLipid)
+	} else {
+		slice = *maybeRecipeBatchLipid.(*[]*RecipeBatchLipid)
+	}
+
+	args := make([]interface{}, 0, 1)
+	if singular {
+		if object.R == nil {
+			object.R = &recipeBatchLipidR{}
+		}
+		args = append(args, object.BatchID)
+
+	} else {
+	Outer:
+		for _, obj := range slice {
+			if obj.R == nil {
+				obj.R = &recipeBatchLipidR{}
+			}
+
+			for _, a := range args {
+				if a == obj.BatchID {
+					continue Outer
+				}
+			}
+
+			args = append(args, obj.BatchID)
+
+		}
+	}
+
+	if len(args) == 0 {
+		return nil
+	}
+
+	query := NewQuery(
+		qm.From(`recipe_batch`),
+		qm.WhereIn(`recipe_batch.id in ?`, args...),
+		qmhelper.WhereIsNull(`recipe_batch.deleted_at`),
+	)
+	if mods != nil {
+		mods.Apply(query)
+	}
+
+	results, err := query.QueryContext(ctx, e)
+	if err != nil {
+		return errors.Wrap(err, "failed to eager load RecipeBatch")
+	}
+
+	var resultSlice []*RecipeBatch
+	if err = queries.Bind(results, &resultSlice); err != nil {
+		return errors.Wrap(err, "failed to bind eager loaded slice RecipeBatch")
+	}
+
+	if err = results.Close(); err != nil {
+		return errors.Wrap(err, "failed to close results of eager load for recipe_batch")
+	}
+	if err = results.Err(); err != nil {
+		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for recipe_batch")
+	}
+
+	if len(recipeBatchLipidAfterSelectHooks) != 0 {
+		for _, obj := range resultSlice {
+			if err := obj.doAfterSelectHooks(ctx, e); err != nil {
+				return err
+			}
+		}
+	}
+
+	if len(resultSlice) == 0 {
+		return nil
+	}
+
+	if singular {
+		foreign := resultSlice[0]
+		object.R.Batch = foreign
+		return nil
+	}
+
+	for _, local := range slice {
+		for _, foreign := range resultSlice {
+			if local.BatchID == foreign.ID {
+				local.R.Batch = foreign
+				break
+			}
+		}
+	}
+
+	return nil
 }
 
 // LoadLipid allows an eager lookup of values, cached into the
@@ -483,6 +603,53 @@ func (recipeBatchLipidL) LoadLipid(ctx context.Context, e boil.ContextExecutor, 
 				break
 			}
 		}
+	}
+
+	return nil
+}
+
+// SetBatch of the recipeBatchLipid to the related item.
+// Sets o.R.Batch to related.
+// Adds o to related.R.BatchRecipeBatchLipids.
+func (o *RecipeBatchLipid) SetBatch(ctx context.Context, exec boil.ContextExecutor, insert bool, related *RecipeBatch) error {
+	var err error
+	if insert {
+		if err = related.Insert(ctx, exec, boil.Infer()); err != nil {
+			return errors.Wrap(err, "failed to insert into foreign table")
+		}
+	}
+
+	updateQuery := fmt.Sprintf(
+		"UPDATE \"recipe_batch_lipid\" SET %s WHERE %s",
+		strmangle.SetParamNames("\"", "\"", 1, []string{"batch_id"}),
+		strmangle.WhereClause("\"", "\"", 2, recipeBatchLipidPrimaryKeyColumns),
+	)
+	values := []interface{}{related.ID, o.ID}
+
+	if boil.IsDebug(ctx) {
+		writer := boil.DebugWriterFrom(ctx)
+		fmt.Fprintln(writer, updateQuery)
+		fmt.Fprintln(writer, values)
+	}
+	if _, err = exec.ExecContext(ctx, updateQuery, values...); err != nil {
+		return errors.Wrap(err, "failed to update local table")
+	}
+
+	o.BatchID = related.ID
+	if o.R == nil {
+		o.R = &recipeBatchLipidR{
+			Batch: related,
+		}
+	} else {
+		o.R.Batch = related
+	}
+
+	if related.R == nil {
+		related.R = &recipeBatchR{
+			BatchRecipeBatchLipids: RecipeBatchLipidSlice{o},
+		}
+	} else {
+		related.R.BatchRecipeBatchLipids = append(related.R.BatchRecipeBatchLipids, o)
 	}
 
 	return nil

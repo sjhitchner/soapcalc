@@ -595,6 +595,618 @@ func testRecipeBatchesInsertWhitelist(t *testing.T) {
 	}
 }
 
+func testRecipeBatchToManyBatchRecipeBatchAdditives(t *testing.T) {
+	var err error
+	ctx := context.Background()
+	tx := MustTx(boil.BeginTx(ctx, nil))
+	defer func() { _ = tx.Rollback() }()
+
+	var a RecipeBatch
+	var b, c RecipeBatchAdditive
+
+	seed := randomize.NewSeed()
+	if err = randomize.Struct(seed, &a, recipeBatchDBTypes, true, recipeBatchColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize RecipeBatch struct: %s", err)
+	}
+
+	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+
+	if err = randomize.Struct(seed, &b, recipeBatchAdditiveDBTypes, false, recipeBatchAdditiveColumnsWithDefault...); err != nil {
+		t.Fatal(err)
+	}
+	if err = randomize.Struct(seed, &c, recipeBatchAdditiveDBTypes, false, recipeBatchAdditiveColumnsWithDefault...); err != nil {
+		t.Fatal(err)
+	}
+
+	b.BatchID = a.ID
+	c.BatchID = a.ID
+
+	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+	if err = c.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+
+	check, err := a.BatchRecipeBatchAdditives().All(ctx, tx)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	bFound, cFound := false, false
+	for _, v := range check {
+		if v.BatchID == b.BatchID {
+			bFound = true
+		}
+		if v.BatchID == c.BatchID {
+			cFound = true
+		}
+	}
+
+	if !bFound {
+		t.Error("expected to find b")
+	}
+	if !cFound {
+		t.Error("expected to find c")
+	}
+
+	slice := RecipeBatchSlice{&a}
+	if err = a.L.LoadBatchRecipeBatchAdditives(ctx, tx, false, (*[]*RecipeBatch)(&slice), nil); err != nil {
+		t.Fatal(err)
+	}
+	if got := len(a.R.BatchRecipeBatchAdditives); got != 2 {
+		t.Error("number of eager loaded records wrong, got:", got)
+	}
+
+	a.R.BatchRecipeBatchAdditives = nil
+	if err = a.L.LoadBatchRecipeBatchAdditives(ctx, tx, true, &a, nil); err != nil {
+		t.Fatal(err)
+	}
+	if got := len(a.R.BatchRecipeBatchAdditives); got != 2 {
+		t.Error("number of eager loaded records wrong, got:", got)
+	}
+
+	if t.Failed() {
+		t.Logf("%#v", check)
+	}
+}
+
+func testRecipeBatchToManyBatchRecipeBatchFragrances(t *testing.T) {
+	var err error
+	ctx := context.Background()
+	tx := MustTx(boil.BeginTx(ctx, nil))
+	defer func() { _ = tx.Rollback() }()
+
+	var a RecipeBatch
+	var b, c RecipeBatchFragrance
+
+	seed := randomize.NewSeed()
+	if err = randomize.Struct(seed, &a, recipeBatchDBTypes, true, recipeBatchColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize RecipeBatch struct: %s", err)
+	}
+
+	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+
+	if err = randomize.Struct(seed, &b, recipeBatchFragranceDBTypes, false, recipeBatchFragranceColumnsWithDefault...); err != nil {
+		t.Fatal(err)
+	}
+	if err = randomize.Struct(seed, &c, recipeBatchFragranceDBTypes, false, recipeBatchFragranceColumnsWithDefault...); err != nil {
+		t.Fatal(err)
+	}
+
+	b.BatchID = a.ID
+	c.BatchID = a.ID
+
+	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+	if err = c.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+
+	check, err := a.BatchRecipeBatchFragrances().All(ctx, tx)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	bFound, cFound := false, false
+	for _, v := range check {
+		if v.BatchID == b.BatchID {
+			bFound = true
+		}
+		if v.BatchID == c.BatchID {
+			cFound = true
+		}
+	}
+
+	if !bFound {
+		t.Error("expected to find b")
+	}
+	if !cFound {
+		t.Error("expected to find c")
+	}
+
+	slice := RecipeBatchSlice{&a}
+	if err = a.L.LoadBatchRecipeBatchFragrances(ctx, tx, false, (*[]*RecipeBatch)(&slice), nil); err != nil {
+		t.Fatal(err)
+	}
+	if got := len(a.R.BatchRecipeBatchFragrances); got != 2 {
+		t.Error("number of eager loaded records wrong, got:", got)
+	}
+
+	a.R.BatchRecipeBatchFragrances = nil
+	if err = a.L.LoadBatchRecipeBatchFragrances(ctx, tx, true, &a, nil); err != nil {
+		t.Fatal(err)
+	}
+	if got := len(a.R.BatchRecipeBatchFragrances); got != 2 {
+		t.Error("number of eager loaded records wrong, got:", got)
+	}
+
+	if t.Failed() {
+		t.Logf("%#v", check)
+	}
+}
+
+func testRecipeBatchToManyBatchRecipeBatchLipids(t *testing.T) {
+	var err error
+	ctx := context.Background()
+	tx := MustTx(boil.BeginTx(ctx, nil))
+	defer func() { _ = tx.Rollback() }()
+
+	var a RecipeBatch
+	var b, c RecipeBatchLipid
+
+	seed := randomize.NewSeed()
+	if err = randomize.Struct(seed, &a, recipeBatchDBTypes, true, recipeBatchColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize RecipeBatch struct: %s", err)
+	}
+
+	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+
+	if err = randomize.Struct(seed, &b, recipeBatchLipidDBTypes, false, recipeBatchLipidColumnsWithDefault...); err != nil {
+		t.Fatal(err)
+	}
+	if err = randomize.Struct(seed, &c, recipeBatchLipidDBTypes, false, recipeBatchLipidColumnsWithDefault...); err != nil {
+		t.Fatal(err)
+	}
+
+	b.BatchID = a.ID
+	c.BatchID = a.ID
+
+	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+	if err = c.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+
+	check, err := a.BatchRecipeBatchLipids().All(ctx, tx)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	bFound, cFound := false, false
+	for _, v := range check {
+		if v.BatchID == b.BatchID {
+			bFound = true
+		}
+		if v.BatchID == c.BatchID {
+			cFound = true
+		}
+	}
+
+	if !bFound {
+		t.Error("expected to find b")
+	}
+	if !cFound {
+		t.Error("expected to find c")
+	}
+
+	slice := RecipeBatchSlice{&a}
+	if err = a.L.LoadBatchRecipeBatchLipids(ctx, tx, false, (*[]*RecipeBatch)(&slice), nil); err != nil {
+		t.Fatal(err)
+	}
+	if got := len(a.R.BatchRecipeBatchLipids); got != 2 {
+		t.Error("number of eager loaded records wrong, got:", got)
+	}
+
+	a.R.BatchRecipeBatchLipids = nil
+	if err = a.L.LoadBatchRecipeBatchLipids(ctx, tx, true, &a, nil); err != nil {
+		t.Fatal(err)
+	}
+	if got := len(a.R.BatchRecipeBatchLipids); got != 2 {
+		t.Error("number of eager loaded records wrong, got:", got)
+	}
+
+	if t.Failed() {
+		t.Logf("%#v", check)
+	}
+}
+
+func testRecipeBatchToManyBatchRecipeBatchLyes(t *testing.T) {
+	var err error
+	ctx := context.Background()
+	tx := MustTx(boil.BeginTx(ctx, nil))
+	defer func() { _ = tx.Rollback() }()
+
+	var a RecipeBatch
+	var b, c RecipeBatchLye
+
+	seed := randomize.NewSeed()
+	if err = randomize.Struct(seed, &a, recipeBatchDBTypes, true, recipeBatchColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize RecipeBatch struct: %s", err)
+	}
+
+	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+
+	if err = randomize.Struct(seed, &b, recipeBatchLyeDBTypes, false, recipeBatchLyeColumnsWithDefault...); err != nil {
+		t.Fatal(err)
+	}
+	if err = randomize.Struct(seed, &c, recipeBatchLyeDBTypes, false, recipeBatchLyeColumnsWithDefault...); err != nil {
+		t.Fatal(err)
+	}
+
+	b.BatchID = a.ID
+	c.BatchID = a.ID
+
+	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+	if err = c.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+
+	check, err := a.BatchRecipeBatchLyes().All(ctx, tx)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	bFound, cFound := false, false
+	for _, v := range check {
+		if v.BatchID == b.BatchID {
+			bFound = true
+		}
+		if v.BatchID == c.BatchID {
+			cFound = true
+		}
+	}
+
+	if !bFound {
+		t.Error("expected to find b")
+	}
+	if !cFound {
+		t.Error("expected to find c")
+	}
+
+	slice := RecipeBatchSlice{&a}
+	if err = a.L.LoadBatchRecipeBatchLyes(ctx, tx, false, (*[]*RecipeBatch)(&slice), nil); err != nil {
+		t.Fatal(err)
+	}
+	if got := len(a.R.BatchRecipeBatchLyes); got != 2 {
+		t.Error("number of eager loaded records wrong, got:", got)
+	}
+
+	a.R.BatchRecipeBatchLyes = nil
+	if err = a.L.LoadBatchRecipeBatchLyes(ctx, tx, true, &a, nil); err != nil {
+		t.Fatal(err)
+	}
+	if got := len(a.R.BatchRecipeBatchLyes); got != 2 {
+		t.Error("number of eager loaded records wrong, got:", got)
+	}
+
+	if t.Failed() {
+		t.Logf("%#v", check)
+	}
+}
+
+func testRecipeBatchToManyAddOpBatchRecipeBatchAdditives(t *testing.T) {
+	var err error
+
+	ctx := context.Background()
+	tx := MustTx(boil.BeginTx(ctx, nil))
+	defer func() { _ = tx.Rollback() }()
+
+	var a RecipeBatch
+	var b, c, d, e RecipeBatchAdditive
+
+	seed := randomize.NewSeed()
+	if err = randomize.Struct(seed, &a, recipeBatchDBTypes, false, strmangle.SetComplement(recipeBatchPrimaryKeyColumns, recipeBatchColumnsWithoutDefault)...); err != nil {
+		t.Fatal(err)
+	}
+	foreigners := []*RecipeBatchAdditive{&b, &c, &d, &e}
+	for _, x := range foreigners {
+		if err = randomize.Struct(seed, x, recipeBatchAdditiveDBTypes, false, strmangle.SetComplement(recipeBatchAdditivePrimaryKeyColumns, recipeBatchAdditiveColumnsWithoutDefault)...); err != nil {
+			t.Fatal(err)
+		}
+	}
+
+	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+	if err = c.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+
+	foreignersSplitByInsertion := [][]*RecipeBatchAdditive{
+		{&b, &c},
+		{&d, &e},
+	}
+
+	for i, x := range foreignersSplitByInsertion {
+		err = a.AddBatchRecipeBatchAdditives(ctx, tx, i != 0, x...)
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		first := x[0]
+		second := x[1]
+
+		if a.ID != first.BatchID {
+			t.Error("foreign key was wrong value", a.ID, first.BatchID)
+		}
+		if a.ID != second.BatchID {
+			t.Error("foreign key was wrong value", a.ID, second.BatchID)
+		}
+
+		if first.R.Batch != &a {
+			t.Error("relationship was not added properly to the foreign slice")
+		}
+		if second.R.Batch != &a {
+			t.Error("relationship was not added properly to the foreign slice")
+		}
+
+		if a.R.BatchRecipeBatchAdditives[i*2] != first {
+			t.Error("relationship struct slice not set to correct value")
+		}
+		if a.R.BatchRecipeBatchAdditives[i*2+1] != second {
+			t.Error("relationship struct slice not set to correct value")
+		}
+
+		count, err := a.BatchRecipeBatchAdditives().Count(ctx, tx)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if want := int64((i + 1) * 2); count != want {
+			t.Error("want", want, "got", count)
+		}
+	}
+}
+func testRecipeBatchToManyAddOpBatchRecipeBatchFragrances(t *testing.T) {
+	var err error
+
+	ctx := context.Background()
+	tx := MustTx(boil.BeginTx(ctx, nil))
+	defer func() { _ = tx.Rollback() }()
+
+	var a RecipeBatch
+	var b, c, d, e RecipeBatchFragrance
+
+	seed := randomize.NewSeed()
+	if err = randomize.Struct(seed, &a, recipeBatchDBTypes, false, strmangle.SetComplement(recipeBatchPrimaryKeyColumns, recipeBatchColumnsWithoutDefault)...); err != nil {
+		t.Fatal(err)
+	}
+	foreigners := []*RecipeBatchFragrance{&b, &c, &d, &e}
+	for _, x := range foreigners {
+		if err = randomize.Struct(seed, x, recipeBatchFragranceDBTypes, false, strmangle.SetComplement(recipeBatchFragrancePrimaryKeyColumns, recipeBatchFragranceColumnsWithoutDefault)...); err != nil {
+			t.Fatal(err)
+		}
+	}
+
+	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+	if err = c.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+
+	foreignersSplitByInsertion := [][]*RecipeBatchFragrance{
+		{&b, &c},
+		{&d, &e},
+	}
+
+	for i, x := range foreignersSplitByInsertion {
+		err = a.AddBatchRecipeBatchFragrances(ctx, tx, i != 0, x...)
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		first := x[0]
+		second := x[1]
+
+		if a.ID != first.BatchID {
+			t.Error("foreign key was wrong value", a.ID, first.BatchID)
+		}
+		if a.ID != second.BatchID {
+			t.Error("foreign key was wrong value", a.ID, second.BatchID)
+		}
+
+		if first.R.Batch != &a {
+			t.Error("relationship was not added properly to the foreign slice")
+		}
+		if second.R.Batch != &a {
+			t.Error("relationship was not added properly to the foreign slice")
+		}
+
+		if a.R.BatchRecipeBatchFragrances[i*2] != first {
+			t.Error("relationship struct slice not set to correct value")
+		}
+		if a.R.BatchRecipeBatchFragrances[i*2+1] != second {
+			t.Error("relationship struct slice not set to correct value")
+		}
+
+		count, err := a.BatchRecipeBatchFragrances().Count(ctx, tx)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if want := int64((i + 1) * 2); count != want {
+			t.Error("want", want, "got", count)
+		}
+	}
+}
+func testRecipeBatchToManyAddOpBatchRecipeBatchLipids(t *testing.T) {
+	var err error
+
+	ctx := context.Background()
+	tx := MustTx(boil.BeginTx(ctx, nil))
+	defer func() { _ = tx.Rollback() }()
+
+	var a RecipeBatch
+	var b, c, d, e RecipeBatchLipid
+
+	seed := randomize.NewSeed()
+	if err = randomize.Struct(seed, &a, recipeBatchDBTypes, false, strmangle.SetComplement(recipeBatchPrimaryKeyColumns, recipeBatchColumnsWithoutDefault)...); err != nil {
+		t.Fatal(err)
+	}
+	foreigners := []*RecipeBatchLipid{&b, &c, &d, &e}
+	for _, x := range foreigners {
+		if err = randomize.Struct(seed, x, recipeBatchLipidDBTypes, false, strmangle.SetComplement(recipeBatchLipidPrimaryKeyColumns, recipeBatchLipidColumnsWithoutDefault)...); err != nil {
+			t.Fatal(err)
+		}
+	}
+
+	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+	if err = c.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+
+	foreignersSplitByInsertion := [][]*RecipeBatchLipid{
+		{&b, &c},
+		{&d, &e},
+	}
+
+	for i, x := range foreignersSplitByInsertion {
+		err = a.AddBatchRecipeBatchLipids(ctx, tx, i != 0, x...)
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		first := x[0]
+		second := x[1]
+
+		if a.ID != first.BatchID {
+			t.Error("foreign key was wrong value", a.ID, first.BatchID)
+		}
+		if a.ID != second.BatchID {
+			t.Error("foreign key was wrong value", a.ID, second.BatchID)
+		}
+
+		if first.R.Batch != &a {
+			t.Error("relationship was not added properly to the foreign slice")
+		}
+		if second.R.Batch != &a {
+			t.Error("relationship was not added properly to the foreign slice")
+		}
+
+		if a.R.BatchRecipeBatchLipids[i*2] != first {
+			t.Error("relationship struct slice not set to correct value")
+		}
+		if a.R.BatchRecipeBatchLipids[i*2+1] != second {
+			t.Error("relationship struct slice not set to correct value")
+		}
+
+		count, err := a.BatchRecipeBatchLipids().Count(ctx, tx)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if want := int64((i + 1) * 2); count != want {
+			t.Error("want", want, "got", count)
+		}
+	}
+}
+func testRecipeBatchToManyAddOpBatchRecipeBatchLyes(t *testing.T) {
+	var err error
+
+	ctx := context.Background()
+	tx := MustTx(boil.BeginTx(ctx, nil))
+	defer func() { _ = tx.Rollback() }()
+
+	var a RecipeBatch
+	var b, c, d, e RecipeBatchLye
+
+	seed := randomize.NewSeed()
+	if err = randomize.Struct(seed, &a, recipeBatchDBTypes, false, strmangle.SetComplement(recipeBatchPrimaryKeyColumns, recipeBatchColumnsWithoutDefault)...); err != nil {
+		t.Fatal(err)
+	}
+	foreigners := []*RecipeBatchLye{&b, &c, &d, &e}
+	for _, x := range foreigners {
+		if err = randomize.Struct(seed, x, recipeBatchLyeDBTypes, false, strmangle.SetComplement(recipeBatchLyePrimaryKeyColumns, recipeBatchLyeColumnsWithoutDefault)...); err != nil {
+			t.Fatal(err)
+		}
+	}
+
+	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+	if err = c.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+
+	foreignersSplitByInsertion := [][]*RecipeBatchLye{
+		{&b, &c},
+		{&d, &e},
+	}
+
+	for i, x := range foreignersSplitByInsertion {
+		err = a.AddBatchRecipeBatchLyes(ctx, tx, i != 0, x...)
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		first := x[0]
+		second := x[1]
+
+		if a.ID != first.BatchID {
+			t.Error("foreign key was wrong value", a.ID, first.BatchID)
+		}
+		if a.ID != second.BatchID {
+			t.Error("foreign key was wrong value", a.ID, second.BatchID)
+		}
+
+		if first.R.Batch != &a {
+			t.Error("relationship was not added properly to the foreign slice")
+		}
+		if second.R.Batch != &a {
+			t.Error("relationship was not added properly to the foreign slice")
+		}
+
+		if a.R.BatchRecipeBatchLyes[i*2] != first {
+			t.Error("relationship struct slice not set to correct value")
+		}
+		if a.R.BatchRecipeBatchLyes[i*2+1] != second {
+			t.Error("relationship struct slice not set to correct value")
+		}
+
+		count, err := a.BatchRecipeBatchLyes().Count(ctx, tx)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if want := int64((i + 1) * 2); count != want {
+			t.Error("want", want, "got", count)
+		}
+	}
+}
 func testRecipeBatchToOneRecipeUsingRecipe(t *testing.T) {
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
@@ -778,7 +1390,7 @@ func testRecipeBatchesSelect(t *testing.T) {
 }
 
 var (
-	recipeBatchDBTypes = map[string]string{`ID`: `integer`, `CreatedAt`: `timestamp with time zone`, `UpdatedAt`: `timestamp with time zone`, `DeletedAt`: `timestamp with time zone`, `Batch`: `character varying`, `ProductionDate`: `timestamp with time zone`, `SellableDate`: `timestamp with time zone`, `Note`: `text`, `LipidWeight`: `double precision`, `ProductionWeight`: `double precision`, `CuredWeight`: `double precision`, `RecipeID`: `integer`}
+	recipeBatchDBTypes = map[string]string{`ID`: `integer`, `CreatedAt`: `timestamp with time zone`, `UpdatedAt`: `timestamp with time zone`, `DeletedAt`: `timestamp with time zone`, `Tag`: `character varying`, `ProductionDate`: `timestamp with time zone`, `SellableDate`: `timestamp with time zone`, `Note`: `text`, `LipidWeight`: `double precision`, `ProductionWeight`: `double precision`, `CuredWeight`: `double precision`, `RecipeID`: `integer`}
 	_                  = bytes.MinRead
 )
 
