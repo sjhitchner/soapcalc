@@ -1,5 +1,8 @@
-package django
+// +build ignore
 
+package main
+
+/*
 import (
 	"path/filepath"
 	// "syscall"
@@ -57,7 +60,7 @@ func (t *Plugin) GenerateCode(data *codegen.Data) error {
 		if err != nil {
 			return err
 		}
-	*/
+	/
 
 	models, err := t.GenerateModels(data)
 	if err != nil {
@@ -158,3 +161,4 @@ type Field struct {
 	Required bool
 	Args     map[string]string
 }
+*/
