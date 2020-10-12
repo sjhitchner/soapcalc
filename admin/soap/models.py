@@ -131,7 +131,7 @@ class LyeInventory(BaseModel, InventoryModel):
     class Meta:
         db_table = 'lye_inventory'
 
-    lye = models.ForeignKey('LyeInventory', on_delete=models.PROTECT)
+    lye = models.ForeignKey('Lye', on_delete=models.PROTECT)
     concentration = models.FloatField()
 
 
