@@ -605,7 +605,7 @@ func (recipeLipidL) LoadRecipe(ctx context.Context, e boil.ContextExecutor, sing
 
 // SetLipid of the recipeLipid to the related item.
 // Sets o.R.Lipid to related.
-// Adds o to related.R.RecipeLipids.
+// Adds o to related.R.RecipeLipid.
 func (o *RecipeLipid) SetLipid(ctx context.Context, exec boil.ContextExecutor, insert bool, related *Lipid) error {
 	var err error
 	if insert {
@@ -641,10 +641,10 @@ func (o *RecipeLipid) SetLipid(ctx context.Context, exec boil.ContextExecutor, i
 
 	if related.R == nil {
 		related.R = &lipidR{
-			RecipeLipids: RecipeLipidSlice{o},
+			RecipeLipid: o,
 		}
 	} else {
-		related.R.RecipeLipids = append(related.R.RecipeLipids, o)
+		related.R.RecipeLipid = o
 	}
 
 	return nil

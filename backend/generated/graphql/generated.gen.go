@@ -12,7 +12,7 @@ import (
 
 	"github.com/99designs/gqlgen/graphql"
 	"github.com/99designs/gqlgen/graphql/introspection"
-	"github.com/sjhitchner/soapcalc/backend/generated/graphql/models"
+	gmodels "github.com/sjhitchner/soapcalc/backend/generated/graphql/models"
 	gqlparser "github.com/vektah/gqlparser/v2"
 	"github.com/vektah/gqlparser/v2/ast"
 )
@@ -223,24 +223,24 @@ type ComplexityRoot struct {
 	}
 
 	Mutation struct {
-		CreateAdditive             func(childComplexity int, input models.AdditiveCreateInput) int
-		CreateAdditiveInventory    func(childComplexity int, input models.AdditiveInventoryCreateInput) int
-		CreateFragrance            func(childComplexity int, input models.FragranceCreateInput) int
-		CreateFragranceInventory   func(childComplexity int, input models.FragranceInventoryCreateInput) int
-		CreateLipid                func(childComplexity int, input models.LipidCreateInput) int
-		CreateLipidInventory       func(childComplexity int, input models.LipidInventoryCreateInput) int
-		CreateLye                  func(childComplexity int, input models.LyeCreateInput) int
-		CreateLyeInventory         func(childComplexity int, input models.LyeInventoryCreateInput) int
-		CreateRecipe               func(childComplexity int, input models.RecipeCreateInput) int
-		CreateRecipeAdditive       func(childComplexity int, input models.RecipeAdditiveCreateInput) int
-		CreateRecipeBatch          func(childComplexity int, input models.RecipeBatchCreateInput) int
-		CreateRecipeBatchAdditive  func(childComplexity int, input models.RecipeBatchAdditiveCreateInput) int
-		CreateRecipeBatchFragrance func(childComplexity int, input models.RecipeBatchFragranceCreateInput) int
-		CreateRecipeBatchLipid     func(childComplexity int, input models.RecipeBatchLipidCreateInput) int
-		CreateRecipeBatchLye       func(childComplexity int, input models.RecipeBatchLyeCreateInput) int
-		CreateRecipeFragrance      func(childComplexity int, input models.RecipeFragranceCreateInput) int
-		CreateRecipeLipid          func(childComplexity int, input models.RecipeLipidCreateInput) int
-		CreateSupplier             func(childComplexity int, input models.SupplierCreateInput) int
+		CreateAdditive             func(childComplexity int, input gmodels.AdditiveCreateInput) int
+		CreateAdditiveInventory    func(childComplexity int, input gmodels.AdditiveInventoryCreateInput) int
+		CreateFragrance            func(childComplexity int, input gmodels.FragranceCreateInput) int
+		CreateFragranceInventory   func(childComplexity int, input gmodels.FragranceInventoryCreateInput) int
+		CreateLipid                func(childComplexity int, input gmodels.LipidCreateInput) int
+		CreateLipidInventory       func(childComplexity int, input gmodels.LipidInventoryCreateInput) int
+		CreateLye                  func(childComplexity int, input gmodels.LyeCreateInput) int
+		CreateLyeInventory         func(childComplexity int, input gmodels.LyeInventoryCreateInput) int
+		CreateRecipe               func(childComplexity int, input gmodels.RecipeCreateInput) int
+		CreateRecipeAdditive       func(childComplexity int, input gmodels.RecipeAdditiveCreateInput) int
+		CreateRecipeBatch          func(childComplexity int, input gmodels.RecipeBatchCreateInput) int
+		CreateRecipeBatchAdditive  func(childComplexity int, input gmodels.RecipeBatchAdditiveCreateInput) int
+		CreateRecipeBatchFragrance func(childComplexity int, input gmodels.RecipeBatchFragranceCreateInput) int
+		CreateRecipeBatchLipid     func(childComplexity int, input gmodels.RecipeBatchLipidCreateInput) int
+		CreateRecipeBatchLye       func(childComplexity int, input gmodels.RecipeBatchLyeCreateInput) int
+		CreateRecipeFragrance      func(childComplexity int, input gmodels.RecipeFragranceCreateInput) int
+		CreateRecipeLipid          func(childComplexity int, input gmodels.RecipeLipidCreateInput) int
+		CreateSupplier             func(childComplexity int, input gmodels.SupplierCreateInput) int
 		DeleteAdditive             func(childComplexity int, id string) int
 		DeleteAdditiveInventory    func(childComplexity int, id string) int
 		DeleteFragrance            func(childComplexity int, id string) int
@@ -259,63 +259,63 @@ type ComplexityRoot struct {
 		DeleteRecipeFragrance      func(childComplexity int, id string) int
 		DeleteRecipeLipid          func(childComplexity int, id string) int
 		DeleteSupplier             func(childComplexity int, id string) int
-		UpdateAdditive             func(childComplexity int, id string, input models.AdditiveUpdateInput) int
-		UpdateAdditiveInventory    func(childComplexity int, id string, input models.AdditiveInventoryUpdateInput) int
-		UpdateFragrance            func(childComplexity int, id string, input models.FragranceUpdateInput) int
-		UpdateFragranceInventory   func(childComplexity int, id string, input models.FragranceInventoryUpdateInput) int
-		UpdateLipid                func(childComplexity int, id string, input models.LipidUpdateInput) int
-		UpdateLipidInventory       func(childComplexity int, id string, input models.LipidInventoryUpdateInput) int
-		UpdateLye                  func(childComplexity int, id string, input models.LyeUpdateInput) int
-		UpdateLyeInventory         func(childComplexity int, id string, input models.LyeInventoryUpdateInput) int
-		UpdateRecipe               func(childComplexity int, id string, input models.RecipeUpdateInput) int
-		UpdateRecipeAdditive       func(childComplexity int, id string, input models.RecipeAdditiveUpdateInput) int
-		UpdateRecipeBatch          func(childComplexity int, id string, input models.RecipeBatchUpdateInput) int
-		UpdateRecipeBatchAdditive  func(childComplexity int, id string, input models.RecipeBatchAdditiveUpdateInput) int
-		UpdateRecipeBatchFragrance func(childComplexity int, id string, input models.RecipeBatchFragranceUpdateInput) int
-		UpdateRecipeBatchLipid     func(childComplexity int, id string, input models.RecipeBatchLipidUpdateInput) int
-		UpdateRecipeBatchLye       func(childComplexity int, id string, input models.RecipeBatchLyeUpdateInput) int
-		UpdateRecipeFragrance      func(childComplexity int, id string, input models.RecipeFragranceUpdateInput) int
-		UpdateRecipeLipid          func(childComplexity int, id string, input models.RecipeLipidUpdateInput) int
-		UpdateSupplier             func(childComplexity int, id string, input models.SupplierUpdateInput) int
+		UpdateAdditive             func(childComplexity int, id string, input gmodels.AdditiveUpdateInput) int
+		UpdateAdditiveInventory    func(childComplexity int, id string, input gmodels.AdditiveInventoryUpdateInput) int
+		UpdateFragrance            func(childComplexity int, id string, input gmodels.FragranceUpdateInput) int
+		UpdateFragranceInventory   func(childComplexity int, id string, input gmodels.FragranceInventoryUpdateInput) int
+		UpdateLipid                func(childComplexity int, id string, input gmodels.LipidUpdateInput) int
+		UpdateLipidInventory       func(childComplexity int, id string, input gmodels.LipidInventoryUpdateInput) int
+		UpdateLye                  func(childComplexity int, id string, input gmodels.LyeUpdateInput) int
+		UpdateLyeInventory         func(childComplexity int, id string, input gmodels.LyeInventoryUpdateInput) int
+		UpdateRecipe               func(childComplexity int, id string, input gmodels.RecipeUpdateInput) int
+		UpdateRecipeAdditive       func(childComplexity int, id string, input gmodels.RecipeAdditiveUpdateInput) int
+		UpdateRecipeBatch          func(childComplexity int, id string, input gmodels.RecipeBatchUpdateInput) int
+		UpdateRecipeBatchAdditive  func(childComplexity int, id string, input gmodels.RecipeBatchAdditiveUpdateInput) int
+		UpdateRecipeBatchFragrance func(childComplexity int, id string, input gmodels.RecipeBatchFragranceUpdateInput) int
+		UpdateRecipeBatchLipid     func(childComplexity int, id string, input gmodels.RecipeBatchLipidUpdateInput) int
+		UpdateRecipeBatchLye       func(childComplexity int, id string, input gmodels.RecipeBatchLyeUpdateInput) int
+		UpdateRecipeFragrance      func(childComplexity int, id string, input gmodels.RecipeFragranceUpdateInput) int
+		UpdateRecipeLipid          func(childComplexity int, id string, input gmodels.RecipeLipidUpdateInput) int
+		UpdateSupplier             func(childComplexity int, id string, input gmodels.SupplierUpdateInput) int
 	}
 
 	Query struct {
 		Additive              func(childComplexity int, id string) int
-		AdditiveInventories   func(childComplexity int, filter *models.AdditiveInventoryFilter) int
+		AdditiveInventories   func(childComplexity int, filter *gmodels.AdditiveInventoryFilter) int
 		AdditiveInventory     func(childComplexity int, id string) int
-		Additives             func(childComplexity int, filter *models.AdditiveFilter) int
+		Additives             func(childComplexity int, filter *gmodels.AdditiveFilter) int
 		Fragrance             func(childComplexity int, id string) int
-		FragranceInventories  func(childComplexity int, filter *models.FragranceInventoryFilter) int
+		FragranceInventories  func(childComplexity int, filter *gmodels.FragranceInventoryFilter) int
 		FragranceInventory    func(childComplexity int, id string) int
-		Fragrances            func(childComplexity int, filter *models.FragranceFilter) int
+		Fragrances            func(childComplexity int, filter *gmodels.FragranceFilter) int
 		Lipid                 func(childComplexity int, id string) int
-		LipidInventories      func(childComplexity int, filter *models.LipidInventoryFilter) int
+		LipidInventories      func(childComplexity int, filter *gmodels.LipidInventoryFilter) int
 		LipidInventory        func(childComplexity int, id string) int
-		Lipids                func(childComplexity int, filter *models.LipidFilter) int
+		Lipids                func(childComplexity int, filter *gmodels.LipidFilter) int
 		Lye                   func(childComplexity int, id string) int
-		LyeInventories        func(childComplexity int, filter *models.LyeInventoryFilter) int
+		LyeInventories        func(childComplexity int, filter *gmodels.LyeInventoryFilter) int
 		LyeInventory          func(childComplexity int, id string) int
-		Lyes                  func(childComplexity int, filter *models.LyeFilter) int
+		Lyes                  func(childComplexity int, filter *gmodels.LyeFilter) int
 		Recipe                func(childComplexity int, id string) int
 		RecipeAdditive        func(childComplexity int, id string) int
-		RecipeAdditives       func(childComplexity int, filter *models.RecipeAdditiveFilter) int
+		RecipeAdditives       func(childComplexity int, filter *gmodels.RecipeAdditiveFilter) int
 		RecipeBatch           func(childComplexity int, id string) int
 		RecipeBatchAdditive   func(childComplexity int, id string) int
-		RecipeBatchAdditives  func(childComplexity int, filter *models.RecipeBatchAdditiveFilter) int
+		RecipeBatchAdditives  func(childComplexity int, filter *gmodels.RecipeBatchAdditiveFilter) int
 		RecipeBatchFragrance  func(childComplexity int, id string) int
-		RecipeBatchFragrances func(childComplexity int, filter *models.RecipeBatchFragranceFilter) int
+		RecipeBatchFragrances func(childComplexity int, filter *gmodels.RecipeBatchFragranceFilter) int
 		RecipeBatchLipid      func(childComplexity int, id string) int
-		RecipeBatchLipids     func(childComplexity int, filter *models.RecipeBatchLipidFilter) int
+		RecipeBatchLipids     func(childComplexity int, filter *gmodels.RecipeBatchLipidFilter) int
 		RecipeBatchLye        func(childComplexity int, id string) int
-		RecipeBatchLyes       func(childComplexity int, filter *models.RecipeBatchLyeFilter) int
-		RecipeBatches         func(childComplexity int, filter *models.RecipeBatchFilter) int
+		RecipeBatchLyes       func(childComplexity int, filter *gmodels.RecipeBatchLyeFilter) int
+		RecipeBatches         func(childComplexity int, filter *gmodels.RecipeBatchFilter) int
 		RecipeFragrance       func(childComplexity int, id string) int
-		RecipeFragrances      func(childComplexity int, filter *models.RecipeFragranceFilter) int
+		RecipeFragrances      func(childComplexity int, filter *gmodels.RecipeFragranceFilter) int
 		RecipeLipid           func(childComplexity int, id string) int
-		RecipeLipids          func(childComplexity int, filter *models.RecipeLipidFilter) int
-		Recipes               func(childComplexity int, filter *models.RecipeFilter) int
+		RecipeLipids          func(childComplexity int, filter *gmodels.RecipeLipidFilter) int
+		Recipes               func(childComplexity int, filter *gmodels.RecipeFilter) int
 		Supplier              func(childComplexity int, id string) int
-		Suppliers             func(childComplexity int, filter *models.SupplierFilter) int
+		Suppliers             func(childComplexity int, filter *gmodels.SupplierFilter) int
 	}
 
 	Recipe struct {
@@ -521,98 +521,98 @@ type ComplexityRoot struct {
 }
 
 type MutationResolver interface {
-	CreateAdditive(ctx context.Context, input models.AdditiveCreateInput) (*models.AdditivePayload, error)
-	UpdateAdditive(ctx context.Context, id string, input models.AdditiveUpdateInput) (*models.AdditivePayload, error)
-	DeleteAdditive(ctx context.Context, id string) (*models.AdditiveDeletePayload, error)
-	CreateAdditiveInventory(ctx context.Context, input models.AdditiveInventoryCreateInput) (*models.AdditiveInventoryPayload, error)
-	UpdateAdditiveInventory(ctx context.Context, id string, input models.AdditiveInventoryUpdateInput) (*models.AdditiveInventoryPayload, error)
-	DeleteAdditiveInventory(ctx context.Context, id string) (*models.AdditiveInventoryDeletePayload, error)
-	CreateFragrance(ctx context.Context, input models.FragranceCreateInput) (*models.FragrancePayload, error)
-	UpdateFragrance(ctx context.Context, id string, input models.FragranceUpdateInput) (*models.FragrancePayload, error)
-	DeleteFragrance(ctx context.Context, id string) (*models.FragranceDeletePayload, error)
-	CreateFragranceInventory(ctx context.Context, input models.FragranceInventoryCreateInput) (*models.FragranceInventoryPayload, error)
-	UpdateFragranceInventory(ctx context.Context, id string, input models.FragranceInventoryUpdateInput) (*models.FragranceInventoryPayload, error)
-	DeleteFragranceInventory(ctx context.Context, id string) (*models.FragranceInventoryDeletePayload, error)
-	CreateLipid(ctx context.Context, input models.LipidCreateInput) (*models.LipidPayload, error)
-	UpdateLipid(ctx context.Context, id string, input models.LipidUpdateInput) (*models.LipidPayload, error)
-	DeleteLipid(ctx context.Context, id string) (*models.LipidDeletePayload, error)
-	CreateLipidInventory(ctx context.Context, input models.LipidInventoryCreateInput) (*models.LipidInventoryPayload, error)
-	UpdateLipidInventory(ctx context.Context, id string, input models.LipidInventoryUpdateInput) (*models.LipidInventoryPayload, error)
-	DeleteLipidInventory(ctx context.Context, id string) (*models.LipidInventoryDeletePayload, error)
-	CreateLye(ctx context.Context, input models.LyeCreateInput) (*models.LyePayload, error)
-	UpdateLye(ctx context.Context, id string, input models.LyeUpdateInput) (*models.LyePayload, error)
-	DeleteLye(ctx context.Context, id string) (*models.LyeDeletePayload, error)
-	CreateLyeInventory(ctx context.Context, input models.LyeInventoryCreateInput) (*models.LyeInventoryPayload, error)
-	UpdateLyeInventory(ctx context.Context, id string, input models.LyeInventoryUpdateInput) (*models.LyeInventoryPayload, error)
-	DeleteLyeInventory(ctx context.Context, id string) (*models.LyeInventoryDeletePayload, error)
-	CreateRecipe(ctx context.Context, input models.RecipeCreateInput) (*models.RecipePayload, error)
-	UpdateRecipe(ctx context.Context, id string, input models.RecipeUpdateInput) (*models.RecipePayload, error)
-	DeleteRecipe(ctx context.Context, id string) (*models.RecipeDeletePayload, error)
-	CreateRecipeAdditive(ctx context.Context, input models.RecipeAdditiveCreateInput) (*models.RecipeAdditivePayload, error)
-	UpdateRecipeAdditive(ctx context.Context, id string, input models.RecipeAdditiveUpdateInput) (*models.RecipeAdditivePayload, error)
-	DeleteRecipeAdditive(ctx context.Context, id string) (*models.RecipeAdditiveDeletePayload, error)
-	CreateRecipeBatch(ctx context.Context, input models.RecipeBatchCreateInput) (*models.RecipeBatchPayload, error)
-	UpdateRecipeBatch(ctx context.Context, id string, input models.RecipeBatchUpdateInput) (*models.RecipeBatchPayload, error)
-	DeleteRecipeBatch(ctx context.Context, id string) (*models.RecipeBatchDeletePayload, error)
-	CreateRecipeBatchAdditive(ctx context.Context, input models.RecipeBatchAdditiveCreateInput) (*models.RecipeBatchAdditivePayload, error)
-	UpdateRecipeBatchAdditive(ctx context.Context, id string, input models.RecipeBatchAdditiveUpdateInput) (*models.RecipeBatchAdditivePayload, error)
-	DeleteRecipeBatchAdditive(ctx context.Context, id string) (*models.RecipeBatchAdditiveDeletePayload, error)
-	CreateRecipeBatchFragrance(ctx context.Context, input models.RecipeBatchFragranceCreateInput) (*models.RecipeBatchFragrancePayload, error)
-	UpdateRecipeBatchFragrance(ctx context.Context, id string, input models.RecipeBatchFragranceUpdateInput) (*models.RecipeBatchFragrancePayload, error)
-	DeleteRecipeBatchFragrance(ctx context.Context, id string) (*models.RecipeBatchFragranceDeletePayload, error)
-	CreateRecipeBatchLipid(ctx context.Context, input models.RecipeBatchLipidCreateInput) (*models.RecipeBatchLipidPayload, error)
-	UpdateRecipeBatchLipid(ctx context.Context, id string, input models.RecipeBatchLipidUpdateInput) (*models.RecipeBatchLipidPayload, error)
-	DeleteRecipeBatchLipid(ctx context.Context, id string) (*models.RecipeBatchLipidDeletePayload, error)
-	CreateRecipeBatchLye(ctx context.Context, input models.RecipeBatchLyeCreateInput) (*models.RecipeBatchLyePayload, error)
-	UpdateRecipeBatchLye(ctx context.Context, id string, input models.RecipeBatchLyeUpdateInput) (*models.RecipeBatchLyePayload, error)
-	DeleteRecipeBatchLye(ctx context.Context, id string) (*models.RecipeBatchLyeDeletePayload, error)
-	CreateRecipeFragrance(ctx context.Context, input models.RecipeFragranceCreateInput) (*models.RecipeFragrancePayload, error)
-	UpdateRecipeFragrance(ctx context.Context, id string, input models.RecipeFragranceUpdateInput) (*models.RecipeFragrancePayload, error)
-	DeleteRecipeFragrance(ctx context.Context, id string) (*models.RecipeFragranceDeletePayload, error)
-	CreateRecipeLipid(ctx context.Context, input models.RecipeLipidCreateInput) (*models.RecipeLipidPayload, error)
-	UpdateRecipeLipid(ctx context.Context, id string, input models.RecipeLipidUpdateInput) (*models.RecipeLipidPayload, error)
-	DeleteRecipeLipid(ctx context.Context, id string) (*models.RecipeLipidDeletePayload, error)
-	CreateSupplier(ctx context.Context, input models.SupplierCreateInput) (*models.SupplierPayload, error)
-	UpdateSupplier(ctx context.Context, id string, input models.SupplierUpdateInput) (*models.SupplierPayload, error)
-	DeleteSupplier(ctx context.Context, id string) (*models.SupplierDeletePayload, error)
+	CreateAdditive(ctx context.Context, input gmodels.AdditiveCreateInput) (*gmodels.AdditivePayload, error)
+	UpdateAdditive(ctx context.Context, id string, input gmodels.AdditiveUpdateInput) (*gmodels.AdditivePayload, error)
+	DeleteAdditive(ctx context.Context, id string) (*gmodels.AdditiveDeletePayload, error)
+	CreateAdditiveInventory(ctx context.Context, input gmodels.AdditiveInventoryCreateInput) (*gmodels.AdditiveInventoryPayload, error)
+	UpdateAdditiveInventory(ctx context.Context, id string, input gmodels.AdditiveInventoryUpdateInput) (*gmodels.AdditiveInventoryPayload, error)
+	DeleteAdditiveInventory(ctx context.Context, id string) (*gmodels.AdditiveInventoryDeletePayload, error)
+	CreateFragrance(ctx context.Context, input gmodels.FragranceCreateInput) (*gmodels.FragrancePayload, error)
+	UpdateFragrance(ctx context.Context, id string, input gmodels.FragranceUpdateInput) (*gmodels.FragrancePayload, error)
+	DeleteFragrance(ctx context.Context, id string) (*gmodels.FragranceDeletePayload, error)
+	CreateFragranceInventory(ctx context.Context, input gmodels.FragranceInventoryCreateInput) (*gmodels.FragranceInventoryPayload, error)
+	UpdateFragranceInventory(ctx context.Context, id string, input gmodels.FragranceInventoryUpdateInput) (*gmodels.FragranceInventoryPayload, error)
+	DeleteFragranceInventory(ctx context.Context, id string) (*gmodels.FragranceInventoryDeletePayload, error)
+	CreateLipid(ctx context.Context, input gmodels.LipidCreateInput) (*gmodels.LipidPayload, error)
+	UpdateLipid(ctx context.Context, id string, input gmodels.LipidUpdateInput) (*gmodels.LipidPayload, error)
+	DeleteLipid(ctx context.Context, id string) (*gmodels.LipidDeletePayload, error)
+	CreateLipidInventory(ctx context.Context, input gmodels.LipidInventoryCreateInput) (*gmodels.LipidInventoryPayload, error)
+	UpdateLipidInventory(ctx context.Context, id string, input gmodels.LipidInventoryUpdateInput) (*gmodels.LipidInventoryPayload, error)
+	DeleteLipidInventory(ctx context.Context, id string) (*gmodels.LipidInventoryDeletePayload, error)
+	CreateLye(ctx context.Context, input gmodels.LyeCreateInput) (*gmodels.LyePayload, error)
+	UpdateLye(ctx context.Context, id string, input gmodels.LyeUpdateInput) (*gmodels.LyePayload, error)
+	DeleteLye(ctx context.Context, id string) (*gmodels.LyeDeletePayload, error)
+	CreateLyeInventory(ctx context.Context, input gmodels.LyeInventoryCreateInput) (*gmodels.LyeInventoryPayload, error)
+	UpdateLyeInventory(ctx context.Context, id string, input gmodels.LyeInventoryUpdateInput) (*gmodels.LyeInventoryPayload, error)
+	DeleteLyeInventory(ctx context.Context, id string) (*gmodels.LyeInventoryDeletePayload, error)
+	CreateRecipe(ctx context.Context, input gmodels.RecipeCreateInput) (*gmodels.RecipePayload, error)
+	UpdateRecipe(ctx context.Context, id string, input gmodels.RecipeUpdateInput) (*gmodels.RecipePayload, error)
+	DeleteRecipe(ctx context.Context, id string) (*gmodels.RecipeDeletePayload, error)
+	CreateRecipeAdditive(ctx context.Context, input gmodels.RecipeAdditiveCreateInput) (*gmodels.RecipeAdditivePayload, error)
+	UpdateRecipeAdditive(ctx context.Context, id string, input gmodels.RecipeAdditiveUpdateInput) (*gmodels.RecipeAdditivePayload, error)
+	DeleteRecipeAdditive(ctx context.Context, id string) (*gmodels.RecipeAdditiveDeletePayload, error)
+	CreateRecipeBatch(ctx context.Context, input gmodels.RecipeBatchCreateInput) (*gmodels.RecipeBatchPayload, error)
+	UpdateRecipeBatch(ctx context.Context, id string, input gmodels.RecipeBatchUpdateInput) (*gmodels.RecipeBatchPayload, error)
+	DeleteRecipeBatch(ctx context.Context, id string) (*gmodels.RecipeBatchDeletePayload, error)
+	CreateRecipeBatchAdditive(ctx context.Context, input gmodels.RecipeBatchAdditiveCreateInput) (*gmodels.RecipeBatchAdditivePayload, error)
+	UpdateRecipeBatchAdditive(ctx context.Context, id string, input gmodels.RecipeBatchAdditiveUpdateInput) (*gmodels.RecipeBatchAdditivePayload, error)
+	DeleteRecipeBatchAdditive(ctx context.Context, id string) (*gmodels.RecipeBatchAdditiveDeletePayload, error)
+	CreateRecipeBatchFragrance(ctx context.Context, input gmodels.RecipeBatchFragranceCreateInput) (*gmodels.RecipeBatchFragrancePayload, error)
+	UpdateRecipeBatchFragrance(ctx context.Context, id string, input gmodels.RecipeBatchFragranceUpdateInput) (*gmodels.RecipeBatchFragrancePayload, error)
+	DeleteRecipeBatchFragrance(ctx context.Context, id string) (*gmodels.RecipeBatchFragranceDeletePayload, error)
+	CreateRecipeBatchLipid(ctx context.Context, input gmodels.RecipeBatchLipidCreateInput) (*gmodels.RecipeBatchLipidPayload, error)
+	UpdateRecipeBatchLipid(ctx context.Context, id string, input gmodels.RecipeBatchLipidUpdateInput) (*gmodels.RecipeBatchLipidPayload, error)
+	DeleteRecipeBatchLipid(ctx context.Context, id string) (*gmodels.RecipeBatchLipidDeletePayload, error)
+	CreateRecipeBatchLye(ctx context.Context, input gmodels.RecipeBatchLyeCreateInput) (*gmodels.RecipeBatchLyePayload, error)
+	UpdateRecipeBatchLye(ctx context.Context, id string, input gmodels.RecipeBatchLyeUpdateInput) (*gmodels.RecipeBatchLyePayload, error)
+	DeleteRecipeBatchLye(ctx context.Context, id string) (*gmodels.RecipeBatchLyeDeletePayload, error)
+	CreateRecipeFragrance(ctx context.Context, input gmodels.RecipeFragranceCreateInput) (*gmodels.RecipeFragrancePayload, error)
+	UpdateRecipeFragrance(ctx context.Context, id string, input gmodels.RecipeFragranceUpdateInput) (*gmodels.RecipeFragrancePayload, error)
+	DeleteRecipeFragrance(ctx context.Context, id string) (*gmodels.RecipeFragranceDeletePayload, error)
+	CreateRecipeLipid(ctx context.Context, input gmodels.RecipeLipidCreateInput) (*gmodels.RecipeLipidPayload, error)
+	UpdateRecipeLipid(ctx context.Context, id string, input gmodels.RecipeLipidUpdateInput) (*gmodels.RecipeLipidPayload, error)
+	DeleteRecipeLipid(ctx context.Context, id string) (*gmodels.RecipeLipidDeletePayload, error)
+	CreateSupplier(ctx context.Context, input gmodels.SupplierCreateInput) (*gmodels.SupplierPayload, error)
+	UpdateSupplier(ctx context.Context, id string, input gmodels.SupplierUpdateInput) (*gmodels.SupplierPayload, error)
+	DeleteSupplier(ctx context.Context, id string) (*gmodels.SupplierDeletePayload, error)
 }
 type QueryResolver interface {
-	Additive(ctx context.Context, id string) (*models.Additive, error)
-	Additives(ctx context.Context, filter *models.AdditiveFilter) ([]*models.Additive, error)
-	AdditiveInventory(ctx context.Context, id string) (*models.AdditiveInventory, error)
-	AdditiveInventories(ctx context.Context, filter *models.AdditiveInventoryFilter) ([]*models.AdditiveInventory, error)
-	Fragrance(ctx context.Context, id string) (*models.Fragrance, error)
-	Fragrances(ctx context.Context, filter *models.FragranceFilter) ([]*models.Fragrance, error)
-	FragranceInventory(ctx context.Context, id string) (*models.FragranceInventory, error)
-	FragranceInventories(ctx context.Context, filter *models.FragranceInventoryFilter) ([]*models.FragranceInventory, error)
-	Lipid(ctx context.Context, id string) (*models.Lipid, error)
-	Lipids(ctx context.Context, filter *models.LipidFilter) ([]*models.Lipid, error)
-	LipidInventory(ctx context.Context, id string) (*models.LipidInventory, error)
-	LipidInventories(ctx context.Context, filter *models.LipidInventoryFilter) ([]*models.LipidInventory, error)
-	Lye(ctx context.Context, id string) (*models.Lye, error)
-	Lyes(ctx context.Context, filter *models.LyeFilter) ([]*models.Lye, error)
-	LyeInventory(ctx context.Context, id string) (*models.LyeInventory, error)
-	LyeInventories(ctx context.Context, filter *models.LyeInventoryFilter) ([]*models.LyeInventory, error)
-	Recipe(ctx context.Context, id string) (*models.Recipe, error)
-	Recipes(ctx context.Context, filter *models.RecipeFilter) ([]*models.Recipe, error)
-	RecipeAdditive(ctx context.Context, id string) (*models.RecipeAdditive, error)
-	RecipeAdditives(ctx context.Context, filter *models.RecipeAdditiveFilter) ([]*models.RecipeAdditive, error)
-	RecipeBatch(ctx context.Context, id string) (*models.RecipeBatch, error)
-	RecipeBatches(ctx context.Context, filter *models.RecipeBatchFilter) ([]*models.RecipeBatch, error)
-	RecipeBatchAdditive(ctx context.Context, id string) (*models.RecipeBatchAdditive, error)
-	RecipeBatchAdditives(ctx context.Context, filter *models.RecipeBatchAdditiveFilter) ([]*models.RecipeBatchAdditive, error)
-	RecipeBatchFragrance(ctx context.Context, id string) (*models.RecipeBatchFragrance, error)
-	RecipeBatchFragrances(ctx context.Context, filter *models.RecipeBatchFragranceFilter) ([]*models.RecipeBatchFragrance, error)
-	RecipeBatchLipid(ctx context.Context, id string) (*models.RecipeBatchLipid, error)
-	RecipeBatchLipids(ctx context.Context, filter *models.RecipeBatchLipidFilter) ([]*models.RecipeBatchLipid, error)
-	RecipeBatchLye(ctx context.Context, id string) (*models.RecipeBatchLye, error)
-	RecipeBatchLyes(ctx context.Context, filter *models.RecipeBatchLyeFilter) ([]*models.RecipeBatchLye, error)
-	RecipeFragrance(ctx context.Context, id string) (*models.RecipeFragrance, error)
-	RecipeFragrances(ctx context.Context, filter *models.RecipeFragranceFilter) ([]*models.RecipeFragrance, error)
-	RecipeLipid(ctx context.Context, id string) (*models.RecipeLipid, error)
-	RecipeLipids(ctx context.Context, filter *models.RecipeLipidFilter) ([]*models.RecipeLipid, error)
-	Supplier(ctx context.Context, id string) (*models.Supplier, error)
-	Suppliers(ctx context.Context, filter *models.SupplierFilter) ([]*models.Supplier, error)
+	Additive(ctx context.Context, id string) (*gmodels.Additive, error)
+	Additives(ctx context.Context, filter *gmodels.AdditiveFilter) ([]*gmodels.Additive, error)
+	AdditiveInventory(ctx context.Context, id string) (*gmodels.AdditiveInventory, error)
+	AdditiveInventories(ctx context.Context, filter *gmodels.AdditiveInventoryFilter) ([]*gmodels.AdditiveInventory, error)
+	Fragrance(ctx context.Context, id string) (*gmodels.Fragrance, error)
+	Fragrances(ctx context.Context, filter *gmodels.FragranceFilter) ([]*gmodels.Fragrance, error)
+	FragranceInventory(ctx context.Context, id string) (*gmodels.FragranceInventory, error)
+	FragranceInventories(ctx context.Context, filter *gmodels.FragranceInventoryFilter) ([]*gmodels.FragranceInventory, error)
+	Lipid(ctx context.Context, id string) (*gmodels.Lipid, error)
+	Lipids(ctx context.Context, filter *gmodels.LipidFilter) ([]*gmodels.Lipid, error)
+	LipidInventory(ctx context.Context, id string) (*gmodels.LipidInventory, error)
+	LipidInventories(ctx context.Context, filter *gmodels.LipidInventoryFilter) ([]*gmodels.LipidInventory, error)
+	Lye(ctx context.Context, id string) (*gmodels.Lye, error)
+	Lyes(ctx context.Context, filter *gmodels.LyeFilter) ([]*gmodels.Lye, error)
+	LyeInventory(ctx context.Context, id string) (*gmodels.LyeInventory, error)
+	LyeInventories(ctx context.Context, filter *gmodels.LyeInventoryFilter) ([]*gmodels.LyeInventory, error)
+	Recipe(ctx context.Context, id string) (*gmodels.Recipe, error)
+	Recipes(ctx context.Context, filter *gmodels.RecipeFilter) ([]*gmodels.Recipe, error)
+	RecipeAdditive(ctx context.Context, id string) (*gmodels.RecipeAdditive, error)
+	RecipeAdditives(ctx context.Context, filter *gmodels.RecipeAdditiveFilter) ([]*gmodels.RecipeAdditive, error)
+	RecipeBatch(ctx context.Context, id string) (*gmodels.RecipeBatch, error)
+	RecipeBatches(ctx context.Context, filter *gmodels.RecipeBatchFilter) ([]*gmodels.RecipeBatch, error)
+	RecipeBatchAdditive(ctx context.Context, id string) (*gmodels.RecipeBatchAdditive, error)
+	RecipeBatchAdditives(ctx context.Context, filter *gmodels.RecipeBatchAdditiveFilter) ([]*gmodels.RecipeBatchAdditive, error)
+	RecipeBatchFragrance(ctx context.Context, id string) (*gmodels.RecipeBatchFragrance, error)
+	RecipeBatchFragrances(ctx context.Context, filter *gmodels.RecipeBatchFragranceFilter) ([]*gmodels.RecipeBatchFragrance, error)
+	RecipeBatchLipid(ctx context.Context, id string) (*gmodels.RecipeBatchLipid, error)
+	RecipeBatchLipids(ctx context.Context, filter *gmodels.RecipeBatchLipidFilter) ([]*gmodels.RecipeBatchLipid, error)
+	RecipeBatchLye(ctx context.Context, id string) (*gmodels.RecipeBatchLye, error)
+	RecipeBatchLyes(ctx context.Context, filter *gmodels.RecipeBatchLyeFilter) ([]*gmodels.RecipeBatchLye, error)
+	RecipeFragrance(ctx context.Context, id string) (*gmodels.RecipeFragrance, error)
+	RecipeFragrances(ctx context.Context, filter *gmodels.RecipeFragranceFilter) ([]*gmodels.RecipeFragrance, error)
+	RecipeLipid(ctx context.Context, id string) (*gmodels.RecipeLipid, error)
+	RecipeLipids(ctx context.Context, filter *gmodels.RecipeLipidFilter) ([]*gmodels.RecipeLipid, error)
+	Supplier(ctx context.Context, id string) (*gmodels.Supplier, error)
+	Suppliers(ctx context.Context, filter *gmodels.SupplierFilter) ([]*gmodels.Supplier, error)
 }
 
 type executableSchema struct {
@@ -1389,7 +1389,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.CreateAdditive(childComplexity, args["input"].(models.AdditiveCreateInput)), true
+		return e.complexity.Mutation.CreateAdditive(childComplexity, args["input"].(gmodels.AdditiveCreateInput)), true
 
 	case "Mutation.createAdditiveInventory":
 		if e.complexity.Mutation.CreateAdditiveInventory == nil {
@@ -1401,7 +1401,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.CreateAdditiveInventory(childComplexity, args["input"].(models.AdditiveInventoryCreateInput)), true
+		return e.complexity.Mutation.CreateAdditiveInventory(childComplexity, args["input"].(gmodels.AdditiveInventoryCreateInput)), true
 
 	case "Mutation.createFragrance":
 		if e.complexity.Mutation.CreateFragrance == nil {
@@ -1413,7 +1413,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.CreateFragrance(childComplexity, args["input"].(models.FragranceCreateInput)), true
+		return e.complexity.Mutation.CreateFragrance(childComplexity, args["input"].(gmodels.FragranceCreateInput)), true
 
 	case "Mutation.createFragranceInventory":
 		if e.complexity.Mutation.CreateFragranceInventory == nil {
@@ -1425,7 +1425,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.CreateFragranceInventory(childComplexity, args["input"].(models.FragranceInventoryCreateInput)), true
+		return e.complexity.Mutation.CreateFragranceInventory(childComplexity, args["input"].(gmodels.FragranceInventoryCreateInput)), true
 
 	case "Mutation.createLipid":
 		if e.complexity.Mutation.CreateLipid == nil {
@@ -1437,7 +1437,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.CreateLipid(childComplexity, args["input"].(models.LipidCreateInput)), true
+		return e.complexity.Mutation.CreateLipid(childComplexity, args["input"].(gmodels.LipidCreateInput)), true
 
 	case "Mutation.createLipidInventory":
 		if e.complexity.Mutation.CreateLipidInventory == nil {
@@ -1449,7 +1449,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.CreateLipidInventory(childComplexity, args["input"].(models.LipidInventoryCreateInput)), true
+		return e.complexity.Mutation.CreateLipidInventory(childComplexity, args["input"].(gmodels.LipidInventoryCreateInput)), true
 
 	case "Mutation.createLye":
 		if e.complexity.Mutation.CreateLye == nil {
@@ -1461,7 +1461,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.CreateLye(childComplexity, args["input"].(models.LyeCreateInput)), true
+		return e.complexity.Mutation.CreateLye(childComplexity, args["input"].(gmodels.LyeCreateInput)), true
 
 	case "Mutation.createLyeInventory":
 		if e.complexity.Mutation.CreateLyeInventory == nil {
@@ -1473,7 +1473,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.CreateLyeInventory(childComplexity, args["input"].(models.LyeInventoryCreateInput)), true
+		return e.complexity.Mutation.CreateLyeInventory(childComplexity, args["input"].(gmodels.LyeInventoryCreateInput)), true
 
 	case "Mutation.createRecipe":
 		if e.complexity.Mutation.CreateRecipe == nil {
@@ -1485,7 +1485,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.CreateRecipe(childComplexity, args["input"].(models.RecipeCreateInput)), true
+		return e.complexity.Mutation.CreateRecipe(childComplexity, args["input"].(gmodels.RecipeCreateInput)), true
 
 	case "Mutation.createRecipeAdditive":
 		if e.complexity.Mutation.CreateRecipeAdditive == nil {
@@ -1497,7 +1497,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.CreateRecipeAdditive(childComplexity, args["input"].(models.RecipeAdditiveCreateInput)), true
+		return e.complexity.Mutation.CreateRecipeAdditive(childComplexity, args["input"].(gmodels.RecipeAdditiveCreateInput)), true
 
 	case "Mutation.createRecipeBatch":
 		if e.complexity.Mutation.CreateRecipeBatch == nil {
@@ -1509,7 +1509,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.CreateRecipeBatch(childComplexity, args["input"].(models.RecipeBatchCreateInput)), true
+		return e.complexity.Mutation.CreateRecipeBatch(childComplexity, args["input"].(gmodels.RecipeBatchCreateInput)), true
 
 	case "Mutation.createRecipeBatchAdditive":
 		if e.complexity.Mutation.CreateRecipeBatchAdditive == nil {
@@ -1521,7 +1521,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.CreateRecipeBatchAdditive(childComplexity, args["input"].(models.RecipeBatchAdditiveCreateInput)), true
+		return e.complexity.Mutation.CreateRecipeBatchAdditive(childComplexity, args["input"].(gmodels.RecipeBatchAdditiveCreateInput)), true
 
 	case "Mutation.createRecipeBatchFragrance":
 		if e.complexity.Mutation.CreateRecipeBatchFragrance == nil {
@@ -1533,7 +1533,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.CreateRecipeBatchFragrance(childComplexity, args["input"].(models.RecipeBatchFragranceCreateInput)), true
+		return e.complexity.Mutation.CreateRecipeBatchFragrance(childComplexity, args["input"].(gmodels.RecipeBatchFragranceCreateInput)), true
 
 	case "Mutation.createRecipeBatchLipid":
 		if e.complexity.Mutation.CreateRecipeBatchLipid == nil {
@@ -1545,7 +1545,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.CreateRecipeBatchLipid(childComplexity, args["input"].(models.RecipeBatchLipidCreateInput)), true
+		return e.complexity.Mutation.CreateRecipeBatchLipid(childComplexity, args["input"].(gmodels.RecipeBatchLipidCreateInput)), true
 
 	case "Mutation.createRecipeBatchLye":
 		if e.complexity.Mutation.CreateRecipeBatchLye == nil {
@@ -1557,7 +1557,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.CreateRecipeBatchLye(childComplexity, args["input"].(models.RecipeBatchLyeCreateInput)), true
+		return e.complexity.Mutation.CreateRecipeBatchLye(childComplexity, args["input"].(gmodels.RecipeBatchLyeCreateInput)), true
 
 	case "Mutation.createRecipeFragrance":
 		if e.complexity.Mutation.CreateRecipeFragrance == nil {
@@ -1569,7 +1569,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.CreateRecipeFragrance(childComplexity, args["input"].(models.RecipeFragranceCreateInput)), true
+		return e.complexity.Mutation.CreateRecipeFragrance(childComplexity, args["input"].(gmodels.RecipeFragranceCreateInput)), true
 
 	case "Mutation.createRecipeLipid":
 		if e.complexity.Mutation.CreateRecipeLipid == nil {
@@ -1581,7 +1581,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.CreateRecipeLipid(childComplexity, args["input"].(models.RecipeLipidCreateInput)), true
+		return e.complexity.Mutation.CreateRecipeLipid(childComplexity, args["input"].(gmodels.RecipeLipidCreateInput)), true
 
 	case "Mutation.createSupplier":
 		if e.complexity.Mutation.CreateSupplier == nil {
@@ -1593,7 +1593,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.CreateSupplier(childComplexity, args["input"].(models.SupplierCreateInput)), true
+		return e.complexity.Mutation.CreateSupplier(childComplexity, args["input"].(gmodels.SupplierCreateInput)), true
 
 	case "Mutation.deleteAdditive":
 		if e.complexity.Mutation.DeleteAdditive == nil {
@@ -1821,7 +1821,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.UpdateAdditive(childComplexity, args["id"].(string), args["input"].(models.AdditiveUpdateInput)), true
+		return e.complexity.Mutation.UpdateAdditive(childComplexity, args["id"].(string), args["input"].(gmodels.AdditiveUpdateInput)), true
 
 	case "Mutation.updateAdditiveInventory":
 		if e.complexity.Mutation.UpdateAdditiveInventory == nil {
@@ -1833,7 +1833,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.UpdateAdditiveInventory(childComplexity, args["id"].(string), args["input"].(models.AdditiveInventoryUpdateInput)), true
+		return e.complexity.Mutation.UpdateAdditiveInventory(childComplexity, args["id"].(string), args["input"].(gmodels.AdditiveInventoryUpdateInput)), true
 
 	case "Mutation.updateFragrance":
 		if e.complexity.Mutation.UpdateFragrance == nil {
@@ -1845,7 +1845,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.UpdateFragrance(childComplexity, args["id"].(string), args["input"].(models.FragranceUpdateInput)), true
+		return e.complexity.Mutation.UpdateFragrance(childComplexity, args["id"].(string), args["input"].(gmodels.FragranceUpdateInput)), true
 
 	case "Mutation.updateFragranceInventory":
 		if e.complexity.Mutation.UpdateFragranceInventory == nil {
@@ -1857,7 +1857,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.UpdateFragranceInventory(childComplexity, args["id"].(string), args["input"].(models.FragranceInventoryUpdateInput)), true
+		return e.complexity.Mutation.UpdateFragranceInventory(childComplexity, args["id"].(string), args["input"].(gmodels.FragranceInventoryUpdateInput)), true
 
 	case "Mutation.updateLipid":
 		if e.complexity.Mutation.UpdateLipid == nil {
@@ -1869,7 +1869,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.UpdateLipid(childComplexity, args["id"].(string), args["input"].(models.LipidUpdateInput)), true
+		return e.complexity.Mutation.UpdateLipid(childComplexity, args["id"].(string), args["input"].(gmodels.LipidUpdateInput)), true
 
 	case "Mutation.updateLipidInventory":
 		if e.complexity.Mutation.UpdateLipidInventory == nil {
@@ -1881,7 +1881,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.UpdateLipidInventory(childComplexity, args["id"].(string), args["input"].(models.LipidInventoryUpdateInput)), true
+		return e.complexity.Mutation.UpdateLipidInventory(childComplexity, args["id"].(string), args["input"].(gmodels.LipidInventoryUpdateInput)), true
 
 	case "Mutation.updateLye":
 		if e.complexity.Mutation.UpdateLye == nil {
@@ -1893,7 +1893,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.UpdateLye(childComplexity, args["id"].(string), args["input"].(models.LyeUpdateInput)), true
+		return e.complexity.Mutation.UpdateLye(childComplexity, args["id"].(string), args["input"].(gmodels.LyeUpdateInput)), true
 
 	case "Mutation.updateLyeInventory":
 		if e.complexity.Mutation.UpdateLyeInventory == nil {
@@ -1905,7 +1905,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.UpdateLyeInventory(childComplexity, args["id"].(string), args["input"].(models.LyeInventoryUpdateInput)), true
+		return e.complexity.Mutation.UpdateLyeInventory(childComplexity, args["id"].(string), args["input"].(gmodels.LyeInventoryUpdateInput)), true
 
 	case "Mutation.updateRecipe":
 		if e.complexity.Mutation.UpdateRecipe == nil {
@@ -1917,7 +1917,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.UpdateRecipe(childComplexity, args["id"].(string), args["input"].(models.RecipeUpdateInput)), true
+		return e.complexity.Mutation.UpdateRecipe(childComplexity, args["id"].(string), args["input"].(gmodels.RecipeUpdateInput)), true
 
 	case "Mutation.updateRecipeAdditive":
 		if e.complexity.Mutation.UpdateRecipeAdditive == nil {
@@ -1929,7 +1929,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.UpdateRecipeAdditive(childComplexity, args["id"].(string), args["input"].(models.RecipeAdditiveUpdateInput)), true
+		return e.complexity.Mutation.UpdateRecipeAdditive(childComplexity, args["id"].(string), args["input"].(gmodels.RecipeAdditiveUpdateInput)), true
 
 	case "Mutation.updateRecipeBatch":
 		if e.complexity.Mutation.UpdateRecipeBatch == nil {
@@ -1941,7 +1941,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.UpdateRecipeBatch(childComplexity, args["id"].(string), args["input"].(models.RecipeBatchUpdateInput)), true
+		return e.complexity.Mutation.UpdateRecipeBatch(childComplexity, args["id"].(string), args["input"].(gmodels.RecipeBatchUpdateInput)), true
 
 	case "Mutation.updateRecipeBatchAdditive":
 		if e.complexity.Mutation.UpdateRecipeBatchAdditive == nil {
@@ -1953,7 +1953,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.UpdateRecipeBatchAdditive(childComplexity, args["id"].(string), args["input"].(models.RecipeBatchAdditiveUpdateInput)), true
+		return e.complexity.Mutation.UpdateRecipeBatchAdditive(childComplexity, args["id"].(string), args["input"].(gmodels.RecipeBatchAdditiveUpdateInput)), true
 
 	case "Mutation.updateRecipeBatchFragrance":
 		if e.complexity.Mutation.UpdateRecipeBatchFragrance == nil {
@@ -1965,7 +1965,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.UpdateRecipeBatchFragrance(childComplexity, args["id"].(string), args["input"].(models.RecipeBatchFragranceUpdateInput)), true
+		return e.complexity.Mutation.UpdateRecipeBatchFragrance(childComplexity, args["id"].(string), args["input"].(gmodels.RecipeBatchFragranceUpdateInput)), true
 
 	case "Mutation.updateRecipeBatchLipid":
 		if e.complexity.Mutation.UpdateRecipeBatchLipid == nil {
@@ -1977,7 +1977,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.UpdateRecipeBatchLipid(childComplexity, args["id"].(string), args["input"].(models.RecipeBatchLipidUpdateInput)), true
+		return e.complexity.Mutation.UpdateRecipeBatchLipid(childComplexity, args["id"].(string), args["input"].(gmodels.RecipeBatchLipidUpdateInput)), true
 
 	case "Mutation.updateRecipeBatchLye":
 		if e.complexity.Mutation.UpdateRecipeBatchLye == nil {
@@ -1989,7 +1989,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.UpdateRecipeBatchLye(childComplexity, args["id"].(string), args["input"].(models.RecipeBatchLyeUpdateInput)), true
+		return e.complexity.Mutation.UpdateRecipeBatchLye(childComplexity, args["id"].(string), args["input"].(gmodels.RecipeBatchLyeUpdateInput)), true
 
 	case "Mutation.updateRecipeFragrance":
 		if e.complexity.Mutation.UpdateRecipeFragrance == nil {
@@ -2001,7 +2001,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.UpdateRecipeFragrance(childComplexity, args["id"].(string), args["input"].(models.RecipeFragranceUpdateInput)), true
+		return e.complexity.Mutation.UpdateRecipeFragrance(childComplexity, args["id"].(string), args["input"].(gmodels.RecipeFragranceUpdateInput)), true
 
 	case "Mutation.updateRecipeLipid":
 		if e.complexity.Mutation.UpdateRecipeLipid == nil {
@@ -2013,7 +2013,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.UpdateRecipeLipid(childComplexity, args["id"].(string), args["input"].(models.RecipeLipidUpdateInput)), true
+		return e.complexity.Mutation.UpdateRecipeLipid(childComplexity, args["id"].(string), args["input"].(gmodels.RecipeLipidUpdateInput)), true
 
 	case "Mutation.updateSupplier":
 		if e.complexity.Mutation.UpdateSupplier == nil {
@@ -2025,7 +2025,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.UpdateSupplier(childComplexity, args["id"].(string), args["input"].(models.SupplierUpdateInput)), true
+		return e.complexity.Mutation.UpdateSupplier(childComplexity, args["id"].(string), args["input"].(gmodels.SupplierUpdateInput)), true
 
 	case "Query.additive":
 		if e.complexity.Query.Additive == nil {
@@ -2049,7 +2049,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Query.AdditiveInventories(childComplexity, args["filter"].(*models.AdditiveInventoryFilter)), true
+		return e.complexity.Query.AdditiveInventories(childComplexity, args["filter"].(*gmodels.AdditiveInventoryFilter)), true
 
 	case "Query.additiveInventory":
 		if e.complexity.Query.AdditiveInventory == nil {
@@ -2073,7 +2073,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Query.Additives(childComplexity, args["filter"].(*models.AdditiveFilter)), true
+		return e.complexity.Query.Additives(childComplexity, args["filter"].(*gmodels.AdditiveFilter)), true
 
 	case "Query.fragrance":
 		if e.complexity.Query.Fragrance == nil {
@@ -2097,7 +2097,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Query.FragranceInventories(childComplexity, args["filter"].(*models.FragranceInventoryFilter)), true
+		return e.complexity.Query.FragranceInventories(childComplexity, args["filter"].(*gmodels.FragranceInventoryFilter)), true
 
 	case "Query.fragranceInventory":
 		if e.complexity.Query.FragranceInventory == nil {
@@ -2121,7 +2121,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Query.Fragrances(childComplexity, args["filter"].(*models.FragranceFilter)), true
+		return e.complexity.Query.Fragrances(childComplexity, args["filter"].(*gmodels.FragranceFilter)), true
 
 	case "Query.lipid":
 		if e.complexity.Query.Lipid == nil {
@@ -2145,7 +2145,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Query.LipidInventories(childComplexity, args["filter"].(*models.LipidInventoryFilter)), true
+		return e.complexity.Query.LipidInventories(childComplexity, args["filter"].(*gmodels.LipidInventoryFilter)), true
 
 	case "Query.lipidInventory":
 		if e.complexity.Query.LipidInventory == nil {
@@ -2169,7 +2169,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Query.Lipids(childComplexity, args["filter"].(*models.LipidFilter)), true
+		return e.complexity.Query.Lipids(childComplexity, args["filter"].(*gmodels.LipidFilter)), true
 
 	case "Query.lye":
 		if e.complexity.Query.Lye == nil {
@@ -2193,7 +2193,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Query.LyeInventories(childComplexity, args["filter"].(*models.LyeInventoryFilter)), true
+		return e.complexity.Query.LyeInventories(childComplexity, args["filter"].(*gmodels.LyeInventoryFilter)), true
 
 	case "Query.lyeInventory":
 		if e.complexity.Query.LyeInventory == nil {
@@ -2217,7 +2217,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Query.Lyes(childComplexity, args["filter"].(*models.LyeFilter)), true
+		return e.complexity.Query.Lyes(childComplexity, args["filter"].(*gmodels.LyeFilter)), true
 
 	case "Query.recipe":
 		if e.complexity.Query.Recipe == nil {
@@ -2253,7 +2253,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Query.RecipeAdditives(childComplexity, args["filter"].(*models.RecipeAdditiveFilter)), true
+		return e.complexity.Query.RecipeAdditives(childComplexity, args["filter"].(*gmodels.RecipeAdditiveFilter)), true
 
 	case "Query.recipeBatch":
 		if e.complexity.Query.RecipeBatch == nil {
@@ -2289,7 +2289,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Query.RecipeBatchAdditives(childComplexity, args["filter"].(*models.RecipeBatchAdditiveFilter)), true
+		return e.complexity.Query.RecipeBatchAdditives(childComplexity, args["filter"].(*gmodels.RecipeBatchAdditiveFilter)), true
 
 	case "Query.recipeBatchFragrance":
 		if e.complexity.Query.RecipeBatchFragrance == nil {
@@ -2313,7 +2313,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Query.RecipeBatchFragrances(childComplexity, args["filter"].(*models.RecipeBatchFragranceFilter)), true
+		return e.complexity.Query.RecipeBatchFragrances(childComplexity, args["filter"].(*gmodels.RecipeBatchFragranceFilter)), true
 
 	case "Query.recipeBatchLipid":
 		if e.complexity.Query.RecipeBatchLipid == nil {
@@ -2337,7 +2337,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Query.RecipeBatchLipids(childComplexity, args["filter"].(*models.RecipeBatchLipidFilter)), true
+		return e.complexity.Query.RecipeBatchLipids(childComplexity, args["filter"].(*gmodels.RecipeBatchLipidFilter)), true
 
 	case "Query.recipeBatchLye":
 		if e.complexity.Query.RecipeBatchLye == nil {
@@ -2361,7 +2361,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Query.RecipeBatchLyes(childComplexity, args["filter"].(*models.RecipeBatchLyeFilter)), true
+		return e.complexity.Query.RecipeBatchLyes(childComplexity, args["filter"].(*gmodels.RecipeBatchLyeFilter)), true
 
 	case "Query.recipeBatches":
 		if e.complexity.Query.RecipeBatches == nil {
@@ -2373,7 +2373,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Query.RecipeBatches(childComplexity, args["filter"].(*models.RecipeBatchFilter)), true
+		return e.complexity.Query.RecipeBatches(childComplexity, args["filter"].(*gmodels.RecipeBatchFilter)), true
 
 	case "Query.recipeFragrance":
 		if e.complexity.Query.RecipeFragrance == nil {
@@ -2397,7 +2397,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Query.RecipeFragrances(childComplexity, args["filter"].(*models.RecipeFragranceFilter)), true
+		return e.complexity.Query.RecipeFragrances(childComplexity, args["filter"].(*gmodels.RecipeFragranceFilter)), true
 
 	case "Query.recipeLipid":
 		if e.complexity.Query.RecipeLipid == nil {
@@ -2421,7 +2421,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Query.RecipeLipids(childComplexity, args["filter"].(*models.RecipeLipidFilter)), true
+		return e.complexity.Query.RecipeLipids(childComplexity, args["filter"].(*gmodels.RecipeLipidFilter)), true
 
 	case "Query.recipes":
 		if e.complexity.Query.Recipes == nil {
@@ -2433,7 +2433,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Query.Recipes(childComplexity, args["filter"].(*models.RecipeFilter)), true
+		return e.complexity.Query.Recipes(childComplexity, args["filter"].(*gmodels.RecipeFilter)), true
 
 	case "Query.supplier":
 		if e.complexity.Query.Supplier == nil {
@@ -2457,7 +2457,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Query.Suppliers(childComplexity, args["filter"].(*models.SupplierFilter)), true
+		return e.complexity.Query.Suppliers(childComplexity, args["filter"].(*gmodels.SupplierFilter)), true
 
 	case "Recipe.additives":
 		if e.complexity.Recipe.Additives == nil {
@@ -4669,7 +4669,7 @@ var parsedSchema = gqlparser.MustLoadSchema(sources...)
 func (ec *executionContext) field_Mutation_createAdditiveInventory_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 models.AdditiveInventoryCreateInput
+	var arg0 gmodels.AdditiveInventoryCreateInput
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg0, err = ec.unmarshalNAdditiveInventoryCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveInventoryCreateInput(ctx, tmp)
@@ -4684,7 +4684,7 @@ func (ec *executionContext) field_Mutation_createAdditiveInventory_args(ctx cont
 func (ec *executionContext) field_Mutation_createAdditive_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 models.AdditiveCreateInput
+	var arg0 gmodels.AdditiveCreateInput
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg0, err = ec.unmarshalNAdditiveCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveCreateInput(ctx, tmp)
@@ -4699,7 +4699,7 @@ func (ec *executionContext) field_Mutation_createAdditive_args(ctx context.Conte
 func (ec *executionContext) field_Mutation_createFragranceInventory_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 models.FragranceInventoryCreateInput
+	var arg0 gmodels.FragranceInventoryCreateInput
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg0, err = ec.unmarshalNFragranceInventoryCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceInventoryCreateInput(ctx, tmp)
@@ -4714,7 +4714,7 @@ func (ec *executionContext) field_Mutation_createFragranceInventory_args(ctx con
 func (ec *executionContext) field_Mutation_createFragrance_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 models.FragranceCreateInput
+	var arg0 gmodels.FragranceCreateInput
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg0, err = ec.unmarshalNFragranceCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceCreateInput(ctx, tmp)
@@ -4729,7 +4729,7 @@ func (ec *executionContext) field_Mutation_createFragrance_args(ctx context.Cont
 func (ec *executionContext) field_Mutation_createLipidInventory_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 models.LipidInventoryCreateInput
+	var arg0 gmodels.LipidInventoryCreateInput
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg0, err = ec.unmarshalNLipidInventoryCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidInventoryCreateInput(ctx, tmp)
@@ -4744,7 +4744,7 @@ func (ec *executionContext) field_Mutation_createLipidInventory_args(ctx context
 func (ec *executionContext) field_Mutation_createLipid_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 models.LipidCreateInput
+	var arg0 gmodels.LipidCreateInput
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg0, err = ec.unmarshalNLipidCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidCreateInput(ctx, tmp)
@@ -4759,7 +4759,7 @@ func (ec *executionContext) field_Mutation_createLipid_args(ctx context.Context,
 func (ec *executionContext) field_Mutation_createLyeInventory_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 models.LyeInventoryCreateInput
+	var arg0 gmodels.LyeInventoryCreateInput
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg0, err = ec.unmarshalNLyeInventoryCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeInventoryCreateInput(ctx, tmp)
@@ -4774,7 +4774,7 @@ func (ec *executionContext) field_Mutation_createLyeInventory_args(ctx context.C
 func (ec *executionContext) field_Mutation_createLye_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 models.LyeCreateInput
+	var arg0 gmodels.LyeCreateInput
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg0, err = ec.unmarshalNLyeCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeCreateInput(ctx, tmp)
@@ -4789,7 +4789,7 @@ func (ec *executionContext) field_Mutation_createLye_args(ctx context.Context, r
 func (ec *executionContext) field_Mutation_createRecipeAdditive_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 models.RecipeAdditiveCreateInput
+	var arg0 gmodels.RecipeAdditiveCreateInput
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg0, err = ec.unmarshalNRecipeAdditiveCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeAdditiveCreateInput(ctx, tmp)
@@ -4804,7 +4804,7 @@ func (ec *executionContext) field_Mutation_createRecipeAdditive_args(ctx context
 func (ec *executionContext) field_Mutation_createRecipeBatchAdditive_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 models.RecipeBatchAdditiveCreateInput
+	var arg0 gmodels.RecipeBatchAdditiveCreateInput
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg0, err = ec.unmarshalNRecipeBatchAdditiveCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchAdditiveCreateInput(ctx, tmp)
@@ -4819,7 +4819,7 @@ func (ec *executionContext) field_Mutation_createRecipeBatchAdditive_args(ctx co
 func (ec *executionContext) field_Mutation_createRecipeBatchFragrance_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 models.RecipeBatchFragranceCreateInput
+	var arg0 gmodels.RecipeBatchFragranceCreateInput
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg0, err = ec.unmarshalNRecipeBatchFragranceCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchFragranceCreateInput(ctx, tmp)
@@ -4834,7 +4834,7 @@ func (ec *executionContext) field_Mutation_createRecipeBatchFragrance_args(ctx c
 func (ec *executionContext) field_Mutation_createRecipeBatchLipid_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 models.RecipeBatchLipidCreateInput
+	var arg0 gmodels.RecipeBatchLipidCreateInput
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg0, err = ec.unmarshalNRecipeBatchLipidCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLipidCreateInput(ctx, tmp)
@@ -4849,7 +4849,7 @@ func (ec *executionContext) field_Mutation_createRecipeBatchLipid_args(ctx conte
 func (ec *executionContext) field_Mutation_createRecipeBatchLye_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 models.RecipeBatchLyeCreateInput
+	var arg0 gmodels.RecipeBatchLyeCreateInput
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg0, err = ec.unmarshalNRecipeBatchLyeCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLyeCreateInput(ctx, tmp)
@@ -4864,7 +4864,7 @@ func (ec *executionContext) field_Mutation_createRecipeBatchLye_args(ctx context
 func (ec *executionContext) field_Mutation_createRecipeBatch_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 models.RecipeBatchCreateInput
+	var arg0 gmodels.RecipeBatchCreateInput
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg0, err = ec.unmarshalNRecipeBatchCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchCreateInput(ctx, tmp)
@@ -4879,7 +4879,7 @@ func (ec *executionContext) field_Mutation_createRecipeBatch_args(ctx context.Co
 func (ec *executionContext) field_Mutation_createRecipeFragrance_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 models.RecipeFragranceCreateInput
+	var arg0 gmodels.RecipeFragranceCreateInput
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg0, err = ec.unmarshalNRecipeFragranceCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeFragranceCreateInput(ctx, tmp)
@@ -4894,7 +4894,7 @@ func (ec *executionContext) field_Mutation_createRecipeFragrance_args(ctx contex
 func (ec *executionContext) field_Mutation_createRecipeLipid_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 models.RecipeLipidCreateInput
+	var arg0 gmodels.RecipeLipidCreateInput
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg0, err = ec.unmarshalNRecipeLipidCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeLipidCreateInput(ctx, tmp)
@@ -4909,7 +4909,7 @@ func (ec *executionContext) field_Mutation_createRecipeLipid_args(ctx context.Co
 func (ec *executionContext) field_Mutation_createRecipe_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 models.RecipeCreateInput
+	var arg0 gmodels.RecipeCreateInput
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg0, err = ec.unmarshalNRecipeCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeCreateInput(ctx, tmp)
@@ -4924,7 +4924,7 @@ func (ec *executionContext) field_Mutation_createRecipe_args(ctx context.Context
 func (ec *executionContext) field_Mutation_createSupplier_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 models.SupplierCreateInput
+	var arg0 gmodels.SupplierCreateInput
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg0, err = ec.unmarshalNSupplierCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐSupplierCreateInput(ctx, tmp)
@@ -5218,7 +5218,7 @@ func (ec *executionContext) field_Mutation_updateAdditiveInventory_args(ctx cont
 		}
 	}
 	args["id"] = arg0
-	var arg1 models.AdditiveInventoryUpdateInput
+	var arg1 gmodels.AdditiveInventoryUpdateInput
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg1, err = ec.unmarshalNAdditiveInventoryUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveInventoryUpdateInput(ctx, tmp)
@@ -5242,7 +5242,7 @@ func (ec *executionContext) field_Mutation_updateAdditive_args(ctx context.Conte
 		}
 	}
 	args["id"] = arg0
-	var arg1 models.AdditiveUpdateInput
+	var arg1 gmodels.AdditiveUpdateInput
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg1, err = ec.unmarshalNAdditiveUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveUpdateInput(ctx, tmp)
@@ -5266,7 +5266,7 @@ func (ec *executionContext) field_Mutation_updateFragranceInventory_args(ctx con
 		}
 	}
 	args["id"] = arg0
-	var arg1 models.FragranceInventoryUpdateInput
+	var arg1 gmodels.FragranceInventoryUpdateInput
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg1, err = ec.unmarshalNFragranceInventoryUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceInventoryUpdateInput(ctx, tmp)
@@ -5290,7 +5290,7 @@ func (ec *executionContext) field_Mutation_updateFragrance_args(ctx context.Cont
 		}
 	}
 	args["id"] = arg0
-	var arg1 models.FragranceUpdateInput
+	var arg1 gmodels.FragranceUpdateInput
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg1, err = ec.unmarshalNFragranceUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceUpdateInput(ctx, tmp)
@@ -5314,7 +5314,7 @@ func (ec *executionContext) field_Mutation_updateLipidInventory_args(ctx context
 		}
 	}
 	args["id"] = arg0
-	var arg1 models.LipidInventoryUpdateInput
+	var arg1 gmodels.LipidInventoryUpdateInput
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg1, err = ec.unmarshalNLipidInventoryUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidInventoryUpdateInput(ctx, tmp)
@@ -5338,7 +5338,7 @@ func (ec *executionContext) field_Mutation_updateLipid_args(ctx context.Context,
 		}
 	}
 	args["id"] = arg0
-	var arg1 models.LipidUpdateInput
+	var arg1 gmodels.LipidUpdateInput
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg1, err = ec.unmarshalNLipidUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidUpdateInput(ctx, tmp)
@@ -5362,7 +5362,7 @@ func (ec *executionContext) field_Mutation_updateLyeInventory_args(ctx context.C
 		}
 	}
 	args["id"] = arg0
-	var arg1 models.LyeInventoryUpdateInput
+	var arg1 gmodels.LyeInventoryUpdateInput
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg1, err = ec.unmarshalNLyeInventoryUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeInventoryUpdateInput(ctx, tmp)
@@ -5386,7 +5386,7 @@ func (ec *executionContext) field_Mutation_updateLye_args(ctx context.Context, r
 		}
 	}
 	args["id"] = arg0
-	var arg1 models.LyeUpdateInput
+	var arg1 gmodels.LyeUpdateInput
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg1, err = ec.unmarshalNLyeUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeUpdateInput(ctx, tmp)
@@ -5410,7 +5410,7 @@ func (ec *executionContext) field_Mutation_updateRecipeAdditive_args(ctx context
 		}
 	}
 	args["id"] = arg0
-	var arg1 models.RecipeAdditiveUpdateInput
+	var arg1 gmodels.RecipeAdditiveUpdateInput
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg1, err = ec.unmarshalNRecipeAdditiveUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeAdditiveUpdateInput(ctx, tmp)
@@ -5434,7 +5434,7 @@ func (ec *executionContext) field_Mutation_updateRecipeBatchAdditive_args(ctx co
 		}
 	}
 	args["id"] = arg0
-	var arg1 models.RecipeBatchAdditiveUpdateInput
+	var arg1 gmodels.RecipeBatchAdditiveUpdateInput
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg1, err = ec.unmarshalNRecipeBatchAdditiveUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchAdditiveUpdateInput(ctx, tmp)
@@ -5458,7 +5458,7 @@ func (ec *executionContext) field_Mutation_updateRecipeBatchFragrance_args(ctx c
 		}
 	}
 	args["id"] = arg0
-	var arg1 models.RecipeBatchFragranceUpdateInput
+	var arg1 gmodels.RecipeBatchFragranceUpdateInput
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg1, err = ec.unmarshalNRecipeBatchFragranceUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchFragranceUpdateInput(ctx, tmp)
@@ -5482,7 +5482,7 @@ func (ec *executionContext) field_Mutation_updateRecipeBatchLipid_args(ctx conte
 		}
 	}
 	args["id"] = arg0
-	var arg1 models.RecipeBatchLipidUpdateInput
+	var arg1 gmodels.RecipeBatchLipidUpdateInput
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg1, err = ec.unmarshalNRecipeBatchLipidUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLipidUpdateInput(ctx, tmp)
@@ -5506,7 +5506,7 @@ func (ec *executionContext) field_Mutation_updateRecipeBatchLye_args(ctx context
 		}
 	}
 	args["id"] = arg0
-	var arg1 models.RecipeBatchLyeUpdateInput
+	var arg1 gmodels.RecipeBatchLyeUpdateInput
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg1, err = ec.unmarshalNRecipeBatchLyeUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLyeUpdateInput(ctx, tmp)
@@ -5530,7 +5530,7 @@ func (ec *executionContext) field_Mutation_updateRecipeBatch_args(ctx context.Co
 		}
 	}
 	args["id"] = arg0
-	var arg1 models.RecipeBatchUpdateInput
+	var arg1 gmodels.RecipeBatchUpdateInput
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg1, err = ec.unmarshalNRecipeBatchUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchUpdateInput(ctx, tmp)
@@ -5554,7 +5554,7 @@ func (ec *executionContext) field_Mutation_updateRecipeFragrance_args(ctx contex
 		}
 	}
 	args["id"] = arg0
-	var arg1 models.RecipeFragranceUpdateInput
+	var arg1 gmodels.RecipeFragranceUpdateInput
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg1, err = ec.unmarshalNRecipeFragranceUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeFragranceUpdateInput(ctx, tmp)
@@ -5578,7 +5578,7 @@ func (ec *executionContext) field_Mutation_updateRecipeLipid_args(ctx context.Co
 		}
 	}
 	args["id"] = arg0
-	var arg1 models.RecipeLipidUpdateInput
+	var arg1 gmodels.RecipeLipidUpdateInput
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg1, err = ec.unmarshalNRecipeLipidUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeLipidUpdateInput(ctx, tmp)
@@ -5602,7 +5602,7 @@ func (ec *executionContext) field_Mutation_updateRecipe_args(ctx context.Context
 		}
 	}
 	args["id"] = arg0
-	var arg1 models.RecipeUpdateInput
+	var arg1 gmodels.RecipeUpdateInput
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg1, err = ec.unmarshalNRecipeUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeUpdateInput(ctx, tmp)
@@ -5626,7 +5626,7 @@ func (ec *executionContext) field_Mutation_updateSupplier_args(ctx context.Conte
 		}
 	}
 	args["id"] = arg0
-	var arg1 models.SupplierUpdateInput
+	var arg1 gmodels.SupplierUpdateInput
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg1, err = ec.unmarshalNSupplierUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐSupplierUpdateInput(ctx, tmp)
@@ -5656,7 +5656,7 @@ func (ec *executionContext) field_Query___type_args(ctx context.Context, rawArgs
 func (ec *executionContext) field_Query_additiveInventories_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 *models.AdditiveInventoryFilter
+	var arg0 *gmodels.AdditiveInventoryFilter
 	if tmp, ok := rawArgs["filter"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("filter"))
 		arg0, err = ec.unmarshalOAdditiveInventoryFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveInventoryFilter(ctx, tmp)
@@ -5701,7 +5701,7 @@ func (ec *executionContext) field_Query_additive_args(ctx context.Context, rawAr
 func (ec *executionContext) field_Query_additives_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 *models.AdditiveFilter
+	var arg0 *gmodels.AdditiveFilter
 	if tmp, ok := rawArgs["filter"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("filter"))
 		arg0, err = ec.unmarshalOAdditiveFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveFilter(ctx, tmp)
@@ -5716,7 +5716,7 @@ func (ec *executionContext) field_Query_additives_args(ctx context.Context, rawA
 func (ec *executionContext) field_Query_fragranceInventories_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 *models.FragranceInventoryFilter
+	var arg0 *gmodels.FragranceInventoryFilter
 	if tmp, ok := rawArgs["filter"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("filter"))
 		arg0, err = ec.unmarshalOFragranceInventoryFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceInventoryFilter(ctx, tmp)
@@ -5761,7 +5761,7 @@ func (ec *executionContext) field_Query_fragrance_args(ctx context.Context, rawA
 func (ec *executionContext) field_Query_fragrances_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 *models.FragranceFilter
+	var arg0 *gmodels.FragranceFilter
 	if tmp, ok := rawArgs["filter"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("filter"))
 		arg0, err = ec.unmarshalOFragranceFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceFilter(ctx, tmp)
@@ -5776,7 +5776,7 @@ func (ec *executionContext) field_Query_fragrances_args(ctx context.Context, raw
 func (ec *executionContext) field_Query_lipidInventories_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 *models.LipidInventoryFilter
+	var arg0 *gmodels.LipidInventoryFilter
 	if tmp, ok := rawArgs["filter"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("filter"))
 		arg0, err = ec.unmarshalOLipidInventoryFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidInventoryFilter(ctx, tmp)
@@ -5821,7 +5821,7 @@ func (ec *executionContext) field_Query_lipid_args(ctx context.Context, rawArgs 
 func (ec *executionContext) field_Query_lipids_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 *models.LipidFilter
+	var arg0 *gmodels.LipidFilter
 	if tmp, ok := rawArgs["filter"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("filter"))
 		arg0, err = ec.unmarshalOLipidFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidFilter(ctx, tmp)
@@ -5836,7 +5836,7 @@ func (ec *executionContext) field_Query_lipids_args(ctx context.Context, rawArgs
 func (ec *executionContext) field_Query_lyeInventories_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 *models.LyeInventoryFilter
+	var arg0 *gmodels.LyeInventoryFilter
 	if tmp, ok := rawArgs["filter"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("filter"))
 		arg0, err = ec.unmarshalOLyeInventoryFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeInventoryFilter(ctx, tmp)
@@ -5881,7 +5881,7 @@ func (ec *executionContext) field_Query_lye_args(ctx context.Context, rawArgs ma
 func (ec *executionContext) field_Query_lyes_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 *models.LyeFilter
+	var arg0 *gmodels.LyeFilter
 	if tmp, ok := rawArgs["filter"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("filter"))
 		arg0, err = ec.unmarshalOLyeFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeFilter(ctx, tmp)
@@ -5911,7 +5911,7 @@ func (ec *executionContext) field_Query_recipeAdditive_args(ctx context.Context,
 func (ec *executionContext) field_Query_recipeAdditives_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 *models.RecipeAdditiveFilter
+	var arg0 *gmodels.RecipeAdditiveFilter
 	if tmp, ok := rawArgs["filter"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("filter"))
 		arg0, err = ec.unmarshalORecipeAdditiveFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeAdditiveFilter(ctx, tmp)
@@ -5941,7 +5941,7 @@ func (ec *executionContext) field_Query_recipeBatchAdditive_args(ctx context.Con
 func (ec *executionContext) field_Query_recipeBatchAdditives_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 *models.RecipeBatchAdditiveFilter
+	var arg0 *gmodels.RecipeBatchAdditiveFilter
 	if tmp, ok := rawArgs["filter"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("filter"))
 		arg0, err = ec.unmarshalORecipeBatchAdditiveFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchAdditiveFilter(ctx, tmp)
@@ -5971,7 +5971,7 @@ func (ec *executionContext) field_Query_recipeBatchFragrance_args(ctx context.Co
 func (ec *executionContext) field_Query_recipeBatchFragrances_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 *models.RecipeBatchFragranceFilter
+	var arg0 *gmodels.RecipeBatchFragranceFilter
 	if tmp, ok := rawArgs["filter"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("filter"))
 		arg0, err = ec.unmarshalORecipeBatchFragranceFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchFragranceFilter(ctx, tmp)
@@ -6001,7 +6001,7 @@ func (ec *executionContext) field_Query_recipeBatchLipid_args(ctx context.Contex
 func (ec *executionContext) field_Query_recipeBatchLipids_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 *models.RecipeBatchLipidFilter
+	var arg0 *gmodels.RecipeBatchLipidFilter
 	if tmp, ok := rawArgs["filter"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("filter"))
 		arg0, err = ec.unmarshalORecipeBatchLipidFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLipidFilter(ctx, tmp)
@@ -6031,7 +6031,7 @@ func (ec *executionContext) field_Query_recipeBatchLye_args(ctx context.Context,
 func (ec *executionContext) field_Query_recipeBatchLyes_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 *models.RecipeBatchLyeFilter
+	var arg0 *gmodels.RecipeBatchLyeFilter
 	if tmp, ok := rawArgs["filter"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("filter"))
 		arg0, err = ec.unmarshalORecipeBatchLyeFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLyeFilter(ctx, tmp)
@@ -6061,7 +6061,7 @@ func (ec *executionContext) field_Query_recipeBatch_args(ctx context.Context, ra
 func (ec *executionContext) field_Query_recipeBatches_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 *models.RecipeBatchFilter
+	var arg0 *gmodels.RecipeBatchFilter
 	if tmp, ok := rawArgs["filter"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("filter"))
 		arg0, err = ec.unmarshalORecipeBatchFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchFilter(ctx, tmp)
@@ -6091,7 +6091,7 @@ func (ec *executionContext) field_Query_recipeFragrance_args(ctx context.Context
 func (ec *executionContext) field_Query_recipeFragrances_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 *models.RecipeFragranceFilter
+	var arg0 *gmodels.RecipeFragranceFilter
 	if tmp, ok := rawArgs["filter"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("filter"))
 		arg0, err = ec.unmarshalORecipeFragranceFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeFragranceFilter(ctx, tmp)
@@ -6121,7 +6121,7 @@ func (ec *executionContext) field_Query_recipeLipid_args(ctx context.Context, ra
 func (ec *executionContext) field_Query_recipeLipids_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 *models.RecipeLipidFilter
+	var arg0 *gmodels.RecipeLipidFilter
 	if tmp, ok := rawArgs["filter"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("filter"))
 		arg0, err = ec.unmarshalORecipeLipidFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeLipidFilter(ctx, tmp)
@@ -6151,7 +6151,7 @@ func (ec *executionContext) field_Query_recipe_args(ctx context.Context, rawArgs
 func (ec *executionContext) field_Query_recipes_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 *models.RecipeFilter
+	var arg0 *gmodels.RecipeFilter
 	if tmp, ok := rawArgs["filter"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("filter"))
 		arg0, err = ec.unmarshalORecipeFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeFilter(ctx, tmp)
@@ -6181,7 +6181,7 @@ func (ec *executionContext) field_Query_supplier_args(ctx context.Context, rawAr
 func (ec *executionContext) field_Query_suppliers_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 *models.SupplierFilter
+	var arg0 *gmodels.SupplierFilter
 	if tmp, ok := rawArgs["filter"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("filter"))
 		arg0, err = ec.unmarshalOSupplierFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐSupplierFilter(ctx, tmp)
@@ -6231,7 +6231,7 @@ func (ec *executionContext) field___Type_fields_args(ctx context.Context, rawArg
 
 // region    **************************** field.gotpl *****************************
 
-func (ec *executionContext) _Additive_id(ctx context.Context, field graphql.CollectedField, obj *models.Additive) (ret graphql.Marshaler) {
+func (ec *executionContext) _Additive_id(ctx context.Context, field graphql.CollectedField, obj *gmodels.Additive) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -6266,7 +6266,7 @@ func (ec *executionContext) _Additive_id(ctx context.Context, field graphql.Coll
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Additive_name(ctx context.Context, field graphql.CollectedField, obj *models.Additive) (ret graphql.Marshaler) {
+func (ec *executionContext) _Additive_name(ctx context.Context, field graphql.CollectedField, obj *gmodels.Additive) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -6301,7 +6301,7 @@ func (ec *executionContext) _Additive_name(ctx context.Context, field graphql.Co
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Additive_note(ctx context.Context, field graphql.CollectedField, obj *models.Additive) (ret graphql.Marshaler) {
+func (ec *executionContext) _Additive_note(ctx context.Context, field graphql.CollectedField, obj *gmodels.Additive) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -6336,7 +6336,7 @@ func (ec *executionContext) _Additive_note(ctx context.Context, field graphql.Co
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Additive_deletedAt(ctx context.Context, field graphql.CollectedField, obj *models.Additive) (ret graphql.Marshaler) {
+func (ec *executionContext) _Additive_deletedAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.Additive) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -6368,7 +6368,7 @@ func (ec *executionContext) _Additive_deletedAt(ctx context.Context, field graph
 	return ec.marshalOInt2ᚖint(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Additive_createdAt(ctx context.Context, field graphql.CollectedField, obj *models.Additive) (ret graphql.Marshaler) {
+func (ec *executionContext) _Additive_createdAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.Additive) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -6403,7 +6403,7 @@ func (ec *executionContext) _Additive_createdAt(ctx context.Context, field graph
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Additive_updatedAt(ctx context.Context, field graphql.CollectedField, obj *models.Additive) (ret graphql.Marshaler) {
+func (ec *executionContext) _Additive_updatedAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.Additive) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -6438,7 +6438,7 @@ func (ec *executionContext) _Additive_updatedAt(ctx context.Context, field graph
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Additive_additiveInventories(ctx context.Context, field graphql.CollectedField, obj *models.Additive) (ret graphql.Marshaler) {
+func (ec *executionContext) _Additive_additiveInventories(ctx context.Context, field graphql.CollectedField, obj *gmodels.Additive) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -6465,12 +6465,12 @@ func (ec *executionContext) _Additive_additiveInventories(ctx context.Context, f
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*models.AdditiveInventory)
+	res := resTmp.([]*gmodels.AdditiveInventory)
 	fc.Result = res
 	return ec.marshalOAdditiveInventory2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveInventory(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _AdditiveDeletePayload_id(ctx context.Context, field graphql.CollectedField, obj *models.AdditiveDeletePayload) (ret graphql.Marshaler) {
+func (ec *executionContext) _AdditiveDeletePayload_id(ctx context.Context, field graphql.CollectedField, obj *gmodels.AdditiveDeletePayload) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -6505,7 +6505,7 @@ func (ec *executionContext) _AdditiveDeletePayload_id(ctx context.Context, field
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _AdditiveInventory_id(ctx context.Context, field graphql.CollectedField, obj *models.AdditiveInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _AdditiveInventory_id(ctx context.Context, field graphql.CollectedField, obj *gmodels.AdditiveInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -6540,7 +6540,7 @@ func (ec *executionContext) _AdditiveInventory_id(ctx context.Context, field gra
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _AdditiveInventory_purchaseDate(ctx context.Context, field graphql.CollectedField, obj *models.AdditiveInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _AdditiveInventory_purchaseDate(ctx context.Context, field graphql.CollectedField, obj *gmodels.AdditiveInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -6575,7 +6575,7 @@ func (ec *executionContext) _AdditiveInventory_purchaseDate(ctx context.Context,
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _AdditiveInventory_expiryDate(ctx context.Context, field graphql.CollectedField, obj *models.AdditiveInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _AdditiveInventory_expiryDate(ctx context.Context, field graphql.CollectedField, obj *gmodels.AdditiveInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -6610,7 +6610,7 @@ func (ec *executionContext) _AdditiveInventory_expiryDate(ctx context.Context, f
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _AdditiveInventory_cost(ctx context.Context, field graphql.CollectedField, obj *models.AdditiveInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _AdditiveInventory_cost(ctx context.Context, field graphql.CollectedField, obj *gmodels.AdditiveInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -6645,7 +6645,7 @@ func (ec *executionContext) _AdditiveInventory_cost(ctx context.Context, field g
 	return ec.marshalNFloat2float64(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _AdditiveInventory_weight(ctx context.Context, field graphql.CollectedField, obj *models.AdditiveInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _AdditiveInventory_weight(ctx context.Context, field graphql.CollectedField, obj *gmodels.AdditiveInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -6680,7 +6680,7 @@ func (ec *executionContext) _AdditiveInventory_weight(ctx context.Context, field
 	return ec.marshalNFloat2float64(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _AdditiveInventory_additive(ctx context.Context, field graphql.CollectedField, obj *models.AdditiveInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _AdditiveInventory_additive(ctx context.Context, field graphql.CollectedField, obj *gmodels.AdditiveInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -6710,12 +6710,12 @@ func (ec *executionContext) _AdditiveInventory_additive(ctx context.Context, fie
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.Additive)
+	res := resTmp.(*gmodels.Additive)
 	fc.Result = res
 	return ec.marshalNAdditive2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditive(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _AdditiveInventory_supplier(ctx context.Context, field graphql.CollectedField, obj *models.AdditiveInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _AdditiveInventory_supplier(ctx context.Context, field graphql.CollectedField, obj *gmodels.AdditiveInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -6745,12 +6745,12 @@ func (ec *executionContext) _AdditiveInventory_supplier(ctx context.Context, fie
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.Supplier)
+	res := resTmp.(*gmodels.Supplier)
 	fc.Result = res
 	return ec.marshalNSupplier2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐSupplier(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _AdditiveInventory_createdAt(ctx context.Context, field graphql.CollectedField, obj *models.AdditiveInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _AdditiveInventory_createdAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.AdditiveInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -6785,7 +6785,7 @@ func (ec *executionContext) _AdditiveInventory_createdAt(ctx context.Context, fi
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _AdditiveInventory_deletedAt(ctx context.Context, field graphql.CollectedField, obj *models.AdditiveInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _AdditiveInventory_deletedAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.AdditiveInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -6817,7 +6817,7 @@ func (ec *executionContext) _AdditiveInventory_deletedAt(ctx context.Context, fi
 	return ec.marshalOInt2ᚖint(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _AdditiveInventory_updatedAt(ctx context.Context, field graphql.CollectedField, obj *models.AdditiveInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _AdditiveInventory_updatedAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.AdditiveInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -6852,7 +6852,7 @@ func (ec *executionContext) _AdditiveInventory_updatedAt(ctx context.Context, fi
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _AdditiveInventoryDeletePayload_id(ctx context.Context, field graphql.CollectedField, obj *models.AdditiveInventoryDeletePayload) (ret graphql.Marshaler) {
+func (ec *executionContext) _AdditiveInventoryDeletePayload_id(ctx context.Context, field graphql.CollectedField, obj *gmodels.AdditiveInventoryDeletePayload) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -6887,7 +6887,7 @@ func (ec *executionContext) _AdditiveInventoryDeletePayload_id(ctx context.Conte
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _AdditiveInventoryPayload_additiveInventory(ctx context.Context, field graphql.CollectedField, obj *models.AdditiveInventoryPayload) (ret graphql.Marshaler) {
+func (ec *executionContext) _AdditiveInventoryPayload_additiveInventory(ctx context.Context, field graphql.CollectedField, obj *gmodels.AdditiveInventoryPayload) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -6917,12 +6917,12 @@ func (ec *executionContext) _AdditiveInventoryPayload_additiveInventory(ctx cont
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.AdditiveInventory)
+	res := resTmp.(*gmodels.AdditiveInventory)
 	fc.Result = res
 	return ec.marshalNAdditiveInventory2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveInventory(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _AdditivePayload_additive(ctx context.Context, field graphql.CollectedField, obj *models.AdditivePayload) (ret graphql.Marshaler) {
+func (ec *executionContext) _AdditivePayload_additive(ctx context.Context, field graphql.CollectedField, obj *gmodels.AdditivePayload) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -6952,12 +6952,12 @@ func (ec *executionContext) _AdditivePayload_additive(ctx context.Context, field
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.Additive)
+	res := resTmp.(*gmodels.Additive)
 	fc.Result = res
 	return ec.marshalNAdditive2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditive(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Fragrance_id(ctx context.Context, field graphql.CollectedField, obj *models.Fragrance) (ret graphql.Marshaler) {
+func (ec *executionContext) _Fragrance_id(ctx context.Context, field graphql.CollectedField, obj *gmodels.Fragrance) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -6992,7 +6992,7 @@ func (ec *executionContext) _Fragrance_id(ctx context.Context, field graphql.Col
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Fragrance_name(ctx context.Context, field graphql.CollectedField, obj *models.Fragrance) (ret graphql.Marshaler) {
+func (ec *executionContext) _Fragrance_name(ctx context.Context, field graphql.CollectedField, obj *gmodels.Fragrance) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -7027,7 +7027,7 @@ func (ec *executionContext) _Fragrance_name(ctx context.Context, field graphql.C
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Fragrance_note(ctx context.Context, field graphql.CollectedField, obj *models.Fragrance) (ret graphql.Marshaler) {
+func (ec *executionContext) _Fragrance_note(ctx context.Context, field graphql.CollectedField, obj *gmodels.Fragrance) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -7062,7 +7062,7 @@ func (ec *executionContext) _Fragrance_note(ctx context.Context, field graphql.C
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Fragrance_deletedAt(ctx context.Context, field graphql.CollectedField, obj *models.Fragrance) (ret graphql.Marshaler) {
+func (ec *executionContext) _Fragrance_deletedAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.Fragrance) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -7094,7 +7094,7 @@ func (ec *executionContext) _Fragrance_deletedAt(ctx context.Context, field grap
 	return ec.marshalOInt2ᚖint(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Fragrance_createdAt(ctx context.Context, field graphql.CollectedField, obj *models.Fragrance) (ret graphql.Marshaler) {
+func (ec *executionContext) _Fragrance_createdAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.Fragrance) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -7129,7 +7129,7 @@ func (ec *executionContext) _Fragrance_createdAt(ctx context.Context, field grap
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Fragrance_updatedAt(ctx context.Context, field graphql.CollectedField, obj *models.Fragrance) (ret graphql.Marshaler) {
+func (ec *executionContext) _Fragrance_updatedAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.Fragrance) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -7164,7 +7164,7 @@ func (ec *executionContext) _Fragrance_updatedAt(ctx context.Context, field grap
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Fragrance_fragranceInventories(ctx context.Context, field graphql.CollectedField, obj *models.Fragrance) (ret graphql.Marshaler) {
+func (ec *executionContext) _Fragrance_fragranceInventories(ctx context.Context, field graphql.CollectedField, obj *gmodels.Fragrance) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -7191,12 +7191,12 @@ func (ec *executionContext) _Fragrance_fragranceInventories(ctx context.Context,
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*models.FragranceInventory)
+	res := resTmp.([]*gmodels.FragranceInventory)
 	fc.Result = res
 	return ec.marshalOFragranceInventory2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceInventory(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _FragranceDeletePayload_id(ctx context.Context, field graphql.CollectedField, obj *models.FragranceDeletePayload) (ret graphql.Marshaler) {
+func (ec *executionContext) _FragranceDeletePayload_id(ctx context.Context, field graphql.CollectedField, obj *gmodels.FragranceDeletePayload) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -7231,7 +7231,7 @@ func (ec *executionContext) _FragranceDeletePayload_id(ctx context.Context, fiel
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _FragranceInventory_id(ctx context.Context, field graphql.CollectedField, obj *models.FragranceInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _FragranceInventory_id(ctx context.Context, field graphql.CollectedField, obj *gmodels.FragranceInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -7266,7 +7266,7 @@ func (ec *executionContext) _FragranceInventory_id(ctx context.Context, field gr
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _FragranceInventory_purchaseDate(ctx context.Context, field graphql.CollectedField, obj *models.FragranceInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _FragranceInventory_purchaseDate(ctx context.Context, field graphql.CollectedField, obj *gmodels.FragranceInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -7301,7 +7301,7 @@ func (ec *executionContext) _FragranceInventory_purchaseDate(ctx context.Context
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _FragranceInventory_expiryDate(ctx context.Context, field graphql.CollectedField, obj *models.FragranceInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _FragranceInventory_expiryDate(ctx context.Context, field graphql.CollectedField, obj *gmodels.FragranceInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -7336,7 +7336,7 @@ func (ec *executionContext) _FragranceInventory_expiryDate(ctx context.Context, 
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _FragranceInventory_cost(ctx context.Context, field graphql.CollectedField, obj *models.FragranceInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _FragranceInventory_cost(ctx context.Context, field graphql.CollectedField, obj *gmodels.FragranceInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -7371,7 +7371,7 @@ func (ec *executionContext) _FragranceInventory_cost(ctx context.Context, field 
 	return ec.marshalNFloat2float64(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _FragranceInventory_weight(ctx context.Context, field graphql.CollectedField, obj *models.FragranceInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _FragranceInventory_weight(ctx context.Context, field graphql.CollectedField, obj *gmodels.FragranceInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -7406,7 +7406,7 @@ func (ec *executionContext) _FragranceInventory_weight(ctx context.Context, fiel
 	return ec.marshalNFloat2float64(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _FragranceInventory_fragrance(ctx context.Context, field graphql.CollectedField, obj *models.FragranceInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _FragranceInventory_fragrance(ctx context.Context, field graphql.CollectedField, obj *gmodels.FragranceInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -7436,12 +7436,12 @@ func (ec *executionContext) _FragranceInventory_fragrance(ctx context.Context, f
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.Fragrance)
+	res := resTmp.(*gmodels.Fragrance)
 	fc.Result = res
 	return ec.marshalNFragrance2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragrance(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _FragranceInventory_supplier(ctx context.Context, field graphql.CollectedField, obj *models.FragranceInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _FragranceInventory_supplier(ctx context.Context, field graphql.CollectedField, obj *gmodels.FragranceInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -7471,12 +7471,12 @@ func (ec *executionContext) _FragranceInventory_supplier(ctx context.Context, fi
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.Supplier)
+	res := resTmp.(*gmodels.Supplier)
 	fc.Result = res
 	return ec.marshalNSupplier2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐSupplier(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _FragranceInventory_deletedAt(ctx context.Context, field graphql.CollectedField, obj *models.FragranceInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _FragranceInventory_deletedAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.FragranceInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -7508,7 +7508,7 @@ func (ec *executionContext) _FragranceInventory_deletedAt(ctx context.Context, f
 	return ec.marshalOInt2ᚖint(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _FragranceInventory_createdAt(ctx context.Context, field graphql.CollectedField, obj *models.FragranceInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _FragranceInventory_createdAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.FragranceInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -7543,7 +7543,7 @@ func (ec *executionContext) _FragranceInventory_createdAt(ctx context.Context, f
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _FragranceInventory_updatedAt(ctx context.Context, field graphql.CollectedField, obj *models.FragranceInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _FragranceInventory_updatedAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.FragranceInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -7578,7 +7578,7 @@ func (ec *executionContext) _FragranceInventory_updatedAt(ctx context.Context, f
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _FragranceInventoryDeletePayload_id(ctx context.Context, field graphql.CollectedField, obj *models.FragranceInventoryDeletePayload) (ret graphql.Marshaler) {
+func (ec *executionContext) _FragranceInventoryDeletePayload_id(ctx context.Context, field graphql.CollectedField, obj *gmodels.FragranceInventoryDeletePayload) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -7613,7 +7613,7 @@ func (ec *executionContext) _FragranceInventoryDeletePayload_id(ctx context.Cont
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _FragranceInventoryPayload_fragranceInventory(ctx context.Context, field graphql.CollectedField, obj *models.FragranceInventoryPayload) (ret graphql.Marshaler) {
+func (ec *executionContext) _FragranceInventoryPayload_fragranceInventory(ctx context.Context, field graphql.CollectedField, obj *gmodels.FragranceInventoryPayload) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -7643,12 +7643,12 @@ func (ec *executionContext) _FragranceInventoryPayload_fragranceInventory(ctx co
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.FragranceInventory)
+	res := resTmp.(*gmodels.FragranceInventory)
 	fc.Result = res
 	return ec.marshalNFragranceInventory2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceInventory(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _FragrancePayload_fragrance(ctx context.Context, field graphql.CollectedField, obj *models.FragrancePayload) (ret graphql.Marshaler) {
+func (ec *executionContext) _FragrancePayload_fragrance(ctx context.Context, field graphql.CollectedField, obj *gmodels.FragrancePayload) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -7678,12 +7678,12 @@ func (ec *executionContext) _FragrancePayload_fragrance(ctx context.Context, fie
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.Fragrance)
+	res := resTmp.(*gmodels.Fragrance)
 	fc.Result = res
 	return ec.marshalNFragrance2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragrance(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Lipid_id(ctx context.Context, field graphql.CollectedField, obj *models.Lipid) (ret graphql.Marshaler) {
+func (ec *executionContext) _Lipid_id(ctx context.Context, field graphql.CollectedField, obj *gmodels.Lipid) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -7718,7 +7718,7 @@ func (ec *executionContext) _Lipid_id(ctx context.Context, field graphql.Collect
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Lipid_name(ctx context.Context, field graphql.CollectedField, obj *models.Lipid) (ret graphql.Marshaler) {
+func (ec *executionContext) _Lipid_name(ctx context.Context, field graphql.CollectedField, obj *gmodels.Lipid) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -7753,7 +7753,7 @@ func (ec *executionContext) _Lipid_name(ctx context.Context, field graphql.Colle
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Lipid_lauric(ctx context.Context, field graphql.CollectedField, obj *models.Lipid) (ret graphql.Marshaler) {
+func (ec *executionContext) _Lipid_lauric(ctx context.Context, field graphql.CollectedField, obj *gmodels.Lipid) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -7788,7 +7788,7 @@ func (ec *executionContext) _Lipid_lauric(ctx context.Context, field graphql.Col
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Lipid_myristic(ctx context.Context, field graphql.CollectedField, obj *models.Lipid) (ret graphql.Marshaler) {
+func (ec *executionContext) _Lipid_myristic(ctx context.Context, field graphql.CollectedField, obj *gmodels.Lipid) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -7823,7 +7823,7 @@ func (ec *executionContext) _Lipid_myristic(ctx context.Context, field graphql.C
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Lipid_palmitic(ctx context.Context, field graphql.CollectedField, obj *models.Lipid) (ret graphql.Marshaler) {
+func (ec *executionContext) _Lipid_palmitic(ctx context.Context, field graphql.CollectedField, obj *gmodels.Lipid) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -7858,7 +7858,7 @@ func (ec *executionContext) _Lipid_palmitic(ctx context.Context, field graphql.C
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Lipid_stearic(ctx context.Context, field graphql.CollectedField, obj *models.Lipid) (ret graphql.Marshaler) {
+func (ec *executionContext) _Lipid_stearic(ctx context.Context, field graphql.CollectedField, obj *gmodels.Lipid) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -7893,7 +7893,7 @@ func (ec *executionContext) _Lipid_stearic(ctx context.Context, field graphql.Co
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Lipid_ricinoleic(ctx context.Context, field graphql.CollectedField, obj *models.Lipid) (ret graphql.Marshaler) {
+func (ec *executionContext) _Lipid_ricinoleic(ctx context.Context, field graphql.CollectedField, obj *gmodels.Lipid) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -7928,7 +7928,7 @@ func (ec *executionContext) _Lipid_ricinoleic(ctx context.Context, field graphql
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Lipid_oleic(ctx context.Context, field graphql.CollectedField, obj *models.Lipid) (ret graphql.Marshaler) {
+func (ec *executionContext) _Lipid_oleic(ctx context.Context, field graphql.CollectedField, obj *gmodels.Lipid) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -7963,7 +7963,7 @@ func (ec *executionContext) _Lipid_oleic(ctx context.Context, field graphql.Coll
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Lipid_linoleic(ctx context.Context, field graphql.CollectedField, obj *models.Lipid) (ret graphql.Marshaler) {
+func (ec *executionContext) _Lipid_linoleic(ctx context.Context, field graphql.CollectedField, obj *gmodels.Lipid) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -7998,7 +7998,7 @@ func (ec *executionContext) _Lipid_linoleic(ctx context.Context, field graphql.C
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Lipid_linolenic(ctx context.Context, field graphql.CollectedField, obj *models.Lipid) (ret graphql.Marshaler) {
+func (ec *executionContext) _Lipid_linolenic(ctx context.Context, field graphql.CollectedField, obj *gmodels.Lipid) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -8033,7 +8033,7 @@ func (ec *executionContext) _Lipid_linolenic(ctx context.Context, field graphql.
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Lipid_hardness(ctx context.Context, field graphql.CollectedField, obj *models.Lipid) (ret graphql.Marshaler) {
+func (ec *executionContext) _Lipid_hardness(ctx context.Context, field graphql.CollectedField, obj *gmodels.Lipid) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -8068,7 +8068,7 @@ func (ec *executionContext) _Lipid_hardness(ctx context.Context, field graphql.C
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Lipid_cleansing(ctx context.Context, field graphql.CollectedField, obj *models.Lipid) (ret graphql.Marshaler) {
+func (ec *executionContext) _Lipid_cleansing(ctx context.Context, field graphql.CollectedField, obj *gmodels.Lipid) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -8103,7 +8103,7 @@ func (ec *executionContext) _Lipid_cleansing(ctx context.Context, field graphql.
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Lipid_conditioning(ctx context.Context, field graphql.CollectedField, obj *models.Lipid) (ret graphql.Marshaler) {
+func (ec *executionContext) _Lipid_conditioning(ctx context.Context, field graphql.CollectedField, obj *gmodels.Lipid) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -8138,7 +8138,7 @@ func (ec *executionContext) _Lipid_conditioning(ctx context.Context, field graph
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Lipid_bubbly(ctx context.Context, field graphql.CollectedField, obj *models.Lipid) (ret graphql.Marshaler) {
+func (ec *executionContext) _Lipid_bubbly(ctx context.Context, field graphql.CollectedField, obj *gmodels.Lipid) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -8173,7 +8173,7 @@ func (ec *executionContext) _Lipid_bubbly(ctx context.Context, field graphql.Col
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Lipid_creamy(ctx context.Context, field graphql.CollectedField, obj *models.Lipid) (ret graphql.Marshaler) {
+func (ec *executionContext) _Lipid_creamy(ctx context.Context, field graphql.CollectedField, obj *gmodels.Lipid) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -8208,7 +8208,7 @@ func (ec *executionContext) _Lipid_creamy(ctx context.Context, field graphql.Col
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Lipid_iodine(ctx context.Context, field graphql.CollectedField, obj *models.Lipid) (ret graphql.Marshaler) {
+func (ec *executionContext) _Lipid_iodine(ctx context.Context, field graphql.CollectedField, obj *gmodels.Lipid) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -8243,7 +8243,7 @@ func (ec *executionContext) _Lipid_iodine(ctx context.Context, field graphql.Col
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Lipid_ins(ctx context.Context, field graphql.CollectedField, obj *models.Lipid) (ret graphql.Marshaler) {
+func (ec *executionContext) _Lipid_ins(ctx context.Context, field graphql.CollectedField, obj *gmodels.Lipid) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -8278,7 +8278,7 @@ func (ec *executionContext) _Lipid_ins(ctx context.Context, field graphql.Collec
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Lipid_inciName(ctx context.Context, field graphql.CollectedField, obj *models.Lipid) (ret graphql.Marshaler) {
+func (ec *executionContext) _Lipid_inciName(ctx context.Context, field graphql.CollectedField, obj *gmodels.Lipid) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -8313,7 +8313,7 @@ func (ec *executionContext) _Lipid_inciName(ctx context.Context, field graphql.C
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Lipid_family(ctx context.Context, field graphql.CollectedField, obj *models.Lipid) (ret graphql.Marshaler) {
+func (ec *executionContext) _Lipid_family(ctx context.Context, field graphql.CollectedField, obj *gmodels.Lipid) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -8348,7 +8348,7 @@ func (ec *executionContext) _Lipid_family(ctx context.Context, field graphql.Col
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Lipid_naoh(ctx context.Context, field graphql.CollectedField, obj *models.Lipid) (ret graphql.Marshaler) {
+func (ec *executionContext) _Lipid_naoh(ctx context.Context, field graphql.CollectedField, obj *gmodels.Lipid) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -8383,7 +8383,7 @@ func (ec *executionContext) _Lipid_naoh(ctx context.Context, field graphql.Colle
 	return ec.marshalNFloat2float64(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Lipid_updatedAt(ctx context.Context, field graphql.CollectedField, obj *models.Lipid) (ret graphql.Marshaler) {
+func (ec *executionContext) _Lipid_updatedAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.Lipid) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -8418,7 +8418,7 @@ func (ec *executionContext) _Lipid_updatedAt(ctx context.Context, field graphql.
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Lipid_createdAt(ctx context.Context, field graphql.CollectedField, obj *models.Lipid) (ret graphql.Marshaler) {
+func (ec *executionContext) _Lipid_createdAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.Lipid) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -8453,7 +8453,7 @@ func (ec *executionContext) _Lipid_createdAt(ctx context.Context, field graphql.
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Lipid_deletedAt(ctx context.Context, field graphql.CollectedField, obj *models.Lipid) (ret graphql.Marshaler) {
+func (ec *executionContext) _Lipid_deletedAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.Lipid) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -8485,7 +8485,7 @@ func (ec *executionContext) _Lipid_deletedAt(ctx context.Context, field graphql.
 	return ec.marshalOInt2ᚖint(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Lipid_lipidInventories(ctx context.Context, field graphql.CollectedField, obj *models.Lipid) (ret graphql.Marshaler) {
+func (ec *executionContext) _Lipid_lipidInventories(ctx context.Context, field graphql.CollectedField, obj *gmodels.Lipid) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -8512,12 +8512,12 @@ func (ec *executionContext) _Lipid_lipidInventories(ctx context.Context, field g
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*models.LipidInventory)
+	res := resTmp.([]*gmodels.LipidInventory)
 	fc.Result = res
 	return ec.marshalOLipidInventory2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidInventory(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _LipidDeletePayload_id(ctx context.Context, field graphql.CollectedField, obj *models.LipidDeletePayload) (ret graphql.Marshaler) {
+func (ec *executionContext) _LipidDeletePayload_id(ctx context.Context, field graphql.CollectedField, obj *gmodels.LipidDeletePayload) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -8552,7 +8552,7 @@ func (ec *executionContext) _LipidDeletePayload_id(ctx context.Context, field gr
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _LipidInventory_id(ctx context.Context, field graphql.CollectedField, obj *models.LipidInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _LipidInventory_id(ctx context.Context, field graphql.CollectedField, obj *gmodels.LipidInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -8587,7 +8587,7 @@ func (ec *executionContext) _LipidInventory_id(ctx context.Context, field graphq
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _LipidInventory_purchaseDate(ctx context.Context, field graphql.CollectedField, obj *models.LipidInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _LipidInventory_purchaseDate(ctx context.Context, field graphql.CollectedField, obj *gmodels.LipidInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -8622,7 +8622,7 @@ func (ec *executionContext) _LipidInventory_purchaseDate(ctx context.Context, fi
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _LipidInventory_expiryDate(ctx context.Context, field graphql.CollectedField, obj *models.LipidInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _LipidInventory_expiryDate(ctx context.Context, field graphql.CollectedField, obj *gmodels.LipidInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -8657,7 +8657,7 @@ func (ec *executionContext) _LipidInventory_expiryDate(ctx context.Context, fiel
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _LipidInventory_cost(ctx context.Context, field graphql.CollectedField, obj *models.LipidInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _LipidInventory_cost(ctx context.Context, field graphql.CollectedField, obj *gmodels.LipidInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -8692,7 +8692,7 @@ func (ec *executionContext) _LipidInventory_cost(ctx context.Context, field grap
 	return ec.marshalNFloat2float64(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _LipidInventory_weight(ctx context.Context, field graphql.CollectedField, obj *models.LipidInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _LipidInventory_weight(ctx context.Context, field graphql.CollectedField, obj *gmodels.LipidInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -8727,7 +8727,7 @@ func (ec *executionContext) _LipidInventory_weight(ctx context.Context, field gr
 	return ec.marshalNFloat2float64(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _LipidInventory_sap(ctx context.Context, field graphql.CollectedField, obj *models.LipidInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _LipidInventory_sap(ctx context.Context, field graphql.CollectedField, obj *gmodels.LipidInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -8762,7 +8762,7 @@ func (ec *executionContext) _LipidInventory_sap(ctx context.Context, field graph
 	return ec.marshalNFloat2float64(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _LipidInventory_naoh(ctx context.Context, field graphql.CollectedField, obj *models.LipidInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _LipidInventory_naoh(ctx context.Context, field graphql.CollectedField, obj *gmodels.LipidInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -8797,7 +8797,7 @@ func (ec *executionContext) _LipidInventory_naoh(ctx context.Context, field grap
 	return ec.marshalNFloat2float64(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _LipidInventory_koh(ctx context.Context, field graphql.CollectedField, obj *models.LipidInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _LipidInventory_koh(ctx context.Context, field graphql.CollectedField, obj *gmodels.LipidInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -8832,7 +8832,7 @@ func (ec *executionContext) _LipidInventory_koh(ctx context.Context, field graph
 	return ec.marshalNFloat2float64(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _LipidInventory_gramsPerLiter(ctx context.Context, field graphql.CollectedField, obj *models.LipidInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _LipidInventory_gramsPerLiter(ctx context.Context, field graphql.CollectedField, obj *gmodels.LipidInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -8867,7 +8867,7 @@ func (ec *executionContext) _LipidInventory_gramsPerLiter(ctx context.Context, f
 	return ec.marshalNFloat2float64(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _LipidInventory_lipid(ctx context.Context, field graphql.CollectedField, obj *models.LipidInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _LipidInventory_lipid(ctx context.Context, field graphql.CollectedField, obj *gmodels.LipidInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -8897,12 +8897,12 @@ func (ec *executionContext) _LipidInventory_lipid(ctx context.Context, field gra
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.Lipid)
+	res := resTmp.(*gmodels.Lipid)
 	fc.Result = res
 	return ec.marshalNLipid2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipid(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _LipidInventory_supplier(ctx context.Context, field graphql.CollectedField, obj *models.LipidInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _LipidInventory_supplier(ctx context.Context, field graphql.CollectedField, obj *gmodels.LipidInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -8932,12 +8932,12 @@ func (ec *executionContext) _LipidInventory_supplier(ctx context.Context, field 
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.Supplier)
+	res := resTmp.(*gmodels.Supplier)
 	fc.Result = res
 	return ec.marshalNSupplier2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐSupplier(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _LipidInventory_createdAt(ctx context.Context, field graphql.CollectedField, obj *models.LipidInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _LipidInventory_createdAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.LipidInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -8972,7 +8972,7 @@ func (ec *executionContext) _LipidInventory_createdAt(ctx context.Context, field
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _LipidInventory_deletedAt(ctx context.Context, field graphql.CollectedField, obj *models.LipidInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _LipidInventory_deletedAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.LipidInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -9004,7 +9004,7 @@ func (ec *executionContext) _LipidInventory_deletedAt(ctx context.Context, field
 	return ec.marshalOInt2ᚖint(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _LipidInventory_updatedAt(ctx context.Context, field graphql.CollectedField, obj *models.LipidInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _LipidInventory_updatedAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.LipidInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -9039,7 +9039,7 @@ func (ec *executionContext) _LipidInventory_updatedAt(ctx context.Context, field
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _LipidInventoryDeletePayload_id(ctx context.Context, field graphql.CollectedField, obj *models.LipidInventoryDeletePayload) (ret graphql.Marshaler) {
+func (ec *executionContext) _LipidInventoryDeletePayload_id(ctx context.Context, field graphql.CollectedField, obj *gmodels.LipidInventoryDeletePayload) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -9074,7 +9074,7 @@ func (ec *executionContext) _LipidInventoryDeletePayload_id(ctx context.Context,
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _LipidInventoryPayload_lipidInventory(ctx context.Context, field graphql.CollectedField, obj *models.LipidInventoryPayload) (ret graphql.Marshaler) {
+func (ec *executionContext) _LipidInventoryPayload_lipidInventory(ctx context.Context, field graphql.CollectedField, obj *gmodels.LipidInventoryPayload) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -9104,12 +9104,12 @@ func (ec *executionContext) _LipidInventoryPayload_lipidInventory(ctx context.Co
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.LipidInventory)
+	res := resTmp.(*gmodels.LipidInventory)
 	fc.Result = res
 	return ec.marshalNLipidInventory2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidInventory(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _LipidPayload_lipid(ctx context.Context, field graphql.CollectedField, obj *models.LipidPayload) (ret graphql.Marshaler) {
+func (ec *executionContext) _LipidPayload_lipid(ctx context.Context, field graphql.CollectedField, obj *gmodels.LipidPayload) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -9139,12 +9139,12 @@ func (ec *executionContext) _LipidPayload_lipid(ctx context.Context, field graph
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.Lipid)
+	res := resTmp.(*gmodels.Lipid)
 	fc.Result = res
 	return ec.marshalNLipid2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipid(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Lye_id(ctx context.Context, field graphql.CollectedField, obj *models.Lye) (ret graphql.Marshaler) {
+func (ec *executionContext) _Lye_id(ctx context.Context, field graphql.CollectedField, obj *gmodels.Lye) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -9179,7 +9179,7 @@ func (ec *executionContext) _Lye_id(ctx context.Context, field graphql.Collected
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Lye_kind(ctx context.Context, field graphql.CollectedField, obj *models.Lye) (ret graphql.Marshaler) {
+func (ec *executionContext) _Lye_kind(ctx context.Context, field graphql.CollectedField, obj *gmodels.Lye) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -9214,7 +9214,7 @@ func (ec *executionContext) _Lye_kind(ctx context.Context, field graphql.Collect
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Lye_name(ctx context.Context, field graphql.CollectedField, obj *models.Lye) (ret graphql.Marshaler) {
+func (ec *executionContext) _Lye_name(ctx context.Context, field graphql.CollectedField, obj *gmodels.Lye) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -9249,7 +9249,7 @@ func (ec *executionContext) _Lye_name(ctx context.Context, field graphql.Collect
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Lye_note(ctx context.Context, field graphql.CollectedField, obj *models.Lye) (ret graphql.Marshaler) {
+func (ec *executionContext) _Lye_note(ctx context.Context, field graphql.CollectedField, obj *gmodels.Lye) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -9284,7 +9284,7 @@ func (ec *executionContext) _Lye_note(ctx context.Context, field graphql.Collect
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Lye_createdAt(ctx context.Context, field graphql.CollectedField, obj *models.Lye) (ret graphql.Marshaler) {
+func (ec *executionContext) _Lye_createdAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.Lye) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -9319,7 +9319,7 @@ func (ec *executionContext) _Lye_createdAt(ctx context.Context, field graphql.Co
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Lye_updatedAt(ctx context.Context, field graphql.CollectedField, obj *models.Lye) (ret graphql.Marshaler) {
+func (ec *executionContext) _Lye_updatedAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.Lye) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -9354,7 +9354,7 @@ func (ec *executionContext) _Lye_updatedAt(ctx context.Context, field graphql.Co
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Lye_deletedAt(ctx context.Context, field graphql.CollectedField, obj *models.Lye) (ret graphql.Marshaler) {
+func (ec *executionContext) _Lye_deletedAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.Lye) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -9386,7 +9386,7 @@ func (ec *executionContext) _Lye_deletedAt(ctx context.Context, field graphql.Co
 	return ec.marshalOInt2ᚖint(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _LyeDeletePayload_id(ctx context.Context, field graphql.CollectedField, obj *models.LyeDeletePayload) (ret graphql.Marshaler) {
+func (ec *executionContext) _LyeDeletePayload_id(ctx context.Context, field graphql.CollectedField, obj *gmodels.LyeDeletePayload) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -9421,7 +9421,7 @@ func (ec *executionContext) _LyeDeletePayload_id(ctx context.Context, field grap
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _LyeInventory_id(ctx context.Context, field graphql.CollectedField, obj *models.LyeInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _LyeInventory_id(ctx context.Context, field graphql.CollectedField, obj *gmodels.LyeInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -9456,7 +9456,7 @@ func (ec *executionContext) _LyeInventory_id(ctx context.Context, field graphql.
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _LyeInventory_purchaseDate(ctx context.Context, field graphql.CollectedField, obj *models.LyeInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _LyeInventory_purchaseDate(ctx context.Context, field graphql.CollectedField, obj *gmodels.LyeInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -9491,7 +9491,7 @@ func (ec *executionContext) _LyeInventory_purchaseDate(ctx context.Context, fiel
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _LyeInventory_expiryDate(ctx context.Context, field graphql.CollectedField, obj *models.LyeInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _LyeInventory_expiryDate(ctx context.Context, field graphql.CollectedField, obj *gmodels.LyeInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -9526,7 +9526,7 @@ func (ec *executionContext) _LyeInventory_expiryDate(ctx context.Context, field 
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _LyeInventory_cost(ctx context.Context, field graphql.CollectedField, obj *models.LyeInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _LyeInventory_cost(ctx context.Context, field graphql.CollectedField, obj *gmodels.LyeInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -9561,7 +9561,7 @@ func (ec *executionContext) _LyeInventory_cost(ctx context.Context, field graphq
 	return ec.marshalNFloat2float64(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _LyeInventory_weight(ctx context.Context, field graphql.CollectedField, obj *models.LyeInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _LyeInventory_weight(ctx context.Context, field graphql.CollectedField, obj *gmodels.LyeInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -9596,7 +9596,7 @@ func (ec *executionContext) _LyeInventory_weight(ctx context.Context, field grap
 	return ec.marshalNFloat2float64(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _LyeInventory_concentration(ctx context.Context, field graphql.CollectedField, obj *models.LyeInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _LyeInventory_concentration(ctx context.Context, field graphql.CollectedField, obj *gmodels.LyeInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -9631,7 +9631,7 @@ func (ec *executionContext) _LyeInventory_concentration(ctx context.Context, fie
 	return ec.marshalNFloat2float64(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _LyeInventory_lye(ctx context.Context, field graphql.CollectedField, obj *models.LyeInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _LyeInventory_lye(ctx context.Context, field graphql.CollectedField, obj *gmodels.LyeInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -9661,12 +9661,12 @@ func (ec *executionContext) _LyeInventory_lye(ctx context.Context, field graphql
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.Lye)
+	res := resTmp.(*gmodels.Lye)
 	fc.Result = res
 	return ec.marshalNLye2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLye(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _LyeInventory_supplier(ctx context.Context, field graphql.CollectedField, obj *models.LyeInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _LyeInventory_supplier(ctx context.Context, field graphql.CollectedField, obj *gmodels.LyeInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -9696,12 +9696,12 @@ func (ec *executionContext) _LyeInventory_supplier(ctx context.Context, field gr
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.Supplier)
+	res := resTmp.(*gmodels.Supplier)
 	fc.Result = res
 	return ec.marshalNSupplier2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐSupplier(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _LyeInventory_updatedAt(ctx context.Context, field graphql.CollectedField, obj *models.LyeInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _LyeInventory_updatedAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.LyeInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -9736,7 +9736,7 @@ func (ec *executionContext) _LyeInventory_updatedAt(ctx context.Context, field g
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _LyeInventory_deletedAt(ctx context.Context, field graphql.CollectedField, obj *models.LyeInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _LyeInventory_deletedAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.LyeInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -9768,7 +9768,7 @@ func (ec *executionContext) _LyeInventory_deletedAt(ctx context.Context, field g
 	return ec.marshalOInt2ᚖint(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _LyeInventory_createdAt(ctx context.Context, field graphql.CollectedField, obj *models.LyeInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _LyeInventory_createdAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.LyeInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -9803,7 +9803,7 @@ func (ec *executionContext) _LyeInventory_createdAt(ctx context.Context, field g
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _LyeInventory_lyeLyeInventories(ctx context.Context, field graphql.CollectedField, obj *models.LyeInventory) (ret graphql.Marshaler) {
+func (ec *executionContext) _LyeInventory_lyeLyeInventories(ctx context.Context, field graphql.CollectedField, obj *gmodels.LyeInventory) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -9830,12 +9830,12 @@ func (ec *executionContext) _LyeInventory_lyeLyeInventories(ctx context.Context,
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*models.LyeInventory)
+	res := resTmp.([]*gmodels.LyeInventory)
 	fc.Result = res
 	return ec.marshalOLyeInventory2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeInventory(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _LyeInventoryDeletePayload_id(ctx context.Context, field graphql.CollectedField, obj *models.LyeInventoryDeletePayload) (ret graphql.Marshaler) {
+func (ec *executionContext) _LyeInventoryDeletePayload_id(ctx context.Context, field graphql.CollectedField, obj *gmodels.LyeInventoryDeletePayload) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -9870,7 +9870,7 @@ func (ec *executionContext) _LyeInventoryDeletePayload_id(ctx context.Context, f
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _LyeInventoryPayload_lyeInventory(ctx context.Context, field graphql.CollectedField, obj *models.LyeInventoryPayload) (ret graphql.Marshaler) {
+func (ec *executionContext) _LyeInventoryPayload_lyeInventory(ctx context.Context, field graphql.CollectedField, obj *gmodels.LyeInventoryPayload) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -9900,12 +9900,12 @@ func (ec *executionContext) _LyeInventoryPayload_lyeInventory(ctx context.Contex
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.LyeInventory)
+	res := resTmp.(*gmodels.LyeInventory)
 	fc.Result = res
 	return ec.marshalNLyeInventory2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeInventory(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _LyePayload_lye(ctx context.Context, field graphql.CollectedField, obj *models.LyePayload) (ret graphql.Marshaler) {
+func (ec *executionContext) _LyePayload_lye(ctx context.Context, field graphql.CollectedField, obj *gmodels.LyePayload) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -9935,7 +9935,7 @@ func (ec *executionContext) _LyePayload_lye(ctx context.Context, field graphql.C
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.Lye)
+	res := resTmp.(*gmodels.Lye)
 	fc.Result = res
 	return ec.marshalNLye2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLye(ctx, field.Selections, res)
 }
@@ -9965,7 +9965,7 @@ func (ec *executionContext) _Mutation_createAdditive(ctx context.Context, field 
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().CreateAdditive(rctx, args["input"].(models.AdditiveCreateInput))
+		return ec.resolvers.Mutation().CreateAdditive(rctx, args["input"].(gmodels.AdditiveCreateInput))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -9977,7 +9977,7 @@ func (ec *executionContext) _Mutation_createAdditive(ctx context.Context, field 
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.AdditivePayload)
+	res := resTmp.(*gmodels.AdditivePayload)
 	fc.Result = res
 	return ec.marshalNAdditivePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditivePayload(ctx, field.Selections, res)
 }
@@ -10007,7 +10007,7 @@ func (ec *executionContext) _Mutation_updateAdditive(ctx context.Context, field 
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().UpdateAdditive(rctx, args["id"].(string), args["input"].(models.AdditiveUpdateInput))
+		return ec.resolvers.Mutation().UpdateAdditive(rctx, args["id"].(string), args["input"].(gmodels.AdditiveUpdateInput))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -10019,7 +10019,7 @@ func (ec *executionContext) _Mutation_updateAdditive(ctx context.Context, field 
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.AdditivePayload)
+	res := resTmp.(*gmodels.AdditivePayload)
 	fc.Result = res
 	return ec.marshalNAdditivePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditivePayload(ctx, field.Selections, res)
 }
@@ -10061,7 +10061,7 @@ func (ec *executionContext) _Mutation_deleteAdditive(ctx context.Context, field 
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.AdditiveDeletePayload)
+	res := resTmp.(*gmodels.AdditiveDeletePayload)
 	fc.Result = res
 	return ec.marshalNAdditiveDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveDeletePayload(ctx, field.Selections, res)
 }
@@ -10091,7 +10091,7 @@ func (ec *executionContext) _Mutation_createAdditiveInventory(ctx context.Contex
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().CreateAdditiveInventory(rctx, args["input"].(models.AdditiveInventoryCreateInput))
+		return ec.resolvers.Mutation().CreateAdditiveInventory(rctx, args["input"].(gmodels.AdditiveInventoryCreateInput))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -10103,7 +10103,7 @@ func (ec *executionContext) _Mutation_createAdditiveInventory(ctx context.Contex
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.AdditiveInventoryPayload)
+	res := resTmp.(*gmodels.AdditiveInventoryPayload)
 	fc.Result = res
 	return ec.marshalNAdditiveInventoryPayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveInventoryPayload(ctx, field.Selections, res)
 }
@@ -10133,7 +10133,7 @@ func (ec *executionContext) _Mutation_updateAdditiveInventory(ctx context.Contex
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().UpdateAdditiveInventory(rctx, args["id"].(string), args["input"].(models.AdditiveInventoryUpdateInput))
+		return ec.resolvers.Mutation().UpdateAdditiveInventory(rctx, args["id"].(string), args["input"].(gmodels.AdditiveInventoryUpdateInput))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -10145,7 +10145,7 @@ func (ec *executionContext) _Mutation_updateAdditiveInventory(ctx context.Contex
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.AdditiveInventoryPayload)
+	res := resTmp.(*gmodels.AdditiveInventoryPayload)
 	fc.Result = res
 	return ec.marshalNAdditiveInventoryPayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveInventoryPayload(ctx, field.Selections, res)
 }
@@ -10187,7 +10187,7 @@ func (ec *executionContext) _Mutation_deleteAdditiveInventory(ctx context.Contex
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.AdditiveInventoryDeletePayload)
+	res := resTmp.(*gmodels.AdditiveInventoryDeletePayload)
 	fc.Result = res
 	return ec.marshalNAdditiveInventoryDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveInventoryDeletePayload(ctx, field.Selections, res)
 }
@@ -10217,7 +10217,7 @@ func (ec *executionContext) _Mutation_createFragrance(ctx context.Context, field
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().CreateFragrance(rctx, args["input"].(models.FragranceCreateInput))
+		return ec.resolvers.Mutation().CreateFragrance(rctx, args["input"].(gmodels.FragranceCreateInput))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -10229,7 +10229,7 @@ func (ec *executionContext) _Mutation_createFragrance(ctx context.Context, field
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.FragrancePayload)
+	res := resTmp.(*gmodels.FragrancePayload)
 	fc.Result = res
 	return ec.marshalNFragrancePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragrancePayload(ctx, field.Selections, res)
 }
@@ -10259,7 +10259,7 @@ func (ec *executionContext) _Mutation_updateFragrance(ctx context.Context, field
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().UpdateFragrance(rctx, args["id"].(string), args["input"].(models.FragranceUpdateInput))
+		return ec.resolvers.Mutation().UpdateFragrance(rctx, args["id"].(string), args["input"].(gmodels.FragranceUpdateInput))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -10271,7 +10271,7 @@ func (ec *executionContext) _Mutation_updateFragrance(ctx context.Context, field
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.FragrancePayload)
+	res := resTmp.(*gmodels.FragrancePayload)
 	fc.Result = res
 	return ec.marshalNFragrancePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragrancePayload(ctx, field.Selections, res)
 }
@@ -10313,7 +10313,7 @@ func (ec *executionContext) _Mutation_deleteFragrance(ctx context.Context, field
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.FragranceDeletePayload)
+	res := resTmp.(*gmodels.FragranceDeletePayload)
 	fc.Result = res
 	return ec.marshalNFragranceDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceDeletePayload(ctx, field.Selections, res)
 }
@@ -10343,7 +10343,7 @@ func (ec *executionContext) _Mutation_createFragranceInventory(ctx context.Conte
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().CreateFragranceInventory(rctx, args["input"].(models.FragranceInventoryCreateInput))
+		return ec.resolvers.Mutation().CreateFragranceInventory(rctx, args["input"].(gmodels.FragranceInventoryCreateInput))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -10355,7 +10355,7 @@ func (ec *executionContext) _Mutation_createFragranceInventory(ctx context.Conte
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.FragranceInventoryPayload)
+	res := resTmp.(*gmodels.FragranceInventoryPayload)
 	fc.Result = res
 	return ec.marshalNFragranceInventoryPayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceInventoryPayload(ctx, field.Selections, res)
 }
@@ -10385,7 +10385,7 @@ func (ec *executionContext) _Mutation_updateFragranceInventory(ctx context.Conte
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().UpdateFragranceInventory(rctx, args["id"].(string), args["input"].(models.FragranceInventoryUpdateInput))
+		return ec.resolvers.Mutation().UpdateFragranceInventory(rctx, args["id"].(string), args["input"].(gmodels.FragranceInventoryUpdateInput))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -10397,7 +10397,7 @@ func (ec *executionContext) _Mutation_updateFragranceInventory(ctx context.Conte
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.FragranceInventoryPayload)
+	res := resTmp.(*gmodels.FragranceInventoryPayload)
 	fc.Result = res
 	return ec.marshalNFragranceInventoryPayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceInventoryPayload(ctx, field.Selections, res)
 }
@@ -10439,7 +10439,7 @@ func (ec *executionContext) _Mutation_deleteFragranceInventory(ctx context.Conte
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.FragranceInventoryDeletePayload)
+	res := resTmp.(*gmodels.FragranceInventoryDeletePayload)
 	fc.Result = res
 	return ec.marshalNFragranceInventoryDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceInventoryDeletePayload(ctx, field.Selections, res)
 }
@@ -10469,7 +10469,7 @@ func (ec *executionContext) _Mutation_createLipid(ctx context.Context, field gra
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().CreateLipid(rctx, args["input"].(models.LipidCreateInput))
+		return ec.resolvers.Mutation().CreateLipid(rctx, args["input"].(gmodels.LipidCreateInput))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -10481,7 +10481,7 @@ func (ec *executionContext) _Mutation_createLipid(ctx context.Context, field gra
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.LipidPayload)
+	res := resTmp.(*gmodels.LipidPayload)
 	fc.Result = res
 	return ec.marshalNLipidPayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidPayload(ctx, field.Selections, res)
 }
@@ -10511,7 +10511,7 @@ func (ec *executionContext) _Mutation_updateLipid(ctx context.Context, field gra
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().UpdateLipid(rctx, args["id"].(string), args["input"].(models.LipidUpdateInput))
+		return ec.resolvers.Mutation().UpdateLipid(rctx, args["id"].(string), args["input"].(gmodels.LipidUpdateInput))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -10523,7 +10523,7 @@ func (ec *executionContext) _Mutation_updateLipid(ctx context.Context, field gra
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.LipidPayload)
+	res := resTmp.(*gmodels.LipidPayload)
 	fc.Result = res
 	return ec.marshalNLipidPayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidPayload(ctx, field.Selections, res)
 }
@@ -10565,7 +10565,7 @@ func (ec *executionContext) _Mutation_deleteLipid(ctx context.Context, field gra
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.LipidDeletePayload)
+	res := resTmp.(*gmodels.LipidDeletePayload)
 	fc.Result = res
 	return ec.marshalNLipidDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidDeletePayload(ctx, field.Selections, res)
 }
@@ -10595,7 +10595,7 @@ func (ec *executionContext) _Mutation_createLipidInventory(ctx context.Context, 
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().CreateLipidInventory(rctx, args["input"].(models.LipidInventoryCreateInput))
+		return ec.resolvers.Mutation().CreateLipidInventory(rctx, args["input"].(gmodels.LipidInventoryCreateInput))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -10607,7 +10607,7 @@ func (ec *executionContext) _Mutation_createLipidInventory(ctx context.Context, 
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.LipidInventoryPayload)
+	res := resTmp.(*gmodels.LipidInventoryPayload)
 	fc.Result = res
 	return ec.marshalNLipidInventoryPayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidInventoryPayload(ctx, field.Selections, res)
 }
@@ -10637,7 +10637,7 @@ func (ec *executionContext) _Mutation_updateLipidInventory(ctx context.Context, 
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().UpdateLipidInventory(rctx, args["id"].(string), args["input"].(models.LipidInventoryUpdateInput))
+		return ec.resolvers.Mutation().UpdateLipidInventory(rctx, args["id"].(string), args["input"].(gmodels.LipidInventoryUpdateInput))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -10649,7 +10649,7 @@ func (ec *executionContext) _Mutation_updateLipidInventory(ctx context.Context, 
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.LipidInventoryPayload)
+	res := resTmp.(*gmodels.LipidInventoryPayload)
 	fc.Result = res
 	return ec.marshalNLipidInventoryPayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidInventoryPayload(ctx, field.Selections, res)
 }
@@ -10691,7 +10691,7 @@ func (ec *executionContext) _Mutation_deleteLipidInventory(ctx context.Context, 
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.LipidInventoryDeletePayload)
+	res := resTmp.(*gmodels.LipidInventoryDeletePayload)
 	fc.Result = res
 	return ec.marshalNLipidInventoryDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidInventoryDeletePayload(ctx, field.Selections, res)
 }
@@ -10721,7 +10721,7 @@ func (ec *executionContext) _Mutation_createLye(ctx context.Context, field graph
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().CreateLye(rctx, args["input"].(models.LyeCreateInput))
+		return ec.resolvers.Mutation().CreateLye(rctx, args["input"].(gmodels.LyeCreateInput))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -10733,7 +10733,7 @@ func (ec *executionContext) _Mutation_createLye(ctx context.Context, field graph
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.LyePayload)
+	res := resTmp.(*gmodels.LyePayload)
 	fc.Result = res
 	return ec.marshalNLyePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyePayload(ctx, field.Selections, res)
 }
@@ -10763,7 +10763,7 @@ func (ec *executionContext) _Mutation_updateLye(ctx context.Context, field graph
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().UpdateLye(rctx, args["id"].(string), args["input"].(models.LyeUpdateInput))
+		return ec.resolvers.Mutation().UpdateLye(rctx, args["id"].(string), args["input"].(gmodels.LyeUpdateInput))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -10775,7 +10775,7 @@ func (ec *executionContext) _Mutation_updateLye(ctx context.Context, field graph
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.LyePayload)
+	res := resTmp.(*gmodels.LyePayload)
 	fc.Result = res
 	return ec.marshalNLyePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyePayload(ctx, field.Selections, res)
 }
@@ -10817,7 +10817,7 @@ func (ec *executionContext) _Mutation_deleteLye(ctx context.Context, field graph
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.LyeDeletePayload)
+	res := resTmp.(*gmodels.LyeDeletePayload)
 	fc.Result = res
 	return ec.marshalNLyeDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeDeletePayload(ctx, field.Selections, res)
 }
@@ -10847,7 +10847,7 @@ func (ec *executionContext) _Mutation_createLyeInventory(ctx context.Context, fi
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().CreateLyeInventory(rctx, args["input"].(models.LyeInventoryCreateInput))
+		return ec.resolvers.Mutation().CreateLyeInventory(rctx, args["input"].(gmodels.LyeInventoryCreateInput))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -10859,7 +10859,7 @@ func (ec *executionContext) _Mutation_createLyeInventory(ctx context.Context, fi
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.LyeInventoryPayload)
+	res := resTmp.(*gmodels.LyeInventoryPayload)
 	fc.Result = res
 	return ec.marshalNLyeInventoryPayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeInventoryPayload(ctx, field.Selections, res)
 }
@@ -10889,7 +10889,7 @@ func (ec *executionContext) _Mutation_updateLyeInventory(ctx context.Context, fi
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().UpdateLyeInventory(rctx, args["id"].(string), args["input"].(models.LyeInventoryUpdateInput))
+		return ec.resolvers.Mutation().UpdateLyeInventory(rctx, args["id"].(string), args["input"].(gmodels.LyeInventoryUpdateInput))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -10901,7 +10901,7 @@ func (ec *executionContext) _Mutation_updateLyeInventory(ctx context.Context, fi
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.LyeInventoryPayload)
+	res := resTmp.(*gmodels.LyeInventoryPayload)
 	fc.Result = res
 	return ec.marshalNLyeInventoryPayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeInventoryPayload(ctx, field.Selections, res)
 }
@@ -10943,7 +10943,7 @@ func (ec *executionContext) _Mutation_deleteLyeInventory(ctx context.Context, fi
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.LyeInventoryDeletePayload)
+	res := resTmp.(*gmodels.LyeInventoryDeletePayload)
 	fc.Result = res
 	return ec.marshalNLyeInventoryDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeInventoryDeletePayload(ctx, field.Selections, res)
 }
@@ -10973,7 +10973,7 @@ func (ec *executionContext) _Mutation_createRecipe(ctx context.Context, field gr
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().CreateRecipe(rctx, args["input"].(models.RecipeCreateInput))
+		return ec.resolvers.Mutation().CreateRecipe(rctx, args["input"].(gmodels.RecipeCreateInput))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -10985,7 +10985,7 @@ func (ec *executionContext) _Mutation_createRecipe(ctx context.Context, field gr
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipePayload)
+	res := resTmp.(*gmodels.RecipePayload)
 	fc.Result = res
 	return ec.marshalNRecipePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipePayload(ctx, field.Selections, res)
 }
@@ -11015,7 +11015,7 @@ func (ec *executionContext) _Mutation_updateRecipe(ctx context.Context, field gr
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().UpdateRecipe(rctx, args["id"].(string), args["input"].(models.RecipeUpdateInput))
+		return ec.resolvers.Mutation().UpdateRecipe(rctx, args["id"].(string), args["input"].(gmodels.RecipeUpdateInput))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -11027,7 +11027,7 @@ func (ec *executionContext) _Mutation_updateRecipe(ctx context.Context, field gr
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipePayload)
+	res := resTmp.(*gmodels.RecipePayload)
 	fc.Result = res
 	return ec.marshalNRecipePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipePayload(ctx, field.Selections, res)
 }
@@ -11069,7 +11069,7 @@ func (ec *executionContext) _Mutation_deleteRecipe(ctx context.Context, field gr
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeDeletePayload)
+	res := resTmp.(*gmodels.RecipeDeletePayload)
 	fc.Result = res
 	return ec.marshalNRecipeDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeDeletePayload(ctx, field.Selections, res)
 }
@@ -11099,7 +11099,7 @@ func (ec *executionContext) _Mutation_createRecipeAdditive(ctx context.Context, 
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().CreateRecipeAdditive(rctx, args["input"].(models.RecipeAdditiveCreateInput))
+		return ec.resolvers.Mutation().CreateRecipeAdditive(rctx, args["input"].(gmodels.RecipeAdditiveCreateInput))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -11111,7 +11111,7 @@ func (ec *executionContext) _Mutation_createRecipeAdditive(ctx context.Context, 
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeAdditivePayload)
+	res := resTmp.(*gmodels.RecipeAdditivePayload)
 	fc.Result = res
 	return ec.marshalNRecipeAdditivePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeAdditivePayload(ctx, field.Selections, res)
 }
@@ -11141,7 +11141,7 @@ func (ec *executionContext) _Mutation_updateRecipeAdditive(ctx context.Context, 
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().UpdateRecipeAdditive(rctx, args["id"].(string), args["input"].(models.RecipeAdditiveUpdateInput))
+		return ec.resolvers.Mutation().UpdateRecipeAdditive(rctx, args["id"].(string), args["input"].(gmodels.RecipeAdditiveUpdateInput))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -11153,7 +11153,7 @@ func (ec *executionContext) _Mutation_updateRecipeAdditive(ctx context.Context, 
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeAdditivePayload)
+	res := resTmp.(*gmodels.RecipeAdditivePayload)
 	fc.Result = res
 	return ec.marshalNRecipeAdditivePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeAdditivePayload(ctx, field.Selections, res)
 }
@@ -11195,7 +11195,7 @@ func (ec *executionContext) _Mutation_deleteRecipeAdditive(ctx context.Context, 
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeAdditiveDeletePayload)
+	res := resTmp.(*gmodels.RecipeAdditiveDeletePayload)
 	fc.Result = res
 	return ec.marshalNRecipeAdditiveDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeAdditiveDeletePayload(ctx, field.Selections, res)
 }
@@ -11225,7 +11225,7 @@ func (ec *executionContext) _Mutation_createRecipeBatch(ctx context.Context, fie
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().CreateRecipeBatch(rctx, args["input"].(models.RecipeBatchCreateInput))
+		return ec.resolvers.Mutation().CreateRecipeBatch(rctx, args["input"].(gmodels.RecipeBatchCreateInput))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -11237,7 +11237,7 @@ func (ec *executionContext) _Mutation_createRecipeBatch(ctx context.Context, fie
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeBatchPayload)
+	res := resTmp.(*gmodels.RecipeBatchPayload)
 	fc.Result = res
 	return ec.marshalNRecipeBatchPayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchPayload(ctx, field.Selections, res)
 }
@@ -11267,7 +11267,7 @@ func (ec *executionContext) _Mutation_updateRecipeBatch(ctx context.Context, fie
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().UpdateRecipeBatch(rctx, args["id"].(string), args["input"].(models.RecipeBatchUpdateInput))
+		return ec.resolvers.Mutation().UpdateRecipeBatch(rctx, args["id"].(string), args["input"].(gmodels.RecipeBatchUpdateInput))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -11279,7 +11279,7 @@ func (ec *executionContext) _Mutation_updateRecipeBatch(ctx context.Context, fie
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeBatchPayload)
+	res := resTmp.(*gmodels.RecipeBatchPayload)
 	fc.Result = res
 	return ec.marshalNRecipeBatchPayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchPayload(ctx, field.Selections, res)
 }
@@ -11321,7 +11321,7 @@ func (ec *executionContext) _Mutation_deleteRecipeBatch(ctx context.Context, fie
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeBatchDeletePayload)
+	res := resTmp.(*gmodels.RecipeBatchDeletePayload)
 	fc.Result = res
 	return ec.marshalNRecipeBatchDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchDeletePayload(ctx, field.Selections, res)
 }
@@ -11351,7 +11351,7 @@ func (ec *executionContext) _Mutation_createRecipeBatchAdditive(ctx context.Cont
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().CreateRecipeBatchAdditive(rctx, args["input"].(models.RecipeBatchAdditiveCreateInput))
+		return ec.resolvers.Mutation().CreateRecipeBatchAdditive(rctx, args["input"].(gmodels.RecipeBatchAdditiveCreateInput))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -11363,7 +11363,7 @@ func (ec *executionContext) _Mutation_createRecipeBatchAdditive(ctx context.Cont
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeBatchAdditivePayload)
+	res := resTmp.(*gmodels.RecipeBatchAdditivePayload)
 	fc.Result = res
 	return ec.marshalNRecipeBatchAdditivePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchAdditivePayload(ctx, field.Selections, res)
 }
@@ -11393,7 +11393,7 @@ func (ec *executionContext) _Mutation_updateRecipeBatchAdditive(ctx context.Cont
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().UpdateRecipeBatchAdditive(rctx, args["id"].(string), args["input"].(models.RecipeBatchAdditiveUpdateInput))
+		return ec.resolvers.Mutation().UpdateRecipeBatchAdditive(rctx, args["id"].(string), args["input"].(gmodels.RecipeBatchAdditiveUpdateInput))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -11405,7 +11405,7 @@ func (ec *executionContext) _Mutation_updateRecipeBatchAdditive(ctx context.Cont
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeBatchAdditivePayload)
+	res := resTmp.(*gmodels.RecipeBatchAdditivePayload)
 	fc.Result = res
 	return ec.marshalNRecipeBatchAdditivePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchAdditivePayload(ctx, field.Selections, res)
 }
@@ -11447,7 +11447,7 @@ func (ec *executionContext) _Mutation_deleteRecipeBatchAdditive(ctx context.Cont
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeBatchAdditiveDeletePayload)
+	res := resTmp.(*gmodels.RecipeBatchAdditiveDeletePayload)
 	fc.Result = res
 	return ec.marshalNRecipeBatchAdditiveDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchAdditiveDeletePayload(ctx, field.Selections, res)
 }
@@ -11477,7 +11477,7 @@ func (ec *executionContext) _Mutation_createRecipeBatchFragrance(ctx context.Con
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().CreateRecipeBatchFragrance(rctx, args["input"].(models.RecipeBatchFragranceCreateInput))
+		return ec.resolvers.Mutation().CreateRecipeBatchFragrance(rctx, args["input"].(gmodels.RecipeBatchFragranceCreateInput))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -11489,7 +11489,7 @@ func (ec *executionContext) _Mutation_createRecipeBatchFragrance(ctx context.Con
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeBatchFragrancePayload)
+	res := resTmp.(*gmodels.RecipeBatchFragrancePayload)
 	fc.Result = res
 	return ec.marshalNRecipeBatchFragrancePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchFragrancePayload(ctx, field.Selections, res)
 }
@@ -11519,7 +11519,7 @@ func (ec *executionContext) _Mutation_updateRecipeBatchFragrance(ctx context.Con
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().UpdateRecipeBatchFragrance(rctx, args["id"].(string), args["input"].(models.RecipeBatchFragranceUpdateInput))
+		return ec.resolvers.Mutation().UpdateRecipeBatchFragrance(rctx, args["id"].(string), args["input"].(gmodels.RecipeBatchFragranceUpdateInput))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -11531,7 +11531,7 @@ func (ec *executionContext) _Mutation_updateRecipeBatchFragrance(ctx context.Con
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeBatchFragrancePayload)
+	res := resTmp.(*gmodels.RecipeBatchFragrancePayload)
 	fc.Result = res
 	return ec.marshalNRecipeBatchFragrancePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchFragrancePayload(ctx, field.Selections, res)
 }
@@ -11573,7 +11573,7 @@ func (ec *executionContext) _Mutation_deleteRecipeBatchFragrance(ctx context.Con
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeBatchFragranceDeletePayload)
+	res := resTmp.(*gmodels.RecipeBatchFragranceDeletePayload)
 	fc.Result = res
 	return ec.marshalNRecipeBatchFragranceDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchFragranceDeletePayload(ctx, field.Selections, res)
 }
@@ -11603,7 +11603,7 @@ func (ec *executionContext) _Mutation_createRecipeBatchLipid(ctx context.Context
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().CreateRecipeBatchLipid(rctx, args["input"].(models.RecipeBatchLipidCreateInput))
+		return ec.resolvers.Mutation().CreateRecipeBatchLipid(rctx, args["input"].(gmodels.RecipeBatchLipidCreateInput))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -11615,7 +11615,7 @@ func (ec *executionContext) _Mutation_createRecipeBatchLipid(ctx context.Context
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeBatchLipidPayload)
+	res := resTmp.(*gmodels.RecipeBatchLipidPayload)
 	fc.Result = res
 	return ec.marshalNRecipeBatchLipidPayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLipidPayload(ctx, field.Selections, res)
 }
@@ -11645,7 +11645,7 @@ func (ec *executionContext) _Mutation_updateRecipeBatchLipid(ctx context.Context
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().UpdateRecipeBatchLipid(rctx, args["id"].(string), args["input"].(models.RecipeBatchLipidUpdateInput))
+		return ec.resolvers.Mutation().UpdateRecipeBatchLipid(rctx, args["id"].(string), args["input"].(gmodels.RecipeBatchLipidUpdateInput))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -11657,7 +11657,7 @@ func (ec *executionContext) _Mutation_updateRecipeBatchLipid(ctx context.Context
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeBatchLipidPayload)
+	res := resTmp.(*gmodels.RecipeBatchLipidPayload)
 	fc.Result = res
 	return ec.marshalNRecipeBatchLipidPayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLipidPayload(ctx, field.Selections, res)
 }
@@ -11699,7 +11699,7 @@ func (ec *executionContext) _Mutation_deleteRecipeBatchLipid(ctx context.Context
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeBatchLipidDeletePayload)
+	res := resTmp.(*gmodels.RecipeBatchLipidDeletePayload)
 	fc.Result = res
 	return ec.marshalNRecipeBatchLipidDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLipidDeletePayload(ctx, field.Selections, res)
 }
@@ -11729,7 +11729,7 @@ func (ec *executionContext) _Mutation_createRecipeBatchLye(ctx context.Context, 
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().CreateRecipeBatchLye(rctx, args["input"].(models.RecipeBatchLyeCreateInput))
+		return ec.resolvers.Mutation().CreateRecipeBatchLye(rctx, args["input"].(gmodels.RecipeBatchLyeCreateInput))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -11741,7 +11741,7 @@ func (ec *executionContext) _Mutation_createRecipeBatchLye(ctx context.Context, 
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeBatchLyePayload)
+	res := resTmp.(*gmodels.RecipeBatchLyePayload)
 	fc.Result = res
 	return ec.marshalNRecipeBatchLyePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLyePayload(ctx, field.Selections, res)
 }
@@ -11771,7 +11771,7 @@ func (ec *executionContext) _Mutation_updateRecipeBatchLye(ctx context.Context, 
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().UpdateRecipeBatchLye(rctx, args["id"].(string), args["input"].(models.RecipeBatchLyeUpdateInput))
+		return ec.resolvers.Mutation().UpdateRecipeBatchLye(rctx, args["id"].(string), args["input"].(gmodels.RecipeBatchLyeUpdateInput))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -11783,7 +11783,7 @@ func (ec *executionContext) _Mutation_updateRecipeBatchLye(ctx context.Context, 
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeBatchLyePayload)
+	res := resTmp.(*gmodels.RecipeBatchLyePayload)
 	fc.Result = res
 	return ec.marshalNRecipeBatchLyePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLyePayload(ctx, field.Selections, res)
 }
@@ -11825,7 +11825,7 @@ func (ec *executionContext) _Mutation_deleteRecipeBatchLye(ctx context.Context, 
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeBatchLyeDeletePayload)
+	res := resTmp.(*gmodels.RecipeBatchLyeDeletePayload)
 	fc.Result = res
 	return ec.marshalNRecipeBatchLyeDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLyeDeletePayload(ctx, field.Selections, res)
 }
@@ -11855,7 +11855,7 @@ func (ec *executionContext) _Mutation_createRecipeFragrance(ctx context.Context,
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().CreateRecipeFragrance(rctx, args["input"].(models.RecipeFragranceCreateInput))
+		return ec.resolvers.Mutation().CreateRecipeFragrance(rctx, args["input"].(gmodels.RecipeFragranceCreateInput))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -11867,7 +11867,7 @@ func (ec *executionContext) _Mutation_createRecipeFragrance(ctx context.Context,
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeFragrancePayload)
+	res := resTmp.(*gmodels.RecipeFragrancePayload)
 	fc.Result = res
 	return ec.marshalNRecipeFragrancePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeFragrancePayload(ctx, field.Selections, res)
 }
@@ -11897,7 +11897,7 @@ func (ec *executionContext) _Mutation_updateRecipeFragrance(ctx context.Context,
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().UpdateRecipeFragrance(rctx, args["id"].(string), args["input"].(models.RecipeFragranceUpdateInput))
+		return ec.resolvers.Mutation().UpdateRecipeFragrance(rctx, args["id"].(string), args["input"].(gmodels.RecipeFragranceUpdateInput))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -11909,7 +11909,7 @@ func (ec *executionContext) _Mutation_updateRecipeFragrance(ctx context.Context,
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeFragrancePayload)
+	res := resTmp.(*gmodels.RecipeFragrancePayload)
 	fc.Result = res
 	return ec.marshalNRecipeFragrancePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeFragrancePayload(ctx, field.Selections, res)
 }
@@ -11951,7 +11951,7 @@ func (ec *executionContext) _Mutation_deleteRecipeFragrance(ctx context.Context,
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeFragranceDeletePayload)
+	res := resTmp.(*gmodels.RecipeFragranceDeletePayload)
 	fc.Result = res
 	return ec.marshalNRecipeFragranceDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeFragranceDeletePayload(ctx, field.Selections, res)
 }
@@ -11981,7 +11981,7 @@ func (ec *executionContext) _Mutation_createRecipeLipid(ctx context.Context, fie
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().CreateRecipeLipid(rctx, args["input"].(models.RecipeLipidCreateInput))
+		return ec.resolvers.Mutation().CreateRecipeLipid(rctx, args["input"].(gmodels.RecipeLipidCreateInput))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -11993,7 +11993,7 @@ func (ec *executionContext) _Mutation_createRecipeLipid(ctx context.Context, fie
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeLipidPayload)
+	res := resTmp.(*gmodels.RecipeLipidPayload)
 	fc.Result = res
 	return ec.marshalNRecipeLipidPayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeLipidPayload(ctx, field.Selections, res)
 }
@@ -12023,7 +12023,7 @@ func (ec *executionContext) _Mutation_updateRecipeLipid(ctx context.Context, fie
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().UpdateRecipeLipid(rctx, args["id"].(string), args["input"].(models.RecipeLipidUpdateInput))
+		return ec.resolvers.Mutation().UpdateRecipeLipid(rctx, args["id"].(string), args["input"].(gmodels.RecipeLipidUpdateInput))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -12035,7 +12035,7 @@ func (ec *executionContext) _Mutation_updateRecipeLipid(ctx context.Context, fie
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeLipidPayload)
+	res := resTmp.(*gmodels.RecipeLipidPayload)
 	fc.Result = res
 	return ec.marshalNRecipeLipidPayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeLipidPayload(ctx, field.Selections, res)
 }
@@ -12077,7 +12077,7 @@ func (ec *executionContext) _Mutation_deleteRecipeLipid(ctx context.Context, fie
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeLipidDeletePayload)
+	res := resTmp.(*gmodels.RecipeLipidDeletePayload)
 	fc.Result = res
 	return ec.marshalNRecipeLipidDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeLipidDeletePayload(ctx, field.Selections, res)
 }
@@ -12107,7 +12107,7 @@ func (ec *executionContext) _Mutation_createSupplier(ctx context.Context, field 
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().CreateSupplier(rctx, args["input"].(models.SupplierCreateInput))
+		return ec.resolvers.Mutation().CreateSupplier(rctx, args["input"].(gmodels.SupplierCreateInput))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -12119,7 +12119,7 @@ func (ec *executionContext) _Mutation_createSupplier(ctx context.Context, field 
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.SupplierPayload)
+	res := resTmp.(*gmodels.SupplierPayload)
 	fc.Result = res
 	return ec.marshalNSupplierPayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐSupplierPayload(ctx, field.Selections, res)
 }
@@ -12149,7 +12149,7 @@ func (ec *executionContext) _Mutation_updateSupplier(ctx context.Context, field 
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().UpdateSupplier(rctx, args["id"].(string), args["input"].(models.SupplierUpdateInput))
+		return ec.resolvers.Mutation().UpdateSupplier(rctx, args["id"].(string), args["input"].(gmodels.SupplierUpdateInput))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -12161,7 +12161,7 @@ func (ec *executionContext) _Mutation_updateSupplier(ctx context.Context, field 
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.SupplierPayload)
+	res := resTmp.(*gmodels.SupplierPayload)
 	fc.Result = res
 	return ec.marshalNSupplierPayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐSupplierPayload(ctx, field.Selections, res)
 }
@@ -12203,7 +12203,7 @@ func (ec *executionContext) _Mutation_deleteSupplier(ctx context.Context, field 
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.SupplierDeletePayload)
+	res := resTmp.(*gmodels.SupplierDeletePayload)
 	fc.Result = res
 	return ec.marshalNSupplierDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐSupplierDeletePayload(ctx, field.Selections, res)
 }
@@ -12245,7 +12245,7 @@ func (ec *executionContext) _Query_additive(ctx context.Context, field graphql.C
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.Additive)
+	res := resTmp.(*gmodels.Additive)
 	fc.Result = res
 	return ec.marshalNAdditive2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditive(ctx, field.Selections, res)
 }
@@ -12275,7 +12275,7 @@ func (ec *executionContext) _Query_additives(ctx context.Context, field graphql.
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().Additives(rctx, args["filter"].(*models.AdditiveFilter))
+		return ec.resolvers.Query().Additives(rctx, args["filter"].(*gmodels.AdditiveFilter))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -12287,7 +12287,7 @@ func (ec *executionContext) _Query_additives(ctx context.Context, field graphql.
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*models.Additive)
+	res := resTmp.([]*gmodels.Additive)
 	fc.Result = res
 	return ec.marshalNAdditive2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveᚄ(ctx, field.Selections, res)
 }
@@ -12329,7 +12329,7 @@ func (ec *executionContext) _Query_additiveInventory(ctx context.Context, field 
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.AdditiveInventory)
+	res := resTmp.(*gmodels.AdditiveInventory)
 	fc.Result = res
 	return ec.marshalNAdditiveInventory2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveInventory(ctx, field.Selections, res)
 }
@@ -12359,7 +12359,7 @@ func (ec *executionContext) _Query_additiveInventories(ctx context.Context, fiel
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().AdditiveInventories(rctx, args["filter"].(*models.AdditiveInventoryFilter))
+		return ec.resolvers.Query().AdditiveInventories(rctx, args["filter"].(*gmodels.AdditiveInventoryFilter))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -12371,7 +12371,7 @@ func (ec *executionContext) _Query_additiveInventories(ctx context.Context, fiel
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*models.AdditiveInventory)
+	res := resTmp.([]*gmodels.AdditiveInventory)
 	fc.Result = res
 	return ec.marshalNAdditiveInventory2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveInventoryᚄ(ctx, field.Selections, res)
 }
@@ -12413,7 +12413,7 @@ func (ec *executionContext) _Query_fragrance(ctx context.Context, field graphql.
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.Fragrance)
+	res := resTmp.(*gmodels.Fragrance)
 	fc.Result = res
 	return ec.marshalNFragrance2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragrance(ctx, field.Selections, res)
 }
@@ -12443,7 +12443,7 @@ func (ec *executionContext) _Query_fragrances(ctx context.Context, field graphql
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().Fragrances(rctx, args["filter"].(*models.FragranceFilter))
+		return ec.resolvers.Query().Fragrances(rctx, args["filter"].(*gmodels.FragranceFilter))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -12455,7 +12455,7 @@ func (ec *executionContext) _Query_fragrances(ctx context.Context, field graphql
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*models.Fragrance)
+	res := resTmp.([]*gmodels.Fragrance)
 	fc.Result = res
 	return ec.marshalNFragrance2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceᚄ(ctx, field.Selections, res)
 }
@@ -12497,7 +12497,7 @@ func (ec *executionContext) _Query_fragranceInventory(ctx context.Context, field
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.FragranceInventory)
+	res := resTmp.(*gmodels.FragranceInventory)
 	fc.Result = res
 	return ec.marshalNFragranceInventory2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceInventory(ctx, field.Selections, res)
 }
@@ -12527,7 +12527,7 @@ func (ec *executionContext) _Query_fragranceInventories(ctx context.Context, fie
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().FragranceInventories(rctx, args["filter"].(*models.FragranceInventoryFilter))
+		return ec.resolvers.Query().FragranceInventories(rctx, args["filter"].(*gmodels.FragranceInventoryFilter))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -12539,7 +12539,7 @@ func (ec *executionContext) _Query_fragranceInventories(ctx context.Context, fie
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*models.FragranceInventory)
+	res := resTmp.([]*gmodels.FragranceInventory)
 	fc.Result = res
 	return ec.marshalNFragranceInventory2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceInventoryᚄ(ctx, field.Selections, res)
 }
@@ -12581,7 +12581,7 @@ func (ec *executionContext) _Query_lipid(ctx context.Context, field graphql.Coll
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.Lipid)
+	res := resTmp.(*gmodels.Lipid)
 	fc.Result = res
 	return ec.marshalNLipid2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipid(ctx, field.Selections, res)
 }
@@ -12611,7 +12611,7 @@ func (ec *executionContext) _Query_lipids(ctx context.Context, field graphql.Col
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().Lipids(rctx, args["filter"].(*models.LipidFilter))
+		return ec.resolvers.Query().Lipids(rctx, args["filter"].(*gmodels.LipidFilter))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -12623,7 +12623,7 @@ func (ec *executionContext) _Query_lipids(ctx context.Context, field graphql.Col
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*models.Lipid)
+	res := resTmp.([]*gmodels.Lipid)
 	fc.Result = res
 	return ec.marshalNLipid2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidᚄ(ctx, field.Selections, res)
 }
@@ -12665,7 +12665,7 @@ func (ec *executionContext) _Query_lipidInventory(ctx context.Context, field gra
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.LipidInventory)
+	res := resTmp.(*gmodels.LipidInventory)
 	fc.Result = res
 	return ec.marshalNLipidInventory2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidInventory(ctx, field.Selections, res)
 }
@@ -12695,7 +12695,7 @@ func (ec *executionContext) _Query_lipidInventories(ctx context.Context, field g
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().LipidInventories(rctx, args["filter"].(*models.LipidInventoryFilter))
+		return ec.resolvers.Query().LipidInventories(rctx, args["filter"].(*gmodels.LipidInventoryFilter))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -12707,7 +12707,7 @@ func (ec *executionContext) _Query_lipidInventories(ctx context.Context, field g
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*models.LipidInventory)
+	res := resTmp.([]*gmodels.LipidInventory)
 	fc.Result = res
 	return ec.marshalNLipidInventory2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidInventoryᚄ(ctx, field.Selections, res)
 }
@@ -12749,7 +12749,7 @@ func (ec *executionContext) _Query_lye(ctx context.Context, field graphql.Collec
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.Lye)
+	res := resTmp.(*gmodels.Lye)
 	fc.Result = res
 	return ec.marshalNLye2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLye(ctx, field.Selections, res)
 }
@@ -12779,7 +12779,7 @@ func (ec *executionContext) _Query_lyes(ctx context.Context, field graphql.Colle
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().Lyes(rctx, args["filter"].(*models.LyeFilter))
+		return ec.resolvers.Query().Lyes(rctx, args["filter"].(*gmodels.LyeFilter))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -12791,7 +12791,7 @@ func (ec *executionContext) _Query_lyes(ctx context.Context, field graphql.Colle
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*models.Lye)
+	res := resTmp.([]*gmodels.Lye)
 	fc.Result = res
 	return ec.marshalNLye2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeᚄ(ctx, field.Selections, res)
 }
@@ -12833,7 +12833,7 @@ func (ec *executionContext) _Query_lyeInventory(ctx context.Context, field graph
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.LyeInventory)
+	res := resTmp.(*gmodels.LyeInventory)
 	fc.Result = res
 	return ec.marshalNLyeInventory2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeInventory(ctx, field.Selections, res)
 }
@@ -12863,7 +12863,7 @@ func (ec *executionContext) _Query_lyeInventories(ctx context.Context, field gra
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().LyeInventories(rctx, args["filter"].(*models.LyeInventoryFilter))
+		return ec.resolvers.Query().LyeInventories(rctx, args["filter"].(*gmodels.LyeInventoryFilter))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -12875,7 +12875,7 @@ func (ec *executionContext) _Query_lyeInventories(ctx context.Context, field gra
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*models.LyeInventory)
+	res := resTmp.([]*gmodels.LyeInventory)
 	fc.Result = res
 	return ec.marshalNLyeInventory2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeInventoryᚄ(ctx, field.Selections, res)
 }
@@ -12917,7 +12917,7 @@ func (ec *executionContext) _Query_recipe(ctx context.Context, field graphql.Col
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.Recipe)
+	res := resTmp.(*gmodels.Recipe)
 	fc.Result = res
 	return ec.marshalNRecipe2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipe(ctx, field.Selections, res)
 }
@@ -12947,7 +12947,7 @@ func (ec *executionContext) _Query_recipes(ctx context.Context, field graphql.Co
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().Recipes(rctx, args["filter"].(*models.RecipeFilter))
+		return ec.resolvers.Query().Recipes(rctx, args["filter"].(*gmodels.RecipeFilter))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -12959,7 +12959,7 @@ func (ec *executionContext) _Query_recipes(ctx context.Context, field graphql.Co
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*models.Recipe)
+	res := resTmp.([]*gmodels.Recipe)
 	fc.Result = res
 	return ec.marshalNRecipe2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeᚄ(ctx, field.Selections, res)
 }
@@ -13001,7 +13001,7 @@ func (ec *executionContext) _Query_recipeAdditive(ctx context.Context, field gra
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeAdditive)
+	res := resTmp.(*gmodels.RecipeAdditive)
 	fc.Result = res
 	return ec.marshalNRecipeAdditive2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeAdditive(ctx, field.Selections, res)
 }
@@ -13031,7 +13031,7 @@ func (ec *executionContext) _Query_recipeAdditives(ctx context.Context, field gr
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().RecipeAdditives(rctx, args["filter"].(*models.RecipeAdditiveFilter))
+		return ec.resolvers.Query().RecipeAdditives(rctx, args["filter"].(*gmodels.RecipeAdditiveFilter))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -13043,7 +13043,7 @@ func (ec *executionContext) _Query_recipeAdditives(ctx context.Context, field gr
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*models.RecipeAdditive)
+	res := resTmp.([]*gmodels.RecipeAdditive)
 	fc.Result = res
 	return ec.marshalNRecipeAdditive2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeAdditiveᚄ(ctx, field.Selections, res)
 }
@@ -13085,7 +13085,7 @@ func (ec *executionContext) _Query_recipeBatch(ctx context.Context, field graphq
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeBatch)
+	res := resTmp.(*gmodels.RecipeBatch)
 	fc.Result = res
 	return ec.marshalNRecipeBatch2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatch(ctx, field.Selections, res)
 }
@@ -13115,7 +13115,7 @@ func (ec *executionContext) _Query_recipeBatches(ctx context.Context, field grap
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().RecipeBatches(rctx, args["filter"].(*models.RecipeBatchFilter))
+		return ec.resolvers.Query().RecipeBatches(rctx, args["filter"].(*gmodels.RecipeBatchFilter))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -13127,7 +13127,7 @@ func (ec *executionContext) _Query_recipeBatches(ctx context.Context, field grap
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*models.RecipeBatch)
+	res := resTmp.([]*gmodels.RecipeBatch)
 	fc.Result = res
 	return ec.marshalNRecipeBatch2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchᚄ(ctx, field.Selections, res)
 }
@@ -13169,7 +13169,7 @@ func (ec *executionContext) _Query_recipeBatchAdditive(ctx context.Context, fiel
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeBatchAdditive)
+	res := resTmp.(*gmodels.RecipeBatchAdditive)
 	fc.Result = res
 	return ec.marshalNRecipeBatchAdditive2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchAdditive(ctx, field.Selections, res)
 }
@@ -13199,7 +13199,7 @@ func (ec *executionContext) _Query_recipeBatchAdditives(ctx context.Context, fie
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().RecipeBatchAdditives(rctx, args["filter"].(*models.RecipeBatchAdditiveFilter))
+		return ec.resolvers.Query().RecipeBatchAdditives(rctx, args["filter"].(*gmodels.RecipeBatchAdditiveFilter))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -13211,7 +13211,7 @@ func (ec *executionContext) _Query_recipeBatchAdditives(ctx context.Context, fie
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*models.RecipeBatchAdditive)
+	res := resTmp.([]*gmodels.RecipeBatchAdditive)
 	fc.Result = res
 	return ec.marshalNRecipeBatchAdditive2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchAdditiveᚄ(ctx, field.Selections, res)
 }
@@ -13253,7 +13253,7 @@ func (ec *executionContext) _Query_recipeBatchFragrance(ctx context.Context, fie
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeBatchFragrance)
+	res := resTmp.(*gmodels.RecipeBatchFragrance)
 	fc.Result = res
 	return ec.marshalNRecipeBatchFragrance2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchFragrance(ctx, field.Selections, res)
 }
@@ -13283,7 +13283,7 @@ func (ec *executionContext) _Query_recipeBatchFragrances(ctx context.Context, fi
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().RecipeBatchFragrances(rctx, args["filter"].(*models.RecipeBatchFragranceFilter))
+		return ec.resolvers.Query().RecipeBatchFragrances(rctx, args["filter"].(*gmodels.RecipeBatchFragranceFilter))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -13295,7 +13295,7 @@ func (ec *executionContext) _Query_recipeBatchFragrances(ctx context.Context, fi
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*models.RecipeBatchFragrance)
+	res := resTmp.([]*gmodels.RecipeBatchFragrance)
 	fc.Result = res
 	return ec.marshalNRecipeBatchFragrance2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchFragranceᚄ(ctx, field.Selections, res)
 }
@@ -13337,7 +13337,7 @@ func (ec *executionContext) _Query_recipeBatchLipid(ctx context.Context, field g
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeBatchLipid)
+	res := resTmp.(*gmodels.RecipeBatchLipid)
 	fc.Result = res
 	return ec.marshalNRecipeBatchLipid2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLipid(ctx, field.Selections, res)
 }
@@ -13367,7 +13367,7 @@ func (ec *executionContext) _Query_recipeBatchLipids(ctx context.Context, field 
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().RecipeBatchLipids(rctx, args["filter"].(*models.RecipeBatchLipidFilter))
+		return ec.resolvers.Query().RecipeBatchLipids(rctx, args["filter"].(*gmodels.RecipeBatchLipidFilter))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -13379,7 +13379,7 @@ func (ec *executionContext) _Query_recipeBatchLipids(ctx context.Context, field 
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*models.RecipeBatchLipid)
+	res := resTmp.([]*gmodels.RecipeBatchLipid)
 	fc.Result = res
 	return ec.marshalNRecipeBatchLipid2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLipidᚄ(ctx, field.Selections, res)
 }
@@ -13421,7 +13421,7 @@ func (ec *executionContext) _Query_recipeBatchLye(ctx context.Context, field gra
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeBatchLye)
+	res := resTmp.(*gmodels.RecipeBatchLye)
 	fc.Result = res
 	return ec.marshalNRecipeBatchLye2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLye(ctx, field.Selections, res)
 }
@@ -13451,7 +13451,7 @@ func (ec *executionContext) _Query_recipeBatchLyes(ctx context.Context, field gr
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().RecipeBatchLyes(rctx, args["filter"].(*models.RecipeBatchLyeFilter))
+		return ec.resolvers.Query().RecipeBatchLyes(rctx, args["filter"].(*gmodels.RecipeBatchLyeFilter))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -13463,7 +13463,7 @@ func (ec *executionContext) _Query_recipeBatchLyes(ctx context.Context, field gr
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*models.RecipeBatchLye)
+	res := resTmp.([]*gmodels.RecipeBatchLye)
 	fc.Result = res
 	return ec.marshalNRecipeBatchLye2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLyeᚄ(ctx, field.Selections, res)
 }
@@ -13505,7 +13505,7 @@ func (ec *executionContext) _Query_recipeFragrance(ctx context.Context, field gr
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeFragrance)
+	res := resTmp.(*gmodels.RecipeFragrance)
 	fc.Result = res
 	return ec.marshalNRecipeFragrance2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeFragrance(ctx, field.Selections, res)
 }
@@ -13535,7 +13535,7 @@ func (ec *executionContext) _Query_recipeFragrances(ctx context.Context, field g
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().RecipeFragrances(rctx, args["filter"].(*models.RecipeFragranceFilter))
+		return ec.resolvers.Query().RecipeFragrances(rctx, args["filter"].(*gmodels.RecipeFragranceFilter))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -13547,7 +13547,7 @@ func (ec *executionContext) _Query_recipeFragrances(ctx context.Context, field g
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*models.RecipeFragrance)
+	res := resTmp.([]*gmodels.RecipeFragrance)
 	fc.Result = res
 	return ec.marshalNRecipeFragrance2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeFragranceᚄ(ctx, field.Selections, res)
 }
@@ -13589,7 +13589,7 @@ func (ec *executionContext) _Query_recipeLipid(ctx context.Context, field graphq
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeLipid)
+	res := resTmp.(*gmodels.RecipeLipid)
 	fc.Result = res
 	return ec.marshalNRecipeLipid2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeLipid(ctx, field.Selections, res)
 }
@@ -13619,7 +13619,7 @@ func (ec *executionContext) _Query_recipeLipids(ctx context.Context, field graph
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().RecipeLipids(rctx, args["filter"].(*models.RecipeLipidFilter))
+		return ec.resolvers.Query().RecipeLipids(rctx, args["filter"].(*gmodels.RecipeLipidFilter))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -13631,7 +13631,7 @@ func (ec *executionContext) _Query_recipeLipids(ctx context.Context, field graph
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*models.RecipeLipid)
+	res := resTmp.([]*gmodels.RecipeLipid)
 	fc.Result = res
 	return ec.marshalNRecipeLipid2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeLipidᚄ(ctx, field.Selections, res)
 }
@@ -13673,7 +13673,7 @@ func (ec *executionContext) _Query_supplier(ctx context.Context, field graphql.C
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.Supplier)
+	res := resTmp.(*gmodels.Supplier)
 	fc.Result = res
 	return ec.marshalNSupplier2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐSupplier(ctx, field.Selections, res)
 }
@@ -13703,7 +13703,7 @@ func (ec *executionContext) _Query_suppliers(ctx context.Context, field graphql.
 	fc.Args = args
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().Suppliers(rctx, args["filter"].(*models.SupplierFilter))
+		return ec.resolvers.Query().Suppliers(rctx, args["filter"].(*gmodels.SupplierFilter))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -13715,7 +13715,7 @@ func (ec *executionContext) _Query_suppliers(ctx context.Context, field graphql.
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*models.Supplier)
+	res := resTmp.([]*gmodels.Supplier)
 	fc.Result = res
 	return ec.marshalNSupplier2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐSupplierᚄ(ctx, field.Selections, res)
 }
@@ -13791,7 +13791,7 @@ func (ec *executionContext) _Query___schema(ctx context.Context, field graphql.C
 	return ec.marshalO__Schema2ᚖgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐSchema(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Recipe_id(ctx context.Context, field graphql.CollectedField, obj *models.Recipe) (ret graphql.Marshaler) {
+func (ec *executionContext) _Recipe_id(ctx context.Context, field graphql.CollectedField, obj *gmodels.Recipe) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -13826,7 +13826,7 @@ func (ec *executionContext) _Recipe_id(ctx context.Context, field graphql.Collec
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Recipe_name(ctx context.Context, field graphql.CollectedField, obj *models.Recipe) (ret graphql.Marshaler) {
+func (ec *executionContext) _Recipe_name(ctx context.Context, field graphql.CollectedField, obj *gmodels.Recipe) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -13861,7 +13861,7 @@ func (ec *executionContext) _Recipe_name(ctx context.Context, field graphql.Coll
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Recipe_note(ctx context.Context, field graphql.CollectedField, obj *models.Recipe) (ret graphql.Marshaler) {
+func (ec *executionContext) _Recipe_note(ctx context.Context, field graphql.CollectedField, obj *gmodels.Recipe) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -13896,7 +13896,7 @@ func (ec *executionContext) _Recipe_note(ctx context.Context, field graphql.Coll
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Recipe_updatedAt(ctx context.Context, field graphql.CollectedField, obj *models.Recipe) (ret graphql.Marshaler) {
+func (ec *executionContext) _Recipe_updatedAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.Recipe) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -13931,7 +13931,7 @@ func (ec *executionContext) _Recipe_updatedAt(ctx context.Context, field graphql
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Recipe_createdAt(ctx context.Context, field graphql.CollectedField, obj *models.Recipe) (ret graphql.Marshaler) {
+func (ec *executionContext) _Recipe_createdAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.Recipe) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -13966,7 +13966,7 @@ func (ec *executionContext) _Recipe_createdAt(ctx context.Context, field graphql
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Recipe_deletedAt(ctx context.Context, field graphql.CollectedField, obj *models.Recipe) (ret graphql.Marshaler) {
+func (ec *executionContext) _Recipe_deletedAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.Recipe) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -13998,7 +13998,7 @@ func (ec *executionContext) _Recipe_deletedAt(ctx context.Context, field graphql
 	return ec.marshalOInt2ᚖint(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Recipe_additives(ctx context.Context, field graphql.CollectedField, obj *models.Recipe) (ret graphql.Marshaler) {
+func (ec *executionContext) _Recipe_additives(ctx context.Context, field graphql.CollectedField, obj *gmodels.Recipe) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -14025,12 +14025,12 @@ func (ec *executionContext) _Recipe_additives(ctx context.Context, field graphql
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*models.RecipeAdditive)
+	res := resTmp.([]*gmodels.RecipeAdditive)
 	fc.Result = res
 	return ec.marshalORecipeAdditive2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeAdditive(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Recipe_batches(ctx context.Context, field graphql.CollectedField, obj *models.Recipe) (ret graphql.Marshaler) {
+func (ec *executionContext) _Recipe_batches(ctx context.Context, field graphql.CollectedField, obj *gmodels.Recipe) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -14057,12 +14057,12 @@ func (ec *executionContext) _Recipe_batches(ctx context.Context, field graphql.C
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*models.RecipeBatch)
+	res := resTmp.([]*gmodels.RecipeBatch)
 	fc.Result = res
 	return ec.marshalORecipeBatch2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatch(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Recipe_fragrances(ctx context.Context, field graphql.CollectedField, obj *models.Recipe) (ret graphql.Marshaler) {
+func (ec *executionContext) _Recipe_fragrances(ctx context.Context, field graphql.CollectedField, obj *gmodels.Recipe) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -14089,12 +14089,12 @@ func (ec *executionContext) _Recipe_fragrances(ctx context.Context, field graphq
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*models.RecipeFragrance)
+	res := resTmp.([]*gmodels.RecipeFragrance)
 	fc.Result = res
 	return ec.marshalORecipeFragrance2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeFragrance(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Recipe_lipids(ctx context.Context, field graphql.CollectedField, obj *models.Recipe) (ret graphql.Marshaler) {
+func (ec *executionContext) _Recipe_lipids(ctx context.Context, field graphql.CollectedField, obj *gmodels.Recipe) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -14121,12 +14121,12 @@ func (ec *executionContext) _Recipe_lipids(ctx context.Context, field graphql.Co
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*models.RecipeLipid)
+	res := resTmp.([]*gmodels.RecipeLipid)
 	fc.Result = res
 	return ec.marshalORecipeLipid2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeLipid(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeAdditive_id(ctx context.Context, field graphql.CollectedField, obj *models.RecipeAdditive) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeAdditive_id(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeAdditive) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -14161,7 +14161,7 @@ func (ec *executionContext) _RecipeAdditive_id(ctx context.Context, field graphq
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeAdditive_percentage(ctx context.Context, field graphql.CollectedField, obj *models.RecipeAdditive) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeAdditive_percentage(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeAdditive) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -14196,7 +14196,7 @@ func (ec *executionContext) _RecipeAdditive_percentage(ctx context.Context, fiel
 	return ec.marshalNFloat2float64(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeAdditive_additive(ctx context.Context, field graphql.CollectedField, obj *models.RecipeAdditive) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeAdditive_additive(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeAdditive) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -14226,12 +14226,12 @@ func (ec *executionContext) _RecipeAdditive_additive(ctx context.Context, field 
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.Additive)
+	res := resTmp.(*gmodels.Additive)
 	fc.Result = res
 	return ec.marshalNAdditive2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditive(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeAdditive_recipe(ctx context.Context, field graphql.CollectedField, obj *models.RecipeAdditive) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeAdditive_recipe(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeAdditive) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -14261,12 +14261,12 @@ func (ec *executionContext) _RecipeAdditive_recipe(ctx context.Context, field gr
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.Recipe)
+	res := resTmp.(*gmodels.Recipe)
 	fc.Result = res
 	return ec.marshalNRecipe2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipe(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeAdditive_deletedAt(ctx context.Context, field graphql.CollectedField, obj *models.RecipeAdditive) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeAdditive_deletedAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeAdditive) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -14298,7 +14298,7 @@ func (ec *executionContext) _RecipeAdditive_deletedAt(ctx context.Context, field
 	return ec.marshalOInt2ᚖint(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeAdditive_updatedAt(ctx context.Context, field graphql.CollectedField, obj *models.RecipeAdditive) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeAdditive_updatedAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeAdditive) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -14333,7 +14333,7 @@ func (ec *executionContext) _RecipeAdditive_updatedAt(ctx context.Context, field
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeAdditive_createdAt(ctx context.Context, field graphql.CollectedField, obj *models.RecipeAdditive) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeAdditive_createdAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeAdditive) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -14368,7 +14368,7 @@ func (ec *executionContext) _RecipeAdditive_createdAt(ctx context.Context, field
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeAdditiveDeletePayload_id(ctx context.Context, field graphql.CollectedField, obj *models.RecipeAdditiveDeletePayload) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeAdditiveDeletePayload_id(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeAdditiveDeletePayload) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -14403,7 +14403,7 @@ func (ec *executionContext) _RecipeAdditiveDeletePayload_id(ctx context.Context,
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeAdditivePayload_recipeAdditive(ctx context.Context, field graphql.CollectedField, obj *models.RecipeAdditivePayload) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeAdditivePayload_recipeAdditive(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeAdditivePayload) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -14433,12 +14433,12 @@ func (ec *executionContext) _RecipeAdditivePayload_recipeAdditive(ctx context.Co
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeAdditive)
+	res := resTmp.(*gmodels.RecipeAdditive)
 	fc.Result = res
 	return ec.marshalNRecipeAdditive2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeAdditive(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatch_id(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatch) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatch_id(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatch) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -14473,7 +14473,7 @@ func (ec *executionContext) _RecipeBatch_id(ctx context.Context, field graphql.C
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatch_tag(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatch) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatch_tag(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatch) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -14508,7 +14508,7 @@ func (ec *executionContext) _RecipeBatch_tag(ctx context.Context, field graphql.
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatch_productionDate(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatch) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatch_productionDate(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatch) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -14543,7 +14543,7 @@ func (ec *executionContext) _RecipeBatch_productionDate(ctx context.Context, fie
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatch_sellableDate(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatch) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatch_sellableDate(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatch) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -14578,7 +14578,7 @@ func (ec *executionContext) _RecipeBatch_sellableDate(ctx context.Context, field
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatch_note(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatch) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatch_note(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatch) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -14613,7 +14613,7 @@ func (ec *executionContext) _RecipeBatch_note(ctx context.Context, field graphql
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatch_lipidWeight(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatch) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatch_lipidWeight(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatch) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -14648,7 +14648,7 @@ func (ec *executionContext) _RecipeBatch_lipidWeight(ctx context.Context, field 
 	return ec.marshalNFloat2float64(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatch_productionWeight(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatch) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatch_productionWeight(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatch) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -14683,7 +14683,7 @@ func (ec *executionContext) _RecipeBatch_productionWeight(ctx context.Context, f
 	return ec.marshalNFloat2float64(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatch_curedWeight(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatch) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatch_curedWeight(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatch) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -14718,7 +14718,7 @@ func (ec *executionContext) _RecipeBatch_curedWeight(ctx context.Context, field 
 	return ec.marshalNFloat2float64(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatch_recipe(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatch) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatch_recipe(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatch) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -14748,12 +14748,12 @@ func (ec *executionContext) _RecipeBatch_recipe(ctx context.Context, field graph
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.Recipe)
+	res := resTmp.(*gmodels.Recipe)
 	fc.Result = res
 	return ec.marshalNRecipe2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipe(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatch_deletedAt(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatch) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatch_deletedAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatch) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -14785,7 +14785,7 @@ func (ec *executionContext) _RecipeBatch_deletedAt(ctx context.Context, field gr
 	return ec.marshalOInt2ᚖint(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatch_updatedAt(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatch) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatch_updatedAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatch) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -14820,7 +14820,7 @@ func (ec *executionContext) _RecipeBatch_updatedAt(ctx context.Context, field gr
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatch_createdAt(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatch) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatch_createdAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatch) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -14855,7 +14855,7 @@ func (ec *executionContext) _RecipeBatch_createdAt(ctx context.Context, field gr
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatch_additives(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatch) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatch_additives(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatch) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -14882,12 +14882,12 @@ func (ec *executionContext) _RecipeBatch_additives(ctx context.Context, field gr
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*models.RecipeBatchAdditive)
+	res := resTmp.([]*gmodels.RecipeBatchAdditive)
 	fc.Result = res
 	return ec.marshalORecipeBatchAdditive2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchAdditive(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatch_fragrances(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatch) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatch_fragrances(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatch) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -14914,12 +14914,12 @@ func (ec *executionContext) _RecipeBatch_fragrances(ctx context.Context, field g
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*models.RecipeBatchFragrance)
+	res := resTmp.([]*gmodels.RecipeBatchFragrance)
 	fc.Result = res
 	return ec.marshalORecipeBatchFragrance2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchFragrance(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatch_lipids(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatch) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatch_lipids(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatch) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -14946,12 +14946,12 @@ func (ec *executionContext) _RecipeBatch_lipids(ctx context.Context, field graph
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*models.RecipeBatchLipid)
+	res := resTmp.([]*gmodels.RecipeBatchLipid)
 	fc.Result = res
 	return ec.marshalORecipeBatchLipid2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLipid(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatch_lye(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatch) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatch_lye(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatch) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -14981,12 +14981,12 @@ func (ec *executionContext) _RecipeBatch_lye(ctx context.Context, field graphql.
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeBatchLye)
+	res := resTmp.(*gmodels.RecipeBatchLye)
 	fc.Result = res
 	return ec.marshalNRecipeBatchLye2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLye(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchAdditive_id(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchAdditive) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchAdditive_id(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchAdditive) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -15021,7 +15021,7 @@ func (ec *executionContext) _RecipeBatchAdditive_id(ctx context.Context, field g
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchAdditive_weight(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchAdditive) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchAdditive_weight(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchAdditive) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -15056,7 +15056,7 @@ func (ec *executionContext) _RecipeBatchAdditive_weight(ctx context.Context, fie
 	return ec.marshalNFloat2float64(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchAdditive_cost(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchAdditive) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchAdditive_cost(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchAdditive) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -15091,7 +15091,7 @@ func (ec *executionContext) _RecipeBatchAdditive_cost(ctx context.Context, field
 	return ec.marshalNFloat2float64(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchAdditive_additive(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchAdditive) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchAdditive_additive(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchAdditive) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -15121,12 +15121,12 @@ func (ec *executionContext) _RecipeBatchAdditive_additive(ctx context.Context, f
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.Additive)
+	res := resTmp.(*gmodels.Additive)
 	fc.Result = res
 	return ec.marshalNAdditive2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditive(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchAdditive_batch(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchAdditive) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchAdditive_batch(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchAdditive) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -15156,12 +15156,12 @@ func (ec *executionContext) _RecipeBatchAdditive_batch(ctx context.Context, fiel
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeBatch)
+	res := resTmp.(*gmodels.RecipeBatch)
 	fc.Result = res
 	return ec.marshalNRecipeBatch2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatch(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchAdditive_updatedAt(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchAdditive) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchAdditive_updatedAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchAdditive) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -15196,7 +15196,7 @@ func (ec *executionContext) _RecipeBatchAdditive_updatedAt(ctx context.Context, 
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchAdditive_deletedAt(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchAdditive) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchAdditive_deletedAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchAdditive) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -15228,7 +15228,7 @@ func (ec *executionContext) _RecipeBatchAdditive_deletedAt(ctx context.Context, 
 	return ec.marshalOInt2ᚖint(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchAdditive_createdAt(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchAdditive) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchAdditive_createdAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchAdditive) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -15263,7 +15263,7 @@ func (ec *executionContext) _RecipeBatchAdditive_createdAt(ctx context.Context, 
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchAdditiveDeletePayload_id(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchAdditiveDeletePayload) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchAdditiveDeletePayload_id(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchAdditiveDeletePayload) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -15298,7 +15298,7 @@ func (ec *executionContext) _RecipeBatchAdditiveDeletePayload_id(ctx context.Con
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchAdditivePayload_recipeBatchAdditive(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchAdditivePayload) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchAdditivePayload_recipeBatchAdditive(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchAdditivePayload) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -15328,12 +15328,12 @@ func (ec *executionContext) _RecipeBatchAdditivePayload_recipeBatchAdditive(ctx 
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeBatchAdditive)
+	res := resTmp.(*gmodels.RecipeBatchAdditive)
 	fc.Result = res
 	return ec.marshalNRecipeBatchAdditive2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchAdditive(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchDeletePayload_id(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchDeletePayload) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchDeletePayload_id(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchDeletePayload) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -15368,7 +15368,7 @@ func (ec *executionContext) _RecipeBatchDeletePayload_id(ctx context.Context, fi
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchFragrance_id(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchFragrance) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchFragrance_id(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchFragrance) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -15403,7 +15403,7 @@ func (ec *executionContext) _RecipeBatchFragrance_id(ctx context.Context, field 
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchFragrance_weight(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchFragrance) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchFragrance_weight(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchFragrance) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -15438,7 +15438,7 @@ func (ec *executionContext) _RecipeBatchFragrance_weight(ctx context.Context, fi
 	return ec.marshalNFloat2float64(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchFragrance_cost(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchFragrance) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchFragrance_cost(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchFragrance) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -15473,7 +15473,7 @@ func (ec *executionContext) _RecipeBatchFragrance_cost(ctx context.Context, fiel
 	return ec.marshalNFloat2float64(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchFragrance_fragrance(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchFragrance) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchFragrance_fragrance(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchFragrance) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -15503,12 +15503,12 @@ func (ec *executionContext) _RecipeBatchFragrance_fragrance(ctx context.Context,
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.Fragrance)
+	res := resTmp.(*gmodels.Fragrance)
 	fc.Result = res
 	return ec.marshalNFragrance2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragrance(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchFragrance_batch(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchFragrance) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchFragrance_batch(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchFragrance) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -15538,12 +15538,12 @@ func (ec *executionContext) _RecipeBatchFragrance_batch(ctx context.Context, fie
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeBatch)
+	res := resTmp.(*gmodels.RecipeBatch)
 	fc.Result = res
 	return ec.marshalNRecipeBatch2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatch(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchFragrance_updatedAt(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchFragrance) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchFragrance_updatedAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchFragrance) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -15578,7 +15578,7 @@ func (ec *executionContext) _RecipeBatchFragrance_updatedAt(ctx context.Context,
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchFragrance_deletedAt(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchFragrance) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchFragrance_deletedAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchFragrance) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -15610,7 +15610,7 @@ func (ec *executionContext) _RecipeBatchFragrance_deletedAt(ctx context.Context,
 	return ec.marshalOInt2ᚖint(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchFragrance_createdAt(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchFragrance) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchFragrance_createdAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchFragrance) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -15645,7 +15645,7 @@ func (ec *executionContext) _RecipeBatchFragrance_createdAt(ctx context.Context,
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchFragranceDeletePayload_id(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchFragranceDeletePayload) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchFragranceDeletePayload_id(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchFragranceDeletePayload) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -15680,7 +15680,7 @@ func (ec *executionContext) _RecipeBatchFragranceDeletePayload_id(ctx context.Co
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchFragrancePayload_recipeBatchFragrance(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchFragrancePayload) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchFragrancePayload_recipeBatchFragrance(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchFragrancePayload) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -15710,12 +15710,12 @@ func (ec *executionContext) _RecipeBatchFragrancePayload_recipeBatchFragrance(ct
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeBatchFragrance)
+	res := resTmp.(*gmodels.RecipeBatchFragrance)
 	fc.Result = res
 	return ec.marshalNRecipeBatchFragrance2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchFragrance(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchLipid_id(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchLipid) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchLipid_id(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchLipid) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -15750,7 +15750,7 @@ func (ec *executionContext) _RecipeBatchLipid_id(ctx context.Context, field grap
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchLipid_weight(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchLipid) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchLipid_weight(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchLipid) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -15785,7 +15785,7 @@ func (ec *executionContext) _RecipeBatchLipid_weight(ctx context.Context, field 
 	return ec.marshalNFloat2float64(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchLipid_cost(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchLipid) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchLipid_cost(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchLipid) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -15820,7 +15820,7 @@ func (ec *executionContext) _RecipeBatchLipid_cost(ctx context.Context, field gr
 	return ec.marshalNFloat2float64(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchLipid_lipid(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchLipid) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchLipid_lipid(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchLipid) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -15850,12 +15850,12 @@ func (ec *executionContext) _RecipeBatchLipid_lipid(ctx context.Context, field g
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.Lipid)
+	res := resTmp.(*gmodels.Lipid)
 	fc.Result = res
 	return ec.marshalNLipid2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipid(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchLipid_batch(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchLipid) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchLipid_batch(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchLipid) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -15885,12 +15885,12 @@ func (ec *executionContext) _RecipeBatchLipid_batch(ctx context.Context, field g
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeBatch)
+	res := resTmp.(*gmodels.RecipeBatch)
 	fc.Result = res
 	return ec.marshalNRecipeBatch2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatch(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchLipid_deletedAt(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchLipid) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchLipid_deletedAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchLipid) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -15922,7 +15922,7 @@ func (ec *executionContext) _RecipeBatchLipid_deletedAt(ctx context.Context, fie
 	return ec.marshalOInt2ᚖint(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchLipid_createdAt(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchLipid) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchLipid_createdAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchLipid) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -15957,7 +15957,7 @@ func (ec *executionContext) _RecipeBatchLipid_createdAt(ctx context.Context, fie
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchLipid_updatedAt(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchLipid) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchLipid_updatedAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchLipid) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -15992,7 +15992,7 @@ func (ec *executionContext) _RecipeBatchLipid_updatedAt(ctx context.Context, fie
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchLipidDeletePayload_id(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchLipidDeletePayload) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchLipidDeletePayload_id(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchLipidDeletePayload) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -16027,7 +16027,7 @@ func (ec *executionContext) _RecipeBatchLipidDeletePayload_id(ctx context.Contex
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchLipidPayload_recipeBatchLipid(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchLipidPayload) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchLipidPayload_recipeBatchLipid(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchLipidPayload) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -16057,12 +16057,12 @@ func (ec *executionContext) _RecipeBatchLipidPayload_recipeBatchLipid(ctx contex
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeBatchLipid)
+	res := resTmp.(*gmodels.RecipeBatchLipid)
 	fc.Result = res
 	return ec.marshalNRecipeBatchLipid2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLipid(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchLye_id(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchLye) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchLye_id(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchLye) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -16097,7 +16097,7 @@ func (ec *executionContext) _RecipeBatchLye_id(ctx context.Context, field graphq
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchLye_weight(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchLye) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchLye_weight(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchLye) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -16132,7 +16132,7 @@ func (ec *executionContext) _RecipeBatchLye_weight(ctx context.Context, field gr
 	return ec.marshalNFloat2float64(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchLye_discount(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchLye) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchLye_discount(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchLye) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -16167,7 +16167,7 @@ func (ec *executionContext) _RecipeBatchLye_discount(ctx context.Context, field 
 	return ec.marshalNFloat2float64(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchLye_cost(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchLye) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchLye_cost(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchLye) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -16202,7 +16202,7 @@ func (ec *executionContext) _RecipeBatchLye_cost(ctx context.Context, field grap
 	return ec.marshalNFloat2float64(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchLye_lye(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchLye) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchLye_lye(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchLye) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -16232,12 +16232,12 @@ func (ec *executionContext) _RecipeBatchLye_lye(ctx context.Context, field graph
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.Lye)
+	res := resTmp.(*gmodels.Lye)
 	fc.Result = res
 	return ec.marshalNLye2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLye(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchLye_batch(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchLye) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchLye_batch(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchLye) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -16267,12 +16267,12 @@ func (ec *executionContext) _RecipeBatchLye_batch(ctx context.Context, field gra
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeBatch)
+	res := resTmp.(*gmodels.RecipeBatch)
 	fc.Result = res
 	return ec.marshalNRecipeBatch2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatch(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchLye_updatedAt(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchLye) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchLye_updatedAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchLye) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -16307,7 +16307,7 @@ func (ec *executionContext) _RecipeBatchLye_updatedAt(ctx context.Context, field
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchLye_deletedAt(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchLye) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchLye_deletedAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchLye) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -16339,7 +16339,7 @@ func (ec *executionContext) _RecipeBatchLye_deletedAt(ctx context.Context, field
 	return ec.marshalOInt2ᚖint(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchLye_createdAt(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchLye) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchLye_createdAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchLye) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -16374,7 +16374,7 @@ func (ec *executionContext) _RecipeBatchLye_createdAt(ctx context.Context, field
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchLyeDeletePayload_id(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchLyeDeletePayload) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchLyeDeletePayload_id(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchLyeDeletePayload) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -16409,7 +16409,7 @@ func (ec *executionContext) _RecipeBatchLyeDeletePayload_id(ctx context.Context,
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchLyePayload_recipeBatchLye(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchLyePayload) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchLyePayload_recipeBatchLye(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchLyePayload) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -16439,12 +16439,12 @@ func (ec *executionContext) _RecipeBatchLyePayload_recipeBatchLye(ctx context.Co
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeBatchLye)
+	res := resTmp.(*gmodels.RecipeBatchLye)
 	fc.Result = res
 	return ec.marshalNRecipeBatchLye2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLye(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeBatchPayload_recipeBatch(ctx context.Context, field graphql.CollectedField, obj *models.RecipeBatchPayload) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeBatchPayload_recipeBatch(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeBatchPayload) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -16474,12 +16474,12 @@ func (ec *executionContext) _RecipeBatchPayload_recipeBatch(ctx context.Context,
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeBatch)
+	res := resTmp.(*gmodels.RecipeBatch)
 	fc.Result = res
 	return ec.marshalNRecipeBatch2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatch(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeDeletePayload_id(ctx context.Context, field graphql.CollectedField, obj *models.RecipeDeletePayload) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeDeletePayload_id(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeDeletePayload) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -16514,7 +16514,7 @@ func (ec *executionContext) _RecipeDeletePayload_id(ctx context.Context, field g
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeFragrance_id(ctx context.Context, field graphql.CollectedField, obj *models.RecipeFragrance) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeFragrance_id(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeFragrance) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -16549,7 +16549,7 @@ func (ec *executionContext) _RecipeFragrance_id(ctx context.Context, field graph
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeFragrance_percentage(ctx context.Context, field graphql.CollectedField, obj *models.RecipeFragrance) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeFragrance_percentage(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeFragrance) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -16584,7 +16584,7 @@ func (ec *executionContext) _RecipeFragrance_percentage(ctx context.Context, fie
 	return ec.marshalNFloat2float64(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeFragrance_fragrance(ctx context.Context, field graphql.CollectedField, obj *models.RecipeFragrance) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeFragrance_fragrance(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeFragrance) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -16614,12 +16614,12 @@ func (ec *executionContext) _RecipeFragrance_fragrance(ctx context.Context, fiel
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.Fragrance)
+	res := resTmp.(*gmodels.Fragrance)
 	fc.Result = res
 	return ec.marshalNFragrance2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragrance(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeFragrance_recipe(ctx context.Context, field graphql.CollectedField, obj *models.RecipeFragrance) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeFragrance_recipe(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeFragrance) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -16649,12 +16649,12 @@ func (ec *executionContext) _RecipeFragrance_recipe(ctx context.Context, field g
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.Recipe)
+	res := resTmp.(*gmodels.Recipe)
 	fc.Result = res
 	return ec.marshalNRecipe2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipe(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeFragrance_deletedAt(ctx context.Context, field graphql.CollectedField, obj *models.RecipeFragrance) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeFragrance_deletedAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeFragrance) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -16686,7 +16686,7 @@ func (ec *executionContext) _RecipeFragrance_deletedAt(ctx context.Context, fiel
 	return ec.marshalOInt2ᚖint(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeFragrance_createdAt(ctx context.Context, field graphql.CollectedField, obj *models.RecipeFragrance) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeFragrance_createdAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeFragrance) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -16721,7 +16721,7 @@ func (ec *executionContext) _RecipeFragrance_createdAt(ctx context.Context, fiel
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeFragrance_updatedAt(ctx context.Context, field graphql.CollectedField, obj *models.RecipeFragrance) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeFragrance_updatedAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeFragrance) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -16756,7 +16756,7 @@ func (ec *executionContext) _RecipeFragrance_updatedAt(ctx context.Context, fiel
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeFragranceDeletePayload_id(ctx context.Context, field graphql.CollectedField, obj *models.RecipeFragranceDeletePayload) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeFragranceDeletePayload_id(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeFragranceDeletePayload) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -16791,7 +16791,7 @@ func (ec *executionContext) _RecipeFragranceDeletePayload_id(ctx context.Context
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeFragrancePayload_recipeFragrance(ctx context.Context, field graphql.CollectedField, obj *models.RecipeFragrancePayload) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeFragrancePayload_recipeFragrance(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeFragrancePayload) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -16821,12 +16821,12 @@ func (ec *executionContext) _RecipeFragrancePayload_recipeFragrance(ctx context.
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeFragrance)
+	res := resTmp.(*gmodels.RecipeFragrance)
 	fc.Result = res
 	return ec.marshalNRecipeFragrance2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeFragrance(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeLipid_id(ctx context.Context, field graphql.CollectedField, obj *models.RecipeLipid) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeLipid_id(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeLipid) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -16861,7 +16861,7 @@ func (ec *executionContext) _RecipeLipid_id(ctx context.Context, field graphql.C
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeLipid_percentage(ctx context.Context, field graphql.CollectedField, obj *models.RecipeLipid) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeLipid_percentage(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeLipid) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -16896,7 +16896,7 @@ func (ec *executionContext) _RecipeLipid_percentage(ctx context.Context, field g
 	return ec.marshalNFloat2float64(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeLipid_lipid(ctx context.Context, field graphql.CollectedField, obj *models.RecipeLipid) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeLipid_lipid(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeLipid) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -16926,12 +16926,12 @@ func (ec *executionContext) _RecipeLipid_lipid(ctx context.Context, field graphq
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.Lipid)
+	res := resTmp.(*gmodels.Lipid)
 	fc.Result = res
 	return ec.marshalNLipid2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipid(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeLipid_recipe(ctx context.Context, field graphql.CollectedField, obj *models.RecipeLipid) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeLipid_recipe(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeLipid) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -16961,12 +16961,12 @@ func (ec *executionContext) _RecipeLipid_recipe(ctx context.Context, field graph
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.Recipe)
+	res := resTmp.(*gmodels.Recipe)
 	fc.Result = res
 	return ec.marshalNRecipe2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipe(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeLipid_createdAt(ctx context.Context, field graphql.CollectedField, obj *models.RecipeLipid) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeLipid_createdAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeLipid) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -17001,7 +17001,7 @@ func (ec *executionContext) _RecipeLipid_createdAt(ctx context.Context, field gr
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeLipid_deletedAt(ctx context.Context, field graphql.CollectedField, obj *models.RecipeLipid) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeLipid_deletedAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeLipid) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -17033,7 +17033,7 @@ func (ec *executionContext) _RecipeLipid_deletedAt(ctx context.Context, field gr
 	return ec.marshalOInt2ᚖint(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeLipid_updatedAt(ctx context.Context, field graphql.CollectedField, obj *models.RecipeLipid) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeLipid_updatedAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeLipid) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -17068,7 +17068,7 @@ func (ec *executionContext) _RecipeLipid_updatedAt(ctx context.Context, field gr
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeLipidDeletePayload_id(ctx context.Context, field graphql.CollectedField, obj *models.RecipeLipidDeletePayload) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeLipidDeletePayload_id(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeLipidDeletePayload) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -17103,7 +17103,7 @@ func (ec *executionContext) _RecipeLipidDeletePayload_id(ctx context.Context, fi
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipeLipidPayload_recipeLipid(ctx context.Context, field graphql.CollectedField, obj *models.RecipeLipidPayload) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipeLipidPayload_recipeLipid(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipeLipidPayload) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -17133,12 +17133,12 @@ func (ec *executionContext) _RecipeLipidPayload_recipeLipid(ctx context.Context,
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.RecipeLipid)
+	res := resTmp.(*gmodels.RecipeLipid)
 	fc.Result = res
 	return ec.marshalNRecipeLipid2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeLipid(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _RecipePayload_recipe(ctx context.Context, field graphql.CollectedField, obj *models.RecipePayload) (ret graphql.Marshaler) {
+func (ec *executionContext) _RecipePayload_recipe(ctx context.Context, field graphql.CollectedField, obj *gmodels.RecipePayload) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -17168,12 +17168,12 @@ func (ec *executionContext) _RecipePayload_recipe(ctx context.Context, field gra
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.Recipe)
+	res := resTmp.(*gmodels.Recipe)
 	fc.Result = res
 	return ec.marshalNRecipe2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipe(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Supplier_id(ctx context.Context, field graphql.CollectedField, obj *models.Supplier) (ret graphql.Marshaler) {
+func (ec *executionContext) _Supplier_id(ctx context.Context, field graphql.CollectedField, obj *gmodels.Supplier) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -17208,7 +17208,7 @@ func (ec *executionContext) _Supplier_id(ctx context.Context, field graphql.Coll
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Supplier_name(ctx context.Context, field graphql.CollectedField, obj *models.Supplier) (ret graphql.Marshaler) {
+func (ec *executionContext) _Supplier_name(ctx context.Context, field graphql.CollectedField, obj *gmodels.Supplier) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -17243,7 +17243,7 @@ func (ec *executionContext) _Supplier_name(ctx context.Context, field graphql.Co
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Supplier_website(ctx context.Context, field graphql.CollectedField, obj *models.Supplier) (ret graphql.Marshaler) {
+func (ec *executionContext) _Supplier_website(ctx context.Context, field graphql.CollectedField, obj *gmodels.Supplier) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -17278,7 +17278,7 @@ func (ec *executionContext) _Supplier_website(ctx context.Context, field graphql
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Supplier_note(ctx context.Context, field graphql.CollectedField, obj *models.Supplier) (ret graphql.Marshaler) {
+func (ec *executionContext) _Supplier_note(ctx context.Context, field graphql.CollectedField, obj *gmodels.Supplier) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -17313,7 +17313,7 @@ func (ec *executionContext) _Supplier_note(ctx context.Context, field graphql.Co
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Supplier_deletedAt(ctx context.Context, field graphql.CollectedField, obj *models.Supplier) (ret graphql.Marshaler) {
+func (ec *executionContext) _Supplier_deletedAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.Supplier) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -17345,7 +17345,7 @@ func (ec *executionContext) _Supplier_deletedAt(ctx context.Context, field graph
 	return ec.marshalOInt2ᚖint(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Supplier_updatedAt(ctx context.Context, field graphql.CollectedField, obj *models.Supplier) (ret graphql.Marshaler) {
+func (ec *executionContext) _Supplier_updatedAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.Supplier) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -17380,7 +17380,7 @@ func (ec *executionContext) _Supplier_updatedAt(ctx context.Context, field graph
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Supplier_createdAt(ctx context.Context, field graphql.CollectedField, obj *models.Supplier) (ret graphql.Marshaler) {
+func (ec *executionContext) _Supplier_createdAt(ctx context.Context, field graphql.CollectedField, obj *gmodels.Supplier) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -17415,7 +17415,7 @@ func (ec *executionContext) _Supplier_createdAt(ctx context.Context, field graph
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Supplier_additiveInventories(ctx context.Context, field graphql.CollectedField, obj *models.Supplier) (ret graphql.Marshaler) {
+func (ec *executionContext) _Supplier_additiveInventories(ctx context.Context, field graphql.CollectedField, obj *gmodels.Supplier) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -17442,12 +17442,12 @@ func (ec *executionContext) _Supplier_additiveInventories(ctx context.Context, f
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*models.AdditiveInventory)
+	res := resTmp.([]*gmodels.AdditiveInventory)
 	fc.Result = res
 	return ec.marshalOAdditiveInventory2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveInventory(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Supplier_fragranceInventories(ctx context.Context, field graphql.CollectedField, obj *models.Supplier) (ret graphql.Marshaler) {
+func (ec *executionContext) _Supplier_fragranceInventories(ctx context.Context, field graphql.CollectedField, obj *gmodels.Supplier) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -17474,12 +17474,12 @@ func (ec *executionContext) _Supplier_fragranceInventories(ctx context.Context, 
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*models.FragranceInventory)
+	res := resTmp.([]*gmodels.FragranceInventory)
 	fc.Result = res
 	return ec.marshalOFragranceInventory2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceInventory(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Supplier_lipidInventories(ctx context.Context, field graphql.CollectedField, obj *models.Supplier) (ret graphql.Marshaler) {
+func (ec *executionContext) _Supplier_lipidInventories(ctx context.Context, field graphql.CollectedField, obj *gmodels.Supplier) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -17506,12 +17506,12 @@ func (ec *executionContext) _Supplier_lipidInventories(ctx context.Context, fiel
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*models.LipidInventory)
+	res := resTmp.([]*gmodels.LipidInventory)
 	fc.Result = res
 	return ec.marshalOLipidInventory2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidInventory(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _Supplier_lyeInventories(ctx context.Context, field graphql.CollectedField, obj *models.Supplier) (ret graphql.Marshaler) {
+func (ec *executionContext) _Supplier_lyeInventories(ctx context.Context, field graphql.CollectedField, obj *gmodels.Supplier) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -17538,12 +17538,12 @@ func (ec *executionContext) _Supplier_lyeInventories(ctx context.Context, field 
 	if resTmp == nil {
 		return graphql.Null
 	}
-	res := resTmp.([]*models.LyeInventory)
+	res := resTmp.([]*gmodels.LyeInventory)
 	fc.Result = res
 	return ec.marshalOLyeInventory2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeInventory(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _SupplierDeletePayload_id(ctx context.Context, field graphql.CollectedField, obj *models.SupplierDeletePayload) (ret graphql.Marshaler) {
+func (ec *executionContext) _SupplierDeletePayload_id(ctx context.Context, field graphql.CollectedField, obj *gmodels.SupplierDeletePayload) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -17578,7 +17578,7 @@ func (ec *executionContext) _SupplierDeletePayload_id(ctx context.Context, field
 	return ec.marshalNID2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) _SupplierPayload_supplier(ctx context.Context, field graphql.CollectedField, obj *models.SupplierPayload) (ret graphql.Marshaler) {
+func (ec *executionContext) _SupplierPayload_supplier(ctx context.Context, field graphql.CollectedField, obj *gmodels.SupplierPayload) (ret graphql.Marshaler) {
 	defer func() {
 		if r := recover(); r != nil {
 			ec.Error(ctx, ec.Recover(ctx, r))
@@ -17608,7 +17608,7 @@ func (ec *executionContext) _SupplierPayload_supplier(ctx context.Context, field
 		}
 		return graphql.Null
 	}
-	res := resTmp.(*models.Supplier)
+	res := resTmp.(*gmodels.Supplier)
 	fc.Result = res
 	return ec.marshalNSupplier2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐSupplier(ctx, field.Selections, res)
 }
@@ -18700,8 +18700,8 @@ func (ec *executionContext) ___Type_ofType(ctx context.Context, field graphql.Co
 
 // region    **************************** input.gotpl *****************************
 
-func (ec *executionContext) unmarshalInputAdditiveCreateInput(ctx context.Context, obj interface{}) (models.AdditiveCreateInput, error) {
-	var it models.AdditiveCreateInput
+func (ec *executionContext) unmarshalInputAdditiveCreateInput(ctx context.Context, obj interface{}) (gmodels.AdditiveCreateInput, error) {
+	var it gmodels.AdditiveCreateInput
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -18752,8 +18752,8 @@ func (ec *executionContext) unmarshalInputAdditiveCreateInput(ctx context.Contex
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputAdditiveFilter(ctx context.Context, obj interface{}) (models.AdditiveFilter, error) {
-	var it models.AdditiveFilter
+func (ec *executionContext) unmarshalInputAdditiveFilter(ctx context.Context, obj interface{}) (gmodels.AdditiveFilter, error) {
+	var it gmodels.AdditiveFilter
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -18780,8 +18780,8 @@ func (ec *executionContext) unmarshalInputAdditiveFilter(ctx context.Context, ob
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputAdditiveInventoryCreateInput(ctx context.Context, obj interface{}) (models.AdditiveInventoryCreateInput, error) {
-	var it models.AdditiveInventoryCreateInput
+func (ec *executionContext) unmarshalInputAdditiveInventoryCreateInput(ctx context.Context, obj interface{}) (gmodels.AdditiveInventoryCreateInput, error) {
+	var it gmodels.AdditiveInventoryCreateInput
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -18864,8 +18864,8 @@ func (ec *executionContext) unmarshalInputAdditiveInventoryCreateInput(ctx conte
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputAdditiveInventoryFilter(ctx context.Context, obj interface{}) (models.AdditiveInventoryFilter, error) {
-	var it models.AdditiveInventoryFilter
+func (ec *executionContext) unmarshalInputAdditiveInventoryFilter(ctx context.Context, obj interface{}) (gmodels.AdditiveInventoryFilter, error) {
+	var it gmodels.AdditiveInventoryFilter
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -18892,8 +18892,8 @@ func (ec *executionContext) unmarshalInputAdditiveInventoryFilter(ctx context.Co
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputAdditiveInventoryUpdateInput(ctx context.Context, obj interface{}) (models.AdditiveInventoryUpdateInput, error) {
-	var it models.AdditiveInventoryUpdateInput
+func (ec *executionContext) unmarshalInputAdditiveInventoryUpdateInput(ctx context.Context, obj interface{}) (gmodels.AdditiveInventoryUpdateInput, error) {
+	var it gmodels.AdditiveInventoryUpdateInput
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -18976,8 +18976,8 @@ func (ec *executionContext) unmarshalInputAdditiveInventoryUpdateInput(ctx conte
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputAdditiveInventoryWhere(ctx context.Context, obj interface{}) (models.AdditiveInventoryWhere, error) {
-	var it models.AdditiveInventoryWhere
+func (ec *executionContext) unmarshalInputAdditiveInventoryWhere(ctx context.Context, obj interface{}) (gmodels.AdditiveInventoryWhere, error) {
+	var it gmodels.AdditiveInventoryWhere
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -19084,8 +19084,8 @@ func (ec *executionContext) unmarshalInputAdditiveInventoryWhere(ctx context.Con
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputAdditiveUpdateInput(ctx context.Context, obj interface{}) (models.AdditiveUpdateInput, error) {
-	var it models.AdditiveUpdateInput
+func (ec *executionContext) unmarshalInputAdditiveUpdateInput(ctx context.Context, obj interface{}) (gmodels.AdditiveUpdateInput, error) {
+	var it gmodels.AdditiveUpdateInput
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -19136,8 +19136,8 @@ func (ec *executionContext) unmarshalInputAdditiveUpdateInput(ctx context.Contex
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputAdditiveWhere(ctx context.Context, obj interface{}) (models.AdditiveWhere, error) {
-	var it models.AdditiveWhere
+func (ec *executionContext) unmarshalInputAdditiveWhere(ctx context.Context, obj interface{}) (gmodels.AdditiveWhere, error) {
+	var it gmodels.AdditiveWhere
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -19220,8 +19220,8 @@ func (ec *executionContext) unmarshalInputAdditiveWhere(ctx context.Context, obj
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputBooleanFilter(ctx context.Context, obj interface{}) (models.BooleanFilter, error) {
-	var it models.BooleanFilter
+func (ec *executionContext) unmarshalInputBooleanFilter(ctx context.Context, obj interface{}) (gmodels.BooleanFilter, error) {
+	var it gmodels.BooleanFilter
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -19248,8 +19248,8 @@ func (ec *executionContext) unmarshalInputBooleanFilter(ctx context.Context, obj
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputFloatFilter(ctx context.Context, obj interface{}) (models.FloatFilter, error) {
-	var it models.FloatFilter
+func (ec *executionContext) unmarshalInputFloatFilter(ctx context.Context, obj interface{}) (gmodels.FloatFilter, error) {
+	var it gmodels.FloatFilter
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -19324,8 +19324,8 @@ func (ec *executionContext) unmarshalInputFloatFilter(ctx context.Context, obj i
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputFragranceCreateInput(ctx context.Context, obj interface{}) (models.FragranceCreateInput, error) {
-	var it models.FragranceCreateInput
+func (ec *executionContext) unmarshalInputFragranceCreateInput(ctx context.Context, obj interface{}) (gmodels.FragranceCreateInput, error) {
+	var it gmodels.FragranceCreateInput
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -19376,8 +19376,8 @@ func (ec *executionContext) unmarshalInputFragranceCreateInput(ctx context.Conte
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputFragranceFilter(ctx context.Context, obj interface{}) (models.FragranceFilter, error) {
-	var it models.FragranceFilter
+func (ec *executionContext) unmarshalInputFragranceFilter(ctx context.Context, obj interface{}) (gmodels.FragranceFilter, error) {
+	var it gmodels.FragranceFilter
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -19404,8 +19404,8 @@ func (ec *executionContext) unmarshalInputFragranceFilter(ctx context.Context, o
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputFragranceInventoryCreateInput(ctx context.Context, obj interface{}) (models.FragranceInventoryCreateInput, error) {
-	var it models.FragranceInventoryCreateInput
+func (ec *executionContext) unmarshalInputFragranceInventoryCreateInput(ctx context.Context, obj interface{}) (gmodels.FragranceInventoryCreateInput, error) {
+	var it gmodels.FragranceInventoryCreateInput
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -19488,8 +19488,8 @@ func (ec *executionContext) unmarshalInputFragranceInventoryCreateInput(ctx cont
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputFragranceInventoryFilter(ctx context.Context, obj interface{}) (models.FragranceInventoryFilter, error) {
-	var it models.FragranceInventoryFilter
+func (ec *executionContext) unmarshalInputFragranceInventoryFilter(ctx context.Context, obj interface{}) (gmodels.FragranceInventoryFilter, error) {
+	var it gmodels.FragranceInventoryFilter
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -19516,8 +19516,8 @@ func (ec *executionContext) unmarshalInputFragranceInventoryFilter(ctx context.C
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputFragranceInventoryUpdateInput(ctx context.Context, obj interface{}) (models.FragranceInventoryUpdateInput, error) {
-	var it models.FragranceInventoryUpdateInput
+func (ec *executionContext) unmarshalInputFragranceInventoryUpdateInput(ctx context.Context, obj interface{}) (gmodels.FragranceInventoryUpdateInput, error) {
+	var it gmodels.FragranceInventoryUpdateInput
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -19600,8 +19600,8 @@ func (ec *executionContext) unmarshalInputFragranceInventoryUpdateInput(ctx cont
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputFragranceInventoryWhere(ctx context.Context, obj interface{}) (models.FragranceInventoryWhere, error) {
-	var it models.FragranceInventoryWhere
+func (ec *executionContext) unmarshalInputFragranceInventoryWhere(ctx context.Context, obj interface{}) (gmodels.FragranceInventoryWhere, error) {
+	var it gmodels.FragranceInventoryWhere
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -19708,8 +19708,8 @@ func (ec *executionContext) unmarshalInputFragranceInventoryWhere(ctx context.Co
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputFragranceUpdateInput(ctx context.Context, obj interface{}) (models.FragranceUpdateInput, error) {
-	var it models.FragranceUpdateInput
+func (ec *executionContext) unmarshalInputFragranceUpdateInput(ctx context.Context, obj interface{}) (gmodels.FragranceUpdateInput, error) {
+	var it gmodels.FragranceUpdateInput
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -19760,8 +19760,8 @@ func (ec *executionContext) unmarshalInputFragranceUpdateInput(ctx context.Conte
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputFragranceWhere(ctx context.Context, obj interface{}) (models.FragranceWhere, error) {
-	var it models.FragranceWhere
+func (ec *executionContext) unmarshalInputFragranceWhere(ctx context.Context, obj interface{}) (gmodels.FragranceWhere, error) {
+	var it gmodels.FragranceWhere
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -19844,8 +19844,8 @@ func (ec *executionContext) unmarshalInputFragranceWhere(ctx context.Context, ob
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputIDFilter(ctx context.Context, obj interface{}) (models.IDFilter, error) {
-	var it models.IDFilter
+func (ec *executionContext) unmarshalInputIDFilter(ctx context.Context, obj interface{}) (gmodels.IDFilter, error) {
+	var it gmodels.IDFilter
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -19888,8 +19888,8 @@ func (ec *executionContext) unmarshalInputIDFilter(ctx context.Context, obj inte
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputIntFilter(ctx context.Context, obj interface{}) (models.IntFilter, error) {
-	var it models.IntFilter
+func (ec *executionContext) unmarshalInputIntFilter(ctx context.Context, obj interface{}) (gmodels.IntFilter, error) {
+	var it gmodels.IntFilter
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -19964,8 +19964,8 @@ func (ec *executionContext) unmarshalInputIntFilter(ctx context.Context, obj int
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputLipidCreateInput(ctx context.Context, obj interface{}) (models.LipidCreateInput, error) {
-	var it models.LipidCreateInput
+func (ec *executionContext) unmarshalInputLipidCreateInput(ctx context.Context, obj interface{}) (gmodels.LipidCreateInput, error) {
+	var it gmodels.LipidCreateInput
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -20152,8 +20152,8 @@ func (ec *executionContext) unmarshalInputLipidCreateInput(ctx context.Context, 
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputLipidFilter(ctx context.Context, obj interface{}) (models.LipidFilter, error) {
-	var it models.LipidFilter
+func (ec *executionContext) unmarshalInputLipidFilter(ctx context.Context, obj interface{}) (gmodels.LipidFilter, error) {
+	var it gmodels.LipidFilter
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -20180,8 +20180,8 @@ func (ec *executionContext) unmarshalInputLipidFilter(ctx context.Context, obj i
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputLipidInventoryCreateInput(ctx context.Context, obj interface{}) (models.LipidInventoryCreateInput, error) {
-	var it models.LipidInventoryCreateInput
+func (ec *executionContext) unmarshalInputLipidInventoryCreateInput(ctx context.Context, obj interface{}) (gmodels.LipidInventoryCreateInput, error) {
+	var it gmodels.LipidInventoryCreateInput
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -20296,8 +20296,8 @@ func (ec *executionContext) unmarshalInputLipidInventoryCreateInput(ctx context.
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputLipidInventoryFilter(ctx context.Context, obj interface{}) (models.LipidInventoryFilter, error) {
-	var it models.LipidInventoryFilter
+func (ec *executionContext) unmarshalInputLipidInventoryFilter(ctx context.Context, obj interface{}) (gmodels.LipidInventoryFilter, error) {
+	var it gmodels.LipidInventoryFilter
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -20324,8 +20324,8 @@ func (ec *executionContext) unmarshalInputLipidInventoryFilter(ctx context.Conte
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputLipidInventoryUpdateInput(ctx context.Context, obj interface{}) (models.LipidInventoryUpdateInput, error) {
-	var it models.LipidInventoryUpdateInput
+func (ec *executionContext) unmarshalInputLipidInventoryUpdateInput(ctx context.Context, obj interface{}) (gmodels.LipidInventoryUpdateInput, error) {
+	var it gmodels.LipidInventoryUpdateInput
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -20440,8 +20440,8 @@ func (ec *executionContext) unmarshalInputLipidInventoryUpdateInput(ctx context.
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputLipidInventoryWhere(ctx context.Context, obj interface{}) (models.LipidInventoryWhere, error) {
-	var it models.LipidInventoryWhere
+func (ec *executionContext) unmarshalInputLipidInventoryWhere(ctx context.Context, obj interface{}) (gmodels.LipidInventoryWhere, error) {
+	var it gmodels.LipidInventoryWhere
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -20580,8 +20580,8 @@ func (ec *executionContext) unmarshalInputLipidInventoryWhere(ctx context.Contex
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputLipidUpdateInput(ctx context.Context, obj interface{}) (models.LipidUpdateInput, error) {
-	var it models.LipidUpdateInput
+func (ec *executionContext) unmarshalInputLipidUpdateInput(ctx context.Context, obj interface{}) (gmodels.LipidUpdateInput, error) {
+	var it gmodels.LipidUpdateInput
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -20768,8 +20768,8 @@ func (ec *executionContext) unmarshalInputLipidUpdateInput(ctx context.Context, 
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputLipidWhere(ctx context.Context, obj interface{}) (models.LipidWhere, error) {
-	var it models.LipidWhere
+func (ec *executionContext) unmarshalInputLipidWhere(ctx context.Context, obj interface{}) (gmodels.LipidWhere, error) {
+	var it gmodels.LipidWhere
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -20988,8 +20988,8 @@ func (ec *executionContext) unmarshalInputLipidWhere(ctx context.Context, obj in
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputLyeCreateInput(ctx context.Context, obj interface{}) (models.LyeCreateInput, error) {
-	var it models.LyeCreateInput
+func (ec *executionContext) unmarshalInputLyeCreateInput(ctx context.Context, obj interface{}) (gmodels.LyeCreateInput, error) {
+	var it gmodels.LyeCreateInput
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -21048,8 +21048,8 @@ func (ec *executionContext) unmarshalInputLyeCreateInput(ctx context.Context, ob
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputLyeFilter(ctx context.Context, obj interface{}) (models.LyeFilter, error) {
-	var it models.LyeFilter
+func (ec *executionContext) unmarshalInputLyeFilter(ctx context.Context, obj interface{}) (gmodels.LyeFilter, error) {
+	var it gmodels.LyeFilter
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -21076,8 +21076,8 @@ func (ec *executionContext) unmarshalInputLyeFilter(ctx context.Context, obj int
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputLyeInventoryCreateInput(ctx context.Context, obj interface{}) (models.LyeInventoryCreateInput, error) {
-	var it models.LyeInventoryCreateInput
+func (ec *executionContext) unmarshalInputLyeInventoryCreateInput(ctx context.Context, obj interface{}) (gmodels.LyeInventoryCreateInput, error) {
+	var it gmodels.LyeInventoryCreateInput
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -21168,8 +21168,8 @@ func (ec *executionContext) unmarshalInputLyeInventoryCreateInput(ctx context.Co
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputLyeInventoryFilter(ctx context.Context, obj interface{}) (models.LyeInventoryFilter, error) {
-	var it models.LyeInventoryFilter
+func (ec *executionContext) unmarshalInputLyeInventoryFilter(ctx context.Context, obj interface{}) (gmodels.LyeInventoryFilter, error) {
+	var it gmodels.LyeInventoryFilter
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -21196,8 +21196,8 @@ func (ec *executionContext) unmarshalInputLyeInventoryFilter(ctx context.Context
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputLyeInventoryUpdateInput(ctx context.Context, obj interface{}) (models.LyeInventoryUpdateInput, error) {
-	var it models.LyeInventoryUpdateInput
+func (ec *executionContext) unmarshalInputLyeInventoryUpdateInput(ctx context.Context, obj interface{}) (gmodels.LyeInventoryUpdateInput, error) {
+	var it gmodels.LyeInventoryUpdateInput
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -21288,8 +21288,8 @@ func (ec *executionContext) unmarshalInputLyeInventoryUpdateInput(ctx context.Co
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputLyeInventoryWhere(ctx context.Context, obj interface{}) (models.LyeInventoryWhere, error) {
-	var it models.LyeInventoryWhere
+func (ec *executionContext) unmarshalInputLyeInventoryWhere(ctx context.Context, obj interface{}) (gmodels.LyeInventoryWhere, error) {
+	var it gmodels.LyeInventoryWhere
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -21412,8 +21412,8 @@ func (ec *executionContext) unmarshalInputLyeInventoryWhere(ctx context.Context,
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputLyeUpdateInput(ctx context.Context, obj interface{}) (models.LyeUpdateInput, error) {
-	var it models.LyeUpdateInput
+func (ec *executionContext) unmarshalInputLyeUpdateInput(ctx context.Context, obj interface{}) (gmodels.LyeUpdateInput, error) {
+	var it gmodels.LyeUpdateInput
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -21472,8 +21472,8 @@ func (ec *executionContext) unmarshalInputLyeUpdateInput(ctx context.Context, ob
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputLyeWhere(ctx context.Context, obj interface{}) (models.LyeWhere, error) {
-	var it models.LyeWhere
+func (ec *executionContext) unmarshalInputLyeWhere(ctx context.Context, obj interface{}) (gmodels.LyeWhere, error) {
+	var it gmodels.LyeWhere
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -21564,8 +21564,8 @@ func (ec *executionContext) unmarshalInputLyeWhere(ctx context.Context, obj inte
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputRecipeAdditiveCreateInput(ctx context.Context, obj interface{}) (models.RecipeAdditiveCreateInput, error) {
-	var it models.RecipeAdditiveCreateInput
+func (ec *executionContext) unmarshalInputRecipeAdditiveCreateInput(ctx context.Context, obj interface{}) (gmodels.RecipeAdditiveCreateInput, error) {
+	var it gmodels.RecipeAdditiveCreateInput
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -21624,8 +21624,8 @@ func (ec *executionContext) unmarshalInputRecipeAdditiveCreateInput(ctx context.
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputRecipeAdditiveFilter(ctx context.Context, obj interface{}) (models.RecipeAdditiveFilter, error) {
-	var it models.RecipeAdditiveFilter
+func (ec *executionContext) unmarshalInputRecipeAdditiveFilter(ctx context.Context, obj interface{}) (gmodels.RecipeAdditiveFilter, error) {
+	var it gmodels.RecipeAdditiveFilter
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -21652,8 +21652,8 @@ func (ec *executionContext) unmarshalInputRecipeAdditiveFilter(ctx context.Conte
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputRecipeAdditiveUpdateInput(ctx context.Context, obj interface{}) (models.RecipeAdditiveUpdateInput, error) {
-	var it models.RecipeAdditiveUpdateInput
+func (ec *executionContext) unmarshalInputRecipeAdditiveUpdateInput(ctx context.Context, obj interface{}) (gmodels.RecipeAdditiveUpdateInput, error) {
+	var it gmodels.RecipeAdditiveUpdateInput
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -21712,8 +21712,8 @@ func (ec *executionContext) unmarshalInputRecipeAdditiveUpdateInput(ctx context.
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputRecipeAdditiveWhere(ctx context.Context, obj interface{}) (models.RecipeAdditiveWhere, error) {
-	var it models.RecipeAdditiveWhere
+func (ec *executionContext) unmarshalInputRecipeAdditiveWhere(ctx context.Context, obj interface{}) (gmodels.RecipeAdditiveWhere, error) {
+	var it gmodels.RecipeAdditiveWhere
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -21796,8 +21796,8 @@ func (ec *executionContext) unmarshalInputRecipeAdditiveWhere(ctx context.Contex
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputRecipeBatchAdditiveCreateInput(ctx context.Context, obj interface{}) (models.RecipeBatchAdditiveCreateInput, error) {
-	var it models.RecipeBatchAdditiveCreateInput
+func (ec *executionContext) unmarshalInputRecipeBatchAdditiveCreateInput(ctx context.Context, obj interface{}) (gmodels.RecipeBatchAdditiveCreateInput, error) {
+	var it gmodels.RecipeBatchAdditiveCreateInput
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -21864,8 +21864,8 @@ func (ec *executionContext) unmarshalInputRecipeBatchAdditiveCreateInput(ctx con
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputRecipeBatchAdditiveFilter(ctx context.Context, obj interface{}) (models.RecipeBatchAdditiveFilter, error) {
-	var it models.RecipeBatchAdditiveFilter
+func (ec *executionContext) unmarshalInputRecipeBatchAdditiveFilter(ctx context.Context, obj interface{}) (gmodels.RecipeBatchAdditiveFilter, error) {
+	var it gmodels.RecipeBatchAdditiveFilter
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -21892,8 +21892,8 @@ func (ec *executionContext) unmarshalInputRecipeBatchAdditiveFilter(ctx context.
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputRecipeBatchAdditiveUpdateInput(ctx context.Context, obj interface{}) (models.RecipeBatchAdditiveUpdateInput, error) {
-	var it models.RecipeBatchAdditiveUpdateInput
+func (ec *executionContext) unmarshalInputRecipeBatchAdditiveUpdateInput(ctx context.Context, obj interface{}) (gmodels.RecipeBatchAdditiveUpdateInput, error) {
+	var it gmodels.RecipeBatchAdditiveUpdateInput
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -21960,8 +21960,8 @@ func (ec *executionContext) unmarshalInputRecipeBatchAdditiveUpdateInput(ctx con
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputRecipeBatchAdditiveWhere(ctx context.Context, obj interface{}) (models.RecipeBatchAdditiveWhere, error) {
-	var it models.RecipeBatchAdditiveWhere
+func (ec *executionContext) unmarshalInputRecipeBatchAdditiveWhere(ctx context.Context, obj interface{}) (gmodels.RecipeBatchAdditiveWhere, error) {
+	var it gmodels.RecipeBatchAdditiveWhere
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -22052,8 +22052,8 @@ func (ec *executionContext) unmarshalInputRecipeBatchAdditiveWhere(ctx context.C
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputRecipeBatchCreateInput(ctx context.Context, obj interface{}) (models.RecipeBatchCreateInput, error) {
-	var it models.RecipeBatchCreateInput
+func (ec *executionContext) unmarshalInputRecipeBatchCreateInput(ctx context.Context, obj interface{}) (gmodels.RecipeBatchCreateInput, error) {
+	var it gmodels.RecipeBatchCreateInput
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -22152,8 +22152,8 @@ func (ec *executionContext) unmarshalInputRecipeBatchCreateInput(ctx context.Con
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputRecipeBatchFilter(ctx context.Context, obj interface{}) (models.RecipeBatchFilter, error) {
-	var it models.RecipeBatchFilter
+func (ec *executionContext) unmarshalInputRecipeBatchFilter(ctx context.Context, obj interface{}) (gmodels.RecipeBatchFilter, error) {
+	var it gmodels.RecipeBatchFilter
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -22180,8 +22180,8 @@ func (ec *executionContext) unmarshalInputRecipeBatchFilter(ctx context.Context,
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputRecipeBatchFragranceCreateInput(ctx context.Context, obj interface{}) (models.RecipeBatchFragranceCreateInput, error) {
-	var it models.RecipeBatchFragranceCreateInput
+func (ec *executionContext) unmarshalInputRecipeBatchFragranceCreateInput(ctx context.Context, obj interface{}) (gmodels.RecipeBatchFragranceCreateInput, error) {
+	var it gmodels.RecipeBatchFragranceCreateInput
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -22248,8 +22248,8 @@ func (ec *executionContext) unmarshalInputRecipeBatchFragranceCreateInput(ctx co
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputRecipeBatchFragranceFilter(ctx context.Context, obj interface{}) (models.RecipeBatchFragranceFilter, error) {
-	var it models.RecipeBatchFragranceFilter
+func (ec *executionContext) unmarshalInputRecipeBatchFragranceFilter(ctx context.Context, obj interface{}) (gmodels.RecipeBatchFragranceFilter, error) {
+	var it gmodels.RecipeBatchFragranceFilter
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -22276,8 +22276,8 @@ func (ec *executionContext) unmarshalInputRecipeBatchFragranceFilter(ctx context
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputRecipeBatchFragranceUpdateInput(ctx context.Context, obj interface{}) (models.RecipeBatchFragranceUpdateInput, error) {
-	var it models.RecipeBatchFragranceUpdateInput
+func (ec *executionContext) unmarshalInputRecipeBatchFragranceUpdateInput(ctx context.Context, obj interface{}) (gmodels.RecipeBatchFragranceUpdateInput, error) {
+	var it gmodels.RecipeBatchFragranceUpdateInput
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -22344,8 +22344,8 @@ func (ec *executionContext) unmarshalInputRecipeBatchFragranceUpdateInput(ctx co
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputRecipeBatchFragranceWhere(ctx context.Context, obj interface{}) (models.RecipeBatchFragranceWhere, error) {
-	var it models.RecipeBatchFragranceWhere
+func (ec *executionContext) unmarshalInputRecipeBatchFragranceWhere(ctx context.Context, obj interface{}) (gmodels.RecipeBatchFragranceWhere, error) {
+	var it gmodels.RecipeBatchFragranceWhere
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -22436,8 +22436,8 @@ func (ec *executionContext) unmarshalInputRecipeBatchFragranceWhere(ctx context.
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputRecipeBatchLipidCreateInput(ctx context.Context, obj interface{}) (models.RecipeBatchLipidCreateInput, error) {
-	var it models.RecipeBatchLipidCreateInput
+func (ec *executionContext) unmarshalInputRecipeBatchLipidCreateInput(ctx context.Context, obj interface{}) (gmodels.RecipeBatchLipidCreateInput, error) {
+	var it gmodels.RecipeBatchLipidCreateInput
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -22504,8 +22504,8 @@ func (ec *executionContext) unmarshalInputRecipeBatchLipidCreateInput(ctx contex
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputRecipeBatchLipidFilter(ctx context.Context, obj interface{}) (models.RecipeBatchLipidFilter, error) {
-	var it models.RecipeBatchLipidFilter
+func (ec *executionContext) unmarshalInputRecipeBatchLipidFilter(ctx context.Context, obj interface{}) (gmodels.RecipeBatchLipidFilter, error) {
+	var it gmodels.RecipeBatchLipidFilter
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -22532,8 +22532,8 @@ func (ec *executionContext) unmarshalInputRecipeBatchLipidFilter(ctx context.Con
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputRecipeBatchLipidUpdateInput(ctx context.Context, obj interface{}) (models.RecipeBatchLipidUpdateInput, error) {
-	var it models.RecipeBatchLipidUpdateInput
+func (ec *executionContext) unmarshalInputRecipeBatchLipidUpdateInput(ctx context.Context, obj interface{}) (gmodels.RecipeBatchLipidUpdateInput, error) {
+	var it gmodels.RecipeBatchLipidUpdateInput
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -22600,8 +22600,8 @@ func (ec *executionContext) unmarshalInputRecipeBatchLipidUpdateInput(ctx contex
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputRecipeBatchLipidWhere(ctx context.Context, obj interface{}) (models.RecipeBatchLipidWhere, error) {
-	var it models.RecipeBatchLipidWhere
+func (ec *executionContext) unmarshalInputRecipeBatchLipidWhere(ctx context.Context, obj interface{}) (gmodels.RecipeBatchLipidWhere, error) {
+	var it gmodels.RecipeBatchLipidWhere
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -22692,8 +22692,8 @@ func (ec *executionContext) unmarshalInputRecipeBatchLipidWhere(ctx context.Cont
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputRecipeBatchLyeCreateInput(ctx context.Context, obj interface{}) (models.RecipeBatchLyeCreateInput, error) {
-	var it models.RecipeBatchLyeCreateInput
+func (ec *executionContext) unmarshalInputRecipeBatchLyeCreateInput(ctx context.Context, obj interface{}) (gmodels.RecipeBatchLyeCreateInput, error) {
+	var it gmodels.RecipeBatchLyeCreateInput
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -22768,8 +22768,8 @@ func (ec *executionContext) unmarshalInputRecipeBatchLyeCreateInput(ctx context.
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputRecipeBatchLyeFilter(ctx context.Context, obj interface{}) (models.RecipeBatchLyeFilter, error) {
-	var it models.RecipeBatchLyeFilter
+func (ec *executionContext) unmarshalInputRecipeBatchLyeFilter(ctx context.Context, obj interface{}) (gmodels.RecipeBatchLyeFilter, error) {
+	var it gmodels.RecipeBatchLyeFilter
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -22796,8 +22796,8 @@ func (ec *executionContext) unmarshalInputRecipeBatchLyeFilter(ctx context.Conte
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputRecipeBatchLyeUpdateInput(ctx context.Context, obj interface{}) (models.RecipeBatchLyeUpdateInput, error) {
-	var it models.RecipeBatchLyeUpdateInput
+func (ec *executionContext) unmarshalInputRecipeBatchLyeUpdateInput(ctx context.Context, obj interface{}) (gmodels.RecipeBatchLyeUpdateInput, error) {
+	var it gmodels.RecipeBatchLyeUpdateInput
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -22872,8 +22872,8 @@ func (ec *executionContext) unmarshalInputRecipeBatchLyeUpdateInput(ctx context.
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputRecipeBatchLyeWhere(ctx context.Context, obj interface{}) (models.RecipeBatchLyeWhere, error) {
-	var it models.RecipeBatchLyeWhere
+func (ec *executionContext) unmarshalInputRecipeBatchLyeWhere(ctx context.Context, obj interface{}) (gmodels.RecipeBatchLyeWhere, error) {
+	var it gmodels.RecipeBatchLyeWhere
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -22972,8 +22972,8 @@ func (ec *executionContext) unmarshalInputRecipeBatchLyeWhere(ctx context.Contex
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputRecipeBatchUpdateInput(ctx context.Context, obj interface{}) (models.RecipeBatchUpdateInput, error) {
-	var it models.RecipeBatchUpdateInput
+func (ec *executionContext) unmarshalInputRecipeBatchUpdateInput(ctx context.Context, obj interface{}) (gmodels.RecipeBatchUpdateInput, error) {
+	var it gmodels.RecipeBatchUpdateInput
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -23072,8 +23072,8 @@ func (ec *executionContext) unmarshalInputRecipeBatchUpdateInput(ctx context.Con
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputRecipeBatchWhere(ctx context.Context, obj interface{}) (models.RecipeBatchWhere, error) {
-	var it models.RecipeBatchWhere
+func (ec *executionContext) unmarshalInputRecipeBatchWhere(ctx context.Context, obj interface{}) (gmodels.RecipeBatchWhere, error) {
+	var it gmodels.RecipeBatchWhere
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -23228,8 +23228,8 @@ func (ec *executionContext) unmarshalInputRecipeBatchWhere(ctx context.Context, 
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputRecipeCreateInput(ctx context.Context, obj interface{}) (models.RecipeCreateInput, error) {
-	var it models.RecipeCreateInput
+func (ec *executionContext) unmarshalInputRecipeCreateInput(ctx context.Context, obj interface{}) (gmodels.RecipeCreateInput, error) {
+	var it gmodels.RecipeCreateInput
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -23280,8 +23280,8 @@ func (ec *executionContext) unmarshalInputRecipeCreateInput(ctx context.Context,
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputRecipeFilter(ctx context.Context, obj interface{}) (models.RecipeFilter, error) {
-	var it models.RecipeFilter
+func (ec *executionContext) unmarshalInputRecipeFilter(ctx context.Context, obj interface{}) (gmodels.RecipeFilter, error) {
+	var it gmodels.RecipeFilter
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -23308,8 +23308,8 @@ func (ec *executionContext) unmarshalInputRecipeFilter(ctx context.Context, obj 
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputRecipeFragranceCreateInput(ctx context.Context, obj interface{}) (models.RecipeFragranceCreateInput, error) {
-	var it models.RecipeFragranceCreateInput
+func (ec *executionContext) unmarshalInputRecipeFragranceCreateInput(ctx context.Context, obj interface{}) (gmodels.RecipeFragranceCreateInput, error) {
+	var it gmodels.RecipeFragranceCreateInput
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -23368,8 +23368,8 @@ func (ec *executionContext) unmarshalInputRecipeFragranceCreateInput(ctx context
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputRecipeFragranceFilter(ctx context.Context, obj interface{}) (models.RecipeFragranceFilter, error) {
-	var it models.RecipeFragranceFilter
+func (ec *executionContext) unmarshalInputRecipeFragranceFilter(ctx context.Context, obj interface{}) (gmodels.RecipeFragranceFilter, error) {
+	var it gmodels.RecipeFragranceFilter
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -23396,8 +23396,8 @@ func (ec *executionContext) unmarshalInputRecipeFragranceFilter(ctx context.Cont
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputRecipeFragranceUpdateInput(ctx context.Context, obj interface{}) (models.RecipeFragranceUpdateInput, error) {
-	var it models.RecipeFragranceUpdateInput
+func (ec *executionContext) unmarshalInputRecipeFragranceUpdateInput(ctx context.Context, obj interface{}) (gmodels.RecipeFragranceUpdateInput, error) {
+	var it gmodels.RecipeFragranceUpdateInput
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -23456,8 +23456,8 @@ func (ec *executionContext) unmarshalInputRecipeFragranceUpdateInput(ctx context
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputRecipeFragranceWhere(ctx context.Context, obj interface{}) (models.RecipeFragranceWhere, error) {
-	var it models.RecipeFragranceWhere
+func (ec *executionContext) unmarshalInputRecipeFragranceWhere(ctx context.Context, obj interface{}) (gmodels.RecipeFragranceWhere, error) {
+	var it gmodels.RecipeFragranceWhere
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -23540,8 +23540,8 @@ func (ec *executionContext) unmarshalInputRecipeFragranceWhere(ctx context.Conte
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputRecipeLipidCreateInput(ctx context.Context, obj interface{}) (models.RecipeLipidCreateInput, error) {
-	var it models.RecipeLipidCreateInput
+func (ec *executionContext) unmarshalInputRecipeLipidCreateInput(ctx context.Context, obj interface{}) (gmodels.RecipeLipidCreateInput, error) {
+	var it gmodels.RecipeLipidCreateInput
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -23600,8 +23600,8 @@ func (ec *executionContext) unmarshalInputRecipeLipidCreateInput(ctx context.Con
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputRecipeLipidFilter(ctx context.Context, obj interface{}) (models.RecipeLipidFilter, error) {
-	var it models.RecipeLipidFilter
+func (ec *executionContext) unmarshalInputRecipeLipidFilter(ctx context.Context, obj interface{}) (gmodels.RecipeLipidFilter, error) {
+	var it gmodels.RecipeLipidFilter
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -23628,8 +23628,8 @@ func (ec *executionContext) unmarshalInputRecipeLipidFilter(ctx context.Context,
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputRecipeLipidUpdateInput(ctx context.Context, obj interface{}) (models.RecipeLipidUpdateInput, error) {
-	var it models.RecipeLipidUpdateInput
+func (ec *executionContext) unmarshalInputRecipeLipidUpdateInput(ctx context.Context, obj interface{}) (gmodels.RecipeLipidUpdateInput, error) {
+	var it gmodels.RecipeLipidUpdateInput
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -23688,8 +23688,8 @@ func (ec *executionContext) unmarshalInputRecipeLipidUpdateInput(ctx context.Con
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputRecipeLipidWhere(ctx context.Context, obj interface{}) (models.RecipeLipidWhere, error) {
-	var it models.RecipeLipidWhere
+func (ec *executionContext) unmarshalInputRecipeLipidWhere(ctx context.Context, obj interface{}) (gmodels.RecipeLipidWhere, error) {
+	var it gmodels.RecipeLipidWhere
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -23772,8 +23772,8 @@ func (ec *executionContext) unmarshalInputRecipeLipidWhere(ctx context.Context, 
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputRecipeUpdateInput(ctx context.Context, obj interface{}) (models.RecipeUpdateInput, error) {
-	var it models.RecipeUpdateInput
+func (ec *executionContext) unmarshalInputRecipeUpdateInput(ctx context.Context, obj interface{}) (gmodels.RecipeUpdateInput, error) {
+	var it gmodels.RecipeUpdateInput
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -23824,8 +23824,8 @@ func (ec *executionContext) unmarshalInputRecipeUpdateInput(ctx context.Context,
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputRecipeWhere(ctx context.Context, obj interface{}) (models.RecipeWhere, error) {
-	var it models.RecipeWhere
+func (ec *executionContext) unmarshalInputRecipeWhere(ctx context.Context, obj interface{}) (gmodels.RecipeWhere, error) {
+	var it gmodels.RecipeWhere
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -23932,8 +23932,8 @@ func (ec *executionContext) unmarshalInputRecipeWhere(ctx context.Context, obj i
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputStringFilter(ctx context.Context, obj interface{}) (models.StringFilter, error) {
-	var it models.StringFilter
+func (ec *executionContext) unmarshalInputStringFilter(ctx context.Context, obj interface{}) (gmodels.StringFilter, error) {
+	var it gmodels.StringFilter
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -24072,8 +24072,8 @@ func (ec *executionContext) unmarshalInputStringFilter(ctx context.Context, obj 
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputSupplierCreateInput(ctx context.Context, obj interface{}) (models.SupplierCreateInput, error) {
-	var it models.SupplierCreateInput
+func (ec *executionContext) unmarshalInputSupplierCreateInput(ctx context.Context, obj interface{}) (gmodels.SupplierCreateInput, error) {
+	var it gmodels.SupplierCreateInput
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -24132,8 +24132,8 @@ func (ec *executionContext) unmarshalInputSupplierCreateInput(ctx context.Contex
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputSupplierFilter(ctx context.Context, obj interface{}) (models.SupplierFilter, error) {
-	var it models.SupplierFilter
+func (ec *executionContext) unmarshalInputSupplierFilter(ctx context.Context, obj interface{}) (gmodels.SupplierFilter, error) {
+	var it gmodels.SupplierFilter
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -24160,8 +24160,8 @@ func (ec *executionContext) unmarshalInputSupplierFilter(ctx context.Context, ob
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputSupplierUpdateInput(ctx context.Context, obj interface{}) (models.SupplierUpdateInput, error) {
-	var it models.SupplierUpdateInput
+func (ec *executionContext) unmarshalInputSupplierUpdateInput(ctx context.Context, obj interface{}) (gmodels.SupplierUpdateInput, error) {
+	var it gmodels.SupplierUpdateInput
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -24220,8 +24220,8 @@ func (ec *executionContext) unmarshalInputSupplierUpdateInput(ctx context.Contex
 	return it, nil
 }
 
-func (ec *executionContext) unmarshalInputSupplierWhere(ctx context.Context, obj interface{}) (models.SupplierWhere, error) {
-	var it models.SupplierWhere
+func (ec *executionContext) unmarshalInputSupplierWhere(ctx context.Context, obj interface{}) (gmodels.SupplierWhere, error) {
+	var it gmodels.SupplierWhere
 	var asMap = obj.(map[string]interface{})
 
 	for k, v := range asMap {
@@ -24346,7 +24346,7 @@ func (ec *executionContext) unmarshalInputSupplierWhere(ctx context.Context, obj
 
 var additiveImplementors = []string{"Additive"}
 
-func (ec *executionContext) _Additive(ctx context.Context, sel ast.SelectionSet, obj *models.Additive) graphql.Marshaler {
+func (ec *executionContext) _Additive(ctx context.Context, sel ast.SelectionSet, obj *gmodels.Additive) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, additiveImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -24397,7 +24397,7 @@ func (ec *executionContext) _Additive(ctx context.Context, sel ast.SelectionSet,
 
 var additiveDeletePayloadImplementors = []string{"AdditiveDeletePayload"}
 
-func (ec *executionContext) _AdditiveDeletePayload(ctx context.Context, sel ast.SelectionSet, obj *models.AdditiveDeletePayload) graphql.Marshaler {
+func (ec *executionContext) _AdditiveDeletePayload(ctx context.Context, sel ast.SelectionSet, obj *gmodels.AdditiveDeletePayload) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, additiveDeletePayloadImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -24424,7 +24424,7 @@ func (ec *executionContext) _AdditiveDeletePayload(ctx context.Context, sel ast.
 
 var additiveInventoryImplementors = []string{"AdditiveInventory"}
 
-func (ec *executionContext) _AdditiveInventory(ctx context.Context, sel ast.SelectionSet, obj *models.AdditiveInventory) graphql.Marshaler {
+func (ec *executionContext) _AdditiveInventory(ctx context.Context, sel ast.SelectionSet, obj *gmodels.AdditiveInventory) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, additiveInventoryImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -24493,7 +24493,7 @@ func (ec *executionContext) _AdditiveInventory(ctx context.Context, sel ast.Sele
 
 var additiveInventoryDeletePayloadImplementors = []string{"AdditiveInventoryDeletePayload"}
 
-func (ec *executionContext) _AdditiveInventoryDeletePayload(ctx context.Context, sel ast.SelectionSet, obj *models.AdditiveInventoryDeletePayload) graphql.Marshaler {
+func (ec *executionContext) _AdditiveInventoryDeletePayload(ctx context.Context, sel ast.SelectionSet, obj *gmodels.AdditiveInventoryDeletePayload) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, additiveInventoryDeletePayloadImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -24520,7 +24520,7 @@ func (ec *executionContext) _AdditiveInventoryDeletePayload(ctx context.Context,
 
 var additiveInventoryPayloadImplementors = []string{"AdditiveInventoryPayload"}
 
-func (ec *executionContext) _AdditiveInventoryPayload(ctx context.Context, sel ast.SelectionSet, obj *models.AdditiveInventoryPayload) graphql.Marshaler {
+func (ec *executionContext) _AdditiveInventoryPayload(ctx context.Context, sel ast.SelectionSet, obj *gmodels.AdditiveInventoryPayload) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, additiveInventoryPayloadImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -24547,7 +24547,7 @@ func (ec *executionContext) _AdditiveInventoryPayload(ctx context.Context, sel a
 
 var additivePayloadImplementors = []string{"AdditivePayload"}
 
-func (ec *executionContext) _AdditivePayload(ctx context.Context, sel ast.SelectionSet, obj *models.AdditivePayload) graphql.Marshaler {
+func (ec *executionContext) _AdditivePayload(ctx context.Context, sel ast.SelectionSet, obj *gmodels.AdditivePayload) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, additivePayloadImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -24574,7 +24574,7 @@ func (ec *executionContext) _AdditivePayload(ctx context.Context, sel ast.Select
 
 var fragranceImplementors = []string{"Fragrance"}
 
-func (ec *executionContext) _Fragrance(ctx context.Context, sel ast.SelectionSet, obj *models.Fragrance) graphql.Marshaler {
+func (ec *executionContext) _Fragrance(ctx context.Context, sel ast.SelectionSet, obj *gmodels.Fragrance) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, fragranceImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -24625,7 +24625,7 @@ func (ec *executionContext) _Fragrance(ctx context.Context, sel ast.SelectionSet
 
 var fragranceDeletePayloadImplementors = []string{"FragranceDeletePayload"}
 
-func (ec *executionContext) _FragranceDeletePayload(ctx context.Context, sel ast.SelectionSet, obj *models.FragranceDeletePayload) graphql.Marshaler {
+func (ec *executionContext) _FragranceDeletePayload(ctx context.Context, sel ast.SelectionSet, obj *gmodels.FragranceDeletePayload) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, fragranceDeletePayloadImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -24652,7 +24652,7 @@ func (ec *executionContext) _FragranceDeletePayload(ctx context.Context, sel ast
 
 var fragranceInventoryImplementors = []string{"FragranceInventory"}
 
-func (ec *executionContext) _FragranceInventory(ctx context.Context, sel ast.SelectionSet, obj *models.FragranceInventory) graphql.Marshaler {
+func (ec *executionContext) _FragranceInventory(ctx context.Context, sel ast.SelectionSet, obj *gmodels.FragranceInventory) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, fragranceInventoryImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -24721,7 +24721,7 @@ func (ec *executionContext) _FragranceInventory(ctx context.Context, sel ast.Sel
 
 var fragranceInventoryDeletePayloadImplementors = []string{"FragranceInventoryDeletePayload"}
 
-func (ec *executionContext) _FragranceInventoryDeletePayload(ctx context.Context, sel ast.SelectionSet, obj *models.FragranceInventoryDeletePayload) graphql.Marshaler {
+func (ec *executionContext) _FragranceInventoryDeletePayload(ctx context.Context, sel ast.SelectionSet, obj *gmodels.FragranceInventoryDeletePayload) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, fragranceInventoryDeletePayloadImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -24748,7 +24748,7 @@ func (ec *executionContext) _FragranceInventoryDeletePayload(ctx context.Context
 
 var fragranceInventoryPayloadImplementors = []string{"FragranceInventoryPayload"}
 
-func (ec *executionContext) _FragranceInventoryPayload(ctx context.Context, sel ast.SelectionSet, obj *models.FragranceInventoryPayload) graphql.Marshaler {
+func (ec *executionContext) _FragranceInventoryPayload(ctx context.Context, sel ast.SelectionSet, obj *gmodels.FragranceInventoryPayload) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, fragranceInventoryPayloadImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -24775,7 +24775,7 @@ func (ec *executionContext) _FragranceInventoryPayload(ctx context.Context, sel 
 
 var fragrancePayloadImplementors = []string{"FragrancePayload"}
 
-func (ec *executionContext) _FragrancePayload(ctx context.Context, sel ast.SelectionSet, obj *models.FragrancePayload) graphql.Marshaler {
+func (ec *executionContext) _FragrancePayload(ctx context.Context, sel ast.SelectionSet, obj *gmodels.FragrancePayload) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, fragrancePayloadImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -24802,7 +24802,7 @@ func (ec *executionContext) _FragrancePayload(ctx context.Context, sel ast.Selec
 
 var lipidImplementors = []string{"Lipid"}
 
-func (ec *executionContext) _Lipid(ctx context.Context, sel ast.SelectionSet, obj *models.Lipid) graphql.Marshaler {
+func (ec *executionContext) _Lipid(ctx context.Context, sel ast.SelectionSet, obj *gmodels.Lipid) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, lipidImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -24938,7 +24938,7 @@ func (ec *executionContext) _Lipid(ctx context.Context, sel ast.SelectionSet, ob
 
 var lipidDeletePayloadImplementors = []string{"LipidDeletePayload"}
 
-func (ec *executionContext) _LipidDeletePayload(ctx context.Context, sel ast.SelectionSet, obj *models.LipidDeletePayload) graphql.Marshaler {
+func (ec *executionContext) _LipidDeletePayload(ctx context.Context, sel ast.SelectionSet, obj *gmodels.LipidDeletePayload) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, lipidDeletePayloadImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -24965,7 +24965,7 @@ func (ec *executionContext) _LipidDeletePayload(ctx context.Context, sel ast.Sel
 
 var lipidInventoryImplementors = []string{"LipidInventory"}
 
-func (ec *executionContext) _LipidInventory(ctx context.Context, sel ast.SelectionSet, obj *models.LipidInventory) graphql.Marshaler {
+func (ec *executionContext) _LipidInventory(ctx context.Context, sel ast.SelectionSet, obj *gmodels.LipidInventory) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, lipidInventoryImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -25054,7 +25054,7 @@ func (ec *executionContext) _LipidInventory(ctx context.Context, sel ast.Selecti
 
 var lipidInventoryDeletePayloadImplementors = []string{"LipidInventoryDeletePayload"}
 
-func (ec *executionContext) _LipidInventoryDeletePayload(ctx context.Context, sel ast.SelectionSet, obj *models.LipidInventoryDeletePayload) graphql.Marshaler {
+func (ec *executionContext) _LipidInventoryDeletePayload(ctx context.Context, sel ast.SelectionSet, obj *gmodels.LipidInventoryDeletePayload) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, lipidInventoryDeletePayloadImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -25081,7 +25081,7 @@ func (ec *executionContext) _LipidInventoryDeletePayload(ctx context.Context, se
 
 var lipidInventoryPayloadImplementors = []string{"LipidInventoryPayload"}
 
-func (ec *executionContext) _LipidInventoryPayload(ctx context.Context, sel ast.SelectionSet, obj *models.LipidInventoryPayload) graphql.Marshaler {
+func (ec *executionContext) _LipidInventoryPayload(ctx context.Context, sel ast.SelectionSet, obj *gmodels.LipidInventoryPayload) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, lipidInventoryPayloadImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -25108,7 +25108,7 @@ func (ec *executionContext) _LipidInventoryPayload(ctx context.Context, sel ast.
 
 var lipidPayloadImplementors = []string{"LipidPayload"}
 
-func (ec *executionContext) _LipidPayload(ctx context.Context, sel ast.SelectionSet, obj *models.LipidPayload) graphql.Marshaler {
+func (ec *executionContext) _LipidPayload(ctx context.Context, sel ast.SelectionSet, obj *gmodels.LipidPayload) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, lipidPayloadImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -25135,7 +25135,7 @@ func (ec *executionContext) _LipidPayload(ctx context.Context, sel ast.Selection
 
 var lyeImplementors = []string{"Lye"}
 
-func (ec *executionContext) _Lye(ctx context.Context, sel ast.SelectionSet, obj *models.Lye) graphql.Marshaler {
+func (ec *executionContext) _Lye(ctx context.Context, sel ast.SelectionSet, obj *gmodels.Lye) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, lyeImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -25189,7 +25189,7 @@ func (ec *executionContext) _Lye(ctx context.Context, sel ast.SelectionSet, obj 
 
 var lyeDeletePayloadImplementors = []string{"LyeDeletePayload"}
 
-func (ec *executionContext) _LyeDeletePayload(ctx context.Context, sel ast.SelectionSet, obj *models.LyeDeletePayload) graphql.Marshaler {
+func (ec *executionContext) _LyeDeletePayload(ctx context.Context, sel ast.SelectionSet, obj *gmodels.LyeDeletePayload) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, lyeDeletePayloadImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -25216,7 +25216,7 @@ func (ec *executionContext) _LyeDeletePayload(ctx context.Context, sel ast.Selec
 
 var lyeInventoryImplementors = []string{"LyeInventory"}
 
-func (ec *executionContext) _LyeInventory(ctx context.Context, sel ast.SelectionSet, obj *models.LyeInventory) graphql.Marshaler {
+func (ec *executionContext) _LyeInventory(ctx context.Context, sel ast.SelectionSet, obj *gmodels.LyeInventory) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, lyeInventoryImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -25292,7 +25292,7 @@ func (ec *executionContext) _LyeInventory(ctx context.Context, sel ast.Selection
 
 var lyeInventoryDeletePayloadImplementors = []string{"LyeInventoryDeletePayload"}
 
-func (ec *executionContext) _LyeInventoryDeletePayload(ctx context.Context, sel ast.SelectionSet, obj *models.LyeInventoryDeletePayload) graphql.Marshaler {
+func (ec *executionContext) _LyeInventoryDeletePayload(ctx context.Context, sel ast.SelectionSet, obj *gmodels.LyeInventoryDeletePayload) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, lyeInventoryDeletePayloadImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -25319,7 +25319,7 @@ func (ec *executionContext) _LyeInventoryDeletePayload(ctx context.Context, sel 
 
 var lyeInventoryPayloadImplementors = []string{"LyeInventoryPayload"}
 
-func (ec *executionContext) _LyeInventoryPayload(ctx context.Context, sel ast.SelectionSet, obj *models.LyeInventoryPayload) graphql.Marshaler {
+func (ec *executionContext) _LyeInventoryPayload(ctx context.Context, sel ast.SelectionSet, obj *gmodels.LyeInventoryPayload) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, lyeInventoryPayloadImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -25346,7 +25346,7 @@ func (ec *executionContext) _LyeInventoryPayload(ctx context.Context, sel ast.Se
 
 var lyePayloadImplementors = []string{"LyePayload"}
 
-func (ec *executionContext) _LyePayload(ctx context.Context, sel ast.SelectionSet, obj *models.LyePayload) graphql.Marshaler {
+func (ec *executionContext) _LyePayload(ctx context.Context, sel ast.SelectionSet, obj *gmodels.LyePayload) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, lyePayloadImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -26203,7 +26203,7 @@ func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) gr
 
 var recipeImplementors = []string{"Recipe"}
 
-func (ec *executionContext) _Recipe(ctx context.Context, sel ast.SelectionSet, obj *models.Recipe) graphql.Marshaler {
+func (ec *executionContext) _Recipe(ctx context.Context, sel ast.SelectionSet, obj *gmodels.Recipe) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, recipeImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -26260,7 +26260,7 @@ func (ec *executionContext) _Recipe(ctx context.Context, sel ast.SelectionSet, o
 
 var recipeAdditiveImplementors = []string{"RecipeAdditive"}
 
-func (ec *executionContext) _RecipeAdditive(ctx context.Context, sel ast.SelectionSet, obj *models.RecipeAdditive) graphql.Marshaler {
+func (ec *executionContext) _RecipeAdditive(ctx context.Context, sel ast.SelectionSet, obj *gmodels.RecipeAdditive) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, recipeAdditiveImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -26314,7 +26314,7 @@ func (ec *executionContext) _RecipeAdditive(ctx context.Context, sel ast.Selecti
 
 var recipeAdditiveDeletePayloadImplementors = []string{"RecipeAdditiveDeletePayload"}
 
-func (ec *executionContext) _RecipeAdditiveDeletePayload(ctx context.Context, sel ast.SelectionSet, obj *models.RecipeAdditiveDeletePayload) graphql.Marshaler {
+func (ec *executionContext) _RecipeAdditiveDeletePayload(ctx context.Context, sel ast.SelectionSet, obj *gmodels.RecipeAdditiveDeletePayload) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, recipeAdditiveDeletePayloadImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -26341,7 +26341,7 @@ func (ec *executionContext) _RecipeAdditiveDeletePayload(ctx context.Context, se
 
 var recipeAdditivePayloadImplementors = []string{"RecipeAdditivePayload"}
 
-func (ec *executionContext) _RecipeAdditivePayload(ctx context.Context, sel ast.SelectionSet, obj *models.RecipeAdditivePayload) graphql.Marshaler {
+func (ec *executionContext) _RecipeAdditivePayload(ctx context.Context, sel ast.SelectionSet, obj *gmodels.RecipeAdditivePayload) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, recipeAdditivePayloadImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -26368,7 +26368,7 @@ func (ec *executionContext) _RecipeAdditivePayload(ctx context.Context, sel ast.
 
 var recipeBatchImplementors = []string{"RecipeBatch"}
 
-func (ec *executionContext) _RecipeBatch(ctx context.Context, sel ast.SelectionSet, obj *models.RecipeBatch) graphql.Marshaler {
+func (ec *executionContext) _RecipeBatch(ctx context.Context, sel ast.SelectionSet, obj *gmodels.RecipeBatch) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, recipeBatchImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -26458,7 +26458,7 @@ func (ec *executionContext) _RecipeBatch(ctx context.Context, sel ast.SelectionS
 
 var recipeBatchAdditiveImplementors = []string{"RecipeBatchAdditive"}
 
-func (ec *executionContext) _RecipeBatchAdditive(ctx context.Context, sel ast.SelectionSet, obj *models.RecipeBatchAdditive) graphql.Marshaler {
+func (ec *executionContext) _RecipeBatchAdditive(ctx context.Context, sel ast.SelectionSet, obj *gmodels.RecipeBatchAdditive) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, recipeBatchAdditiveImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -26517,7 +26517,7 @@ func (ec *executionContext) _RecipeBatchAdditive(ctx context.Context, sel ast.Se
 
 var recipeBatchAdditiveDeletePayloadImplementors = []string{"RecipeBatchAdditiveDeletePayload"}
 
-func (ec *executionContext) _RecipeBatchAdditiveDeletePayload(ctx context.Context, sel ast.SelectionSet, obj *models.RecipeBatchAdditiveDeletePayload) graphql.Marshaler {
+func (ec *executionContext) _RecipeBatchAdditiveDeletePayload(ctx context.Context, sel ast.SelectionSet, obj *gmodels.RecipeBatchAdditiveDeletePayload) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, recipeBatchAdditiveDeletePayloadImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -26544,7 +26544,7 @@ func (ec *executionContext) _RecipeBatchAdditiveDeletePayload(ctx context.Contex
 
 var recipeBatchAdditivePayloadImplementors = []string{"RecipeBatchAdditivePayload"}
 
-func (ec *executionContext) _RecipeBatchAdditivePayload(ctx context.Context, sel ast.SelectionSet, obj *models.RecipeBatchAdditivePayload) graphql.Marshaler {
+func (ec *executionContext) _RecipeBatchAdditivePayload(ctx context.Context, sel ast.SelectionSet, obj *gmodels.RecipeBatchAdditivePayload) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, recipeBatchAdditivePayloadImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -26571,7 +26571,7 @@ func (ec *executionContext) _RecipeBatchAdditivePayload(ctx context.Context, sel
 
 var recipeBatchDeletePayloadImplementors = []string{"RecipeBatchDeletePayload"}
 
-func (ec *executionContext) _RecipeBatchDeletePayload(ctx context.Context, sel ast.SelectionSet, obj *models.RecipeBatchDeletePayload) graphql.Marshaler {
+func (ec *executionContext) _RecipeBatchDeletePayload(ctx context.Context, sel ast.SelectionSet, obj *gmodels.RecipeBatchDeletePayload) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, recipeBatchDeletePayloadImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -26598,7 +26598,7 @@ func (ec *executionContext) _RecipeBatchDeletePayload(ctx context.Context, sel a
 
 var recipeBatchFragranceImplementors = []string{"RecipeBatchFragrance"}
 
-func (ec *executionContext) _RecipeBatchFragrance(ctx context.Context, sel ast.SelectionSet, obj *models.RecipeBatchFragrance) graphql.Marshaler {
+func (ec *executionContext) _RecipeBatchFragrance(ctx context.Context, sel ast.SelectionSet, obj *gmodels.RecipeBatchFragrance) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, recipeBatchFragranceImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -26657,7 +26657,7 @@ func (ec *executionContext) _RecipeBatchFragrance(ctx context.Context, sel ast.S
 
 var recipeBatchFragranceDeletePayloadImplementors = []string{"RecipeBatchFragranceDeletePayload"}
 
-func (ec *executionContext) _RecipeBatchFragranceDeletePayload(ctx context.Context, sel ast.SelectionSet, obj *models.RecipeBatchFragranceDeletePayload) graphql.Marshaler {
+func (ec *executionContext) _RecipeBatchFragranceDeletePayload(ctx context.Context, sel ast.SelectionSet, obj *gmodels.RecipeBatchFragranceDeletePayload) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, recipeBatchFragranceDeletePayloadImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -26684,7 +26684,7 @@ func (ec *executionContext) _RecipeBatchFragranceDeletePayload(ctx context.Conte
 
 var recipeBatchFragrancePayloadImplementors = []string{"RecipeBatchFragrancePayload"}
 
-func (ec *executionContext) _RecipeBatchFragrancePayload(ctx context.Context, sel ast.SelectionSet, obj *models.RecipeBatchFragrancePayload) graphql.Marshaler {
+func (ec *executionContext) _RecipeBatchFragrancePayload(ctx context.Context, sel ast.SelectionSet, obj *gmodels.RecipeBatchFragrancePayload) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, recipeBatchFragrancePayloadImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -26711,7 +26711,7 @@ func (ec *executionContext) _RecipeBatchFragrancePayload(ctx context.Context, se
 
 var recipeBatchLipidImplementors = []string{"RecipeBatchLipid"}
 
-func (ec *executionContext) _RecipeBatchLipid(ctx context.Context, sel ast.SelectionSet, obj *models.RecipeBatchLipid) graphql.Marshaler {
+func (ec *executionContext) _RecipeBatchLipid(ctx context.Context, sel ast.SelectionSet, obj *gmodels.RecipeBatchLipid) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, recipeBatchLipidImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -26770,7 +26770,7 @@ func (ec *executionContext) _RecipeBatchLipid(ctx context.Context, sel ast.Selec
 
 var recipeBatchLipidDeletePayloadImplementors = []string{"RecipeBatchLipidDeletePayload"}
 
-func (ec *executionContext) _RecipeBatchLipidDeletePayload(ctx context.Context, sel ast.SelectionSet, obj *models.RecipeBatchLipidDeletePayload) graphql.Marshaler {
+func (ec *executionContext) _RecipeBatchLipidDeletePayload(ctx context.Context, sel ast.SelectionSet, obj *gmodels.RecipeBatchLipidDeletePayload) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, recipeBatchLipidDeletePayloadImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -26797,7 +26797,7 @@ func (ec *executionContext) _RecipeBatchLipidDeletePayload(ctx context.Context, 
 
 var recipeBatchLipidPayloadImplementors = []string{"RecipeBatchLipidPayload"}
 
-func (ec *executionContext) _RecipeBatchLipidPayload(ctx context.Context, sel ast.SelectionSet, obj *models.RecipeBatchLipidPayload) graphql.Marshaler {
+func (ec *executionContext) _RecipeBatchLipidPayload(ctx context.Context, sel ast.SelectionSet, obj *gmodels.RecipeBatchLipidPayload) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, recipeBatchLipidPayloadImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -26824,7 +26824,7 @@ func (ec *executionContext) _RecipeBatchLipidPayload(ctx context.Context, sel as
 
 var recipeBatchLyeImplementors = []string{"RecipeBatchLye"}
 
-func (ec *executionContext) _RecipeBatchLye(ctx context.Context, sel ast.SelectionSet, obj *models.RecipeBatchLye) graphql.Marshaler {
+func (ec *executionContext) _RecipeBatchLye(ctx context.Context, sel ast.SelectionSet, obj *gmodels.RecipeBatchLye) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, recipeBatchLyeImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -26888,7 +26888,7 @@ func (ec *executionContext) _RecipeBatchLye(ctx context.Context, sel ast.Selecti
 
 var recipeBatchLyeDeletePayloadImplementors = []string{"RecipeBatchLyeDeletePayload"}
 
-func (ec *executionContext) _RecipeBatchLyeDeletePayload(ctx context.Context, sel ast.SelectionSet, obj *models.RecipeBatchLyeDeletePayload) graphql.Marshaler {
+func (ec *executionContext) _RecipeBatchLyeDeletePayload(ctx context.Context, sel ast.SelectionSet, obj *gmodels.RecipeBatchLyeDeletePayload) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, recipeBatchLyeDeletePayloadImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -26915,7 +26915,7 @@ func (ec *executionContext) _RecipeBatchLyeDeletePayload(ctx context.Context, se
 
 var recipeBatchLyePayloadImplementors = []string{"RecipeBatchLyePayload"}
 
-func (ec *executionContext) _RecipeBatchLyePayload(ctx context.Context, sel ast.SelectionSet, obj *models.RecipeBatchLyePayload) graphql.Marshaler {
+func (ec *executionContext) _RecipeBatchLyePayload(ctx context.Context, sel ast.SelectionSet, obj *gmodels.RecipeBatchLyePayload) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, recipeBatchLyePayloadImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -26942,7 +26942,7 @@ func (ec *executionContext) _RecipeBatchLyePayload(ctx context.Context, sel ast.
 
 var recipeBatchPayloadImplementors = []string{"RecipeBatchPayload"}
 
-func (ec *executionContext) _RecipeBatchPayload(ctx context.Context, sel ast.SelectionSet, obj *models.RecipeBatchPayload) graphql.Marshaler {
+func (ec *executionContext) _RecipeBatchPayload(ctx context.Context, sel ast.SelectionSet, obj *gmodels.RecipeBatchPayload) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, recipeBatchPayloadImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -26969,7 +26969,7 @@ func (ec *executionContext) _RecipeBatchPayload(ctx context.Context, sel ast.Sel
 
 var recipeDeletePayloadImplementors = []string{"RecipeDeletePayload"}
 
-func (ec *executionContext) _RecipeDeletePayload(ctx context.Context, sel ast.SelectionSet, obj *models.RecipeDeletePayload) graphql.Marshaler {
+func (ec *executionContext) _RecipeDeletePayload(ctx context.Context, sel ast.SelectionSet, obj *gmodels.RecipeDeletePayload) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, recipeDeletePayloadImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -26996,7 +26996,7 @@ func (ec *executionContext) _RecipeDeletePayload(ctx context.Context, sel ast.Se
 
 var recipeFragranceImplementors = []string{"RecipeFragrance"}
 
-func (ec *executionContext) _RecipeFragrance(ctx context.Context, sel ast.SelectionSet, obj *models.RecipeFragrance) graphql.Marshaler {
+func (ec *executionContext) _RecipeFragrance(ctx context.Context, sel ast.SelectionSet, obj *gmodels.RecipeFragrance) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, recipeFragranceImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -27050,7 +27050,7 @@ func (ec *executionContext) _RecipeFragrance(ctx context.Context, sel ast.Select
 
 var recipeFragranceDeletePayloadImplementors = []string{"RecipeFragranceDeletePayload"}
 
-func (ec *executionContext) _RecipeFragranceDeletePayload(ctx context.Context, sel ast.SelectionSet, obj *models.RecipeFragranceDeletePayload) graphql.Marshaler {
+func (ec *executionContext) _RecipeFragranceDeletePayload(ctx context.Context, sel ast.SelectionSet, obj *gmodels.RecipeFragranceDeletePayload) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, recipeFragranceDeletePayloadImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -27077,7 +27077,7 @@ func (ec *executionContext) _RecipeFragranceDeletePayload(ctx context.Context, s
 
 var recipeFragrancePayloadImplementors = []string{"RecipeFragrancePayload"}
 
-func (ec *executionContext) _RecipeFragrancePayload(ctx context.Context, sel ast.SelectionSet, obj *models.RecipeFragrancePayload) graphql.Marshaler {
+func (ec *executionContext) _RecipeFragrancePayload(ctx context.Context, sel ast.SelectionSet, obj *gmodels.RecipeFragrancePayload) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, recipeFragrancePayloadImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -27104,7 +27104,7 @@ func (ec *executionContext) _RecipeFragrancePayload(ctx context.Context, sel ast
 
 var recipeLipidImplementors = []string{"RecipeLipid"}
 
-func (ec *executionContext) _RecipeLipid(ctx context.Context, sel ast.SelectionSet, obj *models.RecipeLipid) graphql.Marshaler {
+func (ec *executionContext) _RecipeLipid(ctx context.Context, sel ast.SelectionSet, obj *gmodels.RecipeLipid) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, recipeLipidImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -27158,7 +27158,7 @@ func (ec *executionContext) _RecipeLipid(ctx context.Context, sel ast.SelectionS
 
 var recipeLipidDeletePayloadImplementors = []string{"RecipeLipidDeletePayload"}
 
-func (ec *executionContext) _RecipeLipidDeletePayload(ctx context.Context, sel ast.SelectionSet, obj *models.RecipeLipidDeletePayload) graphql.Marshaler {
+func (ec *executionContext) _RecipeLipidDeletePayload(ctx context.Context, sel ast.SelectionSet, obj *gmodels.RecipeLipidDeletePayload) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, recipeLipidDeletePayloadImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -27185,7 +27185,7 @@ func (ec *executionContext) _RecipeLipidDeletePayload(ctx context.Context, sel a
 
 var recipeLipidPayloadImplementors = []string{"RecipeLipidPayload"}
 
-func (ec *executionContext) _RecipeLipidPayload(ctx context.Context, sel ast.SelectionSet, obj *models.RecipeLipidPayload) graphql.Marshaler {
+func (ec *executionContext) _RecipeLipidPayload(ctx context.Context, sel ast.SelectionSet, obj *gmodels.RecipeLipidPayload) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, recipeLipidPayloadImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -27212,7 +27212,7 @@ func (ec *executionContext) _RecipeLipidPayload(ctx context.Context, sel ast.Sel
 
 var recipePayloadImplementors = []string{"RecipePayload"}
 
-func (ec *executionContext) _RecipePayload(ctx context.Context, sel ast.SelectionSet, obj *models.RecipePayload) graphql.Marshaler {
+func (ec *executionContext) _RecipePayload(ctx context.Context, sel ast.SelectionSet, obj *gmodels.RecipePayload) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, recipePayloadImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -27239,7 +27239,7 @@ func (ec *executionContext) _RecipePayload(ctx context.Context, sel ast.Selectio
 
 var supplierImplementors = []string{"Supplier"}
 
-func (ec *executionContext) _Supplier(ctx context.Context, sel ast.SelectionSet, obj *models.Supplier) graphql.Marshaler {
+func (ec *executionContext) _Supplier(ctx context.Context, sel ast.SelectionSet, obj *gmodels.Supplier) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, supplierImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -27301,7 +27301,7 @@ func (ec *executionContext) _Supplier(ctx context.Context, sel ast.SelectionSet,
 
 var supplierDeletePayloadImplementors = []string{"SupplierDeletePayload"}
 
-func (ec *executionContext) _SupplierDeletePayload(ctx context.Context, sel ast.SelectionSet, obj *models.SupplierDeletePayload) graphql.Marshaler {
+func (ec *executionContext) _SupplierDeletePayload(ctx context.Context, sel ast.SelectionSet, obj *gmodels.SupplierDeletePayload) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, supplierDeletePayloadImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -27328,7 +27328,7 @@ func (ec *executionContext) _SupplierDeletePayload(ctx context.Context, sel ast.
 
 var supplierPayloadImplementors = []string{"SupplierPayload"}
 
-func (ec *executionContext) _SupplierPayload(ctx context.Context, sel ast.SelectionSet, obj *models.SupplierPayload) graphql.Marshaler {
+func (ec *executionContext) _SupplierPayload(ctx context.Context, sel ast.SelectionSet, obj *gmodels.SupplierPayload) graphql.Marshaler {
 	fields := graphql.CollectFields(ec.OperationContext, sel, supplierPayloadImplementors)
 
 	out := graphql.NewFieldSet(fields)
@@ -27598,11 +27598,11 @@ func (ec *executionContext) ___Type(ctx context.Context, sel ast.SelectionSet, o
 
 // region    ***************************** type.gotpl *****************************
 
-func (ec *executionContext) marshalNAdditive2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditive(ctx context.Context, sel ast.SelectionSet, v models.Additive) graphql.Marshaler {
+func (ec *executionContext) marshalNAdditive2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditive(ctx context.Context, sel ast.SelectionSet, v gmodels.Additive) graphql.Marshaler {
 	return ec._Additive(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNAdditive2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveᚄ(ctx context.Context, sel ast.SelectionSet, v []*models.Additive) graphql.Marshaler {
+func (ec *executionContext) marshalNAdditive2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveᚄ(ctx context.Context, sel ast.SelectionSet, v []*gmodels.Additive) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
 	isLen1 := len(v) == 1
@@ -27639,7 +27639,7 @@ func (ec *executionContext) marshalNAdditive2ᚕᚖgithubᚗcomᚋsjhitchnerᚋs
 	return ret
 }
 
-func (ec *executionContext) marshalNAdditive2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditive(ctx context.Context, sel ast.SelectionSet, v *models.Additive) graphql.Marshaler {
+func (ec *executionContext) marshalNAdditive2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditive(ctx context.Context, sel ast.SelectionSet, v *gmodels.Additive) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -27649,16 +27649,16 @@ func (ec *executionContext) marshalNAdditive2ᚖgithubᚗcomᚋsjhitchnerᚋsoap
 	return ec._Additive(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalNAdditiveCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveCreateInput(ctx context.Context, v interface{}) (models.AdditiveCreateInput, error) {
+func (ec *executionContext) unmarshalNAdditiveCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveCreateInput(ctx context.Context, v interface{}) (gmodels.AdditiveCreateInput, error) {
 	res, err := ec.unmarshalInputAdditiveCreateInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalNAdditiveDeletePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveDeletePayload(ctx context.Context, sel ast.SelectionSet, v models.AdditiveDeletePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNAdditiveDeletePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveDeletePayload(ctx context.Context, sel ast.SelectionSet, v gmodels.AdditiveDeletePayload) graphql.Marshaler {
 	return ec._AdditiveDeletePayload(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNAdditiveDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveDeletePayload(ctx context.Context, sel ast.SelectionSet, v *models.AdditiveDeletePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNAdditiveDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveDeletePayload(ctx context.Context, sel ast.SelectionSet, v *gmodels.AdditiveDeletePayload) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -27668,11 +27668,11 @@ func (ec *executionContext) marshalNAdditiveDeletePayload2ᚖgithubᚗcomᚋsjhi
 	return ec._AdditiveDeletePayload(ctx, sel, v)
 }
 
-func (ec *executionContext) marshalNAdditiveInventory2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveInventory(ctx context.Context, sel ast.SelectionSet, v models.AdditiveInventory) graphql.Marshaler {
+func (ec *executionContext) marshalNAdditiveInventory2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveInventory(ctx context.Context, sel ast.SelectionSet, v gmodels.AdditiveInventory) graphql.Marshaler {
 	return ec._AdditiveInventory(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNAdditiveInventory2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveInventoryᚄ(ctx context.Context, sel ast.SelectionSet, v []*models.AdditiveInventory) graphql.Marshaler {
+func (ec *executionContext) marshalNAdditiveInventory2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveInventoryᚄ(ctx context.Context, sel ast.SelectionSet, v []*gmodels.AdditiveInventory) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
 	isLen1 := len(v) == 1
@@ -27709,7 +27709,7 @@ func (ec *executionContext) marshalNAdditiveInventory2ᚕᚖgithubᚗcomᚋsjhit
 	return ret
 }
 
-func (ec *executionContext) marshalNAdditiveInventory2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveInventory(ctx context.Context, sel ast.SelectionSet, v *models.AdditiveInventory) graphql.Marshaler {
+func (ec *executionContext) marshalNAdditiveInventory2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveInventory(ctx context.Context, sel ast.SelectionSet, v *gmodels.AdditiveInventory) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -27719,16 +27719,16 @@ func (ec *executionContext) marshalNAdditiveInventory2ᚖgithubᚗcomᚋsjhitchn
 	return ec._AdditiveInventory(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalNAdditiveInventoryCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveInventoryCreateInput(ctx context.Context, v interface{}) (models.AdditiveInventoryCreateInput, error) {
+func (ec *executionContext) unmarshalNAdditiveInventoryCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveInventoryCreateInput(ctx context.Context, v interface{}) (gmodels.AdditiveInventoryCreateInput, error) {
 	res, err := ec.unmarshalInputAdditiveInventoryCreateInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalNAdditiveInventoryDeletePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveInventoryDeletePayload(ctx context.Context, sel ast.SelectionSet, v models.AdditiveInventoryDeletePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNAdditiveInventoryDeletePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveInventoryDeletePayload(ctx context.Context, sel ast.SelectionSet, v gmodels.AdditiveInventoryDeletePayload) graphql.Marshaler {
 	return ec._AdditiveInventoryDeletePayload(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNAdditiveInventoryDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveInventoryDeletePayload(ctx context.Context, sel ast.SelectionSet, v *models.AdditiveInventoryDeletePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNAdditiveInventoryDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveInventoryDeletePayload(ctx context.Context, sel ast.SelectionSet, v *gmodels.AdditiveInventoryDeletePayload) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -27738,11 +27738,11 @@ func (ec *executionContext) marshalNAdditiveInventoryDeletePayload2ᚖgithubᚗc
 	return ec._AdditiveInventoryDeletePayload(ctx, sel, v)
 }
 
-func (ec *executionContext) marshalNAdditiveInventoryPayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveInventoryPayload(ctx context.Context, sel ast.SelectionSet, v models.AdditiveInventoryPayload) graphql.Marshaler {
+func (ec *executionContext) marshalNAdditiveInventoryPayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveInventoryPayload(ctx context.Context, sel ast.SelectionSet, v gmodels.AdditiveInventoryPayload) graphql.Marshaler {
 	return ec._AdditiveInventoryPayload(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNAdditiveInventoryPayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveInventoryPayload(ctx context.Context, sel ast.SelectionSet, v *models.AdditiveInventoryPayload) graphql.Marshaler {
+func (ec *executionContext) marshalNAdditiveInventoryPayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveInventoryPayload(ctx context.Context, sel ast.SelectionSet, v *gmodels.AdditiveInventoryPayload) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -27752,16 +27752,16 @@ func (ec *executionContext) marshalNAdditiveInventoryPayload2ᚖgithubᚗcomᚋs
 	return ec._AdditiveInventoryPayload(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalNAdditiveInventoryUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveInventoryUpdateInput(ctx context.Context, v interface{}) (models.AdditiveInventoryUpdateInput, error) {
+func (ec *executionContext) unmarshalNAdditiveInventoryUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveInventoryUpdateInput(ctx context.Context, v interface{}) (gmodels.AdditiveInventoryUpdateInput, error) {
 	res, err := ec.unmarshalInputAdditiveInventoryUpdateInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalNAdditivePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditivePayload(ctx context.Context, sel ast.SelectionSet, v models.AdditivePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNAdditivePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditivePayload(ctx context.Context, sel ast.SelectionSet, v gmodels.AdditivePayload) graphql.Marshaler {
 	return ec._AdditivePayload(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNAdditivePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditivePayload(ctx context.Context, sel ast.SelectionSet, v *models.AdditivePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNAdditivePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditivePayload(ctx context.Context, sel ast.SelectionSet, v *gmodels.AdditivePayload) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -27771,7 +27771,7 @@ func (ec *executionContext) marshalNAdditivePayload2ᚖgithubᚗcomᚋsjhitchner
 	return ec._AdditivePayload(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalNAdditiveUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveUpdateInput(ctx context.Context, v interface{}) (models.AdditiveUpdateInput, error) {
+func (ec *executionContext) unmarshalNAdditiveUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveUpdateInput(ctx context.Context, v interface{}) (gmodels.AdditiveUpdateInput, error) {
 	res, err := ec.unmarshalInputAdditiveUpdateInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
@@ -27806,11 +27806,11 @@ func (ec *executionContext) marshalNFloat2float64(ctx context.Context, sel ast.S
 	return res
 }
 
-func (ec *executionContext) marshalNFragrance2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragrance(ctx context.Context, sel ast.SelectionSet, v models.Fragrance) graphql.Marshaler {
+func (ec *executionContext) marshalNFragrance2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragrance(ctx context.Context, sel ast.SelectionSet, v gmodels.Fragrance) graphql.Marshaler {
 	return ec._Fragrance(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNFragrance2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceᚄ(ctx context.Context, sel ast.SelectionSet, v []*models.Fragrance) graphql.Marshaler {
+func (ec *executionContext) marshalNFragrance2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceᚄ(ctx context.Context, sel ast.SelectionSet, v []*gmodels.Fragrance) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
 	isLen1 := len(v) == 1
@@ -27847,7 +27847,7 @@ func (ec *executionContext) marshalNFragrance2ᚕᚖgithubᚗcomᚋsjhitchnerᚋ
 	return ret
 }
 
-func (ec *executionContext) marshalNFragrance2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragrance(ctx context.Context, sel ast.SelectionSet, v *models.Fragrance) graphql.Marshaler {
+func (ec *executionContext) marshalNFragrance2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragrance(ctx context.Context, sel ast.SelectionSet, v *gmodels.Fragrance) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -27857,16 +27857,16 @@ func (ec *executionContext) marshalNFragrance2ᚖgithubᚗcomᚋsjhitchnerᚋsoa
 	return ec._Fragrance(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalNFragranceCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceCreateInput(ctx context.Context, v interface{}) (models.FragranceCreateInput, error) {
+func (ec *executionContext) unmarshalNFragranceCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceCreateInput(ctx context.Context, v interface{}) (gmodels.FragranceCreateInput, error) {
 	res, err := ec.unmarshalInputFragranceCreateInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalNFragranceDeletePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceDeletePayload(ctx context.Context, sel ast.SelectionSet, v models.FragranceDeletePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNFragranceDeletePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceDeletePayload(ctx context.Context, sel ast.SelectionSet, v gmodels.FragranceDeletePayload) graphql.Marshaler {
 	return ec._FragranceDeletePayload(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNFragranceDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceDeletePayload(ctx context.Context, sel ast.SelectionSet, v *models.FragranceDeletePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNFragranceDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceDeletePayload(ctx context.Context, sel ast.SelectionSet, v *gmodels.FragranceDeletePayload) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -27876,11 +27876,11 @@ func (ec *executionContext) marshalNFragranceDeletePayload2ᚖgithubᚗcomᚋsjh
 	return ec._FragranceDeletePayload(ctx, sel, v)
 }
 
-func (ec *executionContext) marshalNFragranceInventory2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceInventory(ctx context.Context, sel ast.SelectionSet, v models.FragranceInventory) graphql.Marshaler {
+func (ec *executionContext) marshalNFragranceInventory2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceInventory(ctx context.Context, sel ast.SelectionSet, v gmodels.FragranceInventory) graphql.Marshaler {
 	return ec._FragranceInventory(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNFragranceInventory2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceInventoryᚄ(ctx context.Context, sel ast.SelectionSet, v []*models.FragranceInventory) graphql.Marshaler {
+func (ec *executionContext) marshalNFragranceInventory2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceInventoryᚄ(ctx context.Context, sel ast.SelectionSet, v []*gmodels.FragranceInventory) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
 	isLen1 := len(v) == 1
@@ -27917,7 +27917,7 @@ func (ec *executionContext) marshalNFragranceInventory2ᚕᚖgithubᚗcomᚋsjhi
 	return ret
 }
 
-func (ec *executionContext) marshalNFragranceInventory2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceInventory(ctx context.Context, sel ast.SelectionSet, v *models.FragranceInventory) graphql.Marshaler {
+func (ec *executionContext) marshalNFragranceInventory2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceInventory(ctx context.Context, sel ast.SelectionSet, v *gmodels.FragranceInventory) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -27927,16 +27927,16 @@ func (ec *executionContext) marshalNFragranceInventory2ᚖgithubᚗcomᚋsjhitch
 	return ec._FragranceInventory(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalNFragranceInventoryCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceInventoryCreateInput(ctx context.Context, v interface{}) (models.FragranceInventoryCreateInput, error) {
+func (ec *executionContext) unmarshalNFragranceInventoryCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceInventoryCreateInput(ctx context.Context, v interface{}) (gmodels.FragranceInventoryCreateInput, error) {
 	res, err := ec.unmarshalInputFragranceInventoryCreateInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalNFragranceInventoryDeletePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceInventoryDeletePayload(ctx context.Context, sel ast.SelectionSet, v models.FragranceInventoryDeletePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNFragranceInventoryDeletePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceInventoryDeletePayload(ctx context.Context, sel ast.SelectionSet, v gmodels.FragranceInventoryDeletePayload) graphql.Marshaler {
 	return ec._FragranceInventoryDeletePayload(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNFragranceInventoryDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceInventoryDeletePayload(ctx context.Context, sel ast.SelectionSet, v *models.FragranceInventoryDeletePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNFragranceInventoryDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceInventoryDeletePayload(ctx context.Context, sel ast.SelectionSet, v *gmodels.FragranceInventoryDeletePayload) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -27946,11 +27946,11 @@ func (ec *executionContext) marshalNFragranceInventoryDeletePayload2ᚖgithubᚗ
 	return ec._FragranceInventoryDeletePayload(ctx, sel, v)
 }
 
-func (ec *executionContext) marshalNFragranceInventoryPayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceInventoryPayload(ctx context.Context, sel ast.SelectionSet, v models.FragranceInventoryPayload) graphql.Marshaler {
+func (ec *executionContext) marshalNFragranceInventoryPayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceInventoryPayload(ctx context.Context, sel ast.SelectionSet, v gmodels.FragranceInventoryPayload) graphql.Marshaler {
 	return ec._FragranceInventoryPayload(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNFragranceInventoryPayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceInventoryPayload(ctx context.Context, sel ast.SelectionSet, v *models.FragranceInventoryPayload) graphql.Marshaler {
+func (ec *executionContext) marshalNFragranceInventoryPayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceInventoryPayload(ctx context.Context, sel ast.SelectionSet, v *gmodels.FragranceInventoryPayload) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -27960,16 +27960,16 @@ func (ec *executionContext) marshalNFragranceInventoryPayload2ᚖgithubᚗcomᚋ
 	return ec._FragranceInventoryPayload(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalNFragranceInventoryUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceInventoryUpdateInput(ctx context.Context, v interface{}) (models.FragranceInventoryUpdateInput, error) {
+func (ec *executionContext) unmarshalNFragranceInventoryUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceInventoryUpdateInput(ctx context.Context, v interface{}) (gmodels.FragranceInventoryUpdateInput, error) {
 	res, err := ec.unmarshalInputFragranceInventoryUpdateInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalNFragrancePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragrancePayload(ctx context.Context, sel ast.SelectionSet, v models.FragrancePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNFragrancePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragrancePayload(ctx context.Context, sel ast.SelectionSet, v gmodels.FragrancePayload) graphql.Marshaler {
 	return ec._FragrancePayload(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNFragrancePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragrancePayload(ctx context.Context, sel ast.SelectionSet, v *models.FragrancePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNFragrancePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragrancePayload(ctx context.Context, sel ast.SelectionSet, v *gmodels.FragrancePayload) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -27979,7 +27979,7 @@ func (ec *executionContext) marshalNFragrancePayload2ᚖgithubᚗcomᚋsjhitchne
 	return ec._FragrancePayload(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalNFragranceUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceUpdateInput(ctx context.Context, v interface{}) (models.FragranceUpdateInput, error) {
+func (ec *executionContext) unmarshalNFragranceUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceUpdateInput(ctx context.Context, v interface{}) (gmodels.FragranceUpdateInput, error) {
 	res, err := ec.unmarshalInputFragranceUpdateInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
@@ -28014,11 +28014,11 @@ func (ec *executionContext) marshalNInt2int(ctx context.Context, sel ast.Selecti
 	return res
 }
 
-func (ec *executionContext) marshalNLipid2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipid(ctx context.Context, sel ast.SelectionSet, v models.Lipid) graphql.Marshaler {
+func (ec *executionContext) marshalNLipid2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipid(ctx context.Context, sel ast.SelectionSet, v gmodels.Lipid) graphql.Marshaler {
 	return ec._Lipid(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNLipid2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidᚄ(ctx context.Context, sel ast.SelectionSet, v []*models.Lipid) graphql.Marshaler {
+func (ec *executionContext) marshalNLipid2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidᚄ(ctx context.Context, sel ast.SelectionSet, v []*gmodels.Lipid) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
 	isLen1 := len(v) == 1
@@ -28055,7 +28055,7 @@ func (ec *executionContext) marshalNLipid2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoap
 	return ret
 }
 
-func (ec *executionContext) marshalNLipid2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipid(ctx context.Context, sel ast.SelectionSet, v *models.Lipid) graphql.Marshaler {
+func (ec *executionContext) marshalNLipid2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipid(ctx context.Context, sel ast.SelectionSet, v *gmodels.Lipid) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -28065,16 +28065,16 @@ func (ec *executionContext) marshalNLipid2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcal
 	return ec._Lipid(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalNLipidCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidCreateInput(ctx context.Context, v interface{}) (models.LipidCreateInput, error) {
+func (ec *executionContext) unmarshalNLipidCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidCreateInput(ctx context.Context, v interface{}) (gmodels.LipidCreateInput, error) {
 	res, err := ec.unmarshalInputLipidCreateInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalNLipidDeletePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidDeletePayload(ctx context.Context, sel ast.SelectionSet, v models.LipidDeletePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNLipidDeletePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidDeletePayload(ctx context.Context, sel ast.SelectionSet, v gmodels.LipidDeletePayload) graphql.Marshaler {
 	return ec._LipidDeletePayload(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNLipidDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidDeletePayload(ctx context.Context, sel ast.SelectionSet, v *models.LipidDeletePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNLipidDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidDeletePayload(ctx context.Context, sel ast.SelectionSet, v *gmodels.LipidDeletePayload) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -28084,11 +28084,11 @@ func (ec *executionContext) marshalNLipidDeletePayload2ᚖgithubᚗcomᚋsjhitch
 	return ec._LipidDeletePayload(ctx, sel, v)
 }
 
-func (ec *executionContext) marshalNLipidInventory2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidInventory(ctx context.Context, sel ast.SelectionSet, v models.LipidInventory) graphql.Marshaler {
+func (ec *executionContext) marshalNLipidInventory2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidInventory(ctx context.Context, sel ast.SelectionSet, v gmodels.LipidInventory) graphql.Marshaler {
 	return ec._LipidInventory(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNLipidInventory2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidInventoryᚄ(ctx context.Context, sel ast.SelectionSet, v []*models.LipidInventory) graphql.Marshaler {
+func (ec *executionContext) marshalNLipidInventory2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidInventoryᚄ(ctx context.Context, sel ast.SelectionSet, v []*gmodels.LipidInventory) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
 	isLen1 := len(v) == 1
@@ -28125,7 +28125,7 @@ func (ec *executionContext) marshalNLipidInventory2ᚕᚖgithubᚗcomᚋsjhitchn
 	return ret
 }
 
-func (ec *executionContext) marshalNLipidInventory2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidInventory(ctx context.Context, sel ast.SelectionSet, v *models.LipidInventory) graphql.Marshaler {
+func (ec *executionContext) marshalNLipidInventory2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidInventory(ctx context.Context, sel ast.SelectionSet, v *gmodels.LipidInventory) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -28135,16 +28135,16 @@ func (ec *executionContext) marshalNLipidInventory2ᚖgithubᚗcomᚋsjhitchner�
 	return ec._LipidInventory(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalNLipidInventoryCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidInventoryCreateInput(ctx context.Context, v interface{}) (models.LipidInventoryCreateInput, error) {
+func (ec *executionContext) unmarshalNLipidInventoryCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidInventoryCreateInput(ctx context.Context, v interface{}) (gmodels.LipidInventoryCreateInput, error) {
 	res, err := ec.unmarshalInputLipidInventoryCreateInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalNLipidInventoryDeletePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidInventoryDeletePayload(ctx context.Context, sel ast.SelectionSet, v models.LipidInventoryDeletePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNLipidInventoryDeletePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidInventoryDeletePayload(ctx context.Context, sel ast.SelectionSet, v gmodels.LipidInventoryDeletePayload) graphql.Marshaler {
 	return ec._LipidInventoryDeletePayload(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNLipidInventoryDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidInventoryDeletePayload(ctx context.Context, sel ast.SelectionSet, v *models.LipidInventoryDeletePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNLipidInventoryDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidInventoryDeletePayload(ctx context.Context, sel ast.SelectionSet, v *gmodels.LipidInventoryDeletePayload) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -28154,11 +28154,11 @@ func (ec *executionContext) marshalNLipidInventoryDeletePayload2ᚖgithubᚗcom�
 	return ec._LipidInventoryDeletePayload(ctx, sel, v)
 }
 
-func (ec *executionContext) marshalNLipidInventoryPayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidInventoryPayload(ctx context.Context, sel ast.SelectionSet, v models.LipidInventoryPayload) graphql.Marshaler {
+func (ec *executionContext) marshalNLipidInventoryPayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidInventoryPayload(ctx context.Context, sel ast.SelectionSet, v gmodels.LipidInventoryPayload) graphql.Marshaler {
 	return ec._LipidInventoryPayload(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNLipidInventoryPayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidInventoryPayload(ctx context.Context, sel ast.SelectionSet, v *models.LipidInventoryPayload) graphql.Marshaler {
+func (ec *executionContext) marshalNLipidInventoryPayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidInventoryPayload(ctx context.Context, sel ast.SelectionSet, v *gmodels.LipidInventoryPayload) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -28168,16 +28168,16 @@ func (ec *executionContext) marshalNLipidInventoryPayload2ᚖgithubᚗcomᚋsjhi
 	return ec._LipidInventoryPayload(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalNLipidInventoryUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidInventoryUpdateInput(ctx context.Context, v interface{}) (models.LipidInventoryUpdateInput, error) {
+func (ec *executionContext) unmarshalNLipidInventoryUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidInventoryUpdateInput(ctx context.Context, v interface{}) (gmodels.LipidInventoryUpdateInput, error) {
 	res, err := ec.unmarshalInputLipidInventoryUpdateInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalNLipidPayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidPayload(ctx context.Context, sel ast.SelectionSet, v models.LipidPayload) graphql.Marshaler {
+func (ec *executionContext) marshalNLipidPayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidPayload(ctx context.Context, sel ast.SelectionSet, v gmodels.LipidPayload) graphql.Marshaler {
 	return ec._LipidPayload(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNLipidPayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidPayload(ctx context.Context, sel ast.SelectionSet, v *models.LipidPayload) graphql.Marshaler {
+func (ec *executionContext) marshalNLipidPayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidPayload(ctx context.Context, sel ast.SelectionSet, v *gmodels.LipidPayload) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -28187,16 +28187,16 @@ func (ec *executionContext) marshalNLipidPayload2ᚖgithubᚗcomᚋsjhitchnerᚋ
 	return ec._LipidPayload(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalNLipidUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidUpdateInput(ctx context.Context, v interface{}) (models.LipidUpdateInput, error) {
+func (ec *executionContext) unmarshalNLipidUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidUpdateInput(ctx context.Context, v interface{}) (gmodels.LipidUpdateInput, error) {
 	res, err := ec.unmarshalInputLipidUpdateInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalNLye2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLye(ctx context.Context, sel ast.SelectionSet, v models.Lye) graphql.Marshaler {
+func (ec *executionContext) marshalNLye2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLye(ctx context.Context, sel ast.SelectionSet, v gmodels.Lye) graphql.Marshaler {
 	return ec._Lye(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNLye2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeᚄ(ctx context.Context, sel ast.SelectionSet, v []*models.Lye) graphql.Marshaler {
+func (ec *executionContext) marshalNLye2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeᚄ(ctx context.Context, sel ast.SelectionSet, v []*gmodels.Lye) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
 	isLen1 := len(v) == 1
@@ -28233,7 +28233,7 @@ func (ec *executionContext) marshalNLye2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapca
 	return ret
 }
 
-func (ec *executionContext) marshalNLye2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLye(ctx context.Context, sel ast.SelectionSet, v *models.Lye) graphql.Marshaler {
+func (ec *executionContext) marshalNLye2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLye(ctx context.Context, sel ast.SelectionSet, v *gmodels.Lye) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -28243,16 +28243,16 @@ func (ec *executionContext) marshalNLye2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalc�
 	return ec._Lye(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalNLyeCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeCreateInput(ctx context.Context, v interface{}) (models.LyeCreateInput, error) {
+func (ec *executionContext) unmarshalNLyeCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeCreateInput(ctx context.Context, v interface{}) (gmodels.LyeCreateInput, error) {
 	res, err := ec.unmarshalInputLyeCreateInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalNLyeDeletePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeDeletePayload(ctx context.Context, sel ast.SelectionSet, v models.LyeDeletePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNLyeDeletePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeDeletePayload(ctx context.Context, sel ast.SelectionSet, v gmodels.LyeDeletePayload) graphql.Marshaler {
 	return ec._LyeDeletePayload(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNLyeDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeDeletePayload(ctx context.Context, sel ast.SelectionSet, v *models.LyeDeletePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNLyeDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeDeletePayload(ctx context.Context, sel ast.SelectionSet, v *gmodels.LyeDeletePayload) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -28262,11 +28262,11 @@ func (ec *executionContext) marshalNLyeDeletePayload2ᚖgithubᚗcomᚋsjhitchne
 	return ec._LyeDeletePayload(ctx, sel, v)
 }
 
-func (ec *executionContext) marshalNLyeInventory2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeInventory(ctx context.Context, sel ast.SelectionSet, v models.LyeInventory) graphql.Marshaler {
+func (ec *executionContext) marshalNLyeInventory2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeInventory(ctx context.Context, sel ast.SelectionSet, v gmodels.LyeInventory) graphql.Marshaler {
 	return ec._LyeInventory(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNLyeInventory2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeInventoryᚄ(ctx context.Context, sel ast.SelectionSet, v []*models.LyeInventory) graphql.Marshaler {
+func (ec *executionContext) marshalNLyeInventory2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeInventoryᚄ(ctx context.Context, sel ast.SelectionSet, v []*gmodels.LyeInventory) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
 	isLen1 := len(v) == 1
@@ -28303,7 +28303,7 @@ func (ec *executionContext) marshalNLyeInventory2ᚕᚖgithubᚗcomᚋsjhitchner
 	return ret
 }
 
-func (ec *executionContext) marshalNLyeInventory2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeInventory(ctx context.Context, sel ast.SelectionSet, v *models.LyeInventory) graphql.Marshaler {
+func (ec *executionContext) marshalNLyeInventory2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeInventory(ctx context.Context, sel ast.SelectionSet, v *gmodels.LyeInventory) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -28313,16 +28313,16 @@ func (ec *executionContext) marshalNLyeInventory2ᚖgithubᚗcomᚋsjhitchnerᚋ
 	return ec._LyeInventory(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalNLyeInventoryCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeInventoryCreateInput(ctx context.Context, v interface{}) (models.LyeInventoryCreateInput, error) {
+func (ec *executionContext) unmarshalNLyeInventoryCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeInventoryCreateInput(ctx context.Context, v interface{}) (gmodels.LyeInventoryCreateInput, error) {
 	res, err := ec.unmarshalInputLyeInventoryCreateInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalNLyeInventoryDeletePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeInventoryDeletePayload(ctx context.Context, sel ast.SelectionSet, v models.LyeInventoryDeletePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNLyeInventoryDeletePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeInventoryDeletePayload(ctx context.Context, sel ast.SelectionSet, v gmodels.LyeInventoryDeletePayload) graphql.Marshaler {
 	return ec._LyeInventoryDeletePayload(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNLyeInventoryDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeInventoryDeletePayload(ctx context.Context, sel ast.SelectionSet, v *models.LyeInventoryDeletePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNLyeInventoryDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeInventoryDeletePayload(ctx context.Context, sel ast.SelectionSet, v *gmodels.LyeInventoryDeletePayload) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -28332,11 +28332,11 @@ func (ec *executionContext) marshalNLyeInventoryDeletePayload2ᚖgithubᚗcomᚋ
 	return ec._LyeInventoryDeletePayload(ctx, sel, v)
 }
 
-func (ec *executionContext) marshalNLyeInventoryPayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeInventoryPayload(ctx context.Context, sel ast.SelectionSet, v models.LyeInventoryPayload) graphql.Marshaler {
+func (ec *executionContext) marshalNLyeInventoryPayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeInventoryPayload(ctx context.Context, sel ast.SelectionSet, v gmodels.LyeInventoryPayload) graphql.Marshaler {
 	return ec._LyeInventoryPayload(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNLyeInventoryPayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeInventoryPayload(ctx context.Context, sel ast.SelectionSet, v *models.LyeInventoryPayload) graphql.Marshaler {
+func (ec *executionContext) marshalNLyeInventoryPayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeInventoryPayload(ctx context.Context, sel ast.SelectionSet, v *gmodels.LyeInventoryPayload) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -28346,16 +28346,16 @@ func (ec *executionContext) marshalNLyeInventoryPayload2ᚖgithubᚗcomᚋsjhitc
 	return ec._LyeInventoryPayload(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalNLyeInventoryUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeInventoryUpdateInput(ctx context.Context, v interface{}) (models.LyeInventoryUpdateInput, error) {
+func (ec *executionContext) unmarshalNLyeInventoryUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeInventoryUpdateInput(ctx context.Context, v interface{}) (gmodels.LyeInventoryUpdateInput, error) {
 	res, err := ec.unmarshalInputLyeInventoryUpdateInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalNLyePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyePayload(ctx context.Context, sel ast.SelectionSet, v models.LyePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNLyePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyePayload(ctx context.Context, sel ast.SelectionSet, v gmodels.LyePayload) graphql.Marshaler {
 	return ec._LyePayload(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNLyePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyePayload(ctx context.Context, sel ast.SelectionSet, v *models.LyePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNLyePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyePayload(ctx context.Context, sel ast.SelectionSet, v *gmodels.LyePayload) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -28365,16 +28365,16 @@ func (ec *executionContext) marshalNLyePayload2ᚖgithubᚗcomᚋsjhitchnerᚋso
 	return ec._LyePayload(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalNLyeUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeUpdateInput(ctx context.Context, v interface{}) (models.LyeUpdateInput, error) {
+func (ec *executionContext) unmarshalNLyeUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeUpdateInput(ctx context.Context, v interface{}) (gmodels.LyeUpdateInput, error) {
 	res, err := ec.unmarshalInputLyeUpdateInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalNRecipe2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipe(ctx context.Context, sel ast.SelectionSet, v models.Recipe) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipe2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipe(ctx context.Context, sel ast.SelectionSet, v gmodels.Recipe) graphql.Marshaler {
 	return ec._Recipe(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNRecipe2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeᚄ(ctx context.Context, sel ast.SelectionSet, v []*models.Recipe) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipe2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeᚄ(ctx context.Context, sel ast.SelectionSet, v []*gmodels.Recipe) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
 	isLen1 := len(v) == 1
@@ -28411,7 +28411,7 @@ func (ec *executionContext) marshalNRecipe2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoa
 	return ret
 }
 
-func (ec *executionContext) marshalNRecipe2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipe(ctx context.Context, sel ast.SelectionSet, v *models.Recipe) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipe2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipe(ctx context.Context, sel ast.SelectionSet, v *gmodels.Recipe) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -28421,11 +28421,11 @@ func (ec *executionContext) marshalNRecipe2ᚖgithubᚗcomᚋsjhitchnerᚋsoapca
 	return ec._Recipe(ctx, sel, v)
 }
 
-func (ec *executionContext) marshalNRecipeAdditive2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeAdditive(ctx context.Context, sel ast.SelectionSet, v models.RecipeAdditive) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeAdditive2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeAdditive(ctx context.Context, sel ast.SelectionSet, v gmodels.RecipeAdditive) graphql.Marshaler {
 	return ec._RecipeAdditive(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNRecipeAdditive2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeAdditiveᚄ(ctx context.Context, sel ast.SelectionSet, v []*models.RecipeAdditive) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeAdditive2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeAdditiveᚄ(ctx context.Context, sel ast.SelectionSet, v []*gmodels.RecipeAdditive) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
 	isLen1 := len(v) == 1
@@ -28462,7 +28462,7 @@ func (ec *executionContext) marshalNRecipeAdditive2ᚕᚖgithubᚗcomᚋsjhitchn
 	return ret
 }
 
-func (ec *executionContext) marshalNRecipeAdditive2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeAdditive(ctx context.Context, sel ast.SelectionSet, v *models.RecipeAdditive) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeAdditive2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeAdditive(ctx context.Context, sel ast.SelectionSet, v *gmodels.RecipeAdditive) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -28472,16 +28472,16 @@ func (ec *executionContext) marshalNRecipeAdditive2ᚖgithubᚗcomᚋsjhitchner�
 	return ec._RecipeAdditive(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalNRecipeAdditiveCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeAdditiveCreateInput(ctx context.Context, v interface{}) (models.RecipeAdditiveCreateInput, error) {
+func (ec *executionContext) unmarshalNRecipeAdditiveCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeAdditiveCreateInput(ctx context.Context, v interface{}) (gmodels.RecipeAdditiveCreateInput, error) {
 	res, err := ec.unmarshalInputRecipeAdditiveCreateInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalNRecipeAdditiveDeletePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeAdditiveDeletePayload(ctx context.Context, sel ast.SelectionSet, v models.RecipeAdditiveDeletePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeAdditiveDeletePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeAdditiveDeletePayload(ctx context.Context, sel ast.SelectionSet, v gmodels.RecipeAdditiveDeletePayload) graphql.Marshaler {
 	return ec._RecipeAdditiveDeletePayload(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNRecipeAdditiveDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeAdditiveDeletePayload(ctx context.Context, sel ast.SelectionSet, v *models.RecipeAdditiveDeletePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeAdditiveDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeAdditiveDeletePayload(ctx context.Context, sel ast.SelectionSet, v *gmodels.RecipeAdditiveDeletePayload) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -28491,11 +28491,11 @@ func (ec *executionContext) marshalNRecipeAdditiveDeletePayload2ᚖgithubᚗcom�
 	return ec._RecipeAdditiveDeletePayload(ctx, sel, v)
 }
 
-func (ec *executionContext) marshalNRecipeAdditivePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeAdditivePayload(ctx context.Context, sel ast.SelectionSet, v models.RecipeAdditivePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeAdditivePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeAdditivePayload(ctx context.Context, sel ast.SelectionSet, v gmodels.RecipeAdditivePayload) graphql.Marshaler {
 	return ec._RecipeAdditivePayload(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNRecipeAdditivePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeAdditivePayload(ctx context.Context, sel ast.SelectionSet, v *models.RecipeAdditivePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeAdditivePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeAdditivePayload(ctx context.Context, sel ast.SelectionSet, v *gmodels.RecipeAdditivePayload) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -28505,16 +28505,16 @@ func (ec *executionContext) marshalNRecipeAdditivePayload2ᚖgithubᚗcomᚋsjhi
 	return ec._RecipeAdditivePayload(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalNRecipeAdditiveUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeAdditiveUpdateInput(ctx context.Context, v interface{}) (models.RecipeAdditiveUpdateInput, error) {
+func (ec *executionContext) unmarshalNRecipeAdditiveUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeAdditiveUpdateInput(ctx context.Context, v interface{}) (gmodels.RecipeAdditiveUpdateInput, error) {
 	res, err := ec.unmarshalInputRecipeAdditiveUpdateInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalNRecipeBatch2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatch(ctx context.Context, sel ast.SelectionSet, v models.RecipeBatch) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeBatch2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatch(ctx context.Context, sel ast.SelectionSet, v gmodels.RecipeBatch) graphql.Marshaler {
 	return ec._RecipeBatch(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNRecipeBatch2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchᚄ(ctx context.Context, sel ast.SelectionSet, v []*models.RecipeBatch) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeBatch2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchᚄ(ctx context.Context, sel ast.SelectionSet, v []*gmodels.RecipeBatch) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
 	isLen1 := len(v) == 1
@@ -28551,7 +28551,7 @@ func (ec *executionContext) marshalNRecipeBatch2ᚕᚖgithubᚗcomᚋsjhitchner�
 	return ret
 }
 
-func (ec *executionContext) marshalNRecipeBatch2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatch(ctx context.Context, sel ast.SelectionSet, v *models.RecipeBatch) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeBatch2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatch(ctx context.Context, sel ast.SelectionSet, v *gmodels.RecipeBatch) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -28561,11 +28561,11 @@ func (ec *executionContext) marshalNRecipeBatch2ᚖgithubᚗcomᚋsjhitchnerᚋs
 	return ec._RecipeBatch(ctx, sel, v)
 }
 
-func (ec *executionContext) marshalNRecipeBatchAdditive2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchAdditive(ctx context.Context, sel ast.SelectionSet, v models.RecipeBatchAdditive) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeBatchAdditive2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchAdditive(ctx context.Context, sel ast.SelectionSet, v gmodels.RecipeBatchAdditive) graphql.Marshaler {
 	return ec._RecipeBatchAdditive(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNRecipeBatchAdditive2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchAdditiveᚄ(ctx context.Context, sel ast.SelectionSet, v []*models.RecipeBatchAdditive) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeBatchAdditive2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchAdditiveᚄ(ctx context.Context, sel ast.SelectionSet, v []*gmodels.RecipeBatchAdditive) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
 	isLen1 := len(v) == 1
@@ -28602,7 +28602,7 @@ func (ec *executionContext) marshalNRecipeBatchAdditive2ᚕᚖgithubᚗcomᚋsjh
 	return ret
 }
 
-func (ec *executionContext) marshalNRecipeBatchAdditive2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchAdditive(ctx context.Context, sel ast.SelectionSet, v *models.RecipeBatchAdditive) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeBatchAdditive2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchAdditive(ctx context.Context, sel ast.SelectionSet, v *gmodels.RecipeBatchAdditive) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -28612,16 +28612,16 @@ func (ec *executionContext) marshalNRecipeBatchAdditive2ᚖgithubᚗcomᚋsjhitc
 	return ec._RecipeBatchAdditive(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalNRecipeBatchAdditiveCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchAdditiveCreateInput(ctx context.Context, v interface{}) (models.RecipeBatchAdditiveCreateInput, error) {
+func (ec *executionContext) unmarshalNRecipeBatchAdditiveCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchAdditiveCreateInput(ctx context.Context, v interface{}) (gmodels.RecipeBatchAdditiveCreateInput, error) {
 	res, err := ec.unmarshalInputRecipeBatchAdditiveCreateInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalNRecipeBatchAdditiveDeletePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchAdditiveDeletePayload(ctx context.Context, sel ast.SelectionSet, v models.RecipeBatchAdditiveDeletePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeBatchAdditiveDeletePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchAdditiveDeletePayload(ctx context.Context, sel ast.SelectionSet, v gmodels.RecipeBatchAdditiveDeletePayload) graphql.Marshaler {
 	return ec._RecipeBatchAdditiveDeletePayload(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNRecipeBatchAdditiveDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchAdditiveDeletePayload(ctx context.Context, sel ast.SelectionSet, v *models.RecipeBatchAdditiveDeletePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeBatchAdditiveDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchAdditiveDeletePayload(ctx context.Context, sel ast.SelectionSet, v *gmodels.RecipeBatchAdditiveDeletePayload) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -28631,11 +28631,11 @@ func (ec *executionContext) marshalNRecipeBatchAdditiveDeletePayload2ᚖgithub�
 	return ec._RecipeBatchAdditiveDeletePayload(ctx, sel, v)
 }
 
-func (ec *executionContext) marshalNRecipeBatchAdditivePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchAdditivePayload(ctx context.Context, sel ast.SelectionSet, v models.RecipeBatchAdditivePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeBatchAdditivePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchAdditivePayload(ctx context.Context, sel ast.SelectionSet, v gmodels.RecipeBatchAdditivePayload) graphql.Marshaler {
 	return ec._RecipeBatchAdditivePayload(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNRecipeBatchAdditivePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchAdditivePayload(ctx context.Context, sel ast.SelectionSet, v *models.RecipeBatchAdditivePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeBatchAdditivePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchAdditivePayload(ctx context.Context, sel ast.SelectionSet, v *gmodels.RecipeBatchAdditivePayload) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -28645,21 +28645,21 @@ func (ec *executionContext) marshalNRecipeBatchAdditivePayload2ᚖgithubᚗcom�
 	return ec._RecipeBatchAdditivePayload(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalNRecipeBatchAdditiveUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchAdditiveUpdateInput(ctx context.Context, v interface{}) (models.RecipeBatchAdditiveUpdateInput, error) {
+func (ec *executionContext) unmarshalNRecipeBatchAdditiveUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchAdditiveUpdateInput(ctx context.Context, v interface{}) (gmodels.RecipeBatchAdditiveUpdateInput, error) {
 	res, err := ec.unmarshalInputRecipeBatchAdditiveUpdateInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) unmarshalNRecipeBatchCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchCreateInput(ctx context.Context, v interface{}) (models.RecipeBatchCreateInput, error) {
+func (ec *executionContext) unmarshalNRecipeBatchCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchCreateInput(ctx context.Context, v interface{}) (gmodels.RecipeBatchCreateInput, error) {
 	res, err := ec.unmarshalInputRecipeBatchCreateInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalNRecipeBatchDeletePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchDeletePayload(ctx context.Context, sel ast.SelectionSet, v models.RecipeBatchDeletePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeBatchDeletePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchDeletePayload(ctx context.Context, sel ast.SelectionSet, v gmodels.RecipeBatchDeletePayload) graphql.Marshaler {
 	return ec._RecipeBatchDeletePayload(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNRecipeBatchDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchDeletePayload(ctx context.Context, sel ast.SelectionSet, v *models.RecipeBatchDeletePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeBatchDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchDeletePayload(ctx context.Context, sel ast.SelectionSet, v *gmodels.RecipeBatchDeletePayload) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -28669,11 +28669,11 @@ func (ec *executionContext) marshalNRecipeBatchDeletePayload2ᚖgithubᚗcomᚋs
 	return ec._RecipeBatchDeletePayload(ctx, sel, v)
 }
 
-func (ec *executionContext) marshalNRecipeBatchFragrance2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchFragrance(ctx context.Context, sel ast.SelectionSet, v models.RecipeBatchFragrance) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeBatchFragrance2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchFragrance(ctx context.Context, sel ast.SelectionSet, v gmodels.RecipeBatchFragrance) graphql.Marshaler {
 	return ec._RecipeBatchFragrance(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNRecipeBatchFragrance2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchFragranceᚄ(ctx context.Context, sel ast.SelectionSet, v []*models.RecipeBatchFragrance) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeBatchFragrance2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchFragranceᚄ(ctx context.Context, sel ast.SelectionSet, v []*gmodels.RecipeBatchFragrance) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
 	isLen1 := len(v) == 1
@@ -28710,7 +28710,7 @@ func (ec *executionContext) marshalNRecipeBatchFragrance2ᚕᚖgithubᚗcomᚋsj
 	return ret
 }
 
-func (ec *executionContext) marshalNRecipeBatchFragrance2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchFragrance(ctx context.Context, sel ast.SelectionSet, v *models.RecipeBatchFragrance) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeBatchFragrance2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchFragrance(ctx context.Context, sel ast.SelectionSet, v *gmodels.RecipeBatchFragrance) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -28720,16 +28720,16 @@ func (ec *executionContext) marshalNRecipeBatchFragrance2ᚖgithubᚗcomᚋsjhit
 	return ec._RecipeBatchFragrance(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalNRecipeBatchFragranceCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchFragranceCreateInput(ctx context.Context, v interface{}) (models.RecipeBatchFragranceCreateInput, error) {
+func (ec *executionContext) unmarshalNRecipeBatchFragranceCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchFragranceCreateInput(ctx context.Context, v interface{}) (gmodels.RecipeBatchFragranceCreateInput, error) {
 	res, err := ec.unmarshalInputRecipeBatchFragranceCreateInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalNRecipeBatchFragranceDeletePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchFragranceDeletePayload(ctx context.Context, sel ast.SelectionSet, v models.RecipeBatchFragranceDeletePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeBatchFragranceDeletePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchFragranceDeletePayload(ctx context.Context, sel ast.SelectionSet, v gmodels.RecipeBatchFragranceDeletePayload) graphql.Marshaler {
 	return ec._RecipeBatchFragranceDeletePayload(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNRecipeBatchFragranceDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchFragranceDeletePayload(ctx context.Context, sel ast.SelectionSet, v *models.RecipeBatchFragranceDeletePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeBatchFragranceDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchFragranceDeletePayload(ctx context.Context, sel ast.SelectionSet, v *gmodels.RecipeBatchFragranceDeletePayload) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -28739,11 +28739,11 @@ func (ec *executionContext) marshalNRecipeBatchFragranceDeletePayload2ᚖgithub�
 	return ec._RecipeBatchFragranceDeletePayload(ctx, sel, v)
 }
 
-func (ec *executionContext) marshalNRecipeBatchFragrancePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchFragrancePayload(ctx context.Context, sel ast.SelectionSet, v models.RecipeBatchFragrancePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeBatchFragrancePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchFragrancePayload(ctx context.Context, sel ast.SelectionSet, v gmodels.RecipeBatchFragrancePayload) graphql.Marshaler {
 	return ec._RecipeBatchFragrancePayload(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNRecipeBatchFragrancePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchFragrancePayload(ctx context.Context, sel ast.SelectionSet, v *models.RecipeBatchFragrancePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeBatchFragrancePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchFragrancePayload(ctx context.Context, sel ast.SelectionSet, v *gmodels.RecipeBatchFragrancePayload) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -28753,16 +28753,16 @@ func (ec *executionContext) marshalNRecipeBatchFragrancePayload2ᚖgithubᚗcom�
 	return ec._RecipeBatchFragrancePayload(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalNRecipeBatchFragranceUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchFragranceUpdateInput(ctx context.Context, v interface{}) (models.RecipeBatchFragranceUpdateInput, error) {
+func (ec *executionContext) unmarshalNRecipeBatchFragranceUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchFragranceUpdateInput(ctx context.Context, v interface{}) (gmodels.RecipeBatchFragranceUpdateInput, error) {
 	res, err := ec.unmarshalInputRecipeBatchFragranceUpdateInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalNRecipeBatchLipid2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLipid(ctx context.Context, sel ast.SelectionSet, v models.RecipeBatchLipid) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeBatchLipid2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLipid(ctx context.Context, sel ast.SelectionSet, v gmodels.RecipeBatchLipid) graphql.Marshaler {
 	return ec._RecipeBatchLipid(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNRecipeBatchLipid2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLipidᚄ(ctx context.Context, sel ast.SelectionSet, v []*models.RecipeBatchLipid) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeBatchLipid2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLipidᚄ(ctx context.Context, sel ast.SelectionSet, v []*gmodels.RecipeBatchLipid) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
 	isLen1 := len(v) == 1
@@ -28799,7 +28799,7 @@ func (ec *executionContext) marshalNRecipeBatchLipid2ᚕᚖgithubᚗcomᚋsjhitc
 	return ret
 }
 
-func (ec *executionContext) marshalNRecipeBatchLipid2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLipid(ctx context.Context, sel ast.SelectionSet, v *models.RecipeBatchLipid) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeBatchLipid2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLipid(ctx context.Context, sel ast.SelectionSet, v *gmodels.RecipeBatchLipid) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -28809,16 +28809,16 @@ func (ec *executionContext) marshalNRecipeBatchLipid2ᚖgithubᚗcomᚋsjhitchne
 	return ec._RecipeBatchLipid(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalNRecipeBatchLipidCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLipidCreateInput(ctx context.Context, v interface{}) (models.RecipeBatchLipidCreateInput, error) {
+func (ec *executionContext) unmarshalNRecipeBatchLipidCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLipidCreateInput(ctx context.Context, v interface{}) (gmodels.RecipeBatchLipidCreateInput, error) {
 	res, err := ec.unmarshalInputRecipeBatchLipidCreateInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalNRecipeBatchLipidDeletePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLipidDeletePayload(ctx context.Context, sel ast.SelectionSet, v models.RecipeBatchLipidDeletePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeBatchLipidDeletePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLipidDeletePayload(ctx context.Context, sel ast.SelectionSet, v gmodels.RecipeBatchLipidDeletePayload) graphql.Marshaler {
 	return ec._RecipeBatchLipidDeletePayload(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNRecipeBatchLipidDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLipidDeletePayload(ctx context.Context, sel ast.SelectionSet, v *models.RecipeBatchLipidDeletePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeBatchLipidDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLipidDeletePayload(ctx context.Context, sel ast.SelectionSet, v *gmodels.RecipeBatchLipidDeletePayload) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -28828,11 +28828,11 @@ func (ec *executionContext) marshalNRecipeBatchLipidDeletePayload2ᚖgithubᚗco
 	return ec._RecipeBatchLipidDeletePayload(ctx, sel, v)
 }
 
-func (ec *executionContext) marshalNRecipeBatchLipidPayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLipidPayload(ctx context.Context, sel ast.SelectionSet, v models.RecipeBatchLipidPayload) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeBatchLipidPayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLipidPayload(ctx context.Context, sel ast.SelectionSet, v gmodels.RecipeBatchLipidPayload) graphql.Marshaler {
 	return ec._RecipeBatchLipidPayload(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNRecipeBatchLipidPayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLipidPayload(ctx context.Context, sel ast.SelectionSet, v *models.RecipeBatchLipidPayload) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeBatchLipidPayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLipidPayload(ctx context.Context, sel ast.SelectionSet, v *gmodels.RecipeBatchLipidPayload) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -28842,16 +28842,16 @@ func (ec *executionContext) marshalNRecipeBatchLipidPayload2ᚖgithubᚗcomᚋsj
 	return ec._RecipeBatchLipidPayload(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalNRecipeBatchLipidUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLipidUpdateInput(ctx context.Context, v interface{}) (models.RecipeBatchLipidUpdateInput, error) {
+func (ec *executionContext) unmarshalNRecipeBatchLipidUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLipidUpdateInput(ctx context.Context, v interface{}) (gmodels.RecipeBatchLipidUpdateInput, error) {
 	res, err := ec.unmarshalInputRecipeBatchLipidUpdateInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalNRecipeBatchLye2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLye(ctx context.Context, sel ast.SelectionSet, v models.RecipeBatchLye) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeBatchLye2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLye(ctx context.Context, sel ast.SelectionSet, v gmodels.RecipeBatchLye) graphql.Marshaler {
 	return ec._RecipeBatchLye(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNRecipeBatchLye2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLyeᚄ(ctx context.Context, sel ast.SelectionSet, v []*models.RecipeBatchLye) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeBatchLye2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLyeᚄ(ctx context.Context, sel ast.SelectionSet, v []*gmodels.RecipeBatchLye) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
 	isLen1 := len(v) == 1
@@ -28888,7 +28888,7 @@ func (ec *executionContext) marshalNRecipeBatchLye2ᚕᚖgithubᚗcomᚋsjhitchn
 	return ret
 }
 
-func (ec *executionContext) marshalNRecipeBatchLye2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLye(ctx context.Context, sel ast.SelectionSet, v *models.RecipeBatchLye) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeBatchLye2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLye(ctx context.Context, sel ast.SelectionSet, v *gmodels.RecipeBatchLye) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -28898,16 +28898,16 @@ func (ec *executionContext) marshalNRecipeBatchLye2ᚖgithubᚗcomᚋsjhitchner�
 	return ec._RecipeBatchLye(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalNRecipeBatchLyeCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLyeCreateInput(ctx context.Context, v interface{}) (models.RecipeBatchLyeCreateInput, error) {
+func (ec *executionContext) unmarshalNRecipeBatchLyeCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLyeCreateInput(ctx context.Context, v interface{}) (gmodels.RecipeBatchLyeCreateInput, error) {
 	res, err := ec.unmarshalInputRecipeBatchLyeCreateInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalNRecipeBatchLyeDeletePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLyeDeletePayload(ctx context.Context, sel ast.SelectionSet, v models.RecipeBatchLyeDeletePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeBatchLyeDeletePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLyeDeletePayload(ctx context.Context, sel ast.SelectionSet, v gmodels.RecipeBatchLyeDeletePayload) graphql.Marshaler {
 	return ec._RecipeBatchLyeDeletePayload(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNRecipeBatchLyeDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLyeDeletePayload(ctx context.Context, sel ast.SelectionSet, v *models.RecipeBatchLyeDeletePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeBatchLyeDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLyeDeletePayload(ctx context.Context, sel ast.SelectionSet, v *gmodels.RecipeBatchLyeDeletePayload) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -28917,11 +28917,11 @@ func (ec *executionContext) marshalNRecipeBatchLyeDeletePayload2ᚖgithubᚗcom�
 	return ec._RecipeBatchLyeDeletePayload(ctx, sel, v)
 }
 
-func (ec *executionContext) marshalNRecipeBatchLyePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLyePayload(ctx context.Context, sel ast.SelectionSet, v models.RecipeBatchLyePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeBatchLyePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLyePayload(ctx context.Context, sel ast.SelectionSet, v gmodels.RecipeBatchLyePayload) graphql.Marshaler {
 	return ec._RecipeBatchLyePayload(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNRecipeBatchLyePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLyePayload(ctx context.Context, sel ast.SelectionSet, v *models.RecipeBatchLyePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeBatchLyePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLyePayload(ctx context.Context, sel ast.SelectionSet, v *gmodels.RecipeBatchLyePayload) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -28931,16 +28931,16 @@ func (ec *executionContext) marshalNRecipeBatchLyePayload2ᚖgithubᚗcomᚋsjhi
 	return ec._RecipeBatchLyePayload(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalNRecipeBatchLyeUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLyeUpdateInput(ctx context.Context, v interface{}) (models.RecipeBatchLyeUpdateInput, error) {
+func (ec *executionContext) unmarshalNRecipeBatchLyeUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLyeUpdateInput(ctx context.Context, v interface{}) (gmodels.RecipeBatchLyeUpdateInput, error) {
 	res, err := ec.unmarshalInputRecipeBatchLyeUpdateInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalNRecipeBatchPayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchPayload(ctx context.Context, sel ast.SelectionSet, v models.RecipeBatchPayload) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeBatchPayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchPayload(ctx context.Context, sel ast.SelectionSet, v gmodels.RecipeBatchPayload) graphql.Marshaler {
 	return ec._RecipeBatchPayload(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNRecipeBatchPayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchPayload(ctx context.Context, sel ast.SelectionSet, v *models.RecipeBatchPayload) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeBatchPayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchPayload(ctx context.Context, sel ast.SelectionSet, v *gmodels.RecipeBatchPayload) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -28950,21 +28950,21 @@ func (ec *executionContext) marshalNRecipeBatchPayload2ᚖgithubᚗcomᚋsjhitch
 	return ec._RecipeBatchPayload(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalNRecipeBatchUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchUpdateInput(ctx context.Context, v interface{}) (models.RecipeBatchUpdateInput, error) {
+func (ec *executionContext) unmarshalNRecipeBatchUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchUpdateInput(ctx context.Context, v interface{}) (gmodels.RecipeBatchUpdateInput, error) {
 	res, err := ec.unmarshalInputRecipeBatchUpdateInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) unmarshalNRecipeCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeCreateInput(ctx context.Context, v interface{}) (models.RecipeCreateInput, error) {
+func (ec *executionContext) unmarshalNRecipeCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeCreateInput(ctx context.Context, v interface{}) (gmodels.RecipeCreateInput, error) {
 	res, err := ec.unmarshalInputRecipeCreateInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalNRecipeDeletePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeDeletePayload(ctx context.Context, sel ast.SelectionSet, v models.RecipeDeletePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeDeletePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeDeletePayload(ctx context.Context, sel ast.SelectionSet, v gmodels.RecipeDeletePayload) graphql.Marshaler {
 	return ec._RecipeDeletePayload(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNRecipeDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeDeletePayload(ctx context.Context, sel ast.SelectionSet, v *models.RecipeDeletePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeDeletePayload(ctx context.Context, sel ast.SelectionSet, v *gmodels.RecipeDeletePayload) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -28974,11 +28974,11 @@ func (ec *executionContext) marshalNRecipeDeletePayload2ᚖgithubᚗcomᚋsjhitc
 	return ec._RecipeDeletePayload(ctx, sel, v)
 }
 
-func (ec *executionContext) marshalNRecipeFragrance2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeFragrance(ctx context.Context, sel ast.SelectionSet, v models.RecipeFragrance) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeFragrance2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeFragrance(ctx context.Context, sel ast.SelectionSet, v gmodels.RecipeFragrance) graphql.Marshaler {
 	return ec._RecipeFragrance(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNRecipeFragrance2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeFragranceᚄ(ctx context.Context, sel ast.SelectionSet, v []*models.RecipeFragrance) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeFragrance2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeFragranceᚄ(ctx context.Context, sel ast.SelectionSet, v []*gmodels.RecipeFragrance) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
 	isLen1 := len(v) == 1
@@ -29015,7 +29015,7 @@ func (ec *executionContext) marshalNRecipeFragrance2ᚕᚖgithubᚗcomᚋsjhitch
 	return ret
 }
 
-func (ec *executionContext) marshalNRecipeFragrance2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeFragrance(ctx context.Context, sel ast.SelectionSet, v *models.RecipeFragrance) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeFragrance2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeFragrance(ctx context.Context, sel ast.SelectionSet, v *gmodels.RecipeFragrance) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -29025,16 +29025,16 @@ func (ec *executionContext) marshalNRecipeFragrance2ᚖgithubᚗcomᚋsjhitchner
 	return ec._RecipeFragrance(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalNRecipeFragranceCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeFragranceCreateInput(ctx context.Context, v interface{}) (models.RecipeFragranceCreateInput, error) {
+func (ec *executionContext) unmarshalNRecipeFragranceCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeFragranceCreateInput(ctx context.Context, v interface{}) (gmodels.RecipeFragranceCreateInput, error) {
 	res, err := ec.unmarshalInputRecipeFragranceCreateInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalNRecipeFragranceDeletePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeFragranceDeletePayload(ctx context.Context, sel ast.SelectionSet, v models.RecipeFragranceDeletePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeFragranceDeletePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeFragranceDeletePayload(ctx context.Context, sel ast.SelectionSet, v gmodels.RecipeFragranceDeletePayload) graphql.Marshaler {
 	return ec._RecipeFragranceDeletePayload(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNRecipeFragranceDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeFragranceDeletePayload(ctx context.Context, sel ast.SelectionSet, v *models.RecipeFragranceDeletePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeFragranceDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeFragranceDeletePayload(ctx context.Context, sel ast.SelectionSet, v *gmodels.RecipeFragranceDeletePayload) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -29044,11 +29044,11 @@ func (ec *executionContext) marshalNRecipeFragranceDeletePayload2ᚖgithubᚗcom
 	return ec._RecipeFragranceDeletePayload(ctx, sel, v)
 }
 
-func (ec *executionContext) marshalNRecipeFragrancePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeFragrancePayload(ctx context.Context, sel ast.SelectionSet, v models.RecipeFragrancePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeFragrancePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeFragrancePayload(ctx context.Context, sel ast.SelectionSet, v gmodels.RecipeFragrancePayload) graphql.Marshaler {
 	return ec._RecipeFragrancePayload(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNRecipeFragrancePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeFragrancePayload(ctx context.Context, sel ast.SelectionSet, v *models.RecipeFragrancePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeFragrancePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeFragrancePayload(ctx context.Context, sel ast.SelectionSet, v *gmodels.RecipeFragrancePayload) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -29058,16 +29058,16 @@ func (ec *executionContext) marshalNRecipeFragrancePayload2ᚖgithubᚗcomᚋsjh
 	return ec._RecipeFragrancePayload(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalNRecipeFragranceUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeFragranceUpdateInput(ctx context.Context, v interface{}) (models.RecipeFragranceUpdateInput, error) {
+func (ec *executionContext) unmarshalNRecipeFragranceUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeFragranceUpdateInput(ctx context.Context, v interface{}) (gmodels.RecipeFragranceUpdateInput, error) {
 	res, err := ec.unmarshalInputRecipeFragranceUpdateInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalNRecipeLipid2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeLipid(ctx context.Context, sel ast.SelectionSet, v models.RecipeLipid) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeLipid2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeLipid(ctx context.Context, sel ast.SelectionSet, v gmodels.RecipeLipid) graphql.Marshaler {
 	return ec._RecipeLipid(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNRecipeLipid2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeLipidᚄ(ctx context.Context, sel ast.SelectionSet, v []*models.RecipeLipid) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeLipid2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeLipidᚄ(ctx context.Context, sel ast.SelectionSet, v []*gmodels.RecipeLipid) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
 	isLen1 := len(v) == 1
@@ -29104,7 +29104,7 @@ func (ec *executionContext) marshalNRecipeLipid2ᚕᚖgithubᚗcomᚋsjhitchner�
 	return ret
 }
 
-func (ec *executionContext) marshalNRecipeLipid2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeLipid(ctx context.Context, sel ast.SelectionSet, v *models.RecipeLipid) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeLipid2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeLipid(ctx context.Context, sel ast.SelectionSet, v *gmodels.RecipeLipid) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -29114,16 +29114,16 @@ func (ec *executionContext) marshalNRecipeLipid2ᚖgithubᚗcomᚋsjhitchnerᚋs
 	return ec._RecipeLipid(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalNRecipeLipidCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeLipidCreateInput(ctx context.Context, v interface{}) (models.RecipeLipidCreateInput, error) {
+func (ec *executionContext) unmarshalNRecipeLipidCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeLipidCreateInput(ctx context.Context, v interface{}) (gmodels.RecipeLipidCreateInput, error) {
 	res, err := ec.unmarshalInputRecipeLipidCreateInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalNRecipeLipidDeletePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeLipidDeletePayload(ctx context.Context, sel ast.SelectionSet, v models.RecipeLipidDeletePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeLipidDeletePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeLipidDeletePayload(ctx context.Context, sel ast.SelectionSet, v gmodels.RecipeLipidDeletePayload) graphql.Marshaler {
 	return ec._RecipeLipidDeletePayload(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNRecipeLipidDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeLipidDeletePayload(ctx context.Context, sel ast.SelectionSet, v *models.RecipeLipidDeletePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeLipidDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeLipidDeletePayload(ctx context.Context, sel ast.SelectionSet, v *gmodels.RecipeLipidDeletePayload) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -29133,11 +29133,11 @@ func (ec *executionContext) marshalNRecipeLipidDeletePayload2ᚖgithubᚗcomᚋs
 	return ec._RecipeLipidDeletePayload(ctx, sel, v)
 }
 
-func (ec *executionContext) marshalNRecipeLipidPayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeLipidPayload(ctx context.Context, sel ast.SelectionSet, v models.RecipeLipidPayload) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeLipidPayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeLipidPayload(ctx context.Context, sel ast.SelectionSet, v gmodels.RecipeLipidPayload) graphql.Marshaler {
 	return ec._RecipeLipidPayload(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNRecipeLipidPayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeLipidPayload(ctx context.Context, sel ast.SelectionSet, v *models.RecipeLipidPayload) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipeLipidPayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeLipidPayload(ctx context.Context, sel ast.SelectionSet, v *gmodels.RecipeLipidPayload) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -29147,16 +29147,16 @@ func (ec *executionContext) marshalNRecipeLipidPayload2ᚖgithubᚗcomᚋsjhitch
 	return ec._RecipeLipidPayload(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalNRecipeLipidUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeLipidUpdateInput(ctx context.Context, v interface{}) (models.RecipeLipidUpdateInput, error) {
+func (ec *executionContext) unmarshalNRecipeLipidUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeLipidUpdateInput(ctx context.Context, v interface{}) (gmodels.RecipeLipidUpdateInput, error) {
 	res, err := ec.unmarshalInputRecipeLipidUpdateInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalNRecipePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipePayload(ctx context.Context, sel ast.SelectionSet, v models.RecipePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipePayload(ctx context.Context, sel ast.SelectionSet, v gmodels.RecipePayload) graphql.Marshaler {
 	return ec._RecipePayload(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNRecipePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipePayload(ctx context.Context, sel ast.SelectionSet, v *models.RecipePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNRecipePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipePayload(ctx context.Context, sel ast.SelectionSet, v *gmodels.RecipePayload) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -29166,7 +29166,7 @@ func (ec *executionContext) marshalNRecipePayload2ᚖgithubᚗcomᚋsjhitchner�
 	return ec._RecipePayload(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalNRecipeUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeUpdateInput(ctx context.Context, v interface{}) (models.RecipeUpdateInput, error) {
+func (ec *executionContext) unmarshalNRecipeUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeUpdateInput(ctx context.Context, v interface{}) (gmodels.RecipeUpdateInput, error) {
 	res, err := ec.unmarshalInputRecipeUpdateInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
@@ -29186,11 +29186,11 @@ func (ec *executionContext) marshalNString2string(ctx context.Context, sel ast.S
 	return res
 }
 
-func (ec *executionContext) marshalNSupplier2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐSupplier(ctx context.Context, sel ast.SelectionSet, v models.Supplier) graphql.Marshaler {
+func (ec *executionContext) marshalNSupplier2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐSupplier(ctx context.Context, sel ast.SelectionSet, v gmodels.Supplier) graphql.Marshaler {
 	return ec._Supplier(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNSupplier2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐSupplierᚄ(ctx context.Context, sel ast.SelectionSet, v []*models.Supplier) graphql.Marshaler {
+func (ec *executionContext) marshalNSupplier2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐSupplierᚄ(ctx context.Context, sel ast.SelectionSet, v []*gmodels.Supplier) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
 	isLen1 := len(v) == 1
@@ -29227,7 +29227,7 @@ func (ec *executionContext) marshalNSupplier2ᚕᚖgithubᚗcomᚋsjhitchnerᚋs
 	return ret
 }
 
-func (ec *executionContext) marshalNSupplier2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐSupplier(ctx context.Context, sel ast.SelectionSet, v *models.Supplier) graphql.Marshaler {
+func (ec *executionContext) marshalNSupplier2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐSupplier(ctx context.Context, sel ast.SelectionSet, v *gmodels.Supplier) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -29237,16 +29237,16 @@ func (ec *executionContext) marshalNSupplier2ᚖgithubᚗcomᚋsjhitchnerᚋsoap
 	return ec._Supplier(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalNSupplierCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐSupplierCreateInput(ctx context.Context, v interface{}) (models.SupplierCreateInput, error) {
+func (ec *executionContext) unmarshalNSupplierCreateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐSupplierCreateInput(ctx context.Context, v interface{}) (gmodels.SupplierCreateInput, error) {
 	res, err := ec.unmarshalInputSupplierCreateInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalNSupplierDeletePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐSupplierDeletePayload(ctx context.Context, sel ast.SelectionSet, v models.SupplierDeletePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNSupplierDeletePayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐSupplierDeletePayload(ctx context.Context, sel ast.SelectionSet, v gmodels.SupplierDeletePayload) graphql.Marshaler {
 	return ec._SupplierDeletePayload(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNSupplierDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐSupplierDeletePayload(ctx context.Context, sel ast.SelectionSet, v *models.SupplierDeletePayload) graphql.Marshaler {
+func (ec *executionContext) marshalNSupplierDeletePayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐSupplierDeletePayload(ctx context.Context, sel ast.SelectionSet, v *gmodels.SupplierDeletePayload) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -29256,11 +29256,11 @@ func (ec *executionContext) marshalNSupplierDeletePayload2ᚖgithubᚗcomᚋsjhi
 	return ec._SupplierDeletePayload(ctx, sel, v)
 }
 
-func (ec *executionContext) marshalNSupplierPayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐSupplierPayload(ctx context.Context, sel ast.SelectionSet, v models.SupplierPayload) graphql.Marshaler {
+func (ec *executionContext) marshalNSupplierPayload2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐSupplierPayload(ctx context.Context, sel ast.SelectionSet, v gmodels.SupplierPayload) graphql.Marshaler {
 	return ec._SupplierPayload(ctx, sel, &v)
 }
 
-func (ec *executionContext) marshalNSupplierPayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐSupplierPayload(ctx context.Context, sel ast.SelectionSet, v *models.SupplierPayload) graphql.Marshaler {
+func (ec *executionContext) marshalNSupplierPayload2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐSupplierPayload(ctx context.Context, sel ast.SelectionSet, v *gmodels.SupplierPayload) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
 			ec.Errorf(ctx, "must not be null")
@@ -29270,7 +29270,7 @@ func (ec *executionContext) marshalNSupplierPayload2ᚖgithubᚗcomᚋsjhitchner
 	return ec._SupplierPayload(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalNSupplierUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐSupplierUpdateInput(ctx context.Context, v interface{}) (models.SupplierUpdateInput, error) {
+func (ec *executionContext) unmarshalNSupplierUpdateInput2githubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐSupplierUpdateInput(ctx context.Context, v interface{}) (gmodels.SupplierUpdateInput, error) {
 	res, err := ec.unmarshalInputSupplierUpdateInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
 }
@@ -29504,7 +29504,7 @@ func (ec *executionContext) marshalN__TypeKind2string(ctx context.Context, sel a
 	return res
 }
 
-func (ec *executionContext) unmarshalOAdditiveFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveFilter(ctx context.Context, v interface{}) (*models.AdditiveFilter, error) {
+func (ec *executionContext) unmarshalOAdditiveFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveFilter(ctx context.Context, v interface{}) (*gmodels.AdditiveFilter, error) {
 	if v == nil {
 		return nil, nil
 	}
@@ -29512,7 +29512,7 @@ func (ec *executionContext) unmarshalOAdditiveFilter2ᚖgithubᚗcomᚋsjhitchne
 	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalOAdditiveInventory2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveInventory(ctx context.Context, sel ast.SelectionSet, v []*models.AdditiveInventory) graphql.Marshaler {
+func (ec *executionContext) marshalOAdditiveInventory2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveInventory(ctx context.Context, sel ast.SelectionSet, v []*gmodels.AdditiveInventory) graphql.Marshaler {
 	if v == nil {
 		return graphql.Null
 	}
@@ -29552,14 +29552,14 @@ func (ec *executionContext) marshalOAdditiveInventory2ᚕᚖgithubᚗcomᚋsjhit
 	return ret
 }
 
-func (ec *executionContext) marshalOAdditiveInventory2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveInventory(ctx context.Context, sel ast.SelectionSet, v *models.AdditiveInventory) graphql.Marshaler {
+func (ec *executionContext) marshalOAdditiveInventory2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveInventory(ctx context.Context, sel ast.SelectionSet, v *gmodels.AdditiveInventory) graphql.Marshaler {
 	if v == nil {
 		return graphql.Null
 	}
 	return ec._AdditiveInventory(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalOAdditiveInventoryFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveInventoryFilter(ctx context.Context, v interface{}) (*models.AdditiveInventoryFilter, error) {
+func (ec *executionContext) unmarshalOAdditiveInventoryFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveInventoryFilter(ctx context.Context, v interface{}) (*gmodels.AdditiveInventoryFilter, error) {
 	if v == nil {
 		return nil, nil
 	}
@@ -29567,7 +29567,7 @@ func (ec *executionContext) unmarshalOAdditiveInventoryFilter2ᚖgithubᚗcomᚋ
 	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) unmarshalOAdditiveInventoryWhere2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveInventoryWhere(ctx context.Context, v interface{}) (*models.AdditiveInventoryWhere, error) {
+func (ec *executionContext) unmarshalOAdditiveInventoryWhere2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveInventoryWhere(ctx context.Context, v interface{}) (*gmodels.AdditiveInventoryWhere, error) {
 	if v == nil {
 		return nil, nil
 	}
@@ -29575,7 +29575,7 @@ func (ec *executionContext) unmarshalOAdditiveInventoryWhere2ᚖgithubᚗcomᚋs
 	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) unmarshalOAdditiveWhere2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveWhere(ctx context.Context, v interface{}) (*models.AdditiveWhere, error) {
+func (ec *executionContext) unmarshalOAdditiveWhere2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐAdditiveWhere(ctx context.Context, v interface{}) (*gmodels.AdditiveWhere, error) {
 	if v == nil {
 		return nil, nil
 	}
@@ -29658,7 +29658,7 @@ func (ec *executionContext) marshalOFloat2ᚖfloat64(ctx context.Context, sel as
 	return graphql.MarshalFloat(*v)
 }
 
-func (ec *executionContext) unmarshalOFloatFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFloatFilter(ctx context.Context, v interface{}) (*models.FloatFilter, error) {
+func (ec *executionContext) unmarshalOFloatFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFloatFilter(ctx context.Context, v interface{}) (*gmodels.FloatFilter, error) {
 	if v == nil {
 		return nil, nil
 	}
@@ -29666,7 +29666,7 @@ func (ec *executionContext) unmarshalOFloatFilter2ᚖgithubᚗcomᚋsjhitchner�
 	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) unmarshalOFragranceFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceFilter(ctx context.Context, v interface{}) (*models.FragranceFilter, error) {
+func (ec *executionContext) unmarshalOFragranceFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceFilter(ctx context.Context, v interface{}) (*gmodels.FragranceFilter, error) {
 	if v == nil {
 		return nil, nil
 	}
@@ -29674,7 +29674,7 @@ func (ec *executionContext) unmarshalOFragranceFilter2ᚖgithubᚗcomᚋsjhitchn
 	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalOFragranceInventory2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceInventory(ctx context.Context, sel ast.SelectionSet, v []*models.FragranceInventory) graphql.Marshaler {
+func (ec *executionContext) marshalOFragranceInventory2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceInventory(ctx context.Context, sel ast.SelectionSet, v []*gmodels.FragranceInventory) graphql.Marshaler {
 	if v == nil {
 		return graphql.Null
 	}
@@ -29714,14 +29714,14 @@ func (ec *executionContext) marshalOFragranceInventory2ᚕᚖgithubᚗcomᚋsjhi
 	return ret
 }
 
-func (ec *executionContext) marshalOFragranceInventory2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceInventory(ctx context.Context, sel ast.SelectionSet, v *models.FragranceInventory) graphql.Marshaler {
+func (ec *executionContext) marshalOFragranceInventory2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceInventory(ctx context.Context, sel ast.SelectionSet, v *gmodels.FragranceInventory) graphql.Marshaler {
 	if v == nil {
 		return graphql.Null
 	}
 	return ec._FragranceInventory(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalOFragranceInventoryFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceInventoryFilter(ctx context.Context, v interface{}) (*models.FragranceInventoryFilter, error) {
+func (ec *executionContext) unmarshalOFragranceInventoryFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceInventoryFilter(ctx context.Context, v interface{}) (*gmodels.FragranceInventoryFilter, error) {
 	if v == nil {
 		return nil, nil
 	}
@@ -29729,7 +29729,7 @@ func (ec *executionContext) unmarshalOFragranceInventoryFilter2ᚖgithubᚗcom�
 	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) unmarshalOFragranceInventoryWhere2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceInventoryWhere(ctx context.Context, v interface{}) (*models.FragranceInventoryWhere, error) {
+func (ec *executionContext) unmarshalOFragranceInventoryWhere2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceInventoryWhere(ctx context.Context, v interface{}) (*gmodels.FragranceInventoryWhere, error) {
 	if v == nil {
 		return nil, nil
 	}
@@ -29737,7 +29737,7 @@ func (ec *executionContext) unmarshalOFragranceInventoryWhere2ᚖgithubᚗcomᚋ
 	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) unmarshalOFragranceWhere2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceWhere(ctx context.Context, v interface{}) (*models.FragranceWhere, error) {
+func (ec *executionContext) unmarshalOFragranceWhere2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐFragranceWhere(ctx context.Context, v interface{}) (*gmodels.FragranceWhere, error) {
 	if v == nil {
 		return nil, nil
 	}
@@ -29796,7 +29796,7 @@ func (ec *executionContext) marshalOID2ᚖstring(ctx context.Context, sel ast.Se
 	return graphql.MarshalID(*v)
 }
 
-func (ec *executionContext) unmarshalOIDFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐIDFilter(ctx context.Context, v interface{}) (*models.IDFilter, error) {
+func (ec *executionContext) unmarshalOIDFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐIDFilter(ctx context.Context, v interface{}) (*gmodels.IDFilter, error) {
 	if v == nil {
 		return nil, nil
 	}
@@ -29855,7 +29855,7 @@ func (ec *executionContext) marshalOInt2ᚖint(ctx context.Context, sel ast.Sele
 	return graphql.MarshalInt(*v)
 }
 
-func (ec *executionContext) unmarshalOIntFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐIntFilter(ctx context.Context, v interface{}) (*models.IntFilter, error) {
+func (ec *executionContext) unmarshalOIntFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐIntFilter(ctx context.Context, v interface{}) (*gmodels.IntFilter, error) {
 	if v == nil {
 		return nil, nil
 	}
@@ -29863,7 +29863,7 @@ func (ec *executionContext) unmarshalOIntFilter2ᚖgithubᚗcomᚋsjhitchnerᚋs
 	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) unmarshalOLipidFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidFilter(ctx context.Context, v interface{}) (*models.LipidFilter, error) {
+func (ec *executionContext) unmarshalOLipidFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidFilter(ctx context.Context, v interface{}) (*gmodels.LipidFilter, error) {
 	if v == nil {
 		return nil, nil
 	}
@@ -29871,7 +29871,7 @@ func (ec *executionContext) unmarshalOLipidFilter2ᚖgithubᚗcomᚋsjhitchner�
 	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalOLipidInventory2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidInventory(ctx context.Context, sel ast.SelectionSet, v []*models.LipidInventory) graphql.Marshaler {
+func (ec *executionContext) marshalOLipidInventory2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidInventory(ctx context.Context, sel ast.SelectionSet, v []*gmodels.LipidInventory) graphql.Marshaler {
 	if v == nil {
 		return graphql.Null
 	}
@@ -29911,14 +29911,14 @@ func (ec *executionContext) marshalOLipidInventory2ᚕᚖgithubᚗcomᚋsjhitchn
 	return ret
 }
 
-func (ec *executionContext) marshalOLipidInventory2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidInventory(ctx context.Context, sel ast.SelectionSet, v *models.LipidInventory) graphql.Marshaler {
+func (ec *executionContext) marshalOLipidInventory2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidInventory(ctx context.Context, sel ast.SelectionSet, v *gmodels.LipidInventory) graphql.Marshaler {
 	if v == nil {
 		return graphql.Null
 	}
 	return ec._LipidInventory(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalOLipidInventoryFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidInventoryFilter(ctx context.Context, v interface{}) (*models.LipidInventoryFilter, error) {
+func (ec *executionContext) unmarshalOLipidInventoryFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidInventoryFilter(ctx context.Context, v interface{}) (*gmodels.LipidInventoryFilter, error) {
 	if v == nil {
 		return nil, nil
 	}
@@ -29926,7 +29926,7 @@ func (ec *executionContext) unmarshalOLipidInventoryFilter2ᚖgithubᚗcomᚋsjh
 	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) unmarshalOLipidInventoryWhere2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidInventoryWhere(ctx context.Context, v interface{}) (*models.LipidInventoryWhere, error) {
+func (ec *executionContext) unmarshalOLipidInventoryWhere2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidInventoryWhere(ctx context.Context, v interface{}) (*gmodels.LipidInventoryWhere, error) {
 	if v == nil {
 		return nil, nil
 	}
@@ -29934,7 +29934,7 @@ func (ec *executionContext) unmarshalOLipidInventoryWhere2ᚖgithubᚗcomᚋsjhi
 	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) unmarshalOLipidWhere2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidWhere(ctx context.Context, v interface{}) (*models.LipidWhere, error) {
+func (ec *executionContext) unmarshalOLipidWhere2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLipidWhere(ctx context.Context, v interface{}) (*gmodels.LipidWhere, error) {
 	if v == nil {
 		return nil, nil
 	}
@@ -29942,7 +29942,7 @@ func (ec *executionContext) unmarshalOLipidWhere2ᚖgithubᚗcomᚋsjhitchnerᚋ
 	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) unmarshalOLyeFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeFilter(ctx context.Context, v interface{}) (*models.LyeFilter, error) {
+func (ec *executionContext) unmarshalOLyeFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeFilter(ctx context.Context, v interface{}) (*gmodels.LyeFilter, error) {
 	if v == nil {
 		return nil, nil
 	}
@@ -29950,7 +29950,7 @@ func (ec *executionContext) unmarshalOLyeFilter2ᚖgithubᚗcomᚋsjhitchnerᚋs
 	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalOLyeInventory2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeInventory(ctx context.Context, sel ast.SelectionSet, v []*models.LyeInventory) graphql.Marshaler {
+func (ec *executionContext) marshalOLyeInventory2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeInventory(ctx context.Context, sel ast.SelectionSet, v []*gmodels.LyeInventory) graphql.Marshaler {
 	if v == nil {
 		return graphql.Null
 	}
@@ -29990,14 +29990,14 @@ func (ec *executionContext) marshalOLyeInventory2ᚕᚖgithubᚗcomᚋsjhitchner
 	return ret
 }
 
-func (ec *executionContext) marshalOLyeInventory2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeInventory(ctx context.Context, sel ast.SelectionSet, v *models.LyeInventory) graphql.Marshaler {
+func (ec *executionContext) marshalOLyeInventory2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeInventory(ctx context.Context, sel ast.SelectionSet, v *gmodels.LyeInventory) graphql.Marshaler {
 	if v == nil {
 		return graphql.Null
 	}
 	return ec._LyeInventory(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalOLyeInventoryFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeInventoryFilter(ctx context.Context, v interface{}) (*models.LyeInventoryFilter, error) {
+func (ec *executionContext) unmarshalOLyeInventoryFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeInventoryFilter(ctx context.Context, v interface{}) (*gmodels.LyeInventoryFilter, error) {
 	if v == nil {
 		return nil, nil
 	}
@@ -30005,7 +30005,7 @@ func (ec *executionContext) unmarshalOLyeInventoryFilter2ᚖgithubᚗcomᚋsjhit
 	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) unmarshalOLyeInventoryWhere2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeInventoryWhere(ctx context.Context, v interface{}) (*models.LyeInventoryWhere, error) {
+func (ec *executionContext) unmarshalOLyeInventoryWhere2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeInventoryWhere(ctx context.Context, v interface{}) (*gmodels.LyeInventoryWhere, error) {
 	if v == nil {
 		return nil, nil
 	}
@@ -30013,7 +30013,7 @@ func (ec *executionContext) unmarshalOLyeInventoryWhere2ᚖgithubᚗcomᚋsjhitc
 	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) unmarshalOLyeWhere2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeWhere(ctx context.Context, v interface{}) (*models.LyeWhere, error) {
+func (ec *executionContext) unmarshalOLyeWhere2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐLyeWhere(ctx context.Context, v interface{}) (*gmodels.LyeWhere, error) {
 	if v == nil {
 		return nil, nil
 	}
@@ -30021,7 +30021,7 @@ func (ec *executionContext) unmarshalOLyeWhere2ᚖgithubᚗcomᚋsjhitchnerᚋso
 	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalORecipeAdditive2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeAdditive(ctx context.Context, sel ast.SelectionSet, v []*models.RecipeAdditive) graphql.Marshaler {
+func (ec *executionContext) marshalORecipeAdditive2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeAdditive(ctx context.Context, sel ast.SelectionSet, v []*gmodels.RecipeAdditive) graphql.Marshaler {
 	if v == nil {
 		return graphql.Null
 	}
@@ -30061,14 +30061,14 @@ func (ec *executionContext) marshalORecipeAdditive2ᚕᚖgithubᚗcomᚋsjhitchn
 	return ret
 }
 
-func (ec *executionContext) marshalORecipeAdditive2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeAdditive(ctx context.Context, sel ast.SelectionSet, v *models.RecipeAdditive) graphql.Marshaler {
+func (ec *executionContext) marshalORecipeAdditive2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeAdditive(ctx context.Context, sel ast.SelectionSet, v *gmodels.RecipeAdditive) graphql.Marshaler {
 	if v == nil {
 		return graphql.Null
 	}
 	return ec._RecipeAdditive(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalORecipeAdditiveFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeAdditiveFilter(ctx context.Context, v interface{}) (*models.RecipeAdditiveFilter, error) {
+func (ec *executionContext) unmarshalORecipeAdditiveFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeAdditiveFilter(ctx context.Context, v interface{}) (*gmodels.RecipeAdditiveFilter, error) {
 	if v == nil {
 		return nil, nil
 	}
@@ -30076,7 +30076,7 @@ func (ec *executionContext) unmarshalORecipeAdditiveFilter2ᚖgithubᚗcomᚋsjh
 	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) unmarshalORecipeAdditiveWhere2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeAdditiveWhere(ctx context.Context, v interface{}) (*models.RecipeAdditiveWhere, error) {
+func (ec *executionContext) unmarshalORecipeAdditiveWhere2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeAdditiveWhere(ctx context.Context, v interface{}) (*gmodels.RecipeAdditiveWhere, error) {
 	if v == nil {
 		return nil, nil
 	}
@@ -30084,7 +30084,7 @@ func (ec *executionContext) unmarshalORecipeAdditiveWhere2ᚖgithubᚗcomᚋsjhi
 	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalORecipeBatch2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatch(ctx context.Context, sel ast.SelectionSet, v []*models.RecipeBatch) graphql.Marshaler {
+func (ec *executionContext) marshalORecipeBatch2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatch(ctx context.Context, sel ast.SelectionSet, v []*gmodels.RecipeBatch) graphql.Marshaler {
 	if v == nil {
 		return graphql.Null
 	}
@@ -30124,14 +30124,14 @@ func (ec *executionContext) marshalORecipeBatch2ᚕᚖgithubᚗcomᚋsjhitchner�
 	return ret
 }
 
-func (ec *executionContext) marshalORecipeBatch2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatch(ctx context.Context, sel ast.SelectionSet, v *models.RecipeBatch) graphql.Marshaler {
+func (ec *executionContext) marshalORecipeBatch2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatch(ctx context.Context, sel ast.SelectionSet, v *gmodels.RecipeBatch) graphql.Marshaler {
 	if v == nil {
 		return graphql.Null
 	}
 	return ec._RecipeBatch(ctx, sel, v)
 }
 
-func (ec *executionContext) marshalORecipeBatchAdditive2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchAdditive(ctx context.Context, sel ast.SelectionSet, v []*models.RecipeBatchAdditive) graphql.Marshaler {
+func (ec *executionContext) marshalORecipeBatchAdditive2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchAdditive(ctx context.Context, sel ast.SelectionSet, v []*gmodels.RecipeBatchAdditive) graphql.Marshaler {
 	if v == nil {
 		return graphql.Null
 	}
@@ -30171,14 +30171,14 @@ func (ec *executionContext) marshalORecipeBatchAdditive2ᚕᚖgithubᚗcomᚋsjh
 	return ret
 }
 
-func (ec *executionContext) marshalORecipeBatchAdditive2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchAdditive(ctx context.Context, sel ast.SelectionSet, v *models.RecipeBatchAdditive) graphql.Marshaler {
+func (ec *executionContext) marshalORecipeBatchAdditive2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchAdditive(ctx context.Context, sel ast.SelectionSet, v *gmodels.RecipeBatchAdditive) graphql.Marshaler {
 	if v == nil {
 		return graphql.Null
 	}
 	return ec._RecipeBatchAdditive(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalORecipeBatchAdditiveFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchAdditiveFilter(ctx context.Context, v interface{}) (*models.RecipeBatchAdditiveFilter, error) {
+func (ec *executionContext) unmarshalORecipeBatchAdditiveFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchAdditiveFilter(ctx context.Context, v interface{}) (*gmodels.RecipeBatchAdditiveFilter, error) {
 	if v == nil {
 		return nil, nil
 	}
@@ -30186,7 +30186,7 @@ func (ec *executionContext) unmarshalORecipeBatchAdditiveFilter2ᚖgithubᚗcom�
 	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) unmarshalORecipeBatchAdditiveWhere2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchAdditiveWhere(ctx context.Context, v interface{}) (*models.RecipeBatchAdditiveWhere, error) {
+func (ec *executionContext) unmarshalORecipeBatchAdditiveWhere2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchAdditiveWhere(ctx context.Context, v interface{}) (*gmodels.RecipeBatchAdditiveWhere, error) {
 	if v == nil {
 		return nil, nil
 	}
@@ -30194,7 +30194,7 @@ func (ec *executionContext) unmarshalORecipeBatchAdditiveWhere2ᚖgithubᚗcom�
 	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) unmarshalORecipeBatchFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchFilter(ctx context.Context, v interface{}) (*models.RecipeBatchFilter, error) {
+func (ec *executionContext) unmarshalORecipeBatchFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchFilter(ctx context.Context, v interface{}) (*gmodels.RecipeBatchFilter, error) {
 	if v == nil {
 		return nil, nil
 	}
@@ -30202,7 +30202,7 @@ func (ec *executionContext) unmarshalORecipeBatchFilter2ᚖgithubᚗcomᚋsjhitc
 	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalORecipeBatchFragrance2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchFragrance(ctx context.Context, sel ast.SelectionSet, v []*models.RecipeBatchFragrance) graphql.Marshaler {
+func (ec *executionContext) marshalORecipeBatchFragrance2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchFragrance(ctx context.Context, sel ast.SelectionSet, v []*gmodels.RecipeBatchFragrance) graphql.Marshaler {
 	if v == nil {
 		return graphql.Null
 	}
@@ -30242,14 +30242,14 @@ func (ec *executionContext) marshalORecipeBatchFragrance2ᚕᚖgithubᚗcomᚋsj
 	return ret
 }
 
-func (ec *executionContext) marshalORecipeBatchFragrance2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchFragrance(ctx context.Context, sel ast.SelectionSet, v *models.RecipeBatchFragrance) graphql.Marshaler {
+func (ec *executionContext) marshalORecipeBatchFragrance2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchFragrance(ctx context.Context, sel ast.SelectionSet, v *gmodels.RecipeBatchFragrance) graphql.Marshaler {
 	if v == nil {
 		return graphql.Null
 	}
 	return ec._RecipeBatchFragrance(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalORecipeBatchFragranceFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchFragranceFilter(ctx context.Context, v interface{}) (*models.RecipeBatchFragranceFilter, error) {
+func (ec *executionContext) unmarshalORecipeBatchFragranceFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchFragranceFilter(ctx context.Context, v interface{}) (*gmodels.RecipeBatchFragranceFilter, error) {
 	if v == nil {
 		return nil, nil
 	}
@@ -30257,7 +30257,7 @@ func (ec *executionContext) unmarshalORecipeBatchFragranceFilter2ᚖgithubᚗcom
 	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) unmarshalORecipeBatchFragranceWhere2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchFragranceWhere(ctx context.Context, v interface{}) (*models.RecipeBatchFragranceWhere, error) {
+func (ec *executionContext) unmarshalORecipeBatchFragranceWhere2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchFragranceWhere(ctx context.Context, v interface{}) (*gmodels.RecipeBatchFragranceWhere, error) {
 	if v == nil {
 		return nil, nil
 	}
@@ -30265,7 +30265,7 @@ func (ec *executionContext) unmarshalORecipeBatchFragranceWhere2ᚖgithubᚗcom�
 	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalORecipeBatchLipid2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLipid(ctx context.Context, sel ast.SelectionSet, v []*models.RecipeBatchLipid) graphql.Marshaler {
+func (ec *executionContext) marshalORecipeBatchLipid2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLipid(ctx context.Context, sel ast.SelectionSet, v []*gmodels.RecipeBatchLipid) graphql.Marshaler {
 	if v == nil {
 		return graphql.Null
 	}
@@ -30305,14 +30305,14 @@ func (ec *executionContext) marshalORecipeBatchLipid2ᚕᚖgithubᚗcomᚋsjhitc
 	return ret
 }
 
-func (ec *executionContext) marshalORecipeBatchLipid2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLipid(ctx context.Context, sel ast.SelectionSet, v *models.RecipeBatchLipid) graphql.Marshaler {
+func (ec *executionContext) marshalORecipeBatchLipid2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLipid(ctx context.Context, sel ast.SelectionSet, v *gmodels.RecipeBatchLipid) graphql.Marshaler {
 	if v == nil {
 		return graphql.Null
 	}
 	return ec._RecipeBatchLipid(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalORecipeBatchLipidFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLipidFilter(ctx context.Context, v interface{}) (*models.RecipeBatchLipidFilter, error) {
+func (ec *executionContext) unmarshalORecipeBatchLipidFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLipidFilter(ctx context.Context, v interface{}) (*gmodels.RecipeBatchLipidFilter, error) {
 	if v == nil {
 		return nil, nil
 	}
@@ -30320,7 +30320,7 @@ func (ec *executionContext) unmarshalORecipeBatchLipidFilter2ᚖgithubᚗcomᚋs
 	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) unmarshalORecipeBatchLipidWhere2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLipidWhere(ctx context.Context, v interface{}) (*models.RecipeBatchLipidWhere, error) {
+func (ec *executionContext) unmarshalORecipeBatchLipidWhere2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLipidWhere(ctx context.Context, v interface{}) (*gmodels.RecipeBatchLipidWhere, error) {
 	if v == nil {
 		return nil, nil
 	}
@@ -30328,7 +30328,7 @@ func (ec *executionContext) unmarshalORecipeBatchLipidWhere2ᚖgithubᚗcomᚋsj
 	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) unmarshalORecipeBatchLyeFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLyeFilter(ctx context.Context, v interface{}) (*models.RecipeBatchLyeFilter, error) {
+func (ec *executionContext) unmarshalORecipeBatchLyeFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLyeFilter(ctx context.Context, v interface{}) (*gmodels.RecipeBatchLyeFilter, error) {
 	if v == nil {
 		return nil, nil
 	}
@@ -30336,7 +30336,7 @@ func (ec *executionContext) unmarshalORecipeBatchLyeFilter2ᚖgithubᚗcomᚋsjh
 	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) unmarshalORecipeBatchLyeWhere2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLyeWhere(ctx context.Context, v interface{}) (*models.RecipeBatchLyeWhere, error) {
+func (ec *executionContext) unmarshalORecipeBatchLyeWhere2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchLyeWhere(ctx context.Context, v interface{}) (*gmodels.RecipeBatchLyeWhere, error) {
 	if v == nil {
 		return nil, nil
 	}
@@ -30344,7 +30344,7 @@ func (ec *executionContext) unmarshalORecipeBatchLyeWhere2ᚖgithubᚗcomᚋsjhi
 	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) unmarshalORecipeBatchWhere2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchWhere(ctx context.Context, v interface{}) (*models.RecipeBatchWhere, error) {
+func (ec *executionContext) unmarshalORecipeBatchWhere2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeBatchWhere(ctx context.Context, v interface{}) (*gmodels.RecipeBatchWhere, error) {
 	if v == nil {
 		return nil, nil
 	}
@@ -30352,7 +30352,7 @@ func (ec *executionContext) unmarshalORecipeBatchWhere2ᚖgithubᚗcomᚋsjhitch
 	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) unmarshalORecipeFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeFilter(ctx context.Context, v interface{}) (*models.RecipeFilter, error) {
+func (ec *executionContext) unmarshalORecipeFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeFilter(ctx context.Context, v interface{}) (*gmodels.RecipeFilter, error) {
 	if v == nil {
 		return nil, nil
 	}
@@ -30360,7 +30360,7 @@ func (ec *executionContext) unmarshalORecipeFilter2ᚖgithubᚗcomᚋsjhitchner�
 	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalORecipeFragrance2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeFragrance(ctx context.Context, sel ast.SelectionSet, v []*models.RecipeFragrance) graphql.Marshaler {
+func (ec *executionContext) marshalORecipeFragrance2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeFragrance(ctx context.Context, sel ast.SelectionSet, v []*gmodels.RecipeFragrance) graphql.Marshaler {
 	if v == nil {
 		return graphql.Null
 	}
@@ -30400,14 +30400,14 @@ func (ec *executionContext) marshalORecipeFragrance2ᚕᚖgithubᚗcomᚋsjhitch
 	return ret
 }
 
-func (ec *executionContext) marshalORecipeFragrance2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeFragrance(ctx context.Context, sel ast.SelectionSet, v *models.RecipeFragrance) graphql.Marshaler {
+func (ec *executionContext) marshalORecipeFragrance2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeFragrance(ctx context.Context, sel ast.SelectionSet, v *gmodels.RecipeFragrance) graphql.Marshaler {
 	if v == nil {
 		return graphql.Null
 	}
 	return ec._RecipeFragrance(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalORecipeFragranceFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeFragranceFilter(ctx context.Context, v interface{}) (*models.RecipeFragranceFilter, error) {
+func (ec *executionContext) unmarshalORecipeFragranceFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeFragranceFilter(ctx context.Context, v interface{}) (*gmodels.RecipeFragranceFilter, error) {
 	if v == nil {
 		return nil, nil
 	}
@@ -30415,7 +30415,7 @@ func (ec *executionContext) unmarshalORecipeFragranceFilter2ᚖgithubᚗcomᚋsj
 	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) unmarshalORecipeFragranceWhere2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeFragranceWhere(ctx context.Context, v interface{}) (*models.RecipeFragranceWhere, error) {
+func (ec *executionContext) unmarshalORecipeFragranceWhere2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeFragranceWhere(ctx context.Context, v interface{}) (*gmodels.RecipeFragranceWhere, error) {
 	if v == nil {
 		return nil, nil
 	}
@@ -30423,7 +30423,7 @@ func (ec *executionContext) unmarshalORecipeFragranceWhere2ᚖgithubᚗcomᚋsjh
 	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) marshalORecipeLipid2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeLipid(ctx context.Context, sel ast.SelectionSet, v []*models.RecipeLipid) graphql.Marshaler {
+func (ec *executionContext) marshalORecipeLipid2ᚕᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeLipid(ctx context.Context, sel ast.SelectionSet, v []*gmodels.RecipeLipid) graphql.Marshaler {
 	if v == nil {
 		return graphql.Null
 	}
@@ -30463,14 +30463,14 @@ func (ec *executionContext) marshalORecipeLipid2ᚕᚖgithubᚗcomᚋsjhitchner�
 	return ret
 }
 
-func (ec *executionContext) marshalORecipeLipid2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeLipid(ctx context.Context, sel ast.SelectionSet, v *models.RecipeLipid) graphql.Marshaler {
+func (ec *executionContext) marshalORecipeLipid2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeLipid(ctx context.Context, sel ast.SelectionSet, v *gmodels.RecipeLipid) graphql.Marshaler {
 	if v == nil {
 		return graphql.Null
 	}
 	return ec._RecipeLipid(ctx, sel, v)
 }
 
-func (ec *executionContext) unmarshalORecipeLipidFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeLipidFilter(ctx context.Context, v interface{}) (*models.RecipeLipidFilter, error) {
+func (ec *executionContext) unmarshalORecipeLipidFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeLipidFilter(ctx context.Context, v interface{}) (*gmodels.RecipeLipidFilter, error) {
 	if v == nil {
 		return nil, nil
 	}
@@ -30478,7 +30478,7 @@ func (ec *executionContext) unmarshalORecipeLipidFilter2ᚖgithubᚗcomᚋsjhitc
 	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) unmarshalORecipeLipidWhere2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeLipidWhere(ctx context.Context, v interface{}) (*models.RecipeLipidWhere, error) {
+func (ec *executionContext) unmarshalORecipeLipidWhere2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeLipidWhere(ctx context.Context, v interface{}) (*gmodels.RecipeLipidWhere, error) {
 	if v == nil {
 		return nil, nil
 	}
@@ -30486,7 +30486,7 @@ func (ec *executionContext) unmarshalORecipeLipidWhere2ᚖgithubᚗcomᚋsjhitch
 	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) unmarshalORecipeWhere2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeWhere(ctx context.Context, v interface{}) (*models.RecipeWhere, error) {
+func (ec *executionContext) unmarshalORecipeWhere2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐRecipeWhere(ctx context.Context, v interface{}) (*gmodels.RecipeWhere, error) {
 	if v == nil {
 		return nil, nil
 	}
@@ -30554,7 +30554,7 @@ func (ec *executionContext) marshalOString2ᚖstring(ctx context.Context, sel as
 	return graphql.MarshalString(*v)
 }
 
-func (ec *executionContext) unmarshalOStringFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐStringFilter(ctx context.Context, v interface{}) (*models.StringFilter, error) {
+func (ec *executionContext) unmarshalOStringFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐStringFilter(ctx context.Context, v interface{}) (*gmodels.StringFilter, error) {
 	if v == nil {
 		return nil, nil
 	}
@@ -30562,7 +30562,7 @@ func (ec *executionContext) unmarshalOStringFilter2ᚖgithubᚗcomᚋsjhitchner�
 	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) unmarshalOSupplierFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐSupplierFilter(ctx context.Context, v interface{}) (*models.SupplierFilter, error) {
+func (ec *executionContext) unmarshalOSupplierFilter2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐSupplierFilter(ctx context.Context, v interface{}) (*gmodels.SupplierFilter, error) {
 	if v == nil {
 		return nil, nil
 	}
@@ -30570,7 +30570,7 @@ func (ec *executionContext) unmarshalOSupplierFilter2ᚖgithubᚗcomᚋsjhitchne
 	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
-func (ec *executionContext) unmarshalOSupplierWhere2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐSupplierWhere(ctx context.Context, v interface{}) (*models.SupplierWhere, error) {
+func (ec *executionContext) unmarshalOSupplierWhere2ᚖgithubᚗcomᚋsjhitchnerᚋsoapcalcᚋbackendᚋgeneratedᚋgraphqlᚋmodelsᚐSupplierWhere(ctx context.Context, v interface{}) (*gmodels.SupplierWhere, error) {
 	if v == nil {
 		return nil, nil
 	}

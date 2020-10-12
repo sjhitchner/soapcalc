@@ -161,20 +161,20 @@ var AdditiveWhere = struct {
 
 // AdditiveRels is where relationship names are stored.
 var AdditiveRels = struct {
-	AdditiveInventories  string
-	RecipeAdditives      string
-	RecipeBatchAdditives string
+	RecipeAdditive      string
+	RecipeBatchAdditive string
+	AdditiveInventories string
 }{
-	AdditiveInventories:  "AdditiveInventories",
-	RecipeAdditives:      "RecipeAdditives",
-	RecipeBatchAdditives: "RecipeBatchAdditives",
+	RecipeAdditive:      "RecipeAdditive",
+	RecipeBatchAdditive: "RecipeBatchAdditive",
+	AdditiveInventories: "AdditiveInventories",
 }
 
 // additiveR is where relationships are stored.
 type additiveR struct {
-	AdditiveInventories  AdditiveInventorySlice   `boil:"AdditiveInventories" json:"AdditiveInventories" toml:"AdditiveInventories" yaml:"AdditiveInventories"`
-	RecipeAdditives      RecipeAdditiveSlice      `boil:"RecipeAdditives" json:"RecipeAdditives" toml:"RecipeAdditives" yaml:"RecipeAdditives"`
-	RecipeBatchAdditives RecipeBatchAdditiveSlice `boil:"RecipeBatchAdditives" json:"RecipeBatchAdditives" toml:"RecipeBatchAdditives" yaml:"RecipeBatchAdditives"`
+	RecipeAdditive      *RecipeAdditive        `boil:"RecipeAdditive" json:"RecipeAdditive" toml:"RecipeAdditive" yaml:"RecipeAdditive"`
+	RecipeBatchAdditive *RecipeBatchAdditive   `boil:"RecipeBatchAdditive" json:"RecipeBatchAdditive" toml:"RecipeBatchAdditive" yaml:"RecipeBatchAdditive"`
+	AdditiveInventories AdditiveInventorySlice `boil:"AdditiveInventories" json:"AdditiveInventories" toml:"AdditiveInventories" yaml:"AdditiveInventories"`
 }
 
 // NewStruct creates a new relationship struct
@@ -467,6 +467,36 @@ func (q additiveQuery) Exists(ctx context.Context, exec boil.ContextExecutor) (b
 	return count > 0, nil
 }
 
+// RecipeAdditive pointed to by the foreign key.
+func (o *Additive) RecipeAdditive(mods ...qm.QueryMod) recipeAdditiveQuery {
+	queryMods := []qm.QueryMod{
+		qm.Where("\"additive_id\" = ?", o.ID),
+		qmhelper.WhereIsNull("deleted_at"),
+	}
+
+	queryMods = append(queryMods, mods...)
+
+	query := RecipeAdditives(queryMods...)
+	queries.SetFrom(query.Query, "\"recipe_additive\"")
+
+	return query
+}
+
+// RecipeBatchAdditive pointed to by the foreign key.
+func (o *Additive) RecipeBatchAdditive(mods ...qm.QueryMod) recipeBatchAdditiveQuery {
+	queryMods := []qm.QueryMod{
+		qm.Where("\"additive_id\" = ?", o.ID),
+		qmhelper.WhereIsNull("deleted_at"),
+	}
+
+	queryMods = append(queryMods, mods...)
+
+	query := RecipeBatchAdditives(queryMods...)
+	queries.SetFrom(query.Query, "\"recipe_batch_additive\"")
+
+	return query
+}
+
 // AdditiveInventories retrieves all the additive_inventory's AdditiveInventories with an executor.
 func (o *Additive) AdditiveInventories(mods ...qm.QueryMod) additiveInventoryQuery {
 	var queryMods []qm.QueryMod
@@ -489,48 +519,192 @@ func (o *Additive) AdditiveInventories(mods ...qm.QueryMod) additiveInventoryQue
 	return query
 }
 
-// RecipeAdditives retrieves all the recipe_additive's RecipeAdditives with an executor.
-func (o *Additive) RecipeAdditives(mods ...qm.QueryMod) recipeAdditiveQuery {
-	var queryMods []qm.QueryMod
-	if len(mods) != 0 {
-		queryMods = append(queryMods, mods...)
+// LoadRecipeAdditive allows an eager lookup of values, cached into the
+// loaded structs of the objects. This is for a 1-1 relationship.
+func (additiveL) LoadRecipeAdditive(ctx context.Context, e boil.ContextExecutor, singular bool, maybeAdditive interface{}, mods queries.Applicator) error {
+	var slice []*Additive
+	var object *Additive
+
+	if singular {
+		object = maybeAdditive.(*Additive)
+	} else {
+		slice = *maybeAdditive.(*[]*Additive)
 	}
 
-	queryMods = append(queryMods,
-		qm.Where("\"recipe_additive\".\"additive_id\"=?", o.ID),
-		qmhelper.WhereIsNull("\"recipe_additive\".\"deleted_at\""),
+	args := make([]interface{}, 0, 1)
+	if singular {
+		if object.R == nil {
+			object.R = &additiveR{}
+		}
+		args = append(args, object.ID)
+	} else {
+	Outer:
+		for _, obj := range slice {
+			if obj.R == nil {
+				obj.R = &additiveR{}
+			}
+
+			for _, a := range args {
+				if a == obj.ID {
+					continue Outer
+				}
+			}
+
+			args = append(args, obj.ID)
+		}
+	}
+
+	if len(args) == 0 {
+		return nil
+	}
+
+	query := NewQuery(
+		qm.From(`recipe_additive`),
+		qm.WhereIn(`recipe_additive.additive_id in ?`, args...),
+		qmhelper.WhereIsNull(`recipe_additive.deleted_at`),
 	)
-
-	query := RecipeAdditives(queryMods...)
-	queries.SetFrom(query.Query, "\"recipe_additive\"")
-
-	if len(queries.GetSelect(query.Query)) == 0 {
-		queries.SetSelect(query.Query, []string{"\"recipe_additive\".*"})
+	if mods != nil {
+		mods.Apply(query)
 	}
 
-	return query
+	results, err := query.QueryContext(ctx, e)
+	if err != nil {
+		return errors.Wrap(err, "failed to eager load RecipeAdditive")
+	}
+
+	var resultSlice []*RecipeAdditive
+	if err = queries.Bind(results, &resultSlice); err != nil {
+		return errors.Wrap(err, "failed to bind eager loaded slice RecipeAdditive")
+	}
+
+	if err = results.Close(); err != nil {
+		return errors.Wrap(err, "failed to close results of eager load for recipe_additive")
+	}
+	if err = results.Err(); err != nil {
+		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for recipe_additive")
+	}
+
+	if len(additiveAfterSelectHooks) != 0 {
+		for _, obj := range resultSlice {
+			if err := obj.doAfterSelectHooks(ctx, e); err != nil {
+				return err
+			}
+		}
+	}
+
+	if len(resultSlice) == 0 {
+		return nil
+	}
+
+	if singular {
+		foreign := resultSlice[0]
+		object.R.RecipeAdditive = foreign
+	}
+
+	for _, local := range slice {
+		for _, foreign := range resultSlice {
+			if local.ID == foreign.AdditiveID {
+				local.R.RecipeAdditive = foreign
+				break
+			}
+		}
+	}
+
+	return nil
 }
 
-// RecipeBatchAdditives retrieves all the recipe_batch_additive's RecipeBatchAdditives with an executor.
-func (o *Additive) RecipeBatchAdditives(mods ...qm.QueryMod) recipeBatchAdditiveQuery {
-	var queryMods []qm.QueryMod
-	if len(mods) != 0 {
-		queryMods = append(queryMods, mods...)
+// LoadRecipeBatchAdditive allows an eager lookup of values, cached into the
+// loaded structs of the objects. This is for a 1-1 relationship.
+func (additiveL) LoadRecipeBatchAdditive(ctx context.Context, e boil.ContextExecutor, singular bool, maybeAdditive interface{}, mods queries.Applicator) error {
+	var slice []*Additive
+	var object *Additive
+
+	if singular {
+		object = maybeAdditive.(*Additive)
+	} else {
+		slice = *maybeAdditive.(*[]*Additive)
 	}
 
-	queryMods = append(queryMods,
-		qm.Where("\"recipe_batch_additive\".\"additive_id\"=?", o.ID),
-		qmhelper.WhereIsNull("\"recipe_batch_additive\".\"deleted_at\""),
+	args := make([]interface{}, 0, 1)
+	if singular {
+		if object.R == nil {
+			object.R = &additiveR{}
+		}
+		args = append(args, object.ID)
+	} else {
+	Outer:
+		for _, obj := range slice {
+			if obj.R == nil {
+				obj.R = &additiveR{}
+			}
+
+			for _, a := range args {
+				if a == obj.ID {
+					continue Outer
+				}
+			}
+
+			args = append(args, obj.ID)
+		}
+	}
+
+	if len(args) == 0 {
+		return nil
+	}
+
+	query := NewQuery(
+		qm.From(`recipe_batch_additive`),
+		qm.WhereIn(`recipe_batch_additive.additive_id in ?`, args...),
+		qmhelper.WhereIsNull(`recipe_batch_additive.deleted_at`),
 	)
-
-	query := RecipeBatchAdditives(queryMods...)
-	queries.SetFrom(query.Query, "\"recipe_batch_additive\"")
-
-	if len(queries.GetSelect(query.Query)) == 0 {
-		queries.SetSelect(query.Query, []string{"\"recipe_batch_additive\".*"})
+	if mods != nil {
+		mods.Apply(query)
 	}
 
-	return query
+	results, err := query.QueryContext(ctx, e)
+	if err != nil {
+		return errors.Wrap(err, "failed to eager load RecipeBatchAdditive")
+	}
+
+	var resultSlice []*RecipeBatchAdditive
+	if err = queries.Bind(results, &resultSlice); err != nil {
+		return errors.Wrap(err, "failed to bind eager loaded slice RecipeBatchAdditive")
+	}
+
+	if err = results.Close(); err != nil {
+		return errors.Wrap(err, "failed to close results of eager load for recipe_batch_additive")
+	}
+	if err = results.Err(); err != nil {
+		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for recipe_batch_additive")
+	}
+
+	if len(additiveAfterSelectHooks) != 0 {
+		for _, obj := range resultSlice {
+			if err := obj.doAfterSelectHooks(ctx, e); err != nil {
+				return err
+			}
+		}
+	}
+
+	if len(resultSlice) == 0 {
+		return nil
+	}
+
+	if singular {
+		foreign := resultSlice[0]
+		object.R.RecipeBatchAdditive = foreign
+	}
+
+	for _, local := range slice {
+		for _, foreign := range resultSlice {
+			if local.ID == foreign.AdditiveID {
+				local.R.RecipeBatchAdditive = foreign
+				break
+			}
+		}
+	}
+
+	return nil
 }
 
 // LoadAdditiveInventories allows an eager lookup of values, cached into the
@@ -622,181 +796,105 @@ func (additiveL) LoadAdditiveInventories(ctx context.Context, e boil.ContextExec
 	return nil
 }
 
-// LoadRecipeAdditives allows an eager lookup of values, cached into the
-// loaded structs of the objects. This is for a 1-M or N-M relationship.
-func (additiveL) LoadRecipeAdditives(ctx context.Context, e boil.ContextExecutor, singular bool, maybeAdditive interface{}, mods queries.Applicator) error {
-	var slice []*Additive
-	var object *Additive
+// SetRecipeAdditive of the additive to the related item.
+// Sets o.R.RecipeAdditive to related.
+// Adds o to related.R.Additive.
+func (o *Additive) SetRecipeAdditive(ctx context.Context, exec boil.ContextExecutor, insert bool, related *RecipeAdditive) error {
+	var err error
 
-	if singular {
-		object = maybeAdditive.(*Additive)
+	if insert {
+		related.AdditiveID = o.ID
+
+		if err = related.Insert(ctx, exec, boil.Infer()); err != nil {
+			return errors.Wrap(err, "failed to insert into foreign table")
+		}
 	} else {
-		slice = *maybeAdditive.(*[]*Additive)
+		updateQuery := fmt.Sprintf(
+			"UPDATE \"recipe_additive\" SET %s WHERE %s",
+			strmangle.SetParamNames("\"", "\"", 1, []string{"additive_id"}),
+			strmangle.WhereClause("\"", "\"", 2, recipeAdditivePrimaryKeyColumns),
+		)
+		values := []interface{}{o.ID, related.ID}
+
+		if boil.IsDebug(ctx) {
+			writer := boil.DebugWriterFrom(ctx)
+			fmt.Fprintln(writer, updateQuery)
+			fmt.Fprintln(writer, values)
+		}
+		if _, err = exec.ExecContext(ctx, updateQuery, values...); err != nil {
+			return errors.Wrap(err, "failed to update foreign table")
+		}
+
+		related.AdditiveID = o.ID
+
 	}
 
-	args := make([]interface{}, 0, 1)
-	if singular {
-		if object.R == nil {
-			object.R = &additiveR{}
+	if o.R == nil {
+		o.R = &additiveR{
+			RecipeAdditive: related,
 		}
-		args = append(args, object.ID)
 	} else {
-	Outer:
-		for _, obj := range slice {
-			if obj.R == nil {
-				obj.R = &additiveR{}
-			}
+		o.R.RecipeAdditive = related
+	}
 
-			for _, a := range args {
-				if a == obj.ID {
-					continue Outer
-				}
-			}
-
-			args = append(args, obj.ID)
+	if related.R == nil {
+		related.R = &recipeAdditiveR{
+			Additive: o,
 		}
+	} else {
+		related.R.Additive = o
 	}
-
-	if len(args) == 0 {
-		return nil
-	}
-
-	query := NewQuery(
-		qm.From(`recipe_additive`),
-		qm.WhereIn(`recipe_additive.additive_id in ?`, args...),
-		qmhelper.WhereIsNull(`recipe_additive.deleted_at`),
-	)
-	if mods != nil {
-		mods.Apply(query)
-	}
-
-	results, err := query.QueryContext(ctx, e)
-	if err != nil {
-		return errors.Wrap(err, "failed to eager load recipe_additive")
-	}
-
-	var resultSlice []*RecipeAdditive
-	if err = queries.Bind(results, &resultSlice); err != nil {
-		return errors.Wrap(err, "failed to bind eager loaded slice recipe_additive")
-	}
-
-	if err = results.Close(); err != nil {
-		return errors.Wrap(err, "failed to close results in eager load on recipe_additive")
-	}
-	if err = results.Err(); err != nil {
-		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for recipe_additive")
-	}
-
-	if len(recipeAdditiveAfterSelectHooks) != 0 {
-		for _, obj := range resultSlice {
-			if err := obj.doAfterSelectHooks(ctx, e); err != nil {
-				return err
-			}
-		}
-	}
-	if singular {
-		object.R.RecipeAdditives = resultSlice
-		return nil
-	}
-
-	for _, foreign := range resultSlice {
-		for _, local := range slice {
-			if local.ID == foreign.AdditiveID {
-				local.R.RecipeAdditives = append(local.R.RecipeAdditives, foreign)
-				break
-			}
-		}
-	}
-
 	return nil
 }
 
-// LoadRecipeBatchAdditives allows an eager lookup of values, cached into the
-// loaded structs of the objects. This is for a 1-M or N-M relationship.
-func (additiveL) LoadRecipeBatchAdditives(ctx context.Context, e boil.ContextExecutor, singular bool, maybeAdditive interface{}, mods queries.Applicator) error {
-	var slice []*Additive
-	var object *Additive
+// SetRecipeBatchAdditive of the additive to the related item.
+// Sets o.R.RecipeBatchAdditive to related.
+// Adds o to related.R.Additive.
+func (o *Additive) SetRecipeBatchAdditive(ctx context.Context, exec boil.ContextExecutor, insert bool, related *RecipeBatchAdditive) error {
+	var err error
 
-	if singular {
-		object = maybeAdditive.(*Additive)
+	if insert {
+		related.AdditiveID = o.ID
+
+		if err = related.Insert(ctx, exec, boil.Infer()); err != nil {
+			return errors.Wrap(err, "failed to insert into foreign table")
+		}
 	} else {
-		slice = *maybeAdditive.(*[]*Additive)
+		updateQuery := fmt.Sprintf(
+			"UPDATE \"recipe_batch_additive\" SET %s WHERE %s",
+			strmangle.SetParamNames("\"", "\"", 1, []string{"additive_id"}),
+			strmangle.WhereClause("\"", "\"", 2, recipeBatchAdditivePrimaryKeyColumns),
+		)
+		values := []interface{}{o.ID, related.ID}
+
+		if boil.IsDebug(ctx) {
+			writer := boil.DebugWriterFrom(ctx)
+			fmt.Fprintln(writer, updateQuery)
+			fmt.Fprintln(writer, values)
+		}
+		if _, err = exec.ExecContext(ctx, updateQuery, values...); err != nil {
+			return errors.Wrap(err, "failed to update foreign table")
+		}
+
+		related.AdditiveID = o.ID
+
 	}
 
-	args := make([]interface{}, 0, 1)
-	if singular {
-		if object.R == nil {
-			object.R = &additiveR{}
+	if o.R == nil {
+		o.R = &additiveR{
+			RecipeBatchAdditive: related,
 		}
-		args = append(args, object.ID)
 	} else {
-	Outer:
-		for _, obj := range slice {
-			if obj.R == nil {
-				obj.R = &additiveR{}
-			}
+		o.R.RecipeBatchAdditive = related
+	}
 
-			for _, a := range args {
-				if a == obj.ID {
-					continue Outer
-				}
-			}
-
-			args = append(args, obj.ID)
+	if related.R == nil {
+		related.R = &recipeBatchAdditiveR{
+			Additive: o,
 		}
+	} else {
+		related.R.Additive = o
 	}
-
-	if len(args) == 0 {
-		return nil
-	}
-
-	query := NewQuery(
-		qm.From(`recipe_batch_additive`),
-		qm.WhereIn(`recipe_batch_additive.additive_id in ?`, args...),
-		qmhelper.WhereIsNull(`recipe_batch_additive.deleted_at`),
-	)
-	if mods != nil {
-		mods.Apply(query)
-	}
-
-	results, err := query.QueryContext(ctx, e)
-	if err != nil {
-		return errors.Wrap(err, "failed to eager load recipe_batch_additive")
-	}
-
-	var resultSlice []*RecipeBatchAdditive
-	if err = queries.Bind(results, &resultSlice); err != nil {
-		return errors.Wrap(err, "failed to bind eager loaded slice recipe_batch_additive")
-	}
-
-	if err = results.Close(); err != nil {
-		return errors.Wrap(err, "failed to close results in eager load on recipe_batch_additive")
-	}
-	if err = results.Err(); err != nil {
-		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for recipe_batch_additive")
-	}
-
-	if len(recipeBatchAdditiveAfterSelectHooks) != 0 {
-		for _, obj := range resultSlice {
-			if err := obj.doAfterSelectHooks(ctx, e); err != nil {
-				return err
-			}
-		}
-	}
-	if singular {
-		object.R.RecipeBatchAdditives = resultSlice
-		return nil
-	}
-
-	for _, foreign := range resultSlice {
-		for _, local := range slice {
-			if local.ID == foreign.AdditiveID {
-				local.R.RecipeBatchAdditives = append(local.R.RecipeBatchAdditives, foreign)
-				break
-			}
-		}
-	}
-
 	return nil
 }
 
@@ -844,112 +942,6 @@ func (o *Additive) AddAdditiveInventories(ctx context.Context, exec boil.Context
 	for _, rel := range related {
 		if rel.R == nil {
 			rel.R = &additiveInventoryR{
-				Additive: o,
-			}
-		} else {
-			rel.R.Additive = o
-		}
-	}
-	return nil
-}
-
-// AddRecipeAdditives adds the given related objects to the existing relationships
-// of the additive, optionally inserting them as new records.
-// Appends related to o.R.RecipeAdditives.
-// Sets related.R.Additive appropriately.
-func (o *Additive) AddRecipeAdditives(ctx context.Context, exec boil.ContextExecutor, insert bool, related ...*RecipeAdditive) error {
-	var err error
-	for _, rel := range related {
-		if insert {
-			rel.AdditiveID = o.ID
-			if err = rel.Insert(ctx, exec, boil.Infer()); err != nil {
-				return errors.Wrap(err, "failed to insert into foreign table")
-			}
-		} else {
-			updateQuery := fmt.Sprintf(
-				"UPDATE \"recipe_additive\" SET %s WHERE %s",
-				strmangle.SetParamNames("\"", "\"", 1, []string{"additive_id"}),
-				strmangle.WhereClause("\"", "\"", 2, recipeAdditivePrimaryKeyColumns),
-			)
-			values := []interface{}{o.ID, rel.ID}
-
-			if boil.IsDebug(ctx) {
-				writer := boil.DebugWriterFrom(ctx)
-				fmt.Fprintln(writer, updateQuery)
-				fmt.Fprintln(writer, values)
-			}
-			if _, err = exec.ExecContext(ctx, updateQuery, values...); err != nil {
-				return errors.Wrap(err, "failed to update foreign table")
-			}
-
-			rel.AdditiveID = o.ID
-		}
-	}
-
-	if o.R == nil {
-		o.R = &additiveR{
-			RecipeAdditives: related,
-		}
-	} else {
-		o.R.RecipeAdditives = append(o.R.RecipeAdditives, related...)
-	}
-
-	for _, rel := range related {
-		if rel.R == nil {
-			rel.R = &recipeAdditiveR{
-				Additive: o,
-			}
-		} else {
-			rel.R.Additive = o
-		}
-	}
-	return nil
-}
-
-// AddRecipeBatchAdditives adds the given related objects to the existing relationships
-// of the additive, optionally inserting them as new records.
-// Appends related to o.R.RecipeBatchAdditives.
-// Sets related.R.Additive appropriately.
-func (o *Additive) AddRecipeBatchAdditives(ctx context.Context, exec boil.ContextExecutor, insert bool, related ...*RecipeBatchAdditive) error {
-	var err error
-	for _, rel := range related {
-		if insert {
-			rel.AdditiveID = o.ID
-			if err = rel.Insert(ctx, exec, boil.Infer()); err != nil {
-				return errors.Wrap(err, "failed to insert into foreign table")
-			}
-		} else {
-			updateQuery := fmt.Sprintf(
-				"UPDATE \"recipe_batch_additive\" SET %s WHERE %s",
-				strmangle.SetParamNames("\"", "\"", 1, []string{"additive_id"}),
-				strmangle.WhereClause("\"", "\"", 2, recipeBatchAdditivePrimaryKeyColumns),
-			)
-			values := []interface{}{o.ID, rel.ID}
-
-			if boil.IsDebug(ctx) {
-				writer := boil.DebugWriterFrom(ctx)
-				fmt.Fprintln(writer, updateQuery)
-				fmt.Fprintln(writer, values)
-			}
-			if _, err = exec.ExecContext(ctx, updateQuery, values...); err != nil {
-				return errors.Wrap(err, "failed to update foreign table")
-			}
-
-			rel.AdditiveID = o.ID
-		}
-	}
-
-	if o.R == nil {
-		o.R = &additiveR{
-			RecipeBatchAdditives: related,
-		}
-	} else {
-		o.R.RecipeBatchAdditives = append(o.R.RecipeBatchAdditives, related...)
-	}
-
-	for _, rel := range related {
-		if rel.R == nil {
-			rel.R = &recipeBatchAdditiveR{
 				Additive: o,
 			}
 		} else {

@@ -36,9 +36,13 @@ func TestUpsert(t *testing.T) {
 
 	t.Run("RecipeBatchLyes", testRecipeBatchLyesUpsert)
 
+	t.Run("RecipeBatchNotes", testRecipeBatchNotesUpsert)
+
 	t.Run("RecipeFragrances", testRecipeFragrancesUpsert)
 
 	t.Run("RecipeLipids", testRecipeLipidsUpsert)
+
+	t.Run("RecipeSteps", testRecipeStepsUpsert)
 
 	t.Run("Suppliers", testSuppliersUpsert)
 }

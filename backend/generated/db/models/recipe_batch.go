@@ -106,12 +106,14 @@ var RecipeBatchRels = struct {
 	BatchRecipeBatchFragrances string
 	BatchRecipeBatchLipids     string
 	BatchRecipeBatchLyes       string
+	BatchRecipeBatchNotes      string
 }{
 	Recipe:                     "Recipe",
 	BatchRecipeBatchAdditives:  "BatchRecipeBatchAdditives",
 	BatchRecipeBatchFragrances: "BatchRecipeBatchFragrances",
 	BatchRecipeBatchLipids:     "BatchRecipeBatchLipids",
 	BatchRecipeBatchLyes:       "BatchRecipeBatchLyes",
+	BatchRecipeBatchNotes:      "BatchRecipeBatchNotes",
 }
 
 // recipeBatchR is where relationships are stored.
@@ -121,6 +123,7 @@ type recipeBatchR struct {
 	BatchRecipeBatchFragrances RecipeBatchFragranceSlice `boil:"BatchRecipeBatchFragrances" json:"BatchRecipeBatchFragrances" toml:"BatchRecipeBatchFragrances" yaml:"BatchRecipeBatchFragrances"`
 	BatchRecipeBatchLipids     RecipeBatchLipidSlice     `boil:"BatchRecipeBatchLipids" json:"BatchRecipeBatchLipids" toml:"BatchRecipeBatchLipids" yaml:"BatchRecipeBatchLipids"`
 	BatchRecipeBatchLyes       RecipeBatchLyeSlice       `boil:"BatchRecipeBatchLyes" json:"BatchRecipeBatchLyes" toml:"BatchRecipeBatchLyes" yaml:"BatchRecipeBatchLyes"`
+	BatchRecipeBatchNotes      RecipeBatchNoteSlice      `boil:"BatchRecipeBatchNotes" json:"BatchRecipeBatchNotes" toml:"BatchRecipeBatchNotes" yaml:"BatchRecipeBatchNotes"`
 }
 
 // NewStruct creates a new relationship struct
@@ -511,6 +514,28 @@ func (o *RecipeBatch) BatchRecipeBatchLyes(mods ...qm.QueryMod) recipeBatchLyeQu
 
 	if len(queries.GetSelect(query.Query)) == 0 {
 		queries.SetSelect(query.Query, []string{"\"recipe_batch_lye\".*"})
+	}
+
+	return query
+}
+
+// BatchRecipeBatchNotes retrieves all the recipe_batch_note's RecipeBatchNotes with an executor via batch_id column.
+func (o *RecipeBatch) BatchRecipeBatchNotes(mods ...qm.QueryMod) recipeBatchNoteQuery {
+	var queryMods []qm.QueryMod
+	if len(mods) != 0 {
+		queryMods = append(queryMods, mods...)
+	}
+
+	queryMods = append(queryMods,
+		qm.Where("\"recipe_batch_note\".\"batch_id\"=?", o.ID),
+		qmhelper.WhereIsNull("\"recipe_batch_note\".\"deleted_at\""),
+	)
+
+	query := RecipeBatchNotes(queryMods...)
+	queries.SetFrom(query.Query, "\"recipe_batch_note\"")
+
+	if len(queries.GetSelect(query.Query)) == 0 {
+		queries.SetSelect(query.Query, []string{"\"recipe_batch_note\".*"})
 	}
 
 	return query
@@ -969,6 +994,95 @@ func (recipeBatchL) LoadBatchRecipeBatchLyes(ctx context.Context, e boil.Context
 	return nil
 }
 
+// LoadBatchRecipeBatchNotes allows an eager lookup of values, cached into the
+// loaded structs of the objects. This is for a 1-M or N-M relationship.
+func (recipeBatchL) LoadBatchRecipeBatchNotes(ctx context.Context, e boil.ContextExecutor, singular bool, maybeRecipeBatch interface{}, mods queries.Applicator) error {
+	var slice []*RecipeBatch
+	var object *RecipeBatch
+
+	if singular {
+		object = maybeRecipeBatch.(*RecipeBatch)
+	} else {
+		slice = *maybeRecipeBatch.(*[]*RecipeBatch)
+	}
+
+	args := make([]interface{}, 0, 1)
+	if singular {
+		if object.R == nil {
+			object.R = &recipeBatchR{}
+		}
+		args = append(args, object.ID)
+	} else {
+	Outer:
+		for _, obj := range slice {
+			if obj.R == nil {
+				obj.R = &recipeBatchR{}
+			}
+
+			for _, a := range args {
+				if a == obj.ID {
+					continue Outer
+				}
+			}
+
+			args = append(args, obj.ID)
+		}
+	}
+
+	if len(args) == 0 {
+		return nil
+	}
+
+	query := NewQuery(
+		qm.From(`recipe_batch_note`),
+		qm.WhereIn(`recipe_batch_note.batch_id in ?`, args...),
+		qmhelper.WhereIsNull(`recipe_batch_note.deleted_at`),
+	)
+	if mods != nil {
+		mods.Apply(query)
+	}
+
+	results, err := query.QueryContext(ctx, e)
+	if err != nil {
+		return errors.Wrap(err, "failed to eager load recipe_batch_note")
+	}
+
+	var resultSlice []*RecipeBatchNote
+	if err = queries.Bind(results, &resultSlice); err != nil {
+		return errors.Wrap(err, "failed to bind eager loaded slice recipe_batch_note")
+	}
+
+	if err = results.Close(); err != nil {
+		return errors.Wrap(err, "failed to close results in eager load on recipe_batch_note")
+	}
+	if err = results.Err(); err != nil {
+		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for recipe_batch_note")
+	}
+
+	if len(recipeBatchNoteAfterSelectHooks) != 0 {
+		for _, obj := range resultSlice {
+			if err := obj.doAfterSelectHooks(ctx, e); err != nil {
+				return err
+			}
+		}
+	}
+	if singular {
+		object.R.BatchRecipeBatchNotes = resultSlice
+		return nil
+	}
+
+	for _, foreign := range resultSlice {
+		for _, local := range slice {
+			if local.ID == foreign.BatchID {
+				local.R.BatchRecipeBatchNotes = append(local.R.BatchRecipeBatchNotes, foreign)
+				break
+			}
+		}
+	}
+
+	return nil
+}
+
 // SetRecipe of the recipeBatch to the related item.
 // Sets o.R.Recipe to related.
 // Adds o to related.R.RecipeBatches.
@@ -1219,6 +1333,59 @@ func (o *RecipeBatch) AddBatchRecipeBatchLyes(ctx context.Context, exec boil.Con
 	for _, rel := range related {
 		if rel.R == nil {
 			rel.R = &recipeBatchLyeR{
+				Batch: o,
+			}
+		} else {
+			rel.R.Batch = o
+		}
+	}
+	return nil
+}
+
+// AddBatchRecipeBatchNotes adds the given related objects to the existing relationships
+// of the recipe_batch, optionally inserting them as new records.
+// Appends related to o.R.BatchRecipeBatchNotes.
+// Sets related.R.Batch appropriately.
+func (o *RecipeBatch) AddBatchRecipeBatchNotes(ctx context.Context, exec boil.ContextExecutor, insert bool, related ...*RecipeBatchNote) error {
+	var err error
+	for _, rel := range related {
+		if insert {
+			rel.BatchID = o.ID
+			if err = rel.Insert(ctx, exec, boil.Infer()); err != nil {
+				return errors.Wrap(err, "failed to insert into foreign table")
+			}
+		} else {
+			updateQuery := fmt.Sprintf(
+				"UPDATE \"recipe_batch_note\" SET %s WHERE %s",
+				strmangle.SetParamNames("\"", "\"", 1, []string{"batch_id"}),
+				strmangle.WhereClause("\"", "\"", 2, recipeBatchNotePrimaryKeyColumns),
+			)
+			values := []interface{}{o.ID, rel.ID}
+
+			if boil.IsDebug(ctx) {
+				writer := boil.DebugWriterFrom(ctx)
+				fmt.Fprintln(writer, updateQuery)
+				fmt.Fprintln(writer, values)
+			}
+			if _, err = exec.ExecContext(ctx, updateQuery, values...); err != nil {
+				return errors.Wrap(err, "failed to update foreign table")
+			}
+
+			rel.BatchID = o.ID
+		}
+	}
+
+	if o.R == nil {
+		o.R = &recipeBatchR{
+			BatchRecipeBatchNotes: related,
+		}
+	} else {
+		o.R.BatchRecipeBatchNotes = append(o.R.BatchRecipeBatchNotes, related...)
+	}
+
+	for _, rel := range related {
+		if rel.R == nil {
+			rel.R = &recipeBatchNoteR{
 				Batch: o,
 			}
 		} else {

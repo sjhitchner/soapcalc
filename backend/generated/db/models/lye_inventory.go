@@ -96,20 +96,17 @@ var LyeInventoryWhere = struct {
 
 // LyeInventoryRels is where relationship names are stored.
 var LyeInventoryRels = struct {
-	Lye               string
-	Supplier          string
-	LyeLyeInventories string
+	Lye      string
+	Supplier string
 }{
-	Lye:               "Lye",
-	Supplier:          "Supplier",
-	LyeLyeInventories: "LyeLyeInventories",
+	Lye:      "Lye",
+	Supplier: "Supplier",
 }
 
 // lyeInventoryR is where relationships are stored.
 type lyeInventoryR struct {
-	Lye               *LyeInventory     `boil:"Lye" json:"Lye" toml:"Lye" yaml:"Lye"`
-	Supplier          *Supplier         `boil:"Supplier" json:"Supplier" toml:"Supplier" yaml:"Supplier"`
-	LyeLyeInventories LyeInventorySlice `boil:"LyeLyeInventories" json:"LyeLyeInventories" toml:"LyeLyeInventories" yaml:"LyeLyeInventories"`
+	Lye      *Lye      `boil:"Lye" json:"Lye" toml:"Lye" yaml:"Lye"`
+	Supplier *Supplier `boil:"Supplier" json:"Supplier" toml:"Supplier" yaml:"Supplier"`
 }
 
 // NewStruct creates a new relationship struct
@@ -403,7 +400,7 @@ func (q lyeInventoryQuery) Exists(ctx context.Context, exec boil.ContextExecutor
 }
 
 // Lye pointed to by the foreign key.
-func (o *LyeInventory) Lye(mods ...qm.QueryMod) lyeInventoryQuery {
+func (o *LyeInventory) Lye(mods ...qm.QueryMod) lyeQuery {
 	queryMods := []qm.QueryMod{
 		qm.Where("\"id\" = ?", o.LyeID),
 		qmhelper.WhereIsNull("deleted_at"),
@@ -411,8 +408,8 @@ func (o *LyeInventory) Lye(mods ...qm.QueryMod) lyeInventoryQuery {
 
 	queryMods = append(queryMods, mods...)
 
-	query := LyeInventories(queryMods...)
-	queries.SetFrom(query.Query, "\"lye_inventory\"")
+	query := Lyes(queryMods...)
+	queries.SetFrom(query.Query, "\"lye\"")
 
 	return query
 }
@@ -428,28 +425,6 @@ func (o *LyeInventory) Supplier(mods ...qm.QueryMod) supplierQuery {
 
 	query := Suppliers(queryMods...)
 	queries.SetFrom(query.Query, "\"supplier\"")
-
-	return query
-}
-
-// LyeLyeInventories retrieves all the lye_inventory's LyeInventories with an executor via lye_id column.
-func (o *LyeInventory) LyeLyeInventories(mods ...qm.QueryMod) lyeInventoryQuery {
-	var queryMods []qm.QueryMod
-	if len(mods) != 0 {
-		queryMods = append(queryMods, mods...)
-	}
-
-	queryMods = append(queryMods,
-		qm.Where("\"lye_inventory\".\"lye_id\"=?", o.ID),
-		qmhelper.WhereIsNull("\"lye_inventory\".\"deleted_at\""),
-	)
-
-	query := LyeInventories(queryMods...)
-	queries.SetFrom(query.Query, "\"lye_inventory\"")
-
-	if len(queries.GetSelect(query.Query)) == 0 {
-		queries.SetSelect(query.Query, []string{"\"lye_inventory\".*"})
-	}
 
 	return query
 }
@@ -496,9 +471,9 @@ func (lyeInventoryL) LoadLye(ctx context.Context, e boil.ContextExecutor, singul
 	}
 
 	query := NewQuery(
-		qm.From(`lye_inventory`),
-		qm.WhereIn(`lye_inventory.id in ?`, args...),
-		qmhelper.WhereIsNull(`lye_inventory.deleted_at`),
+		qm.From(`lye`),
+		qm.WhereIn(`lye.id in ?`, args...),
+		qmhelper.WhereIsNull(`lye.deleted_at`),
 	)
 	if mods != nil {
 		mods.Apply(query)
@@ -506,19 +481,19 @@ func (lyeInventoryL) LoadLye(ctx context.Context, e boil.ContextExecutor, singul
 
 	results, err := query.QueryContext(ctx, e)
 	if err != nil {
-		return errors.Wrap(err, "failed to eager load LyeInventory")
+		return errors.Wrap(err, "failed to eager load Lye")
 	}
 
-	var resultSlice []*LyeInventory
+	var resultSlice []*Lye
 	if err = queries.Bind(results, &resultSlice); err != nil {
-		return errors.Wrap(err, "failed to bind eager loaded slice LyeInventory")
+		return errors.Wrap(err, "failed to bind eager loaded slice Lye")
 	}
 
 	if err = results.Close(); err != nil {
-		return errors.Wrap(err, "failed to close results of eager load for lye_inventory")
+		return errors.Wrap(err, "failed to close results of eager load for lye")
 	}
 	if err = results.Err(); err != nil {
-		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for lye_inventory")
+		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for lye")
 	}
 
 	if len(lyeInventoryAfterSelectHooks) != 0 {
@@ -648,99 +623,10 @@ func (lyeInventoryL) LoadSupplier(ctx context.Context, e boil.ContextExecutor, s
 	return nil
 }
 
-// LoadLyeLyeInventories allows an eager lookup of values, cached into the
-// loaded structs of the objects. This is for a 1-M or N-M relationship.
-func (lyeInventoryL) LoadLyeLyeInventories(ctx context.Context, e boil.ContextExecutor, singular bool, maybeLyeInventory interface{}, mods queries.Applicator) error {
-	var slice []*LyeInventory
-	var object *LyeInventory
-
-	if singular {
-		object = maybeLyeInventory.(*LyeInventory)
-	} else {
-		slice = *maybeLyeInventory.(*[]*LyeInventory)
-	}
-
-	args := make([]interface{}, 0, 1)
-	if singular {
-		if object.R == nil {
-			object.R = &lyeInventoryR{}
-		}
-		args = append(args, object.ID)
-	} else {
-	Outer:
-		for _, obj := range slice {
-			if obj.R == nil {
-				obj.R = &lyeInventoryR{}
-			}
-
-			for _, a := range args {
-				if a == obj.ID {
-					continue Outer
-				}
-			}
-
-			args = append(args, obj.ID)
-		}
-	}
-
-	if len(args) == 0 {
-		return nil
-	}
-
-	query := NewQuery(
-		qm.From(`lye_inventory`),
-		qm.WhereIn(`lye_inventory.lye_id in ?`, args...),
-		qmhelper.WhereIsNull(`lye_inventory.deleted_at`),
-	)
-	if mods != nil {
-		mods.Apply(query)
-	}
-
-	results, err := query.QueryContext(ctx, e)
-	if err != nil {
-		return errors.Wrap(err, "failed to eager load lye_inventory")
-	}
-
-	var resultSlice []*LyeInventory
-	if err = queries.Bind(results, &resultSlice); err != nil {
-		return errors.Wrap(err, "failed to bind eager loaded slice lye_inventory")
-	}
-
-	if err = results.Close(); err != nil {
-		return errors.Wrap(err, "failed to close results in eager load on lye_inventory")
-	}
-	if err = results.Err(); err != nil {
-		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for lye_inventory")
-	}
-
-	if len(lyeInventoryAfterSelectHooks) != 0 {
-		for _, obj := range resultSlice {
-			if err := obj.doAfterSelectHooks(ctx, e); err != nil {
-				return err
-			}
-		}
-	}
-	if singular {
-		object.R.LyeLyeInventories = resultSlice
-		return nil
-	}
-
-	for _, foreign := range resultSlice {
-		for _, local := range slice {
-			if local.ID == foreign.LyeID {
-				local.R.LyeLyeInventories = append(local.R.LyeLyeInventories, foreign)
-				break
-			}
-		}
-	}
-
-	return nil
-}
-
 // SetLye of the lyeInventory to the related item.
 // Sets o.R.Lye to related.
-// Adds o to related.R.LyeLyeInventories.
-func (o *LyeInventory) SetLye(ctx context.Context, exec boil.ContextExecutor, insert bool, related *LyeInventory) error {
+// Adds o to related.R.LyeInventories.
+func (o *LyeInventory) SetLye(ctx context.Context, exec boil.ContextExecutor, insert bool, related *Lye) error {
 	var err error
 	if insert {
 		if err = related.Insert(ctx, exec, boil.Infer()); err != nil {
@@ -774,11 +660,11 @@ func (o *LyeInventory) SetLye(ctx context.Context, exec boil.ContextExecutor, in
 	}
 
 	if related.R == nil {
-		related.R = &lyeInventoryR{
-			LyeLyeInventories: LyeInventorySlice{o},
+		related.R = &lyeR{
+			LyeInventories: LyeInventorySlice{o},
 		}
 	} else {
-		related.R.LyeLyeInventories = append(related.R.LyeLyeInventories, o)
+		related.R.LyeInventories = append(related.R.LyeInventories, o)
 	}
 
 	return nil
@@ -828,59 +714,6 @@ func (o *LyeInventory) SetSupplier(ctx context.Context, exec boil.ContextExecuto
 		related.R.LyeInventories = append(related.R.LyeInventories, o)
 	}
 
-	return nil
-}
-
-// AddLyeLyeInventories adds the given related objects to the existing relationships
-// of the lye_inventory, optionally inserting them as new records.
-// Appends related to o.R.LyeLyeInventories.
-// Sets related.R.Lye appropriately.
-func (o *LyeInventory) AddLyeLyeInventories(ctx context.Context, exec boil.ContextExecutor, insert bool, related ...*LyeInventory) error {
-	var err error
-	for _, rel := range related {
-		if insert {
-			rel.LyeID = o.ID
-			if err = rel.Insert(ctx, exec, boil.Infer()); err != nil {
-				return errors.Wrap(err, "failed to insert into foreign table")
-			}
-		} else {
-			updateQuery := fmt.Sprintf(
-				"UPDATE \"lye_inventory\" SET %s WHERE %s",
-				strmangle.SetParamNames("\"", "\"", 1, []string{"lye_id"}),
-				strmangle.WhereClause("\"", "\"", 2, lyeInventoryPrimaryKeyColumns),
-			)
-			values := []interface{}{o.ID, rel.ID}
-
-			if boil.IsDebug(ctx) {
-				writer := boil.DebugWriterFrom(ctx)
-				fmt.Fprintln(writer, updateQuery)
-				fmt.Fprintln(writer, values)
-			}
-			if _, err = exec.ExecContext(ctx, updateQuery, values...); err != nil {
-				return errors.Wrap(err, "failed to update foreign table")
-			}
-
-			rel.LyeID = o.ID
-		}
-	}
-
-	if o.R == nil {
-		o.R = &lyeInventoryR{
-			LyeLyeInventories: related,
-		}
-	} else {
-		o.R.LyeLyeInventories = append(o.R.LyeLyeInventories, related...)
-	}
-
-	for _, rel := range related {
-		if rel.R == nil {
-			rel.R = &lyeInventoryR{
-				Lye: o,
-			}
-		} else {
-			rel.R.Lye = o
-		}
-	}
 	return nil
 }
 

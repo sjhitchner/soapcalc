@@ -907,6 +907,84 @@ func testRecipeBatchToManyBatchRecipeBatchLyes(t *testing.T) {
 	}
 }
 
+func testRecipeBatchToManyBatchRecipeBatchNotes(t *testing.T) {
+	var err error
+	ctx := context.Background()
+	tx := MustTx(boil.BeginTx(ctx, nil))
+	defer func() { _ = tx.Rollback() }()
+
+	var a RecipeBatch
+	var b, c RecipeBatchNote
+
+	seed := randomize.NewSeed()
+	if err = randomize.Struct(seed, &a, recipeBatchDBTypes, true, recipeBatchColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize RecipeBatch struct: %s", err)
+	}
+
+	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+
+	if err = randomize.Struct(seed, &b, recipeBatchNoteDBTypes, false, recipeBatchNoteColumnsWithDefault...); err != nil {
+		t.Fatal(err)
+	}
+	if err = randomize.Struct(seed, &c, recipeBatchNoteDBTypes, false, recipeBatchNoteColumnsWithDefault...); err != nil {
+		t.Fatal(err)
+	}
+
+	b.BatchID = a.ID
+	c.BatchID = a.ID
+
+	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+	if err = c.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+
+	check, err := a.BatchRecipeBatchNotes().All(ctx, tx)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	bFound, cFound := false, false
+	for _, v := range check {
+		if v.BatchID == b.BatchID {
+			bFound = true
+		}
+		if v.BatchID == c.BatchID {
+			cFound = true
+		}
+	}
+
+	if !bFound {
+		t.Error("expected to find b")
+	}
+	if !cFound {
+		t.Error("expected to find c")
+	}
+
+	slice := RecipeBatchSlice{&a}
+	if err = a.L.LoadBatchRecipeBatchNotes(ctx, tx, false, (*[]*RecipeBatch)(&slice), nil); err != nil {
+		t.Fatal(err)
+	}
+	if got := len(a.R.BatchRecipeBatchNotes); got != 2 {
+		t.Error("number of eager loaded records wrong, got:", got)
+	}
+
+	a.R.BatchRecipeBatchNotes = nil
+	if err = a.L.LoadBatchRecipeBatchNotes(ctx, tx, true, &a, nil); err != nil {
+		t.Fatal(err)
+	}
+	if got := len(a.R.BatchRecipeBatchNotes); got != 2 {
+		t.Error("number of eager loaded records wrong, got:", got)
+	}
+
+	if t.Failed() {
+		t.Logf("%#v", check)
+	}
+}
+
 func testRecipeBatchToManyAddOpBatchRecipeBatchAdditives(t *testing.T) {
 	var err error
 
@@ -1199,6 +1277,81 @@ func testRecipeBatchToManyAddOpBatchRecipeBatchLyes(t *testing.T) {
 		}
 
 		count, err := a.BatchRecipeBatchLyes().Count(ctx, tx)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if want := int64((i + 1) * 2); count != want {
+			t.Error("want", want, "got", count)
+		}
+	}
+}
+func testRecipeBatchToManyAddOpBatchRecipeBatchNotes(t *testing.T) {
+	var err error
+
+	ctx := context.Background()
+	tx := MustTx(boil.BeginTx(ctx, nil))
+	defer func() { _ = tx.Rollback() }()
+
+	var a RecipeBatch
+	var b, c, d, e RecipeBatchNote
+
+	seed := randomize.NewSeed()
+	if err = randomize.Struct(seed, &a, recipeBatchDBTypes, false, strmangle.SetComplement(recipeBatchPrimaryKeyColumns, recipeBatchColumnsWithoutDefault)...); err != nil {
+		t.Fatal(err)
+	}
+	foreigners := []*RecipeBatchNote{&b, &c, &d, &e}
+	for _, x := range foreigners {
+		if err = randomize.Struct(seed, x, recipeBatchNoteDBTypes, false, strmangle.SetComplement(recipeBatchNotePrimaryKeyColumns, recipeBatchNoteColumnsWithoutDefault)...); err != nil {
+			t.Fatal(err)
+		}
+	}
+
+	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+	if err = c.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+
+	foreignersSplitByInsertion := [][]*RecipeBatchNote{
+		{&b, &c},
+		{&d, &e},
+	}
+
+	for i, x := range foreignersSplitByInsertion {
+		err = a.AddBatchRecipeBatchNotes(ctx, tx, i != 0, x...)
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		first := x[0]
+		second := x[1]
+
+		if a.ID != first.BatchID {
+			t.Error("foreign key was wrong value", a.ID, first.BatchID)
+		}
+		if a.ID != second.BatchID {
+			t.Error("foreign key was wrong value", a.ID, second.BatchID)
+		}
+
+		if first.R.Batch != &a {
+			t.Error("relationship was not added properly to the foreign slice")
+		}
+		if second.R.Batch != &a {
+			t.Error("relationship was not added properly to the foreign slice")
+		}
+
+		if a.R.BatchRecipeBatchNotes[i*2] != first {
+			t.Error("relationship struct slice not set to correct value")
+		}
+		if a.R.BatchRecipeBatchNotes[i*2+1] != second {
+			t.Error("relationship struct slice not set to correct value")
+		}
+
+		count, err := a.BatchRecipeBatchNotes().Count(ctx, tx)
 		if err != nil {
 			t.Fatal(err)
 		}

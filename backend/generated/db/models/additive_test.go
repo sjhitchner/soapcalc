@@ -595,6 +595,231 @@ func testAdditivesInsertWhitelist(t *testing.T) {
 	}
 }
 
+func testAdditiveOneToOneRecipeAdditiveUsingRecipeAdditive(t *testing.T) {
+	ctx := context.Background()
+	tx := MustTx(boil.BeginTx(ctx, nil))
+	defer func() { _ = tx.Rollback() }()
+
+	var foreign RecipeAdditive
+	var local Additive
+
+	seed := randomize.NewSeed()
+	if err := randomize.Struct(seed, &foreign, recipeAdditiveDBTypes, true, recipeAdditiveColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize RecipeAdditive struct: %s", err)
+	}
+	if err := randomize.Struct(seed, &local, additiveDBTypes, true, additiveColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Additive struct: %s", err)
+	}
+
+	if err := local.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+
+	foreign.AdditiveID = local.ID
+	if err := foreign.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+
+	check, err := local.RecipeAdditive().One(ctx, tx)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if check.AdditiveID != foreign.AdditiveID {
+		t.Errorf("want: %v, got %v", foreign.AdditiveID, check.AdditiveID)
+	}
+
+	slice := AdditiveSlice{&local}
+	if err = local.L.LoadRecipeAdditive(ctx, tx, false, (*[]*Additive)(&slice), nil); err != nil {
+		t.Fatal(err)
+	}
+	if local.R.RecipeAdditive == nil {
+		t.Error("struct should have been eager loaded")
+	}
+
+	local.R.RecipeAdditive = nil
+	if err = local.L.LoadRecipeAdditive(ctx, tx, true, &local, nil); err != nil {
+		t.Fatal(err)
+	}
+	if local.R.RecipeAdditive == nil {
+		t.Error("struct should have been eager loaded")
+	}
+}
+
+func testAdditiveOneToOneRecipeBatchAdditiveUsingRecipeBatchAdditive(t *testing.T) {
+	ctx := context.Background()
+	tx := MustTx(boil.BeginTx(ctx, nil))
+	defer func() { _ = tx.Rollback() }()
+
+	var foreign RecipeBatchAdditive
+	var local Additive
+
+	seed := randomize.NewSeed()
+	if err := randomize.Struct(seed, &foreign, recipeBatchAdditiveDBTypes, true, recipeBatchAdditiveColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize RecipeBatchAdditive struct: %s", err)
+	}
+	if err := randomize.Struct(seed, &local, additiveDBTypes, true, additiveColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Additive struct: %s", err)
+	}
+
+	if err := local.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+
+	foreign.AdditiveID = local.ID
+	if err := foreign.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+
+	check, err := local.RecipeBatchAdditive().One(ctx, tx)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if check.AdditiveID != foreign.AdditiveID {
+		t.Errorf("want: %v, got %v", foreign.AdditiveID, check.AdditiveID)
+	}
+
+	slice := AdditiveSlice{&local}
+	if err = local.L.LoadRecipeBatchAdditive(ctx, tx, false, (*[]*Additive)(&slice), nil); err != nil {
+		t.Fatal(err)
+	}
+	if local.R.RecipeBatchAdditive == nil {
+		t.Error("struct should have been eager loaded")
+	}
+
+	local.R.RecipeBatchAdditive = nil
+	if err = local.L.LoadRecipeBatchAdditive(ctx, tx, true, &local, nil); err != nil {
+		t.Fatal(err)
+	}
+	if local.R.RecipeBatchAdditive == nil {
+		t.Error("struct should have been eager loaded")
+	}
+}
+
+func testAdditiveOneToOneSetOpRecipeAdditiveUsingRecipeAdditive(t *testing.T) {
+	var err error
+
+	ctx := context.Background()
+	tx := MustTx(boil.BeginTx(ctx, nil))
+	defer func() { _ = tx.Rollback() }()
+
+	var a Additive
+	var b, c RecipeAdditive
+
+	seed := randomize.NewSeed()
+	if err = randomize.Struct(seed, &a, additiveDBTypes, false, strmangle.SetComplement(additivePrimaryKeyColumns, additiveColumnsWithoutDefault)...); err != nil {
+		t.Fatal(err)
+	}
+	if err = randomize.Struct(seed, &b, recipeAdditiveDBTypes, false, strmangle.SetComplement(recipeAdditivePrimaryKeyColumns, recipeAdditiveColumnsWithoutDefault)...); err != nil {
+		t.Fatal(err)
+	}
+	if err = randomize.Struct(seed, &c, recipeAdditiveDBTypes, false, strmangle.SetComplement(recipeAdditivePrimaryKeyColumns, recipeAdditiveColumnsWithoutDefault)...); err != nil {
+		t.Fatal(err)
+	}
+
+	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+
+	for i, x := range []*RecipeAdditive{&b, &c} {
+		err = a.SetRecipeAdditive(ctx, tx, i != 0, x)
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		if a.R.RecipeAdditive != x {
+			t.Error("relationship struct not set to correct value")
+		}
+		if x.R.Additive != &a {
+			t.Error("failed to append to foreign relationship struct")
+		}
+
+		if a.ID != x.AdditiveID {
+			t.Error("foreign key was wrong value", a.ID)
+		}
+
+		zero := reflect.Zero(reflect.TypeOf(x.AdditiveID))
+		reflect.Indirect(reflect.ValueOf(&x.AdditiveID)).Set(zero)
+
+		if err = x.Reload(ctx, tx); err != nil {
+			t.Fatal("failed to reload", err)
+		}
+
+		if a.ID != x.AdditiveID {
+			t.Error("foreign key was wrong value", a.ID, x.AdditiveID)
+		}
+
+		if _, err = x.Delete(ctx, tx, true); err != nil {
+			t.Fatal("failed to delete x", err)
+		}
+	}
+}
+func testAdditiveOneToOneSetOpRecipeBatchAdditiveUsingRecipeBatchAdditive(t *testing.T) {
+	var err error
+
+	ctx := context.Background()
+	tx := MustTx(boil.BeginTx(ctx, nil))
+	defer func() { _ = tx.Rollback() }()
+
+	var a Additive
+	var b, c RecipeBatchAdditive
+
+	seed := randomize.NewSeed()
+	if err = randomize.Struct(seed, &a, additiveDBTypes, false, strmangle.SetComplement(additivePrimaryKeyColumns, additiveColumnsWithoutDefault)...); err != nil {
+		t.Fatal(err)
+	}
+	if err = randomize.Struct(seed, &b, recipeBatchAdditiveDBTypes, false, strmangle.SetComplement(recipeBatchAdditivePrimaryKeyColumns, recipeBatchAdditiveColumnsWithoutDefault)...); err != nil {
+		t.Fatal(err)
+	}
+	if err = randomize.Struct(seed, &c, recipeBatchAdditiveDBTypes, false, strmangle.SetComplement(recipeBatchAdditivePrimaryKeyColumns, recipeBatchAdditiveColumnsWithoutDefault)...); err != nil {
+		t.Fatal(err)
+	}
+
+	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+
+	for i, x := range []*RecipeBatchAdditive{&b, &c} {
+		err = a.SetRecipeBatchAdditive(ctx, tx, i != 0, x)
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		if a.R.RecipeBatchAdditive != x {
+			t.Error("relationship struct not set to correct value")
+		}
+		if x.R.Additive != &a {
+			t.Error("failed to append to foreign relationship struct")
+		}
+
+		if a.ID != x.AdditiveID {
+			t.Error("foreign key was wrong value", a.ID)
+		}
+
+		zero := reflect.Zero(reflect.TypeOf(x.AdditiveID))
+		reflect.Indirect(reflect.ValueOf(&x.AdditiveID)).Set(zero)
+
+		if err = x.Reload(ctx, tx); err != nil {
+			t.Fatal("failed to reload", err)
+		}
+
+		if a.ID != x.AdditiveID {
+			t.Error("foreign key was wrong value", a.ID, x.AdditiveID)
+		}
+
+		if _, err = x.Delete(ctx, tx, true); err != nil {
+			t.Fatal("failed to delete x", err)
+		}
+	}
+}
+
 func testAdditiveToManyAdditiveInventories(t *testing.T) {
 	var err error
 	ctx := context.Background()
@@ -673,162 +898,6 @@ func testAdditiveToManyAdditiveInventories(t *testing.T) {
 	}
 }
 
-func testAdditiveToManyRecipeAdditives(t *testing.T) {
-	var err error
-	ctx := context.Background()
-	tx := MustTx(boil.BeginTx(ctx, nil))
-	defer func() { _ = tx.Rollback() }()
-
-	var a Additive
-	var b, c RecipeAdditive
-
-	seed := randomize.NewSeed()
-	if err = randomize.Struct(seed, &a, additiveDBTypes, true, additiveColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize Additive struct: %s", err)
-	}
-
-	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
-
-	if err = randomize.Struct(seed, &b, recipeAdditiveDBTypes, false, recipeAdditiveColumnsWithDefault...); err != nil {
-		t.Fatal(err)
-	}
-	if err = randomize.Struct(seed, &c, recipeAdditiveDBTypes, false, recipeAdditiveColumnsWithDefault...); err != nil {
-		t.Fatal(err)
-	}
-
-	b.AdditiveID = a.ID
-	c.AdditiveID = a.ID
-
-	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
-	if err = c.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
-
-	check, err := a.RecipeAdditives().All(ctx, tx)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	bFound, cFound := false, false
-	for _, v := range check {
-		if v.AdditiveID == b.AdditiveID {
-			bFound = true
-		}
-		if v.AdditiveID == c.AdditiveID {
-			cFound = true
-		}
-	}
-
-	if !bFound {
-		t.Error("expected to find b")
-	}
-	if !cFound {
-		t.Error("expected to find c")
-	}
-
-	slice := AdditiveSlice{&a}
-	if err = a.L.LoadRecipeAdditives(ctx, tx, false, (*[]*Additive)(&slice), nil); err != nil {
-		t.Fatal(err)
-	}
-	if got := len(a.R.RecipeAdditives); got != 2 {
-		t.Error("number of eager loaded records wrong, got:", got)
-	}
-
-	a.R.RecipeAdditives = nil
-	if err = a.L.LoadRecipeAdditives(ctx, tx, true, &a, nil); err != nil {
-		t.Fatal(err)
-	}
-	if got := len(a.R.RecipeAdditives); got != 2 {
-		t.Error("number of eager loaded records wrong, got:", got)
-	}
-
-	if t.Failed() {
-		t.Logf("%#v", check)
-	}
-}
-
-func testAdditiveToManyRecipeBatchAdditives(t *testing.T) {
-	var err error
-	ctx := context.Background()
-	tx := MustTx(boil.BeginTx(ctx, nil))
-	defer func() { _ = tx.Rollback() }()
-
-	var a Additive
-	var b, c RecipeBatchAdditive
-
-	seed := randomize.NewSeed()
-	if err = randomize.Struct(seed, &a, additiveDBTypes, true, additiveColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize Additive struct: %s", err)
-	}
-
-	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
-
-	if err = randomize.Struct(seed, &b, recipeBatchAdditiveDBTypes, false, recipeBatchAdditiveColumnsWithDefault...); err != nil {
-		t.Fatal(err)
-	}
-	if err = randomize.Struct(seed, &c, recipeBatchAdditiveDBTypes, false, recipeBatchAdditiveColumnsWithDefault...); err != nil {
-		t.Fatal(err)
-	}
-
-	b.AdditiveID = a.ID
-	c.AdditiveID = a.ID
-
-	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
-	if err = c.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
-
-	check, err := a.RecipeBatchAdditives().All(ctx, tx)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	bFound, cFound := false, false
-	for _, v := range check {
-		if v.AdditiveID == b.AdditiveID {
-			bFound = true
-		}
-		if v.AdditiveID == c.AdditiveID {
-			cFound = true
-		}
-	}
-
-	if !bFound {
-		t.Error("expected to find b")
-	}
-	if !cFound {
-		t.Error("expected to find c")
-	}
-
-	slice := AdditiveSlice{&a}
-	if err = a.L.LoadRecipeBatchAdditives(ctx, tx, false, (*[]*Additive)(&slice), nil); err != nil {
-		t.Fatal(err)
-	}
-	if got := len(a.R.RecipeBatchAdditives); got != 2 {
-		t.Error("number of eager loaded records wrong, got:", got)
-	}
-
-	a.R.RecipeBatchAdditives = nil
-	if err = a.L.LoadRecipeBatchAdditives(ctx, tx, true, &a, nil); err != nil {
-		t.Fatal(err)
-	}
-	if got := len(a.R.RecipeBatchAdditives); got != 2 {
-		t.Error("number of eager loaded records wrong, got:", got)
-	}
-
-	if t.Failed() {
-		t.Logf("%#v", check)
-	}
-}
-
 func testAdditiveToManyAddOpAdditiveInventories(t *testing.T) {
 	var err error
 
@@ -896,156 +965,6 @@ func testAdditiveToManyAddOpAdditiveInventories(t *testing.T) {
 		}
 
 		count, err := a.AdditiveInventories().Count(ctx, tx)
-		if err != nil {
-			t.Fatal(err)
-		}
-		if want := int64((i + 1) * 2); count != want {
-			t.Error("want", want, "got", count)
-		}
-	}
-}
-func testAdditiveToManyAddOpRecipeAdditives(t *testing.T) {
-	var err error
-
-	ctx := context.Background()
-	tx := MustTx(boil.BeginTx(ctx, nil))
-	defer func() { _ = tx.Rollback() }()
-
-	var a Additive
-	var b, c, d, e RecipeAdditive
-
-	seed := randomize.NewSeed()
-	if err = randomize.Struct(seed, &a, additiveDBTypes, false, strmangle.SetComplement(additivePrimaryKeyColumns, additiveColumnsWithoutDefault)...); err != nil {
-		t.Fatal(err)
-	}
-	foreigners := []*RecipeAdditive{&b, &c, &d, &e}
-	for _, x := range foreigners {
-		if err = randomize.Struct(seed, x, recipeAdditiveDBTypes, false, strmangle.SetComplement(recipeAdditivePrimaryKeyColumns, recipeAdditiveColumnsWithoutDefault)...); err != nil {
-			t.Fatal(err)
-		}
-	}
-
-	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
-	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
-	if err = c.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
-
-	foreignersSplitByInsertion := [][]*RecipeAdditive{
-		{&b, &c},
-		{&d, &e},
-	}
-
-	for i, x := range foreignersSplitByInsertion {
-		err = a.AddRecipeAdditives(ctx, tx, i != 0, x...)
-		if err != nil {
-			t.Fatal(err)
-		}
-
-		first := x[0]
-		second := x[1]
-
-		if a.ID != first.AdditiveID {
-			t.Error("foreign key was wrong value", a.ID, first.AdditiveID)
-		}
-		if a.ID != second.AdditiveID {
-			t.Error("foreign key was wrong value", a.ID, second.AdditiveID)
-		}
-
-		if first.R.Additive != &a {
-			t.Error("relationship was not added properly to the foreign slice")
-		}
-		if second.R.Additive != &a {
-			t.Error("relationship was not added properly to the foreign slice")
-		}
-
-		if a.R.RecipeAdditives[i*2] != first {
-			t.Error("relationship struct slice not set to correct value")
-		}
-		if a.R.RecipeAdditives[i*2+1] != second {
-			t.Error("relationship struct slice not set to correct value")
-		}
-
-		count, err := a.RecipeAdditives().Count(ctx, tx)
-		if err != nil {
-			t.Fatal(err)
-		}
-		if want := int64((i + 1) * 2); count != want {
-			t.Error("want", want, "got", count)
-		}
-	}
-}
-func testAdditiveToManyAddOpRecipeBatchAdditives(t *testing.T) {
-	var err error
-
-	ctx := context.Background()
-	tx := MustTx(boil.BeginTx(ctx, nil))
-	defer func() { _ = tx.Rollback() }()
-
-	var a Additive
-	var b, c, d, e RecipeBatchAdditive
-
-	seed := randomize.NewSeed()
-	if err = randomize.Struct(seed, &a, additiveDBTypes, false, strmangle.SetComplement(additivePrimaryKeyColumns, additiveColumnsWithoutDefault)...); err != nil {
-		t.Fatal(err)
-	}
-	foreigners := []*RecipeBatchAdditive{&b, &c, &d, &e}
-	for _, x := range foreigners {
-		if err = randomize.Struct(seed, x, recipeBatchAdditiveDBTypes, false, strmangle.SetComplement(recipeBatchAdditivePrimaryKeyColumns, recipeBatchAdditiveColumnsWithoutDefault)...); err != nil {
-			t.Fatal(err)
-		}
-	}
-
-	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
-	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
-	if err = c.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
-
-	foreignersSplitByInsertion := [][]*RecipeBatchAdditive{
-		{&b, &c},
-		{&d, &e},
-	}
-
-	for i, x := range foreignersSplitByInsertion {
-		err = a.AddRecipeBatchAdditives(ctx, tx, i != 0, x...)
-		if err != nil {
-			t.Fatal(err)
-		}
-
-		first := x[0]
-		second := x[1]
-
-		if a.ID != first.AdditiveID {
-			t.Error("foreign key was wrong value", a.ID, first.AdditiveID)
-		}
-		if a.ID != second.AdditiveID {
-			t.Error("foreign key was wrong value", a.ID, second.AdditiveID)
-		}
-
-		if first.R.Additive != &a {
-			t.Error("relationship was not added properly to the foreign slice")
-		}
-		if second.R.Additive != &a {
-			t.Error("relationship was not added properly to the foreign slice")
-		}
-
-		if a.R.RecipeBatchAdditives[i*2] != first {
-			t.Error("relationship struct slice not set to correct value")
-		}
-		if a.R.RecipeBatchAdditives[i*2+1] != second {
-			t.Error("relationship struct slice not set to correct value")
-		}
-
-		count, err := a.RecipeBatchAdditives().Count(ctx, tx)
 		if err != nil {
 			t.Fatal(err)
 		}

@@ -792,7 +792,7 @@ func testRecipeBatchLipidToOneSetOpLipidUsingLipid(t *testing.T) {
 			t.Error("relationship struct not set to correct value")
 		}
 
-		if x.R.RecipeBatchLipids[0] != &a {
+		if x.R.RecipeBatchLipid != &a {
 			t.Error("failed to append to foreign relationship struct")
 		}
 		if a.LipidID != x.ID {

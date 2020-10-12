@@ -657,7 +657,7 @@ func (o *RecipeBatchLipid) SetBatch(ctx context.Context, exec boil.ContextExecut
 
 // SetLipid of the recipeBatchLipid to the related item.
 // Sets o.R.Lipid to related.
-// Adds o to related.R.RecipeBatchLipids.
+// Adds o to related.R.RecipeBatchLipid.
 func (o *RecipeBatchLipid) SetLipid(ctx context.Context, exec boil.ContextExecutor, insert bool, related *Lipid) error {
 	var err error
 	if insert {
@@ -693,10 +693,10 @@ func (o *RecipeBatchLipid) SetLipid(ctx context.Context, exec boil.ContextExecut
 
 	if related.R == nil {
 		related.R = &lipidR{
-			RecipeBatchLipids: RecipeBatchLipidSlice{o},
+			RecipeBatchLipid: o,
 		}
 	} else {
-		related.R.RecipeBatchLipids = append(related.R.RecipeBatchLipids, o)
+		related.R.RecipeBatchLipid = o
 	}
 
 	return nil

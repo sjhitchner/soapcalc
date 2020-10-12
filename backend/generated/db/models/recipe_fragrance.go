@@ -605,7 +605,7 @@ func (recipeFragranceL) LoadRecipe(ctx context.Context, e boil.ContextExecutor, 
 
 // SetFragrance of the recipeFragrance to the related item.
 // Sets o.R.Fragrance to related.
-// Adds o to related.R.RecipeFragrances.
+// Adds o to related.R.RecipeFragrance.
 func (o *RecipeFragrance) SetFragrance(ctx context.Context, exec boil.ContextExecutor, insert bool, related *Fragrance) error {
 	var err error
 	if insert {
@@ -641,10 +641,10 @@ func (o *RecipeFragrance) SetFragrance(ctx context.Context, exec boil.ContextExe
 
 	if related.R == nil {
 		related.R = &fragranceR{
-			RecipeFragrances: RecipeFragranceSlice{o},
+			RecipeFragrance: o,
 		}
 	} else {
-		related.R.RecipeFragrances = append(related.R.RecipeFragrances, o)
+		related.R.RecipeFragrance = o
 	}
 
 	return nil

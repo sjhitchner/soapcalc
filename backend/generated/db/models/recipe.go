@@ -75,11 +75,13 @@ var RecipeRels = struct {
 	RecipeBatches    string
 	RecipeFragrances string
 	RecipeLipids     string
+	RecipeSteps      string
 }{
 	RecipeAdditives:  "RecipeAdditives",
 	RecipeBatches:    "RecipeBatches",
 	RecipeFragrances: "RecipeFragrances",
 	RecipeLipids:     "RecipeLipids",
+	RecipeSteps:      "RecipeSteps",
 }
 
 // recipeR is where relationships are stored.
@@ -88,6 +90,7 @@ type recipeR struct {
 	RecipeBatches    RecipeBatchSlice     `boil:"RecipeBatches" json:"RecipeBatches" toml:"RecipeBatches" yaml:"RecipeBatches"`
 	RecipeFragrances RecipeFragranceSlice `boil:"RecipeFragrances" json:"RecipeFragrances" toml:"RecipeFragrances" yaml:"RecipeFragrances"`
 	RecipeLipids     RecipeLipidSlice     `boil:"RecipeLipids" json:"RecipeLipids" toml:"RecipeLipids" yaml:"RecipeLipids"`
+	RecipeSteps      RecipeStepSlice      `boil:"RecipeSteps" json:"RecipeSteps" toml:"RecipeSteps" yaml:"RecipeSteps"`
 }
 
 // NewStruct creates a new relationship struct
@@ -468,6 +471,28 @@ func (o *Recipe) RecipeLipids(mods ...qm.QueryMod) recipeLipidQuery {
 	return query
 }
 
+// RecipeSteps retrieves all the recipe_step's RecipeSteps with an executor.
+func (o *Recipe) RecipeSteps(mods ...qm.QueryMod) recipeStepQuery {
+	var queryMods []qm.QueryMod
+	if len(mods) != 0 {
+		queryMods = append(queryMods, mods...)
+	}
+
+	queryMods = append(queryMods,
+		qm.Where("\"recipe_step\".\"recipe_id\"=?", o.ID),
+		qmhelper.WhereIsNull("\"recipe_step\".\"deleted_at\""),
+	)
+
+	query := RecipeSteps(queryMods...)
+	queries.SetFrom(query.Query, "\"recipe_step\"")
+
+	if len(queries.GetSelect(query.Query)) == 0 {
+		queries.SetSelect(query.Query, []string{"\"recipe_step\".*"})
+	}
+
+	return query
+}
+
 // LoadRecipeAdditives allows an eager lookup of values, cached into the
 // loaded structs of the objects. This is for a 1-M or N-M relationship.
 func (recipeL) LoadRecipeAdditives(ctx context.Context, e boil.ContextExecutor, singular bool, maybeRecipe interface{}, mods queries.Applicator) error {
@@ -824,6 +849,95 @@ func (recipeL) LoadRecipeLipids(ctx context.Context, e boil.ContextExecutor, sin
 	return nil
 }
 
+// LoadRecipeSteps allows an eager lookup of values, cached into the
+// loaded structs of the objects. This is for a 1-M or N-M relationship.
+func (recipeL) LoadRecipeSteps(ctx context.Context, e boil.ContextExecutor, singular bool, maybeRecipe interface{}, mods queries.Applicator) error {
+	var slice []*Recipe
+	var object *Recipe
+
+	if singular {
+		object = maybeRecipe.(*Recipe)
+	} else {
+		slice = *maybeRecipe.(*[]*Recipe)
+	}
+
+	args := make([]interface{}, 0, 1)
+	if singular {
+		if object.R == nil {
+			object.R = &recipeR{}
+		}
+		args = append(args, object.ID)
+	} else {
+	Outer:
+		for _, obj := range slice {
+			if obj.R == nil {
+				obj.R = &recipeR{}
+			}
+
+			for _, a := range args {
+				if a == obj.ID {
+					continue Outer
+				}
+			}
+
+			args = append(args, obj.ID)
+		}
+	}
+
+	if len(args) == 0 {
+		return nil
+	}
+
+	query := NewQuery(
+		qm.From(`recipe_step`),
+		qm.WhereIn(`recipe_step.recipe_id in ?`, args...),
+		qmhelper.WhereIsNull(`recipe_step.deleted_at`),
+	)
+	if mods != nil {
+		mods.Apply(query)
+	}
+
+	results, err := query.QueryContext(ctx, e)
+	if err != nil {
+		return errors.Wrap(err, "failed to eager load recipe_step")
+	}
+
+	var resultSlice []*RecipeStep
+	if err = queries.Bind(results, &resultSlice); err != nil {
+		return errors.Wrap(err, "failed to bind eager loaded slice recipe_step")
+	}
+
+	if err = results.Close(); err != nil {
+		return errors.Wrap(err, "failed to close results in eager load on recipe_step")
+	}
+	if err = results.Err(); err != nil {
+		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for recipe_step")
+	}
+
+	if len(recipeStepAfterSelectHooks) != 0 {
+		for _, obj := range resultSlice {
+			if err := obj.doAfterSelectHooks(ctx, e); err != nil {
+				return err
+			}
+		}
+	}
+	if singular {
+		object.R.RecipeSteps = resultSlice
+		return nil
+	}
+
+	for _, foreign := range resultSlice {
+		for _, local := range slice {
+			if local.ID == foreign.RecipeID {
+				local.R.RecipeSteps = append(local.R.RecipeSteps, foreign)
+				break
+			}
+		}
+	}
+
+	return nil
+}
+
 // AddRecipeAdditives adds the given related objects to the existing relationships
 // of the recipe, optionally inserting them as new records.
 // Appends related to o.R.RecipeAdditives.
@@ -1027,6 +1141,59 @@ func (o *Recipe) AddRecipeLipids(ctx context.Context, exec boil.ContextExecutor,
 	for _, rel := range related {
 		if rel.R == nil {
 			rel.R = &recipeLipidR{
+				Recipe: o,
+			}
+		} else {
+			rel.R.Recipe = o
+		}
+	}
+	return nil
+}
+
+// AddRecipeSteps adds the given related objects to the existing relationships
+// of the recipe, optionally inserting them as new records.
+// Appends related to o.R.RecipeSteps.
+// Sets related.R.Recipe appropriately.
+func (o *Recipe) AddRecipeSteps(ctx context.Context, exec boil.ContextExecutor, insert bool, related ...*RecipeStep) error {
+	var err error
+	for _, rel := range related {
+		if insert {
+			rel.RecipeID = o.ID
+			if err = rel.Insert(ctx, exec, boil.Infer()); err != nil {
+				return errors.Wrap(err, "failed to insert into foreign table")
+			}
+		} else {
+			updateQuery := fmt.Sprintf(
+				"UPDATE \"recipe_step\" SET %s WHERE %s",
+				strmangle.SetParamNames("\"", "\"", 1, []string{"recipe_id"}),
+				strmangle.WhereClause("\"", "\"", 2, recipeStepPrimaryKeyColumns),
+			)
+			values := []interface{}{o.ID, rel.ID}
+
+			if boil.IsDebug(ctx) {
+				writer := boil.DebugWriterFrom(ctx)
+				fmt.Fprintln(writer, updateQuery)
+				fmt.Fprintln(writer, values)
+			}
+			if _, err = exec.ExecContext(ctx, updateQuery, values...); err != nil {
+				return errors.Wrap(err, "failed to update foreign table")
+			}
+
+			rel.RecipeID = o.ID
+		}
+	}
+
+	if o.R == nil {
+		o.R = &recipeR{
+			RecipeSteps: related,
+		}
+	} else {
+		o.R.RecipeSteps = append(o.R.RecipeSteps, related...)
+	}
+
+	for _, rel := range related {
+		if rel.R == nil {
+			rel.R = &recipeStepR{
 				Recipe: o,
 			}
 		} else {

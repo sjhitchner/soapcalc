@@ -735,7 +735,7 @@ func testRecipeAdditiveToOneSetOpAdditiveUsingAdditive(t *testing.T) {
 			t.Error("relationship struct not set to correct value")
 		}
 
-		if x.R.RecipeAdditives[0] != &a {
+		if x.R.RecipeAdditive != &a {
 			t.Error("failed to append to foreign relationship struct")
 		}
 		if a.AdditiveID != x.ID {

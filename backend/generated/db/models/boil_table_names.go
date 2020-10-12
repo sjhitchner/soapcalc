@@ -19,8 +19,10 @@ var TableNames = struct {
 	RecipeBatchFragrance string
 	RecipeBatchLipid     string
 	RecipeBatchLye       string
+	RecipeBatchNote      string
 	RecipeFragrance      string
 	RecipeLipid          string
+	RecipeStep           string
 	Supplier             string
 }{
 	Additive:             "additive",
@@ -38,7 +40,9 @@ var TableNames = struct {
 	RecipeBatchFragrance: "recipe_batch_fragrance",
 	RecipeBatchLipid:     "recipe_batch_lipid",
 	RecipeBatchLye:       "recipe_batch_lye",
+	RecipeBatchNote:      "recipe_batch_note",
 	RecipeFragrance:      "recipe_fragrance",
 	RecipeLipid:          "recipe_lipid",
+	RecipeStep:           "recipe_step",
 	Supplier:             "supplier",
 }

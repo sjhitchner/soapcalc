@@ -605,7 +605,7 @@ func (recipeAdditiveL) LoadRecipe(ctx context.Context, e boil.ContextExecutor, s
 
 // SetAdditive of the recipeAdditive to the related item.
 // Sets o.R.Additive to related.
-// Adds o to related.R.RecipeAdditives.
+// Adds o to related.R.RecipeAdditive.
 func (o *RecipeAdditive) SetAdditive(ctx context.Context, exec boil.ContextExecutor, insert bool, related *Additive) error {
 	var err error
 	if insert {
@@ -641,10 +641,10 @@ func (o *RecipeAdditive) SetAdditive(ctx context.Context, exec boil.ContextExecu
 
 	if related.R == nil {
 		related.R = &additiveR{
-			RecipeAdditives: RecipeAdditiveSlice{o},
+			RecipeAdditive: o,
 		}
 	} else {
-		related.R.RecipeAdditives = append(related.R.RecipeAdditives, o)
+		related.R.RecipeAdditive = o
 	}
 
 	return nil

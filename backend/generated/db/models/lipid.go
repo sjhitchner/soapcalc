@@ -156,20 +156,20 @@ var LipidWhere = struct {
 
 // LipidRels is where relationship names are stored.
 var LipidRels = struct {
-	LipidInventories  string
-	RecipeBatchLipids string
-	RecipeLipids      string
+	RecipeBatchLipid string
+	RecipeLipid      string
+	LipidInventories string
 }{
-	LipidInventories:  "LipidInventories",
-	RecipeBatchLipids: "RecipeBatchLipids",
-	RecipeLipids:      "RecipeLipids",
+	RecipeBatchLipid: "RecipeBatchLipid",
+	RecipeLipid:      "RecipeLipid",
+	LipidInventories: "LipidInventories",
 }
 
 // lipidR is where relationships are stored.
 type lipidR struct {
-	LipidInventories  LipidInventorySlice   `boil:"LipidInventories" json:"LipidInventories" toml:"LipidInventories" yaml:"LipidInventories"`
-	RecipeBatchLipids RecipeBatchLipidSlice `boil:"RecipeBatchLipids" json:"RecipeBatchLipids" toml:"RecipeBatchLipids" yaml:"RecipeBatchLipids"`
-	RecipeLipids      RecipeLipidSlice      `boil:"RecipeLipids" json:"RecipeLipids" toml:"RecipeLipids" yaml:"RecipeLipids"`
+	RecipeBatchLipid *RecipeBatchLipid   `boil:"RecipeBatchLipid" json:"RecipeBatchLipid" toml:"RecipeBatchLipid" yaml:"RecipeBatchLipid"`
+	RecipeLipid      *RecipeLipid        `boil:"RecipeLipid" json:"RecipeLipid" toml:"RecipeLipid" yaml:"RecipeLipid"`
+	LipidInventories LipidInventorySlice `boil:"LipidInventories" json:"LipidInventories" toml:"LipidInventories" yaml:"LipidInventories"`
 }
 
 // NewStruct creates a new relationship struct
@@ -462,6 +462,36 @@ func (q lipidQuery) Exists(ctx context.Context, exec boil.ContextExecutor) (bool
 	return count > 0, nil
 }
 
+// RecipeBatchLipid pointed to by the foreign key.
+func (o *Lipid) RecipeBatchLipid(mods ...qm.QueryMod) recipeBatchLipidQuery {
+	queryMods := []qm.QueryMod{
+		qm.Where("\"lipid_id\" = ?", o.ID),
+		qmhelper.WhereIsNull("deleted_at"),
+	}
+
+	queryMods = append(queryMods, mods...)
+
+	query := RecipeBatchLipids(queryMods...)
+	queries.SetFrom(query.Query, "\"recipe_batch_lipid\"")
+
+	return query
+}
+
+// RecipeLipid pointed to by the foreign key.
+func (o *Lipid) RecipeLipid(mods ...qm.QueryMod) recipeLipidQuery {
+	queryMods := []qm.QueryMod{
+		qm.Where("\"lipid_id\" = ?", o.ID),
+		qmhelper.WhereIsNull("deleted_at"),
+	}
+
+	queryMods = append(queryMods, mods...)
+
+	query := RecipeLipids(queryMods...)
+	queries.SetFrom(query.Query, "\"recipe_lipid\"")
+
+	return query
+}
+
 // LipidInventories retrieves all the lipid_inventory's LipidInventories with an executor.
 func (o *Lipid) LipidInventories(mods ...qm.QueryMod) lipidInventoryQuery {
 	var queryMods []qm.QueryMod
@@ -484,48 +514,192 @@ func (o *Lipid) LipidInventories(mods ...qm.QueryMod) lipidInventoryQuery {
 	return query
 }
 
-// RecipeBatchLipids retrieves all the recipe_batch_lipid's RecipeBatchLipids with an executor.
-func (o *Lipid) RecipeBatchLipids(mods ...qm.QueryMod) recipeBatchLipidQuery {
-	var queryMods []qm.QueryMod
-	if len(mods) != 0 {
-		queryMods = append(queryMods, mods...)
+// LoadRecipeBatchLipid allows an eager lookup of values, cached into the
+// loaded structs of the objects. This is for a 1-1 relationship.
+func (lipidL) LoadRecipeBatchLipid(ctx context.Context, e boil.ContextExecutor, singular bool, maybeLipid interface{}, mods queries.Applicator) error {
+	var slice []*Lipid
+	var object *Lipid
+
+	if singular {
+		object = maybeLipid.(*Lipid)
+	} else {
+		slice = *maybeLipid.(*[]*Lipid)
 	}
 
-	queryMods = append(queryMods,
-		qm.Where("\"recipe_batch_lipid\".\"lipid_id\"=?", o.ID),
-		qmhelper.WhereIsNull("\"recipe_batch_lipid\".\"deleted_at\""),
+	args := make([]interface{}, 0, 1)
+	if singular {
+		if object.R == nil {
+			object.R = &lipidR{}
+		}
+		args = append(args, object.ID)
+	} else {
+	Outer:
+		for _, obj := range slice {
+			if obj.R == nil {
+				obj.R = &lipidR{}
+			}
+
+			for _, a := range args {
+				if a == obj.ID {
+					continue Outer
+				}
+			}
+
+			args = append(args, obj.ID)
+		}
+	}
+
+	if len(args) == 0 {
+		return nil
+	}
+
+	query := NewQuery(
+		qm.From(`recipe_batch_lipid`),
+		qm.WhereIn(`recipe_batch_lipid.lipid_id in ?`, args...),
+		qmhelper.WhereIsNull(`recipe_batch_lipid.deleted_at`),
 	)
-
-	query := RecipeBatchLipids(queryMods...)
-	queries.SetFrom(query.Query, "\"recipe_batch_lipid\"")
-
-	if len(queries.GetSelect(query.Query)) == 0 {
-		queries.SetSelect(query.Query, []string{"\"recipe_batch_lipid\".*"})
+	if mods != nil {
+		mods.Apply(query)
 	}
 
-	return query
+	results, err := query.QueryContext(ctx, e)
+	if err != nil {
+		return errors.Wrap(err, "failed to eager load RecipeBatchLipid")
+	}
+
+	var resultSlice []*RecipeBatchLipid
+	if err = queries.Bind(results, &resultSlice); err != nil {
+		return errors.Wrap(err, "failed to bind eager loaded slice RecipeBatchLipid")
+	}
+
+	if err = results.Close(); err != nil {
+		return errors.Wrap(err, "failed to close results of eager load for recipe_batch_lipid")
+	}
+	if err = results.Err(); err != nil {
+		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for recipe_batch_lipid")
+	}
+
+	if len(lipidAfterSelectHooks) != 0 {
+		for _, obj := range resultSlice {
+			if err := obj.doAfterSelectHooks(ctx, e); err != nil {
+				return err
+			}
+		}
+	}
+
+	if len(resultSlice) == 0 {
+		return nil
+	}
+
+	if singular {
+		foreign := resultSlice[0]
+		object.R.RecipeBatchLipid = foreign
+	}
+
+	for _, local := range slice {
+		for _, foreign := range resultSlice {
+			if local.ID == foreign.LipidID {
+				local.R.RecipeBatchLipid = foreign
+				break
+			}
+		}
+	}
+
+	return nil
 }
 
-// RecipeLipids retrieves all the recipe_lipid's RecipeLipids with an executor.
-func (o *Lipid) RecipeLipids(mods ...qm.QueryMod) recipeLipidQuery {
-	var queryMods []qm.QueryMod
-	if len(mods) != 0 {
-		queryMods = append(queryMods, mods...)
+// LoadRecipeLipid allows an eager lookup of values, cached into the
+// loaded structs of the objects. This is for a 1-1 relationship.
+func (lipidL) LoadRecipeLipid(ctx context.Context, e boil.ContextExecutor, singular bool, maybeLipid interface{}, mods queries.Applicator) error {
+	var slice []*Lipid
+	var object *Lipid
+
+	if singular {
+		object = maybeLipid.(*Lipid)
+	} else {
+		slice = *maybeLipid.(*[]*Lipid)
 	}
 
-	queryMods = append(queryMods,
-		qm.Where("\"recipe_lipid\".\"lipid_id\"=?", o.ID),
-		qmhelper.WhereIsNull("\"recipe_lipid\".\"deleted_at\""),
+	args := make([]interface{}, 0, 1)
+	if singular {
+		if object.R == nil {
+			object.R = &lipidR{}
+		}
+		args = append(args, object.ID)
+	} else {
+	Outer:
+		for _, obj := range slice {
+			if obj.R == nil {
+				obj.R = &lipidR{}
+			}
+
+			for _, a := range args {
+				if a == obj.ID {
+					continue Outer
+				}
+			}
+
+			args = append(args, obj.ID)
+		}
+	}
+
+	if len(args) == 0 {
+		return nil
+	}
+
+	query := NewQuery(
+		qm.From(`recipe_lipid`),
+		qm.WhereIn(`recipe_lipid.lipid_id in ?`, args...),
+		qmhelper.WhereIsNull(`recipe_lipid.deleted_at`),
 	)
-
-	query := RecipeLipids(queryMods...)
-	queries.SetFrom(query.Query, "\"recipe_lipid\"")
-
-	if len(queries.GetSelect(query.Query)) == 0 {
-		queries.SetSelect(query.Query, []string{"\"recipe_lipid\".*"})
+	if mods != nil {
+		mods.Apply(query)
 	}
 
-	return query
+	results, err := query.QueryContext(ctx, e)
+	if err != nil {
+		return errors.Wrap(err, "failed to eager load RecipeLipid")
+	}
+
+	var resultSlice []*RecipeLipid
+	if err = queries.Bind(results, &resultSlice); err != nil {
+		return errors.Wrap(err, "failed to bind eager loaded slice RecipeLipid")
+	}
+
+	if err = results.Close(); err != nil {
+		return errors.Wrap(err, "failed to close results of eager load for recipe_lipid")
+	}
+	if err = results.Err(); err != nil {
+		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for recipe_lipid")
+	}
+
+	if len(lipidAfterSelectHooks) != 0 {
+		for _, obj := range resultSlice {
+			if err := obj.doAfterSelectHooks(ctx, e); err != nil {
+				return err
+			}
+		}
+	}
+
+	if len(resultSlice) == 0 {
+		return nil
+	}
+
+	if singular {
+		foreign := resultSlice[0]
+		object.R.RecipeLipid = foreign
+	}
+
+	for _, local := range slice {
+		for _, foreign := range resultSlice {
+			if local.ID == foreign.LipidID {
+				local.R.RecipeLipid = foreign
+				break
+			}
+		}
+	}
+
+	return nil
 }
 
 // LoadLipidInventories allows an eager lookup of values, cached into the
@@ -617,181 +791,105 @@ func (lipidL) LoadLipidInventories(ctx context.Context, e boil.ContextExecutor, 
 	return nil
 }
 
-// LoadRecipeBatchLipids allows an eager lookup of values, cached into the
-// loaded structs of the objects. This is for a 1-M or N-M relationship.
-func (lipidL) LoadRecipeBatchLipids(ctx context.Context, e boil.ContextExecutor, singular bool, maybeLipid interface{}, mods queries.Applicator) error {
-	var slice []*Lipid
-	var object *Lipid
+// SetRecipeBatchLipid of the lipid to the related item.
+// Sets o.R.RecipeBatchLipid to related.
+// Adds o to related.R.Lipid.
+func (o *Lipid) SetRecipeBatchLipid(ctx context.Context, exec boil.ContextExecutor, insert bool, related *RecipeBatchLipid) error {
+	var err error
 
-	if singular {
-		object = maybeLipid.(*Lipid)
+	if insert {
+		related.LipidID = o.ID
+
+		if err = related.Insert(ctx, exec, boil.Infer()); err != nil {
+			return errors.Wrap(err, "failed to insert into foreign table")
+		}
 	} else {
-		slice = *maybeLipid.(*[]*Lipid)
+		updateQuery := fmt.Sprintf(
+			"UPDATE \"recipe_batch_lipid\" SET %s WHERE %s",
+			strmangle.SetParamNames("\"", "\"", 1, []string{"lipid_id"}),
+			strmangle.WhereClause("\"", "\"", 2, recipeBatchLipidPrimaryKeyColumns),
+		)
+		values := []interface{}{o.ID, related.ID}
+
+		if boil.IsDebug(ctx) {
+			writer := boil.DebugWriterFrom(ctx)
+			fmt.Fprintln(writer, updateQuery)
+			fmt.Fprintln(writer, values)
+		}
+		if _, err = exec.ExecContext(ctx, updateQuery, values...); err != nil {
+			return errors.Wrap(err, "failed to update foreign table")
+		}
+
+		related.LipidID = o.ID
+
 	}
 
-	args := make([]interface{}, 0, 1)
-	if singular {
-		if object.R == nil {
-			object.R = &lipidR{}
+	if o.R == nil {
+		o.R = &lipidR{
+			RecipeBatchLipid: related,
 		}
-		args = append(args, object.ID)
 	} else {
-	Outer:
-		for _, obj := range slice {
-			if obj.R == nil {
-				obj.R = &lipidR{}
-			}
+		o.R.RecipeBatchLipid = related
+	}
 
-			for _, a := range args {
-				if a == obj.ID {
-					continue Outer
-				}
-			}
-
-			args = append(args, obj.ID)
+	if related.R == nil {
+		related.R = &recipeBatchLipidR{
+			Lipid: o,
 		}
+	} else {
+		related.R.Lipid = o
 	}
-
-	if len(args) == 0 {
-		return nil
-	}
-
-	query := NewQuery(
-		qm.From(`recipe_batch_lipid`),
-		qm.WhereIn(`recipe_batch_lipid.lipid_id in ?`, args...),
-		qmhelper.WhereIsNull(`recipe_batch_lipid.deleted_at`),
-	)
-	if mods != nil {
-		mods.Apply(query)
-	}
-
-	results, err := query.QueryContext(ctx, e)
-	if err != nil {
-		return errors.Wrap(err, "failed to eager load recipe_batch_lipid")
-	}
-
-	var resultSlice []*RecipeBatchLipid
-	if err = queries.Bind(results, &resultSlice); err != nil {
-		return errors.Wrap(err, "failed to bind eager loaded slice recipe_batch_lipid")
-	}
-
-	if err = results.Close(); err != nil {
-		return errors.Wrap(err, "failed to close results in eager load on recipe_batch_lipid")
-	}
-	if err = results.Err(); err != nil {
-		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for recipe_batch_lipid")
-	}
-
-	if len(recipeBatchLipidAfterSelectHooks) != 0 {
-		for _, obj := range resultSlice {
-			if err := obj.doAfterSelectHooks(ctx, e); err != nil {
-				return err
-			}
-		}
-	}
-	if singular {
-		object.R.RecipeBatchLipids = resultSlice
-		return nil
-	}
-
-	for _, foreign := range resultSlice {
-		for _, local := range slice {
-			if local.ID == foreign.LipidID {
-				local.R.RecipeBatchLipids = append(local.R.RecipeBatchLipids, foreign)
-				break
-			}
-		}
-	}
-
 	return nil
 }
 
-// LoadRecipeLipids allows an eager lookup of values, cached into the
-// loaded structs of the objects. This is for a 1-M or N-M relationship.
-func (lipidL) LoadRecipeLipids(ctx context.Context, e boil.ContextExecutor, singular bool, maybeLipid interface{}, mods queries.Applicator) error {
-	var slice []*Lipid
-	var object *Lipid
+// SetRecipeLipid of the lipid to the related item.
+// Sets o.R.RecipeLipid to related.
+// Adds o to related.R.Lipid.
+func (o *Lipid) SetRecipeLipid(ctx context.Context, exec boil.ContextExecutor, insert bool, related *RecipeLipid) error {
+	var err error
 
-	if singular {
-		object = maybeLipid.(*Lipid)
+	if insert {
+		related.LipidID = o.ID
+
+		if err = related.Insert(ctx, exec, boil.Infer()); err != nil {
+			return errors.Wrap(err, "failed to insert into foreign table")
+		}
 	} else {
-		slice = *maybeLipid.(*[]*Lipid)
+		updateQuery := fmt.Sprintf(
+			"UPDATE \"recipe_lipid\" SET %s WHERE %s",
+			strmangle.SetParamNames("\"", "\"", 1, []string{"lipid_id"}),
+			strmangle.WhereClause("\"", "\"", 2, recipeLipidPrimaryKeyColumns),
+		)
+		values := []interface{}{o.ID, related.ID}
+
+		if boil.IsDebug(ctx) {
+			writer := boil.DebugWriterFrom(ctx)
+			fmt.Fprintln(writer, updateQuery)
+			fmt.Fprintln(writer, values)
+		}
+		if _, err = exec.ExecContext(ctx, updateQuery, values...); err != nil {
+			return errors.Wrap(err, "failed to update foreign table")
+		}
+
+		related.LipidID = o.ID
+
 	}
 
-	args := make([]interface{}, 0, 1)
-	if singular {
-		if object.R == nil {
-			object.R = &lipidR{}
+	if o.R == nil {
+		o.R = &lipidR{
+			RecipeLipid: related,
 		}
-		args = append(args, object.ID)
 	} else {
-	Outer:
-		for _, obj := range slice {
-			if obj.R == nil {
-				obj.R = &lipidR{}
-			}
+		o.R.RecipeLipid = related
+	}
 
-			for _, a := range args {
-				if a == obj.ID {
-					continue Outer
-				}
-			}
-
-			args = append(args, obj.ID)
+	if related.R == nil {
+		related.R = &recipeLipidR{
+			Lipid: o,
 		}
+	} else {
+		related.R.Lipid = o
 	}
-
-	if len(args) == 0 {
-		return nil
-	}
-
-	query := NewQuery(
-		qm.From(`recipe_lipid`),
-		qm.WhereIn(`recipe_lipid.lipid_id in ?`, args...),
-		qmhelper.WhereIsNull(`recipe_lipid.deleted_at`),
-	)
-	if mods != nil {
-		mods.Apply(query)
-	}
-
-	results, err := query.QueryContext(ctx, e)
-	if err != nil {
-		return errors.Wrap(err, "failed to eager load recipe_lipid")
-	}
-
-	var resultSlice []*RecipeLipid
-	if err = queries.Bind(results, &resultSlice); err != nil {
-		return errors.Wrap(err, "failed to bind eager loaded slice recipe_lipid")
-	}
-
-	if err = results.Close(); err != nil {
-		return errors.Wrap(err, "failed to close results in eager load on recipe_lipid")
-	}
-	if err = results.Err(); err != nil {
-		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for recipe_lipid")
-	}
-
-	if len(recipeLipidAfterSelectHooks) != 0 {
-		for _, obj := range resultSlice {
-			if err := obj.doAfterSelectHooks(ctx, e); err != nil {
-				return err
-			}
-		}
-	}
-	if singular {
-		object.R.RecipeLipids = resultSlice
-		return nil
-	}
-
-	for _, foreign := range resultSlice {
-		for _, local := range slice {
-			if local.ID == foreign.LipidID {
-				local.R.RecipeLipids = append(local.R.RecipeLipids, foreign)
-				break
-			}
-		}
-	}
-
 	return nil
 }
 
@@ -839,112 +937,6 @@ func (o *Lipid) AddLipidInventories(ctx context.Context, exec boil.ContextExecut
 	for _, rel := range related {
 		if rel.R == nil {
 			rel.R = &lipidInventoryR{
-				Lipid: o,
-			}
-		} else {
-			rel.R.Lipid = o
-		}
-	}
-	return nil
-}
-
-// AddRecipeBatchLipids adds the given related objects to the existing relationships
-// of the lipid, optionally inserting them as new records.
-// Appends related to o.R.RecipeBatchLipids.
-// Sets related.R.Lipid appropriately.
-func (o *Lipid) AddRecipeBatchLipids(ctx context.Context, exec boil.ContextExecutor, insert bool, related ...*RecipeBatchLipid) error {
-	var err error
-	for _, rel := range related {
-		if insert {
-			rel.LipidID = o.ID
-			if err = rel.Insert(ctx, exec, boil.Infer()); err != nil {
-				return errors.Wrap(err, "failed to insert into foreign table")
-			}
-		} else {
-			updateQuery := fmt.Sprintf(
-				"UPDATE \"recipe_batch_lipid\" SET %s WHERE %s",
-				strmangle.SetParamNames("\"", "\"", 1, []string{"lipid_id"}),
-				strmangle.WhereClause("\"", "\"", 2, recipeBatchLipidPrimaryKeyColumns),
-			)
-			values := []interface{}{o.ID, rel.ID}
-
-			if boil.IsDebug(ctx) {
-				writer := boil.DebugWriterFrom(ctx)
-				fmt.Fprintln(writer, updateQuery)
-				fmt.Fprintln(writer, values)
-			}
-			if _, err = exec.ExecContext(ctx, updateQuery, values...); err != nil {
-				return errors.Wrap(err, "failed to update foreign table")
-			}
-
-			rel.LipidID = o.ID
-		}
-	}
-
-	if o.R == nil {
-		o.R = &lipidR{
-			RecipeBatchLipids: related,
-		}
-	} else {
-		o.R.RecipeBatchLipids = append(o.R.RecipeBatchLipids, related...)
-	}
-
-	for _, rel := range related {
-		if rel.R == nil {
-			rel.R = &recipeBatchLipidR{
-				Lipid: o,
-			}
-		} else {
-			rel.R.Lipid = o
-		}
-	}
-	return nil
-}
-
-// AddRecipeLipids adds the given related objects to the existing relationships
-// of the lipid, optionally inserting them as new records.
-// Appends related to o.R.RecipeLipids.
-// Sets related.R.Lipid appropriately.
-func (o *Lipid) AddRecipeLipids(ctx context.Context, exec boil.ContextExecutor, insert bool, related ...*RecipeLipid) error {
-	var err error
-	for _, rel := range related {
-		if insert {
-			rel.LipidID = o.ID
-			if err = rel.Insert(ctx, exec, boil.Infer()); err != nil {
-				return errors.Wrap(err, "failed to insert into foreign table")
-			}
-		} else {
-			updateQuery := fmt.Sprintf(
-				"UPDATE \"recipe_lipid\" SET %s WHERE %s",
-				strmangle.SetParamNames("\"", "\"", 1, []string{"lipid_id"}),
-				strmangle.WhereClause("\"", "\"", 2, recipeLipidPrimaryKeyColumns),
-			)
-			values := []interface{}{o.ID, rel.ID}
-
-			if boil.IsDebug(ctx) {
-				writer := boil.DebugWriterFrom(ctx)
-				fmt.Fprintln(writer, updateQuery)
-				fmt.Fprintln(writer, values)
-			}
-			if _, err = exec.ExecContext(ctx, updateQuery, values...); err != nil {
-				return errors.Wrap(err, "failed to update foreign table")
-			}
-
-			rel.LipidID = o.ID
-		}
-	}
-
-	if o.R == nil {
-		o.R = &lipidR{
-			RecipeLipids: related,
-		}
-	} else {
-		o.R.RecipeLipids = append(o.R.RecipeLipids, related...)
-	}
-
-	for _, rel := range related {
-		if rel.R == nil {
-			rel.R = &recipeLipidR{
 				Lipid: o,
 			}
 		} else {

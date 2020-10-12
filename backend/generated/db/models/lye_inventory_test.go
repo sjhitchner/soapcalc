@@ -595,173 +595,20 @@ func testLyeInventoriesInsertWhitelist(t *testing.T) {
 	}
 }
 
-func testLyeInventoryToManyLyeLyeInventories(t *testing.T) {
-	var err error
-	ctx := context.Background()
-	tx := MustTx(boil.BeginTx(ctx, nil))
-	defer func() { _ = tx.Rollback() }()
-
-	var a LyeInventory
-	var b, c LyeInventory
-
-	seed := randomize.NewSeed()
-	if err = randomize.Struct(seed, &a, lyeInventoryDBTypes, true, lyeInventoryColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize LyeInventory struct: %s", err)
-	}
-
-	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
-
-	if err = randomize.Struct(seed, &b, lyeInventoryDBTypes, false, lyeInventoryColumnsWithDefault...); err != nil {
-		t.Fatal(err)
-	}
-	if err = randomize.Struct(seed, &c, lyeInventoryDBTypes, false, lyeInventoryColumnsWithDefault...); err != nil {
-		t.Fatal(err)
-	}
-
-	b.LyeID = a.ID
-	c.LyeID = a.ID
-
-	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
-	if err = c.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
-
-	check, err := a.LyeLyeInventories().All(ctx, tx)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	bFound, cFound := false, false
-	for _, v := range check {
-		if v.LyeID == b.LyeID {
-			bFound = true
-		}
-		if v.LyeID == c.LyeID {
-			cFound = true
-		}
-	}
-
-	if !bFound {
-		t.Error("expected to find b")
-	}
-	if !cFound {
-		t.Error("expected to find c")
-	}
-
-	slice := LyeInventorySlice{&a}
-	if err = a.L.LoadLyeLyeInventories(ctx, tx, false, (*[]*LyeInventory)(&slice), nil); err != nil {
-		t.Fatal(err)
-	}
-	if got := len(a.R.LyeLyeInventories); got != 2 {
-		t.Error("number of eager loaded records wrong, got:", got)
-	}
-
-	a.R.LyeLyeInventories = nil
-	if err = a.L.LoadLyeLyeInventories(ctx, tx, true, &a, nil); err != nil {
-		t.Fatal(err)
-	}
-	if got := len(a.R.LyeLyeInventories); got != 2 {
-		t.Error("number of eager loaded records wrong, got:", got)
-	}
-
-	if t.Failed() {
-		t.Logf("%#v", check)
-	}
-}
-
-func testLyeInventoryToManyAddOpLyeLyeInventories(t *testing.T) {
-	var err error
-
-	ctx := context.Background()
-	tx := MustTx(boil.BeginTx(ctx, nil))
-	defer func() { _ = tx.Rollback() }()
-
-	var a LyeInventory
-	var b, c, d, e LyeInventory
-
-	seed := randomize.NewSeed()
-	if err = randomize.Struct(seed, &a, lyeInventoryDBTypes, false, strmangle.SetComplement(lyeInventoryPrimaryKeyColumns, lyeInventoryColumnsWithoutDefault)...); err != nil {
-		t.Fatal(err)
-	}
-	foreigners := []*LyeInventory{&b, &c, &d, &e}
-	for _, x := range foreigners {
-		if err = randomize.Struct(seed, x, lyeInventoryDBTypes, false, strmangle.SetComplement(lyeInventoryPrimaryKeyColumns, lyeInventoryColumnsWithoutDefault)...); err != nil {
-			t.Fatal(err)
-		}
-	}
-
-	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
-	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
-	if err = c.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
-
-	foreignersSplitByInsertion := [][]*LyeInventory{
-		{&b, &c},
-		{&d, &e},
-	}
-
-	for i, x := range foreignersSplitByInsertion {
-		err = a.AddLyeLyeInventories(ctx, tx, i != 0, x...)
-		if err != nil {
-			t.Fatal(err)
-		}
-
-		first := x[0]
-		second := x[1]
-
-		if a.ID != first.LyeID {
-			t.Error("foreign key was wrong value", a.ID, first.LyeID)
-		}
-		if a.ID != second.LyeID {
-			t.Error("foreign key was wrong value", a.ID, second.LyeID)
-		}
-
-		if first.R.Lye != &a {
-			t.Error("relationship was not added properly to the foreign slice")
-		}
-		if second.R.Lye != &a {
-			t.Error("relationship was not added properly to the foreign slice")
-		}
-
-		if a.R.LyeLyeInventories[i*2] != first {
-			t.Error("relationship struct slice not set to correct value")
-		}
-		if a.R.LyeLyeInventories[i*2+1] != second {
-			t.Error("relationship struct slice not set to correct value")
-		}
-
-		count, err := a.LyeLyeInventories().Count(ctx, tx)
-		if err != nil {
-			t.Fatal(err)
-		}
-		if want := int64((i + 1) * 2); count != want {
-			t.Error("want", want, "got", count)
-		}
-	}
-}
-func testLyeInventoryToOneLyeInventoryUsingLye(t *testing.T) {
+func testLyeInventoryToOneLyeUsingLye(t *testing.T) {
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
 
 	var local LyeInventory
-	var foreign LyeInventory
+	var foreign Lye
 
 	seed := randomize.NewSeed()
 	if err := randomize.Struct(seed, &local, lyeInventoryDBTypes, false, lyeInventoryColumnsWithDefault...); err != nil {
 		t.Errorf("Unable to randomize LyeInventory struct: %s", err)
 	}
-	if err := randomize.Struct(seed, &foreign, lyeInventoryDBTypes, false, lyeInventoryColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize LyeInventory struct: %s", err)
+	if err := randomize.Struct(seed, &foreign, lyeDBTypes, false, lyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Lye struct: %s", err)
 	}
 
 	if err := foreign.Insert(ctx, tx, boil.Infer()); err != nil {
@@ -850,7 +697,7 @@ func testLyeInventoryToOneSupplierUsingSupplier(t *testing.T) {
 	}
 }
 
-func testLyeInventoryToOneSetOpLyeInventoryUsingLye(t *testing.T) {
+func testLyeInventoryToOneSetOpLyeUsingLye(t *testing.T) {
 	var err error
 
 	ctx := context.Background()
@@ -858,16 +705,16 @@ func testLyeInventoryToOneSetOpLyeInventoryUsingLye(t *testing.T) {
 	defer func() { _ = tx.Rollback() }()
 
 	var a LyeInventory
-	var b, c LyeInventory
+	var b, c Lye
 
 	seed := randomize.NewSeed()
 	if err = randomize.Struct(seed, &a, lyeInventoryDBTypes, false, strmangle.SetComplement(lyeInventoryPrimaryKeyColumns, lyeInventoryColumnsWithoutDefault)...); err != nil {
 		t.Fatal(err)
 	}
-	if err = randomize.Struct(seed, &b, lyeInventoryDBTypes, false, strmangle.SetComplement(lyeInventoryPrimaryKeyColumns, lyeInventoryColumnsWithoutDefault)...); err != nil {
+	if err = randomize.Struct(seed, &b, lyeDBTypes, false, strmangle.SetComplement(lyePrimaryKeyColumns, lyeColumnsWithoutDefault)...); err != nil {
 		t.Fatal(err)
 	}
-	if err = randomize.Struct(seed, &c, lyeInventoryDBTypes, false, strmangle.SetComplement(lyeInventoryPrimaryKeyColumns, lyeInventoryColumnsWithoutDefault)...); err != nil {
+	if err = randomize.Struct(seed, &c, lyeDBTypes, false, strmangle.SetComplement(lyePrimaryKeyColumns, lyeColumnsWithoutDefault)...); err != nil {
 		t.Fatal(err)
 	}
 
@@ -878,7 +725,7 @@ func testLyeInventoryToOneSetOpLyeInventoryUsingLye(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	for i, x := range []*LyeInventory{&b, &c} {
+	for i, x := range []*Lye{&b, &c} {
 		err = a.SetLye(ctx, tx, i != 0, x)
 		if err != nil {
 			t.Fatal(err)
@@ -888,7 +735,7 @@ func testLyeInventoryToOneSetOpLyeInventoryUsingLye(t *testing.T) {
 			t.Error("relationship struct not set to correct value")
 		}
 
-		if x.R.LyeLyeInventories[0] != &a {
+		if x.R.LyeInventories[0] != &a {
 			t.Error("failed to append to foreign relationship struct")
 		}
 		if a.LyeID != x.ID {

@@ -27,8 +27,10 @@ func TestParent(t *testing.T) {
 	t.Run("RecipeBatchFragrances", testRecipeBatchFragrances)
 	t.Run("RecipeBatchLipids", testRecipeBatchLipids)
 	t.Run("RecipeBatchLyes", testRecipeBatchLyes)
+	t.Run("RecipeBatchNotes", testRecipeBatchNotes)
 	t.Run("RecipeFragrances", testRecipeFragrances)
 	t.Run("RecipeLipids", testRecipeLipids)
+	t.Run("RecipeSteps", testRecipeSteps)
 	t.Run("Suppliers", testSuppliers)
 }
 
@@ -48,8 +50,10 @@ func TestSoftDelete(t *testing.T) {
 	t.Run("RecipeBatchFragrances", testRecipeBatchFragrancesSoftDelete)
 	t.Run("RecipeBatchLipids", testRecipeBatchLipidsSoftDelete)
 	t.Run("RecipeBatchLyes", testRecipeBatchLyesSoftDelete)
+	t.Run("RecipeBatchNotes", testRecipeBatchNotesSoftDelete)
 	t.Run("RecipeFragrances", testRecipeFragrancesSoftDelete)
 	t.Run("RecipeLipids", testRecipeLipidsSoftDelete)
+	t.Run("RecipeSteps", testRecipeStepsSoftDelete)
 	t.Run("Suppliers", testSuppliersSoftDelete)
 }
 
@@ -69,8 +73,10 @@ func TestQuerySoftDeleteAll(t *testing.T) {
 	t.Run("RecipeBatchFragrances", testRecipeBatchFragrancesQuerySoftDeleteAll)
 	t.Run("RecipeBatchLipids", testRecipeBatchLipidsQuerySoftDeleteAll)
 	t.Run("RecipeBatchLyes", testRecipeBatchLyesQuerySoftDeleteAll)
+	t.Run("RecipeBatchNotes", testRecipeBatchNotesQuerySoftDeleteAll)
 	t.Run("RecipeFragrances", testRecipeFragrancesQuerySoftDeleteAll)
 	t.Run("RecipeLipids", testRecipeLipidsQuerySoftDeleteAll)
+	t.Run("RecipeSteps", testRecipeStepsQuerySoftDeleteAll)
 	t.Run("Suppliers", testSuppliersQuerySoftDeleteAll)
 }
 
@@ -90,8 +96,10 @@ func TestSliceSoftDeleteAll(t *testing.T) {
 	t.Run("RecipeBatchFragrances", testRecipeBatchFragrancesSliceSoftDeleteAll)
 	t.Run("RecipeBatchLipids", testRecipeBatchLipidsSliceSoftDeleteAll)
 	t.Run("RecipeBatchLyes", testRecipeBatchLyesSliceSoftDeleteAll)
+	t.Run("RecipeBatchNotes", testRecipeBatchNotesSliceSoftDeleteAll)
 	t.Run("RecipeFragrances", testRecipeFragrancesSliceSoftDeleteAll)
 	t.Run("RecipeLipids", testRecipeLipidsSliceSoftDeleteAll)
+	t.Run("RecipeSteps", testRecipeStepsSliceSoftDeleteAll)
 	t.Run("Suppliers", testSuppliersSliceSoftDeleteAll)
 }
 
@@ -111,8 +119,10 @@ func TestDelete(t *testing.T) {
 	t.Run("RecipeBatchFragrances", testRecipeBatchFragrancesDelete)
 	t.Run("RecipeBatchLipids", testRecipeBatchLipidsDelete)
 	t.Run("RecipeBatchLyes", testRecipeBatchLyesDelete)
+	t.Run("RecipeBatchNotes", testRecipeBatchNotesDelete)
 	t.Run("RecipeFragrances", testRecipeFragrancesDelete)
 	t.Run("RecipeLipids", testRecipeLipidsDelete)
+	t.Run("RecipeSteps", testRecipeStepsDelete)
 	t.Run("Suppliers", testSuppliersDelete)
 }
 
@@ -132,8 +142,10 @@ func TestQueryDeleteAll(t *testing.T) {
 	t.Run("RecipeBatchFragrances", testRecipeBatchFragrancesQueryDeleteAll)
 	t.Run("RecipeBatchLipids", testRecipeBatchLipidsQueryDeleteAll)
 	t.Run("RecipeBatchLyes", testRecipeBatchLyesQueryDeleteAll)
+	t.Run("RecipeBatchNotes", testRecipeBatchNotesQueryDeleteAll)
 	t.Run("RecipeFragrances", testRecipeFragrancesQueryDeleteAll)
 	t.Run("RecipeLipids", testRecipeLipidsQueryDeleteAll)
+	t.Run("RecipeSteps", testRecipeStepsQueryDeleteAll)
 	t.Run("Suppliers", testSuppliersQueryDeleteAll)
 }
 
@@ -153,8 +165,10 @@ func TestSliceDeleteAll(t *testing.T) {
 	t.Run("RecipeBatchFragrances", testRecipeBatchFragrancesSliceDeleteAll)
 	t.Run("RecipeBatchLipids", testRecipeBatchLipidsSliceDeleteAll)
 	t.Run("RecipeBatchLyes", testRecipeBatchLyesSliceDeleteAll)
+	t.Run("RecipeBatchNotes", testRecipeBatchNotesSliceDeleteAll)
 	t.Run("RecipeFragrances", testRecipeFragrancesSliceDeleteAll)
 	t.Run("RecipeLipids", testRecipeLipidsSliceDeleteAll)
+	t.Run("RecipeSteps", testRecipeStepsSliceDeleteAll)
 	t.Run("Suppliers", testSuppliersSliceDeleteAll)
 }
 
@@ -174,8 +188,10 @@ func TestExists(t *testing.T) {
 	t.Run("RecipeBatchFragrances", testRecipeBatchFragrancesExists)
 	t.Run("RecipeBatchLipids", testRecipeBatchLipidsExists)
 	t.Run("RecipeBatchLyes", testRecipeBatchLyesExists)
+	t.Run("RecipeBatchNotes", testRecipeBatchNotesExists)
 	t.Run("RecipeFragrances", testRecipeFragrancesExists)
 	t.Run("RecipeLipids", testRecipeLipidsExists)
+	t.Run("RecipeSteps", testRecipeStepsExists)
 	t.Run("Suppliers", testSuppliersExists)
 }
 
@@ -195,8 +211,10 @@ func TestFind(t *testing.T) {
 	t.Run("RecipeBatchFragrances", testRecipeBatchFragrancesFind)
 	t.Run("RecipeBatchLipids", testRecipeBatchLipidsFind)
 	t.Run("RecipeBatchLyes", testRecipeBatchLyesFind)
+	t.Run("RecipeBatchNotes", testRecipeBatchNotesFind)
 	t.Run("RecipeFragrances", testRecipeFragrancesFind)
 	t.Run("RecipeLipids", testRecipeLipidsFind)
+	t.Run("RecipeSteps", testRecipeStepsFind)
 	t.Run("Suppliers", testSuppliersFind)
 }
 
@@ -216,8 +234,10 @@ func TestBind(t *testing.T) {
 	t.Run("RecipeBatchFragrances", testRecipeBatchFragrancesBind)
 	t.Run("RecipeBatchLipids", testRecipeBatchLipidsBind)
 	t.Run("RecipeBatchLyes", testRecipeBatchLyesBind)
+	t.Run("RecipeBatchNotes", testRecipeBatchNotesBind)
 	t.Run("RecipeFragrances", testRecipeFragrancesBind)
 	t.Run("RecipeLipids", testRecipeLipidsBind)
+	t.Run("RecipeSteps", testRecipeStepsBind)
 	t.Run("Suppliers", testSuppliersBind)
 }
 
@@ -237,8 +257,10 @@ func TestOne(t *testing.T) {
 	t.Run("RecipeBatchFragrances", testRecipeBatchFragrancesOne)
 	t.Run("RecipeBatchLipids", testRecipeBatchLipidsOne)
 	t.Run("RecipeBatchLyes", testRecipeBatchLyesOne)
+	t.Run("RecipeBatchNotes", testRecipeBatchNotesOne)
 	t.Run("RecipeFragrances", testRecipeFragrancesOne)
 	t.Run("RecipeLipids", testRecipeLipidsOne)
+	t.Run("RecipeSteps", testRecipeStepsOne)
 	t.Run("Suppliers", testSuppliersOne)
 }
 
@@ -258,8 +280,10 @@ func TestAll(t *testing.T) {
 	t.Run("RecipeBatchFragrances", testRecipeBatchFragrancesAll)
 	t.Run("RecipeBatchLipids", testRecipeBatchLipidsAll)
 	t.Run("RecipeBatchLyes", testRecipeBatchLyesAll)
+	t.Run("RecipeBatchNotes", testRecipeBatchNotesAll)
 	t.Run("RecipeFragrances", testRecipeFragrancesAll)
 	t.Run("RecipeLipids", testRecipeLipidsAll)
+	t.Run("RecipeSteps", testRecipeStepsAll)
 	t.Run("Suppliers", testSuppliersAll)
 }
 
@@ -279,8 +303,10 @@ func TestCount(t *testing.T) {
 	t.Run("RecipeBatchFragrances", testRecipeBatchFragrancesCount)
 	t.Run("RecipeBatchLipids", testRecipeBatchLipidsCount)
 	t.Run("RecipeBatchLyes", testRecipeBatchLyesCount)
+	t.Run("RecipeBatchNotes", testRecipeBatchNotesCount)
 	t.Run("RecipeFragrances", testRecipeFragrancesCount)
 	t.Run("RecipeLipids", testRecipeLipidsCount)
+	t.Run("RecipeSteps", testRecipeStepsCount)
 	t.Run("Suppliers", testSuppliersCount)
 }
 
@@ -300,8 +326,10 @@ func TestHooks(t *testing.T) {
 	t.Run("RecipeBatchFragrances", testRecipeBatchFragrancesHooks)
 	t.Run("RecipeBatchLipids", testRecipeBatchLipidsHooks)
 	t.Run("RecipeBatchLyes", testRecipeBatchLyesHooks)
+	t.Run("RecipeBatchNotes", testRecipeBatchNotesHooks)
 	t.Run("RecipeFragrances", testRecipeFragrancesHooks)
 	t.Run("RecipeLipids", testRecipeLipidsHooks)
+	t.Run("RecipeSteps", testRecipeStepsHooks)
 	t.Run("Suppliers", testSuppliersHooks)
 }
 
@@ -336,10 +364,14 @@ func TestInsert(t *testing.T) {
 	t.Run("RecipeBatchLipids", testRecipeBatchLipidsInsertWhitelist)
 	t.Run("RecipeBatchLyes", testRecipeBatchLyesInsert)
 	t.Run("RecipeBatchLyes", testRecipeBatchLyesInsertWhitelist)
+	t.Run("RecipeBatchNotes", testRecipeBatchNotesInsert)
+	t.Run("RecipeBatchNotes", testRecipeBatchNotesInsertWhitelist)
 	t.Run("RecipeFragrances", testRecipeFragrancesInsert)
 	t.Run("RecipeFragrances", testRecipeFragrancesInsertWhitelist)
 	t.Run("RecipeLipids", testRecipeLipidsInsert)
 	t.Run("RecipeLipids", testRecipeLipidsInsertWhitelist)
+	t.Run("RecipeSteps", testRecipeStepsInsert)
+	t.Run("RecipeSteps", testRecipeStepsInsertWhitelist)
 	t.Run("Suppliers", testSuppliersInsert)
 	t.Run("Suppliers", testSuppliersInsertWhitelist)
 }
@@ -353,7 +385,7 @@ func TestToOne(t *testing.T) {
 	t.Run("FragranceInventoryToSupplierUsingSupplier", testFragranceInventoryToOneSupplierUsingSupplier)
 	t.Run("LipidInventoryToLipidUsingLipid", testLipidInventoryToOneLipidUsingLipid)
 	t.Run("LipidInventoryToSupplierUsingSupplier", testLipidInventoryToOneSupplierUsingSupplier)
-	t.Run("LyeInventoryToLyeInventoryUsingLye", testLyeInventoryToOneLyeInventoryUsingLye)
+	t.Run("LyeInventoryToLyeUsingLye", testLyeInventoryToOneLyeUsingLye)
 	t.Run("LyeInventoryToSupplierUsingSupplier", testLyeInventoryToOneSupplierUsingSupplier)
 	t.Run("RecipeAdditiveToAdditiveUsingAdditive", testRecipeAdditiveToOneAdditiveUsingAdditive)
 	t.Run("RecipeAdditiveToRecipeUsingRecipe", testRecipeAdditiveToOneRecipeUsingRecipe)
@@ -366,15 +398,23 @@ func TestToOne(t *testing.T) {
 	t.Run("RecipeBatchLipidToLipidUsingLipid", testRecipeBatchLipidToOneLipidUsingLipid)
 	t.Run("RecipeBatchLyeToRecipeBatchUsingBatch", testRecipeBatchLyeToOneRecipeBatchUsingBatch)
 	t.Run("RecipeBatchLyeToLyeUsingLye", testRecipeBatchLyeToOneLyeUsingLye)
+	t.Run("RecipeBatchNoteToRecipeBatchUsingBatch", testRecipeBatchNoteToOneRecipeBatchUsingBatch)
 	t.Run("RecipeFragranceToFragranceUsingFragrance", testRecipeFragranceToOneFragranceUsingFragrance)
 	t.Run("RecipeFragranceToRecipeUsingRecipe", testRecipeFragranceToOneRecipeUsingRecipe)
 	t.Run("RecipeLipidToLipidUsingLipid", testRecipeLipidToOneLipidUsingLipid)
 	t.Run("RecipeLipidToRecipeUsingRecipe", testRecipeLipidToOneRecipeUsingRecipe)
+	t.Run("RecipeStepToRecipeUsingRecipe", testRecipeStepToOneRecipeUsingRecipe)
 }
 
 // TestOneToOne tests cannot be run in parallel
 // or deadlocks can occur.
 func TestOneToOne(t *testing.T) {
+	t.Run("AdditiveToRecipeAdditiveUsingRecipeAdditive", testAdditiveOneToOneRecipeAdditiveUsingRecipeAdditive)
+	t.Run("AdditiveToRecipeBatchAdditiveUsingRecipeBatchAdditive", testAdditiveOneToOneRecipeBatchAdditiveUsingRecipeBatchAdditive)
+	t.Run("FragranceToRecipeBatchFragranceUsingRecipeBatchFragrance", testFragranceOneToOneRecipeBatchFragranceUsingRecipeBatchFragrance)
+	t.Run("FragranceToRecipeFragranceUsingRecipeFragrance", testFragranceOneToOneRecipeFragranceUsingRecipeFragrance)
+	t.Run("LipidToRecipeBatchLipidUsingRecipeBatchLipid", testLipidOneToOneRecipeBatchLipidUsingRecipeBatchLipid)
+	t.Run("LipidToRecipeLipidUsingRecipeLipid", testLipidOneToOneRecipeLipidUsingRecipeLipid)
 	t.Run("LyeToRecipeBatchLyeUsingRecipeBatchLye", testLyeOneToOneRecipeBatchLyeUsingRecipeBatchLye)
 }
 
@@ -382,23 +422,19 @@ func TestOneToOne(t *testing.T) {
 // or deadlocks can occur.
 func TestToMany(t *testing.T) {
 	t.Run("AdditiveToAdditiveInventories", testAdditiveToManyAdditiveInventories)
-	t.Run("AdditiveToRecipeAdditives", testAdditiveToManyRecipeAdditives)
-	t.Run("AdditiveToRecipeBatchAdditives", testAdditiveToManyRecipeBatchAdditives)
 	t.Run("FragranceToFragranceInventories", testFragranceToManyFragranceInventories)
-	t.Run("FragranceToRecipeBatchFragrances", testFragranceToManyRecipeBatchFragrances)
-	t.Run("FragranceToRecipeFragrances", testFragranceToManyRecipeFragrances)
 	t.Run("LipidToLipidInventories", testLipidToManyLipidInventories)
-	t.Run("LipidToRecipeBatchLipids", testLipidToManyRecipeBatchLipids)
-	t.Run("LipidToRecipeLipids", testLipidToManyRecipeLipids)
-	t.Run("LyeInventoryToLyeLyeInventories", testLyeInventoryToManyLyeLyeInventories)
+	t.Run("LyeToLyeInventories", testLyeToManyLyeInventories)
 	t.Run("RecipeToRecipeAdditives", testRecipeToManyRecipeAdditives)
 	t.Run("RecipeToRecipeBatches", testRecipeToManyRecipeBatches)
 	t.Run("RecipeToRecipeFragrances", testRecipeToManyRecipeFragrances)
 	t.Run("RecipeToRecipeLipids", testRecipeToManyRecipeLipids)
+	t.Run("RecipeToRecipeSteps", testRecipeToManyRecipeSteps)
 	t.Run("RecipeBatchToBatchRecipeBatchAdditives", testRecipeBatchToManyBatchRecipeBatchAdditives)
 	t.Run("RecipeBatchToBatchRecipeBatchFragrances", testRecipeBatchToManyBatchRecipeBatchFragrances)
 	t.Run("RecipeBatchToBatchRecipeBatchLipids", testRecipeBatchToManyBatchRecipeBatchLipids)
 	t.Run("RecipeBatchToBatchRecipeBatchLyes", testRecipeBatchToManyBatchRecipeBatchLyes)
+	t.Run("RecipeBatchToBatchRecipeBatchNotes", testRecipeBatchToManyBatchRecipeBatchNotes)
 	t.Run("SupplierToAdditiveInventories", testSupplierToManyAdditiveInventories)
 	t.Run("SupplierToFragranceInventories", testSupplierToManyFragranceInventories)
 	t.Run("SupplierToLipidInventories", testSupplierToManyLipidInventories)
@@ -414,23 +450,25 @@ func TestToOneSet(t *testing.T) {
 	t.Run("FragranceInventoryToSupplierUsingFragranceInventories", testFragranceInventoryToOneSetOpSupplierUsingSupplier)
 	t.Run("LipidInventoryToLipidUsingLipidInventories", testLipidInventoryToOneSetOpLipidUsingLipid)
 	t.Run("LipidInventoryToSupplierUsingLipidInventories", testLipidInventoryToOneSetOpSupplierUsingSupplier)
-	t.Run("LyeInventoryToLyeInventoryUsingLyeLyeInventories", testLyeInventoryToOneSetOpLyeInventoryUsingLye)
+	t.Run("LyeInventoryToLyeUsingLyeInventories", testLyeInventoryToOneSetOpLyeUsingLye)
 	t.Run("LyeInventoryToSupplierUsingLyeInventories", testLyeInventoryToOneSetOpSupplierUsingSupplier)
-	t.Run("RecipeAdditiveToAdditiveUsingRecipeAdditives", testRecipeAdditiveToOneSetOpAdditiveUsingAdditive)
+	t.Run("RecipeAdditiveToAdditiveUsingRecipeAdditive", testRecipeAdditiveToOneSetOpAdditiveUsingAdditive)
 	t.Run("RecipeAdditiveToRecipeUsingRecipeAdditives", testRecipeAdditiveToOneSetOpRecipeUsingRecipe)
 	t.Run("RecipeBatchToRecipeUsingRecipeBatches", testRecipeBatchToOneSetOpRecipeUsingRecipe)
-	t.Run("RecipeBatchAdditiveToAdditiveUsingRecipeBatchAdditives", testRecipeBatchAdditiveToOneSetOpAdditiveUsingAdditive)
+	t.Run("RecipeBatchAdditiveToAdditiveUsingRecipeBatchAdditive", testRecipeBatchAdditiveToOneSetOpAdditiveUsingAdditive)
 	t.Run("RecipeBatchAdditiveToRecipeBatchUsingBatchRecipeBatchAdditives", testRecipeBatchAdditiveToOneSetOpRecipeBatchUsingBatch)
 	t.Run("RecipeBatchFragranceToRecipeBatchUsingBatchRecipeBatchFragrances", testRecipeBatchFragranceToOneSetOpRecipeBatchUsingBatch)
-	t.Run("RecipeBatchFragranceToFragranceUsingRecipeBatchFragrances", testRecipeBatchFragranceToOneSetOpFragranceUsingFragrance)
+	t.Run("RecipeBatchFragranceToFragranceUsingRecipeBatchFragrance", testRecipeBatchFragranceToOneSetOpFragranceUsingFragrance)
 	t.Run("RecipeBatchLipidToRecipeBatchUsingBatchRecipeBatchLipids", testRecipeBatchLipidToOneSetOpRecipeBatchUsingBatch)
-	t.Run("RecipeBatchLipidToLipidUsingRecipeBatchLipids", testRecipeBatchLipidToOneSetOpLipidUsingLipid)
+	t.Run("RecipeBatchLipidToLipidUsingRecipeBatchLipid", testRecipeBatchLipidToOneSetOpLipidUsingLipid)
 	t.Run("RecipeBatchLyeToRecipeBatchUsingBatchRecipeBatchLyes", testRecipeBatchLyeToOneSetOpRecipeBatchUsingBatch)
 	t.Run("RecipeBatchLyeToLyeUsingRecipeBatchLye", testRecipeBatchLyeToOneSetOpLyeUsingLye)
-	t.Run("RecipeFragranceToFragranceUsingRecipeFragrances", testRecipeFragranceToOneSetOpFragranceUsingFragrance)
+	t.Run("RecipeBatchNoteToRecipeBatchUsingBatchRecipeBatchNotes", testRecipeBatchNoteToOneSetOpRecipeBatchUsingBatch)
+	t.Run("RecipeFragranceToFragranceUsingRecipeFragrance", testRecipeFragranceToOneSetOpFragranceUsingFragrance)
 	t.Run("RecipeFragranceToRecipeUsingRecipeFragrances", testRecipeFragranceToOneSetOpRecipeUsingRecipe)
-	t.Run("RecipeLipidToLipidUsingRecipeLipids", testRecipeLipidToOneSetOpLipidUsingLipid)
+	t.Run("RecipeLipidToLipidUsingRecipeLipid", testRecipeLipidToOneSetOpLipidUsingLipid)
 	t.Run("RecipeLipidToRecipeUsingRecipeLipids", testRecipeLipidToOneSetOpRecipeUsingRecipe)
+	t.Run("RecipeStepToRecipeUsingRecipeSteps", testRecipeStepToOneSetOpRecipeUsingRecipe)
 }
 
 // TestToOneRemove tests cannot be run in parallel
@@ -440,6 +478,12 @@ func TestToOneRemove(t *testing.T) {}
 // TestOneToOneSet tests cannot be run in parallel
 // or deadlocks can occur.
 func TestOneToOneSet(t *testing.T) {
+	t.Run("AdditiveToRecipeAdditiveUsingRecipeAdditive", testAdditiveOneToOneSetOpRecipeAdditiveUsingRecipeAdditive)
+	t.Run("AdditiveToRecipeBatchAdditiveUsingRecipeBatchAdditive", testAdditiveOneToOneSetOpRecipeBatchAdditiveUsingRecipeBatchAdditive)
+	t.Run("FragranceToRecipeBatchFragranceUsingRecipeBatchFragrance", testFragranceOneToOneSetOpRecipeBatchFragranceUsingRecipeBatchFragrance)
+	t.Run("FragranceToRecipeFragranceUsingRecipeFragrance", testFragranceOneToOneSetOpRecipeFragranceUsingRecipeFragrance)
+	t.Run("LipidToRecipeBatchLipidUsingRecipeBatchLipid", testLipidOneToOneSetOpRecipeBatchLipidUsingRecipeBatchLipid)
+	t.Run("LipidToRecipeLipidUsingRecipeLipid", testLipidOneToOneSetOpRecipeLipidUsingRecipeLipid)
 	t.Run("LyeToRecipeBatchLyeUsingRecipeBatchLye", testLyeOneToOneSetOpRecipeBatchLyeUsingRecipeBatchLye)
 }
 
@@ -451,23 +495,19 @@ func TestOneToOneRemove(t *testing.T) {}
 // or deadlocks can occur.
 func TestToManyAdd(t *testing.T) {
 	t.Run("AdditiveToAdditiveInventories", testAdditiveToManyAddOpAdditiveInventories)
-	t.Run("AdditiveToRecipeAdditives", testAdditiveToManyAddOpRecipeAdditives)
-	t.Run("AdditiveToRecipeBatchAdditives", testAdditiveToManyAddOpRecipeBatchAdditives)
 	t.Run("FragranceToFragranceInventories", testFragranceToManyAddOpFragranceInventories)
-	t.Run("FragranceToRecipeBatchFragrances", testFragranceToManyAddOpRecipeBatchFragrances)
-	t.Run("FragranceToRecipeFragrances", testFragranceToManyAddOpRecipeFragrances)
 	t.Run("LipidToLipidInventories", testLipidToManyAddOpLipidInventories)
-	t.Run("LipidToRecipeBatchLipids", testLipidToManyAddOpRecipeBatchLipids)
-	t.Run("LipidToRecipeLipids", testLipidToManyAddOpRecipeLipids)
-	t.Run("LyeInventoryToLyeLyeInventories", testLyeInventoryToManyAddOpLyeLyeInventories)
+	t.Run("LyeToLyeInventories", testLyeToManyAddOpLyeInventories)
 	t.Run("RecipeToRecipeAdditives", testRecipeToManyAddOpRecipeAdditives)
 	t.Run("RecipeToRecipeBatches", testRecipeToManyAddOpRecipeBatches)
 	t.Run("RecipeToRecipeFragrances", testRecipeToManyAddOpRecipeFragrances)
 	t.Run("RecipeToRecipeLipids", testRecipeToManyAddOpRecipeLipids)
+	t.Run("RecipeToRecipeSteps", testRecipeToManyAddOpRecipeSteps)
 	t.Run("RecipeBatchToBatchRecipeBatchAdditives", testRecipeBatchToManyAddOpBatchRecipeBatchAdditives)
 	t.Run("RecipeBatchToBatchRecipeBatchFragrances", testRecipeBatchToManyAddOpBatchRecipeBatchFragrances)
 	t.Run("RecipeBatchToBatchRecipeBatchLipids", testRecipeBatchToManyAddOpBatchRecipeBatchLipids)
 	t.Run("RecipeBatchToBatchRecipeBatchLyes", testRecipeBatchToManyAddOpBatchRecipeBatchLyes)
+	t.Run("RecipeBatchToBatchRecipeBatchNotes", testRecipeBatchToManyAddOpBatchRecipeBatchNotes)
 	t.Run("SupplierToAdditiveInventories", testSupplierToManyAddOpAdditiveInventories)
 	t.Run("SupplierToFragranceInventories", testSupplierToManyAddOpFragranceInventories)
 	t.Run("SupplierToLipidInventories", testSupplierToManyAddOpLipidInventories)
@@ -498,8 +538,10 @@ func TestReload(t *testing.T) {
 	t.Run("RecipeBatchFragrances", testRecipeBatchFragrancesReload)
 	t.Run("RecipeBatchLipids", testRecipeBatchLipidsReload)
 	t.Run("RecipeBatchLyes", testRecipeBatchLyesReload)
+	t.Run("RecipeBatchNotes", testRecipeBatchNotesReload)
 	t.Run("RecipeFragrances", testRecipeFragrancesReload)
 	t.Run("RecipeLipids", testRecipeLipidsReload)
+	t.Run("RecipeSteps", testRecipeStepsReload)
 	t.Run("Suppliers", testSuppliersReload)
 }
 
@@ -519,8 +561,10 @@ func TestReloadAll(t *testing.T) {
 	t.Run("RecipeBatchFragrances", testRecipeBatchFragrancesReloadAll)
 	t.Run("RecipeBatchLipids", testRecipeBatchLipidsReloadAll)
 	t.Run("RecipeBatchLyes", testRecipeBatchLyesReloadAll)
+	t.Run("RecipeBatchNotes", testRecipeBatchNotesReloadAll)
 	t.Run("RecipeFragrances", testRecipeFragrancesReloadAll)
 	t.Run("RecipeLipids", testRecipeLipidsReloadAll)
+	t.Run("RecipeSteps", testRecipeStepsReloadAll)
 	t.Run("Suppliers", testSuppliersReloadAll)
 }
 
@@ -540,8 +584,10 @@ func TestSelect(t *testing.T) {
 	t.Run("RecipeBatchFragrances", testRecipeBatchFragrancesSelect)
 	t.Run("RecipeBatchLipids", testRecipeBatchLipidsSelect)
 	t.Run("RecipeBatchLyes", testRecipeBatchLyesSelect)
+	t.Run("RecipeBatchNotes", testRecipeBatchNotesSelect)
 	t.Run("RecipeFragrances", testRecipeFragrancesSelect)
 	t.Run("RecipeLipids", testRecipeLipidsSelect)
+	t.Run("RecipeSteps", testRecipeStepsSelect)
 	t.Run("Suppliers", testSuppliersSelect)
 }
 
@@ -561,8 +607,10 @@ func TestUpdate(t *testing.T) {
 	t.Run("RecipeBatchFragrances", testRecipeBatchFragrancesUpdate)
 	t.Run("RecipeBatchLipids", testRecipeBatchLipidsUpdate)
 	t.Run("RecipeBatchLyes", testRecipeBatchLyesUpdate)
+	t.Run("RecipeBatchNotes", testRecipeBatchNotesUpdate)
 	t.Run("RecipeFragrances", testRecipeFragrancesUpdate)
 	t.Run("RecipeLipids", testRecipeLipidsUpdate)
+	t.Run("RecipeSteps", testRecipeStepsUpdate)
 	t.Run("Suppliers", testSuppliersUpdate)
 }
 
@@ -582,7 +630,9 @@ func TestSliceUpdateAll(t *testing.T) {
 	t.Run("RecipeBatchFragrances", testRecipeBatchFragrancesSliceUpdateAll)
 	t.Run("RecipeBatchLipids", testRecipeBatchLipidsSliceUpdateAll)
 	t.Run("RecipeBatchLyes", testRecipeBatchLyesSliceUpdateAll)
+	t.Run("RecipeBatchNotes", testRecipeBatchNotesSliceUpdateAll)
 	t.Run("RecipeFragrances", testRecipeFragrancesSliceUpdateAll)
 	t.Run("RecipeLipids", testRecipeLipidsSliceUpdateAll)
+	t.Run("RecipeSteps", testRecipeStepsSliceUpdateAll)
 	t.Run("Suppliers", testSuppliersSliceUpdateAll)
 }

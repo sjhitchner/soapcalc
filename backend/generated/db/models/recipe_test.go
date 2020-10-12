@@ -907,6 +907,84 @@ func testRecipeToManyRecipeLipids(t *testing.T) {
 	}
 }
 
+func testRecipeToManyRecipeSteps(t *testing.T) {
+	var err error
+	ctx := context.Background()
+	tx := MustTx(boil.BeginTx(ctx, nil))
+	defer func() { _ = tx.Rollback() }()
+
+	var a Recipe
+	var b, c RecipeStep
+
+	seed := randomize.NewSeed()
+	if err = randomize.Struct(seed, &a, recipeDBTypes, true, recipeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Recipe struct: %s", err)
+	}
+
+	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+
+	if err = randomize.Struct(seed, &b, recipeStepDBTypes, false, recipeStepColumnsWithDefault...); err != nil {
+		t.Fatal(err)
+	}
+	if err = randomize.Struct(seed, &c, recipeStepDBTypes, false, recipeStepColumnsWithDefault...); err != nil {
+		t.Fatal(err)
+	}
+
+	b.RecipeID = a.ID
+	c.RecipeID = a.ID
+
+	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+	if err = c.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+
+	check, err := a.RecipeSteps().All(ctx, tx)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	bFound, cFound := false, false
+	for _, v := range check {
+		if v.RecipeID == b.RecipeID {
+			bFound = true
+		}
+		if v.RecipeID == c.RecipeID {
+			cFound = true
+		}
+	}
+
+	if !bFound {
+		t.Error("expected to find b")
+	}
+	if !cFound {
+		t.Error("expected to find c")
+	}
+
+	slice := RecipeSlice{&a}
+	if err = a.L.LoadRecipeSteps(ctx, tx, false, (*[]*Recipe)(&slice), nil); err != nil {
+		t.Fatal(err)
+	}
+	if got := len(a.R.RecipeSteps); got != 2 {
+		t.Error("number of eager loaded records wrong, got:", got)
+	}
+
+	a.R.RecipeSteps = nil
+	if err = a.L.LoadRecipeSteps(ctx, tx, true, &a, nil); err != nil {
+		t.Fatal(err)
+	}
+	if got := len(a.R.RecipeSteps); got != 2 {
+		t.Error("number of eager loaded records wrong, got:", got)
+	}
+
+	if t.Failed() {
+		t.Logf("%#v", check)
+	}
+}
+
 func testRecipeToManyAddOpRecipeAdditives(t *testing.T) {
 	var err error
 
@@ -1199,6 +1277,81 @@ func testRecipeToManyAddOpRecipeLipids(t *testing.T) {
 		}
 
 		count, err := a.RecipeLipids().Count(ctx, tx)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if want := int64((i + 1) * 2); count != want {
+			t.Error("want", want, "got", count)
+		}
+	}
+}
+func testRecipeToManyAddOpRecipeSteps(t *testing.T) {
+	var err error
+
+	ctx := context.Background()
+	tx := MustTx(boil.BeginTx(ctx, nil))
+	defer func() { _ = tx.Rollback() }()
+
+	var a Recipe
+	var b, c, d, e RecipeStep
+
+	seed := randomize.NewSeed()
+	if err = randomize.Struct(seed, &a, recipeDBTypes, false, strmangle.SetComplement(recipePrimaryKeyColumns, recipeColumnsWithoutDefault)...); err != nil {
+		t.Fatal(err)
+	}
+	foreigners := []*RecipeStep{&b, &c, &d, &e}
+	for _, x := range foreigners {
+		if err = randomize.Struct(seed, x, recipeStepDBTypes, false, strmangle.SetComplement(recipeStepPrimaryKeyColumns, recipeStepColumnsWithoutDefault)...); err != nil {
+			t.Fatal(err)
+		}
+	}
+
+	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+	if err = c.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+
+	foreignersSplitByInsertion := [][]*RecipeStep{
+		{&b, &c},
+		{&d, &e},
+	}
+
+	for i, x := range foreignersSplitByInsertion {
+		err = a.AddRecipeSteps(ctx, tx, i != 0, x...)
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		first := x[0]
+		second := x[1]
+
+		if a.ID != first.RecipeID {
+			t.Error("foreign key was wrong value", a.ID, first.RecipeID)
+		}
+		if a.ID != second.RecipeID {
+			t.Error("foreign key was wrong value", a.ID, second.RecipeID)
+		}
+
+		if first.R.Recipe != &a {
+			t.Error("relationship was not added properly to the foreign slice")
+		}
+		if second.R.Recipe != &a {
+			t.Error("relationship was not added properly to the foreign slice")
+		}
+
+		if a.R.RecipeSteps[i*2] != first {
+			t.Error("relationship struct slice not set to correct value")
+		}
+		if a.R.RecipeSteps[i*2+1] != second {
+			t.Error("relationship struct slice not set to correct value")
+		}
+
+		count, err := a.RecipeSteps().Count(ctx, tx)
 		if err != nil {
 			t.Fatal(err)
 		}
