@@ -792,7 +792,7 @@ func testRecipeBatchLyeToOneSetOpLyeUsingLye(t *testing.T) {
 			t.Error("relationship struct not set to correct value")
 		}
 
-		if x.R.RecipeBatchLyes[0] != &a {
+		if x.R.RecipeBatchLye != &a {
 			t.Error("failed to append to foreign relationship struct")
 		}
 		if a.LyeID != x.ID {

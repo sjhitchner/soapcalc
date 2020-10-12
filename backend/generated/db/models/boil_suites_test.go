@@ -374,7 +374,9 @@ func TestToOne(t *testing.T) {
 
 // TestOneToOne tests cannot be run in parallel
 // or deadlocks can occur.
-func TestOneToOne(t *testing.T) {}
+func TestOneToOne(t *testing.T) {
+	t.Run("LyeToRecipeBatchLyeUsingRecipeBatchLye", testLyeOneToOneRecipeBatchLyeUsingRecipeBatchLye)
+}
 
 // TestToMany tests cannot be run in parallel
 // or deadlocks can occur.
@@ -388,7 +390,6 @@ func TestToMany(t *testing.T) {
 	t.Run("LipidToLipidInventories", testLipidToManyLipidInventories)
 	t.Run("LipidToRecipeBatchLipids", testLipidToManyRecipeBatchLipids)
 	t.Run("LipidToRecipeLipids", testLipidToManyRecipeLipids)
-	t.Run("LyeToRecipeBatchLyes", testLyeToManyRecipeBatchLyes)
 	t.Run("LyeInventoryToLyeLyeInventories", testLyeInventoryToManyLyeLyeInventories)
 	t.Run("RecipeToRecipeAdditives", testRecipeToManyRecipeAdditives)
 	t.Run("RecipeToRecipeBatches", testRecipeToManyRecipeBatches)
@@ -425,7 +426,7 @@ func TestToOneSet(t *testing.T) {
 	t.Run("RecipeBatchLipidToRecipeBatchUsingBatchRecipeBatchLipids", testRecipeBatchLipidToOneSetOpRecipeBatchUsingBatch)
 	t.Run("RecipeBatchLipidToLipidUsingRecipeBatchLipids", testRecipeBatchLipidToOneSetOpLipidUsingLipid)
 	t.Run("RecipeBatchLyeToRecipeBatchUsingBatchRecipeBatchLyes", testRecipeBatchLyeToOneSetOpRecipeBatchUsingBatch)
-	t.Run("RecipeBatchLyeToLyeUsingRecipeBatchLyes", testRecipeBatchLyeToOneSetOpLyeUsingLye)
+	t.Run("RecipeBatchLyeToLyeUsingRecipeBatchLye", testRecipeBatchLyeToOneSetOpLyeUsingLye)
 	t.Run("RecipeFragranceToFragranceUsingRecipeFragrances", testRecipeFragranceToOneSetOpFragranceUsingFragrance)
 	t.Run("RecipeFragranceToRecipeUsingRecipeFragrances", testRecipeFragranceToOneSetOpRecipeUsingRecipe)
 	t.Run("RecipeLipidToLipidUsingRecipeLipids", testRecipeLipidToOneSetOpLipidUsingLipid)
@@ -438,7 +439,9 @@ func TestToOneRemove(t *testing.T) {}
 
 // TestOneToOneSet tests cannot be run in parallel
 // or deadlocks can occur.
-func TestOneToOneSet(t *testing.T) {}
+func TestOneToOneSet(t *testing.T) {
+	t.Run("LyeToRecipeBatchLyeUsingRecipeBatchLye", testLyeOneToOneSetOpRecipeBatchLyeUsingRecipeBatchLye)
+}
 
 // TestOneToOneRemove tests cannot be run in parallel
 // or deadlocks can occur.
@@ -456,7 +459,6 @@ func TestToManyAdd(t *testing.T) {
 	t.Run("LipidToLipidInventories", testLipidToManyAddOpLipidInventories)
 	t.Run("LipidToRecipeBatchLipids", testLipidToManyAddOpRecipeBatchLipids)
 	t.Run("LipidToRecipeLipids", testLipidToManyAddOpRecipeLipids)
-	t.Run("LyeToRecipeBatchLyes", testLyeToManyAddOpRecipeBatchLyes)
 	t.Run("LyeInventoryToLyeLyeInventories", testLyeInventoryToManyAddOpLyeLyeInventories)
 	t.Run("RecipeToRecipeAdditives", testRecipeToManyAddOpRecipeAdditives)
 	t.Run("RecipeToRecipeBatches", testRecipeToManyAddOpRecipeBatches)

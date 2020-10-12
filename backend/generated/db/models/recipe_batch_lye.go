@@ -662,7 +662,7 @@ func (o *RecipeBatchLye) SetBatch(ctx context.Context, exec boil.ContextExecutor
 
 // SetLye of the recipeBatchLye to the related item.
 // Sets o.R.Lye to related.
-// Adds o to related.R.RecipeBatchLyes.
+// Adds o to related.R.RecipeBatchLye.
 func (o *RecipeBatchLye) SetLye(ctx context.Context, exec boil.ContextExecutor, insert bool, related *Lye) error {
 	var err error
 	if insert {
@@ -698,10 +698,10 @@ func (o *RecipeBatchLye) SetLye(ctx context.Context, exec boil.ContextExecutor, 
 
 	if related.R == nil {
 		related.R = &lyeR{
-			RecipeBatchLyes: RecipeBatchLyeSlice{o},
+			RecipeBatchLye: o,
 		}
 	} else {
-		related.R.RecipeBatchLyes = append(related.R.RecipeBatchLyes, o)
+		related.R.RecipeBatchLye = o
 	}
 
 	return nil

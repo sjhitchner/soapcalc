@@ -76,14 +76,14 @@ var LyeWhere = struct {
 
 // LyeRels is where relationship names are stored.
 var LyeRels = struct {
-	RecipeBatchLyes string
+	RecipeBatchLye string
 }{
-	RecipeBatchLyes: "RecipeBatchLyes",
+	RecipeBatchLye: "RecipeBatchLye",
 }
 
 // lyeR is where relationships are stored.
 type lyeR struct {
-	RecipeBatchLyes RecipeBatchLyeSlice `boil:"RecipeBatchLyes" json:"RecipeBatchLyes" toml:"RecipeBatchLyes" yaml:"RecipeBatchLyes"`
+	RecipeBatchLye *RecipeBatchLye `boil:"RecipeBatchLye" json:"RecipeBatchLye" toml:"RecipeBatchLye" yaml:"RecipeBatchLye"`
 }
 
 // NewStruct creates a new relationship struct
@@ -376,31 +376,24 @@ func (q lyeQuery) Exists(ctx context.Context, exec boil.ContextExecutor) (bool, 
 	return count > 0, nil
 }
 
-// RecipeBatchLyes retrieves all the recipe_batch_lye's RecipeBatchLyes with an executor.
-func (o *Lye) RecipeBatchLyes(mods ...qm.QueryMod) recipeBatchLyeQuery {
-	var queryMods []qm.QueryMod
-	if len(mods) != 0 {
-		queryMods = append(queryMods, mods...)
+// RecipeBatchLye pointed to by the foreign key.
+func (o *Lye) RecipeBatchLye(mods ...qm.QueryMod) recipeBatchLyeQuery {
+	queryMods := []qm.QueryMod{
+		qm.Where("\"lye_id\" = ?", o.ID),
+		qmhelper.WhereIsNull("deleted_at"),
 	}
 
-	queryMods = append(queryMods,
-		qm.Where("\"recipe_batch_lye\".\"lye_id\"=?", o.ID),
-		qmhelper.WhereIsNull("\"recipe_batch_lye\".\"deleted_at\""),
-	)
+	queryMods = append(queryMods, mods...)
 
 	query := RecipeBatchLyes(queryMods...)
 	queries.SetFrom(query.Query, "\"recipe_batch_lye\"")
 
-	if len(queries.GetSelect(query.Query)) == 0 {
-		queries.SetSelect(query.Query, []string{"\"recipe_batch_lye\".*"})
-	}
-
 	return query
 }
 
-// LoadRecipeBatchLyes allows an eager lookup of values, cached into the
-// loaded structs of the objects. This is for a 1-M or N-M relationship.
-func (lyeL) LoadRecipeBatchLyes(ctx context.Context, e boil.ContextExecutor, singular bool, maybeLye interface{}, mods queries.Applicator) error {
+// LoadRecipeBatchLye allows an eager lookup of values, cached into the
+// loaded structs of the objects. This is for a 1-1 relationship.
+func (lyeL) LoadRecipeBatchLye(ctx context.Context, e boil.ContextExecutor, singular bool, maybeLye interface{}, mods queries.Applicator) error {
 	var slice []*Lye
 	var object *Lye
 
@@ -448,37 +441,42 @@ func (lyeL) LoadRecipeBatchLyes(ctx context.Context, e boil.ContextExecutor, sin
 
 	results, err := query.QueryContext(ctx, e)
 	if err != nil {
-		return errors.Wrap(err, "failed to eager load recipe_batch_lye")
+		return errors.Wrap(err, "failed to eager load RecipeBatchLye")
 	}
 
 	var resultSlice []*RecipeBatchLye
 	if err = queries.Bind(results, &resultSlice); err != nil {
-		return errors.Wrap(err, "failed to bind eager loaded slice recipe_batch_lye")
+		return errors.Wrap(err, "failed to bind eager loaded slice RecipeBatchLye")
 	}
 
 	if err = results.Close(); err != nil {
-		return errors.Wrap(err, "failed to close results in eager load on recipe_batch_lye")
+		return errors.Wrap(err, "failed to close results of eager load for recipe_batch_lye")
 	}
 	if err = results.Err(); err != nil {
 		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for recipe_batch_lye")
 	}
 
-	if len(recipeBatchLyeAfterSelectHooks) != 0 {
+	if len(lyeAfterSelectHooks) != 0 {
 		for _, obj := range resultSlice {
 			if err := obj.doAfterSelectHooks(ctx, e); err != nil {
 				return err
 			}
 		}
 	}
-	if singular {
-		object.R.RecipeBatchLyes = resultSlice
+
+	if len(resultSlice) == 0 {
 		return nil
 	}
 
-	for _, foreign := range resultSlice {
-		for _, local := range slice {
+	if singular {
+		foreign := resultSlice[0]
+		object.R.RecipeBatchLye = foreign
+	}
+
+	for _, local := range slice {
+		for _, foreign := range resultSlice {
 			if local.ID == foreign.LyeID {
-				local.R.RecipeBatchLyes = append(local.R.RecipeBatchLyes, foreign)
+				local.R.RecipeBatchLye = foreign
 				break
 			}
 		}
@@ -487,55 +485,53 @@ func (lyeL) LoadRecipeBatchLyes(ctx context.Context, e boil.ContextExecutor, sin
 	return nil
 }
 
-// AddRecipeBatchLyes adds the given related objects to the existing relationships
-// of the lye, optionally inserting them as new records.
-// Appends related to o.R.RecipeBatchLyes.
-// Sets related.R.Lye appropriately.
-func (o *Lye) AddRecipeBatchLyes(ctx context.Context, exec boil.ContextExecutor, insert bool, related ...*RecipeBatchLye) error {
+// SetRecipeBatchLye of the lye to the related item.
+// Sets o.R.RecipeBatchLye to related.
+// Adds o to related.R.Lye.
+func (o *Lye) SetRecipeBatchLye(ctx context.Context, exec boil.ContextExecutor, insert bool, related *RecipeBatchLye) error {
 	var err error
-	for _, rel := range related {
-		if insert {
-			rel.LyeID = o.ID
-			if err = rel.Insert(ctx, exec, boil.Infer()); err != nil {
-				return errors.Wrap(err, "failed to insert into foreign table")
-			}
-		} else {
-			updateQuery := fmt.Sprintf(
-				"UPDATE \"recipe_batch_lye\" SET %s WHERE %s",
-				strmangle.SetParamNames("\"", "\"", 1, []string{"lye_id"}),
-				strmangle.WhereClause("\"", "\"", 2, recipeBatchLyePrimaryKeyColumns),
-			)
-			values := []interface{}{o.ID, rel.ID}
 
-			if boil.IsDebug(ctx) {
-				writer := boil.DebugWriterFrom(ctx)
-				fmt.Fprintln(writer, updateQuery)
-				fmt.Fprintln(writer, values)
-			}
-			if _, err = exec.ExecContext(ctx, updateQuery, values...); err != nil {
-				return errors.Wrap(err, "failed to update foreign table")
-			}
+	if insert {
+		related.LyeID = o.ID
 
-			rel.LyeID = o.ID
+		if err = related.Insert(ctx, exec, boil.Infer()); err != nil {
+			return errors.Wrap(err, "failed to insert into foreign table")
 		}
+	} else {
+		updateQuery := fmt.Sprintf(
+			"UPDATE \"recipe_batch_lye\" SET %s WHERE %s",
+			strmangle.SetParamNames("\"", "\"", 1, []string{"lye_id"}),
+			strmangle.WhereClause("\"", "\"", 2, recipeBatchLyePrimaryKeyColumns),
+		)
+		values := []interface{}{o.ID, related.ID}
+
+		if boil.IsDebug(ctx) {
+			writer := boil.DebugWriterFrom(ctx)
+			fmt.Fprintln(writer, updateQuery)
+			fmt.Fprintln(writer, values)
+		}
+		if _, err = exec.ExecContext(ctx, updateQuery, values...); err != nil {
+			return errors.Wrap(err, "failed to update foreign table")
+		}
+
+		related.LyeID = o.ID
+
 	}
 
 	if o.R == nil {
 		o.R = &lyeR{
-			RecipeBatchLyes: related,
+			RecipeBatchLye: related,
 		}
 	} else {
-		o.R.RecipeBatchLyes = append(o.R.RecipeBatchLyes, related...)
+		o.R.RecipeBatchLye = related
 	}
 
-	for _, rel := range related {
-		if rel.R == nil {
-			rel.R = &recipeBatchLyeR{
-				Lye: o,
-			}
-		} else {
-			rel.R.Lye = o
+	if related.R == nil {
+		related.R = &recipeBatchLyeR{
+			Lye: o,
 		}
+	} else {
+		related.R.Lye = o
 	}
 	return nil
 }

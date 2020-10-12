@@ -595,8 +595,60 @@ func testLyesInsertWhitelist(t *testing.T) {
 	}
 }
 
-func testLyeToManyRecipeBatchLyes(t *testing.T) {
+func testLyeOneToOneRecipeBatchLyeUsingRecipeBatchLye(t *testing.T) {
+	ctx := context.Background()
+	tx := MustTx(boil.BeginTx(ctx, nil))
+	defer func() { _ = tx.Rollback() }()
+
+	var foreign RecipeBatchLye
+	var local Lye
+
+	seed := randomize.NewSeed()
+	if err := randomize.Struct(seed, &foreign, recipeBatchLyeDBTypes, true, recipeBatchLyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize RecipeBatchLye struct: %s", err)
+	}
+	if err := randomize.Struct(seed, &local, lyeDBTypes, true, lyeColumnsWithDefault...); err != nil {
+		t.Errorf("Unable to randomize Lye struct: %s", err)
+	}
+
+	if err := local.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+
+	foreign.LyeID = local.ID
+	if err := foreign.Insert(ctx, tx, boil.Infer()); err != nil {
+		t.Fatal(err)
+	}
+
+	check, err := local.RecipeBatchLye().One(ctx, tx)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if check.LyeID != foreign.LyeID {
+		t.Errorf("want: %v, got %v", foreign.LyeID, check.LyeID)
+	}
+
+	slice := LyeSlice{&local}
+	if err = local.L.LoadRecipeBatchLye(ctx, tx, false, (*[]*Lye)(&slice), nil); err != nil {
+		t.Fatal(err)
+	}
+	if local.R.RecipeBatchLye == nil {
+		t.Error("struct should have been eager loaded")
+	}
+
+	local.R.RecipeBatchLye = nil
+	if err = local.L.LoadRecipeBatchLye(ctx, tx, true, &local, nil); err != nil {
+		t.Fatal(err)
+	}
+	if local.R.RecipeBatchLye == nil {
+		t.Error("struct should have been eager loaded")
+	}
+}
+
+func testLyeOneToOneSetOpRecipeBatchLyeUsingRecipeBatchLye(t *testing.T) {
 	var err error
+
 	ctx := context.Background()
 	tx := MustTx(boil.BeginTx(ctx, nil))
 	defer func() { _ = tx.Rollback() }()
@@ -605,93 +657,14 @@ func testLyeToManyRecipeBatchLyes(t *testing.T) {
 	var b, c RecipeBatchLye
 
 	seed := randomize.NewSeed()
-	if err = randomize.Struct(seed, &a, lyeDBTypes, true, lyeColumnsWithDefault...); err != nil {
-		t.Errorf("Unable to randomize Lye struct: %s", err)
-	}
-
-	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
-
-	if err = randomize.Struct(seed, &b, recipeBatchLyeDBTypes, false, recipeBatchLyeColumnsWithDefault...); err != nil {
-		t.Fatal(err)
-	}
-	if err = randomize.Struct(seed, &c, recipeBatchLyeDBTypes, false, recipeBatchLyeColumnsWithDefault...); err != nil {
-		t.Fatal(err)
-	}
-
-	b.LyeID = a.ID
-	c.LyeID = a.ID
-
-	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
-	if err = c.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
-
-	check, err := a.RecipeBatchLyes().All(ctx, tx)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	bFound, cFound := false, false
-	for _, v := range check {
-		if v.LyeID == b.LyeID {
-			bFound = true
-		}
-		if v.LyeID == c.LyeID {
-			cFound = true
-		}
-	}
-
-	if !bFound {
-		t.Error("expected to find b")
-	}
-	if !cFound {
-		t.Error("expected to find c")
-	}
-
-	slice := LyeSlice{&a}
-	if err = a.L.LoadRecipeBatchLyes(ctx, tx, false, (*[]*Lye)(&slice), nil); err != nil {
-		t.Fatal(err)
-	}
-	if got := len(a.R.RecipeBatchLyes); got != 2 {
-		t.Error("number of eager loaded records wrong, got:", got)
-	}
-
-	a.R.RecipeBatchLyes = nil
-	if err = a.L.LoadRecipeBatchLyes(ctx, tx, true, &a, nil); err != nil {
-		t.Fatal(err)
-	}
-	if got := len(a.R.RecipeBatchLyes); got != 2 {
-		t.Error("number of eager loaded records wrong, got:", got)
-	}
-
-	if t.Failed() {
-		t.Logf("%#v", check)
-	}
-}
-
-func testLyeToManyAddOpRecipeBatchLyes(t *testing.T) {
-	var err error
-
-	ctx := context.Background()
-	tx := MustTx(boil.BeginTx(ctx, nil))
-	defer func() { _ = tx.Rollback() }()
-
-	var a Lye
-	var b, c, d, e RecipeBatchLye
-
-	seed := randomize.NewSeed()
 	if err = randomize.Struct(seed, &a, lyeDBTypes, false, strmangle.SetComplement(lyePrimaryKeyColumns, lyeColumnsWithoutDefault)...); err != nil {
 		t.Fatal(err)
 	}
-	foreigners := []*RecipeBatchLye{&b, &c, &d, &e}
-	for _, x := range foreigners {
-		if err = randomize.Struct(seed, x, recipeBatchLyeDBTypes, false, strmangle.SetComplement(recipeBatchLyePrimaryKeyColumns, recipeBatchLyeColumnsWithoutDefault)...); err != nil {
-			t.Fatal(err)
-		}
+	if err = randomize.Struct(seed, &b, recipeBatchLyeDBTypes, false, strmangle.SetComplement(recipeBatchLyePrimaryKeyColumns, recipeBatchLyeColumnsWithoutDefault)...); err != nil {
+		t.Fatal(err)
+	}
+	if err = randomize.Struct(seed, &c, recipeBatchLyeDBTypes, false, strmangle.SetComplement(recipeBatchLyePrimaryKeyColumns, recipeBatchLyeColumnsWithoutDefault)...); err != nil {
+		t.Fatal(err)
 	}
 
 	if err := a.Insert(ctx, tx, boil.Infer()); err != nil {
@@ -700,51 +673,37 @@ func testLyeToManyAddOpRecipeBatchLyes(t *testing.T) {
 	if err = b.Insert(ctx, tx, boil.Infer()); err != nil {
 		t.Fatal(err)
 	}
-	if err = c.Insert(ctx, tx, boil.Infer()); err != nil {
-		t.Fatal(err)
-	}
 
-	foreignersSplitByInsertion := [][]*RecipeBatchLye{
-		{&b, &c},
-		{&d, &e},
-	}
-
-	for i, x := range foreignersSplitByInsertion {
-		err = a.AddRecipeBatchLyes(ctx, tx, i != 0, x...)
+	for i, x := range []*RecipeBatchLye{&b, &c} {
+		err = a.SetRecipeBatchLye(ctx, tx, i != 0, x)
 		if err != nil {
 			t.Fatal(err)
 		}
 
-		first := x[0]
-		second := x[1]
-
-		if a.ID != first.LyeID {
-			t.Error("foreign key was wrong value", a.ID, first.LyeID)
+		if a.R.RecipeBatchLye != x {
+			t.Error("relationship struct not set to correct value")
 		}
-		if a.ID != second.LyeID {
-			t.Error("foreign key was wrong value", a.ID, second.LyeID)
+		if x.R.Lye != &a {
+			t.Error("failed to append to foreign relationship struct")
 		}
 
-		if first.R.Lye != &a {
-			t.Error("relationship was not added properly to the foreign slice")
-		}
-		if second.R.Lye != &a {
-			t.Error("relationship was not added properly to the foreign slice")
+		if a.ID != x.LyeID {
+			t.Error("foreign key was wrong value", a.ID)
 		}
 
-		if a.R.RecipeBatchLyes[i*2] != first {
-			t.Error("relationship struct slice not set to correct value")
-		}
-		if a.R.RecipeBatchLyes[i*2+1] != second {
-			t.Error("relationship struct slice not set to correct value")
+		zero := reflect.Zero(reflect.TypeOf(x.LyeID))
+		reflect.Indirect(reflect.ValueOf(&x.LyeID)).Set(zero)
+
+		if err = x.Reload(ctx, tx); err != nil {
+			t.Fatal("failed to reload", err)
 		}
 
-		count, err := a.RecipeBatchLyes().Count(ctx, tx)
-		if err != nil {
-			t.Fatal(err)
+		if a.ID != x.LyeID {
+			t.Error("foreign key was wrong value", a.ID, x.LyeID)
 		}
-		if want := int64((i + 1) * 2); count != want {
-			t.Error("want", want, "got", count)
+
+		if _, err = x.Delete(ctx, tx, true); err != nil {
+			t.Fatal("failed to delete x", err)
 		}
 	}
 }
