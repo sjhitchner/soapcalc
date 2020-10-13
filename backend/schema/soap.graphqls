@@ -2,10 +2,10 @@ type Additive {
   id: ID!
   name: String!
   note: String!
-  deletedAt: Int
   createdAt: Int!
   updatedAt: Int!
-  additiveInventories: [AdditiveInventory]
+  deletedAt: Int
+  inventory: [AdditiveInventory]
 }
 
 type AdditiveInventory {
@@ -16,19 +16,19 @@ type AdditiveInventory {
   weight: Float!
   additive: Additive!
   supplier: Supplier!
-  createdAt: Int!
-  deletedAt: Int
   updatedAt: Int!
+  deletedAt: Int
+  createdAt: Int!
 }
 
 type Fragrance {
   id: ID!
   name: String!
   note: String!
-  deletedAt: Int
   createdAt: Int!
+  deletedAt: Int
   updatedAt: Int!
-  fragranceInventories: [FragranceInventory]
+  inventory: [FragranceInventory]
 }
 
 type FragranceInventory {
@@ -65,10 +65,10 @@ type Lipid {
   inciName: String!
   family: String!
   naoh: Float!
-  updatedAt: Int!
-  createdAt: Int!
   deletedAt: Int
-  lipidInventories: [LipidInventory]
+  createdAt: Int!
+  updatedAt: Int!
+  inventory: [LipidInventory]
 }
 
 type LipidInventory {
@@ -93,9 +93,10 @@ type Lye {
   kind: String!
   name: String!
   note: String!
-  createdAt: Int!
-  updatedAt: Int!
   deletedAt: Int
+  updatedAt: Int!
+  createdAt: Int!
+  inventory: [LyeInventory]
 }
 
 type LyeInventory {
@@ -107,23 +108,23 @@ type LyeInventory {
   concentration: Float!
   lye: Lye!
   supplier: Supplier!
-  updatedAt: Int!
   deletedAt: Int
   createdAt: Int!
-  lyeLyeInventories: [LyeInventory]
+  updatedAt: Int!
 }
 
 type Recipe {
   id: ID!
   name: String!
   note: String!
-  updatedAt: Int!
-  createdAt: Int!
   deletedAt: Int
+  createdAt: Int!
+  updatedAt: Int!
   additives: [RecipeAdditive]
   batches: [RecipeBatch]
   fragrances: [RecipeFragrance]
   lipids: [RecipeLipid]
+  steps: [RecipeStep]
 }
 
 type RecipeAdditive {
@@ -132,8 +133,8 @@ type RecipeAdditive {
   additive: Additive!
   recipe: Recipe!
   deletedAt: Int
-  updatedAt: Int!
   createdAt: Int!
+  updatedAt: Int!
 }
 
 type RecipeBatch {
@@ -152,7 +153,8 @@ type RecipeBatch {
   additives: [RecipeBatchAdditive]
   fragrances: [RecipeBatchFragrance]
   lipids: [RecipeBatchLipid]
-  lye: RecipeBatchLye!
+  lye: [RecipeBatchLye]
+  notes: [RecipeBatchNote]
 }
 
 type RecipeBatchAdditive {
@@ -161,9 +163,9 @@ type RecipeBatchAdditive {
   cost: Float!
   additive: Additive!
   batch: RecipeBatch!
+  createdAt: Int!
   updatedAt: Int!
   deletedAt: Int
-  createdAt: Int!
 }
 
 type RecipeBatchFragrance {
@@ -184,8 +186,8 @@ type RecipeBatchLipid {
   lipid: Lipid!
   batch: RecipeBatch!
   deletedAt: Int
-  createdAt: Int!
   updatedAt: Int!
+  createdAt: Int!
 }
 
 type RecipeBatchLye {
@@ -198,6 +200,16 @@ type RecipeBatchLye {
   updatedAt: Int!
   deletedAt: Int
   createdAt: Int!
+}
+
+type RecipeBatchNote {
+  id: ID!
+  note: String!
+  link: String!
+  batch: RecipeBatch!
+  createdAt: Int!
+  updatedAt: Int!
+  deletedAt: Int
 }
 
 type RecipeFragrance {
@@ -215,9 +227,19 @@ type RecipeLipid {
   percentage: Float!
   lipid: Lipid!
   recipe: Recipe!
-  createdAt: Int!
   deletedAt: Int
   updatedAt: Int!
+  createdAt: Int!
+}
+
+type RecipeStep {
+  id: ID!
+  num: Int!
+  note: String!
+  recipe: Recipe!
+  createdAt: Int!
+  updatedAt: Int!
+  deletedAt: Int
 }
 
 type Supplier {
@@ -228,10 +250,10 @@ type Supplier {
   deletedAt: Int
   updatedAt: Int!
   createdAt: Int!
-  additiveInventories: [AdditiveInventory]
-  fragranceInventories: [FragranceInventory]
-  lipidInventories: [LipidInventory]
-  lyeInventories: [LyeInventory]
+  additiveInventory: [AdditiveInventory]
+  fragranceInventory: [FragranceInventory]
+  lipidInventory: [LipidInventory]
+  lyeInventory: [LyeInventory]
 }
 
 input IDFilter {
@@ -301,10 +323,12 @@ input AdditiveWhere {
   id: IDFilter
   name: StringFilter
   note: StringFilter
-  deletedAt: IntFilter
   createdAt: IntFilter
   updatedAt: IntFilter
-  additiveInventories: AdditiveInventoryWhere
+  deletedAt: IntFilter
+  recipeAdditive: RecipeAdditiveWhere
+  recipeBatchAdditive: RecipeBatchAdditiveWhere
+  additiveInventory: AdditiveInventoryWhere
   or: AdditiveWhere
   and: AdditiveWhere
 }
@@ -322,9 +346,9 @@ input AdditiveInventoryWhere {
   weight: FloatFilter
   additive: AdditiveWhere
   supplier: SupplierWhere
-  createdAt: IntFilter
-  deletedAt: IntFilter
   updatedAt: IntFilter
+  deletedAt: IntFilter
+  createdAt: IntFilter
   or: AdditiveInventoryWhere
   and: AdditiveInventoryWhere
 }
@@ -338,10 +362,12 @@ input FragranceWhere {
   id: IDFilter
   name: StringFilter
   note: StringFilter
-  deletedAt: IntFilter
   createdAt: IntFilter
+  deletedAt: IntFilter
   updatedAt: IntFilter
-  fragranceInventories: FragranceInventoryWhere
+  recipeBatchFragrance: RecipeBatchFragranceWhere
+  recipeFragrance: RecipeFragranceWhere
+  fragranceInventory: FragranceInventoryWhere
   or: FragranceWhere
   and: FragranceWhere
 }
@@ -392,10 +418,12 @@ input LipidWhere {
   inciName: StringFilter
   family: StringFilter
   naoh: FloatFilter
-  updatedAt: IntFilter
-  createdAt: IntFilter
   deletedAt: IntFilter
-  lipidInventories: LipidInventoryWhere
+  createdAt: IntFilter
+  updatedAt: IntFilter
+  recipeBatchLipid: RecipeBatchLipidWhere
+  recipeLipid: RecipeLipidWhere
+  lipidInventory: LipidInventoryWhere
   or: LipidWhere
   and: LipidWhere
 }
@@ -434,10 +462,11 @@ input LyeWhere {
   kind: StringFilter
   name: StringFilter
   note: StringFilter
-  createdAt: IntFilter
-  updatedAt: IntFilter
   deletedAt: IntFilter
-  recipeBatchLyes: RecipeBatchLyeWhere
+  updatedAt: IntFilter
+  createdAt: IntFilter
+  recipeBatchLye: RecipeBatchLyeWhere
+  lyeInventory: LyeInventoryWhere
   or: LyeWhere
   and: LyeWhere
 }
@@ -456,10 +485,9 @@ input LyeInventoryWhere {
   concentration: FloatFilter
   lye: LyeWhere
   supplier: SupplierWhere
-  updatedAt: IntFilter
   deletedAt: IntFilter
   createdAt: IntFilter
-  lyeLyeInventories: LyeInventoryWhere
+  updatedAt: IntFilter
   or: LyeInventoryWhere
   and: LyeInventoryWhere
 }
@@ -473,13 +501,14 @@ input RecipeWhere {
   id: IDFilter
   name: StringFilter
   note: StringFilter
-  updatedAt: IntFilter
-  createdAt: IntFilter
   deletedAt: IntFilter
+  createdAt: IntFilter
+  updatedAt: IntFilter
   recipeAdditives: RecipeAdditiveWhere
   recipeBatches: RecipeBatchWhere
   recipeFragrances: RecipeFragranceWhere
   recipeLipids: RecipeLipidWhere
+  recipeSteps: RecipeStepWhere
   or: RecipeWhere
   and: RecipeWhere
 }
@@ -495,8 +524,8 @@ input RecipeAdditiveWhere {
   additive: AdditiveWhere
   recipe: RecipeWhere
   deletedAt: IntFilter
-  updatedAt: IntFilter
   createdAt: IntFilter
+  updatedAt: IntFilter
   or: RecipeAdditiveWhere
   and: RecipeAdditiveWhere
 }
@@ -523,6 +552,7 @@ input RecipeBatchWhere {
   batchRecipeBatchFragrances: RecipeBatchFragranceWhere
   batchRecipeBatchLipids: RecipeBatchLipidWhere
   batchRecipeBatchLyes: RecipeBatchLyeWhere
+  batchRecipeBatchNotes: RecipeBatchNoteWhere
   or: RecipeBatchWhere
   and: RecipeBatchWhere
 }
@@ -538,9 +568,9 @@ input RecipeBatchAdditiveWhere {
   cost: FloatFilter
   additive: AdditiveWhere
   batch: RecipeBatchWhere
+  createdAt: IntFilter
   updatedAt: IntFilter
   deletedAt: IntFilter
-  createdAt: IntFilter
   or: RecipeBatchAdditiveWhere
   and: RecipeBatchAdditiveWhere
 }
@@ -575,8 +605,8 @@ input RecipeBatchLipidWhere {
   lipid: LipidWhere
   batch: RecipeBatchWhere
   deletedAt: IntFilter
-  createdAt: IntFilter
   updatedAt: IntFilter
+  createdAt: IntFilter
   or: RecipeBatchLipidWhere
   and: RecipeBatchLipidWhere
 }
@@ -598,6 +628,23 @@ input RecipeBatchLyeWhere {
   createdAt: IntFilter
   or: RecipeBatchLyeWhere
   and: RecipeBatchLyeWhere
+}
+
+input RecipeBatchNoteFilter {
+  search: String
+  where: RecipeBatchNoteWhere
+}
+
+input RecipeBatchNoteWhere {
+  id: IDFilter
+  note: StringFilter
+  link: StringFilter
+  batch: RecipeBatchWhere
+  createdAt: IntFilter
+  updatedAt: IntFilter
+  deletedAt: IntFilter
+  or: RecipeBatchNoteWhere
+  and: RecipeBatchNoteWhere
 }
 
 input RecipeFragranceFilter {
@@ -627,11 +674,28 @@ input RecipeLipidWhere {
   percentage: FloatFilter
   lipid: LipidWhere
   recipe: RecipeWhere
-  createdAt: IntFilter
   deletedAt: IntFilter
   updatedAt: IntFilter
+  createdAt: IntFilter
   or: RecipeLipidWhere
   and: RecipeLipidWhere
+}
+
+input RecipeStepFilter {
+  search: String
+  where: RecipeStepWhere
+}
+
+input RecipeStepWhere {
+  id: IDFilter
+  num: IntFilter
+  note: StringFilter
+  recipe: RecipeWhere
+  createdAt: IntFilter
+  updatedAt: IntFilter
+  deletedAt: IntFilter
+  or: RecipeStepWhere
+  and: RecipeStepWhere
 }
 
 input SupplierFilter {
@@ -647,10 +711,10 @@ input SupplierWhere {
   deletedAt: IntFilter
   updatedAt: IntFilter
   createdAt: IntFilter
-  additiveInventories: AdditiveInventoryWhere
-  fragranceInventories: FragranceInventoryWhere
-  lipidInventories: LipidInventoryWhere
-  lyeInventories: LyeInventoryWhere
+  additiveInventory: AdditiveInventoryWhere
+  fragranceInventory: FragranceInventoryWhere
+  lipidInventory: LipidInventoryWhere
+  lyeInventory: LyeInventoryWhere
   or: SupplierWhere
   and: SupplierWhere
 }
@@ -658,20 +722,12 @@ input SupplierWhere {
 type Query {
   additive(id: ID!): Additive!
   additives(filter: AdditiveFilter): [Additive!]!
-  additiveInventory(id: ID!): AdditiveInventory!
-  additiveInventories(filter: AdditiveInventoryFilter): [AdditiveInventory!]!
   fragrance(id: ID!): Fragrance!
   fragrances(filter: FragranceFilter): [Fragrance!]!
-  fragranceInventory(id: ID!): FragranceInventory!
-  fragranceInventories(filter: FragranceInventoryFilter): [FragranceInventory!]!
   lipid(id: ID!): Lipid!
   lipids(filter: LipidFilter): [Lipid!]!
-  lipidInventory(id: ID!): LipidInventory!
-  lipidInventories(filter: LipidInventoryFilter): [LipidInventory!]!
   lye(id: ID!): Lye!
   lyes(filter: LyeFilter): [Lye!]!
-  lyeInventory(id: ID!): LyeInventory!
-  lyeInventories(filter: LyeInventoryFilter): [LyeInventory!]!
   recipe(id: ID!): Recipe!
   recipes(filter: RecipeFilter): [Recipe!]!
   recipeAdditive(id: ID!): RecipeAdditive!
@@ -690,10 +746,14 @@ type Query {
   recipeBatchLipids(filter: RecipeBatchLipidFilter): [RecipeBatchLipid!]!
   recipeBatchLye(id: ID!): RecipeBatchLye!
   recipeBatchLyes(filter: RecipeBatchLyeFilter): [RecipeBatchLye!]!
+  recipeBatchNote(id: ID!): RecipeBatchNote!
+  recipeBatchNotes(filter: RecipeBatchNoteFilter): [RecipeBatchNote!]!
   recipeFragrance(id: ID!): RecipeFragrance!
   recipeFragrances(filter: RecipeFragranceFilter): [RecipeFragrance!]!
   recipeLipid(id: ID!): RecipeLipid!
   recipeLipids(filter: RecipeLipidFilter): [RecipeLipid!]!
+  recipeStep(id: ID!): RecipeStep!
+  recipeSteps(filter: RecipeStepFilter): [RecipeStep!]!
   supplier(id: ID!): Supplier!
   suppliers(filter: SupplierFilter): [Supplier!]!
 }
@@ -701,17 +761,17 @@ type Query {
 input AdditiveCreateInput {
   name: String!
   note: String!
-  deletedAt: Int
   createdAt: Int!
   updatedAt: Int!
+  deletedAt: Int
 }
 
 input AdditiveUpdateInput {
   name: String
   note: String
-  deletedAt: Int
   createdAt: Int
   updatedAt: Int
+  deletedAt: Int
 }
 
 type AdditivePayload {
@@ -729,9 +789,9 @@ input AdditiveInventoryCreateInput {
   weight: Float!
   additiveId: ID!
   supplierId: ID!
-  createdAt: Int!
-  deletedAt: Int
   updatedAt: Int!
+  deletedAt: Int
+  createdAt: Int!
 }
 
 input AdditiveInventoryUpdateInput {
@@ -741,9 +801,9 @@ input AdditiveInventoryUpdateInput {
   weight: Float
   additiveId: ID
   supplierId: ID
-  createdAt: Int
-  deletedAt: Int
   updatedAt: Int
+  deletedAt: Int
+  createdAt: Int
 }
 
 type AdditiveInventoryPayload {
@@ -757,16 +817,16 @@ type AdditiveInventoryDeletePayload {
 input FragranceCreateInput {
   name: String!
   note: String!
-  deletedAt: Int
   createdAt: Int!
+  deletedAt: Int
   updatedAt: Int!
 }
 
 input FragranceUpdateInput {
   name: String
   note: String
-  deletedAt: Int
   createdAt: Int
+  deletedAt: Int
   updatedAt: Int
 }
 
@@ -830,9 +890,11 @@ input LipidCreateInput {
   inciName: String!
   family: String!
   naoh: Float!
-  updatedAt: Int!
-  createdAt: Int!
   deletedAt: Int
+  createdAt: Int!
+  updatedAt: Int!
+  recipeBatchLipid: ID
+  recipeLipid: ID
 }
 
 input LipidUpdateInput {
@@ -855,9 +917,11 @@ input LipidUpdateInput {
   inciName: String
   family: String
   naoh: Float
-  updatedAt: Int
-  createdAt: Int
   deletedAt: Int
+  createdAt: Int
+  updatedAt: Int
+  recipeBatchLipid: ID
+  recipeLipid: ID
 }
 
 type LipidPayload {
@@ -912,18 +976,18 @@ input LyeCreateInput {
   kind: String!
   name: String!
   note: String!
-  createdAt: Int!
-  updatedAt: Int!
   deletedAt: Int
+  updatedAt: Int!
+  createdAt: Int!
 }
 
 input LyeUpdateInput {
   kind: String
   name: String
   note: String
-  createdAt: Int
-  updatedAt: Int
   deletedAt: Int
+  updatedAt: Int
+  createdAt: Int
 }
 
 type LyePayload {
@@ -942,9 +1006,9 @@ input LyeInventoryCreateInput {
   concentration: Float!
   lyeId: ID!
   supplierId: ID!
-  updatedAt: Int!
   deletedAt: Int
   createdAt: Int!
+  updatedAt: Int!
 }
 
 input LyeInventoryUpdateInput {
@@ -955,9 +1019,9 @@ input LyeInventoryUpdateInput {
   concentration: Float
   lyeId: ID
   supplierId: ID
-  updatedAt: Int
   deletedAt: Int
   createdAt: Int
+  updatedAt: Int
 }
 
 type LyeInventoryPayload {
@@ -971,17 +1035,17 @@ type LyeInventoryDeletePayload {
 input RecipeCreateInput {
   name: String!
   note: String!
-  updatedAt: Int!
-  createdAt: Int!
   deletedAt: Int
+  createdAt: Int!
+  updatedAt: Int!
 }
 
 input RecipeUpdateInput {
   name: String
   note: String
-  updatedAt: Int
-  createdAt: Int
   deletedAt: Int
+  createdAt: Int
+  updatedAt: Int
 }
 
 type RecipePayload {
@@ -997,8 +1061,8 @@ input RecipeAdditiveCreateInput {
   additiveId: ID!
   recipeId: ID!
   deletedAt: Int
-  updatedAt: Int!
   createdAt: Int!
+  updatedAt: Int!
 }
 
 input RecipeAdditiveUpdateInput {
@@ -1006,8 +1070,8 @@ input RecipeAdditiveUpdateInput {
   additiveId: ID
   recipeId: ID
   deletedAt: Int
-  updatedAt: Int
   createdAt: Int
+  updatedAt: Int
 }
 
 type RecipeAdditivePayload {
@@ -1059,9 +1123,9 @@ input RecipeBatchAdditiveCreateInput {
   cost: Float!
   additiveId: ID!
   batchId: ID!
+  createdAt: Int!
   updatedAt: Int!
   deletedAt: Int
-  createdAt: Int!
 }
 
 input RecipeBatchAdditiveUpdateInput {
@@ -1069,9 +1133,9 @@ input RecipeBatchAdditiveUpdateInput {
   cost: Float
   additiveId: ID
   batchId: ID
+  createdAt: Int
   updatedAt: Int
   deletedAt: Int
-  createdAt: Int
 }
 
 type RecipeBatchAdditivePayload {
@@ -1116,8 +1180,8 @@ input RecipeBatchLipidCreateInput {
   lipidId: ID!
   batchId: ID!
   deletedAt: Int
-  createdAt: Int!
   updatedAt: Int!
+  createdAt: Int!
 }
 
 input RecipeBatchLipidUpdateInput {
@@ -1126,8 +1190,8 @@ input RecipeBatchLipidUpdateInput {
   lipidId: ID
   batchId: ID
   deletedAt: Int
-  createdAt: Int
   updatedAt: Int
+  createdAt: Int
 }
 
 type RecipeBatchLipidPayload {
@@ -1168,6 +1232,32 @@ type RecipeBatchLyeDeletePayload {
   id: ID!
 }
 
+input RecipeBatchNoteCreateInput {
+  note: String!
+  link: String!
+  batchId: ID!
+  createdAt: Int!
+  updatedAt: Int!
+  deletedAt: Int
+}
+
+input RecipeBatchNoteUpdateInput {
+  note: String
+  link: String
+  batchId: ID
+  createdAt: Int
+  updatedAt: Int
+  deletedAt: Int
+}
+
+type RecipeBatchNotePayload {
+  recipeBatchNote: RecipeBatchNote!
+}
+
+type RecipeBatchNoteDeletePayload {
+  id: ID!
+}
+
 input RecipeFragranceCreateInput {
   percentage: Float!
   fragranceId: ID!
@@ -1198,18 +1288,18 @@ input RecipeLipidCreateInput {
   percentage: Float!
   lipidId: ID!
   recipeId: ID!
-  createdAt: Int!
   deletedAt: Int
   updatedAt: Int!
+  createdAt: Int!
 }
 
 input RecipeLipidUpdateInput {
   percentage: Float
   lipidId: ID
   recipeId: ID
-  createdAt: Int
   deletedAt: Int
   updatedAt: Int
+  createdAt: Int
 }
 
 type RecipeLipidPayload {
@@ -1217,6 +1307,32 @@ type RecipeLipidPayload {
 }
 
 type RecipeLipidDeletePayload {
+  id: ID!
+}
+
+input RecipeStepCreateInput {
+  num: Int!
+  note: String!
+  recipeId: ID!
+  createdAt: Int!
+  updatedAt: Int!
+  deletedAt: Int
+}
+
+input RecipeStepUpdateInput {
+  num: Int
+  note: String
+  recipeId: ID
+  createdAt: Int
+  updatedAt: Int
+  deletedAt: Int
+}
+
+type RecipeStepPayload {
+  recipeStep: RecipeStep!
+}
+
+type RecipeStepDeletePayload {
   id: ID!
 }
 
@@ -1338,6 +1454,14 @@ type Mutation {
     input: RecipeBatchLyeUpdateInput!
   ): RecipeBatchLyePayload!
   deleteRecipeBatchLye(id: ID!): RecipeBatchLyeDeletePayload!
+  createRecipeBatchNote(
+    input: RecipeBatchNoteCreateInput!
+  ): RecipeBatchNotePayload!
+  updateRecipeBatchNote(
+    id: ID!
+    input: RecipeBatchNoteUpdateInput!
+  ): RecipeBatchNotePayload!
+  deleteRecipeBatchNote(id: ID!): RecipeBatchNoteDeletePayload!
   createRecipeFragrance(
     input: RecipeFragranceCreateInput!
   ): RecipeFragrancePayload!
@@ -1352,6 +1476,9 @@ type Mutation {
     input: RecipeLipidUpdateInput!
   ): RecipeLipidPayload!
   deleteRecipeLipid(id: ID!): RecipeLipidDeletePayload!
+  createRecipeStep(input: RecipeStepCreateInput!): RecipeStepPayload!
+  updateRecipeStep(id: ID!, input: RecipeStepUpdateInput!): RecipeStepPayload!
+  deleteRecipeStep(id: ID!): RecipeStepDeletePayload!
   createSupplier(input: SupplierCreateInput!): SupplierPayload!
   updateSupplier(id: ID!, input: SupplierUpdateInput!): SupplierPayload!
   deleteSupplier(id: ID!): SupplierDeletePayload!
