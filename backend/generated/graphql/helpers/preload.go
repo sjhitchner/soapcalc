@@ -11,13 +11,7 @@ import (
 )
 
 var TablePreloadMap = map[string]map[string]boilergql.ColumnSetting{
-	models.TableNames.Additive: {
-		"additiveInventories": {
-			Name:                  models.AdditiveRels.AdditiveInventories,
-			RelationshipModelName: models.TableNames.AdditiveInventory,
-			IDAvailable:           false,
-		},
-	},
+	models.TableNames.Additive: {},
 	models.TableNames.AdditiveInventory: {
 		"additive": {
 			Name:                  models.AdditiveInventoryRels.Additive,
@@ -30,13 +24,7 @@ var TablePreloadMap = map[string]map[string]boilergql.ColumnSetting{
 			IDAvailable:           true,
 		},
 	},
-	models.TableNames.Fragrance: {
-		"fragranceInventories": {
-			Name:                  models.FragranceRels.FragranceInventories,
-			RelationshipModelName: models.TableNames.FragranceInventory,
-			IDAvailable:           false,
-		},
-	},
+	models.TableNames.Fragrance: {},
 	models.TableNames.FragranceInventory: {
 		"fragrance": {
 			Name:                  models.FragranceInventoryRels.Fragrance,
@@ -49,13 +37,7 @@ var TablePreloadMap = map[string]map[string]boilergql.ColumnSetting{
 			IDAvailable:           true,
 		},
 	},
-	models.TableNames.Lipid: {
-		"lipidInventories": {
-			Name:                  models.LipidRels.LipidInventories,
-			RelationshipModelName: models.TableNames.LipidInventory,
-			IDAvailable:           false,
-		},
-	},
+	models.TableNames.Lipid: {},
 	models.TableNames.LipidInventory: {
 		"lipid": {
 			Name:                  models.LipidInventoryRels.Lipid,
@@ -149,6 +131,13 @@ var TablePreloadMap = map[string]map[string]boilergql.ColumnSetting{
 			IDAvailable:           true,
 		},
 	},
+	models.TableNames.RecipeBatchNote: {
+		"batch": {
+			Name:                  models.RecipeBatchNoteRels.Batch,
+			RelationshipModelName: models.TableNames.RecipeBatch,
+			IDAvailable:           true,
+		},
+	},
 	models.TableNames.RecipeFragrance: {
 		"fragrance": {
 			Name:                  models.RecipeFragranceRels.Fragrance,
@@ -173,28 +162,14 @@ var TablePreloadMap = map[string]map[string]boilergql.ColumnSetting{
 			IDAvailable:           true,
 		},
 	},
-	models.TableNames.Supplier: {
-		"additiveInventories": {
-			Name:                  models.SupplierRels.AdditiveInventories,
-			RelationshipModelName: models.TableNames.AdditiveInventory,
-			IDAvailable:           false,
-		},
-		"fragranceInventories": {
-			Name:                  models.SupplierRels.FragranceInventories,
-			RelationshipModelName: models.TableNames.FragranceInventory,
-			IDAvailable:           false,
-		},
-		"lipidInventories": {
-			Name:                  models.SupplierRels.LipidInventories,
-			RelationshipModelName: models.TableNames.LipidInventory,
-			IDAvailable:           false,
-		},
-		"lyeInventories": {
-			Name:                  models.SupplierRels.LyeInventories,
-			RelationshipModelName: models.TableNames.LyeInventory,
-			IDAvailable:           false,
+	models.TableNames.RecipeStep: {
+		"recipe": {
+			Name:                  models.RecipeStepRels.Recipe,
+			RelationshipModelName: models.TableNames.Recipe,
+			IDAvailable:           true,
 		},
 	},
+	models.TableNames.Supplier: {},
 }
 
 func GetAdditivePreloadMods(ctx context.Context) (queryMods []qm.QueryMod) {
@@ -317,6 +292,14 @@ func GetRecipeBatchLyePreloadModsWithLevel(ctx context.Context, level string) (q
 	return boilergql.GetPreloadModsWithLevel(ctx, TablePreloadMap, models.TableNames.RecipeBatchLye, level)
 }
 
+func GetRecipeBatchNotePreloadMods(ctx context.Context) (queryMods []qm.QueryMod) {
+	return boilergql.GetPreloadModsWithLevel(ctx, TablePreloadMap, models.TableNames.RecipeBatchNote, "")
+}
+
+func GetRecipeBatchNotePreloadModsWithLevel(ctx context.Context, level string) (queryMods []qm.QueryMod) {
+	return boilergql.GetPreloadModsWithLevel(ctx, TablePreloadMap, models.TableNames.RecipeBatchNote, level)
+}
+
 func GetRecipeFragrancePreloadMods(ctx context.Context) (queryMods []qm.QueryMod) {
 	return boilergql.GetPreloadModsWithLevel(ctx, TablePreloadMap, models.TableNames.RecipeFragrance, "")
 }
@@ -331,6 +314,14 @@ func GetRecipeLipidPreloadMods(ctx context.Context) (queryMods []qm.QueryMod) {
 
 func GetRecipeLipidPreloadModsWithLevel(ctx context.Context, level string) (queryMods []qm.QueryMod) {
 	return boilergql.GetPreloadModsWithLevel(ctx, TablePreloadMap, models.TableNames.RecipeLipid, level)
+}
+
+func GetRecipeStepPreloadMods(ctx context.Context) (queryMods []qm.QueryMod) {
+	return boilergql.GetPreloadModsWithLevel(ctx, TablePreloadMap, models.TableNames.RecipeStep, "")
+}
+
+func GetRecipeStepPreloadModsWithLevel(ctx context.Context, level string) (queryMods []qm.QueryMod) {
+	return boilergql.GetPreloadModsWithLevel(ctx, TablePreloadMap, models.TableNames.RecipeStep, level)
 }
 
 func GetSupplierPreloadMods(ctx context.Context) (queryMods []qm.QueryMod) {
@@ -419,6 +410,12 @@ var RecipeBatchLyePayloadPreloadLevels = struct {
 	RecipeBatchLye: "recipeBatchLye",
 }
 
+var RecipeBatchNotePayloadPreloadLevels = struct {
+	RecipeBatchNote string
+}{
+	RecipeBatchNote: "recipeBatchNote",
+}
+
 var RecipeBatchPayloadPreloadLevels = struct {
 	RecipeBatch string
 }{
@@ -441,6 +438,12 @@ var RecipePayloadPreloadLevels = struct {
 	Recipe string
 }{
 	Recipe: "recipe",
+}
+
+var RecipeStepPayloadPreloadLevels = struct {
+	RecipeStep string
+}{
+	RecipeStep: "recipeStep",
 }
 
 var SupplierPayloadPreloadLevels = struct {

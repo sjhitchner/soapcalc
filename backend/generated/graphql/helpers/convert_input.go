@@ -28,9 +28,9 @@ func AdditiveCreateInputToBoiler(
 	r := &models.Additive{
 		Name:      m.Name,
 		Note:      m.Note,
-		DeletedAt: boilergql.PointerIntToNullDotTime(m.DeletedAt),
 		CreatedAt: boilergql.IntToTimeDotTime(m.CreatedAt),
 		UpdatedAt: boilergql.IntToTimeDotTime(m.UpdatedAt),
+		DeletedAt: boilergql.PointerIntToNullDotTime(m.DeletedAt),
 	}
 	return r
 }
@@ -46,12 +46,12 @@ func AdditiveCreateInputToModelM(
 			modelM[models.AdditiveColumns.Name] = m.Name
 		case "note":
 			modelM[models.AdditiveColumns.Note] = m.Note
-		case "deletedAt":
-			modelM[models.AdditiveColumns.DeletedAt] = boilergql.PointerIntToNullDotTime(m.DeletedAt)
 		case "createdAt":
 			modelM[models.AdditiveColumns.CreatedAt] = boilergql.IntToTimeDotTime(m.CreatedAt)
 		case "updatedAt":
 			modelM[models.AdditiveColumns.UpdatedAt] = boilergql.IntToTimeDotTime(m.UpdatedAt)
+		case "deletedAt":
+			modelM[models.AdditiveColumns.DeletedAt] = boilergql.PointerIntToNullDotTime(m.DeletedAt)
 		}
 	}
 	return modelM
@@ -65,12 +65,12 @@ func AdditiveCreateInputToBoilerWhitelist(input map[string]interface{}, extraCol
 			columnsWhichAreSet = append(columnsWhichAreSet, models.AdditiveColumns.Name)
 		case "note":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.AdditiveColumns.Note)
-		case "deletedAt":
-			columnsWhichAreSet = append(columnsWhichAreSet, models.AdditiveColumns.DeletedAt)
 		case "createdAt":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.AdditiveColumns.CreatedAt)
 		case "updatedAt":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.AdditiveColumns.UpdatedAt)
+		case "deletedAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.AdditiveColumns.DeletedAt)
 		}
 	}
 	columnsWhichAreSet = append(columnsWhichAreSet, extraColumns...)
@@ -100,9 +100,9 @@ func AdditiveInventoryCreateInputToBoiler(
 		Weight:       m.Weight,
 		AdditiveID:   int(boilergql.IDToBoiler(m.AdditiveID)),
 		SupplierID:   int(boilergql.IDToBoiler(m.SupplierID)),
-		CreatedAt:    boilergql.IntToTimeDotTime(m.CreatedAt),
-		DeletedAt:    boilergql.PointerIntToNullDotTime(m.DeletedAt),
 		UpdatedAt:    boilergql.IntToTimeDotTime(m.UpdatedAt),
+		DeletedAt:    boilergql.PointerIntToNullDotTime(m.DeletedAt),
+		CreatedAt:    boilergql.IntToTimeDotTime(m.CreatedAt),
 	}
 	return r
 }
@@ -126,12 +126,12 @@ func AdditiveInventoryCreateInputToModelM(
 			modelM[models.AdditiveInventoryColumns.AdditiveID] = int(boilergql.IDToBoiler(m.AdditiveID))
 		case "supplierId":
 			modelM[models.AdditiveInventoryColumns.SupplierID] = int(boilergql.IDToBoiler(m.SupplierID))
-		case "createdAt":
-			modelM[models.AdditiveInventoryColumns.CreatedAt] = boilergql.IntToTimeDotTime(m.CreatedAt)
-		case "deletedAt":
-			modelM[models.AdditiveInventoryColumns.DeletedAt] = boilergql.PointerIntToNullDotTime(m.DeletedAt)
 		case "updatedAt":
 			modelM[models.AdditiveInventoryColumns.UpdatedAt] = boilergql.IntToTimeDotTime(m.UpdatedAt)
+		case "deletedAt":
+			modelM[models.AdditiveInventoryColumns.DeletedAt] = boilergql.PointerIntToNullDotTime(m.DeletedAt)
+		case "createdAt":
+			modelM[models.AdditiveInventoryColumns.CreatedAt] = boilergql.IntToTimeDotTime(m.CreatedAt)
 		}
 	}
 	return modelM
@@ -153,12 +153,12 @@ func AdditiveInventoryCreateInputToBoilerWhitelist(input map[string]interface{},
 			columnsWhichAreSet = append(columnsWhichAreSet, models.AdditiveInventoryColumns.AdditiveID)
 		case "supplierId":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.AdditiveInventoryColumns.SupplierID)
-		case "createdAt":
-			columnsWhichAreSet = append(columnsWhichAreSet, models.AdditiveInventoryColumns.CreatedAt)
-		case "deletedAt":
-			columnsWhichAreSet = append(columnsWhichAreSet, models.AdditiveInventoryColumns.DeletedAt)
 		case "updatedAt":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.AdditiveInventoryColumns.UpdatedAt)
+		case "deletedAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.AdditiveInventoryColumns.DeletedAt)
+		case "createdAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.AdditiveInventoryColumns.CreatedAt)
 		}
 	}
 	columnsWhichAreSet = append(columnsWhichAreSet, extraColumns...)
@@ -188,9 +188,9 @@ func AdditiveInventoryUpdateInputToBoiler(
 		Weight:       boilergql.PointerFloat64ToFloat64(m.Weight),
 		AdditiveID:   int(boilergql.IDToBoiler(boilergql.PointerStringToString(m.AdditiveID))),
 		SupplierID:   int(boilergql.IDToBoiler(boilergql.PointerStringToString(m.SupplierID))),
-		CreatedAt:    boilergql.PointerIntToTimeDotTime(m.CreatedAt),
-		DeletedAt:    boilergql.PointerIntToNullDotTime(m.DeletedAt),
 		UpdatedAt:    boilergql.PointerIntToTimeDotTime(m.UpdatedAt),
+		DeletedAt:    boilergql.PointerIntToNullDotTime(m.DeletedAt),
+		CreatedAt:    boilergql.PointerIntToTimeDotTime(m.CreatedAt),
 	}
 	return r
 }
@@ -214,12 +214,12 @@ func AdditiveInventoryUpdateInputToModelM(
 			modelM[models.AdditiveInventoryColumns.AdditiveID] = int(boilergql.IDToBoiler(boilergql.PointerStringToString(m.AdditiveID)))
 		case "supplierId":
 			modelM[models.AdditiveInventoryColumns.SupplierID] = int(boilergql.IDToBoiler(boilergql.PointerStringToString(m.SupplierID)))
-		case "createdAt":
-			modelM[models.AdditiveInventoryColumns.CreatedAt] = boilergql.PointerIntToTimeDotTime(m.CreatedAt)
-		case "deletedAt":
-			modelM[models.AdditiveInventoryColumns.DeletedAt] = boilergql.PointerIntToNullDotTime(m.DeletedAt)
 		case "updatedAt":
 			modelM[models.AdditiveInventoryColumns.UpdatedAt] = boilergql.PointerIntToTimeDotTime(m.UpdatedAt)
+		case "deletedAt":
+			modelM[models.AdditiveInventoryColumns.DeletedAt] = boilergql.PointerIntToNullDotTime(m.DeletedAt)
+		case "createdAt":
+			modelM[models.AdditiveInventoryColumns.CreatedAt] = boilergql.PointerIntToTimeDotTime(m.CreatedAt)
 		}
 	}
 	return modelM
@@ -241,12 +241,12 @@ func AdditiveInventoryUpdateInputToBoilerWhitelist(input map[string]interface{},
 			columnsWhichAreSet = append(columnsWhichAreSet, models.AdditiveInventoryColumns.AdditiveID)
 		case "supplierId":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.AdditiveInventoryColumns.SupplierID)
-		case "createdAt":
-			columnsWhichAreSet = append(columnsWhichAreSet, models.AdditiveInventoryColumns.CreatedAt)
-		case "deletedAt":
-			columnsWhichAreSet = append(columnsWhichAreSet, models.AdditiveInventoryColumns.DeletedAt)
 		case "updatedAt":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.AdditiveInventoryColumns.UpdatedAt)
+		case "deletedAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.AdditiveInventoryColumns.DeletedAt)
+		case "createdAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.AdditiveInventoryColumns.CreatedAt)
 		}
 	}
 	columnsWhichAreSet = append(columnsWhichAreSet, extraColumns...)
@@ -272,9 +272,9 @@ func AdditiveUpdateInputToBoiler(
 	r := &models.Additive{
 		Name:      boilergql.PointerStringToString(m.Name),
 		Note:      boilergql.PointerStringToString(m.Note),
-		DeletedAt: boilergql.PointerIntToNullDotTime(m.DeletedAt),
 		CreatedAt: boilergql.PointerIntToTimeDotTime(m.CreatedAt),
 		UpdatedAt: boilergql.PointerIntToTimeDotTime(m.UpdatedAt),
+		DeletedAt: boilergql.PointerIntToNullDotTime(m.DeletedAt),
 	}
 	return r
 }
@@ -290,12 +290,12 @@ func AdditiveUpdateInputToModelM(
 			modelM[models.AdditiveColumns.Name] = boilergql.PointerStringToString(m.Name)
 		case "note":
 			modelM[models.AdditiveColumns.Note] = boilergql.PointerStringToString(m.Note)
-		case "deletedAt":
-			modelM[models.AdditiveColumns.DeletedAt] = boilergql.PointerIntToNullDotTime(m.DeletedAt)
 		case "createdAt":
 			modelM[models.AdditiveColumns.CreatedAt] = boilergql.PointerIntToTimeDotTime(m.CreatedAt)
 		case "updatedAt":
 			modelM[models.AdditiveColumns.UpdatedAt] = boilergql.PointerIntToTimeDotTime(m.UpdatedAt)
+		case "deletedAt":
+			modelM[models.AdditiveColumns.DeletedAt] = boilergql.PointerIntToNullDotTime(m.DeletedAt)
 		}
 	}
 	return modelM
@@ -309,12 +309,12 @@ func AdditiveUpdateInputToBoilerWhitelist(input map[string]interface{}, extraCol
 			columnsWhichAreSet = append(columnsWhichAreSet, models.AdditiveColumns.Name)
 		case "note":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.AdditiveColumns.Note)
-		case "deletedAt":
-			columnsWhichAreSet = append(columnsWhichAreSet, models.AdditiveColumns.DeletedAt)
 		case "createdAt":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.AdditiveColumns.CreatedAt)
 		case "updatedAt":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.AdditiveColumns.UpdatedAt)
+		case "deletedAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.AdditiveColumns.DeletedAt)
 		}
 	}
 	columnsWhichAreSet = append(columnsWhichAreSet, extraColumns...)
@@ -340,8 +340,8 @@ func FragranceCreateInputToBoiler(
 	r := &models.Fragrance{
 		Name:      m.Name,
 		Note:      m.Note,
-		DeletedAt: boilergql.PointerIntToNullDotTime(m.DeletedAt),
 		CreatedAt: boilergql.IntToTimeDotTime(m.CreatedAt),
+		DeletedAt: boilergql.PointerIntToNullDotTime(m.DeletedAt),
 		UpdatedAt: boilergql.IntToTimeDotTime(m.UpdatedAt),
 	}
 	return r
@@ -358,10 +358,10 @@ func FragranceCreateInputToModelM(
 			modelM[models.FragranceColumns.Name] = m.Name
 		case "note":
 			modelM[models.FragranceColumns.Note] = m.Note
-		case "deletedAt":
-			modelM[models.FragranceColumns.DeletedAt] = boilergql.PointerIntToNullDotTime(m.DeletedAt)
 		case "createdAt":
 			modelM[models.FragranceColumns.CreatedAt] = boilergql.IntToTimeDotTime(m.CreatedAt)
+		case "deletedAt":
+			modelM[models.FragranceColumns.DeletedAt] = boilergql.PointerIntToNullDotTime(m.DeletedAt)
 		case "updatedAt":
 			modelM[models.FragranceColumns.UpdatedAt] = boilergql.IntToTimeDotTime(m.UpdatedAt)
 		}
@@ -377,10 +377,10 @@ func FragranceCreateInputToBoilerWhitelist(input map[string]interface{}, extraCo
 			columnsWhichAreSet = append(columnsWhichAreSet, models.FragranceColumns.Name)
 		case "note":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.FragranceColumns.Note)
-		case "deletedAt":
-			columnsWhichAreSet = append(columnsWhichAreSet, models.FragranceColumns.DeletedAt)
 		case "createdAt":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.FragranceColumns.CreatedAt)
+		case "deletedAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.FragranceColumns.DeletedAt)
 		case "updatedAt":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.FragranceColumns.UpdatedAt)
 		}
@@ -584,8 +584,8 @@ func FragranceUpdateInputToBoiler(
 	r := &models.Fragrance{
 		Name:      boilergql.PointerStringToString(m.Name),
 		Note:      boilergql.PointerStringToString(m.Note),
-		DeletedAt: boilergql.PointerIntToNullDotTime(m.DeletedAt),
 		CreatedAt: boilergql.PointerIntToTimeDotTime(m.CreatedAt),
+		DeletedAt: boilergql.PointerIntToNullDotTime(m.DeletedAt),
 		UpdatedAt: boilergql.PointerIntToTimeDotTime(m.UpdatedAt),
 	}
 	return r
@@ -602,10 +602,10 @@ func FragranceUpdateInputToModelM(
 			modelM[models.FragranceColumns.Name] = boilergql.PointerStringToString(m.Name)
 		case "note":
 			modelM[models.FragranceColumns.Note] = boilergql.PointerStringToString(m.Note)
-		case "deletedAt":
-			modelM[models.FragranceColumns.DeletedAt] = boilergql.PointerIntToNullDotTime(m.DeletedAt)
 		case "createdAt":
 			modelM[models.FragranceColumns.CreatedAt] = boilergql.PointerIntToTimeDotTime(m.CreatedAt)
+		case "deletedAt":
+			modelM[models.FragranceColumns.DeletedAt] = boilergql.PointerIntToNullDotTime(m.DeletedAt)
 		case "updatedAt":
 			modelM[models.FragranceColumns.UpdatedAt] = boilergql.PointerIntToTimeDotTime(m.UpdatedAt)
 		}
@@ -621,10 +621,10 @@ func FragranceUpdateInputToBoilerWhitelist(input map[string]interface{}, extraCo
 			columnsWhichAreSet = append(columnsWhichAreSet, models.FragranceColumns.Name)
 		case "note":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.FragranceColumns.Note)
-		case "deletedAt":
-			columnsWhichAreSet = append(columnsWhichAreSet, models.FragranceColumns.DeletedAt)
 		case "createdAt":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.FragranceColumns.CreatedAt)
+		case "deletedAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.FragranceColumns.DeletedAt)
 		case "updatedAt":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.FragranceColumns.UpdatedAt)
 		}
@@ -650,28 +650,30 @@ func LipidCreateInputToBoiler(
 		return nil
 	}
 	r := &models.Lipid{
-		Name:         m.Name,
-		Lauric:       m.Lauric,
-		Myristic:     m.Myristic,
-		Palmitic:     m.Palmitic,
-		Stearic:      m.Stearic,
-		Ricinoleic:   m.Ricinoleic,
-		Oleic:        m.Oleic,
-		Linoleic:     m.Linoleic,
-		Linolenic:    m.Linolenic,
-		Hardness:     m.Hardness,
-		Cleansing:    m.Cleansing,
-		Conditioning: m.Conditioning,
-		Bubbly:       m.Bubbly,
-		Creamy:       m.Creamy,
-		Iodine:       m.Iodine,
-		Ins:          m.Ins,
-		InciName:     m.InciName,
-		Family:       m.Family,
-		Naoh:         m.Naoh,
-		UpdatedAt:    boilergql.IntToTimeDotTime(m.UpdatedAt),
-		CreatedAt:    boilergql.IntToTimeDotTime(m.CreatedAt),
-		DeletedAt:    boilergql.PointerIntToNullDotTime(m.DeletedAt),
+		Name:             m.Name,
+		Lauric:           m.Lauric,
+		Myristic:         m.Myristic,
+		Palmitic:         m.Palmitic,
+		Stearic:          m.Stearic,
+		Ricinoleic:       m.Ricinoleic,
+		Oleic:            m.Oleic,
+		Linoleic:         m.Linoleic,
+		Linolenic:        m.Linolenic,
+		Hardness:         m.Hardness,
+		Cleansing:        m.Cleansing,
+		Conditioning:     m.Conditioning,
+		Bubbly:           m.Bubbly,
+		Creamy:           m.Creamy,
+		Iodine:           m.Iodine,
+		Ins:              m.Ins,
+		InciName:         m.InciName,
+		Family:           m.Family,
+		Naoh:             m.Naoh,
+		DeletedAt:        boilergql.PointerIntToNullDotTime(m.DeletedAt),
+		CreatedAt:        boilergql.IntToTimeDotTime(m.CreatedAt),
+		UpdatedAt:        boilergql.IntToTimeDotTime(m.UpdatedAt),
+		RecipeBatchLipid: boilergql.IDToBoiler(boilergql.PointerStringToString(m.RecipeBatchLipid)),
+		RecipeLipid:      boilergql.IDToBoiler(boilergql.PointerStringToString(m.RecipeLipid)),
 	}
 	return r
 }
@@ -721,12 +723,16 @@ func LipidCreateInputToModelM(
 			modelM[models.LipidColumns.Family] = m.Family
 		case "naoh":
 			modelM[models.LipidColumns.Naoh] = m.Naoh
-		case "updatedAt":
-			modelM[models.LipidColumns.UpdatedAt] = boilergql.IntToTimeDotTime(m.UpdatedAt)
-		case "createdAt":
-			modelM[models.LipidColumns.CreatedAt] = boilergql.IntToTimeDotTime(m.CreatedAt)
 		case "deletedAt":
 			modelM[models.LipidColumns.DeletedAt] = boilergql.PointerIntToNullDotTime(m.DeletedAt)
+		case "createdAt":
+			modelM[models.LipidColumns.CreatedAt] = boilergql.IntToTimeDotTime(m.CreatedAt)
+		case "updatedAt":
+			modelM[models.LipidColumns.UpdatedAt] = boilergql.IntToTimeDotTime(m.UpdatedAt)
+		case "recipeBatchLipid":
+			modelM[models.LipidColumns.RecipeBatchLipid] = boilergql.IDToBoiler(boilergql.PointerStringToString(m.RecipeBatchLipid))
+		case "recipeLipid":
+			modelM[models.LipidColumns.RecipeLipid] = boilergql.IDToBoiler(boilergql.PointerStringToString(m.RecipeLipid))
 		}
 	}
 	return modelM
@@ -774,12 +780,16 @@ func LipidCreateInputToBoilerWhitelist(input map[string]interface{}, extraColumn
 			columnsWhichAreSet = append(columnsWhichAreSet, models.LipidColumns.Family)
 		case "naoh":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.LipidColumns.Naoh)
-		case "updatedAt":
-			columnsWhichAreSet = append(columnsWhichAreSet, models.LipidColumns.UpdatedAt)
-		case "createdAt":
-			columnsWhichAreSet = append(columnsWhichAreSet, models.LipidColumns.CreatedAt)
 		case "deletedAt":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.LipidColumns.DeletedAt)
+		case "createdAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.LipidColumns.CreatedAt)
+		case "updatedAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.LipidColumns.UpdatedAt)
+		case "recipeBatchLipid":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.LipidColumns.RecipeBatchLipid)
+		case "recipeLipid":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.LipidColumns.RecipeLipid)
 		}
 	}
 	columnsWhichAreSet = append(columnsWhichAreSet, extraColumns...)
@@ -1019,28 +1029,30 @@ func LipidUpdateInputToBoiler(
 		return nil
 	}
 	r := &models.Lipid{
-		Name:         boilergql.PointerStringToString(m.Name),
-		Lauric:       boilergql.PointerIntToInt(m.Lauric),
-		Myristic:     boilergql.PointerIntToInt(m.Myristic),
-		Palmitic:     boilergql.PointerIntToInt(m.Palmitic),
-		Stearic:      boilergql.PointerIntToInt(m.Stearic),
-		Ricinoleic:   boilergql.PointerIntToInt(m.Ricinoleic),
-		Oleic:        boilergql.PointerIntToInt(m.Oleic),
-		Linoleic:     boilergql.PointerIntToInt(m.Linoleic),
-		Linolenic:    boilergql.PointerIntToInt(m.Linolenic),
-		Hardness:     boilergql.PointerIntToInt(m.Hardness),
-		Cleansing:    boilergql.PointerIntToInt(m.Cleansing),
-		Conditioning: boilergql.PointerIntToInt(m.Conditioning),
-		Bubbly:       boilergql.PointerIntToInt(m.Bubbly),
-		Creamy:       boilergql.PointerIntToInt(m.Creamy),
-		Iodine:       boilergql.PointerIntToInt(m.Iodine),
-		Ins:          boilergql.PointerIntToInt(m.Ins),
-		InciName:     boilergql.PointerStringToString(m.InciName),
-		Family:       boilergql.PointerStringToString(m.Family),
-		Naoh:         boilergql.PointerFloat64ToFloat64(m.Naoh),
-		UpdatedAt:    boilergql.PointerIntToTimeDotTime(m.UpdatedAt),
-		CreatedAt:    boilergql.PointerIntToTimeDotTime(m.CreatedAt),
-		DeletedAt:    boilergql.PointerIntToNullDotTime(m.DeletedAt),
+		Name:             boilergql.PointerStringToString(m.Name),
+		Lauric:           boilergql.PointerIntToInt(m.Lauric),
+		Myristic:         boilergql.PointerIntToInt(m.Myristic),
+		Palmitic:         boilergql.PointerIntToInt(m.Palmitic),
+		Stearic:          boilergql.PointerIntToInt(m.Stearic),
+		Ricinoleic:       boilergql.PointerIntToInt(m.Ricinoleic),
+		Oleic:            boilergql.PointerIntToInt(m.Oleic),
+		Linoleic:         boilergql.PointerIntToInt(m.Linoleic),
+		Linolenic:        boilergql.PointerIntToInt(m.Linolenic),
+		Hardness:         boilergql.PointerIntToInt(m.Hardness),
+		Cleansing:        boilergql.PointerIntToInt(m.Cleansing),
+		Conditioning:     boilergql.PointerIntToInt(m.Conditioning),
+		Bubbly:           boilergql.PointerIntToInt(m.Bubbly),
+		Creamy:           boilergql.PointerIntToInt(m.Creamy),
+		Iodine:           boilergql.PointerIntToInt(m.Iodine),
+		Ins:              boilergql.PointerIntToInt(m.Ins),
+		InciName:         boilergql.PointerStringToString(m.InciName),
+		Family:           boilergql.PointerStringToString(m.Family),
+		Naoh:             boilergql.PointerFloat64ToFloat64(m.Naoh),
+		DeletedAt:        boilergql.PointerIntToNullDotTime(m.DeletedAt),
+		CreatedAt:        boilergql.PointerIntToTimeDotTime(m.CreatedAt),
+		UpdatedAt:        boilergql.PointerIntToTimeDotTime(m.UpdatedAt),
+		RecipeBatchLipid: boilergql.IDToBoiler(boilergql.PointerStringToString(m.RecipeBatchLipid)),
+		RecipeLipid:      boilergql.IDToBoiler(boilergql.PointerStringToString(m.RecipeLipid)),
 	}
 	return r
 }
@@ -1090,12 +1102,16 @@ func LipidUpdateInputToModelM(
 			modelM[models.LipidColumns.Family] = boilergql.PointerStringToString(m.Family)
 		case "naoh":
 			modelM[models.LipidColumns.Naoh] = boilergql.PointerFloat64ToFloat64(m.Naoh)
-		case "updatedAt":
-			modelM[models.LipidColumns.UpdatedAt] = boilergql.PointerIntToTimeDotTime(m.UpdatedAt)
-		case "createdAt":
-			modelM[models.LipidColumns.CreatedAt] = boilergql.PointerIntToTimeDotTime(m.CreatedAt)
 		case "deletedAt":
 			modelM[models.LipidColumns.DeletedAt] = boilergql.PointerIntToNullDotTime(m.DeletedAt)
+		case "createdAt":
+			modelM[models.LipidColumns.CreatedAt] = boilergql.PointerIntToTimeDotTime(m.CreatedAt)
+		case "updatedAt":
+			modelM[models.LipidColumns.UpdatedAt] = boilergql.PointerIntToTimeDotTime(m.UpdatedAt)
+		case "recipeBatchLipid":
+			modelM[models.LipidColumns.RecipeBatchLipid] = boilergql.IDToBoiler(boilergql.PointerStringToString(m.RecipeBatchLipid))
+		case "recipeLipid":
+			modelM[models.LipidColumns.RecipeLipid] = boilergql.IDToBoiler(boilergql.PointerStringToString(m.RecipeLipid))
 		}
 	}
 	return modelM
@@ -1143,12 +1159,16 @@ func LipidUpdateInputToBoilerWhitelist(input map[string]interface{}, extraColumn
 			columnsWhichAreSet = append(columnsWhichAreSet, models.LipidColumns.Family)
 		case "naoh":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.LipidColumns.Naoh)
-		case "updatedAt":
-			columnsWhichAreSet = append(columnsWhichAreSet, models.LipidColumns.UpdatedAt)
-		case "createdAt":
-			columnsWhichAreSet = append(columnsWhichAreSet, models.LipidColumns.CreatedAt)
 		case "deletedAt":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.LipidColumns.DeletedAt)
+		case "createdAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.LipidColumns.CreatedAt)
+		case "updatedAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.LipidColumns.UpdatedAt)
+		case "recipeBatchLipid":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.LipidColumns.RecipeBatchLipid)
+		case "recipeLipid":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.LipidColumns.RecipeLipid)
 		}
 	}
 	columnsWhichAreSet = append(columnsWhichAreSet, extraColumns...)
@@ -1175,9 +1195,9 @@ func LyeCreateInputToBoiler(
 		Kind:      m.Kind,
 		Name:      m.Name,
 		Note:      m.Note,
-		CreatedAt: boilergql.IntToTimeDotTime(m.CreatedAt),
-		UpdatedAt: boilergql.IntToTimeDotTime(m.UpdatedAt),
 		DeletedAt: boilergql.PointerIntToNullDotTime(m.DeletedAt),
+		UpdatedAt: boilergql.IntToTimeDotTime(m.UpdatedAt),
+		CreatedAt: boilergql.IntToTimeDotTime(m.CreatedAt),
 	}
 	return r
 }
@@ -1195,12 +1215,12 @@ func LyeCreateInputToModelM(
 			modelM[models.LyeColumns.Name] = m.Name
 		case "note":
 			modelM[models.LyeColumns.Note] = m.Note
-		case "createdAt":
-			modelM[models.LyeColumns.CreatedAt] = boilergql.IntToTimeDotTime(m.CreatedAt)
-		case "updatedAt":
-			modelM[models.LyeColumns.UpdatedAt] = boilergql.IntToTimeDotTime(m.UpdatedAt)
 		case "deletedAt":
 			modelM[models.LyeColumns.DeletedAt] = boilergql.PointerIntToNullDotTime(m.DeletedAt)
+		case "updatedAt":
+			modelM[models.LyeColumns.UpdatedAt] = boilergql.IntToTimeDotTime(m.UpdatedAt)
+		case "createdAt":
+			modelM[models.LyeColumns.CreatedAt] = boilergql.IntToTimeDotTime(m.CreatedAt)
 		}
 	}
 	return modelM
@@ -1216,12 +1236,12 @@ func LyeCreateInputToBoilerWhitelist(input map[string]interface{}, extraColumns 
 			columnsWhichAreSet = append(columnsWhichAreSet, models.LyeColumns.Name)
 		case "note":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.LyeColumns.Note)
-		case "createdAt":
-			columnsWhichAreSet = append(columnsWhichAreSet, models.LyeColumns.CreatedAt)
-		case "updatedAt":
-			columnsWhichAreSet = append(columnsWhichAreSet, models.LyeColumns.UpdatedAt)
 		case "deletedAt":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.LyeColumns.DeletedAt)
+		case "updatedAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.LyeColumns.UpdatedAt)
+		case "createdAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.LyeColumns.CreatedAt)
 		}
 	}
 	columnsWhichAreSet = append(columnsWhichAreSet, extraColumns...)
@@ -1252,9 +1272,9 @@ func LyeInventoryCreateInputToBoiler(
 		Concentration: m.Concentration,
 		LyeID:         int(boilergql.IDToBoiler(m.LyeID)),
 		SupplierID:    int(boilergql.IDToBoiler(m.SupplierID)),
-		UpdatedAt:     boilergql.IntToTimeDotTime(m.UpdatedAt),
 		DeletedAt:     boilergql.PointerIntToNullDotTime(m.DeletedAt),
 		CreatedAt:     boilergql.IntToTimeDotTime(m.CreatedAt),
+		UpdatedAt:     boilergql.IntToTimeDotTime(m.UpdatedAt),
 	}
 	return r
 }
@@ -1280,12 +1300,12 @@ func LyeInventoryCreateInputToModelM(
 			modelM[models.LyeInventoryColumns.LyeID] = int(boilergql.IDToBoiler(m.LyeID))
 		case "supplierId":
 			modelM[models.LyeInventoryColumns.SupplierID] = int(boilergql.IDToBoiler(m.SupplierID))
-		case "updatedAt":
-			modelM[models.LyeInventoryColumns.UpdatedAt] = boilergql.IntToTimeDotTime(m.UpdatedAt)
 		case "deletedAt":
 			modelM[models.LyeInventoryColumns.DeletedAt] = boilergql.PointerIntToNullDotTime(m.DeletedAt)
 		case "createdAt":
 			modelM[models.LyeInventoryColumns.CreatedAt] = boilergql.IntToTimeDotTime(m.CreatedAt)
+		case "updatedAt":
+			modelM[models.LyeInventoryColumns.UpdatedAt] = boilergql.IntToTimeDotTime(m.UpdatedAt)
 		}
 	}
 	return modelM
@@ -1309,12 +1329,12 @@ func LyeInventoryCreateInputToBoilerWhitelist(input map[string]interface{}, extr
 			columnsWhichAreSet = append(columnsWhichAreSet, models.LyeInventoryColumns.LyeID)
 		case "supplierId":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.LyeInventoryColumns.SupplierID)
-		case "updatedAt":
-			columnsWhichAreSet = append(columnsWhichAreSet, models.LyeInventoryColumns.UpdatedAt)
 		case "deletedAt":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.LyeInventoryColumns.DeletedAt)
 		case "createdAt":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.LyeInventoryColumns.CreatedAt)
+		case "updatedAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.LyeInventoryColumns.UpdatedAt)
 		}
 	}
 	columnsWhichAreSet = append(columnsWhichAreSet, extraColumns...)
@@ -1345,9 +1365,9 @@ func LyeInventoryUpdateInputToBoiler(
 		Concentration: boilergql.PointerFloat64ToFloat64(m.Concentration),
 		LyeID:         int(boilergql.IDToBoiler(boilergql.PointerStringToString(m.LyeID))),
 		SupplierID:    int(boilergql.IDToBoiler(boilergql.PointerStringToString(m.SupplierID))),
-		UpdatedAt:     boilergql.PointerIntToTimeDotTime(m.UpdatedAt),
 		DeletedAt:     boilergql.PointerIntToNullDotTime(m.DeletedAt),
 		CreatedAt:     boilergql.PointerIntToTimeDotTime(m.CreatedAt),
+		UpdatedAt:     boilergql.PointerIntToTimeDotTime(m.UpdatedAt),
 	}
 	return r
 }
@@ -1373,12 +1393,12 @@ func LyeInventoryUpdateInputToModelM(
 			modelM[models.LyeInventoryColumns.LyeID] = int(boilergql.IDToBoiler(boilergql.PointerStringToString(m.LyeID)))
 		case "supplierId":
 			modelM[models.LyeInventoryColumns.SupplierID] = int(boilergql.IDToBoiler(boilergql.PointerStringToString(m.SupplierID)))
-		case "updatedAt":
-			modelM[models.LyeInventoryColumns.UpdatedAt] = boilergql.PointerIntToTimeDotTime(m.UpdatedAt)
 		case "deletedAt":
 			modelM[models.LyeInventoryColumns.DeletedAt] = boilergql.PointerIntToNullDotTime(m.DeletedAt)
 		case "createdAt":
 			modelM[models.LyeInventoryColumns.CreatedAt] = boilergql.PointerIntToTimeDotTime(m.CreatedAt)
+		case "updatedAt":
+			modelM[models.LyeInventoryColumns.UpdatedAt] = boilergql.PointerIntToTimeDotTime(m.UpdatedAt)
 		}
 	}
 	return modelM
@@ -1402,12 +1422,12 @@ func LyeInventoryUpdateInputToBoilerWhitelist(input map[string]interface{}, extr
 			columnsWhichAreSet = append(columnsWhichAreSet, models.LyeInventoryColumns.LyeID)
 		case "supplierId":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.LyeInventoryColumns.SupplierID)
-		case "updatedAt":
-			columnsWhichAreSet = append(columnsWhichAreSet, models.LyeInventoryColumns.UpdatedAt)
 		case "deletedAt":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.LyeInventoryColumns.DeletedAt)
 		case "createdAt":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.LyeInventoryColumns.CreatedAt)
+		case "updatedAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.LyeInventoryColumns.UpdatedAt)
 		}
 	}
 	columnsWhichAreSet = append(columnsWhichAreSet, extraColumns...)
@@ -1434,9 +1454,9 @@ func LyeUpdateInputToBoiler(
 		Kind:      boilergql.PointerStringToString(m.Kind),
 		Name:      boilergql.PointerStringToString(m.Name),
 		Note:      boilergql.PointerStringToString(m.Note),
-		CreatedAt: boilergql.PointerIntToTimeDotTime(m.CreatedAt),
-		UpdatedAt: boilergql.PointerIntToTimeDotTime(m.UpdatedAt),
 		DeletedAt: boilergql.PointerIntToNullDotTime(m.DeletedAt),
+		UpdatedAt: boilergql.PointerIntToTimeDotTime(m.UpdatedAt),
+		CreatedAt: boilergql.PointerIntToTimeDotTime(m.CreatedAt),
 	}
 	return r
 }
@@ -1454,12 +1474,12 @@ func LyeUpdateInputToModelM(
 			modelM[models.LyeColumns.Name] = boilergql.PointerStringToString(m.Name)
 		case "note":
 			modelM[models.LyeColumns.Note] = boilergql.PointerStringToString(m.Note)
-		case "createdAt":
-			modelM[models.LyeColumns.CreatedAt] = boilergql.PointerIntToTimeDotTime(m.CreatedAt)
-		case "updatedAt":
-			modelM[models.LyeColumns.UpdatedAt] = boilergql.PointerIntToTimeDotTime(m.UpdatedAt)
 		case "deletedAt":
 			modelM[models.LyeColumns.DeletedAt] = boilergql.PointerIntToNullDotTime(m.DeletedAt)
+		case "updatedAt":
+			modelM[models.LyeColumns.UpdatedAt] = boilergql.PointerIntToTimeDotTime(m.UpdatedAt)
+		case "createdAt":
+			modelM[models.LyeColumns.CreatedAt] = boilergql.PointerIntToTimeDotTime(m.CreatedAt)
 		}
 	}
 	return modelM
@@ -1475,12 +1495,12 @@ func LyeUpdateInputToBoilerWhitelist(input map[string]interface{}, extraColumns 
 			columnsWhichAreSet = append(columnsWhichAreSet, models.LyeColumns.Name)
 		case "note":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.LyeColumns.Note)
-		case "createdAt":
-			columnsWhichAreSet = append(columnsWhichAreSet, models.LyeColumns.CreatedAt)
-		case "updatedAt":
-			columnsWhichAreSet = append(columnsWhichAreSet, models.LyeColumns.UpdatedAt)
 		case "deletedAt":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.LyeColumns.DeletedAt)
+		case "updatedAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.LyeColumns.UpdatedAt)
+		case "createdAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.LyeColumns.CreatedAt)
 		}
 	}
 	columnsWhichAreSet = append(columnsWhichAreSet, extraColumns...)
@@ -1508,8 +1528,8 @@ func RecipeAdditiveCreateInputToBoiler(
 		AdditiveID: int(boilergql.IDToBoiler(m.AdditiveID)),
 		RecipeID:   int(boilergql.IDToBoiler(m.RecipeID)),
 		DeletedAt:  boilergql.PointerIntToNullDotTime(m.DeletedAt),
-		UpdatedAt:  boilergql.IntToTimeDotTime(m.UpdatedAt),
 		CreatedAt:  boilergql.IntToTimeDotTime(m.CreatedAt),
+		UpdatedAt:  boilergql.IntToTimeDotTime(m.UpdatedAt),
 	}
 	return r
 }
@@ -1529,10 +1549,10 @@ func RecipeAdditiveCreateInputToModelM(
 			modelM[models.RecipeAdditiveColumns.RecipeID] = int(boilergql.IDToBoiler(m.RecipeID))
 		case "deletedAt":
 			modelM[models.RecipeAdditiveColumns.DeletedAt] = boilergql.PointerIntToNullDotTime(m.DeletedAt)
-		case "updatedAt":
-			modelM[models.RecipeAdditiveColumns.UpdatedAt] = boilergql.IntToTimeDotTime(m.UpdatedAt)
 		case "createdAt":
 			modelM[models.RecipeAdditiveColumns.CreatedAt] = boilergql.IntToTimeDotTime(m.CreatedAt)
+		case "updatedAt":
+			modelM[models.RecipeAdditiveColumns.UpdatedAt] = boilergql.IntToTimeDotTime(m.UpdatedAt)
 		}
 	}
 	return modelM
@@ -1550,10 +1570,10 @@ func RecipeAdditiveCreateInputToBoilerWhitelist(input map[string]interface{}, ex
 			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeAdditiveColumns.RecipeID)
 		case "deletedAt":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeAdditiveColumns.DeletedAt)
-		case "updatedAt":
-			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeAdditiveColumns.UpdatedAt)
 		case "createdAt":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeAdditiveColumns.CreatedAt)
+		case "updatedAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeAdditiveColumns.UpdatedAt)
 		}
 	}
 	columnsWhichAreSet = append(columnsWhichAreSet, extraColumns...)
@@ -1581,8 +1601,8 @@ func RecipeAdditiveUpdateInputToBoiler(
 		AdditiveID: int(boilergql.IDToBoiler(boilergql.PointerStringToString(m.AdditiveID))),
 		RecipeID:   int(boilergql.IDToBoiler(boilergql.PointerStringToString(m.RecipeID))),
 		DeletedAt:  boilergql.PointerIntToNullDotTime(m.DeletedAt),
-		UpdatedAt:  boilergql.PointerIntToTimeDotTime(m.UpdatedAt),
 		CreatedAt:  boilergql.PointerIntToTimeDotTime(m.CreatedAt),
+		UpdatedAt:  boilergql.PointerIntToTimeDotTime(m.UpdatedAt),
 	}
 	return r
 }
@@ -1602,10 +1622,10 @@ func RecipeAdditiveUpdateInputToModelM(
 			modelM[models.RecipeAdditiveColumns.RecipeID] = int(boilergql.IDToBoiler(boilergql.PointerStringToString(m.RecipeID)))
 		case "deletedAt":
 			modelM[models.RecipeAdditiveColumns.DeletedAt] = boilergql.PointerIntToNullDotTime(m.DeletedAt)
-		case "updatedAt":
-			modelM[models.RecipeAdditiveColumns.UpdatedAt] = boilergql.PointerIntToTimeDotTime(m.UpdatedAt)
 		case "createdAt":
 			modelM[models.RecipeAdditiveColumns.CreatedAt] = boilergql.PointerIntToTimeDotTime(m.CreatedAt)
+		case "updatedAt":
+			modelM[models.RecipeAdditiveColumns.UpdatedAt] = boilergql.PointerIntToTimeDotTime(m.UpdatedAt)
 		}
 	}
 	return modelM
@@ -1623,10 +1643,10 @@ func RecipeAdditiveUpdateInputToBoilerWhitelist(input map[string]interface{}, ex
 			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeAdditiveColumns.RecipeID)
 		case "deletedAt":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeAdditiveColumns.DeletedAt)
-		case "updatedAt":
-			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeAdditiveColumns.UpdatedAt)
 		case "createdAt":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeAdditiveColumns.CreatedAt)
+		case "updatedAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeAdditiveColumns.UpdatedAt)
 		}
 	}
 	columnsWhichAreSet = append(columnsWhichAreSet, extraColumns...)
@@ -1654,9 +1674,9 @@ func RecipeBatchAdditiveCreateInputToBoiler(
 		Cost:       m.Cost,
 		AdditiveID: int(boilergql.IDToBoiler(m.AdditiveID)),
 		BatchID:    int(boilergql.IDToBoiler(m.BatchID)),
+		CreatedAt:  boilergql.IntToTimeDotTime(m.CreatedAt),
 		UpdatedAt:  boilergql.IntToTimeDotTime(m.UpdatedAt),
 		DeletedAt:  boilergql.PointerIntToNullDotTime(m.DeletedAt),
-		CreatedAt:  boilergql.IntToTimeDotTime(m.CreatedAt),
 	}
 	return r
 }
@@ -1676,12 +1696,12 @@ func RecipeBatchAdditiveCreateInputToModelM(
 			modelM[models.RecipeBatchAdditiveColumns.AdditiveID] = int(boilergql.IDToBoiler(m.AdditiveID))
 		case "batchId":
 			modelM[models.RecipeBatchAdditiveColumns.BatchID] = int(boilergql.IDToBoiler(m.BatchID))
+		case "createdAt":
+			modelM[models.RecipeBatchAdditiveColumns.CreatedAt] = boilergql.IntToTimeDotTime(m.CreatedAt)
 		case "updatedAt":
 			modelM[models.RecipeBatchAdditiveColumns.UpdatedAt] = boilergql.IntToTimeDotTime(m.UpdatedAt)
 		case "deletedAt":
 			modelM[models.RecipeBatchAdditiveColumns.DeletedAt] = boilergql.PointerIntToNullDotTime(m.DeletedAt)
-		case "createdAt":
-			modelM[models.RecipeBatchAdditiveColumns.CreatedAt] = boilergql.IntToTimeDotTime(m.CreatedAt)
 		}
 	}
 	return modelM
@@ -1699,12 +1719,12 @@ func RecipeBatchAdditiveCreateInputToBoilerWhitelist(input map[string]interface{
 			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeBatchAdditiveColumns.AdditiveID)
 		case "batchId":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeBatchAdditiveColumns.BatchID)
+		case "createdAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeBatchAdditiveColumns.CreatedAt)
 		case "updatedAt":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeBatchAdditiveColumns.UpdatedAt)
 		case "deletedAt":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeBatchAdditiveColumns.DeletedAt)
-		case "createdAt":
-			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeBatchAdditiveColumns.CreatedAt)
 		}
 	}
 	columnsWhichAreSet = append(columnsWhichAreSet, extraColumns...)
@@ -1732,9 +1752,9 @@ func RecipeBatchAdditiveUpdateInputToBoiler(
 		Cost:       boilergql.PointerFloat64ToFloat64(m.Cost),
 		AdditiveID: int(boilergql.IDToBoiler(boilergql.PointerStringToString(m.AdditiveID))),
 		BatchID:    int(boilergql.IDToBoiler(boilergql.PointerStringToString(m.BatchID))),
+		CreatedAt:  boilergql.PointerIntToTimeDotTime(m.CreatedAt),
 		UpdatedAt:  boilergql.PointerIntToTimeDotTime(m.UpdatedAt),
 		DeletedAt:  boilergql.PointerIntToNullDotTime(m.DeletedAt),
-		CreatedAt:  boilergql.PointerIntToTimeDotTime(m.CreatedAt),
 	}
 	return r
 }
@@ -1754,12 +1774,12 @@ func RecipeBatchAdditiveUpdateInputToModelM(
 			modelM[models.RecipeBatchAdditiveColumns.AdditiveID] = int(boilergql.IDToBoiler(boilergql.PointerStringToString(m.AdditiveID)))
 		case "batchId":
 			modelM[models.RecipeBatchAdditiveColumns.BatchID] = int(boilergql.IDToBoiler(boilergql.PointerStringToString(m.BatchID)))
+		case "createdAt":
+			modelM[models.RecipeBatchAdditiveColumns.CreatedAt] = boilergql.PointerIntToTimeDotTime(m.CreatedAt)
 		case "updatedAt":
 			modelM[models.RecipeBatchAdditiveColumns.UpdatedAt] = boilergql.PointerIntToTimeDotTime(m.UpdatedAt)
 		case "deletedAt":
 			modelM[models.RecipeBatchAdditiveColumns.DeletedAt] = boilergql.PointerIntToNullDotTime(m.DeletedAt)
-		case "createdAt":
-			modelM[models.RecipeBatchAdditiveColumns.CreatedAt] = boilergql.PointerIntToTimeDotTime(m.CreatedAt)
 		}
 	}
 	return modelM
@@ -1777,12 +1797,12 @@ func RecipeBatchAdditiveUpdateInputToBoilerWhitelist(input map[string]interface{
 			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeBatchAdditiveColumns.AdditiveID)
 		case "batchId":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeBatchAdditiveColumns.BatchID)
+		case "createdAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeBatchAdditiveColumns.CreatedAt)
 		case "updatedAt":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeBatchAdditiveColumns.UpdatedAt)
 		case "deletedAt":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeBatchAdditiveColumns.DeletedAt)
-		case "createdAt":
-			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeBatchAdditiveColumns.CreatedAt)
 		}
 	}
 	columnsWhichAreSet = append(columnsWhichAreSet, extraColumns...)
@@ -2065,8 +2085,8 @@ func RecipeBatchLipidCreateInputToBoiler(
 		LipidID:   int(boilergql.IDToBoiler(m.LipidID)),
 		BatchID:   int(boilergql.IDToBoiler(m.BatchID)),
 		DeletedAt: boilergql.PointerIntToNullDotTime(m.DeletedAt),
-		CreatedAt: boilergql.IntToTimeDotTime(m.CreatedAt),
 		UpdatedAt: boilergql.IntToTimeDotTime(m.UpdatedAt),
+		CreatedAt: boilergql.IntToTimeDotTime(m.CreatedAt),
 	}
 	return r
 }
@@ -2088,10 +2108,10 @@ func RecipeBatchLipidCreateInputToModelM(
 			modelM[models.RecipeBatchLipidColumns.BatchID] = int(boilergql.IDToBoiler(m.BatchID))
 		case "deletedAt":
 			modelM[models.RecipeBatchLipidColumns.DeletedAt] = boilergql.PointerIntToNullDotTime(m.DeletedAt)
-		case "createdAt":
-			modelM[models.RecipeBatchLipidColumns.CreatedAt] = boilergql.IntToTimeDotTime(m.CreatedAt)
 		case "updatedAt":
 			modelM[models.RecipeBatchLipidColumns.UpdatedAt] = boilergql.IntToTimeDotTime(m.UpdatedAt)
+		case "createdAt":
+			modelM[models.RecipeBatchLipidColumns.CreatedAt] = boilergql.IntToTimeDotTime(m.CreatedAt)
 		}
 	}
 	return modelM
@@ -2111,10 +2131,10 @@ func RecipeBatchLipidCreateInputToBoilerWhitelist(input map[string]interface{}, 
 			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeBatchLipidColumns.BatchID)
 		case "deletedAt":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeBatchLipidColumns.DeletedAt)
-		case "createdAt":
-			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeBatchLipidColumns.CreatedAt)
 		case "updatedAt":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeBatchLipidColumns.UpdatedAt)
+		case "createdAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeBatchLipidColumns.CreatedAt)
 		}
 	}
 	columnsWhichAreSet = append(columnsWhichAreSet, extraColumns...)
@@ -2143,8 +2163,8 @@ func RecipeBatchLipidUpdateInputToBoiler(
 		LipidID:   int(boilergql.IDToBoiler(boilergql.PointerStringToString(m.LipidID))),
 		BatchID:   int(boilergql.IDToBoiler(boilergql.PointerStringToString(m.BatchID))),
 		DeletedAt: boilergql.PointerIntToNullDotTime(m.DeletedAt),
-		CreatedAt: boilergql.PointerIntToTimeDotTime(m.CreatedAt),
 		UpdatedAt: boilergql.PointerIntToTimeDotTime(m.UpdatedAt),
+		CreatedAt: boilergql.PointerIntToTimeDotTime(m.CreatedAt),
 	}
 	return r
 }
@@ -2166,10 +2186,10 @@ func RecipeBatchLipidUpdateInputToModelM(
 			modelM[models.RecipeBatchLipidColumns.BatchID] = int(boilergql.IDToBoiler(boilergql.PointerStringToString(m.BatchID)))
 		case "deletedAt":
 			modelM[models.RecipeBatchLipidColumns.DeletedAt] = boilergql.PointerIntToNullDotTime(m.DeletedAt)
-		case "createdAt":
-			modelM[models.RecipeBatchLipidColumns.CreatedAt] = boilergql.PointerIntToTimeDotTime(m.CreatedAt)
 		case "updatedAt":
 			modelM[models.RecipeBatchLipidColumns.UpdatedAt] = boilergql.PointerIntToTimeDotTime(m.UpdatedAt)
+		case "createdAt":
+			modelM[models.RecipeBatchLipidColumns.CreatedAt] = boilergql.PointerIntToTimeDotTime(m.CreatedAt)
 		}
 	}
 	return modelM
@@ -2189,10 +2209,10 @@ func RecipeBatchLipidUpdateInputToBoilerWhitelist(input map[string]interface{}, 
 			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeBatchLipidColumns.BatchID)
 		case "deletedAt":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeBatchLipidColumns.DeletedAt)
-		case "createdAt":
-			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeBatchLipidColumns.CreatedAt)
 		case "updatedAt":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeBatchLipidColumns.UpdatedAt)
+		case "createdAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeBatchLipidColumns.CreatedAt)
 		}
 	}
 	columnsWhichAreSet = append(columnsWhichAreSet, extraColumns...)
@@ -2365,6 +2385,152 @@ func RecipeBatchLyeUpdateInputToBoilerWhitelist(input map[string]interface{}, ex
 	return boil.Whitelist(columnsWhichAreSet...)
 }
 
+func RecipeBatchNoteCreateInputsToBoiler(am []*gmodels.RecipeBatchNoteCreateInput) []*models.RecipeBatchNote {
+	ar := make([]*models.RecipeBatchNote, len(am))
+	for i, m := range am {
+		ar[i] = RecipeBatchNoteCreateInputToBoiler(
+			m,
+		)
+	}
+	return ar
+}
+
+func RecipeBatchNoteCreateInputToBoiler(
+	m *gmodels.RecipeBatchNoteCreateInput,
+) *models.RecipeBatchNote {
+	if m == nil {
+		return nil
+	}
+	r := &models.RecipeBatchNote{
+		Note:      m.Note,
+		Link:      m.Link,
+		BatchID:   int(boilergql.IDToBoiler(m.BatchID)),
+		CreatedAt: boilergql.IntToTimeDotTime(m.CreatedAt),
+		UpdatedAt: boilergql.IntToTimeDotTime(m.UpdatedAt),
+		DeletedAt: boilergql.PointerIntToNullDotTime(m.DeletedAt),
+	}
+	return r
+}
+
+func RecipeBatchNoteCreateInputToModelM(
+	input map[string]interface{},
+	m gmodels.RecipeBatchNoteCreateInput,
+) models.M {
+	modelM := models.M{}
+	for key := range input {
+		switch key {
+		case "note":
+			modelM[models.RecipeBatchNoteColumns.Note] = m.Note
+		case "link":
+			modelM[models.RecipeBatchNoteColumns.Link] = m.Link
+		case "batchId":
+			modelM[models.RecipeBatchNoteColumns.BatchID] = int(boilergql.IDToBoiler(m.BatchID))
+		case "createdAt":
+			modelM[models.RecipeBatchNoteColumns.CreatedAt] = boilergql.IntToTimeDotTime(m.CreatedAt)
+		case "updatedAt":
+			modelM[models.RecipeBatchNoteColumns.UpdatedAt] = boilergql.IntToTimeDotTime(m.UpdatedAt)
+		case "deletedAt":
+			modelM[models.RecipeBatchNoteColumns.DeletedAt] = boilergql.PointerIntToNullDotTime(m.DeletedAt)
+		}
+	}
+	return modelM
+}
+
+func RecipeBatchNoteCreateInputToBoilerWhitelist(input map[string]interface{}, extraColumns ...string) boil.Columns {
+	columnsWhichAreSet := []string{}
+	for key := range input {
+		switch key {
+		case "note":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeBatchNoteColumns.Note)
+		case "link":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeBatchNoteColumns.Link)
+		case "batchId":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeBatchNoteColumns.BatchID)
+		case "createdAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeBatchNoteColumns.CreatedAt)
+		case "updatedAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeBatchNoteColumns.UpdatedAt)
+		case "deletedAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeBatchNoteColumns.DeletedAt)
+		}
+	}
+	columnsWhichAreSet = append(columnsWhichAreSet, extraColumns...)
+	return boil.Whitelist(columnsWhichAreSet...)
+}
+
+func RecipeBatchNoteUpdateInputsToBoiler(am []*gmodels.RecipeBatchNoteUpdateInput) []*models.RecipeBatchNote {
+	ar := make([]*models.RecipeBatchNote, len(am))
+	for i, m := range am {
+		ar[i] = RecipeBatchNoteUpdateInputToBoiler(
+			m,
+		)
+	}
+	return ar
+}
+
+func RecipeBatchNoteUpdateInputToBoiler(
+	m *gmodels.RecipeBatchNoteUpdateInput,
+) *models.RecipeBatchNote {
+	if m == nil {
+		return nil
+	}
+	r := &models.RecipeBatchNote{
+		Note:      boilergql.PointerStringToString(m.Note),
+		Link:      boilergql.PointerStringToString(m.Link),
+		BatchID:   int(boilergql.IDToBoiler(boilergql.PointerStringToString(m.BatchID))),
+		CreatedAt: boilergql.PointerIntToTimeDotTime(m.CreatedAt),
+		UpdatedAt: boilergql.PointerIntToTimeDotTime(m.UpdatedAt),
+		DeletedAt: boilergql.PointerIntToNullDotTime(m.DeletedAt),
+	}
+	return r
+}
+
+func RecipeBatchNoteUpdateInputToModelM(
+	input map[string]interface{},
+	m gmodels.RecipeBatchNoteUpdateInput,
+) models.M {
+	modelM := models.M{}
+	for key := range input {
+		switch key {
+		case "note":
+			modelM[models.RecipeBatchNoteColumns.Note] = boilergql.PointerStringToString(m.Note)
+		case "link":
+			modelM[models.RecipeBatchNoteColumns.Link] = boilergql.PointerStringToString(m.Link)
+		case "batchId":
+			modelM[models.RecipeBatchNoteColumns.BatchID] = int(boilergql.IDToBoiler(boilergql.PointerStringToString(m.BatchID)))
+		case "createdAt":
+			modelM[models.RecipeBatchNoteColumns.CreatedAt] = boilergql.PointerIntToTimeDotTime(m.CreatedAt)
+		case "updatedAt":
+			modelM[models.RecipeBatchNoteColumns.UpdatedAt] = boilergql.PointerIntToTimeDotTime(m.UpdatedAt)
+		case "deletedAt":
+			modelM[models.RecipeBatchNoteColumns.DeletedAt] = boilergql.PointerIntToNullDotTime(m.DeletedAt)
+		}
+	}
+	return modelM
+}
+
+func RecipeBatchNoteUpdateInputToBoilerWhitelist(input map[string]interface{}, extraColumns ...string) boil.Columns {
+	columnsWhichAreSet := []string{}
+	for key := range input {
+		switch key {
+		case "note":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeBatchNoteColumns.Note)
+		case "link":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeBatchNoteColumns.Link)
+		case "batchId":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeBatchNoteColumns.BatchID)
+		case "createdAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeBatchNoteColumns.CreatedAt)
+		case "updatedAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeBatchNoteColumns.UpdatedAt)
+		case "deletedAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeBatchNoteColumns.DeletedAt)
+		}
+	}
+	columnsWhichAreSet = append(columnsWhichAreSet, extraColumns...)
+	return boil.Whitelist(columnsWhichAreSet...)
+}
+
 func RecipeBatchUpdateInputsToBoiler(am []*gmodels.RecipeBatchUpdateInput) []*models.RecipeBatch {
 	ar := make([]*models.RecipeBatch, len(am))
 	for i, m := range am {
@@ -2482,9 +2648,9 @@ func RecipeCreateInputToBoiler(
 	r := &models.Recipe{
 		Name:      m.Name,
 		Note:      m.Note,
-		UpdatedAt: boilergql.IntToTimeDotTime(m.UpdatedAt),
-		CreatedAt: boilergql.IntToTimeDotTime(m.CreatedAt),
 		DeletedAt: boilergql.PointerIntToNullDotTime(m.DeletedAt),
+		CreatedAt: boilergql.IntToTimeDotTime(m.CreatedAt),
+		UpdatedAt: boilergql.IntToTimeDotTime(m.UpdatedAt),
 	}
 	return r
 }
@@ -2500,12 +2666,12 @@ func RecipeCreateInputToModelM(
 			modelM[models.RecipeColumns.Name] = m.Name
 		case "note":
 			modelM[models.RecipeColumns.Note] = m.Note
-		case "updatedAt":
-			modelM[models.RecipeColumns.UpdatedAt] = boilergql.IntToTimeDotTime(m.UpdatedAt)
-		case "createdAt":
-			modelM[models.RecipeColumns.CreatedAt] = boilergql.IntToTimeDotTime(m.CreatedAt)
 		case "deletedAt":
 			modelM[models.RecipeColumns.DeletedAt] = boilergql.PointerIntToNullDotTime(m.DeletedAt)
+		case "createdAt":
+			modelM[models.RecipeColumns.CreatedAt] = boilergql.IntToTimeDotTime(m.CreatedAt)
+		case "updatedAt":
+			modelM[models.RecipeColumns.UpdatedAt] = boilergql.IntToTimeDotTime(m.UpdatedAt)
 		}
 	}
 	return modelM
@@ -2519,12 +2685,12 @@ func RecipeCreateInputToBoilerWhitelist(input map[string]interface{}, extraColum
 			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeColumns.Name)
 		case "note":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeColumns.Note)
-		case "updatedAt":
-			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeColumns.UpdatedAt)
-		case "createdAt":
-			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeColumns.CreatedAt)
 		case "deletedAt":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeColumns.DeletedAt)
+		case "createdAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeColumns.CreatedAt)
+		case "updatedAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeColumns.UpdatedAt)
 		}
 	}
 	columnsWhichAreSet = append(columnsWhichAreSet, extraColumns...)
@@ -2697,9 +2863,9 @@ func RecipeLipidCreateInputToBoiler(
 		Percentage: m.Percentage,
 		LipidID:    int(boilergql.IDToBoiler(m.LipidID)),
 		RecipeID:   int(boilergql.IDToBoiler(m.RecipeID)),
-		CreatedAt:  boilergql.IntToTimeDotTime(m.CreatedAt),
 		DeletedAt:  boilergql.PointerIntToNullDotTime(m.DeletedAt),
 		UpdatedAt:  boilergql.IntToTimeDotTime(m.UpdatedAt),
+		CreatedAt:  boilergql.IntToTimeDotTime(m.CreatedAt),
 	}
 	return r
 }
@@ -2717,12 +2883,12 @@ func RecipeLipidCreateInputToModelM(
 			modelM[models.RecipeLipidColumns.LipidID] = int(boilergql.IDToBoiler(m.LipidID))
 		case "recipeId":
 			modelM[models.RecipeLipidColumns.RecipeID] = int(boilergql.IDToBoiler(m.RecipeID))
-		case "createdAt":
-			modelM[models.RecipeLipidColumns.CreatedAt] = boilergql.IntToTimeDotTime(m.CreatedAt)
 		case "deletedAt":
 			modelM[models.RecipeLipidColumns.DeletedAt] = boilergql.PointerIntToNullDotTime(m.DeletedAt)
 		case "updatedAt":
 			modelM[models.RecipeLipidColumns.UpdatedAt] = boilergql.IntToTimeDotTime(m.UpdatedAt)
+		case "createdAt":
+			modelM[models.RecipeLipidColumns.CreatedAt] = boilergql.IntToTimeDotTime(m.CreatedAt)
 		}
 	}
 	return modelM
@@ -2738,12 +2904,12 @@ func RecipeLipidCreateInputToBoilerWhitelist(input map[string]interface{}, extra
 			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeLipidColumns.LipidID)
 		case "recipeId":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeLipidColumns.RecipeID)
-		case "createdAt":
-			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeLipidColumns.CreatedAt)
 		case "deletedAt":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeLipidColumns.DeletedAt)
 		case "updatedAt":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeLipidColumns.UpdatedAt)
+		case "createdAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeLipidColumns.CreatedAt)
 		}
 	}
 	columnsWhichAreSet = append(columnsWhichAreSet, extraColumns...)
@@ -2770,9 +2936,9 @@ func RecipeLipidUpdateInputToBoiler(
 		Percentage: boilergql.PointerFloat64ToFloat64(m.Percentage),
 		LipidID:    int(boilergql.IDToBoiler(boilergql.PointerStringToString(m.LipidID))),
 		RecipeID:   int(boilergql.IDToBoiler(boilergql.PointerStringToString(m.RecipeID))),
-		CreatedAt:  boilergql.PointerIntToTimeDotTime(m.CreatedAt),
 		DeletedAt:  boilergql.PointerIntToNullDotTime(m.DeletedAt),
 		UpdatedAt:  boilergql.PointerIntToTimeDotTime(m.UpdatedAt),
+		CreatedAt:  boilergql.PointerIntToTimeDotTime(m.CreatedAt),
 	}
 	return r
 }
@@ -2790,12 +2956,12 @@ func RecipeLipidUpdateInputToModelM(
 			modelM[models.RecipeLipidColumns.LipidID] = int(boilergql.IDToBoiler(boilergql.PointerStringToString(m.LipidID)))
 		case "recipeId":
 			modelM[models.RecipeLipidColumns.RecipeID] = int(boilergql.IDToBoiler(boilergql.PointerStringToString(m.RecipeID)))
-		case "createdAt":
-			modelM[models.RecipeLipidColumns.CreatedAt] = boilergql.PointerIntToTimeDotTime(m.CreatedAt)
 		case "deletedAt":
 			modelM[models.RecipeLipidColumns.DeletedAt] = boilergql.PointerIntToNullDotTime(m.DeletedAt)
 		case "updatedAt":
 			modelM[models.RecipeLipidColumns.UpdatedAt] = boilergql.PointerIntToTimeDotTime(m.UpdatedAt)
+		case "createdAt":
+			modelM[models.RecipeLipidColumns.CreatedAt] = boilergql.PointerIntToTimeDotTime(m.CreatedAt)
 		}
 	}
 	return modelM
@@ -2811,12 +2977,158 @@ func RecipeLipidUpdateInputToBoilerWhitelist(input map[string]interface{}, extra
 			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeLipidColumns.LipidID)
 		case "recipeId":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeLipidColumns.RecipeID)
-		case "createdAt":
-			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeLipidColumns.CreatedAt)
 		case "deletedAt":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeLipidColumns.DeletedAt)
 		case "updatedAt":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeLipidColumns.UpdatedAt)
+		case "createdAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeLipidColumns.CreatedAt)
+		}
+	}
+	columnsWhichAreSet = append(columnsWhichAreSet, extraColumns...)
+	return boil.Whitelist(columnsWhichAreSet...)
+}
+
+func RecipeStepCreateInputsToBoiler(am []*gmodels.RecipeStepCreateInput) []*models.RecipeStep {
+	ar := make([]*models.RecipeStep, len(am))
+	for i, m := range am {
+		ar[i] = RecipeStepCreateInputToBoiler(
+			m,
+		)
+	}
+	return ar
+}
+
+func RecipeStepCreateInputToBoiler(
+	m *gmodels.RecipeStepCreateInput,
+) *models.RecipeStep {
+	if m == nil {
+		return nil
+	}
+	r := &models.RecipeStep{
+		Num:       m.Num,
+		Note:      m.Note,
+		RecipeID:  int(boilergql.IDToBoiler(m.RecipeID)),
+		CreatedAt: boilergql.IntToTimeDotTime(m.CreatedAt),
+		UpdatedAt: boilergql.IntToTimeDotTime(m.UpdatedAt),
+		DeletedAt: boilergql.PointerIntToNullDotTime(m.DeletedAt),
+	}
+	return r
+}
+
+func RecipeStepCreateInputToModelM(
+	input map[string]interface{},
+	m gmodels.RecipeStepCreateInput,
+) models.M {
+	modelM := models.M{}
+	for key := range input {
+		switch key {
+		case "num":
+			modelM[models.RecipeStepColumns.Num] = m.Num
+		case "note":
+			modelM[models.RecipeStepColumns.Note] = m.Note
+		case "recipeId":
+			modelM[models.RecipeStepColumns.RecipeID] = int(boilergql.IDToBoiler(m.RecipeID))
+		case "createdAt":
+			modelM[models.RecipeStepColumns.CreatedAt] = boilergql.IntToTimeDotTime(m.CreatedAt)
+		case "updatedAt":
+			modelM[models.RecipeStepColumns.UpdatedAt] = boilergql.IntToTimeDotTime(m.UpdatedAt)
+		case "deletedAt":
+			modelM[models.RecipeStepColumns.DeletedAt] = boilergql.PointerIntToNullDotTime(m.DeletedAt)
+		}
+	}
+	return modelM
+}
+
+func RecipeStepCreateInputToBoilerWhitelist(input map[string]interface{}, extraColumns ...string) boil.Columns {
+	columnsWhichAreSet := []string{}
+	for key := range input {
+		switch key {
+		case "num":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeStepColumns.Num)
+		case "note":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeStepColumns.Note)
+		case "recipeId":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeStepColumns.RecipeID)
+		case "createdAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeStepColumns.CreatedAt)
+		case "updatedAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeStepColumns.UpdatedAt)
+		case "deletedAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeStepColumns.DeletedAt)
+		}
+	}
+	columnsWhichAreSet = append(columnsWhichAreSet, extraColumns...)
+	return boil.Whitelist(columnsWhichAreSet...)
+}
+
+func RecipeStepUpdateInputsToBoiler(am []*gmodels.RecipeStepUpdateInput) []*models.RecipeStep {
+	ar := make([]*models.RecipeStep, len(am))
+	for i, m := range am {
+		ar[i] = RecipeStepUpdateInputToBoiler(
+			m,
+		)
+	}
+	return ar
+}
+
+func RecipeStepUpdateInputToBoiler(
+	m *gmodels.RecipeStepUpdateInput,
+) *models.RecipeStep {
+	if m == nil {
+		return nil
+	}
+	r := &models.RecipeStep{
+		Num:       boilergql.PointerIntToInt(m.Num),
+		Note:      boilergql.PointerStringToString(m.Note),
+		RecipeID:  int(boilergql.IDToBoiler(boilergql.PointerStringToString(m.RecipeID))),
+		CreatedAt: boilergql.PointerIntToTimeDotTime(m.CreatedAt),
+		UpdatedAt: boilergql.PointerIntToTimeDotTime(m.UpdatedAt),
+		DeletedAt: boilergql.PointerIntToNullDotTime(m.DeletedAt),
+	}
+	return r
+}
+
+func RecipeStepUpdateInputToModelM(
+	input map[string]interface{},
+	m gmodels.RecipeStepUpdateInput,
+) models.M {
+	modelM := models.M{}
+	for key := range input {
+		switch key {
+		case "num":
+			modelM[models.RecipeStepColumns.Num] = boilergql.PointerIntToInt(m.Num)
+		case "note":
+			modelM[models.RecipeStepColumns.Note] = boilergql.PointerStringToString(m.Note)
+		case "recipeId":
+			modelM[models.RecipeStepColumns.RecipeID] = int(boilergql.IDToBoiler(boilergql.PointerStringToString(m.RecipeID)))
+		case "createdAt":
+			modelM[models.RecipeStepColumns.CreatedAt] = boilergql.PointerIntToTimeDotTime(m.CreatedAt)
+		case "updatedAt":
+			modelM[models.RecipeStepColumns.UpdatedAt] = boilergql.PointerIntToTimeDotTime(m.UpdatedAt)
+		case "deletedAt":
+			modelM[models.RecipeStepColumns.DeletedAt] = boilergql.PointerIntToNullDotTime(m.DeletedAt)
+		}
+	}
+	return modelM
+}
+
+func RecipeStepUpdateInputToBoilerWhitelist(input map[string]interface{}, extraColumns ...string) boil.Columns {
+	columnsWhichAreSet := []string{}
+	for key := range input {
+		switch key {
+		case "num":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeStepColumns.Num)
+		case "note":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeStepColumns.Note)
+		case "recipeId":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeStepColumns.RecipeID)
+		case "createdAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeStepColumns.CreatedAt)
+		case "updatedAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeStepColumns.UpdatedAt)
+		case "deletedAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeStepColumns.DeletedAt)
 		}
 	}
 	columnsWhichAreSet = append(columnsWhichAreSet, extraColumns...)
@@ -2842,9 +3154,9 @@ func RecipeUpdateInputToBoiler(
 	r := &models.Recipe{
 		Name:      boilergql.PointerStringToString(m.Name),
 		Note:      boilergql.PointerStringToString(m.Note),
-		UpdatedAt: boilergql.PointerIntToTimeDotTime(m.UpdatedAt),
-		CreatedAt: boilergql.PointerIntToTimeDotTime(m.CreatedAt),
 		DeletedAt: boilergql.PointerIntToNullDotTime(m.DeletedAt),
+		CreatedAt: boilergql.PointerIntToTimeDotTime(m.CreatedAt),
+		UpdatedAt: boilergql.PointerIntToTimeDotTime(m.UpdatedAt),
 	}
 	return r
 }
@@ -2860,12 +3172,12 @@ func RecipeUpdateInputToModelM(
 			modelM[models.RecipeColumns.Name] = boilergql.PointerStringToString(m.Name)
 		case "note":
 			modelM[models.RecipeColumns.Note] = boilergql.PointerStringToString(m.Note)
-		case "updatedAt":
-			modelM[models.RecipeColumns.UpdatedAt] = boilergql.PointerIntToTimeDotTime(m.UpdatedAt)
-		case "createdAt":
-			modelM[models.RecipeColumns.CreatedAt] = boilergql.PointerIntToTimeDotTime(m.CreatedAt)
 		case "deletedAt":
 			modelM[models.RecipeColumns.DeletedAt] = boilergql.PointerIntToNullDotTime(m.DeletedAt)
+		case "createdAt":
+			modelM[models.RecipeColumns.CreatedAt] = boilergql.PointerIntToTimeDotTime(m.CreatedAt)
+		case "updatedAt":
+			modelM[models.RecipeColumns.UpdatedAt] = boilergql.PointerIntToTimeDotTime(m.UpdatedAt)
 		}
 	}
 	return modelM
@@ -2879,12 +3191,12 @@ func RecipeUpdateInputToBoilerWhitelist(input map[string]interface{}, extraColum
 			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeColumns.Name)
 		case "note":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeColumns.Note)
-		case "updatedAt":
-			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeColumns.UpdatedAt)
-		case "createdAt":
-			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeColumns.CreatedAt)
 		case "deletedAt":
 			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeColumns.DeletedAt)
+		case "createdAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeColumns.CreatedAt)
+		case "updatedAt":
+			columnsWhichAreSet = append(columnsWhichAreSet, models.RecipeColumns.UpdatedAt)
 		}
 	}
 	columnsWhichAreSet = append(columnsWhichAreSet, extraColumns...)

@@ -48,13 +48,9 @@ func AdditiveToGraphQL(m *models.Additive) *gmodels.Additive {
 		ID:        AdditiveIDToGraphQL(uint(m.ID)),
 		Name:      m.Name,
 		Note:      m.Note,
-		DeletedAt: boilergql.NullDotTimeToPointerInt(m.DeletedAt),
 		CreatedAt: boilergql.TimeDotTimeToInt(m.CreatedAt),
 		UpdatedAt: boilergql.TimeDotTimeToInt(m.UpdatedAt),
-	}
-
-	if m.R != nil && m.R.AdditiveInventories != nil {
-		r.AdditiveInventories = AdditiveInventoriesToGraphQL(m.R.AdditiveInventories)
+		DeletedAt: boilergql.NullDotTimeToPointerInt(m.DeletedAt),
 	}
 
 	return r
@@ -109,9 +105,9 @@ func AdditiveInventoryToGraphQL(m *models.AdditiveInventory) *gmodels.AdditiveIn
 		ExpiryDate:   boilergql.TimeDotTimeToInt(m.ExpiryDate),
 		Cost:         m.Cost,
 		Weight:       m.Weight,
-		CreatedAt:    boilergql.TimeDotTimeToInt(m.CreatedAt),
-		DeletedAt:    boilergql.NullDotTimeToPointerInt(m.DeletedAt),
 		UpdatedAt:    boilergql.TimeDotTimeToInt(m.UpdatedAt),
+		DeletedAt:    boilergql.NullDotTimeToPointerInt(m.DeletedAt),
+		CreatedAt:    boilergql.TimeDotTimeToInt(m.CreatedAt),
 	}
 
 	if boilergql.IntIsFilled(m.AdditiveID) {
@@ -180,13 +176,9 @@ func FragranceToGraphQL(m *models.Fragrance) *gmodels.Fragrance {
 		ID:        FragranceIDToGraphQL(uint(m.ID)),
 		Name:      m.Name,
 		Note:      m.Note,
-		DeletedAt: boilergql.NullDotTimeToPointerInt(m.DeletedAt),
 		CreatedAt: boilergql.TimeDotTimeToInt(m.CreatedAt),
+		DeletedAt: boilergql.NullDotTimeToPointerInt(m.DeletedAt),
 		UpdatedAt: boilergql.TimeDotTimeToInt(m.UpdatedAt),
-	}
-
-	if m.R != nil && m.R.FragranceInventories != nil {
-		r.FragranceInventories = FragranceInventoriesToGraphQL(m.R.FragranceInventories)
 	}
 
 	return r
@@ -329,13 +321,9 @@ func LipidToGraphQL(m *models.Lipid) *gmodels.Lipid {
 		InciName:     m.InciName,
 		Family:       m.Family,
 		Naoh:         m.Naoh,
-		UpdatedAt:    boilergql.TimeDotTimeToInt(m.UpdatedAt),
-		CreatedAt:    boilergql.TimeDotTimeToInt(m.CreatedAt),
 		DeletedAt:    boilergql.NullDotTimeToPointerInt(m.DeletedAt),
-	}
-
-	if m.R != nil && m.R.LipidInventories != nil {
-		r.LipidInventories = LipidInventoriesToGraphQL(m.R.LipidInventories)
+		CreatedAt:    boilergql.TimeDotTimeToInt(m.CreatedAt),
+		UpdatedAt:    boilergql.TimeDotTimeToInt(m.UpdatedAt),
 	}
 
 	return r
@@ -466,9 +454,9 @@ func LyeToGraphQL(m *models.Lye) *gmodels.Lye {
 		Kind:      m.Kind,
 		Name:      m.Name,
 		Note:      m.Note,
-		CreatedAt: boilergql.TimeDotTimeToInt(m.CreatedAt),
-		UpdatedAt: boilergql.TimeDotTimeToInt(m.UpdatedAt),
 		DeletedAt: boilergql.NullDotTimeToPointerInt(m.DeletedAt),
+		UpdatedAt: boilergql.TimeDotTimeToInt(m.UpdatedAt),
+		CreatedAt: boilergql.TimeDotTimeToInt(m.CreatedAt),
 	}
 
 	return r
@@ -524,9 +512,9 @@ func LyeInventoryToGraphQL(m *models.LyeInventory) *gmodels.LyeInventory {
 		Cost:          m.Cost,
 		Weight:        m.Weight,
 		Concentration: m.Concentration,
-		UpdatedAt:     boilergql.TimeDotTimeToInt(m.UpdatedAt),
 		DeletedAt:     boilergql.NullDotTimeToPointerInt(m.DeletedAt),
 		CreatedAt:     boilergql.TimeDotTimeToInt(m.CreatedAt),
+		UpdatedAt:     boilergql.TimeDotTimeToInt(m.UpdatedAt),
 	}
 
 	if boilergql.IntIsFilled(m.LyeID) {
@@ -595,9 +583,9 @@ func RecipeToGraphQL(m *models.Recipe) *gmodels.Recipe {
 		ID:        RecipeIDToGraphQL(uint(m.ID)),
 		Name:      m.Name,
 		Note:      m.Note,
-		UpdatedAt: boilergql.TimeDotTimeToInt(m.UpdatedAt),
-		CreatedAt: boilergql.TimeDotTimeToInt(m.CreatedAt),
 		DeletedAt: boilergql.NullDotTimeToPointerInt(m.DeletedAt),
+		CreatedAt: boilergql.TimeDotTimeToInt(m.CreatedAt),
+		UpdatedAt: boilergql.TimeDotTimeToInt(m.UpdatedAt),
 	}
 
 	return r
@@ -650,8 +638,8 @@ func RecipeAdditiveToGraphQL(m *models.RecipeAdditive) *gmodels.RecipeAdditive {
 		ID:         RecipeAdditiveIDToGraphQL(uint(m.ID)),
 		Percentage: m.Percentage,
 		DeletedAt:  boilergql.NullDotTimeToPointerInt(m.DeletedAt),
-		UpdatedAt:  boilergql.TimeDotTimeToInt(m.UpdatedAt),
 		CreatedAt:  boilergql.TimeDotTimeToInt(m.CreatedAt),
+		UpdatedAt:  boilergql.TimeDotTimeToInt(m.UpdatedAt),
 	}
 
 	if boilergql.IntIsFilled(m.AdditiveID) {
@@ -788,9 +776,9 @@ func RecipeBatchAdditiveToGraphQL(m *models.RecipeBatchAdditive) *gmodels.Recipe
 		ID:        RecipeBatchAdditiveIDToGraphQL(uint(m.ID)),
 		Weight:    m.Weight,
 		Cost:      m.Cost,
+		CreatedAt: boilergql.TimeDotTimeToInt(m.CreatedAt),
 		UpdatedAt: boilergql.TimeDotTimeToInt(m.UpdatedAt),
 		DeletedAt: boilergql.NullDotTimeToPointerInt(m.DeletedAt),
-		CreatedAt: boilergql.TimeDotTimeToInt(m.CreatedAt),
 	}
 
 	if boilergql.IntIsFilled(m.AdditiveID) {
@@ -931,8 +919,8 @@ func RecipeBatchLipidToGraphQL(m *models.RecipeBatchLipid) *gmodels.RecipeBatchL
 		Weight: m.Weight,
 		Cost:   m.Cost, Lipid: LipidIDToGraphQL(uint(m.LipidID)),
 		DeletedAt: boilergql.NullDotTimeToPointerInt(m.DeletedAt),
-		CreatedAt: boilergql.TimeDotTimeToInt(m.CreatedAt),
 		UpdatedAt: boilergql.TimeDotTimeToInt(m.UpdatedAt),
+		CreatedAt: boilergql.TimeDotTimeToInt(m.CreatedAt),
 	}
 
 	if boilergql.IntIsFilled(m.LipidID) {
@@ -1031,6 +1019,69 @@ func RecipeBatchLyeID(v string) int {
 }
 
 func RecipeBatchLyeIDs(a []string) []int {
+	return boilergql.IDsToBoilerInt(a)
+}
+
+func RecipeBatchNoteWithUintID(id uint) *gmodels.RecipeBatchNote {
+	return &gmodels.RecipeBatchNote{
+		ID: RecipeBatchNoteIDToGraphQL(id),
+	}
+}
+
+func RecipeBatchNoteWithIntID(id int) *gmodels.RecipeBatchNote {
+	return RecipeBatchNoteWithUintID(uint(id))
+}
+
+func RecipeBatchNoteWithNullDotUintID(id null.Uint) *gmodels.RecipeBatchNote {
+	return RecipeBatchNoteWithUintID(id.Uint)
+}
+
+func RecipeBatchNoteWithNullDotIntID(id null.Int) *gmodels.RecipeBatchNote {
+	return RecipeBatchNoteWithUintID(uint(id.Int))
+}
+
+func RecipeBatchNotesToGraphQL(am []*models.RecipeBatchNote) []*gmodels.RecipeBatchNote {
+	ar := make([]*gmodels.RecipeBatchNote, len(am))
+	for i, m := range am {
+		ar[i] = RecipeBatchNoteToGraphQL(m)
+	}
+	return ar
+}
+
+func RecipeBatchNoteIDToGraphQL(v uint) string {
+	return boilergql.IDToGraphQL(v, models.TableNames.RecipeBatchNote)
+}
+
+func RecipeBatchNoteToGraphQL(m *models.RecipeBatchNote) *gmodels.RecipeBatchNote {
+	if m == nil {
+		return nil
+	}
+
+	r := &gmodels.RecipeBatchNote{
+		ID:        RecipeBatchNoteIDToGraphQL(uint(m.ID)),
+		Note:      m.Note,
+		Link:      m.Link,
+		CreatedAt: boilergql.TimeDotTimeToInt(m.CreatedAt),
+		UpdatedAt: boilergql.TimeDotTimeToInt(m.UpdatedAt),
+		DeletedAt: boilergql.NullDotTimeToPointerInt(m.DeletedAt),
+	}
+
+	if boilergql.IntIsFilled(m.BatchID) {
+		if m.R != nil && m.R.Batch != nil {
+			r.Batch = RecipeBatchToGraphQL(m.R.Batch)
+		} else {
+			r.Batch = RecipeBatchWithIntID(m.BatchID)
+		}
+	}
+
+	return r
+}
+
+func RecipeBatchNoteID(v string) int {
+	return boilergql.IDToBoilerInt(v)
+}
+
+func RecipeBatchNoteIDs(a []string) []int {
 	return boilergql.IDsToBoilerInt(a)
 }
 
@@ -1142,9 +1193,9 @@ func RecipeLipidToGraphQL(m *models.RecipeLipid) *gmodels.RecipeLipid {
 	r := &gmodels.RecipeLipid{
 		ID:         RecipeLipidIDToGraphQL(uint(m.ID)),
 		Percentage: m.Percentage, Lipid: LipidIDToGraphQL(uint(m.LipidID)),
-		CreatedAt: boilergql.TimeDotTimeToInt(m.CreatedAt),
 		DeletedAt: boilergql.NullDotTimeToPointerInt(m.DeletedAt),
 		UpdatedAt: boilergql.TimeDotTimeToInt(m.UpdatedAt),
+		CreatedAt: boilergql.TimeDotTimeToInt(m.CreatedAt),
 	}
 
 	if boilergql.IntIsFilled(m.LipidID) {
@@ -1171,6 +1222,69 @@ func RecipeLipidID(v string) int {
 }
 
 func RecipeLipidIDs(a []string) []int {
+	return boilergql.IDsToBoilerInt(a)
+}
+
+func RecipeStepWithUintID(id uint) *gmodels.RecipeStep {
+	return &gmodels.RecipeStep{
+		ID: RecipeStepIDToGraphQL(id),
+	}
+}
+
+func RecipeStepWithIntID(id int) *gmodels.RecipeStep {
+	return RecipeStepWithUintID(uint(id))
+}
+
+func RecipeStepWithNullDotUintID(id null.Uint) *gmodels.RecipeStep {
+	return RecipeStepWithUintID(id.Uint)
+}
+
+func RecipeStepWithNullDotIntID(id null.Int) *gmodels.RecipeStep {
+	return RecipeStepWithUintID(uint(id.Int))
+}
+
+func RecipeStepsToGraphQL(am []*models.RecipeStep) []*gmodels.RecipeStep {
+	ar := make([]*gmodels.RecipeStep, len(am))
+	for i, m := range am {
+		ar[i] = RecipeStepToGraphQL(m)
+	}
+	return ar
+}
+
+func RecipeStepIDToGraphQL(v uint) string {
+	return boilergql.IDToGraphQL(v, models.TableNames.RecipeStep)
+}
+
+func RecipeStepToGraphQL(m *models.RecipeStep) *gmodels.RecipeStep {
+	if m == nil {
+		return nil
+	}
+
+	r := &gmodels.RecipeStep{
+		ID:        RecipeStepIDToGraphQL(uint(m.ID)),
+		Num:       m.Num,
+		Note:      m.Note,
+		CreatedAt: boilergql.TimeDotTimeToInt(m.CreatedAt),
+		UpdatedAt: boilergql.TimeDotTimeToInt(m.UpdatedAt),
+		DeletedAt: boilergql.NullDotTimeToPointerInt(m.DeletedAt),
+	}
+
+	if boilergql.IntIsFilled(m.RecipeID) {
+		if m.R != nil && m.R.Recipe != nil {
+			r.Recipe = RecipeToGraphQL(m.R.Recipe)
+		} else {
+			r.Recipe = RecipeWithIntID(m.RecipeID)
+		}
+	}
+
+	return r
+}
+
+func RecipeStepID(v string) int {
+	return boilergql.IDToBoilerInt(v)
+}
+
+func RecipeStepIDs(a []string) []int {
 	return boilergql.IDsToBoilerInt(a)
 }
 
@@ -1217,19 +1331,6 @@ func SupplierToGraphQL(m *models.Supplier) *gmodels.Supplier {
 		DeletedAt: boilergql.NullDotTimeToPointerInt(m.DeletedAt),
 		UpdatedAt: boilergql.TimeDotTimeToInt(m.UpdatedAt),
 		CreatedAt: boilergql.TimeDotTimeToInt(m.CreatedAt),
-	}
-
-	if m.R != nil && m.R.AdditiveInventories != nil {
-		r.AdditiveInventories = AdditiveInventoriesToGraphQL(m.R.AdditiveInventories)
-	}
-	if m.R != nil && m.R.FragranceInventories != nil {
-		r.FragranceInventories = FragranceInventoriesToGraphQL(m.R.FragranceInventories)
-	}
-	if m.R != nil && m.R.LipidInventories != nil {
-		r.LipidInventories = LipidInventoriesToGraphQL(m.R.LipidInventories)
-	}
-	if m.R != nil && m.R.LyeInventories != nil {
-		r.LyeInventories = LyeInventoriesToGraphQL(m.R.LyeInventories)
 	}
 
 	return r
