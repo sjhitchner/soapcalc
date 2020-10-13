@@ -82,7 +82,9 @@ sqlgqlschema:
 		--pagination=yes \
         --batch-update=false \
         --batch-create=false \
-        --batch-delete=false
+        --batch-delete=false \
+		--pagination=yes
+	# --directives=isAuthenticated \
 	# go run github.com/web-ridge/sqlboiler-graphql-schema --input generated/db/models --output schema/soap.graphqls --directives=isAuthenticated --pagination=yes
 
 protobufs:
