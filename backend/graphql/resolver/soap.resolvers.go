@@ -191,6 +191,18 @@ func (r *mutationResolver) DeleteRecipeBatchLye(ctx context.Context, id string) 
 	panic(fmt.Errorf("not implemented"))
 }
 
+func (r *mutationResolver) CreateRecipeBatchNote(ctx context.Context, input gmodels.RecipeBatchNoteCreateInput) (*gmodels.RecipeBatchNotePayload, error) {
+	panic(fmt.Errorf("not implemented"))
+}
+
+func (r *mutationResolver) UpdateRecipeBatchNote(ctx context.Context, id string, input gmodels.RecipeBatchNoteUpdateInput) (*gmodels.RecipeBatchNotePayload, error) {
+	panic(fmt.Errorf("not implemented"))
+}
+
+func (r *mutationResolver) DeleteRecipeBatchNote(ctx context.Context, id string) (*gmodels.RecipeBatchNoteDeletePayload, error) {
+	panic(fmt.Errorf("not implemented"))
+}
+
 func (r *mutationResolver) CreateRecipeFragrance(ctx context.Context, input gmodels.RecipeFragranceCreateInput) (*gmodels.RecipeFragrancePayload, error) {
 	panic(fmt.Errorf("not implemented"))
 }
@@ -215,6 +227,18 @@ func (r *mutationResolver) DeleteRecipeLipid(ctx context.Context, id string) (*g
 	panic(fmt.Errorf("not implemented"))
 }
 
+func (r *mutationResolver) CreateRecipeStep(ctx context.Context, input gmodels.RecipeStepCreateInput) (*gmodels.RecipeStepPayload, error) {
+	panic(fmt.Errorf("not implemented"))
+}
+
+func (r *mutationResolver) UpdateRecipeStep(ctx context.Context, id string, input gmodels.RecipeStepUpdateInput) (*gmodels.RecipeStepPayload, error) {
+	panic(fmt.Errorf("not implemented"))
+}
+
+func (r *mutationResolver) DeleteRecipeStep(ctx context.Context, id string) (*gmodels.RecipeStepDeletePayload, error) {
+	panic(fmt.Errorf("not implemented"))
+}
+
 func (r *mutationResolver) CreateSupplier(ctx context.Context, input gmodels.SupplierCreateInput) (*gmodels.SupplierPayload, error) {
 	panic(fmt.Errorf("not implemented"))
 }
@@ -235,27 +259,11 @@ func (r *queryResolver) Additives(ctx context.Context, filter *gmodels.AdditiveF
 	panic(fmt.Errorf("not implemented"))
 }
 
-func (r *queryResolver) AdditiveInventory(ctx context.Context, id string) (*gmodels.AdditiveInventory, error) {
-	panic(fmt.Errorf("not implemented"))
-}
-
-func (r *queryResolver) AdditiveInventories(ctx context.Context, filter *gmodels.AdditiveInventoryFilter) ([]*gmodels.AdditiveInventory, error) {
-	panic(fmt.Errorf("not implemented"))
-}
-
 func (r *queryResolver) Fragrance(ctx context.Context, id string) (*gmodels.Fragrance, error) {
 	panic(fmt.Errorf("not implemented"))
 }
 
 func (r *queryResolver) Fragrances(ctx context.Context, filter *gmodels.FragranceFilter) ([]*gmodels.Fragrance, error) {
-	panic(fmt.Errorf("not implemented"))
-}
-
-func (r *queryResolver) FragranceInventory(ctx context.Context, id string) (*gmodels.FragranceInventory, error) {
-	panic(fmt.Errorf("not implemented"))
-}
-
-func (r *queryResolver) FragranceInventories(ctx context.Context, filter *gmodels.FragranceInventoryFilter) ([]*gmodels.FragranceInventory, error) {
 	panic(fmt.Errorf("not implemented"))
 }
 
@@ -267,27 +275,11 @@ func (r *queryResolver) Lipids(ctx context.Context, filter *gmodels.LipidFilter)
 	panic(fmt.Errorf("not implemented"))
 }
 
-func (r *queryResolver) LipidInventory(ctx context.Context, id string) (*gmodels.LipidInventory, error) {
-	panic(fmt.Errorf("not implemented"))
-}
-
-func (r *queryResolver) LipidInventories(ctx context.Context, filter *gmodels.LipidInventoryFilter) ([]*gmodels.LipidInventory, error) {
-	panic(fmt.Errorf("not implemented"))
-}
-
 func (r *queryResolver) Lye(ctx context.Context, id string) (*gmodels.Lye, error) {
 	panic(fmt.Errorf("not implemented"))
 }
 
 func (r *queryResolver) Lyes(ctx context.Context, filter *gmodels.LyeFilter) ([]*gmodels.Lye, error) {
-	panic(fmt.Errorf("not implemented"))
-}
-
-func (r *queryResolver) LyeInventory(ctx context.Context, id string) (*gmodels.LyeInventory, error) {
-	panic(fmt.Errorf("not implemented"))
-}
-
-func (r *queryResolver) LyeInventories(ctx context.Context, filter *gmodels.LyeInventoryFilter) ([]*gmodels.LyeInventory, error) {
 	panic(fmt.Errorf("not implemented"))
 }
 
@@ -347,6 +339,14 @@ func (r *queryResolver) RecipeBatchLyes(ctx context.Context, filter *gmodels.Rec
 	panic(fmt.Errorf("not implemented"))
 }
 
+func (r *queryResolver) RecipeBatchNote(ctx context.Context, id string) (*gmodels.RecipeBatchNote, error) {
+	panic(fmt.Errorf("not implemented"))
+}
+
+func (r *queryResolver) RecipeBatchNotes(ctx context.Context, filter *gmodels.RecipeBatchNoteFilter) ([]*gmodels.RecipeBatchNote, error) {
+	panic(fmt.Errorf("not implemented"))
+}
+
 func (r *queryResolver) RecipeFragrance(ctx context.Context, id string) (*gmodels.RecipeFragrance, error) {
 	panic(fmt.Errorf("not implemented"))
 }
@@ -360,6 +360,14 @@ func (r *queryResolver) RecipeLipid(ctx context.Context, id string) (*gmodels.Re
 }
 
 func (r *queryResolver) RecipeLipids(ctx context.Context, filter *gmodels.RecipeLipidFilter) ([]*gmodels.RecipeLipid, error) {
+	panic(fmt.Errorf("not implemented"))
+}
+
+func (r *queryResolver) RecipeStep(ctx context.Context, id string) (*gmodels.RecipeStep, error) {
+	panic(fmt.Errorf("not implemented"))
+}
+
+func (r *queryResolver) RecipeSteps(ctx context.Context, filter *gmodels.RecipeStepFilter) ([]*gmodels.RecipeStep, error) {
 	panic(fmt.Errorf("not implemented"))
 }
 
